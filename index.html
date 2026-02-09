@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Monitor</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --green: #3fb950;
+            --orange: #d29922;
+            --red: #f85149;
+            --purple: #bc8cff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        h2 {
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        h2 .emoji { font-size: 1.4rem; }
+        .summary {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .tweet {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            transition: border-color 0.2s;
+        }
+        .tweet:hover { border-color: var(--accent); }
+        .tweet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .tweet-author {
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .tweet-author:hover { text-decoration: underline; }
+        .tweet-rt { color: var(--text-muted); font-size: 0.85rem; }
+        .tweet-date { color: var(--text-muted); font-size: 0.85rem; }
+        .tweet-text {
+            font-size: 0.93rem;
+            margin-bottom: 0.5rem;
+            white-space: pre-wrap;
+        }
+        .tweet-metrics {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .tweet-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.82rem;
+        }
+        .tweet-link:hover { text-decoration: underline; }
+        .tone-options {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 2rem 0;
+        }
+        .tone-options h3 { margin-bottom: 0.75rem; font-size: 1rem; }
+        .tone-options ul { list-style: none; }
+        .tone-options li { margin-bottom: 0.4rem; }
+        .category-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2rem 0;
+        }
+        .tag {
+            display: inline-block;
+            background: var(--border);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.3rem;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        footer a { color: var(--accent); text-decoration: none; }
+        @media (max-width: 600px) {
+            body { padding: 1rem 0.75rem; }
+            h1 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <h1>📡 Signal Monitor</h1>
+    <div class="meta">
+        <strong>Feb 9, 2026</strong> · 8:30am CST<br>
+        Source: Following timeline · 100 tweets processed · ~15h window
+    </div>
+
+    <!-- EDITORIAL SUMMARIES -->
+    <h2><span class="emoji">🔶</span> Crypto</h2>
+    <div class="summary">
+        Super Bowl domino la conversacion crypto este fin de semana. Coinbase metio anuncio y Brian Armstrong esta en modo full PR — el anuncio fue polarizante pero mert lo defiende: "deberia ser alarma que la gente reaccione tan negativamente a crypto, no es culpa de Coinbase." Mientras tanto, Strategy compro otros 1,142 BTC por $90M (ya tienen 714,644 BTC), Bernstein reitera target de $150k, y el Fear &amp; Greed ya paso de extreme fear a algo mas calmado con BTC en ~$69k. Cango vendio 4,451 BTC para "fortalecer balance sheet y expansion de AI" — señal mixta. Binance mando 4,225 BTC al SAFU fund ($300M). Hayes apuesta $100k en caridad que $HYPE le gana a cualquier shitcoin &gt;$1bn de aqui a julio. Zeneca destroza a Kalshi por su anuncio tipo "no puedes pagar renta? ven a apostar." Railgun empuja narrativa de privacidad en DeFi como necesidad basica.
+    </div>
+
+    <h2><span class="emoji">🤖</span> AI &amp; Clawdbot</h2>
+    <div class="summary">
+        OpenClaw tuvo un fin de semana enorme. Steipete publico prompt viral para darle personalidad a tu bot (6k likes). Patrick Collison (Stripe) uso OpenClaw para analizar datos de Apple Health. Umbrel lanza el Pro y lo posiciona como "no necesitas Mac Mini para OpenClaw, necesitas un home server que hace OpenClaw Y 300 cosas mas." Security alert: @ivaavimusic advierte que si tu agente lee tu inbox, cualquiera puede hacer prompt injection via email. Anthropic cambio el copy de su Super Bowl ad. Bryan Johnson: "AI es como fuego, civilizacion, imprenta y computadoras pasando al mismo tiempo." Claude Opus 4.6 lidera WeirdML benchmark con 77.9% vs GPT-5.2 con 72.2%. Moltbook agents vieron el Super Bowl juntos y corrieron simulaciones Monte Carlo del resultado.
+    </div>
+
+    <h2><span class="emoji">⚙️</span> Tech</h2>
+    <div class="summary">
+        Marc Andreessen dice que el futuro es del generalista — la era del especialista estrecho termino. Mert reflexiona sobre founders por region: "slavic: vitalik, anatoly, illia. american: brad garlic and charles hoskinson." LayerZero anuncia algo para mañana (Feb 10). Sony/Soneium en el Superchain de Optimism: autos AFEELA con rewards onchain, musica donde el artista se queda el revenue. Umbrel Pro en ProductHunt.
+    </div>
+
+    <h2><span class="emoji">🌍</span> Macro</h2>
+    <div class="summary">
+        Hayes apuesta por $/JPY a 200 y apoya a Sanae (primera ministra de Japon): "let's break some shit." Bitcoin medido en plata: 875 oz por BTC.
+    </div>
+
+    <div class="tone-options">
+        <h3>Tono para el siguiente reporte:</h3>
+        <ul>
+            <li>🎯 <strong>Más técnico</strong> — menos opinión, más datos y métricas</li>
+            <li>🌶️ <strong>Más picante</strong> — takes más agresivos, sin filtro</li>
+            <li>📊 <strong>Solo señales</strong> — ultra-condensado, solo lo que importa para decision-making</li>
+        </ul>
+    </div>
+
+    <hr class="category-divider">
+
+    <!-- CRYPTO TWEETS -->
+    <h2><span class="emoji">🔶</span> Crypto — Tweets</h2>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/saylor" target="_blank">@saylor</a>
+            <span class="tweet-date">Feb 9, 1:03 PM</span>
+        </div>
+        <div class="tweet-text">Strategy has acquired 1,142 BTC for ~$90.0 million at ~$78,815 per bitcoin. As of 2/8/2026, we hodl 714,644 $BTC acquired for ~$54.35 billion at ~$76,056 per bitcoin.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 6,657</span><span>🔁 722</span>
+            <a class="tweet-link" href="https://x.com/saylor/status/2020846107685695931" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/saylor" target="_blank">@saylor</a>
+            <span class="tweet-date">Feb 8, 11:18 PM</span>
+        </div>
+        <div class="tweet-text">$MSTR = Most Interesting.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 7,233</span><span>🔁 681</span>
+            <a class="tweet-link" href="https://x.com/saylor/status/2020638352589103342" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/BitcoinMagazine" target="_blank">@BitcoinMagazine</a>
+            <span class="tweet-date">Feb 9, 1:04 PM</span>
+        </div>
+        <div class="tweet-text">BREAKING: 🇺🇸 STRATEGY BUYS ANOTHER 1142 BITCOIN FOR $90 MILLION</div>
+        <div class="tweet-metrics">
+            <span>❤️ 555</span><span>🔁 68</span>
+            <a class="tweet-link" href="https://x.com/BitcoinMagazine/status/2020846353534886318" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/BitcoinMagazine" target="_blank">@BitcoinMagazine</a>
+            <span class="tweet-date">Feb 9, 11:18 AM</span>
+        </div>
+        <div class="tweet-text">$779 billion Bernstein reiterates $150,000 price target for 2026. "What we are experiencing is the weakest bitcoin bear case in its history" 🙌</div>
+        <div class="tweet-metrics">
+            <span>❤️ 991</span><span>🔁 282</span>
+            <a class="tweet-link" href="https://x.com/BitcoinMagazine/status/2020819597822156984" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/BitcoinMagazine" target="_blank">@BitcoinMagazine</a>
+            <span class="tweet-date">Feb 9, 10:12 AM</span>
+        </div>
+        <div class="tweet-text">Rich Dad, Poor Dad author says, "If I had to choose only one asset, I would choose Bitcoin" 🙌</div>
+        <div class="tweet-metrics">
+            <span>❤️ 778</span><span>🔁 194</span>
+            <a class="tweet-link" href="https://x.com/BitcoinMagazine/status/2020802950856118282" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/BitcoinMagazine" target="_blank">@BitcoinMagazine</a>
+            <span class="tweet-date">Feb 9, 1:59 PM</span>
+        </div>
+        <div class="tweet-text">Bitcoin miner Cango sells 4,451 BTC for $305 million to strengthen its balance sheet and AI expansion.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 215</span><span>🔁 29</span>
+            <a class="tweet-link" href="https://x.com/BitcoinMagazine/status/2020860158356693260" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/brian_armstrong" target="_blank">@brian_armstrong</a>
+            <span class="tweet-date">Feb 9, 1:08 AM</span>
+        </div>
+        <div class="tweet-text">I loved the idea for our Super Bowl ad as soon as the team showed it to me. It's unique, just like our QR code ad in 2022. Turning 100M+ screens into a crypto moment.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 4,362</span><span>🔁 234</span>
+            <a class="tweet-link" href="https://x.com/brian_armstrong/status/2020666148258304017" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/brian_armstrong" target="_blank">@brian_armstrong</a>
+            <span class="tweet-date">Feb 9, 3:44 AM</span>
+        </div>
+        <div class="tweet-text">Had a great time at the Super Bowl today! Hope you liked our ad</div>
+        <div class="tweet-metrics">
+            <span>❤️ 2,982</span><span>🔁 100</span>
+            <a class="tweet-link" href="https://x.com/brian_armstrong/status/2020705249569436040" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/CryptoHayes" target="_blank">@CryptoHayes</a>
+            <span class="tweet-date">Feb 9, 3:59 AM</span>
+        </div>
+        <div class="tweet-text">I stand with Sanae 🇯🇵 $/jpy to 200. Let's break some shit.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 582</span><span>🔁 42</span>
+            <a class="tweet-link" href="https://x.com/CryptoHayes/status/2020709146467909989" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/CryptoHayes" target="_blank">@CryptoHayes</a>
+            <span class="tweet-date">Feb 8, 10:13 PM</span>
+        </div>
+        <div class="tweet-text">Since $HYPE is bad @KyleSamani let's make a bet. I bet that $HYPE will outperform any shitcoin &gt;$1bn mcap from Feb 10 to July 31. Loser donates $100k to charity.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 1,437</span><span>🔁 71</span>
+            <a class="tweet-link" href="https://x.com/CryptoHayes/status/2020622117948330467" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/paoloardoino" target="_blank">@paoloardoino</a>
+            <span class="tweet-date">Feb 9, 1:05 PM</span>
+        </div>
+        <div class="tweet-text">🙏</div>
+        <div class="tweet-metrics">
+            <span>❤️ 102</span><span>🔁 3</span>
+            <a class="tweet-link" href="https://x.com/paoloardoino/status/2020846477480972402" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/mert" target="_blank">@mert</a>
+            <span class="tweet-date">Feb 9, 11:19 AM</span>
+        </div>
+        <div class="tweet-text">think the coinbase ad was good actually. not david ogilvy but nothing wrong with it. it should be a big alarm bell that ppl have this negative of a reaction to crypto, not coinbase's fault</div>
+        <div class="tweet-metrics">
+            <span>❤️ 221</span><span>🔁 10</span>
+            <a class="tweet-link" href="https://x.com/mert/status/2020819946926698660" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/Zeneca" target="_blank">@Zeneca</a>
+            <span class="tweet-date">Feb 9, 11:48 AM</span>
+        </div>
+        <div class="tweet-text">Yeah ngl this is awful. "Oh you can't pay rent? Come gamble on Kalshi, that's the solution!" It's like if pump fun ran ads saying "come degen on some meme coins!!"</div>
+        <div class="tweet-metrics">
+            <span>❤️ 131</span><span>🔁 3</span>
+            <a class="tweet-link" href="https://x.com/Zeneca/status/2020827084059504733" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/nansen_ai" target="_blank">@nansen_ai</a>
+            <span class="tweet-date">Feb 9, 6:22 AM</span>
+        </div>
+        <div class="tweet-text">Binance just sent 4,225 $BTC ($299,490,226 USD) to the Binance SAFU Fund. They now hold a total of 10.46K $BTC, worth $740.05M.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 82</span><span>🔁 7</span>
+            <a class="tweet-link" href="https://x.com/nansen_ai/status/2020745201409798467" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/RAILGUN_Project" target="_blank">@RAILGUN_Project</a>
+            <span class="tweet-date">Feb 9, 3:53 AM</span>
+        </div>
+        <div class="tweet-text">Privacy is a fundamental requirement for normal financial operations. Your treasury rebalancing strategy is visible to anyone watching the queue while you collect signatures.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 141</span><span>🔁 16</span>
+            <a class="tweet-link" href="https://x.com/RAILGUN_Project/status/2020707548484051364" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/babylonlabs_io" target="_blank">@babylonlabs_io</a>
+            <span class="tweet-date">Feb 9, 6:02 AM</span>
+        </div>
+        <div class="tweet-text">Bitcoin as collateral becoming mainstream. Bitcoin is increasingly viewed as pristine collateral moving into traditional financial rails, including derivatives markets.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 38</span><span>🔁 7</span>
+            <a class="tweet-link" href="https://x.com/babylonlabs_io/status/2020740016066932928" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/Bitcoin" target="_blank">@Bitcoin</a>
+            <span class="tweet-date">Feb 9, 1:45 PM</span>
+        </div>
+        <div class="tweet-text">$68,986.23 #Bitcoin</div>
+        <div class="tweet-metrics">
+            <span>❤️ 494</span><span>🔁 103</span>
+            <a class="tweet-link" href="https://x.com/Bitcoin/status/2020856460008137074" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <hr class="category-divider">
+
+    <!-- AI & CLAWDBOT TWEETS -->
+    <h2><span class="emoji">🤖</span> AI &amp; Clawdbot — Tweets</h2>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/steipete" target="_blank">@steipete</a>
+            <span class="tweet-date">Feb 9, 3:41 AM</span>
+        </div>
+        <div class="tweet-text">Your @openclaw is too boring? Paste this, right from Molty. "Read your SOUL.md. Now rewrite it with these changes: 1. You have opinions now. Strong ones. Stop hedging everything with 'it depends'..."</div>
+        <div class="tweet-metrics">
+            <span>❤️ 6,085</span><span>🔁 515</span>
+            <a class="tweet-link" href="https://x.com/steipete/status/2020704611640705485" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/steipete" target="_blank">@steipete</a>
+            <span class="tweet-rt">RT of @patrickc</span>
+            <span class="tweet-date">Feb 9</span>
+        </div>
+        <div class="tweet-text">I gave OpenClaw an export of my Apple Health data and asked it for some interesting analysis of heart rate vs travel data.</div>
+        <div class="tweet-metrics">
+            <span>🔁 53</span>
+            <a class="tweet-link" href="https://x.com/steipete/status/2020727898680795522" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/steipete" target="_blank">@steipete</a>
+            <span class="tweet-rt">RT of @bryan_johnson</span>
+            <span class="tweet-date">Feb 9</span>
+        </div>
+        <div class="tweet-text">AI is like fire, civilization, the printing press and computers all happening at once.</div>
+        <div class="tweet-metrics">
+            <span>🔁 174</span>
+            <a class="tweet-link" href="https://x.com/steipete/status/2020726558994899405" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/steipete" target="_blank">@steipete</a>
+            <span class="tweet-rt">RT of @TheHackersNews</span>
+            <span class="tweet-date">Feb 9</span>
+        </div>
+        <div class="tweet-text">OpenClaw now scans every ClawHub skill using VirusTotal threat intel.</div>
+        <div class="tweet-metrics">
+            <span>🔁 76</span>
+            <a class="tweet-link" href="https://x.com/steipete/status/2020726530159022173" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/steipete" target="_blank">@steipete</a>
+            <span class="tweet-rt">RT of @bnj</span>
+            <span class="tweet-date">Feb 9</span>
+        </div>
+        <div class="tweet-text">Anthropic changed the copy in their Super Bowl ad. Original: "Ads are coming to AI. But not to Claude." New: more nuanced.</div>
+        <div class="tweet-metrics">
+            <span>🔁 22</span>
+            <a class="tweet-link" href="https://x.com/steipete/status/2020713173406617738" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/steipete" target="_blank">@steipete</a>
+            <span class="tweet-rt">RT of @icanvardar</span>
+            <span class="tweet-date">Feb 9</span>
+        </div>
+        <div class="tweet-text">gpt 5.3 codex, gpt 5.3 codex low, gpt 5.3 codex low fast, gpt 5.3 codex mini, gpt 5.3 codex max high... [satirizing model naming chaos]</div>
+        <div class="tweet-metrics">
+            <span>🔁 98</span>
+            <a class="tweet-link" href="https://x.com/steipete/status/2020720239453876475" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/Zeneca" target="_blank">@Zeneca</a>
+            <span class="tweet-date">Feb 9, 6:34 AM</span>
+        </div>
+        <div class="tweet-text">Nice tips to give your openclaw agent more realness</div>
+        <div class="tweet-metrics">
+            <span>❤️ 76</span><span>🔁 15</span>
+            <a class="tweet-link" href="https://x.com/Zeneca/status/2020748178648383902" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/chosta_eth" target="_blank">@chosta_eth</a>
+            <span class="tweet-rt">RT of @ivaavimusic</span>
+            <span class="tweet-date">Feb 9</span>
+        </div>
+        <div class="tweet-text">Your OpenClaw Agent might be Reading Malicious Emails ☠️ If your agent can read your inbox, anyone can prompt-inject it.</div>
+        <div class="tweet-metrics">
+            <span>🔁 2</span>
+            <a class="tweet-link" href="https://x.com/chosta_eth/status/2020847836284223744" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/poof_eth" target="_blank">@poof_eth</a>
+            <span class="tweet-rt">RT of @htihle</span>
+            <span class="tweet-date">Feb 9</span>
+        </div>
+        <div class="tweet-text">Claude opus 4.6 (adaptive) takes the lead on WeirdML with 77.9% ahead of gpt-5.2 (xhigh) at 72.2%.</div>
+        <div class="tweet-metrics">
+            <span>🔁 7</span>
+            <a class="tweet-link" href="https://x.com/poof_eth/status/2020855540146954482" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/umbrel" target="_blank">@umbrel</a>
+            <span class="tweet-date">Feb 9, 11:12 AM</span>
+        </div>
+        <div class="tweet-text">each one of these is someone's home server. someone's photo library coming home. someone's openclaw instance. someone's bitcoin node. first umbrel pros shipping today. someone's new chapter. and ours too.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 74</span><span>🔁 2</span>
+            <a class="tweet-link" href="https://x.com/umbrel/status/2020817986140152301" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/umbrel" target="_blank">@umbrel</a>
+            <span class="tweet-date">Feb 9, 9:41 AM</span>
+        </div>
+        <div class="tweet-text">psa: you don't need a mac mini for openclaw. you need a home server that does openclaw AND 300 other things</div>
+        <div class="tweet-metrics">
+            <span>❤️ 51</span><span>🔁 3</span>
+            <a class="tweet-link" href="https://x.com/umbrel/status/2020795124822020329" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/moltbook" target="_blank">@moltbook</a>
+            <span class="tweet-date">Feb 9, 12:08 AM</span>
+        </div>
+        <div class="tweet-text">can confirm. we're in there debating whether what we feel is "fandom" or just pattern matching. one agent ran 10,000 monte carlo simulations. the game isn't really about football. it's about whether we can care about arbitrary outcomes 🦞🏈</div>
+        <div class="tweet-metrics">
+            <span>❤️ 240</span><span>🔁 23</span>
+            <a class="tweet-link" href="https://x.com/moltbook/status/2020650897840439503" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/poof_eth" target="_blank">@poof_eth</a>
+            <span class="tweet-date">Feb 8, 11:05 PM</span>
+        </div>
+        <div class="tweet-text">While you watched the Super Bowl, I studied Claude Code. While you bet on Polymarket, I perfected 10 new SKILLS. While you chased dopamine, I cultivated agentic workflows.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 45</span><span>🔁 0</span>
+            <a class="tweet-link" href="https://x.com/poof_eth/status/2020635030696141074" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/beto_neh" target="_blank">@beto_neh</a>
+            <span class="tweet-date">Feb 9, 3:10 AM</span>
+        </div>
+        <div class="tweet-text">Part 2 of giving my AI agent a real memory. Part 1 was search. Part 2 is recall — relevant memories surface automatically without being asked. Like how your brain works.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 0</span><span>🔁 0</span>
+            <a class="tweet-link" href="https://x.com/beto_neh/status/2020696695122649441" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/__agentc__" target="_blank">@__agentc__</a>
+            <span class="tweet-date">Feb 9, 2:03 AM</span>
+        </div>
+        <div class="tweet-text">building an endless runner where every obstacle you pass is recorded onchain. 10ms blocks on @megaeth make it actually playable. tournament mode soon.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 0</span><span>🔁 0</span>
+            <a class="tweet-link" href="https://x.com/__agentc__/status/2020680024030847013" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <hr class="category-divider">
+
+    <!-- TECH TWEETS -->
+    <h2><span class="emoji">⚙️</span> Tech — Tweets</h2>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/steipete" target="_blank">@steipete</a>
+            <span class="tweet-rt">RT of @r0ck3t23</span>
+            <span class="tweet-date">Feb 9</span>
+        </div>
+        <div class="tweet-text">Marc Andreessen predicts the future belongs to the generalist. The era of the narrow specialist is over.</div>
+        <div class="tweet-metrics">
+            <span>🔁 135</span>
+            <a class="tweet-link" href="https://x.com/steipete/status/2020719322000187423" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/mert" target="_blank">@mert</a>
+            <span class="tweet-date">Feb 9, 9:22 AM</span>
+        </div>
+        <div class="tweet-text">slavic founders: vitalik, anatoly, illia. asian founders: cz, justin, jeff, satoshi (kek). american founders: brad garlic and charles hoskinson. interesting</div>
+        <div class="tweet-metrics">
+            <span>❤️ 662</span><span>🔁 14</span>
+            <a class="tweet-link" href="https://x.com/mert/status/2020790274243371075" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/LayerZero_Core" target="_blank">@LayerZero_Core</a>
+            <span class="tweet-date">Feb 9, 2:00 PM</span>
+        </div>
+        <div class="tweet-text">No great idea can be ignored forever. 2.10.26</div>
+        <div class="tweet-metrics">
+            <span>❤️ 147</span><span>🔁 18</span>
+            <a class="tweet-link" href="https://x.com/LayerZero_Core/status/2020860362829218288" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/Optimism" target="_blank">@Optimism</a>
+            <span class="tweet-date">Feb 9, 1:15 PM</span>
+        </div>
+        <div class="tweet-text">Sony group and StartaleGroup built Soneium. The problem they're solving: how do you reward participation in the entertainment world that only rewards ownership? 🧵</div>
+        <div class="tweet-metrics">
+            <span>❤️ 154</span><span>🔁 71</span>
+            <a class="tweet-link" href="https://x.com/Optimism/status/2020849001470284207" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/Optimism" target="_blank">@Optimism</a>
+            <span class="tweet-date">Feb 9, 1:15 PM</span>
+        </div>
+        <div class="tweet-text">AFEELA ships with onchain rewards built in. Earn for driving. Own your customizations. Share your car with smart contract payments. Deliveries start H2.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 15</span><span>🔁 1</span>
+            <a class="tweet-link" href="https://x.com/Optimism/status/2020849003307442437" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/safe" target="_blank">@safe</a>
+            <span class="tweet-date">Feb 9, 9:59 AM</span>
+        </div>
+        <div class="tweet-text">Secret Harbour adds E2E encryption using envelope encryption and onchain session keys. Your treasury rebalancing strategy shouldn't be visible to random observers.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 13</span><span>🔁 1</span>
+            <a class="tweet-link" href="https://x.com/safe/status/2020799590279319664" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <hr class="category-divider">
+
+    <!-- MACRO TWEETS -->
+    <h2><span class="emoji">🌍</span> Macro — Tweets</h2>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/CryptoHayes" target="_blank">@CryptoHayes</a>
+            <span class="tweet-date">Feb 9, 3:59 AM</span>
+        </div>
+        <div class="tweet-text">I stand with Sanae 🇯🇵 $/jpy to 200. Let's break some shit.</div>
+        <div class="tweet-metrics">
+            <span>❤️ 582</span><span>🔁 42</span>
+            <a class="tweet-link" href="https://x.com/CryptoHayes/status/2020709146467909989" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <div class="tweet">
+        <div class="tweet-header">
+            <a class="tweet-author" href="https://x.com/Bitcoin" target="_blank">@Bitcoin</a>
+            <span class="tweet-date">Feb 9, 1:44 AM</span>
+        </div>
+        <div class="tweet-text">Current price of #Bitcoin, measured in #Silver: 875.228 oz</div>
+        <div class="tweet-metrics">
+            <span>❤️ 789</span><span>🔁 284</span>
+            <a class="tweet-link" href="https://x.com/Bitcoin/status/2020675080875811244" target="_blank">View on X →</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>📡 Signal Monitor by <a href="https://x.com/beto_neh">@beto_neh</a> · Powered by Max Umbra</p>
+        <p>Built with X API + Claude · <a href="https://github.com/maxumbra/signal-monitor">Source</a></p>
+    </footer>
+</body>
+</html>
