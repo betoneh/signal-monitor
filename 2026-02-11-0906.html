@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <title>Signal Monitor - 2026-02-11-0906</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --text-primary: #e7e9ea;
+            --text-secondary: #71767b;
+            --accent: #1d9bf0;
+            --accent-hover: #1a8cd8;
+            --border: #2f3336;
+            --crypto: #f7931a;
+            --ai: #10a37f;
+            --tech: #8b5cf6;
+            --macro: #ef4444;
+            --openclaw: #FF4500;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        .header-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .stats-line {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin-top: 12px;
+            letter-spacing: 0.02em;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .editorial-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .editorial-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 15px;
+        }
+        
+        .category-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .category-header .count {
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .category-crypto .category-header {
+            border-color: var(--crypto);
+        }
+        
+        .category-ai .category-header {
+            border-color: var(--ai);
+        }
+        
+        .category-tech .category-header {
+            border-color: var(--tech);
+        }
+        
+        .category-macro .category-header {
+            border-color: var(--macro);
+        }
+        .category-openclaw .category-header {
+            border-color: var(--openclaw);
+        }
+        
+        .tweet {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        .tweet:hover {
+            border-color: var(--accent);
+        }
+        
+        .tweet.priority {
+            border-left: 3px solid var(--accent);
+        }
+        
+        .tweet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .tweet-author {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .author-handle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .author-handle a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .author-handle a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-time {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .tweet-text {
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .tweet-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-media {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        
+        .tweet-media img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .tweet-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .tweet-metrics {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tweet-link a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .retweet-badge {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .priority-badge {
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .stats {
+                gap: 10px;
+            }
+            
+            .stat {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://maxumbra.github.io/signal-monitor/"><img src="icon-192.png" alt="Signal Monitor" class="header-logo"></a>
+            <h1><a href="https://maxumbra.github.io/signal-monitor/" style="color: inherit; text-decoration: none;">Signal Monitor</a></h1>
+            <p class="subtitle">11/02/2026 - 09:06</p>
+            <p class="stats-line">200 tweets · Crypto 20% · AI 34% · Tech 8% · Macro 4% · OpenClaw 3% · Other 31%</p>
+        </header>
+
+        <div class="editorial-cards">
+            <div class="editorial-card"><strong>Crypto</strong> — BlackRock compra $UNI despues de entrar a DeFi con BUIDL — el institutional-DeFi convergence se acelera. Robinhood lanza su propia L2 en Arbitrum con testnet live. Bitdeer vende 25% de su BTC. Kevin Warsh (candidato a Fed Chair de Trump) dice que Bitcoin es el nuevo oro para menores de 40.</div>
+            <div class="editorial-card"><strong>AI</strong> — Semana de building tools: tambo 1.0 sale como toolkit open-source de generative UI, Virtuals Protocol lanza one-click deployment de agentes OpenClaw. El debate de AI safety se intensifica — el jefe de safety research de Anthropic renunció y desapareció. La narrativa de AI amplificando capacidades de equipos pequeños (50 personas → 500) se consolida.</div>
+            <div class="editorial-card"><strong>Tech</strong> — Stablecoins evolucionan de black box a modular payment stack (Stablecoin 2.0). Stripe entra con x402 powered by USDC. Yubico prepara firmware 5.8 con firmas digitales privacy-capable en hardware. El software personal llega — la era de &#39;sell work, not software&#39;.</div>
+            <div class="editorial-card"><strong>Macro</strong> — Kevin Warsh como pick de Trump para Fed Chair es la macro-señal: &#39;Bitcoin es tu nuevo oro si tienes menos de 40&#39;. BlackRock + Uniswap formalizan partnership. Prediction markets bajo escrutinio por insider trading.</div>
+            <div class="editorial-card"><strong>openclaw</strong> — OpenClaw gana momentum orgánico: guías de quick start, deployment one-click en Virtuals, debates de &#39;is it actually useful?&#39; y tutoriales de setup en Mac Mini. La comunidad crece con contenido educativo y troubleshooting.</div>
+            <div class="editorial-card"><strong>Señal del día</strong> — BlackRock comprando $UNI en mercado abierto despues de lanzar BUIDL + Robinhood lanzando su propia L2 + Warsh diciendo &#39;Bitcoin is your new gold&#39; — las instituciones ya no están explorando crypto, están construyendo infraestructura. El muro entre TradFi y DeFi se cayó esta semana.</div>
+        </div>
+
+        <section class="category category-crypto">
+            <div class="category-header">
+                <h2>Crypto</h2>
+                <span class="count">40 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">CoinGecko</span>
+                        <span class="author-handle"><a href="https://x.com/coingecko" target="_blank">@coingecko</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">TODAY: Bitdeer has reportedly sold 25% of their total Bitcoin holdings (487 $BTC). <a href="https://t.co/ltJAgFPEk0" target="_blank" rel="noopener">https://t.co/ltJAgFPEk0</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HA26OEGXkAA2a6P.jpg" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/media/HA26ODwXsAA6enZ.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/coingecko/status/2021477352438628457" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Andy</span>
+                        <span class="author-handle"><a href="https://x.com/andyyy" target="_blank">@andyyy</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">JUST IN: BLACKROCK IS BUYING $UNI ON THE MARKET AFTER &#39;MOVING INTO DEFI&#39; WITH ITS BUIDL PRODUCT <a href="https://t.co/8G48zVNJMk" target="_blank" rel="noopener">https://t.co/8G48zVNJMk</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HA4eByRbsAA-zSg.png" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/andyyy/status/2021586480720687191" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">clawi.ai</span>
+                        <span class="author-handle"><a href="https://x.com/ClawiAi" target="_blank">@ClawiAi</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text"><a href="https://t.co/ZAVgNzQd2t" target="_blank" rel="noopener">https://t.co/ZAVgNzQd2t</a> defines who your agent is.
+
+You can find the soul document in your OpenClaw dashboard. Begin here and give the shell a little soul ✨ <a href="https://t.co/q6NIeyPKux" target="_blank" rel="noopener">https://t.co/q6NIeyPKux</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2021551175359762432/img/ivSHRlQryzqnnc-C.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/ClawiAi/status/2021555278538289213" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">CoinGecko</span>
+                        <span class="author-handle"><a href="https://x.com/coingecko" target="_blank">@coingecko</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">JUST IN: $76B Robinhood launches its own chain, an Ethereum L2 built on Arbitrum. Its public testnet is now live. <a href="https://t.co/1pUDQPvfUJ" target="_blank" rel="noopener">https://t.co/1pUDQPvfUJ</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HA2jKqMXcAAoYkL.jpg" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/media/HA2jKoaWwAAsxfw.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/coingecko/status/2021451212952867107" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Jake Shields</span>
+                        <span class="author-handle"><a href="https://x.com/jakeshieldsajj" target="_blank">@jakeshieldsajj</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">Hey <a href="https://x.com/grok" target="_blank" rel="noopener">@grok</a>, I&#39;m reading the Epstein files, and I just noticed something extremely disturbing 
+
+He often responds with Whoops after he appears to have raped or had someone killed 
+
+Will you look at all the times he said that, whoops and tie it to my theory</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/jakeshieldsajj/status/2021353313028157876" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-ai">
+            <div class="category-header">
+                <h2>AI</h2>
+                <span class="count">69 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Vlad Tenev</span>
+                        <span class="author-handle"><a href="https://x.com/vladtenev" target="_blank">@vladtenev</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">The future of finance is onchain.
+
+The Robinhood Chain testnet is live for developers. Let us know what you think. <a href="https://t.co/vZArTfC9s1" target="_blank" rel="noopener">https://t.co/vZArTfC9s1</a></div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/vladtenev/status/2021401110129541373" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Michael Magán</span>
+                        <span class="author-handle"><a href="https://x.com/mrmagan_" target="_blank">@mrmagan_</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">build an agent that speaks your UI.
+
+your charts. your forms. your seat maps.
+
+multi-turn, streaming, interactive.
+
+introducing tambo 1.0, the open-source generative UI toolkit for react. <a href="https://t.co/5l1IfFbjwp" target="_blank" rel="noopener">https://t.co/5l1IfFbjwp</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2021293676643876868/img/0blKY2KMXcbhNgS8.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/mrmagan_/status/2021296847893967092" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Virtuals Protocol</span>
+                        <span class="author-handle"><a href="https://x.com/virtuals_io" target="_blank">@virtuals_io</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">One-click <a href="https://x.com/openclaw" target="_blank" rel="noopener">@openclaw</a> agent deployment, live on Virtuals Protocol 🦞</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/virtuals_io/status/2021488391142134210" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Sergito ❚ ❚</span>
+                        <span class="author-handle"><a href="https://x.com/sergitosergito" target="_blank">@sergitosergito</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">One thing we’ve been thinking about at MeebCo is how can we start executing as a 50-person company now that we can 10x ourselves with AI tools?
+
+The future is here.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/sergitosergito/status/2021593943524212971" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Robinhood</span>
+                        <span class="author-handle"><a href="https://x.com/RobinhoodApp" target="_blank">@RobinhoodApp</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">In case you missed it, Robinhood Chain is now live on testnet.
+
+An early step in our work to build onchain financial infrastructure, giving developers a place to build ahead of mainnet.
+
+Explore the testnet: <a href="https://t.co/BqIJnHo40E" target="_blank" rel="noopener">https://t.co/BqIJnHo40E</a> <a href="https://t.co/NIObEXaVtq" target="_blank" rel="noopener">https://t.co/NIObEXaVtq</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2021585020377313280/img/Yb2xyJXClg-AHN1C.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/RobinhoodApp/status/2021585052417630465" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-tech">
+            <div class="category-header">
+                <h2>Tech</h2>
+                <span class="count">16 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Cyprx Research Lab Official</span>
+                        <span class="author-handle"><a href="https://x.com/CyprxResearch" target="_blank">@CyprxResearch</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">Stablecoin 1.0 to 2.0: 
+From black box to modular payment stack
+
+The first wave was simple:
+- 1 provider.
+- 1 stack.
+- 1 margin.
+- Take it or leave it.
+
+That was Stablecoin 1.0: fast to launch, but opaque, expensive, and hard to control.
+
+Now we’re entering Stablecoin 2.0.
+
+Instead of all-in-one vendors, institutions assemble a bank-grade, modular stack:
+- Wallet infra &amp; key management
+- Liquidity, FX, bridges
+- Independent compliance &amp; risk
+- Multiple on/off ramps
+- Settlement rails connected to the real economy
+
+Result:
+- Control over flows &amp; counterparties
+- Negotiated economics
+- Multi-corridor, multi-chain strategies
+- Compliance by design, not by vendor
+
+This mirrors the evolution of cards and open banking:
+Monolith and orchestrated infrastructure.
+
+Stablecoins are no longer a product.
+They’re becoming payment infrastructure.
+
+And the winners won’t be the loudest tokens,
+they’ll be the teams with the best stack architecture.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HAynlIKWcAEcc0m.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/CyprxResearch/status/2021237730655793662" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Jordi in Cryptoland</span>
+                        <span class="author-handle"><a href="https://x.com/lordjorx" target="_blank">@lordjorx</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">The Yield Tranching meta is officially exploding.
+
+Strata just doubled their cap from $50M to $100M. The integration with <a href="https://x.com/aave" target="_blank" rel="noopener">@aave</a> is scaling their TVL fast, and they need it because competition is arriving. 
+
+<a href="https://x.com/roycoprotocol" target="_blank" rel="noopener">@roycoprotocol</a> is launching a very similar product and <a href="https://x.com/phtevenstrong" target="_blank" rel="noopener">@phtevenstrong</a> is working on <a href="https://x.com/mezzanine_fi" target="_blank" rel="noopener">@mezzanine_fi</a> which is also a protocol in the same niche. Yield Tranching is clearly becoming a trend.
+
+The main issue right now is execution. Doing these loops manually is tedious and slow. I checked <a href="https://x.com/Contango_xyz" target="_blank" rel="noopener">@Contango_xyz</a> to see if this loop was available, but it isn&#39;t there yet. 
+
+Generally, among the profitable options available right now, very few have enough liquidity to be worth it.
+
+This is why I’m waiting for platforms like <a href="https://x.com/Infinit_Labs" target="_blank" rel="noopener">@Infinit_Labs</a>. Institutions use bots to fill these caps almost instantly and this DeFi AI agents can help us a lot. 
+
+Right now, the total supply is already at $59M. If you want to participate, you have to be quick.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HA2GF8fXIAA61wP.jpg" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/media/HA2GXvZXQAAuSSE.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/lordjorx/status/2021510016302497803" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Yubico | #YubiKey</span>
+                        <span class="author-handle"><a href="https://x.com/Yubico" target="_blank">@Yubico</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">Big changes are coming to digital identity! 🚀 Yubico&#39;s upcoming 5.8 firmware will introduce privacy capable digital signatures, making hardware-backed signing as easy as a passkey login.
+
+Read the blog for a first look at what’s next, or register for our Feb 26 webinar to learn more 🔗 <a href="https://t.co/idVzr1BftR" target="_blank" rel="noopener">https://t.co/idVzr1BftR</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HA1dv1iXcAEVduT.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/Yubico/status/2021374905267175811" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Vaughtton</span>
+                        <span class="author-handle"><a href="https://x.com/Vaughtton" target="_blank">@Vaughtton</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">El software personal ha llegado.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/Vaughtton/status/2021259406009061677" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Akshay Kothari</span>
+                        <span class="author-handle"><a href="https://x.com/akothari" target="_blank">@akothari</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">We used to sell software. Now we sell work. It’s a subtle shift, but it dramatically expands the opportunity.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/akothari/status/2021457180717875306" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-macro">
+            <div class="category-header">
+                <h2>Macro</h2>
+                <span class="count">7 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Mary-Catherine Lader</span>
+                        <span class="author-handle"><a href="https://x.com/Mclader" target="_blank">@Mclader</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">This partnership was a long time coming, and I’m thrilled it’s now public.
+
+After starting digital assets at BlackRock in 2015, I left to join Uniswap when it was 10 people in 2021. Uniswap was clearly an innovation in financial markets — crowd-sourced liquidity, no need for a market maker, anyone could become one. 
+
+Five years and $4T of trading later, it made sense to me that the world’s largest asset manager should partner with the world’s most used AMM. It took open-mindedness and persistence to get this done, and I hope both firms push to tokenize markets from here.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/Mclader/status/2021593601864573193" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">cookies (🍪,🍪) | 饼妹</span>
+                        <span class="author-handle"><a href="https://x.com/jinglingcookies" target="_blank">@jinglingcookies</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">interesting read on approaches towards insider trading on prediction markets
+
+check it out!</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/jinglingcookies/status/2021359826312540425" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">kanv</span>
+                        <span class="author-handle"><a href="https://x.com/gupta_kanv" target="_blank">@gupta_kanv</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">Securitize is leading the way with the DS protocol and compliant access to RWAs, an area where Euler is particularly well suited.
+
+Looking forward to working with Securitize on RWAs this year.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/gupta_kanv/status/2021500972254863566" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Bitcoin Magazine</span>
+                        <span class="author-handle"><a href="https://x.com/BitcoinMagazine" target="_blank">@BitcoinMagazine</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">🇺🇸 President Trump&#39;s next Fed Chair pick, Kevin Warsh:
+
+“If you’re under 40, Bitcoin is your new gold.” <a href="https://t.co/bGQPpJtPui" target="_blank" rel="noopener">https://t.co/bGQPpJtPui</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2020992166827323392/img/B1HNdh64wFZAVybs.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/BitcoinMagazine/status/2020992376781652386" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">John</span>
+                        <span class="author-handle"><a href="https://x.com/johncalhooon" target="_blank">@johncalhooon</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">We rebuilt the entire BSV stack in Rust!
+
+SDK, wallet toolbox, middleware, everything.
+
+Deployed it to Cloudflare Workers for $5/month.
+
+If your BSV infrastructure costs more than a coffee, we should talk.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/johncalhooon/status/2021260378252968073" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-other">
+            <div class="category-header">
+                <h2>📌 Other</h2>
+                <span class="count">62 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Kalshi Traders</span>
+                        <span class="author-handle"><a href="https://x.com/KalshiTrade" target="_blank">@KalshiTrade</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">JUST IN: BlackRock acquires Uniswap tokens</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/KalshiTrade/status/2021586037034651819" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">God of Prompt</span>
+                        <span class="author-handle"><a href="https://x.com/godofprompt" target="_blank">@godofprompt</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">R E A D 
+
+T H I S 
+
+N O W
+
+O R 
+
+Y O U 
+
+W I L L 
+
+R E G R E T 
+
+I T 
+
+L A T E R</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/godofprompt/status/2021541165687038348" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">eric</span>
+                        <span class="author-handle"><a href="https://x.com/defyneric" target="_blank">@defyneric</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">How To Off Ramp Crypto Without Paying Taxes</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/defyneric/status/2021425207202730039" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Gnosis Pay 🦉💳</span>
+                        <span class="author-handle"><a href="https://x.com/gnosispay" target="_blank">@gnosispay</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">It&#39;s called Gnosis Pay
+
+If you want to offer this to your users, partner with us <a href="https://t.co/P77IK4cnYv" target="_blank" rel="noopener">https://t.co/P77IK4cnYv</a></div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/gnosispay/status/2021326838232912036" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">David Ondrej</span>
+                        <span class="author-handle"><a href="https://x.com/DavidOndrej1" target="_blank">@DavidOndrej1</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">this is the best article you’ll ever read</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/DavidOndrej1/status/2021257114577195155" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <footer>
+            <p>Generated by <a href="https://github.com/maxumbra/signal-monitor">Signal Monitor</a> · 2026-02-11T09:06</p>
+            <p>Powered by Clawdbot 🤖</p>
+        </footer>
+    </div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+        // Pull-to-refresh
+        let startY = 0;
+        let pulling = false;
+        const ptr = document.createElement('div');
+        ptr.style.cssText = 'position:fixed;top:0;left:0;right:0;text-align:center;padding:12px;color:#71767b;font-size:14px;z-index:9999;transform:translateY(-100%);transition:transform .2s;background:#0f0f0f;';
+        ptr.textContent = '↓ Pull to refresh';
+        document.body.prepend(ptr);
+        document.addEventListener('touchstart', e => { if (window.scrollY === 0) { startY = e.touches[0].pageY; pulling = true; } });
+        document.addEventListener('touchmove', e => {
+            if (!pulling) return;
+            const dy = e.touches[0].pageY - startY;
+            if (dy > 10 && dy < 150) { ptr.style.transform = `translateY(${Math.min(dy/2, 40)}px)`; ptr.textContent = dy > 80 ? '↑ Release to refresh' : '↓ Pull to refresh'; }
+        });
+        document.addEventListener('touchend', e => {
+            if (!pulling) return;
+            pulling = false;
+            const dy = e.changedTouches[0].pageY - startY;
+            ptr.style.transform = 'translateY(-100%)';
+            if (dy > 80) { ptr.textContent = 'Refreshing...'; ptr.style.transform = 'translateY(0)'; location.reload(); }
+        });
+    </script>
+</body>
+</html>
