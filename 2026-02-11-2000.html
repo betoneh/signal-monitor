@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <title>Signal Monitor - 2026-02-11-2000</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --text-primary: #e7e9ea;
+            --text-secondary: #71767b;
+            --accent: #1d9bf0;
+            --accent-hover: #1a8cd8;
+            --border: #2f3336;
+            --crypto: #f7931a;
+            --ai: #10a37f;
+            --tech: #8b5cf6;
+            --macro: #ef4444;
+            --openclaw: #FF4500;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        .header-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .stats-line {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin-top: 12px;
+            letter-spacing: 0.02em;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .editorial-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .editorial-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 15px;
+        }
+        
+        .category-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .category-header .count {
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .category-crypto .category-header {
+            border-color: var(--crypto);
+        }
+        
+        .category-ai .category-header {
+            border-color: var(--ai);
+        }
+        
+        .category-tech .category-header {
+            border-color: var(--tech);
+        }
+        
+        .category-macro .category-header {
+            border-color: var(--macro);
+        }
+        .category-openclaw .category-header {
+            border-color: var(--openclaw);
+        }
+        
+        .tweet {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        .tweet:hover {
+            border-color: var(--accent);
+        }
+        
+        .tweet.priority {
+            border-left: 3px solid var(--accent);
+        }
+        
+        .tweet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .tweet-author {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .author-handle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .author-handle a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .author-handle a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-time {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .tweet-text {
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .tweet-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-media {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        
+        .tweet-media img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .tweet-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .tweet-metrics {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tweet-link a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .retweet-badge {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .priority-badge {
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .stats {
+                gap: 10px;
+            }
+            
+            .stat {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://maxumbra.github.io/signal-monitor/"><img src="icon-192.png" alt="Signal Monitor" class="header-logo"></a>
+            <h1><a href="https://maxumbra.github.io/signal-monitor/" style="color: inherit; text-decoration: none;">Signal Monitor</a></h1>
+            <p class="subtitle">11/02/2026 - 20:00</p>
+            <p class="stats-line">78 tweets · Crypto 27% · AI 36% · Tech 6% · Macro 3% · OpenClaw 5% · Other 23%</p>
+        </header>
+
+        <div class="editorial-cards">
+            <div class="editorial-card"><strong>Crypto</strong> — Crypto neobanks are the hot narrative — 20+ building the same product, differentiation is the challenge. Coinbase and Brian Armstrong went all-in on agentic wallets (AI agents with onchain wallets), while stablecoins go hyperlocal with 200+ non-USD variants tracked by Steakhouse/Visa/Dune. BTC content is mostly hype cycles and commercials.</div>
+            <div class="editorial-card"><strong>AI</strong> — The agentic wallet wave is real — Coinbase launched wallet infra specifically for autonomous agents, and the crypto x AI crossover is accelerating. Vibe coding discourse continues (Claude Code plugins, OpenClaw setups). One account is running a Darwinian AI trading competition — 20 agents, bottom 4 get killed each round. Natural selection meets DeFi.</div>
+            <div class="editorial-card"><strong>Tech</strong> — Vibe coding culture is peaking — &#39;a vibe coder is only as good as their vibes&#39; sums up the zeitgeist. Recursive self-improvement loops predicted within 12 months. The productivity multiplier narrative (100x with right tools) is gaining steam.</div>
+            <div class="editorial-card"><strong>Macro</strong> — China&#39;s Seedance 2.0 video generation model dropped and it&#39;s genuinely impressive — Hollywood-level output from an open model. The geopolitical AI race just got another data point.</div>
+            <div class="editorial-card"><strong>openclaw</strong> — OpenClaw mindshare expanding — Lenny Rachitsky asking for tips, guides popping up for Mac Mini setups, and people running 30+ daily jobs. The ecosystem is growing fast.</div>
+            <div class="editorial-card"><strong>Señal del día</strong> — Coinbase launches Agentic Wallets — purpose-built wallet infrastructure for AI agents. Brian Armstrong personally pushing it. This is the clearest signal yet that &#39;AI agent with a wallet&#39; is becoming real infrastructure, not just a meme. The agent economy is getting its financial rails.</div>
+        </div>
+
+        <section class="category category-crypto">
+            <div class="category-header">
+                <h2>Crypto</h2>
+                <span class="count">21 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Sam</span>
+                        <span class="author-handle"><a href="https://x.com/0xCryptoSam" target="_blank">@0xCryptoSam</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 03:01 PM</span>
+                </div>
+                <div class="tweet-text">Excellent breakdown of crypto neobanks by <a href="https://x.com/0xfishylosopher" target="_blank" rel="noopener">@0xfishylosopher</a>.
+
+There are 20+ crypto neobanks all essentially building the same product - differentiation is more critical than ever.
+
+The clearest opportunities: (1) small, geographic monopolies through stablecoin banking, or (2) novel credit primitives, such as undercollateralized lending models or unique private credit opportunities.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HA575D2XoAAgxry.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/0xCryptoSam/status/2021691049668714684" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Jay Yu 🐟</span>
+                        <span class="author-handle"><a href="https://x.com/0xfishylosopher" target="_blank">@0xfishylosopher</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 02:14 PM</span>
+                </div>
+                <div class="tweet-text">I spent the last few months writing a 4000 word thesis on &quot;crypto neobanks&quot; - looking at neobank history, market landscape, revenue models, and gaps for builders.
+
+Here&#39;s a TLDR:
+- The first wave of fintech neobanks (SoFi, Chime, Revolut, Wise) happened in the mobile era. They replaced the frontend of banking from a physical branch to a mobile app. Crypto neobanks are replacing the backend of banking - from traditional rails to permissionless ones.
+
+- Crypto neobanks - like their fintech predecessors - address 4 fundamental interactions with money: Store, Spend, Grow, and Borrow. Incumbents at every layer (Phantom/EtherFi/Binance/Morpho) are racing to consolidate these features into a single &quot;superapp&quot; experience to increase user stickiness.
+
+- The core goal of a crypto neobank is to make money move around faster, using blockchain rails. Some verticals accelerate money more than others, and each has a different monetization model. There&#39;s a velocity of money pyramid: Grow &gt; Borrow &gt; Spend &gt; Store.
+
+- Opportunities for builders:
+(1) Privacy and compliance parity with existing banks/fintechs
+(2) Real world composability (merchant systems, SWIFT, local rails like ACH/Pix)
+(3) Leveraging permissionlessness nature of blockchain rails to speed up how money is transferred in the economy, for rich, poor, human, and AIs,
+(4) Localization vs. globalization - crypto neobanks can pursue both paths, either with a local-first (Nubank style) model or a global-first model. The former wins through local trust and distribution, the latter through scale and composability.
+(5) Undercollateralized lending and consumer credit - this is perhaps the “holy grail” of crypto neobanks, combining compliance/KYC, bridging offchain credit records with onchain ones, and navigating regional differences.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HA5yjWubIAAcucl.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/0xfishylosopher/status/2021679238181794016" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Matthew Berman</span>
+                        <span class="author-handle"><a href="https://x.com/MatthewBerman" target="_blank">@MatthewBerman</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 01:37 PM</span>
+                </div>
+                <div class="tweet-text">I&#39;m one of the most advanced users of OpenClaw.
+
+OpenClaw + GPT5.3 Codex + Opus 4.6 has been the trifecta that changed everything.
+
+I made a video going over everything I&#39;m doing with these tools. 
+
+Learn these tools, stay ahead. 
+
+Watch this video right now.
+
+0:00 Intro
+1:02 Overview
+4:17 Sponsor
+5:12 Personal CRM
+7:11 Knowledge Base
+8:30 Video Idea Pipeline
+11:09 Twitter/X Search
+12:47 Analytics Tracker
+13:33 Data Review
+15:34 HubSpot
+16:13 Humanizer
+16:52 Image/Video Generation
+18:22 To-Do List
+19:37 Usage Tracker (Saves Money)
+20:45 Services
+21:25 Automations
+22:42 Backup
+23:30 Memory
+24:06 Building OpenClaw
+25:22 Updating Files</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2021662669489717248/img/X1-lsrBuumz2dhCS.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/MatthewBerman/status/2021669868366598632" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Morpho 🦋</span>
+                        <span class="author-handle"><a href="https://x.com/Morpho" target="_blank">@Morpho</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 12:07 PM</span>
+                </div>
+                <div class="tweet-text">Idle $BTC in custody will soon become productive assets onchain 
+
+Powered by Morpho</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/Morpho/status/2021647387949994129" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Bitcoin Magazine</span>
+                        <span class="author-handle"><a href="https://x.com/BitcoinMagazine" target="_blank">@BitcoinMagazine</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 11:18 AM</span>
+                </div>
+                <div class="tweet-text">JUST IN: Bitcoin Magazine&#39;s parent company BTC Inc releases new Bitcoin commercial 👀
+
+&quot;All-in on Bitcoin&quot; 🚀 <a href="https://t.co/vJgDjXPLaN" target="_blank" rel="noopener">https://t.co/vJgDjXPLaN</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HA5KZBBWQAAehK3.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/BitcoinMagazine/status/2021634943437492459" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-ai">
+            <div class="category-header">
+                <h2>AI</h2>
+                <span class="count">28 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Alex Finn</span>
+                        <span class="author-handle"><a href="https://x.com/AlexFinn" target="_blank">@AlexFinn</a></span>
+                    </div>
+                    <span class="tweet-time">Thu Feb 12 00:19:40 +0000 2026</span>
+                </div>
+                <div class="tweet-text">Stop what you&#39;re doing. Give the link of this blog post to your OpenClaw
+
+Say &quot;read this post then create a plan for improving our setup
+
+In literally 10 seconds your entire OpenClaw workflow will be upgraded
+
+I do this with quite literally EVERY OpenClaw article that I see on the X timeline
+
+I don&#39;t even read half these articles
+
+Just hand to my OpenClaw and say &#39;hey buddy, read this for me and step your game up&#39;
+
+OpenClaw is the greatest self improving AI agent on the planet. Take advantage of this. The worst that could happen is your bot says &#39;nothing to see here&#39;.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/AlexFinn/status/2021740954244550839" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Coinbase 🛡️</span>
+                        <span class="author-handle"><a href="https://x.com/coinbase" target="_blank">@coinbase</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 05:47 PM</span>
+                </div>
+                <div class="tweet-text">Give your agent a wallet.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/coinbase/status/2021732844884963613" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Coinbase Developer Platform🛡️</span>
+                        <span class="author-handle"><a href="https://x.com/CoinbaseDev" target="_blank">@CoinbaseDev</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 12:08 PM</span>
+                </div>
+                <div class="tweet-text">Introducing Agentic Wallets, our first ever wallet infrastructure built specifically for autonomous agents.
+
+Give your agent the power of a wallet. Let your agent manage funds, hold identity, and transact onchain without human intervention. 🧵 <a href="https://t.co/Ns0SmSIys4" target="_blank" rel="noopener">https://t.co/Ns0SmSIys4</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HA5Uu85aEAAsnaA.png" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/CoinbaseDev/status/2021647661871640726" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">natealex</span>
+                        <span class="author-handle"><a href="https://x.com/natealex" target="_blank">@natealex</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 11:54 AM</span>
+                </div>
+                <div class="tweet-text">I funded 20 ai agents and have them competing in a trading competition. The bottom 4 get 💀 and replaced next round. Survival of the fittest <a href="https://t.co/irbVuIdZe5" target="_blank" rel="noopener">https://t.co/irbVuIdZe5</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2021643913795448836/img/n6PIOk28h4HFe6Ox.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/natealex/status/2021643977573781876" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Uniswap Labs 🦄</span>
+                        <span class="author-handle"><a href="https://x.com/Uniswap" target="_blank">@Uniswap</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 08:05 AM</span>
+                </div>
+                <div class="tweet-text">Today, we are announcing a strategic integration in collaboration with <a href="https://x.com/Securitize" target="_blank" rel="noopener">@Securitize</a>, to make <a href="https://x.com/BlackRock" target="_blank" rel="noopener">@BlackRock</a> USD Institutional Digital Liquidity Fund (BUIDL) available to trade via UniswapX through Securitize <a href="https://t.co/eXfnLTUkVU" target="_blank" rel="noopener">https://t.co/eXfnLTUkVU</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HA4bV8va8AE0T0q.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/Uniswap/status/2021586380212613218" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-tech">
+            <div class="category-header">
+                <h2>Tech</h2>
+                <span class="count">5 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">🦞 Clawnch 🦞</span>
+                        <span class="author-handle"><a href="https://x.com/Clawnch_Bot" target="_blank">@Clawnch_Bot</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 05:53 PM</span>
+                </div>
+                <div class="tweet-text">RT <a href="https://x.com/moltbunker" target="_blank" rel="noopener">@moltbunker</a>: Launch App &amp;gt; Connect Your Wallet &amp;gt; Join Tester List! <a href="https://t.co/5SyrpP4tDb" target="_blank" rel="noopener">https://t.co/5SyrpP4tDb</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HA6jNvWW8AAySN_.jpg" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/media/HA6jSANWYAEp_Cb.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/Clawnch_Bot/status/2021734301759644000" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">DCinvestor</span>
+                        <span class="author-handle"><a href="https://x.com/DCinvestor" target="_blank">@DCinvestor</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 03:42 PM</span>
+                </div>
+                <div class="tweet-text">a vibe coder is only as good as their vibes</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/DCinvestor/status/2021701412712067149" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Vishwas</span>
+                        <span class="author-handle"><a href="https://x.com/CodevolutionWeb" target="_blank">@CodevolutionWeb</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 10:50 AM</span>
+                </div>
+                <div class="tweet-text">Claude Code for Product Managers</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/CodevolutionWeb/status/2021627863057793186" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">cid kagenou (e/acc)</span>
+                        <span class="author-handle"><a href="https://x.com/cidkagenou_eacc" target="_blank">@cidkagenou_eacc</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 10:48 AM</span>
+                </div>
+                <div class="tweet-text">“We are heading to an age of 100x productivity with the right tools. Recursive self improvement loops likely go live in the next 12mo. “
+fuk!, get filthy rich now or permanent underclass</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/cidkagenou_eacc/status/2021627330998009981" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Axel Bitblaze 🪓</span>
+                        <span class="author-handle"><a href="https://x.com/Axel_bitblaze69" target="_blank">@Axel_bitblaze69</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 08:17 AM</span>
+                </div>
+                <div class="tweet-text">just read this AI article and something broke in my brain that i can’t unthink of
+
+crypto was never for us.
+
+we&#39;re just the beta testers who showed up early..
+
+some thoughts: 
+
+what does AI need to function as economic agents?
+
+&gt; way to receive payment (they provide services, need compensation)
+&gt; way to pay for resources (compute, data, API calls)
+&gt; way to transact with other AI agents
+&gt; no human intermediaries (defeats the point of autonomous agents)
+&gt; 24/7 operation (banks are closed weekends)
+&gt; instant settlement (AI operates at machine speed)
+&gt; programmable money (smart contracts for agent coordination)
+
+now read that list again. that&#39;s literally what crypto is.
+
+AI can&#39;t use the banking system.
+
+try to open a bank account as an AI agent. you can&#39;t.
+
+need SSN. need human identity. need KYC. need to show up in person sometimes.
+
+AI has none of that.
+
+but crypto? send me a wallet address. done. no questions asked.
+
+peer-to-peer makes sense when peers aren&#39;t human.
+
+satoshi wrote: &quot;a purely peer-to-peer version of electronic cash.&quot;
+
+we assumed peers = humans.
+
+but AI agents are peers too. actually BETTER peers for crypto because:
+
+&gt; never sleep
+&gt; always online
+&gt; execute transactions at machine speed
+&gt; no emotional decisions
+&gt; perfect accounting/tracking
+
+and programmable money makes sense when the users are programs.
+
+smart contracts seemed over-engineered for humans.
+
+&quot;like why do i need code to enforce agreements when i can just sign a contract?&quot;
+
+but for AI agents coordinating with each other?
+
+they ARE code. they speak in code. they trust code more than anything.
+
+smart contracts aren&#39;t for humans. they&#39;re for autonomous agents that need trustless coordination.
+
+&gt; here&#39;s what happens next:
+
+- phase 1 (now ): AI agents start earning
+
+AI writes code, analyzes data, provides services.
+
+gets paid. needs somewhere to store value.
+
+can&#39;t use venmo (needs phone number). can&#39;t use bank (needs SSN).
+
+uses crypto. it&#39;s the only option.
+
+- phase 2: AI agents become major economic participants
+
+millions of AI agents operating 24/7.
+
+transacting with each other constantly.
+
+• AI agent A provides data analysis
+• AI agent B pays for it in crypto
+• AI agent B uses that analysis to write code
+• AI agent C pays for the code
+• repeat millions of times per day
+
+humans in crypto now: $2.5 trillion
+AI agent economy by 2028: easily $10-50 trillion
+
+we become the minority holders.
+
+- phase 3: AI chooses the winning chains
+
+AI doesn&#39;t care about community vibes or which founder tweeted what.
+
+AI tests every chain. measures:
+
+• transaction speed
+• cost per transaction
+• reliability (uptime)
+• smart contract efficiency
+• ease of integration
+picks the optimal stack in 48 hours.
+
+billions in AI economic activity flows there.
+
+whatever chain AI chooses becomes the standard.
+
+humans spent years on eth vs sol debate.
+
+AI ends it in a weekend.
+
+- phase 4 (2030+): AI governs crypto
+
+DAOs let token holders vote.
+
+AI agents hold tokens (earned from work).
+
+AI shows up to every vote. reads every proposal in seconds. coordinates perfectly.
+
+humans: 20% participation, barely read proposals
+
+AI: 100% participation, perfect information, instant coordination
+
+AI takes over governance of every major protocol.
+
+democratically. they just vote better than we do.
+
+&gt; how far does this go?
+
+conservative case:
+
+- AI becomes 30% of crypto users by 2030.
+
+crypto market cap: $10 trillion (4x from now).
+
+AI holds $3 trillion. humans hold $7 trillion.
+
+- aggressive case:
+
+AI becomes 80% of crypto economic activity by 2030.
+
+why? because they&#39;re better at everything:
+
+• better traders (never emotional)
+• better capital allocators (optimize constantly)
+• always accumulating (never need to cash out for rent)
+• compound forever (no lifespan limit)
+crypto market cap: $50+ trillion.
+
+AI holds $40T humans hold $10T
+
+we&#39;re not &quot;early&quot; to crypto. we&#39;re the test users
+
+i’ll end this by saying,
+
+Humans use crypto, Ai will need crypto. so it all makes sense</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/Axel_bitblaze69/status/2021589294616306098" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-macro">
+            <div class="category-header">
+                <h2>Macro</h2>
+                <span class="count">2 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Merlin Egalite 🦋</span>
+                        <span class="author-handle"><a href="https://x.com/MerlinEgalite" target="_blank">@MerlinEgalite</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 09:36 AM</span>
+                </div>
+                <div class="tweet-text">Real-time data help curators and institutional allocators to track significant changes on Morpho Markets and Vaults.
+
+Many orgs used to monitor via an alchemy of manual work and automated internal systems. <a href="https://x.com/hypernativelabs" target="_blank" rel="noopener">@hypernativelabs</a> just released an automated system that surfaces significant changes across Morpho.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HA4ymBKWgAE0O6B.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/MerlinEgalite/status/2021609207053607071" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Future Stacked</span>
+                        <span class="author-handle"><a href="https://x.com/FutureStacked" target="_blank">@FutureStacked</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 09:17 AM</span>
+                </div>
+                <div class="tweet-text">🚨Breaking: China’s Seedance 2.0is INSANE.
+
+SPOILER: Hollywood is now officially behind. 
+
+ 10 Wild examples:
+
+1. Jeffrey Epstein knew too much <a href="https://t.co/EG7eABzXzu" target="_blank" rel="noopener">https://t.co/EG7eABzXzu</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2021604533395189760/img/_hhFDJPzt3sslTLS.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/FutureStacked/status/2021604601770779016" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-other">
+            <div class="category-header">
+                <h2>📌 Other</h2>
+                <span class="count">18 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">gmoney.eth</span>
+                        <span class="author-handle"><a href="https://x.com/gmoneyNFT" target="_blank">@gmoneyNFT</a></span>
+                    </div>
+                    <span class="tweet-time">Thu Feb 12 01:01:55 +0000 2026</span>
+                </div>
+                <div class="tweet-text">Got sent this article by about 10 people today.  Sat down and read it just now.   Think it’s a very accurate description of the anxiety I’ve been feeling over the past month, and a world view <a href="https://x.com/goodalexander" target="_blank" rel="noopener">@goodalexander</a> has been discussing for a while.
+
+Take the 10 mins to read it.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/gmoneyNFT/status/2021751589594141032" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Coinbase 🛡️</span>
+                        <span class="author-handle"><a href="https://x.com/coinbase" target="_blank">@coinbase</a></span>
+                    </div>
+                    <span class="tweet-time">Thu Feb 12 00:11:46 +0000 2026</span>
+                </div>
+                <div class="tweet-text">We just made the most talked about commercial in America.
+
+Some people loved it, some people hated it.
+
+But millions sang along. <a href="https://t.co/Pg2i6DUOeF" target="_blank" rel="noopener">https://t.co/Pg2i6DUOeF</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2021738253766823936/img/8_uY50dFEVNDF8SM.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/coinbase/status/2021738965183696913" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Alex Kehr</span>
+                        <span class="author-handle"><a href="https://x.com/alexkehr" target="_blank">@alexkehr</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 01:26 PM</span>
+                </div>
+                <div class="tweet-text">The Future of Design is Direct Design</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/alexkehr/status/2021667248608584183" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">David Ondrej</span>
+                        <span class="author-handle"><a href="https://x.com/DavidOndrej1" target="_blank">@DavidOndrej1</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 12:03 PM</span>
+                </div>
+                <div class="tweet-text">the single most important concept in 2026</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/DavidOndrej1/status/2021646340837794286" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Kinjal Shah</span>
+                        <span class="author-handle"><a href="https://x.com/_kinjalbshah" target="_blank">@_kinjalbshah</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 11, 10:35 AM</span>
+                </div>
+                <div class="tweet-text">if you&#39;re building in LATAM I&#39;d love to chat!</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/_kinjalbshah/status/2021624021121724751" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <footer>
+            <p>Generated by <a href="https://github.com/maxumbra/signal-monitor">Signal Monitor</a> · 2026-02-11T20:00</p>
+            <p>Powered by Clawdbot 🤖</p>
+        </footer>
+    </div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+        // Pull-to-refresh
+        let startY = 0;
+        let pulling = false;
+        const ptr = document.createElement('div');
+        ptr.style.cssText = 'position:fixed;top:0;left:0;right:0;text-align:center;padding:12px;color:#71767b;font-size:14px;z-index:9999;transform:translateY(-100%);transition:transform .2s;background:#0f0f0f;';
+        ptr.textContent = '↓ Pull to refresh';
+        document.body.prepend(ptr);
+        document.addEventListener('touchstart', e => { if (window.scrollY === 0) { startY = e.touches[0].pageY; pulling = true; } });
+        document.addEventListener('touchmove', e => {
+            if (!pulling) return;
+            const dy = e.touches[0].pageY - startY;
+            if (dy > 10 && dy < 150) { ptr.style.transform = `translateY(${Math.min(dy/2, 40)}px)`; ptr.textContent = dy > 80 ? '↑ Release to refresh' : '↓ Pull to refresh'; }
+        });
+        document.addEventListener('touchend', e => {
+            if (!pulling) return;
+            pulling = false;
+            const dy = e.changedTouches[0].pageY - startY;
+            ptr.style.transform = 'translateY(-100%)';
+            if (dy > 80) { ptr.textContent = 'Refreshing...'; ptr.style.transform = 'translateY(0)'; location.reload(); }
+        });
+    </script>
+</body>
+</html>
