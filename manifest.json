@@ -2,28 +2,7 @@
   "name": "Signal Monitor",
   "short_name": "Signal",
   "description": "Timeline digest & signal detection",
-  "start_url": "/signal-monitor/",
-  "scope": "/signal-monitor/",
-  "display": "standalone",
+  "display": "browser",
   "background_color": "#0f0f0f",
-  "theme_color": "#0f0f0f",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-1024.png",
-      "sizes": "1024x1024",
-      "type": "image/png"
-    }
-  ]
+  "theme_color": "#0f0f0f"
 }
