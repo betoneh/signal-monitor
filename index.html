@@ -11,9 +11,11 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
     <title>Signal Monitor</title>
     <style>
+        html { scroll-behavior:smooth; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #0f0f0f;
+            -webkit-font-smoothing: antialiased;
             color: #e7e9ea;
             max-width: 800px;
             margin: 0 auto;
@@ -29,9 +31,10 @@
             border: 1px solid #2f3336;
             border-radius: 12px;
             margin-bottom: 12px;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, transform 0.15s;
         }
-        li:hover { border-color: #1d9bf0; }
+        li:hover { border-color: #1d9bf0; transform:translateY(-1px); }
+        li:active { transform:scale(0.99); }
         a {
             display: block;
             padding: 16px 20px;
@@ -67,27 +70,7 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').catch(() => {});
         }
-        // Pull-to-refresh
-        let startY = 0;
-        let pulling = false;
-        const ptr = document.createElement('div');
-        ptr.style.cssText = 'position:fixed;top:0;left:0;right:0;text-align:center;padding:12px;color:#71767b;font-size:14px;z-index:9999;transform:translateY(-100%);transition:transform .2s;background:#0f0f0f;';
-        ptr.textContent = '↓ Pull to refresh';
-        document.body.prepend(ptr);
-        document.addEventListener('touchstart', e => { if (window.scrollY < 5) { startY = e.touches[0].pageY; pulling = true; } }, {passive:true});
-        document.addEventListener('touchmove', e => {
-            if (!pulling) return;
-            const dy = e.touches[0].pageY - startY;
-            if (dy < 0) { pulling = false; return; }
-            if (dy > 10 && dy < 150) { e.preventDefault(); ptr.style.transform = `translateY(${Math.min(dy/2, 40)}px)`; ptr.textContent = dy > 80 ? '↑ Release to refresh' : '↓ Pull to refresh'; }
-        }, {passive:false});
-        document.addEventListener('touchend', e => {
-            if (!pulling) return;
-            pulling = false;
-            const dy = e.changedTouches[0].pageY - startY;
-            ptr.style.transform = 'translateY(-100%)';
-            if (dy > 80 && dy < 200) { ptr.textContent = 'Refreshing...'; ptr.style.transform = 'translateY(0)'; location.reload(); }
-        });
+        // Native pull-to-refresh via overscroll-behavior
     </script>
 </body>
 </html>
