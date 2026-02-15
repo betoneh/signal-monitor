@@ -16,20 +16,21 @@ h2 { font-size:1.2em; margin:32px 0 14px; color:var(--accent); border-bottom:1px
 .description { color:var(--dim); font-size:0.88em; margin-bottom:24px; line-height:1.5; }
 .section-count { font-size:0.8em; color:var(--dim); font-weight:normal; }
 .signal-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 16px; margin:10px 0; transition:border-color 0.2s, transform 0.15s; }
-.signal-card:hover { border-color:var(--accent); transform:translateY(-1px); }
+@media (hover:hover) { .signal-card:hover { border-color:var(--accent); transform:translateY(-1px); } }
+.signal-card:active { transform:scale(0.99); }
 .signal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
 .signal-author { color:var(--link); text-decoration:none; font-weight:600; transition:color 0.15s; }
-.signal-author:hover { color:#79b8ff; }
+@media (hover:hover) { .signal-author:hover { color:#79b8ff; } }
 .signal-score { color:var(--accent); font-size:0.85em; font-weight:600; }
 .signal-text { font-size:0.9em; color:var(--text); margin-bottom:10px; line-height:1.5; }
 .signal-footer { display:flex; justify-content:space-between; align-items:center; }
 .signal-keywords { font-size:0.75em; color:var(--dim); opacity:0.7; }
 .signal-link { font-size:0.85em; color:var(--link); text-decoration:none; opacity:0.7; transition:opacity 0.15s; white-space:nowrap; }
-.signal-link:hover { opacity:1; }
+@media (hover:hover) { .signal-link:hover { opacity:1; } }
 .empty { color:var(--dim); font-style:italic; padding:8px 0; }
 .footer { margin-top:48px; text-align:center; color:var(--dim); font-size:0.8em; padding-top:20px; border-top:1px solid var(--border); }
 .footer a { color:var(--link); text-decoration:none; transition:color 0.15s; }
-.footer a:hover { color:#79b8ff; }
+@media (hover:hover) { .footer a:hover { color:#79b8ff; } }
 .footer .nav { display:flex; gap:16px; justify-content:center; margin-top:8px; }
 </style>
 </head>
