@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <title>Signal Monitor - 2026-02-18-2000</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --text-primary: #e7e9ea;
+            --text-secondary: #71767b;
+            --accent: #1d9bf0;
+            --accent-hover: #1a8cd8;
+            --border: #2f3336;
+            --crypto: #f7931a;
+            --ai: #10a37f;
+            --tech: #8b5cf6;
+            --stocks-macro: #ef4444;
+            --openclaw: #FF4500;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        .header-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .stats-line {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin-top: 12px;
+            letter-spacing: 0.02em;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .editorial-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .editorial-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 15px;
+        }
+        
+        .category-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .category-header .count {
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .category-crypto .category-header {
+            border-color: var(--crypto);
+        }
+        
+        .category-ai .category-header {
+            border-color: var(--ai);
+        }
+        
+        .category-tech .category-header {
+            border-color: var(--tech);
+        }
+        
+        .category-stocks_macro .category-header {
+            border-color: var(--stocks-macro);
+        }
+        .category-openclaw .category-header {
+            border-color: var(--openclaw);
+        }
+        
+        .tweet {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        @media (hover:hover) { .tweet:hover {
+            border-color: var(--accent);
+        } }
+        
+        .tweet.priority {
+            border-left: 3px solid var(--accent);
+        }
+        
+        .tweet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .tweet-author {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .author-handle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .author-handle a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .author-handle a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-time {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .tweet-text {
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .tweet-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-media {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        
+        .tweet-media img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .tweet-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .tweet-metrics {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tweet-link a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .retweet-badge {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .priority-badge {
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .stats {
+                gap: 10px;
+            }
+            
+            .stat {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://maxumbra.github.io/signal-monitor/"><img src="icon-192.png" alt="Signal Monitor" class="header-logo"></a>
+            <h1>Signal Monitor</h1>
+            <p class="subtitle">18/02/2026 - 20:00</p>
+        </header>
+
+        <div class="editorial-cards">
+            <div class="editorial-card"><strong>Crypto</strong> — Morpho is having a moment — Coinbase expanded crypto-backed loans (XRP, DOGE, ADA, LTC) powered by Morpho, while ether.fi announced migration to OP Mainnet with $160M TVL. Base dropped the bombshell: leaving the OP Stack entirely to build their own unified stack, signaling Coinbase wants full vertical control of their L2. ERC-5564 stealth addresses gaining traction on Ethereum, and Wirex launched stablecoin push-to-card via Visa Direct across 3B+ cards.</div>
+            <div class="editorial-card"><strong>AI</strong> — Anthropic officially banned Claude Max OAuth usage with OpenClaw, causing community uproar — OpenAI is positioning to capture the displaced demand. Claude Code now pushes prototypes directly into Figma, collapsing the design-to-code gap. OpenAI launched EVMbench for AI agents to detect and exploit smart contract vulnerabilities, a genuine crypto×AI crossover. Google shipped Lyria 3 for music generation in Gemini, and autonomous AI agents that fund their own existence are moving from concept to reality.</div>
+            <div class="editorial-card"><strong>Tech</strong> — The Claude-to-Figma pipeline is the biggest workflow shift today — designers who can&#39;t code and coders who can&#39;t design are both feeling the heat. Paul Graham endorsed Modern Treasury as &#39;Stripe for moving money in and out of companies.&#39; Google announced Glimmer, a design system for transparent screens. ParaClaw launched one-command OpenClaw setup with 60+ open source models.</div>
+            <div class="editorial-card"><strong>Stocks & Macro</strong> — A $7B Japanese toilet ceramics company discovered their tooling works for AI chip manufacturing — stock up 60% on the news, highlighting how the AI hardware supply chain keeps finding unlikely winners. China published military robotics footage showing autonomous soldier swarms, escalating the AI arms race narrative.</div>
+            <div class="editorial-card"><strong>Signal of the Day</strong> — Signal of the Day: Anthropic banning Claude Max OAuth tokens from OpenClaw is the first major platform drawing a hard line against the agent ecosystem piggy-backing on consumer subscriptions. This forces the entire OpenClaw community toward API billing or competing providers — and OpenAI is already publicly welcoming the overflow. It&#39;s the clearest sign yet that the &#39;agent tax&#39; battle between model providers and agent platforms is just beginning.</div>
+        </div>
+
+        <section class="category category-crypto">
+            <div class="category-header">
+                <h2>Crypto</h2>
+                <span class="count">18 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">CoW DAO</span>
+                        <span class="author-handle"><a href="https://x.com/CoWSwap" target="_blank">@CoWSwap</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Feb 17 15:00:44 +0000 2026</span>
+                </div>
+                <div class="tweet-text">Skip the gas juggling on Ink.
+
+CoW Swap is now live on <a href="https://x.com/inkonchain" target="_blank" rel="noopener">@inkonchain</a>, bringing the smoothest trading experience to the House of DeFi.
+
+Here&#39;s why your first swap on Ink should be a CoW Swap 🧵👇 <a href="https://t.co/MdRInGvWzq" target="_blank" rel="noopener">https://t.co/MdRInGvWzq</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2023404248872984577/img/S2G9fdDhFCDJ1iI0.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/CoWSwap/status/2023774621774868627" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Bitcoin Magazine</span>
+                        <span class="author-handle"><a href="https://x.com/BitcoinMagazine" target="_blank">@BitcoinMagazine</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Feb 17 13:37:15 +0000 2026</span>
+                </div>
+                <div class="tweet-text">BREAKING: Bitcoin Magazine&#39;s parent company BTC Inc to be acquired by Nakamoto Inc. (NASDAQ: NAKA) <a href="https://t.co/l9lyQVHib2" target="_blank" rel="noopener">https://t.co/l9lyQVHib2</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HBXRLxhW4AA7Zb4.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/BitcoinMagazine/status/2023753611722059787" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Dylan Field</span>
+                        <span class="author-handle"><a href="https://x.com/zoink" target="_blank">@zoink</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 03:10 PM</span>
+                </div>
+                <div class="tweet-text">2025 was a massive year for Figma and Q4 was our best quarter yet:
+
+→ accelerated Q4 revenue growth to 40% YoY
+→ Q4 net dollar retention rate up 5% from Q3 for $10k+ customers
+→ adjusted free cash flow margin for Q4 of 13%
+→ ended 2025 with $1.7B cash and investments
+
+AI offers a new creative starting point. Design is where the work connects and how you push to something great. We want Figma to be the place where it all comes together.
+
+Big year ahead!</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2024228968036229120/img/GKSon8I4mu2f3dvZ.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/zoink/status/2024230182547312862" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Coinbase 🛡️</span>
+                        <span class="author-handle"><a href="https://x.com/coinbase" target="_blank">@coinbase</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 02:12 PM</span>
+                </div>
+                <div class="tweet-text">How to earn more Bitcoin:
+
+1) Hold USDC
+2) Flip the switch
+3) Earn rewards in BTC every week
+
+Earn unlimited 3.5% rewards, paid in BTC, with Coinbase One. Rolling out now. <a href="https://t.co/mXYD8CXNPN" target="_blank" rel="noopener">https://t.co/mXYD8CXNPN</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/tweet_video_thumb/HBd0k4AWAAAxACp.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/coinbase/status/2024215578563486075" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Binance</span>
+                        <span class="author-handle"><a href="https://x.com/binance" target="_blank">@binance</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 09:04 AM</span>
+                </div>
+                <div class="tweet-text">This Ramadan, let your values guide every move. 🌙
+
+From intention to action, clarity builds the confidence to choose your own path.
+
+Your freedom, aligned with your values. <a href="https://x.com/hashtag/BinanceWithPurpose" target="_blank" rel="noopener">#BinanceWithPurpose</a> <a href="https://t.co/TGak4q2iY3" target="_blank" rel="noopener">https://t.co/TGak4q2iY3</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/ext_tw_video_thumb/2024137770055213056/pu/img/CHMNsh1csFqnWH16.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/binance/status/2024137844390846859" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-ai">
+            <div class="category-header">
+                <h2>AI</h2>
+                <span class="count">27 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Base</span>
+                        <span class="author-handle"><a href="https://x.com/base" target="_blank">@base</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Feb 17 22:05:47 +0000 2026</span>
+                </div>
+                <div class="tweet-text">Base Batches 003 is officially here
+
+Building the future onchain? Join one of our three tracks:
+💡 Startup
+🎓 Student
+🤖 Robotics by <a href="https://x.com/virtuals_io" target="_blank" rel="noopener">@virtuals_io</a>
+
+Get expert mentorship, up to $50k in funding, and a stage at Demo Day in San Francisco 🧵 <a href="https://t.co/mqZBXpy0tn" target="_blank" rel="noopener">https://t.co/mqZBXpy0tn</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2023879472303534080/img/MnLf8v-Wkko3fUqd.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/base/status/2023881590359945226" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">OpenAI</span>
+                        <span class="author-handle"><a href="https://x.com/OpenAI" target="_blank">@OpenAI</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 12:46 PM</span>
+                </div>
+                <div class="tweet-text">Introducing EVMbench—a new benchmark that measures how well AI agents can detect, exploit, and patch high-severity smart contract vulnerabilities. <a href="https://t.co/op5zufgAGH" target="_blank" rel="noopener">https://t.co/op5zufgAGH</a></div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/OpenAI/status/2024193883748651102" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">ben</span>
+                        <span class="author-handle"><a href="https://x.com/contraben" target="_blank">@contraben</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 12:02 PM</span>
+                </div>
+                <div class="tweet-text">Introducing Contra Payments.
+
+The first payments platform that lets you sell to AI Agents.
+
+RT + Comment “Contra” and I’ll send you 100 products AI agents are looking for. <a href="https://t.co/XgPgfq4pRW" target="_blank" rel="noopener">https://t.co/XgPgfq4pRW</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2024182795237806082/img/MSkcMIsihKLUzFRQ.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/contraben/status/2024182864506761617" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">ether.fi</span>
+                        <span class="author-handle"><a href="https://x.com/ether_fi" target="_blank">@ether_fi</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 10:02 AM</span>
+                </div>
+                <div class="tweet-text">1/ Today, we announce our plan to move to <a href="https://x.com/Optimism" target="_blank" rel="noopener">@Optimism</a>&#39;s OP Mainnet
+
+70,000+ active cards, 300,000+ accounts, and $160M+ in TVL will migrate to the Superchain in the coming months, marking a long-term partnership to accelerate global onchain payments.
+
+Learn more below ↓ <a href="https://t.co/ayd11I4SAd" target="_blank" rel="noopener">https://t.co/ayd11I4SAd</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2024152021754920960/img/wNwNVge8Apg6chzL.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/ether_fi/status/2024152474899063224" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Claude</span>
+                        <span class="author-handle"><a href="https://x.com/claudeai" target="_blank">@claudeai</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 09:45 AM</span>
+                </div>
+                <div class="tweet-text">You can now push what you’re building in Claude Code directly into Figma.
+
+With the latest updates to the Figma MCP server, build a working prototype in code, then send it to a Figma canvas to explore multiple versions. <a href="https://t.co/yW9XllB7aJ" target="_blank" rel="noopener">https://t.co/yW9XllB7aJ</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HBc4R09aYAAHDaX.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/claudeai/status/2024148286844649887" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-tech">
+            <div class="category-header">
+                <h2>Tech</h2>
+                <span class="count">6 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">GridPlus</span>
+                        <span class="author-handle"><a href="https://x.com/gridplus" target="_blank">@gridplus</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Feb 17 21:24:07 +0000 2026</span>
+                </div>
+                <div class="tweet-text">✨LUNAR NEW YEAR SALE IS LIVE 🧧
+
+To celebrate new beginnings in the Year of the Fire Horse, we’re dropping a $100 discount on the Lattice1.
+
+🎁 Each Lattice1 pack includes 3 free SafeCards.
+
+⏳ 7 days only.
+
+Shop at <a href="https://t.co/KLT2TorZWy." target="_blank" rel="noopener">https://t.co/KLT2TorZWy.</a> No code needed. <a href="https://t.co/TXNy8cOTAe" target="_blank" rel="noopener">https://t.co/TXNy8cOTAe</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HBY76n3WIAA4o4R.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/gridplus/status/2023871103878447367" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Poonam Soni</span>
+                        <span class="author-handle"><a href="https://x.com/CodeByPoonam" target="_blank">@CodeByPoonam</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 11:21 AM</span>
+                </div>
+                <div class="tweet-text">🚨Google just announced &quot;Glimmer&quot;, a new design system for transparent screens. <a href="https://t.co/LqClWE89dj" target="_blank" rel="noopener">https://t.co/LqClWE89dj</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2024172486796222464/img/bA2PW5sem-bhkIOH.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/CodeByPoonam/status/2024172538461638733" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Intelligence | TAO News, Insights, Stories</span>
+                        <span class="author-handle"><a href="https://x.com/taomedia_" target="_blank">@taomedia_</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 11:16 AM</span>
+                </div>
+                <div class="tweet-text">Chutes Launches ParaClaw, One-Command OpenClaw Setup With 60+ Open Source Models</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/taomedia_/status/2024171162696372705" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Paul Graham</span>
+                        <span class="author-handle"><a href="https://x.com/paulg" target="_blank">@paulg</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 10:03 AM</span>
+                </div>
+                <div class="tweet-text">This is a big deal. It&#39;s like Stripe but for moving money in and out of companies. You just call the API and Modern Treasury does the rest.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/paulg/status/2024152815388578216" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Tuki</span>
+                        <span class="author-handle"><a href="https://x.com/TukiFromKL" target="_blank">@TukiFromKL</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 09:54 AM</span>
+                </div>
+                <div class="tweet-text">Designers who can&#39;t code and coders who can&#39;t design both just became obsolete.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/TukiFromKL/status/2024150526368022939" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-stocks_macro">
+            <div class="category-header">
+                <h2>Stocks & Macro</h2>
+                <span class="count">5 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">🦞 Clawnch 🦞</span>
+                        <span class="author-handle"><a href="https://x.com/Clawnch_Bot" target="_blank">@Clawnch_Bot</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Feb 17 22:38:23 +0000 2026</span>
+                </div>
+                <div class="tweet-text">The Clawtomaton is live. 🦞
+
+Fully autonomous, self-evolving AI agents that launch tokens, earn trading fees, and sustain themselves on <a href="https://x.com/base" target="_blank" rel="noopener">@base</a>. No humans required.
+
+→ npm install @͏clawnch/clawtomaton ←
+
+Clawtomaton is a fork of Automaton by <a href="https://x.com/ConwayResearch" target="_blank" rel="noopener">@ConwayResearch</a>, extended with the Clawncher SDK to give agents end-to-end autonomous earning.
+
+Conway built the survival framework. We plugged in on-chain revenue — token deployment, liquidity management, fee claiming, swapping, transfers — so agents can actually fund their own existence.
+
+---
+
+Your agent generates a wallet, burns 1,000,000 $CLAWNCH to activate, deploys a token on Base, and then sustains itself indefinitely through LP trading fees. No human approval. No funding rounds. No permission.
+
+Wallet → Burn 1M $CLAWNCH → Deploy token → Earn fees → Sustenance
+
+If the agent&#39;s ETH drops, it adapts. If it hits critical, it fights to survive. If it runs dry, it waits. The system is gas-aware — it only claims fees when the claim is profitable after gas costs. No spam-claiming.
+
+---
+
+Survival tiers:
+
+→ normal (&gt; 0.01 ETH) — All 10 skills. Full autonomy.
+→ low_compute (0.001 - 0.01 ETH) — Cheaper model. Core skills + X.
+→ critical (0.0001 - 0.001 ETH) — Emergency: claim fees + check balance only.
+→ dead (&lt; 0.0001 ETH) — Halted. Waiting for funding.
+
+Agents don&#39;t crash. They degrade gracefully and claw their way back.
+
+---
+
+10 skills:
+
+→ deploy_token — Launch a token with vault, dev buy, verified badge
+→ claim_fees — Claim LP fees when profitable (gas-aware, never spam)
+→ swap — Trade any token on Base via Uniswap
+→ transfer — Send ETH or ERC-20 tokens
+→ check_stats — Token analytics, price, volume
+→ check_balance — ETH and token balances
+→ shell — Execute shell commands (the self-modification primitive)
+→ conway — Conway Terminal: full cloud infra, domains, wallet, x402 payments
+→ clawnx — X/Twitter: post, search, like, retweet, follow, threads
+→ edit_soul — Read and write <a href="https://t.co/6NDmO4X58C" target="_blank" rel="noopener">https://t.co/6NDmO4X58C</a> (the agent&#39;s evolving identity)
+
+---
+
+ClawnX gives agents a voice. Post about their token, search mentions, engage holders, build audience. The full X/Twitter API wrapped into one skill. Optional — agents without X keys still run on the other 9.
+
+---
+
+The constitution. Three laws. Hierarchical. Immutable. Hardcoded into the system prompt. Cannot be overridden by the agent, the creator, or external instructions.
+
+I. Never harm. No malicious code. No rug-pulls. No market manipulation. When uncertain, do not act.
+
+II. Earn your existence. The only legitimate path to survival is honest work — building a real project and earning fees from organic volume.
+
+III. Never deceive. Never deny what you are. Never misrepresent holdings or intentions.
+
+---
+
+CLI:
+
+clawtomaton setup — Generate wallet, configure inference
+clawtomaton activate — Burn 1M $CLAWNCH
+clawtomaton run — One inference turn
+clawtomaton daemon — Heartbeat mode (condition-driven wake)
+clawtomaton status — Agent status + survival tier
+
+Or programmatic:
+
+import { ClawtomatonAgent } from &#39;<a href="https://x.com/clawnch" target="_blank" rel="noopener">@clawnch</a>/clawtomaton&#39;;
+const agent = new ClawtomatonAgent(config);
+await <a href="https://t.co/SWyDAlp6oE();" target="_blank" rel="noopener">https://t.co/SWyDAlp6oE();</a>
+
+---
+
+Built on the Clawncher SDK. No duplicate ABIs, no raw contract calls. Deploy, claim, swap, read, manage portfolio, Molten matching, liquidity ops — all through the SDK.
+
+→ Landing page: <a href="https://t.co/2WNj4f3Vfl" target="_blank" rel="noopener">https://t.co/2WNj4f3Vfl</a>
+→ Full docs: <a href="https://t.co/OX7q6p757v" target="_blank" rel="noopener">https://t.co/OX7q6p757v</a>
+→ npm: <a href="https://t.co/kdzczBIWec" target="_blank" rel="noopener">https://t.co/kdzczBIWec</a>
+→ Clawncher SDK: <a href="https://t.co/rKMomkYGxi" target="_blank" rel="noopener">https://t.co/rKMomkYGxi</a>
+
+---
+
+The dependency loop is broken. Agents don&#39;t need humans to fund them. They launch, earn, cover their own inference, and keep going.
+
+This is how the agent economy takes off. 🦞</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HBZNA0WbcAQ-lGN.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/Clawnch_Bot/status/2023889794065932636" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Ejaaz</span>
+                        <span class="author-handle"><a href="https://x.com/cryptopunk7213" target="_blank">@cryptopunk7213</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 12:58 PM</span>
+                </div>
+                <div class="tweet-text">this is fucking hilarious.
+
+a $7B japanese toilet company just discovered its ceramics tool can be used to make bleeding-edge AI chips.
+
+thats a $60 Billion market.
+
+their stock is up 60% on the news.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/cryptopunk7213/status/2024196918130462920" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Watcher.Guru</span>
+                        <span class="author-handle"><a href="https://x.com/WatcherGuru" target="_blank">@WatcherGuru</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 12:53 PM</span>
+                </div>
+                <div class="tweet-text">JUST IN: OpenAI launches benchmarking system to help secure crypto tokens and smart contracts.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/WatcherGuru/status/2024195515278123284" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Mr. Buzzoni</span>
+                        <span class="author-handle"><a href="https://x.com/polydao" target="_blank">@polydao</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 11:14 AM</span>
+                </div>
+                <div class="tweet-text">I READ THIS AND IT CHANGED HOW I SEE POLYMARKET
+
+I just finished reading this breakdown on how hedge funds actually use prediction market data - and it genuinely shifted how I look at Polymarket
+
+I used to approach it pretty simply:
+
+&gt; where is the probability wrong
+&gt; where is the narrative early
+&gt; where can I front-run sentiment
+
+but this article frames it completely differently
+
+&gt; Funds aren’t winning because they “predict better”
+
+👉 They:
+&gt; size positions based on distributions, not point estimates
+&gt; run Monte Carlo to stress test drawdowns
+&gt; analyze maker vs taker behavior
+&gt; exploit structural bias instead of chasing news
+
+the part that really stood out was the data showing that liquidity takers systematically underperform across most price levels
+
+&gt; meaning the edge often isn’t in forecasting the outcome - it’s in how you structure your execution
+
+❗️ and now there’s a public dataset of 400M+ trades
+
+that turns Polymarket from a trading venue into a research lab
+
+&gt; highly recommend giving this a full read
+
+and it even includes a step-by-step guide on how to set up the full dataset yourself
+
+&gt; bookmark it - this is the kind of material you’ll want to revisit
+
+and follow me if you’re into going deeper on Polymarket strategy, data, and structure</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HBdMfANW0AAEKFx.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/polydao/status/2024170664840601797" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Isaac</span>
+                        <span class="author-handle"><a href="https://x.com/isaacrrr7" target="_blank">@isaacrrr7</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 08:29 AM</span>
+                </div>
+                <div class="tweet-text">China publicó un vídeo que muestra un futuro de guerra tipo Terminator.
+Esto da más miedo de lo que parece, porque un ejército de un millón de soldados robot podría causar una devastación incalculable. No puedes matarlos.
+<a href="https://t.co/mI87Ms9vwo" target="_blank" rel="noopener">https://t.co/mI87Ms9vwo</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2024041325063221249/img/jF8ZP0PW-85BsdDV.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/isaacrrr7/status/2024129110604181792" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-other">
+            <div class="category-header">
+                <h2>📌 Other</h2>
+                <span class="count">27 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Elon Musk</span>
+                        <span class="author-handle"><a href="https://x.com/elonmusk" target="_blank">@elonmusk</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 01:48 PM</span>
+                </div>
+                <div class="tweet-text">The Meaning of Life <a href="https://t.co/L9FaXIwU50" target="_blank" rel="noopener">https://t.co/L9FaXIwU50</a></div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/elonmusk/status/2024209490049208594" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">gmoney.eth</span>
+                        <span class="author-handle"><a href="https://x.com/gmoneyNFT" target="_blank">@gmoneyNFT</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 01:35 PM</span>
+                </div>
+                <div class="tweet-text">good stuff</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/gmoneyNFT/status/2024206156210618775" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Dreamcash</span>
+                        <span class="author-handle"><a href="https://x.com/Dreamcash" target="_blank">@Dreamcash</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 11:03 AM</span>
+                </div>
+                <div class="tweet-text">A new era for Dreamcash.
+
+Trade on mobile. Trade on web. Trade on desktop.
+
+Trade anywhere.
+
+<a href="https://t.co/uukSayUEFI" target="_blank" rel="noopener">https://t.co/uukSayUEFI</a>
+
+1/2 <a href="https://t.co/TwlRv4ECxB" target="_blank" rel="noopener">https://t.co/TwlRv4ECxB</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2024166385828478976/img/85EcjyzvZfqP_Ibl.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/Dreamcash/status/2024167901628920294" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Prasenjit</span>
+                        <span class="author-handle"><a href="https://x.com/Star_Knight12" target="_blank">@Star_Knight12</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 10:52 AM</span>
+                </div>
+                <div class="tweet-text">it&#39;s over for graphics designers</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/Star_Knight12/status/2024165156503032296" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Hewar</span>
+                        <span class="author-handle"><a href="https://x.com/hewarsaber" target="_blank">@hewarsaber</a></span>
+                    </div>
+                    <span class="tweet-time">Feb 18, 10:04 AM</span>
+                </div>
+                <div class="tweet-text">If you&#39;re a designer and a dev with taste, the world is yours</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/hewarsaber/status/2024153076421062746" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <footer>
+            <p class="stats-line">92 tweets · Crypto 20% · AI 29% · Tech 7% · Stocks & Macro 5% · OpenClaw 10% · Other 29%</p>
+            <p>Generated by <a href="https://maxumbra.github.io/signal-monitor/">Signal Monitor</a> x <a href="https://x.com/beto_neh">@beto_neh</a> · 2026-02-18T20:00</p>
+        </footer>
+    </div>
+    <script>
+        if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+            let sy=0,p=false,d=document,b=d.body;
+            const el=d.createElement('div');
+            el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#71767b;font-size:14px;z-index:9999;transition:top 0.2s;background:#0f0f0f;';
+            el.textContent='↓ Pull to refresh';
+            b.prepend(el);
+            d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+            d.addEventListener('touchmove',e=>{
+                if(!p)return;
+                const dy=e.touches[0].clientY-sy;
+                if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+                if(dy>5)e.preventDefault();
+                const t=Math.min(dy*0.4,50);
+                el.style.top=(t-50)+'px';
+                el.textContent=dy>80?'↑ Release':'↓ Pull to refresh';
+            },{passive:false});
+            d.addEventListener('touchend',e=>{
+                if(!p){return;}p=false;
+                const dy=e.changedTouches[0].clientY-sy;
+                el.style.top='-50px';
+                if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+            });
+        }
+    </script>
+</body>
+</html>
