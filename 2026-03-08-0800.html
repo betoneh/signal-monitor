@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <title>Signal Monitor - 2026-03-08-0800</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --text-primary: #e7e9ea;
+            --text-secondary: #71767b;
+            --accent: #1d9bf0;
+            --accent-hover: #1a8cd8;
+            --border: #2f3336;
+            --crypto: #f7931a;
+            --ai: #10a37f;
+            --tech: #8b5cf6;
+            --stocks-macro: #ef4444;
+            --openclaw: #FF4500;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        .header-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .stats-line {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin-top: 12px;
+            letter-spacing: 0.02em;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .editorial-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .editorial-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 15px;
+        }
+        
+        .category-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .category-header .count {
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .category-crypto .category-header {
+            border-color: var(--crypto);
+        }
+        
+        .category-ai .category-header {
+            border-color: var(--ai);
+        }
+        
+        .category-tech .category-header {
+            border-color: var(--tech);
+        }
+        
+        .category-stocks_macro .category-header {
+            border-color: var(--stocks-macro);
+        }
+        .category-openclaw .category-header {
+            border-color: var(--openclaw);
+        }
+        
+        .tweet {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        @media (hover:hover) { .tweet:hover {
+            border-color: var(--accent);
+        } }
+        
+        .tweet.priority {
+            border-left: 3px solid var(--accent);
+        }
+        
+        .tweet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .tweet-author {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .author-handle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .author-handle a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .author-handle a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-time {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .tweet-text {
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .editorial-card a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .editorial-card a:hover {
+            text-decoration: underline;
+        }
+        .tweet-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-media {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        
+        .tweet-media img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .tweet-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .tweet-metrics {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tweet-link a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .retweet-badge {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .priority-badge {
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .stats {
+                gap: 10px;
+            }
+            
+            .stat {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://betoneh.github.io/signal-monitor/"><img src="icon-192.png" alt="Signal Monitor" class="header-logo"></a>
+            <h1>Signal Monitor</h1>
+            <p class="subtitle">08/03/2026 - 08:00</p>
+        </header>
+
+        <div class="editorial-cards">
+            <div class="editorial-card"><strong>Crypto</strong> — Bitcoin sits at <a href="https://x.com/100trillionUSD/status/2030627876698050937" target="_blank">$67k</a> while the S2F model screams $500k cycle average — a massive gap that's either the buy of the decade or proof the model is broken. Meanwhile, an Ethereum co-founder is <a href="https://x.com/arkham/status/2030496840890954202" target="_blank">dumping another $150M in ETH</a>, adding quiet pressure to a market watching every whale move. On the constructive side, <a href="https://x.com/thedefiedge/status/2030620250853765339" target="_blank">DeFi innovation</a> is alive — a 9-year evolution paper covering Uniswap, Curve, Balancer, and Hyperliquid dropped today, and Ethena's yield model is getting scrutinized: if you don't <a href="https://x.com/0xluude/status/2030489698628776270" target="_blank">own your yield source</a>, you own nothing.</div>
+            <div class="editorial-card"><strong>AI</strong> — OpenClaw <a href="https://x.com/openclaw/status/2030522386894946620" target="_blank">2026.3.7</a> dropped with GPT-5.4 + Gemini 3.1 Flash-Lite support and ACP bindings that survive restarts — the per-topic Telegram agent routing is the quietly huge feature: one agent, one job, separate session per topic. Karpathy <a href="https://x.com/meta_alchemist/status/2030594828082565289" target="_blank">open-sourced the smallest autonomous self-improving training system</a> and it went viral — the argument for training your own agents rather than waiting for Claude or Codex to do it is getting sharper. Anthropic also dropped a <a href="https://x.com/RoundtableSpace/status/2030595632998580328" target="_blank">33-page cheat sheet</a> for building Claude skills, and practitioners are finding that <a href="https://x.com/liquiditygoblin/status/2030510466645307424" target="_blank">shorter CLAUDE.md files outperform longer ones</a> in Python repos.</div>
+            <div class="editorial-card"><strong>Tech</strong> — Two sharp takes from the builder side today: <a href="https://x.com/beffjezos/status/2030535678984155598" target="_blank">Codex wrappers have no moat</a> beyond visual aesthetics — a brutal but accurate framing for the commoditization wave hitting AI tooling. Separately, vibe coders are being warned to <a href="https://x.com/om_patel5/status/2030491740415684691" target="_blank">read the security checklist</a> before shipping to production, as the gap between what agents can build and what's safe to deploy keeps widening. Bill Ackman publicly called out <a href="https://x.com/BillAckman/status/2030616632163254761" target="_blank">Outlook search</a> as broken — not news, but when a billionaire tweets it at Satya, someone at Microsoft has a bad Sunday.</div>
+            <div class="editorial-card"><strong>Stocks & Macro</strong> — The private credit stress signal is the story of the day. Stani Kulechov published a <a href="https://x.com/StaniKulechov/status/2030611384581423574" target="_blank">detailed breakdown</a>: BCRED nearly gated with $3.7B in Q1 redemption requests, BlackRock's HPS had to gate $580M, Blue Owl saw $2.9B in Q4 redemptions — BDCs now trade at 20% discount to NAV with 10-11% yields, historically a premium product. The thesis: AI disruption fears around software borrowers are triggering a repricing cascade that could bleed into public bond markets. Separately, Saudi Arabia <a href="https://x.com/zerohedge/status/2030483189748072608" target="_blank">shot down three drones</a> near Riyadh and intercepted one heading toward the Shaybah oil field — geopolitical tail risk on energy quietly ticking up.</div>
+        </div>
+
+        <section class="category category-crypto">
+            <div class="category-header">
+                <h2>Crypto</h2>
+                <span class="count">10 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">HypernativeLabs</span>
+                        <span class="author-handle"><a href="https://x.com/HypernativeLabs" target="_blank">@HypernativeLabs</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 11 15:12:00 +0000 2025</span>
+                </div>
+                <div class="tweet-text">🚨 Web3 security needs an upgrade.
+
+Hypernative secures web3 protocols, chains, CEXs, wallets and other web3 firms, totalling over $100B in TVL.
+
+Book a demo and discover how Hypernative can protect your company or project ⬇️
+
+<a href="https://t.co/s9efGV9RsV" target="_blank" rel="noopener">https://t.co/s9efGV9RsV</a></div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/HypernativeLabs/status/1899478419265712531" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Cassandra Unchained</span>
+                        <span class="author-handle"><a href="https://x.com/michaeljburry" target="_blank">@michaeljburry</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Feb 03 18:47:12 +0000 2026</span>
+                </div>
+                <div class="tweet-text">February 2026 Cassandra Unchained Charity of the Month is the Fistula Foundation. 
+Fistula Foundation has provided tens of thousands of needed surgeries to women across poor, rural areas of Sub-Saharan Africa and South Asia who suffer severe incontinence and discomfort as a result of significant pelvic floor injuries during childbirth.
+Fistula Foundation is on a mission not only to treat these injuries but to end them altogether, to completely solve the problem.
+I have followed this charity for a long time and can personally vouch for this Foundation, which is rated 100% by Charity Navigator, A grade by Charity Watch. 5% of CU&#39;s revenues will during February will be donated to Fistula Foundation, and I hope they raise even more to help these women. 
+<a href="https://t.co/z4fAzJ4s5D" target="_blank" rel="noopener">https://t.co/z4fAzJ4s5D</a>
+<a href="https://t.co/exKzRtiDMZ" target="_blank" rel="noopener">https://t.co/exKzRtiDMZ</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HAQQ1kqaIAAUAGr.jpg" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/media/HAQQ62Ha8AAX3Ic.png" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/media/HAQRKF4bsAADCX6.png" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/media/HAQRdR8a0AAKNFX.png" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/michaeljburry/status/2018758183507083455" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Edgy - The DeFi Edge 🗡️</span>
+                        <span class="author-handle"><a href="https://x.com/thedefiedge" target="_blank">@thedefiedge</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 06:22 AM</span>
+                </div>
+                <div class="tweet-text">If you think DeFi isn&#39;t innovating anymore, you haven&#39;t been paying attention.
+
+Here&#39;s 7 interesting things I saw happen in DeFi this week:</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/thedefiedge/status/2030620250853765339" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Binance</span>
+                        <span class="author-handle"><a href="https://x.com/binance" target="_blank">@binance</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 01:41 AM</span>
+                </div>
+                <div class="tweet-text">This <a href="https://x.com/hashtag/IWD2026" target="_blank" rel="noopener">#IWD2026</a>, we’re spotlighting Binance female leadership - and we&#39;re reserving the center position for every woman in the community!
+
+Use the template, add your photo in the center space, and post yours for a chance to win from 1000 $USDC.
+
+Tag <a href="https://x.com/Binance" target="_blank" rel="noopener">@Binance</a> + <a href="https://x.com/hashtag/IWD2026" target="_blank" rel="noopener">#IWD2026</a> to join now</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/binance/status/2030549391996506417" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">CoinGecko</span>
+                        <span class="author-handle"><a href="https://x.com/coingecko" target="_blank">@coingecko</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 11:14 PM</span>
+                </div>
+                <div class="tweet-text">Everyone&#39;s watching Bitcoin-kun, Ethereum-san, and Solana-chan 👁️👁️ <a href="https://t.co/GxKf9lLVqA" target="_blank" rel="noopener">https://t.co/GxKf9lLVqA</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC3UacWXsAANt1t.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/coingecko/status/2030512559556591717" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-ai">
+            <div class="category-header">
+                <h2>AI</h2>
+                <span class="count">15 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Fabrizio Rinaldi</span>
+                        <span class="author-handle"><a href="https://x.com/linuz90" target="_blank">@linuz90</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 06:08 AM</span>
+                </div>
+                <div class="tweet-text">If you&#39;re using <a href="https://x.com/openclaw" target="_blank" rel="noopener">@openclaw</a> on Telegram, you need to set up forum topics.
+
+Turns one messy chat into organized topics. Each with its own isolated LLM session.
+
+Each topic gets its own LLM session too 👌
+
+Setup is easy:
+
+Open BotFather and enable &quot;Threaded Mode&quot; for your bot.
+
+Then tell your agent:
+
+→ Set up forum topics in our chat. Call getForumTopicIconStickers to get available emoji IDs, then createForumTopic for each one with icon_custom_emoji_id. Important: send a message inside each topic right after creating it, otherwise it won&#39;t show up in Telegram.
+
+Then after you&#39;re happy with the topics, tell it to route all cron jobs and heartbeat messages to the most relevant topic.
+
+Now when I forward emails to my bot it acts on them in relevant topics. Sim race prep lands in Racing. Morning briefing goes to Life.
+
+Completely changed my experience with it.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC4zCd-a4AAdoZ1.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/linuz90/status/2030616602782450087" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">0xMarioNawfal</span>
+                        <span class="author-handle"><a href="https://x.com/RoundtableSpace" target="_blank">@RoundtableSpace</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 04:45 AM</span>
+                </div>
+                <div class="tweet-text">Anthropic dropped a 33 pages cheat sheet for building Claude skills
+
+<a href="https://t.co/jEuH95NGn3" target="_blank" rel="noopener">https://t.co/jEuH95NGn3</a> <a href="https://t.co/udwk64U4ST" target="_blank" rel="noopener">https://t.co/udwk64U4ST</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC3pp8JXUAA4kuN.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/RoundtableSpace/status/2030595632998580328" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Meta Alchemist</span>
+                        <span class="author-handle"><a href="https://x.com/meta_alchemist" target="_blank">@meta_alchemist</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 04:41 AM</span>
+                </div>
+                <div class="tweet-text">Karpathy open-sourced the smallest autonomous self-improving training system, and it&#39;s already super viral!
+
+Let&#39;s break down WHY you want to train your agents, 
+and not just wait for Claude, Codex to do so.
+
+16 reasons: <a href="https://t.co/6ZQU4FgPQt" target="_blank" rel="noopener">https://t.co/6ZQU4FgPQt</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC4eJ30bsAAabBw.jpg" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/media/HC4eJ3ma0AASC3y.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/meta_alchemist/status/2030594828082565289" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Vadim</span>
+                        <span class="author-handle"><a href="https://x.com/VadimStrizheus" target="_blank">@VadimStrizheus</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 12:11 AM</span>
+                </div>
+                <div class="tweet-text">Name a better feeling than this. 
+
+I’ll wait <a href="https://t.co/SFErPage0o" target="_blank" rel="noopener">https://t.co/SFErPage0o</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC3hSbhWUAYwLvH.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/VadimStrizheus/status/2030526718448918585" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Zeneca🔮</span>
+                        <span class="author-handle"><a href="https://x.com/Zeneca" target="_blank">@Zeneca</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 11:15 PM</span>
+                </div>
+                <div class="tweet-text">I haven&#39;t had coffee in 6 months
+
+I just made a coffee
+
+I blame AI
+
+It was meant to automate our lives and free up our time
+
+But instead it is creating insane FOMO and an urgency to want to do everything, all at once, right now, before it&#39;s too late
+
+Go figure</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/Zeneca/status/2030512676288520655" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-tech">
+            <div class="category-header">
+                <h2>Tech</h2>
+                <span class="count">3 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Bill Ackman</span>
+                        <span class="author-handle"><a href="https://x.com/BillAckman" target="_blank">@BillAckman</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 06:08 AM</span>
+                </div>
+                <div class="tweet-text">Search on <a href="https://x.com/Microsoft" target="_blank" rel="noopener">@Microsoft</a> Outlook sucks. <a href="https://x.com/satyanadella" target="_blank" rel="noopener">@satyanadella</a> please fix it.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/BillAckman/status/2030616632163254761" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Beff (e/acc)</span>
+                        <span class="author-handle"><a href="https://x.com/beffjezos" target="_blank">@beffjezos</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 12:46 AM</span>
+                </div>
+                <div class="tweet-text">Request for startup
+
+The only moat the Codex wrappers can have are visual aesthetics</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/beffjezos/status/2030535678984155598" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Om Patel</span>
+                        <span class="author-handle"><a href="https://x.com/om_patel5" target="_blank">@om_patel5</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 09:52 PM</span>
+                </div>
+                <div class="tweet-text">EVERY VIBE CODER NEEDS TO READ THIS BEFORE SHIPPING TO PRODUCTION: <a href="https://t.co/xDkM1KOe5S" target="_blank" rel="noopener">https://t.co/xDkM1KOe5S</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC3AlT4XIAAKhIZ.png" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/om_patel5/status/2030491740415684691" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-stocks_macro">
+            <div class="category-header">
+                <h2>Stocks & Macro</h2>
+                <span class="count">7 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Netflix Latinoamérica</span>
+                        <span class="author-handle"><a href="https://x.com/NetflixLAT" target="_blank">@NetflixLAT</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Feb 10 15:29:39 +0000 2026</span>
+                </div>
+                <div class="tweet-text">¿A quién busca el Sr. Bridgerton? Bridgerton: Temporada 4 ya está disponible. Solo en Netflix.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/NetflixLAT/status/2021245185871741086" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Michael Saylor</span>
+                        <span class="author-handle"><a href="https://x.com/saylor" target="_blank">@saylor</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 07:01 AM</span>
+                </div>
+                <div class="tweet-text">The Second Century Begins. <a href="https://t.co/stZzNhLgay" target="_blank" rel="noopener">https://t.co/stZzNhLgay</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC4_KH_aMAA6npF.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/saylor/status/2030630059573207263" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Stani.eth</span>
+                        <span class="author-handle"><a href="https://x.com/StaniKulechov" target="_blank">@StaniKulechov</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 05:47 AM</span>
+                </div>
+                <div class="tweet-text">Private credit is in a strange place today.
+
+The economy is tied to the cost of money. Low interest rates mean cheap borrowing, which in theory should lead to higher utilization of credit facilities. Conversely, high interest rates mean less affordable borrowing and, in theory, reduced demand for credit.
+
+We&#39;ve been living through a high-interest-rate environment since the Federal Reserve began its aggressive tightening cycle in March 2022, raising rates from near zero to over 5% by mid-2023, the fastest hiking cycle in four decades. Rates have remained elevated through early 2026, with only modest cuts. For many consumers and businesses that initiated borrowing during the low- or mid-rate era, and whose obligations remain outstanding, this translates into a significantly higher cost of capital, a burden that compounds over time.
+
+This all sounds normal. Finance is part of almost every phase of a company&#39;s lifecycle, from growth to maturity. The problem arises when the cost of capital stays elevated for too long, creating unmanageable expenses for borrowers.
+
+Businesses typically borrow from financial institutions like banks, or from asset managers in the form of private credit.
+
+How do private credit funds work?
+
+Private credit funds are typically either closed-end or semi-liquid vehicles managed by asset managers. This structure makes sense: the funds need to deploy capital into lending opportunities to generate returns. Investors in private credit range from pension funds, insurance companies, and family offices to, increasingly, retail investors.
+
+Closed-end funds don&#39;t allow redemptions until maturity, usually 7 to 10 years. Semi-liquid funds offer quarterly redemption windows with limits. BDCs (Business Development Companies), which are publicly traded, provide liquidity via daily trading on exchanges.
+
+In essence, private credit funds function as private banks: they lend capital to businesses and collect interest.
+
+What does private credit fund?
+
+Typically, private credit finances leveraged buyouts for private equity, middle-market corporate loans for companies that lack access to public bond markets, certain asset-backed lending (such as aircraft, shipping, and consumer loans), and real estate credit.
+
+Private credit funds generally fill the funding gap that banks have vacated. This shift has been driven primarily by post-2008 regulation, particularly Basel III, which pushed banks out of riskier corporate lending. Today, private credit finances an estimated 80 to 90% of leveraged buyouts in the U.S. middle market.
+
+Who are the players?
+
+Apollo ~$460B AUM
+Blackstone ~$330B AUM
+Ares ~$280B AUM
+KKR ~$220B AUM
+Carlyle ~$190B AUM
+Blue Owl ~$170B AUM
+
+What&#39;s going on?
+
+Recently, distress has emerged across private credit. The persistent cost of capital driven by high interest rates remains a reality, and AI is reshaping perceptions of many software companies that private credit has funded, creating uncertainty about these borrowers&#39; futures.
+
+The market has already begun repricing private credit:
+VanEck BDC Income ETF: ~15% decline over the past year
+
+Blue Owl Capital: ~50% decline over the past year, with ~30% of that during 2026
+
+Apollo, Blackstone, Ares, KKR: shares down ~20% on private credit concerns
+
+The average BDC now trades at roughly a 20% discount to NAV while offering 10 to 11% yields, signaling that loan portfolios may be overvalued, defaults could rise, or liquidity risk is building. What makes this even more concerning is that historically, these funds traded at a premium.
+
+Some funds&#39; monitored loan default metrics have risen to as high as 9%. Blackstone&#39;s flagship private credit fund, BCRED, is a notable example.
+
+BCRED recently limited its redemptions. The fund manages roughly $82B, and during Q1 2026, redemption requests reached $3.7B, approximately 8% of NAV. Blackstone injected $400M of its own capital to support liquidity. Technically, the fund was not gated, but it came very close.
+
+Meanwhile, BlackRock&#39;s HPS Corporate Lending Fund (HLEND), a $26B fund, received $1.2B in redemption requests, reaching the point where gating was necessary. Roughly $580M in requests could not be honored.
+
+Blue Owl&#39;s retail private credit vehicle experienced $2.9B in redemptions during Q4 2025, with redemption requests reaching 15% of NAV, largely driven by exposure to software lending.
+
+Can the market handle a private credit fund default?
+
+While total redemptions have been around $7B+ (5 to 10% of NAV) and public alternative managers are down 20 to 30%, the overall private credit market is still $1.8 to 2T in size. Even the largest funds top out at $20 to 80B, compared to the global bond market at $130T or banking assets at $180T. A single fund default would most likely not collapse the broader market or trigger the kind of contagion that amplifies crises. Large funds also hold diversified portfolios of hundreds of loans, and the semi-liquid or closed-end structure naturally forces investor lock-up, acting as a buffer against bank-run dynamics.
+
+I&#39;ve mapped out three scenarios of increasing severity:
+
+Scenario A: One large fund defaults (~$50B)Investors lose capital, some companies lose financing, and credit spreads widen. The system likely absorbs the shock.
+
+Scenario B: Several funds fail simultaneouslyCredit markets freeze, leveraged companies cannot refinance, and defaults cascade. This could trigger a credit-cycle downturn.
+
+Scenario C: Private credit + leveraged loans collapseA broader corporate credit crisis unfolds: private equity deals fail and banks become exposed. This would be genuinely systemic.
+
+Fortunately, private credit funds remain relatively small in the broader picture and are unlikely on their own to pose systemic risk. However, the most worrisome scenario is one where loss of confidence begins in private credit markets, particularly around lending to businesses vulnerable to AI disruption, and then bleeds into public bond markets. This contagion path is plausible because the larger corporates in bond markets are arguably more exposed to automation and AI disruption than the leaner, high-growth businesses that private credit typically funds.
+
+How does this affect RWAs and DeFi?
+
+The most immediate impact of private credit distress falls on capital allocators. Many private credit funds have been distributed to retail investors via publicly traded BDCs, private credit ETFs, or semi-liquid funds like Blackstone&#39;s BCRED, Apollo&#39;s Debt Solutions BDC, and BlackRock&#39;s HPS Corporate Lending Fund.
+
+These funds share common characteristics: quarterly (or monthly) redemption windows, redemption limits typically capped at 5% of NAV per quarter, and target returns of 8 to 11%. Recently, some funds have also begun gating redemptions.
+
+From a DeFi capital allocator&#39;s perspective, the biggest risk I see is structural: private credit is packaged in DeFi in ways that many retail-oriented users don&#39;t fully understand before committing capital. We&#39;ve seen countless examples of DeFi users eagerly supplying funds into high-yielding RWA strategies, only to discover later that the underlying exposure carries significant duration risk.
+
+I believe RWAs represent the biggest opportunity for DeFi in the near term. However, my greatest fear is that institutional opportunists could view DeFi as a channel to offload illiquid and distressed products that Wall Street has already soured on, effectively using DeFi participants as exit liquidity. This risk is amplified by the fact that assessing RWA allocation opportunities is inherently harder: they don&#39;t carry the same transparency or onchain verifiability that native DeFi opportunities provide.
+
+That said, private credit done well onchain offers something traditional finance fundamentally cannot: smart contract-enforced guarantees. Redemption windows, withdrawal limits, collateral ratios, and distribution rules can be encoded immutably, meaning fund managers cannot arbitrarily change the terms after capital has been committed. In traditional private credit, investors discovered the hard way with BCRED and HLEND that redemption policies can be tightened or gated at the discretion of the manager when conditions deteriorate. Onchain, those rules are transparent from day one and enforced by code, not by a fund administrator under pressure. This is precisely where RWAs and DeFi can outperform the traditional model for this asset category.
+
+For RWAs to succeed in DeFi, and for DeFi to scale meaningfully through real-world assets, the industry needs deliberate and careful structuring of opportunities that bridge TradFi and onchain markets. That means robust transparency standards, proper risk disclosure, independent verification of underlying collateral, and governance frameworks that protect onchain participants from asymmetric information disadvantages. Without these safeguards, the convergence of TradFi and DeFi risks becoming extractive rather than additive.
+
+DeFi should not become Wall Street&#39;s exit liquidity.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/StaniKulechov/status/2030611384581423574" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Cern Basher</span>
+                        <span class="author-handle"><a href="https://x.com/CernBasher" target="_blank">@CernBasher</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 10:42 PM</span>
+                </div>
+                <div class="tweet-text">Trump&#39;s Cyber Strategy for America vs SOFTWAR
+
+There is significant conceptual overlap between these two documents.
+
+<a href="https://x.com/JasonPLowery" target="_blank" rel="noopener">@JasonPLowery</a> published his in 2023 (and shortly after it was banned for a time). 
+
+Trump issued his in March, 2026.
+
+continued below...</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC3JxkiWIAAnTjc.jpg" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/media/HC3JyQtXgAAAGzr.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/CernBasher/status/2030504291354415499" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Robert ⟠ | Polaris</span>
+                        <span class="author-handle"><a href="https://x.com/0xluude" target="_blank">@0xluude</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 09:44 PM</span>
+                </div>
+                <div class="tweet-text">The main thing Ethena tells us is that if you rely on others to generate your yield, you are unable to build a moat that is defensible
+
+Every MM or trading desk I speak to is running delta neutral strategies 
+
+Ethena showed how profitable the basis trade could be, then watched it become ultra competitive which ultimately makes it impossible for them to scale
+
+Apart from some offchain no-ADL handshake agreements there is no moat here and it will become increasingly harder for Ethena to generate a large portion of yield from basis 
+
+If you don’t own your yield source, which no one else can access apart from you
+
+You don’t own anything</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/0xluude/status/2030489698628776270" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-other">
+            <div class="category-header">
+                <h2>📌 Other</h2>
+                <span class="count">25 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Coinbase 🛡️</span>
+                        <span class="author-handle"><a href="https://x.com/coinbase" target="_blank">@coinbase</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 06:45 AM</span>
+                </div>
+                <div class="tweet-text"><a href="https://x.com/grok" target="_blank" rel="noopener">@grok</a> add 15 more computer screens to the picture</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/coinbase/status/2030625897804710187" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Coinbase 🛡️</span>
+                        <span class="author-handle"><a href="https://x.com/coinbase" target="_blank">@coinbase</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 06:45 AM</span>
+                </div>
+                <div class="tweet-text">Imagine monitoring the situation from our office. <a href="https://t.co/g9bAWHUFSW" target="_blank" rel="noopener">https://t.co/g9bAWHUFSW</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC47eBEasAAH5xc.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/coinbase/status/2030625883447500971" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Marc Andreessen 🇺🇸</span>
+                        <span class="author-handle"><a href="https://x.com/pmarca" target="_blank">@pmarca</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 05:55 AM</span>
+                </div>
+                <div class="tweet-text">💯</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/pmarca/status/2030613459193242036" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Nikita Bier</span>
+                        <span class="author-handle"><a href="https://x.com/nikitabier" target="_blank">@nikitabier</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 12:18 AM</span>
+                </div>
+                <div class="tweet-text">There’s a better way: The optimal tax structure for a small business is an S-Corp. S-Corps can deduct payroll via the QBI deduction. 
+
+And if you’re in NY or CA, you’re able to deduct state tax payments (and bypass SALT deduction limits) via a program called PTET.
+
+So yes, you can pay yourself via payroll and have it be tax efficient.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/nikitabier/status/2030528585207796074" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">bone</span>
+                        <span class="author-handle"><a href="https://x.com/boneGPT" target="_blank">@boneGPT</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 11:21 PM</span>
+                </div>
+                <div class="tweet-text">my business is doing 15-20k a month and i can&#39;t qualify for a mortgage 
+
+i need to pay myself a higher salary for TWO WHOLE YEARS before i can qualify for one, tripling my tax burden
+
+might be smarter to keep renting</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/boneGPT/status/2030514114561274235" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <footer>
+            <p class="stats-line">61 tweets · Crypto 16% · AI 25% · Tech 5% · Stocks & Macro 11% · OpenClaw 2% · Other 41%</p>
+            <p>Generated by <a href="https://betoneh.github.io/signal-monitor/">Signal Monitor</a> x <a href="https://x.com/beto_neh">@beto_neh</a> · 2026-03-08T08:00</p>
+        </footer>
+    </div>
+    <script>
+        if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+            let sy=0,p=false,d=document,b=d.body;
+            const el=d.createElement('div');
+            el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#71767b;font-size:14px;z-index:9999;transition:top 0.2s;background:#0f0f0f;';
+            el.textContent='↓ Pull to refresh';
+            b.prepend(el);
+            d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+            d.addEventListener('touchmove',e=>{
+                if(!p)return;
+                const dy=e.touches[0].clientY-sy;
+                if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+                if(dy>5)e.preventDefault();
+                const t=Math.min(dy*0.4,50);
+                el.style.top=(t-50)+'px';
+                el.textContent=dy>80?'↑ Release':'↓ Pull to refresh';
+            },{passive:false});
+            d.addEventListener('touchend',e=>{
+                if(!p){return;}p=false;
+                const dy=e.changedTouches[0].clientY-sy;
+                el.style.top='-50px';
+                if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+            });
+        }
+    </script>
+    </script>
+</body>
+</html>
