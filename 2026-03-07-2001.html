@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <title>Signal Monitor - 2026-03-07-2001</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --text-primary: #e7e9ea;
+            --text-secondary: #71767b;
+            --accent: #1d9bf0;
+            --accent-hover: #1a8cd8;
+            --border: #2f3336;
+            --crypto: #f7931a;
+            --ai: #10a37f;
+            --tech: #8b5cf6;
+            --stocks-macro: #ef4444;
+            --openclaw: #FF4500;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        .header-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .stats-line {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin-top: 12px;
+            letter-spacing: 0.02em;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .editorial-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .editorial-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 15px;
+        }
+        
+        .category-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .category-header .count {
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .category-crypto .category-header {
+            border-color: var(--crypto);
+        }
+        
+        .category-ai .category-header {
+            border-color: var(--ai);
+        }
+        
+        .category-tech .category-header {
+            border-color: var(--tech);
+        }
+        
+        .category-stocks_macro .category-header {
+            border-color: var(--stocks-macro);
+        }
+        .category-openclaw .category-header {
+            border-color: var(--openclaw);
+        }
+        
+        .tweet {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        @media (hover:hover) { .tweet:hover {
+            border-color: var(--accent);
+        } }
+        
+        .tweet.priority {
+            border-left: 3px solid var(--accent);
+        }
+        
+        .tweet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .tweet-author {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .author-handle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .author-handle a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .author-handle a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-time {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .tweet-text {
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .editorial-card a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .editorial-card a:hover {
+            text-decoration: underline;
+        }
+        .tweet-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-media {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        
+        .tweet-media img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .tweet-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .tweet-metrics {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tweet-link a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .retweet-badge {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .priority-badge {
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .stats {
+                gap: 10px;
+            }
+            
+            .stat {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://betoneh.github.io/signal-monitor/"><img src="icon-192.png" alt="Signal Monitor" class="header-logo"></a>
+            <h1>Signal Monitor</h1>
+            <p class="subtitle">07/03/2026 - 20:01</p>
+        </header>
+
+        <div class="editorial-cards">
+            <div class="editorial-card"><strong>Crypto</strong> — Only <a href="https://x.com/BitcoinMagazine/status/2030279647078801408" target="_blank">1 million BTC remain</a> to be mined out of Bitcoin's 21M hard cap — a psychological milestone getting real attention. Stablecoins hit a record $1.8T in transfer volume as <a href="https://x.com/Cointelegraph/status/2030342716400513360" target="_blank">USDC flipped Tether</a> in throughput, while <a href="https://x.com/tokenterminal/status/2030367773986034112" target="_blank">BlackRock, Fidelity, and J.P. Morgan</a> build tokenized money market funds on Ethereum — RWA holder counts (funds, stocks, commodities) are all at all-time highs. Crypto was also formally named an <a href="https://x.com/JasonPLowery/status/2030194448416788699" target="_blank">emerging technology priority</a> in the US Presidential Cyber Strategy, and Coinbase expanded DEX trading to 84 countries.</div>
+            <div class="editorial-card"><strong>AI</strong> — The <a href="https://x.com/claudeai/status/2029966517497122886" target="_blank">Claude Marketplace launched</a> in limited preview, letting enterprises simplify AI tool procurement — 18K likes signal real enterprise interest. OpenAI's robotics chief <a href="https://x.com/Polymarket/status/2030407086748684754" target="_blank">resigned</a>, warning the Pentagon AI deal could enable mass surveillance and autonomous weapons — a notable internal fracture. Circle and Stripe are <a href="https://x.com/FirstSquawk/status/2030291067611095068" target="_blank">racing to build stablecoin payment rails</a> for AI agents, replacing credit card swipes with autonomous settlement. CZ flagged that <a href="https://x.com/cz_binance/status/2030292528965337595" target="_blank">AI agents know where the liquidity is</a>, and Karpathy keeps <a href="https://x.com/justic_hot/status/2030380496883155350" target="_blank">shrinking the gap</a> between research and hands-on training with single-GPU setups.</div>
+            <div class="editorial-card"><strong>Tech</strong> — Elon announced <a href="https://x.com/elonmusk/status/2030202126282973682" target="_blank">Starship V3 first flight in ~4 weeks</a> (100K likes), while Tesla battery cell production and <a href="https://x.com/elonmusk/status/2030197628005122329" target="_blank">self-driving progress</a> continue to generate outsized engagement. Curve Finance went public calling out PancakeSwap for <a href="https://x.com/CurveFinance/status/2029925614929559839" target="_blank">copying their code</a> without permission — a reminder that open-source licenses still matter even in DeFi. The <a href="https://x.com/amasad/status/2030353125450883100" target="_blank">generalist automator</a> narrative is gaining traction: tools, agents, and infrastructure are converging.</div>
+            <div class="editorial-card"><strong>Stocks & Macro</strong> — The macro story is crude oil: last week's <a href="https://x.com/charliebilello/status/2030290563791041012" target="_blank">36% spike</a> was the biggest weekly percentage increase since futures started trading in 1983 — driven partly by an <a href="https://x.com/clashreport/status/2030335284756226205" target="_blank">Iranian drone</a> reportedly striking a Dubai tower. Short-term inflation breakevens are up 50bps since December lows. Meanwhile, the <a href="https://x.com/andyyy/status/2030087167603519880" target="_blank">two-reality split</a> in crypto is real: retail is in a bear market while institutions in NYC are in full tokenization mania mode. Prediction markets are also heating up — <a href="https://x.com/zerohedge/status/2030406918980714575" target="_blank">Polymarket and Kalshi</a> are eyeing $20B valuations.</div>
+        </div>
+
+        <section class="category category-crypto">
+            <div class="category-header">
+                <h2>Crypto</h2>
+                <span class="count">19 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Bitcoin Magazine</span>
+                        <span class="author-handle"><a href="https://x.com/BitcoinMagazine" target="_blank">@BitcoinMagazine</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 07:49 AM</span>
+                </div>
+                <div class="tweet-text">JUST IN: There is now only 1,000,884 BTC left of Bitcoin&#39;s 21 million supply to be mined </div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC0APZabgAANH-A?format=png&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 2,800 · 🔁 605 · 💬 241</div>
+                    <div class="tweet-link"><a href="https://x.com/BitcoinMagazine/status/2030279647078801408" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Paolo Ardoino </span>
+                        <span class="author-handle"><a href="https://x.com/paoloardoino" target="_blank">@paoloardoino</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 04:03 AM</span>
+                </div>
+                <div class="tweet-text">Tether  Bitcoin</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HCzEVlAb0AA_2mJ?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 1,000 · 🔁 125 · 💬 50</div>
+                    <div class="tweet-link"><a href="https://x.com/paoloardoino/status/2030222701877465306" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Jason Lowery</span>
+                        <span class="author-handle"><a href="https://x.com/JasonPLowery" target="_blank">@JasonPLowery</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 02:10 AM</span>
+                </div>
+                <div class="tweet-text">Boom. Supporting cryptocurrency &amp; blockchain technology is now officially an emerging technology priority in the U.S. Presidential Cyber Strategy.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HCyzErsaUAE9-lO?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 926 · 🔁 157 · 💬 40</div>
+                    <div class="tweet-link"><a href="https://x.com/JasonPLowery/status/2030194448416788699" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Max Keiser</span>
+                        <span class="author-handle"><a href="https://x.com/maxkeiser" target="_blank">@maxkeiser</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 06, 07:30 PM</span>
+                </div>
+                <div class="tweet-text">Didn’t Ray Dalio say that no central bank will ever buy Bitcoin?</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HCxXhGAXAAAGyJ6?format=jpg&name=small" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/amplify_video_thumb/2029870108676608000/img/BGNxgXpifoPHoG7h?format=jpg&name=240x240" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 1,500 · 🔁 189 · 💬 56</div>
+                    <div class="tweet-link"><a href="https://x.com/maxkeiser/status/2030093760973910252" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Coinbase </span>
+                        <span class="author-handle"><a href="https://x.com/coinbase" target="_blank">@coinbase</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 06, 04:07 AM</span>
+                </div>
+                <div class="tweet-text">↓ DEX trading on Coinbase is now available in these 84 countries.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 1,900 · 🔁 358 · 💬 540</div>
+                    <div class="tweet-link"><a href="https://x.com/coinbase/status/2029861474038923312" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-ai">
+            <div class="category-header">
+                <h2>AI</h2>
+                <span class="count">21 tweets</span>
+            </div>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 zerohedge reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Clash Report</span>
+                        <span class="author-handle"><a href="https://x.com/clashreport" target="_blank">@clashreport</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 11:30 AM</span>
+                </div>
+                <div class="tweet-text">An Iranian drone reportedly struck the 23 Marina tower in Dubai, UAE.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2030335156096040961/img/mFmz3abbIBzr2M8y.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 3,800 · 🔁 823 · 💬 126</div>
+                    <div class="tweet-link"><a href="https://x.com/clashreport/status/2030335284756226205" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Polymarket</span>
+                        <span class="author-handle"><a href="https://x.com/Polymarket" target="_blank">@Polymarket</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 10:48 AM</span>
+                </div>
+                <div class="tweet-text">JUST IN: Replit CEO suggests being “brainrotted” &amp; “terminally online” is an advantage in the AI age.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 3,100 · 🔁 351 · 💬 194</div>
+                    <div class="tweet-link"><a href="https://x.com/Polymarket/status/2030324827911827892" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Abhijit</span>
+                        <span class="author-handle"><a href="https://x.com/abhijitwt" target="_blank">@abhijitwt</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 06, 12:17 PM</span>
+                </div>
+                <div class="tweet-text">OpenAi released a feature that does exactly what my startup does</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/ext_tw_video_thumb/2029984663809454080/pu/img/Jp06AU2i4GkVr0t2.jpg" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/media/HCvz4yqaUAMuYKH?format=jpg&name=240x240" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 4,400 · 🔁 191 · 💬 56</div>
+                    <div class="tweet-link"><a href="https://x.com/abhijitwt/status/2029984717228101910" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Claude</span>
+                        <span class="author-handle"><a href="https://x.com/claudeai" target="_blank">@claudeai</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 06, 11:05 AM</span>
+                </div>
+                <div class="tweet-text">Introducing the Claude Marketplace, a way for enterprises to simplify their procurement of AI tools.
+
+Now in limited preview.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HCvfSyEb0AAsmKW?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 18,000 · 🔁 1,700 · 💬 629</div>
+                    <div class="tweet-link"><a href="https://x.com/claudeai/status/2029966517497122886" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">pseudo </span>
+                        <span class="author-handle"><a href="https://x.com/pseudotheos" target="_blank">@pseudotheos</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 06, 10:28 AM</span>
+                </div>
+                <div class="tweet-text">PRO TIP: Use Claude for free through Amazon customer support!</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HCvbXvNXIAc17Wk?format=png&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 20,000 · 🔁 946 · 💬 123</div>
+                    <div class="tweet-link"><a href="https://x.com/pseudotheos/status/2029957370323870040" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-tech">
+            <div class="category-header">
+                <h2>Tech</h2>
+                <span class="count">11 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">tobi lutke</span>
+                        <span class="author-handle"><a href="https://x.com/tobi" target="_blank">@tobi</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 07:03 PM</span>
+                </div>
+                <div class="tweet-text"></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC2a9XdWQAAgmtb?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 384 · 🔁 35 · 💬 21</div>
+                    <div class="tweet-link"><a href="https://x.com/tobi/status/2030449390188380186" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Elon Musk</span>
+                        <span class="author-handle"><a href="https://x.com/elonmusk" target="_blank">@elonmusk</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 06:49 PM</span>
+                </div>
+                <div class="tweet-text">Tesla self-driving is a game-changer</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 10,000 · 🔁 1,000 · 💬 1,300</div>
+                    <div class="tweet-link"><a href="https://x.com/elonmusk/status/2030445733791371330" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Elon Musk</span>
+                        <span class="author-handle"><a href="https://x.com/elonmusk" target="_blank">@elonmusk</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 02:23 AM</span>
+                </div>
+                <div class="tweet-text">Tesla battery cell production is getting good</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HCyo6HqaUAAWqHP?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 43,000 · 🔁 5,600 · 💬 2,200</div>
+                    <div class="tweet-link"><a href="https://x.com/elonmusk/status/2030197628005122329" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Nikita Bier</span>
+                        <span class="author-handle"><a href="https://x.com/nikitabier" target="_blank">@nikitabier</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 06, 10:38 PM</span>
+                </div>
+                <div class="tweet-text">Should be fixed once Apple approves this build. For now, you can turn your device to dark mode. Sorry about that.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HCyCmXGaUAIXTVq?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 818 · 🔁 86 · 💬 95</div>
+                    <div class="tweet-link"><a href="https://x.com/nikitabier/status/2030141131988816216" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Curve Finance</span>
+                        <span class="author-handle"><a href="https://x.com/CurveFinance" target="_blank">@CurveFinance</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 06, 08:22 AM</span>
+                </div>
+                <div class="tweet-text">Dear 
+<a href="https://x.com/PancakeSwap" target="_blank" rel="noopener">@PancakeSwap</a>
+. Looks like you copied our code without asking. It is violation of its license. Not only it is illegal: historically it showed to be unwise for those who did it this way in other regards.
+
+In any case. If you want to enjoy using stableswap without  legal</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HCu-c7pW8AAmIZ-?format=png&name=small" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/media/HCYDUiLbgAEn9tY?format=jpg&name=240x240" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 3,900 · 🔁 627 · 💬 484</div>
+                    <div class="tweet-link"><a href="https://x.com/CurveFinance/status/2029925614929559839" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-stocks_macro">
+            <div class="category-header">
+                <h2>Stocks & Macro</h2>
+                <span class="count">16 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Polymarket</span>
+                        <span class="author-handle"><a href="https://x.com/Polymarket" target="_blank">@Polymarket</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 04:15 PM</span>
+                </div>
+                <div class="tweet-text">JUST IN: OpenAl&#39;s robotics chief resigns, warning the company&#39;s Pentagon Al deal could enable mass surveillance and autonomous weapons.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 6,900 · 🔁 1,400 · 💬 211</div>
+                    <div class="tweet-link"><a href="https://x.com/Polymarket/status/2030407086748684754" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Charlie Bilello</span>
+                        <span class="author-handle"><a href="https://x.com/charliebilello" target="_blank">@charliebilello</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 08:32 AM</span>
+                </div>
+                <div class="tweet-text">Crude Oil Futures started trading in 1983.
+
+Last week&#39;s 36% spike was the biggest weekly percentage increase that we&#39;ve ever seen.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC0KJ-ibIAAlg9y?format=png&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 603 · 🔁 174 · 💬 33</div>
+                    <div class="tweet-link"><a href="https://x.com/charliebilello/status/2030290563791041012" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Wall Street Mav</span>
+                        <span class="author-handle"><a href="https://x.com/WallStreetMav" target="_blank">@WallStreetMav</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 06, 11:43 AM</span>
+                </div>
+                <div class="tweet-text">One ship making a run thru the Strait of Hormuz
+
+The name is &quot;IDGAF&quot; ... perfect. </div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HCvsEghXsAAzVNd?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 10,000 · 🔁 1,200 · 💬 353</div>
+                    <div class="tweet-link"><a href="https://x.com/WallStreetMav/status/2029976058754211851" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 bunny reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Eric Balchunas</span>
+                        <span class="author-handle"><a href="https://x.com/EricBalchunas" target="_blank">@EricBalchunas</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 05, 03:24 PM</span>
+                </div>
+                <div class="tweet-text">Solana is down 57% since the spot ETFs launched in July (that is about as unlucky timing as you&#39;ll ever see in ETFs) yet they managed to not only accumulate $1.5b in flows but not really give any of it up. Further, 50% of the assets are from 13F filers = serious inv base. Both</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HCrVZaDbcAA3Lju?format=png&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 1,500 · 🔁 242 · 💬 123</div>
+                    <div class="tweet-link"><a href="https://x.com/EricBalchunas/status/2029669421053042856" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Netflix Latinoamérica</span>
+                        <span class="author-handle"><a href="https://x.com/NetflixLAT" target="_blank">@NetflixLAT</a></span>
+                    </div>
+                    <span class="tweet-time"></span>
+                </div>
+                <div class="tweet-text">¡Pelea como pirata! ONE PIECE: RUMBO A LA GRAN RUTA, disponible el 10 de marzo, solo en Netflix.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 1,200 · 🔁 71 · 💬 14</div>
+                    <div class="tweet-link"><a href="https://x.com/NetflixLAT/status/2026720752926662884" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-other">
+            <div class="category-header">
+                <h2>📌 Other</h2>
+                <span class="count">45 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Elon Musk</span>
+                        <span class="author-handle"><a href="https://x.com/elonmusk" target="_blank">@elonmusk</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 03:08 PM</span>
+                </div>
+                <div class="tweet-text">It’s not close</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 26,000 · 🔁 3,300 · 💬 1,700</div>
+                    <div class="tweet-link"><a href="https://x.com/elonmusk/status/2030390047908716665" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">steinful</span>
+                        <span class="author-handle"><a href="https://x.com/stainfool" target="_blank">@stainfool</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 02:44 AM</span>
+                </div>
+                <div class="tweet-text">GUI design in Evangelion</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2030202696783781888/img/4yztE7Txri_jY6z0.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 8,900 · 🔁 1,200 · 💬 16</div>
+                    <div class="tweet-link"><a href="https://x.com/stainfool/status/2030202875297587402" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Elon Musk</span>
+                        <span class="author-handle"><a href="https://x.com/elonmusk" target="_blank">@elonmusk</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 02:41 AM</span>
+                </div>
+                <div class="tweet-text">Starship V3 first flight in about 4 weeks</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2029980671582806016/img/pM7OoKtxm_slDe__.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 100,000 · 🔁 10,000 · 💬 4,300</div>
+                    <div class="tweet-link"><a href="https://x.com/elonmusk/status/2030202126282973682" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Elon Musk</span>
+                        <span class="author-handle"><a href="https://x.com/elonmusk" target="_blank">@elonmusk</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 07, 12:23 AM</span>
+                </div>
+                <div class="tweet-text">Just press the switch</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HCyNTKkaUAA9kU9?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 39,000 · 🔁 5,700 · 💬 2,800</div>
+                    <div class="tweet-link"><a href="https://x.com/elonmusk/status/2030167535782649989" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Elon Musk</span>
+                        <span class="author-handle"><a href="https://x.com/elonmusk" target="_blank">@elonmusk</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 06, 11:54 PM</span>
+                </div>
+                <div class="tweet-text">Cool</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HCyNyhcaUAAhtly?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 16,000 · 🔁 2,600 · 💬 1,500</div>
+                    <div class="tweet-link"><a href="https://x.com/elonmusk/status/2030160147323211806" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <footer>
+            <p class="stats-line">114 tweets · Crypto 17% · AI 18% · Tech 10% · Stocks & Macro 14% · OpenClaw 2% · Other 39%</p>
+            <p>Generated by <a href="https://betoneh.github.io/signal-monitor/">Signal Monitor</a> x <a href="https://x.com/beto_neh">@beto_neh</a> · 2026-03-07T20:01</p>
+        </footer>
+    </div>
+    <script>
+        if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+            let sy=0,p=false,d=document,b=d.body;
+            const el=d.createElement('div');
+            el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#71767b;font-size:14px;z-index:9999;transition:top 0.2s;background:#0f0f0f;';
+            el.textContent='↓ Pull to refresh';
+            b.prepend(el);
+            d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+            d.addEventListener('touchmove',e=>{
+                if(!p)return;
+                const dy=e.touches[0].clientY-sy;
+                if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+                if(dy>5)e.preventDefault();
+                const t=Math.min(dy*0.4,50);
+                el.style.top=(t-50)+'px';
+                el.textContent=dy>80?'↑ Release':'↓ Pull to refresh';
+            },{passive:false});
+            d.addEventListener('touchend',e=>{
+                if(!p){return;}p=false;
+                const dy=e.changedTouches[0].clientY-sy;
+                el.style.top='-50px';
+                if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+            });
+        }
+    </script>
+    </script>
+</body>
+</html>
