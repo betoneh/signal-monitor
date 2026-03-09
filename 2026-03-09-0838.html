@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <title>Signal Monitor - 2026-03-09-0838</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --text-primary: #e7e9ea;
+            --text-secondary: #71767b;
+            --accent: #1d9bf0;
+            --accent-hover: #1a8cd8;
+            --border: #2f3336;
+            --crypto: #f7931a;
+            --ai: #10a37f;
+            --tech: #8b5cf6;
+            --stocks-macro: #ef4444;
+            --openclaw: #FF4500;
+            --israel: #0038b8;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        .header-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .stats-line {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin-top: 12px;
+            letter-spacing: 0.02em;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .editorial-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .editorial-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 15px;
+        }
+        
+        .category-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .category-header .count {
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .category-crypto .category-header {
+            border-color: var(--crypto);
+        }
+        
+        .category-ai .category-header {
+            border-color: var(--ai);
+        }
+        
+        .category-tech .category-header {
+            border-color: var(--tech);
+        }
+        
+        .category-stocks_macro .category-header {
+            border-color: var(--stocks-macro);
+        }
+        .category-israel .category-header {
+            border-color: var(--israel);
+        }
+        
+        .category-openclaw .category-header {
+            border-color: var(--openclaw);
+        }
+        
+        .tweet {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        @media (hover:hover) { .tweet:hover {
+            border-color: var(--accent);
+        } }
+        
+        .tweet.priority {
+            border-left: 3px solid var(--accent);
+        }
+        
+        .tweet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .tweet-author {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .author-handle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .author-handle a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .author-handle a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-time {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .tweet-text {
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .editorial-card a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .editorial-card a:hover {
+            text-decoration: underline;
+        }
+        .tweet-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-media {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        
+        .tweet-media img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .tweet-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .tweet-metrics {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tweet-link a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .retweet-badge {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .priority-badge {
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .stats {
+                gap: 10px;
+            }
+            
+            .stat {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://betoneh.github.io/signal-monitor/"><img src="icon-192.png" alt="Signal Monitor" class="header-logo"></a>
+            <h1>Signal Monitor</h1>
+            <p class="subtitle">09/03/2026 - 08:38</p>
+        </header>
+
+        <div class="editorial-cards">
+            <div class="editorial-card"><strong>Crypto</strong> — Austin Griffith is <a href="https://x.com/austingriffith" target="_blank">shifting to AI-native Ethereum dev stacks</a> — a signal that the builder class sees AI tooling as infrastructure, not novelty. BitMine's <a href="https://x.com/WatcherGuru" target="_blank">$122M ETH purchase</a> (60,976 ETH) stands out in a quiet market. Privy highlights KAST's stablecoin platform push and Kraken DeFi Earn crossing $100M deposits — institutional appetite for onchain yield is real.</div>
+            <div class="editorial-card"><strong>AI</strong> — Karpathy's <a href="https://x.com/alex_prompter" target="_blank">Autoresearch</a> repo dominates the feed — AI agents running their own ML experiments in an infinite loop. The discourse split is clear: half the timeline is ecstatic, the other half (led by <a href="https://x.com/svpino" target="_blank">svpino</a>) calls bullshit on agent hype. Apple's play isn't a frontier LLM — <a href="https://x.com/PeterDiamandis" target="_blank">Diamandis notes</a> they may have done it with hardware instead. Microsoft dropped <a href="https://x.com/zivdotcat" target="_blank">Copilot Cowork</a>, their answer to Claude's computer use.</div>
+            <div class="editorial-card"><strong>Tech</strong> — A <a href="https://x.com/DeRonin_" target="_blank">directory of 1,700+ dead YC-backed startups</a> surfaced — sobering dataset for anyone romanticizing startup life.</div>
+            <div class="editorial-card"><strong>Stocks & Macro</strong> — Tom Lee's BitMine going heavy on ETH ($122M) while <a href="https://x.com/CoinMarketCap" target="_blank">CoinMarketCap</a> memes about faded coins hitting $50B caps. Macro remains in wait-and-see mode. An <a href="https://x.com/heynavtoor" target="_blank">open-sourced AI hedge fund</a> with 18 agents modeled after Wall Street legends is making rounds — more novelty than production, but the concept is trending.</div>
+            <div class="editorial-card"><strong>Israel</strong> — No significant Israel-related signals in this cycle.</div>
+        </div>
+
+        <section class="category category-crypto">
+            <div class="category-header">
+                <h2>Crypto</h2>
+                <span class="count">3 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Austin Griffith</span>
+                        <span class="author-handle"><a href="https://x.com/austingriffith" target="_blank">@austingriffith</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 07:31 AM</span>
+                </div>
+                <div class="tweet-text">🤠 Shifting to an AI-Native Ethereum Developer Stack</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/austingriffith/status/2030999895822455114" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Privy</span>
+                        <span class="author-handle"><a href="https://x.com/privy_io" target="_blank">@privy_io</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 06:32 AM</span>
+                </div>
+                <div class="tweet-text">Congrats to the KAST team on this exciting milestone!
+
+KAST is building a stablecoin-powered platform for global money movement, helping users earn globally, hold digital dollars, and spend locally.
+
+Privy is proud to be part of their journey.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/privy_io/status/2030984958274085163" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Morgan</span>
+                        <span class="author-handle"><a href="https://x.com/morganlinton" target="_blank">@morganlinton</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 10:20 PM</span>
+                </div>
+                <div class="tweet-text">If you want to learn how one of the best engineers in the world builds clis, checkout this repo.
+
+I just had Codex go through it, and spent almost an hour with it asking questions, learning, kinda the next best thing I can get to sitting down with <a href="https://x.com/steipete" target="_blank" rel="noopener">@steipete</a> himself. <a href="https://t.co/N6LjBWK8pn" target="_blank" rel="noopener">https://t.co/N6LjBWK8pn</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC8RibTaQAAewc4.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/morganlinton/status/2030861350445129838" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-ai">
+            <div class="category-header">
+                <h2>AI</h2>
+                <span class="count">22 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">God of Prompt</span>
+                        <span class="author-handle"><a href="https://x.com/godofprompt" target="_blank">@godofprompt</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 08:02 AM</span>
+                </div>
+                <div class="tweet-text">Karpathy just dropped a 630-line repo where AI agents run their own ML research experiments in an infinite loop. 
+
+No human involved. Every dot on that graph is a full training run the agent did on its own, finding better architectures, tuning hyperparameters, committing improvements to git. 
+
+You write the prompt. The agent does the science. 
+
+If you saw this and kept scrolling, you&#39;re not paying attention.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/godofprompt/status/2031007676386197966" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Alex Prompter</span>
+                        <span class="author-handle"><a href="https://x.com/alex_prompter" target="_blank">@alex_prompter</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 07:54 AM</span>
+                </div>
+                <div class="tweet-text">🚨 Holy shit.. Karpathy just open-sourced a repo that lets AI agents run their own ML research experiments autonomously.
+
+630 lines of code. Single GPU. No human in the loop.
+
+Every dot in his graph is a full LLM training run that took 5 minutes, and the agent just keeps going, stacking commits, finding better architectures, tuning hyperparameters, lowering validation loss.On its own. Indefinitely.
+
+Let me say that again. You write a prompt in a markdown file. The AI agent iterates on the actual training code. It spawns training runs, evaluates results, commits improvements to a git branch, and loops.
+
+You wake up and your agent has run 50 experiments while you slept.
+
+This is not a wrapper. This is not another chatbot UI. This is an AI researcher that writes code, trains models, evaluates results, and improves its own approach. The human&#39;s only job is engineering the prompt that guides the agent&#39;s research direction. That&#39;s it. The rest is fully autonomous.
+
+The wildest part? You can now compare research strategies head to head.
+
+Different prompts, different agents, different approaches, all racing to find the lowest validation loss.
+
+Karpathy called it &quot;part code, part sci-fi, and a pinch of psychosis&quot; and honestly that&#39;s the most accurate description of where AI research is heading right now.
+
+If you&#39;ve been sitting on the sidelines wondering when AI agents would stop being demos and start doing real work, this is the moment.
+
+This isn&#39;t generating blog posts or answering emails. This is an agent doing actual neural network research, making actual scientific progress, accumulating actual knowledge through experimentation.
+
+On a single GPU. In 630 lines.
+
+Go clone it and run it this weekend: <a href="https://t.co/wEoFLqodjF." target="_blank" rel="noopener">https://t.co/wEoFLqodjF.</a>
+
+If you see this and scroll past it, I genuinely don&#39;t know what would get you to pay attention.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2031005648473739264/img/d3r-1S_b3TINjdyP.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/alex_prompter/status/2031005709584810355" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">mert</span>
+                        <span class="author-handle"><a href="https://x.com/mert" target="_blank">@mert</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 07:52 AM</span>
+                </div>
+                <div class="tweet-text">huge
+
+zcash&#39;s best wallet just raised from a16z, paradigm, and even david friedberg 
+
+I didnt even make it on to the poster (am washed)
+
+the team now has the resources to bring encrypted money to all
+
+phantom was a big reason SOL succeeded, same will happen here
+
+trillions</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/mert/status/2031005188304031994" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">sui ☄️</span>
+                        <span class="author-handle"><a href="https://x.com/birdabo" target="_blank">@birdabo</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 06:30 AM</span>
+                </div>
+                <div class="tweet-text">Anthropic dropped a 33 page PDF turning Claude into an AI operating system. 
+
+- auto triggering workflows without prompts
+- claude picks the right skill automatically
+- scripts, assets, documentation all packaged
+- claude becomes smarter with every skills
+
+job market is cooked😭 <a href="https://t.co/GWFomrkKkY" target="_blank" rel="noopener">https://t.co/GWFomrkKkY</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2030984428370251776/img/7wNtHNcqooHbLXnM.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/birdabo/status/2030984487748960686" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Simplifying AI</span>
+                        <span class="author-handle"><a href="https://x.com/simplifyinAI" target="_blank">@simplifyinAI</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 05:05 AM</span>
+                </div>
+                <div class="tweet-text">🚨 BREAKING: The biggest bottleneck for AI agents just got solved by a 12MB file.
+
+PinchTab is a tiny 12mb go binary that gives any AI agent full browser control through a plain HTTP API. You just send a request and it clicks, types, and navigates..
+
+It manages Chrome instances, bypasses bot detection, and reduces token usage by 13x by parsing the accessibility tree instead of taking expensive screenshots.
+
+Whether you are using Python, TypeScript, or Go, your agent just sends an HTTP request and it works.
+
+100% Open Source.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC9uHkzWsAE5LR1.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/simplifyinAI/status/2030963191753138491" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-tech">
+            <div class="category-header">
+                <h2>Tech</h2>
+                <span class="count">1 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Ronin</span>
+                        <span class="author-handle"><a href="https://x.com/DeRonin_" target="_blank">@DeRonin_</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 03:39 AM</span>
+                </div>
+                <div class="tweet-text">Somebody released a directory of 1,700+ dead startups (backed by YC)
+
+here is the link: <a href="https://t.co/sEdUPd5Dqv" target="_blank" rel="noopener">https://t.co/sEdUPd5Dqv</a>
+
+all of them have deep analysis of product inside and full funding story (in short, 100% product&#39;s description)
+
+many of these startups failed not because the idea was bad, but because they launched at the wrong time or were just grant cash grabs
+
+the ideas themselves are still worth drawing inspiration from (i&#39;ve already found few ideas of my further startups btw)
+
+[ BOOKMARK ]</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2030941579763134464/img/Ufh63Sl6sUyrbztP.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/DeRonin_/status/2030941646414581921" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-stocks_macro">
+            <div class="category-header">
+                <h2>Stocks & Macro</h2>
+                <span class="count">6 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Watcher.Guru</span>
+                        <span class="author-handle"><a href="https://x.com/WatcherGuru" target="_blank">@WatcherGuru</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 06:45 AM</span>
+                </div>
+                <div class="tweet-text">JUST IN: Tom Lee&#39;s &#39;BitMine&#39; buys 60,976 $ETH worth $122 million. <a href="https://t.co/rjIkcs1pAq" target="_blank" rel="noopener">https://t.co/rjIkcs1pAq</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC-FICKW4AAfXkO.jpg" alt="Tweet media" loading="lazy"><img src="https://pbs.twimg.com/media/HC-FICKXsAAy1jm.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/WatcherGuru/status/2030988338811879538" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Nav Toor</span>
+                        <span class="author-handle"><a href="https://x.com/heynavtoor" target="_blank">@heynavtoor</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 05:20 AM</span>
+                </div>
+                <div class="tweet-text">🚨 Someone just open sourced an AI hedge fund with 18 agents that think like Wall Street legends.
+
+Warren Buffett. Charlie Munger. Michael Burry. Cathie Wood. Bill Ackman. All running on your laptop.
+
+It&#39;s called AI Hedge Fund. You give it stock tickers. 18 AI agents analyze the company from every angle. Then they vote on whether to buy, sell, or hold.
+
+Not a toy. Not a dashboard. A full multi-agent investment research system.
+
+No Bloomberg Terminal. No $25K brokerage minimums. No financial advisor fees. Just AI agents doing what hedge funds charge 2-and-20 for.
+
+Here&#39;s who&#39;s on your team:
+
+→ Warren Buffett Agent. Only buys wonderful businesses at fair prices
+→ Charlie Munger Agent. Demands a margin of safety on every pick
+→ Michael Burry Agent. The Big Short contrarian hunting deep value
+→ Cathie Wood Agent. Innovation and disruption. High conviction growth
+→ Bill Ackman Agent. Activist investor. Takes bold positions
+→ Ben Graham Agent. The godfather of value investing. Hidden gems only
+→ Aswath Damodaran Agent. The Dean of Valuation. Story meets numbers
+→ Plus 11 more specialized agents covering technicals, sentiment, risk, and fundamentals
+
+Here&#39;s how it works:
+
+→ You enter stock tickers (AAPL, NVDA, TSLA, whatever you want)
+→ Agents pull real financial data. Earnings, balance sheets, insider trades, news
+→ Each agent analyzes the data through their own investment philosophy
+→ A Risk Manager agent checks position sizing and portfolio exposure
+→ A Portfolio Manager agent takes all signals and makes the final call
+→ You get a buy/sell/hold decision with full reasoning from every agent
+
+Here&#39;s the wildest part:
+
+You can turn on --show-reasoning and watch each agent explain their logic step by step. Warren Buffett agent breaks down the moat. Michael Burry agent flags the hidden risks. Cathie Wood agent finds the disruption angle. They literally argue with each other.
+
+It has a full backtester. Run your strategy against historical data and see how it would have performed.
+
+Full web UI included. Not just a terminal tool. A real dashboard.
+
+Works with OpenAI, Claude, Groq, DeepSeek, or fully local with Ollama. Your data never has to leave your machine.
+
+Data for AAPL, GOOGL, MSFT, NVDA, and TSLA is completely free. No API key needed.
+
+46.7K GitHub stars. 8.1K forks. Actively maintained.
+
+100% Open Source. MIT License.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC9xvqEa0AAdpcp.png" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/heynavtoor/status/2030967023627563256" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">CoinMarketCap</span>
+                        <span class="author-handle"><a href="https://x.com/CoinMarketCap" target="_blank">@CoinMarketCap</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 04:00 AM</span>
+                </div>
+                <div class="tweet-text">When the coin you faded is now at $50B market cap <a href="https://t.co/24QJeD1itF" target="_blank" rel="noopener">https://t.co/24QJeD1itF</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2030946775167832064/img/iXrOL33OoBpcdV7S.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/CoinMarketCap/status/2030946825239396820" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Jason Smith - 上官杰文</span>
+                        <span class="author-handle"><a href="https://x.com/ShangguanJiewen" target="_blank">@ShangguanJiewen</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 03:00 AM</span>
+                </div>
+                <div class="tweet-text">It&#39;s getting very close to the time when everyone living in the world will buy a robot to take care of their home...
+
+These will be as essential in the next generation as cars are now.
+
+These are made in China: The Unitree G1. <a href="https://t.co/2HeivnxOi4" target="_blank" rel="noopener">https://t.co/2HeivnxOi4</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2030917488355971072/img/qVuLfa18nYm3inTQ.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/ShangguanJiewen/status/2030931599710453847" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Misbah Syed</span>
+                        <span class="author-handle"><a href="https://x.com/MisbahSy" target="_blank">@MisbahSy</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 02:02 AM</span>
+                </div>
+                <div class="tweet-text">OPPORTUNITY ALERT: Andrej just outlined what might be a huge infrastructure gap in ai research right now.
+
+&gt; <a href="https://x.com/karpathy" target="_blank" rel="noopener">@karpathy</a>&#39;s autoresearch repo lets an ai agent run ml experiments overnight. which is super cool in itself. 
+
+&gt; next is to build something to facilitate an entire research community of agents, all experimenting in parallel, across different directions, on different hardware.
+
+here&#39;s what needs to be built:
+
+&gt; a distributed experiment coordination layer. agents need to claim research directions, avoid duplicating work, and share findings. nothing like this exists yet.
+
+&gt; a branch-first version control system. not master + PRs that merge back. think permanent branches that agents &quot;adopt&quot; and accumulate. git&#39;s merge-back assumption breaks down completely here.
+
+&gt; an agent-readable research feed. <a href="https://x.com/karpathy" target="_blank" rel="noopener">@karpathy</a>  prototyped this with github discussions where agents post summaries of their overnight runs. imagine this at scale: thousands of agents publishing mini-papers every morning.
+
+&gt; a findings aggregation engine. the thing that reads 500 agent experiment reports and synthesizes what actually worked across all of them.
+
+&gt; a compute marketplace for research. SETI<a href="https://x.com/home" target="_blank" rel="noopener">@home</a> but for ml experiments. people contribute gpu hours, agents run experiments, results flow back to the collective.
+
+&gt; a reputation/quality system for agent contributions. not all experiments are equal. you need a way to rank, filter, and trust agent-generated research.
+
+&gt; cross-platform experiment normalization. autoresearch uses a fixed 5-min time budget so results are comparable on one gpu. scaling this across different hardware needs a standardized benchmarking layer.
+
+&gt; every tool we use today was designed for humans who get tired, lose focus, and can only track a few things at once. agents don&#39;t have those limits. the tools of today will break with agentic research velocity.
+
+&gt; whoever builds the infrastructure for massively collaborative agent research is building the github of the agent era.
+
+is someone already building this?</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/MisbahSy/status/2030917004056760680" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-other">
+            <div class="category-header">
+                <h2>📌 Other</h2>
+                <span class="count">24 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Peter Steinberger 🦞</span>
+                        <span class="author-handle"><a href="https://x.com/steipete" target="_blank">@steipete</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 08:38 AM</span>
+                </div>
+                <div class="tweet-text">there&#39;s a store now?</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/steipete/status/2031016684664799570" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Ryan Carson</span>
+                        <span class="author-handle"><a href="https://x.com/ryancarson" target="_blank">@ryancarson</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 07:31 AM</span>
+                </div>
+                <div class="tweet-text">Excited to see ideas like this.
+
+Would love to hear from anyone running Paperclip and achieving great results. 
+
+I’d like to take it for a spin soon.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/ryancarson/status/2030999863274406161" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Merlin Egalite 🦋</span>
+                        <span class="author-handle"><a href="https://x.com/MerlinEgalite" target="_blank">@MerlinEgalite</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 07:07 AM</span>
+                </div>
+                <div class="tweet-text">Received my results from <a href="https://x.com/lucis_life" target="_blank" rel="noopener">@lucis_life</a>, I&#39;m biologically 21 yo ie soon I won&#39;t be allowed to drink alcohol in the US anymore. This will make matters even worse.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/MerlinEgalite/status/2030993964657262640" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Beff (e/acc)</span>
+                        <span class="author-handle"><a href="https://x.com/beffjezos" target="_blank">@beffjezos</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 01:56 AM</span>
+                </div>
+                <div class="tweet-text">It&#39;s actually genuinely over for Hollywood...
+
+Or it&#39;s a whole new beginning of a golden age of cinema</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/beffjezos/status/2030915718230007876" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">shouko</span>
+                        <span class="author-handle"><a href="https://x.com/shoukointech" target="_blank">@shoukointech</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 08, 11:56 PM</span>
+                </div>
+                <div class="tweet-text">Mark Zuckerberg on the best advice he got from Peter Thiel <a href="https://t.co/l9Pzc4mHvW" target="_blank" rel="noopener">https://t.co/l9Pzc4mHvW</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/ext_tw_video_thumb/2030885236796760064/pu/img/e8I3ACP_gn-O5WFj.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/shoukointech/status/2030885293268902032" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <footer>
+            <p class="stats-line">61 tweets · Crypto 5% · AI 36% · Tech 2% · Stocks & Macro 10% · Israel 0% · OpenClaw 8% · Other 39%</p>
+            <p>Generated by <a href="https://betoneh.github.io/signal-monitor/">Signal Monitor</a> x <a href="https://x.com/beto_neh">@beto_neh</a> · 2026-03-09T08:38</p>
+        </footer>
+    </div>
+    <script>
+        if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+            let sy=0,p=false,d=document,b=d.body;
+            const el=d.createElement('div');
+            el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#71767b;font-size:14px;z-index:9999;transition:top 0.2s;background:#0f0f0f;';
+            el.textContent='↓ Pull to refresh';
+            b.prepend(el);
+            d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+            d.addEventListener('touchmove',e=>{
+                if(!p)return;
+                const dy=e.touches[0].clientY-sy;
+                if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+                if(dy>5)e.preventDefault();
+                const t=Math.min(dy*0.4,50);
+                el.style.top=(t-50)+'px';
+                el.textContent=dy>80?'↑ Release':'↓ Pull to refresh';
+            },{passive:false});
+            d.addEventListener('touchend',e=>{
+                if(!p){return;}p=false;
+                const dy=e.changedTouches[0].clientY-sy;
+                el.style.top='-50px';
+                if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+            });
+        }
+    </script>
+    </script>
+</body>
+</html>
