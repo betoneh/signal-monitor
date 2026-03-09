@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <title>Signal Monitor - 2026-03-09-1744</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --text-primary: #e7e9ea;
+            --text-secondary: #71767b;
+            --accent: #1d9bf0;
+            --accent-hover: #1a8cd8;
+            --border: #2f3336;
+            --crypto: #f7931a;
+            --ai: #10a37f;
+            --tech: #8b5cf6;
+            --stocks-macro: #ef4444;
+            --openclaw: #FF4500;
+            --israel: #0038b8;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        .header-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .stats-line {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin-top: 12px;
+            letter-spacing: 0.02em;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .editorial-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .editorial-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 15px;
+        }
+        
+        .category-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .category-header .count {
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .category-crypto .category-header {
+            border-color: var(--crypto);
+        }
+        
+        .category-ai .category-header {
+            border-color: var(--ai);
+        }
+        
+        .category-tech .category-header {
+            border-color: var(--tech);
+        }
+        
+        .category-stocks_macro .category-header {
+            border-color: var(--stocks-macro);
+        }
+        .category-israel .category-header {
+            border-color: var(--israel);
+        }
+        
+        .category-openclaw .category-header {
+            border-color: var(--openclaw);
+        }
+        
+        .tweet {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        @media (hover:hover) { .tweet:hover {
+            border-color: var(--accent);
+        } }
+        
+        .tweet.priority {
+            border-left: 3px solid var(--accent);
+        }
+        
+        .tweet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .tweet-author {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .author-handle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .author-handle a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .author-handle a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-time {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .tweet-text {
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .editorial-card a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .editorial-card a:hover {
+            text-decoration: underline;
+        }
+        .tweet-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-media {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        
+        .tweet-media img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .tweet-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .tweet-metrics {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tweet-link a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .retweet-badge {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .priority-badge {
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .stats {
+                gap: 10px;
+            }
+            
+            .stat {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://betoneh.github.io/signal-monitor/"><img src="icon-192.png" alt="Signal Monitor" class="header-logo"></a>
+            <h1>Signal Monitor</h1>
+            <p class="subtitle">09/03/2026 - 17:44</p>
+        </header>
+
+        <div class="editorial-cards">
+            <div class="editorial-card"><strong>Crypto</strong> — Austin Griffith is <a href="https://x.com/austingriffith" target="_blank">shifting to AI-native Ethereum dev stacks</a> — a signal that the builder class sees AI tooling as infrastructure, not novelty. BitMine's <a href="https://x.com/WatcherGuru" target="_blank">$122M ETH purchase</a> (60,976 ETH) stands out in a quiet market. Privy highlights KAST's stablecoin platform push and Kraken DeFi Earn crossing $100M deposits — institutional appetite for onchain yield is real.</div>
+            <div class="editorial-card"><strong>AI</strong> — Karpathy's <a href="https://x.com/alex_prompter" target="_blank">Autoresearch</a> repo dominates the feed — AI agents running their own ML experiments in an infinite loop. The discourse split is clear: half the timeline is ecstatic, the other half (led by <a href="https://x.com/svpino" target="_blank">svpino</a>) calls bullshit on agent hype. Apple's play isn't a frontier LLM — <a href="https://x.com/PeterDiamandis" target="_blank">Diamandis notes</a> they may have done it with hardware instead. Microsoft dropped <a href="https://x.com/zivdotcat" target="_blank">Copilot Cowork</a>, their answer to Claude's computer use.</div>
+            <div class="editorial-card"><strong>Tech</strong> — A <a href="https://x.com/DeRonin_" target="_blank">directory of 1,700+ dead YC-backed startups</a> surfaced — sobering dataset for anyone romanticizing startup life.</div>
+            <div class="editorial-card"><strong>Stocks & Macro</strong> — Tom Lee's BitMine going heavy on ETH ($122M) while <a href="https://x.com/CoinMarketCap" target="_blank">CoinMarketCap</a> memes about faded coins hitting $50B caps. Macro remains in wait-and-see mode. An <a href="https://x.com/heynavtoor" target="_blank">open-sourced AI hedge fund</a> with 18 agents modeled after Wall Street legends is making rounds — more novelty than production, but the concept is trending.</div>
+            <div class="editorial-card"><strong>Israel</strong> — No significant Israel-related signals in this cycle.</div>
+        </div>
+
+        <section class="category category-crypto">
+            <div class="category-header">
+                <h2>Crypto</h2>
+                <span class="count">13 tweets</span>
+            </div>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 zerohedge reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Open Source Intel</span>
+                        <span class="author-handle"><a href="https://x.com/Osint613" target="_blank">@Osint613</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 03:47 PM</span>
+                </div>
+                <div class="tweet-text">Footage from Iran right now looks like something out of a movie. I have no idea what they are hitting or how they are hitting, but this is something completely new for me.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2031124731932368896/img/Qo9ZdAHHVRtsCzcA.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 9,100 · 🔁 1,400 · 💬 307</div>
+                    <div class="tweet-link"><a href="https://x.com/Osint613/status/2031124787800469913" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">CoinMarketCap</span>
+                        <span class="author-handle"><a href="https://x.com/CoinMarketCap" target="_blank">@CoinMarketCap</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 03:25 PM</span>
+                </div>
+                <div class="tweet-text">LATEST:  Bitcoin has crossed 20 million coins mined, leaving fewer than 1 million BTC left to issue over the next 114 years before the network hits its hard cap of 21 million in 2140.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC_8EP5WsAArz_C?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 224 · 🔁 72 · 💬 66</div>
+                    <div class="tweet-link"><a href="https://x.com/CoinMarketCap/status/2031119127692054531" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Binance</span>
+                        <span class="author-handle"><a href="https://x.com/binance" target="_blank">@binance</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 03:01 PM</span>
+                </div>
+                <div class="tweet-text">Your strategy. Your settings. 
+
+Customize your approach and let the Binance Futures DCA Bot handle the rest.
+
+ 
+https://
+binance.com/en/trading-bot
+s/futures/dca-bot/BTCUSDT
+…</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC_2lFMW0AAztk8?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 192 · 🔁 48 · 💬 77</div>
+                    <div class="tweet-link"><a href="https://x.com/binance/status/2031113081128890603" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">mert</span>
+                        <span class="author-handle"><a href="https://x.com/mert" target="_blank">@mert</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 02:58 PM</span>
+                </div>
+                <div class="tweet-text">unstoppable private money meets unstoppable liquidity
+
+excited to see collaboration between those at the frontier of crypto
+
+with private money especially, crucial to not rely on CEXes
+
+now you have Solana, NEAR, and Hyperliquid via Unit
+
+trillions</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC-Ii67XoAA8QvJ?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 250 · 🔁 18 · 💬 28</div>
+                    <div class="tweet-link"><a href="https://x.com/mert/status/2031112287335891331" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">The Wall Street Journal</span>
+                        <span class="author-handle"><a href="https://x.com/WSJ" target="_blank">@WSJ</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 09:16 AM</span>
+                </div>
+                <div class="tweet-text">From 
+<a href="https://x.com/WSJopinion" target="_blank" rel="noopener">@WSJopinion</a>
+: Trump can win something greater than the Nobel Peace Prize. If the president ends the regimes in Iran and Cuba, he will cripple the global anti-American movement, writes 
+<a href="https://x.com/JoshuaMuravchik" target="_blank" rel="noopener">@JoshuaMuravchik</a>
+.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 3,200 · 🔁 852 · 💬 510</div>
+                    <div class="tweet-link"><a href="https://x.com/WSJ/status/2031026278623510830" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-ai">
+            <div class="category-header">
+                <h2>AI</h2>
+                <span class="count">20 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">zerohedge</span>
+                        <span class="author-handle"><a href="https://x.com/zerohedge" target="_blank">@zerohedge</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 04:06 PM</span>
+                </div>
+                <div class="tweet-text">*TRUMP: WE&#39;RE WAIVING CERTAIN OIL-RELATED SANCTIONS TO CUT PRICE
+
+*TRUMP: WILL TAKE SOME SANCTIONS OFF UNTIL THIS STRAIGHTENS OUT</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 622 · 🔁 85 · 💬 28</div>
+                    <div class="tweet-link"><a href="https://x.com/zerohedge/status/2031129413576700366" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Bill Mitchell</span>
+                        <span class="author-handle"><a href="https://x.com/mitchellvii" target="_blank">@mitchellvii</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 03:06 PM</span>
+                </div>
+                <div class="tweet-text">  BUNKERS BUSTED: Iran spent FOUR decades building their underground missile bunkers.
+
+They were very proud of them.
+
+But the US military, using advanced AI, wiped them out in a week!
+
+Amazing.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC_3uDaXcAA1T97?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 2,400 · 🔁 508 · 💬 102</div>
+                    <div class="tweet-link"><a href="https://x.com/mitchellvii/status/2031114335414534423" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">zerohedge</span>
+                        <span class="author-handle"><a href="https://x.com/zerohedge" target="_blank">@zerohedge</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 02:26 PM</span>
+                </div>
+                <div class="tweet-text">&quot;Straits of.... America&quot;</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC_ummvWkAACsZ2?format=jpg&name=360x360" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 6,100 · 🔁 564 · 💬 120</div>
+                    <div class="tweet-link"><a href="https://x.com/zerohedge/status/2031104307500650636" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Eyal Yakoby</span>
+                        <span class="author-handle"><a href="https://x.com/EYakoby" target="_blank">@EYakoby</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 02:00 PM</span>
+                </div>
+                <div class="tweet-text">BREAKING: The NYPD outlines what Emir Balat said about the failed attack in NYC.
+ 
+“He requested paper and wrote, ‘I pledge my allegiance to the Islamic State, die in your rage, you Kufar,’ &#39;Kufar&#39; is an Arabic term that refers to non-Muslims.”</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2031085479001464834/img/WEH6nGIZP2yDtJZg.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 2,200 · 🔁 577 · 💬 67</div>
+                    <div class="tweet-link"><a href="https://x.com/EYakoby/status/2031097745272885605" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Eyal Yakoby</span>
+                        <span class="author-handle"><a href="https://x.com/EYakoby" target="_blank">@EYakoby</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 07:17 AM</span>
+                </div>
+                <div class="tweet-text">BREAKING: Veterans are slamming Tucker Carlson after he said that our troops go and fight in wars to ‘r*pe daughters and wives.’
+
+Tucker is truly a POS.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC-MXUTaAAA0Rcw?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 12,000 · 🔁 2,700 · 💬 556</div>
+                    <div class="tweet-link"><a href="https://x.com/EYakoby/status/2030996291560309090" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-tech">
+            <div class="category-header">
+                <h2>Tech</h2>
+                <span class="count">2 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">zerohedge</span>
+                        <span class="author-handle"><a href="https://x.com/zerohedge" target="_blank">@zerohedge</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 04:00 PM</span>
+                </div>
+                <div class="tweet-text">*TRUMP: AHEAD OF INITIAL IRAN WAR TIMELINE BY A LOT
+
+*TRUMP: HAVE TAKEN OUT IRAN LEADERSHIP TWICE, MAYBE THREE TIMES
+
+*TRUMP: COULD HIT IRAN ELECTRIC PRODUCTION, BUT DON&#39;T WANT TO
+
+*TRUMP: LEFT SOME OF MOST IMPORTANT IRAN TARGETS LEFT FOR LATER</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 628 · 🔁 60 · 💬 42</div>
+                    <div class="tweet-link"><a href="https://x.com/zerohedge/status/2031127953220776122" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Zeneca</span>
+                        <span class="author-handle"><a href="https://x.com/Zeneca" target="_blank">@Zeneca</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 02:29 PM</span>
+                </div>
+                <div class="tweet-text">Another day, another massive product launched by anthropic</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2031087443961851904/img/djTbAdaklBTC4hQE.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 57 · 💬 23</div>
+                    <div class="tweet-link"><a href="https://x.com/Zeneca/status/2031105115537424579" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-stocks_macro">
+            <div class="category-header">
+                <h2>Stocks & Macro</h2>
+                <span class="count">13 tweets</span>
+            </div>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Joel Fischer </span>
+                        <span class="author-handle"><a href="https://x.com/realJoelFischer" target="_blank">@realJoelFischer</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 04:08 PM</span>
+                </div>
+                <div class="tweet-text">A 2 star chief running towards danger.
+
+May God bless the NYPD </div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HDAF5VraMAICCYG?format=jpg&name=900x900" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 3,500 · 💬 116</div>
+                    <div class="tweet-link"><a href="https://x.com/realJoelFischer/status/2031129920936481267" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">zerohedge</span>
+                        <span class="author-handle"><a href="https://x.com/zerohedge" target="_blank">@zerohedge</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 04:03 PM</span>
+                </div>
+                <div class="tweet-text">*TRUMP: IF IRAN HOLDS OIL SUPPLY, THEY&#39;LL GET HIT HARDER
+
+*TRUMP: OIL SUPPLIES WILL BE MORE SECURE IN THE LONG RUN</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 533 · 🔁 50 · 💬 14</div>
+                    <div class="tweet-link"><a href="https://x.com/zerohedge/status/2031128685063889392" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Bitcoin Magazine</span>
+                        <span class="author-handle"><a href="https://x.com/BitcoinMagazine" target="_blank">@BitcoinMagazine</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 03:13 PM</span>
+                </div>
+                <div class="tweet-text">NEW: Michael Saylor&#39;s Strategy files an amendment that would allow them to sell more shares in premarket and after hours trading to buy more bitcoin </div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC_4xEFaMAAL7O_?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 1,500 · 🔁 171 · 💬 75</div>
+                    <div class="tweet-link"><a href="https://x.com/BitcoinMagazine/status/2031116144224907434" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 mert reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Unit</span>
+                        <span class="author-handle"><a href="https://x.com/unitxyz" target="_blank">@unitxyz</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 02:49 PM</span>
+                </div>
+                <div class="tweet-text">Spot ZCASH deposits, withdrawals and trading are now officially live on Hyperliquid. Only unshielded ZEC deposits and withdrawals are supported at this time.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC-Ii67XoAA8QvJ?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 386 · 🔁 54 · 💬 27</div>
+                    <div class="tweet-link"><a href="https://x.com/unitxyz/status/2031110163533541801" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">zerohedge</span>
+                        <span class="author-handle"><a href="https://x.com/zerohedge" target="_blank">@zerohedge</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 02:25 PM</span>
+                </div>
+                <div class="tweet-text">Oil down 30% since this last night</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC_uZQIaMAMfJIa?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 5,500 · 🔁 740 · 💬 326</div>
+                    <div class="tweet-link"><a href="https://x.com/zerohedge/status/2031104078084763801" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-israel">
+            <div class="category-header">
+                <h2>Israel</h2>
+                <span class="count">31 tweets</span>
+            </div>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">David Keyes</span>
+                        <span class="author-handle"><a href="https://x.com/DavidMKeyes" target="_blank">@DavidMKeyes</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 03:16 PM</span>
+                </div>
+                <div class="tweet-text"> Holy shit. Gen. Assa S. Sinated, the most feared IRGC commander in Iran, has been assassinated. Absolute game changer.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC_51geXAAAZ1jB?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 6,300 · 🔁 1,400 · 💬 195</div>
+                    <div class="tweet-link"><a href="https://x.com/DavidMKeyes/status/2031116887178744172" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Eyal Yakoby</span>
+                        <span class="author-handle"><a href="https://x.com/EYakoby" target="_blank">@EYakoby</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 12:13 PM</span>
+                </div>
+                <div class="tweet-text">BREAKING: In the official &quot;allegiance ceremony to Mojtaba Khamenei&quot;, they could bring only a cardboard cutout of him.
+
+He is reportedly unconscious after an assassination attempt.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/ext_tw_video_thumb/2031019836810092544/pu/img/a47c2he-Oj9sXEJG.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 7,000 · 🔁 1,400 · 💬 400</div>
+                    <div class="tweet-link"><a href="https://x.com/EYakoby/status/2031070970031546858" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Mario Nawfal</span>
+                        <span class="author-handle"><a href="https://x.com/MarioNawfal" target="_blank">@MarioNawfal</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 11:26 AM</span>
+                </div>
+                <div class="tweet-text">Syria&#39;s President just backed Lebanon&#39;s President in disarming Hezbollah
+
+The Middle East is changing forever</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 6,700 · 🔁 672 · 💬 159</div>
+                    <div class="tweet-link"><a href="https://x.com/MarioNawfal/status/2031059079444181121" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">𝐍𝐢𝐨𝐡 𝐁𝐞𝐫𝐠  ✡︎</span>
+                        <span class="author-handle"><a href="https://x.com/NiohBerg" target="_blank">@NiohBerg</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 10:52 AM</span>
+                </div>
+                <div class="tweet-text"> Per Israeli C12:
+
+Mojtaba Khamenei was severely injured, one of his legs has been amputated, and he may not even be consciously aware that he is the SL.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC-9tcobcAAC_PN?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 12,000 · 🔁 2,700 · 💬 700</div>
+                    <div class="tweet-link"><a href="https://x.com/NiohBerg/status/2031050550998094111" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Baba Banaras™</span>
+                        <span class="author-handle"><a href="https://x.com/RealBababanaras" target="_blank">@RealBababanaras</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 09:53 AM</span>
+                </div>
+                <div class="tweet-text">BREAKING : All Hezbollah leadership including current Chief Naim Qassem has been eliminated after announcing war against Israel in support of Iran. The Israeli Airforce bombed multiple locations in Beirut, Lebanon with pin point accuracy.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/ext_tw_video_thumb/2031035620978761728/pu/img/84rSuElFbaiCyCcA.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 10,000 · 🔁 1,700 · 💬 103</div>
+                    <div class="tweet-link"><a href="https://x.com/RealBababanaras/status/2031035657683083430" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-other">
+            <div class="category-header">
+                <h2>📌 Other</h2>
+                <span class="count">41 tweets</span>
+            </div>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Nick Sortor</span>
+                        <span class="author-handle"><a href="https://x.com/nicksortor" target="_blank">@nicksortor</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 02:08 PM</span>
+                </div>
+                <div class="tweet-text"> TERRIFYING: The US has reportedly intercepted encrypted conversations from the Iranian government meant to trigger &quot;SLEEPER CELLS&quot; across the west, including in the US, per ABC
+
+Thanks to the Democrats, we have NO CLUE how many of these sleeper cells are in the US, and Schumer</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2031099663781068800/img/93Ol55DXMIIqadxg.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 23,000 · 🔁 8,500 · 💬 1,500</div>
+                    <div class="tweet-link"><a href="https://x.com/nicksortor/status/2031099740012605529" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">The Babylon Bee</span>
+                        <span class="author-handle"><a href="https://x.com/TheBabylonBee" target="_blank">@TheBabylonBee</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 01:15 PM</span>
+                </div>
+                <div class="tweet-text">Mamdani Clarifies That His Wife Only Celebrates Terrorism In Her Capacity As A Private Citizen 
+https://
+buff.ly/FBGKO2a</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HC_eUQKWgAA0XWG?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 16,000 · 🔁 3,000 · 💬 216</div>
+                    <div class="tweet-link"><a href="https://x.com/TheBabylonBee/status/2031086398808236120" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">The White House</span>
+                        <span class="author-handle"><a href="https://x.com/WhiteHouse" target="_blank">@WhiteHouse</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 09:37 AM</span>
+                </div>
+                <div class="tweet-text">This regime will soon learn that no one should challenge the STRENGTH and MIGHT of the United States Armed Forces.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2031023315486216192/img/PdSjodej3j56jKi8.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 44,000 · 🔁 11,000 · 💬 8,200</div>
+                    <div class="tweet-link"><a href="https://x.com/WhiteHouse/status/2031031695659462864" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Matt Walsh</span>
+                        <span class="author-handle"><a href="https://x.com/MattWalshBlog" target="_blank">@MattWalshBlog</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 09:06 AM</span>
+                </div>
+                <div class="tweet-text">So just to recap: a prison guard who lied to the authorities about checking on Epstein also coincidentally made a series of deposits in the weeks leading up to his death that were so suspicious that the bank independently reported them to the police. That same prison guard was</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 93,000 · 🔁 17,000 · 💬 2,000</div>
+                    <div class="tweet-link"><a href="https://x.com/MattWalshBlog/status/2031023821063356453" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Geiger Capital</span>
+                        <span class="author-handle"><a href="https://x.com/Geiger_Capital" target="_blank">@Geiger_Capital</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 08:21 AM</span>
+                </div>
+                <div class="tweet-text">It’s absolutely perfect…
+
+A liberal man in NYC yelling about how everyone is welcome, as a Muslim man yells &quot;Allahu Akbar!&quot; and uses him as a literal springboard to throw a homemade bomb.
+
+The West’s suicidal empathy on video.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2030738461481672705/img/H3THPK4tbtBSfs6T.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 53,000 · 🔁 11,000 · 💬 1,000</div>
+                    <div class="tweet-link"><a href="https://x.com/Geiger_Capital/status/2031012541019664835" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <footer>
+            <p class="stats-line">120 tweets · Crypto 11% · AI 17% · Tech 2% · Stocks & Macro 11% · Israel 26% · OpenClaw 0% · Other 34%</p>
+            <p>Generated by <a href="https://betoneh.github.io/signal-monitor/">Signal Monitor</a> x <a href="https://x.com/beto_neh">@beto_neh</a> · 2026-03-09T17:44</p>
+        </footer>
+    </div>
+    <script>
+        if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+            let sy=0,p=false,d=document,b=d.body;
+            const el=d.createElement('div');
+            el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#71767b;font-size:14px;z-index:9999;transition:top 0.2s;background:#0f0f0f;';
+            el.textContent='↓ Pull to refresh';
+            b.prepend(el);
+            d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+            d.addEventListener('touchmove',e=>{
+                if(!p)return;
+                const dy=e.touches[0].clientY-sy;
+                if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+                if(dy>5)e.preventDefault();
+                const t=Math.min(dy*0.4,50);
+                el.style.top=(t-50)+'px';
+                el.textContent=dy>80?'↑ Release':'↓ Pull to refresh';
+            },{passive:false});
+            d.addEventListener('touchend',e=>{
+                if(!p){return;}p=false;
+                const dy=e.changedTouches[0].clientY-sy;
+                el.style.top='-50px';
+                if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+            });
+        }
+    </script>
+    </script>
+</body>
+</html>
