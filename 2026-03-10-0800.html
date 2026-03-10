@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <title>Signal Monitor - 2026-03-10-0800</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --text-primary: #e7e9ea;
+            --text-secondary: #71767b;
+            --accent: #1d9bf0;
+            --accent-hover: #1a8cd8;
+            --border: #2f3336;
+            --crypto: #f7931a;
+            --ai: #10a37f;
+            --tech: #8b5cf6;
+            --stocks-macro: #ef4444;
+            --openclaw: #FF4500;
+            --israel: #0038b8;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        .header-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .stats-line {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin-top: 12px;
+            letter-spacing: 0.02em;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .editorial-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .editorial-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 15px;
+        }
+        
+        .category-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .category-header .count {
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .category-crypto .category-header {
+            border-color: var(--crypto);
+        }
+        
+        .category-ai .category-header {
+            border-color: var(--ai);
+        }
+        
+        .category-tech .category-header {
+            border-color: var(--tech);
+        }
+        
+        .category-stocks_macro .category-header {
+            border-color: var(--stocks-macro);
+        }
+        .category-israel .category-header {
+            border-color: var(--israel);
+        }
+        
+        .category-openclaw .category-header {
+            border-color: var(--openclaw);
+        }
+        
+        .tweet {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        @media (hover:hover) { .tweet:hover {
+            border-color: var(--accent);
+        } }
+        
+        .tweet.priority {
+            border-left: 3px solid var(--accent);
+        }
+        
+        .tweet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .tweet-author {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .author-handle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .author-handle a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .author-handle a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-time {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .tweet-text {
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .editorial-card a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .editorial-card a:hover {
+            text-decoration: underline;
+        }
+        .tweet-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-media {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        
+        .tweet-media img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .tweet-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .tweet-metrics {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tweet-link a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .retweet-badge {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .priority-badge {
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .stats {
+                gap: 10px;
+            }
+            
+            .stat {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://betoneh.github.io/signal-monitor/"><img src="icon-192.png" alt="Signal Monitor" class="header-logo"></a>
+            <h1>Signal Monitor</h1>
+            <p class="subtitle">10/03/2026 - 08:00</p>
+        </header>
+
+        <div class="editorial-cards">
+            <div class="editorial-card"><strong>Crypto</strong> — BTC <a href="https://x.com/coingecko/status/2031290219467518380" target="_blank">reclaimed $71K</a> as Coinbase premium <a href="https://x.com/velo_xyz/status/2031258829099512189" target="_blank">turned green</a> after 13 consecutive red weeks — a potential sentiment inflection. Vitalik framed <a href="https://x.com/ETH_Daily/status/2031199775933202902" target="_blank">low-risk DeFi as Ethereum's Google-ads equivalent</a>: the core revenue engine that subsidizes everything else. Infrastructure moves continue: Babylon integrated <a href="https://x.com/babylonlabs_io/status/2031356103221543268" target="_blank">Ledger signing</a> for trustless Bitcoin vaults (8M hardware wallet users), Euler is building <a href="https://x.com/eulerfinance/status/2031288055139651986" target="_blank">vault-isolated RWA lending</a>, and near-instant <a href="https://x.com/tomkysar/status/2031244243860336718" target="_blank">1:1 stablecoin bridging</a> shipped quietly.</div>
+            <div class="editorial-card"><strong>AI</strong> — Yann LeCun's <a href="https://x.com/sharbel/status/2031315982057112052" target="_blank">AMI Labs raised $1.03B</a> at $3.5B valuation — Europe's largest seed round ever — to build world models that learn from sensor data instead of text. His thesis: LLMs are <a href="https://x.com/dgt10011/status/2031365760963019142" target="_blank">fundamentally limited</a> because real intelligence requires understanding causality, not predicting tokens. Multiple commentators noted this is the first serious, well-funded <a href="https://x.com/cryptopunk7213/status/2031342590600073466" target="_blank">alternative paradigm</a> to the transformer consensus. Meanwhile, the agent economy debate intensified: Visa and Mastercard are <a href="https://x.com/aakashgupta/status/2031234270317129746" target="_blank">already running live agent payment pilots</a> using tokenized credentials, challenging the crypto-native narrative that agents need blockchain rails. AWS now <a href="https://x.com/milan_milanovic/status/2031304937620033639" target="_blank">requires senior sign-off</a> on AI-assisted code from junior/mid engineers — a sign that guardrails are tightening even as adoption accelerates. NVIDIA announced <a href="https://x.com/unusual_whales/status/2031189317482328088" target="_blank">NemoClaw</a>, an open-source enterprise agent platform, and Tencent is <a href="https://x.com/zerohedge/status/2031354937968308351" target="_blank">building an AI agent for WeChat</a>.</div>
+            <div class="editorial-card"><strong>Tech</strong> — Elon announced <a href="https://x.com/zerohedge/status/2031363963993166305" target="_blank">X Money early public access</a> launching next month — potentially the biggest fintech launch of the year given X's user base. The Figma MCP server went <a href="https://x.com/zoink/status/2031255670771822710" target="_blank">bidirectional</a>, letting coding agents pull designs from Figma and push updates back. Perplexity Computer is positioning as a <a href="https://x.com/GabbbarSingh/status/2031222631417131120" target="_blank">marketing department replacement</a> at $200/month, claiming 94x ROI over traditional MarTech stacks. Chinese AI companies are shipping their own agent platforms at speed — Zhipu's AutoClaw launch <a href="https://x.com/steipete/status/2031241495735341373" target="_blank">popped the stock 13%</a>.</div>
+            <div class="editorial-card"><strong>Stocks & Macro</strong> — Bill Ackman filed to take <a href="https://x.com/BillAckman/status/2031349206363914308" target="_blank">Pershing Square public</a> via a combined IPO with a new closed-end fund — investors in PSUS get free PSI shares. The DOJ is <a href="https://x.com/rstormsf/status/2031204201418883256" target="_blank">seeking to retry Roman Storm</a> on money laundering and sanctions charges despite Treasury lifting Tornado Cash sanctions and the AG memo declaring DOJ "is not a digital assets regulator" — a stark contradiction that drew widespread backlash. BioNTech ADRs <a href="https://x.com/zerohedge/status/2031364019676684623" target="_blank">sank 19%</a>, the worst single-day drop since April 2025.</div>
+            <div class="editorial-card"><strong>Israel</strong> — No significant Israel signals in this cycle.</div>
+        </div>
+
+        <section class="category category-crypto">
+            <div class="category-header">
+                <h2>Crypto</h2>
+                <span class="count">14 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Babylon</span>
+                        <span class="author-handle"><a href="https://x.com/babylonlabs_io" target="_blank">@babylonlabs_io</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 13:06:50 +0000 2026</span>
+                </div>
+                <div class="tweet-text">What happens when trustless Bitcoin vaults meet the world’s most widely used self-custody hardware ecosystem?
+
+Babylon and <a href="https://x.com/Ledger" target="_blank" rel="noopener">@Ledger</a> integration brings native Ledger signer support to Babylon Trustless Bitcoin Vaults.
+
+With Ledger Clear Signing, 8 million users will be able to interact with TBV.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2031355936414081025/img/PTtlcGYBB3Fsm43V.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/babylonlabs_io/status/2031356103221543268" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">CoinGecko</span>
+                        <span class="author-handle"><a href="https://x.com/coingecko" target="_blank">@coingecko</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 08:45:02 +0000 2026</span>
+                </div>
+                <div class="tweet-text">NOW: $BTC reclaims $71,000.
+
+Will we see $72K soon? <a href="https://t.co/sAiGJ33vsI" target="_blank" rel="noopener">https://t.co/sAiGJ33vsI</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HDCXsMRWoAAnOir.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/coingecko/status/2031290219467518380" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-ai">
+            <div class="category-header">
+                <h2>AI</h2>
+                <span class="count">35 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">HackerNoon | Learn Any Technology</span>
+                        <span class="author-handle"><a href="https://x.com/hackernoon" target="_blank">@hackernoon</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 12:55:22 +0000 2026</span>
+                </div>
+                <div class="tweet-text">AI medical scribes must do more than transcribe conversations.
+
+They need to capture medical terminology, identify speakers, protect patient data, and generate structured clinical notes.
+
+This guide shows how to build one👇 <a href="https://t.co/eCNWp74Hh0" target="_blank" rel="noopener">https://t.co/eCNWp74Hh0</a></div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/hackernoon/status/2031353217859060072" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">CZ 🔶 BNB</span>
+                        <span class="author-handle"><a href="https://x.com/cz_binance" target="_blank">@cz_binance</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 10:17:04 +0000 2026</span>
+                </div>
+                <div class="tweet-text">Tried many AI models with OpenClaw, I found Kimi AI to be the most token efficient, good at coding, also the easiest to set up.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/cz_binance/status/2031313379235606989" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-tech">
+            <div class="category-header">
+                <h2>Tech</h2>
+                <span class="count">8 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">zerohedge</span>
+                        <span class="author-handle"><a href="https://x.com/zerohedge" target="_blank">@zerohedge</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 13:38:04 +0000 2026</span>
+                </div>
+                <div class="tweet-text">RT <a href="https://x.com/elonmusk" target="_blank" rel="noopener">@elonmusk</a>: 𝕏 Money early public access will launch next month</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/zerohedge/status/2031363963993166305" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Aakash Gupta</span>
+                        <span class="author-handle"><a href="https://x.com/aakashgupta" target="_blank">@aakashgupta</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 05:02:43 +0000 2026</span>
+                </div>
+                <div class="tweet-text">Armstrong is telling you AI agents need crypto because they can’t use banks, and nobody’s noticing that Visa, Mastercard, Google, Stripe, and PayPal already built the answer.
+
+Visa completed hundreds of agent-initiated transactions in live pilots last year. Mastercard launched Agent Pay with tokenized credentials across all U.S. issuers. Google shipped an entire Agent Payments Protocol. Santander and Mastercard ran Europe’s first regulated AI agent payment two weeks ago.
+
+The “agents can’t open bank accounts” framing sounds clean, but it skips what’s actually happening. Visa’s Trusted Agent Protocol uses cryptographic signatures to authenticate AI agents the same way it authenticates human cardholders. The agent gets a token linked to your account. No bank account needed for the agent. No KYC for the bot. The human already passed that gate.
+
+This tells you everything about how the payments industry views this race. Coinbase’s x402 protocol has processed 50 million transactions since February, which sounds like scale until you realize Visa processes that volume roughly every 90 minutes. Visa is working with 100+ partners across six continents. Mastercard launched an entire Agent Suite in January with 4,000 advisors. These companies process 3.4 trillion transactions annually and they’re retooling all of it for agents.
+
+The real constraint for AI agent payments is liability. When an agent books the wrong flight or buys the wrong size, who eats the cost? Visa’s Ramachandran said it directly: agents are now a fifth party in the dispute chain. Crypto has no dispute chain. No chargebacks. No consumer protection. For a billion agents making mistakes at machine speed, that’s a feature for Coinbase and a problem for the person whose agent just bought 400 economy seats to Mumbai.
+
+Coinbase wins the long tail. Agent-to-agent micropayments, DeFi, on-chain operations where no merchant exists. That’s a real market. But “agents can’t use banks” is a 2024 take running on a 2026 timeline where Visa is telling merchants to prepare for AI agent checkout by holiday season.
+
+The incumbents aren’t sleeping through this one. They’re spending more, moving faster, and they already have the merchants. Crypto becomes a rail for agents. Visa and Mastercard are betting their entire product roadmap it won’t be the primary one.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/aakashgupta/status/2031234270317129746" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-stocks_macro">
+            <div class="category-header">
+                <h2>Stocks & Macro</h2>
+                <span class="count">9 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Bill Ackman</span>
+                        <span class="author-handle"><a href="https://x.com/BillAckman" target="_blank">@BillAckman</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 12:39:26 +0000 2026</span>
+                </div>
+                <div class="tweet-text">Today, Pershing Square Inc. (PSI), an alternative asset management company, filed to go public along with Pershing Square USA, Ltd. (PSUS) a new closed ended investment company managed by Pershing Square. 
+ 
+In the combined offering, investors in the IPO of PSUS will receive shares in PSI for no additional consideration. For example, if an investor buys 100 shares of PSUS in the IPO, they will receive 20 shares of PSI at no additional cost. 
+ 
+I explain the transaction in detail in a letter that can be found here:
+ 
+<a href="https://t.co/ie1jgbFYH6" target="_blank" rel="noopener">https://t.co/ie1jgbFYH6</a> [<a href="https://t.co/8xfglANBvw]" target="_blank" rel="noopener">https://t.co/8xfglANBvw]</a>
+ 
+The prospectus for PSI can be found here:
+ 
+<a href="https://t.co/mRFvjkhPy2" target="_blank" rel="noopener">https://t.co/mRFvjkhPy2</a> [<a href="https://t.co/8xfglANBvw]" target="_blank" rel="noopener">https://t.co/8xfglANBvw]</a>
+ 
+And the prospectus for PSUS can be found here:
+ 
+<a href="https://t.co/ie1jgbFYH6" target="_blank" rel="noopener">https://t.co/ie1jgbFYH6</a> [<a href="https://t.co/8xfglANBvw]" target="_blank" rel="noopener">https://t.co/8xfglANBvw]</a>
+
+The PSI and PSUS Registration Statements have not yet become effective.  The securities described therein may not be sold, nor may offers to buy be accepted, prior to the time the Registration Statements become effective.  Before you invest in the combined offering, you should read the Registration Statements for more complete information about the PSI, PSUS, and the combined offering.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/BillAckman/status/2031349206363914308" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Merlin Egalite 🦋</span>
+                        <span class="author-handle"><a href="https://x.com/MerlinEgalite" target="_blank">@MerlinEgalite</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 08:53:53 +0000 2026</span>
+                </div>
+                <div class="tweet-text">woke up bullish <a href="https://x.com/hashtag/FutureOfFrance" target="_blank" rel="noopener">#FutureOfFrance</a> and you?</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/MerlinEgalite/status/2031292444570988618" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-other">
+            <div class="category-header">
+                <h2>📌 Other</h2>
+                <span class="count">29 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Aave</span>
+                        <span class="author-handle"><a href="https://x.com/aave" target="_blank">@aave</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 13:58:54 +0000 2026</span>
+                </div>
+                <div class="tweet-text">RT <a href="https://x.com/StaniKulechov" target="_blank" rel="noopener">@StaniKulechov</a>: <a href="https://t.co/V34mcJ0iIn" target="_blank" rel="noopener">https://t.co/V34mcJ0iIn</a></div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/aave/status/2031369204604031298" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Elon Musk</span>
+                        <span class="author-handle"><a href="https://x.com/elonmusk" target="_blank">@elonmusk</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 12:53:57 +0000 2026</span>
+                </div>
+                <div class="tweet-text">Proceed with caution</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/elonmusk/status/2031352859846148366" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <footer>
+            <p class="stats-line">98 tweets · Crypto 14% · AI 36% · Tech 8% · Stocks & Macro 9% · Israel 0% · OpenClaw 3% · Other 30%</p>
+            <p>Generated by <a href="https://betoneh.github.io/signal-monitor/">Signal Monitor</a> x <a href="https://x.com/beto_neh">@beto_neh</a> · 2026-03-10T08:00</p>
+        </footer>
+    </div>
+    <script>
+        if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+            let sy=0,p=false,d=document,b=d.body;
+            const el=d.createElement('div');
+            el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#71767b;font-size:14px;z-index:9999;transition:top 0.2s;background:#0f0f0f;';
+            el.textContent='↓ Pull to refresh';
+            b.prepend(el);
+            d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+            d.addEventListener('touchmove',e=>{
+                if(!p)return;
+                const dy=e.touches[0].clientY-sy;
+                if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+                if(dy>5)e.preventDefault();
+                const t=Math.min(dy*0.4,50);
+                el.style.top=(t-50)+'px';
+                el.textContent=dy>80?'↑ Release':'↓ Pull to refresh';
+            },{passive:false});
+            d.addEventListener('touchend',e=>{
+                if(!p){return;}p=false;
+                const dy=e.changedTouches[0].clientY-sy;
+                el.style.top='-50px';
+                if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+            });
+        }
+    </script>
+    </script>
+</body>
+</html>
