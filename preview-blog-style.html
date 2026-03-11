@@ -33,12 +33,20 @@
     max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem;
   }
   header { padding: 2rem 1rem 1.5rem; }
+  .title-row {
+    display: flex; align-items: baseline; gap: 0.75rem;
+  }
   .site-title {
     display: inline-block;
     font-size: 1.5rem; font-weight: 700; color: #0ec4a9; text-decoration: none;
   }
   @media (min-width: 640px) { .site-title { font-size: 1.875rem; } }
   .site-title:hover { color: #0ec4a9; }
+  .feed-badge {
+    font-size: 0.7rem; color: #8b949e;
+    background: rgba(52, 63, 96, 0.75); padding: 2px 8px; border-radius: 3px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
   .header-meta {
     display: flex; align-items: center; gap: 0.75rem;
     margin-top: 0.5rem; margin-bottom: 1.5rem;
@@ -55,10 +63,7 @@
   .header-meta .reading-time {
     font-size: 0.875rem; color: rgba(234, 237, 243, 0.6);
   }
-  .header-source {
-    font-size: 0.75rem; color: #8b949e; margin-top: 0.25rem;
-    text-transform: uppercase; letter-spacing: 0.05em;
-  }
+
   .stats { font-size: 0.75rem; color: #8b949e; margin-top: 0.5rem; line-height: 1.6; }
 
   .hr { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
@@ -193,7 +198,10 @@
 <div class="progress-bar" id="progress"></div>
 
 <header>
-  <a href="https://betoneh.github.io/signal-monitor/" class="site-title">Signal Monitor</a>
+  <div class="title-row">
+    <a href="https://betoneh.github.io/signal-monitor/" class="site-title">Signal Monitor</a>
+    <span class="feed-badge">Following</span>
+  </div>
   <div class="header-meta">
     <span class="date-wrap">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/><path d="M7 14h.013"/><path d="M10.01 14h.005"/><path d="M13.01 14h.005"/><path d="M16.015 14h.005"/><path d="M13.015 17h.005"/><path d="M7.01 17h.005"/><path d="M10.01 17h.005"/></svg>
@@ -202,7 +210,6 @@
     <span class="sep">&bull;</span>
     <span class="reading-time" id="reading-time"></span>
   </div>
-  <div class="header-source">Following</div>
 </header>
 
 <main>
