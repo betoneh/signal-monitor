@@ -108,6 +108,15 @@
     <p class="subtitle">Changes save directly to the repo · next cron picks them up</p>
 
     <div class="section">
+        <div class="section-title">Model</div>
+        <div class="row"><span class="row-label">Editorial model</span>
+            <select class="row-value" id="model" style="width:220px;">
+                <option value="claude-opus-4-6">Claude Opus 4</option>
+                <option value="claude-sonnet-4-6">Claude Sonnet 4</option>
+            </select></div>
+    </div>
+
+    <div class="section">
         <div class="section-title">8am Run — Daily Digest</div>
         <div class="row"><span class="row-label">Feed</span>
             <select class="row-value" id="am-feed"><option value="Following" selected>Following</option><option value="For You">For You</option></select></div>
@@ -267,6 +276,7 @@ function buildConfig() {
     return {
         version: 1,
         updated_at: new Date().toISOString(),
+        model: gv('model'),
         runs: {
             am: { feed: gv('am-feed'), hours: gn('am-hours'), max: gn('am-max') },
             pm: { feed: gv('pm-feed'), hours: gn('pm-hours'), max: gn('pm-max') }
@@ -283,6 +293,9 @@ function gv(id) { return document.getElementById(id)?.value || ''; }
 function gn(id) { return parseInt(document.getElementById(id)?.value) || 0; }
 
 function applyConfig(cfg) {
+    if (cfg.model) {
+        document.getElementById('model').value = cfg.model;
+    }
     if (cfg.runs?.am) {
         document.getElementById('am-feed').value = cfg.runs.am.feed || 'Following';
         document.getElementById('am-hours').value = cfg.runs.am.hours || 24;
