@@ -98,6 +98,19 @@
 
         .save-status { font-size: 0.8rem; color: #71767b; margin-top: 8px; }
         .dirty { color: #f7931a !important; }
+
+        .toggle { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .toggle input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background: #333; border-radius: 24px; transition: 0.2s;
+        }
+        .toggle-slider:before {
+            content: ''; position: absolute; height: 18px; width: 18px; left: 3px; bottom: 3px;
+            background: #666; border-radius: 50%; transition: 0.2s;
+        }
+        .toggle input:checked + .toggle-slider { background: #1d9bf0; }
+        .toggle input:checked + .toggle-slider:before { transform: translateX(20px); background: white; }
     </style>
 </head>
 <body>
@@ -119,6 +132,21 @@
             <select class="row-value" id="model" style="width:220px;">
                 <option value="claude-opus-4-6">Claude Opus 4</option>
                 <option value="claude-sonnet-4-6">Claude Sonnet 4</option>
+            </select></div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Audio</div>
+        <div class="row"><span class="row-label">Generate TTS audio</span>
+            <label class="toggle"><input type="checkbox" id="audio-enabled" checked><span class="toggle-slider"></span></label></div>
+        <div class="row"><span class="row-label">Voice</span>
+            <select class="row-value" id="audio-voice" style="width:220px;">
+                <option value="en-US-GuyNeural">Guy (male)</option>
+                <option value="en-US-ChristopherNeural">Christopher (male)</option>
+                <option value="en-US-EricNeural">Eric (male)</option>
+                <option value="en-US-AndrewNeural">Andrew (male)</option>
+                <option value="en-US-JennyNeural">Jenny (female)</option>
+                <option value="en-US-AriaNeural">Aria (female)</option>
             </select></div>
     </div>
 
@@ -297,6 +325,10 @@ function buildConfig() {
         version: 1,
         updated_at: new Date().toISOString(),
         model: gv('model'),
+        audio: {
+            enabled: document.getElementById('audio-enabled').checked,
+            voice: gv('audio-voice')
+        },
         runs: {
             am: { feed: gv('am-feed'), hours: gn('am-hours'), max: gn('am-max') },
             pm: { feed: gv('pm-feed'), hours: gn('pm-hours'), max: gn('pm-max') }
@@ -315,6 +347,10 @@ function gn(id) { return parseInt(document.getElementById(id)?.value) || 0; }
 function applyConfig(cfg) {
     if (cfg.model) {
         document.getElementById('model').value = cfg.model;
+    }
+    if (cfg.audio) {
+        document.getElementById('audio-enabled').checked = cfg.audio.enabled !== false;
+        if (cfg.audio.voice) document.getElementById('audio-voice').value = cfg.audio.voice;
     }
     if (cfg.runs?.am) {
         document.getElementById('am-feed').value = cfg.runs.am.feed || 'Following';
