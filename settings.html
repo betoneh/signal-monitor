@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f0f0f">
+    <title>Signal Monitor — Settings</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0f0f0f; color: #e7e9ea; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+        /* Password gate */
+        #gate { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        #gate-box { text-align: center; }
+        #gate-box input {
+            background: #1a1a1a; border: 1px solid #333; color: #e7e9ea;
+            padding: 12px 20px; border-radius: 8px; font-size: 1rem; width: 240px;
+            text-align: center; outline: none;
+        }
+        #gate-box input:focus { border-color: #1d9bf0; }
+        #gate-box input::placeholder { color: #555; }
+        .gate-error { color: #f72585; font-size: 0.85rem; margin-top: 8px; display: none; }
+
+        /* Main app */
+        #app { display: none; max-width: 680px; margin: 0 auto; padding: 20px 16px 80px; }
+
+        h1 { font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+        .subtitle { color: #71767b; font-size: 0.85rem; margin-bottom: 30px; }
+
+        .section { margin-bottom: 28px; }
+        .section-title {
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em;
+            color: #71767b; margin-bottom: 12px; padding-bottom: 6px;
+            border-bottom: 1px solid #222;
+        }
+
+        .row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 0; border-bottom: 1px solid #1a1a1a;
+        }
+        .row-label { font-size: 0.9rem; color: #ccc; }
+        .row-value {
+            background: #1a1a1a; border: 1px solid #333; color: #e7e9ea;
+            padding: 6px 12px; border-radius: 6px; font-size: 0.85rem;
+            width: 120px; text-align: center; outline: none;
+        }
+        .row-value:focus { border-color: #1d9bf0; }
+        select.row-value { cursor: pointer; appearance: none; -webkit-appearance: none; }
+
+        /* Keywords */
+        .kw-category { margin-bottom: 20px; }
+        .kw-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 8px;
+        }
+        .kw-name { font-size: 0.95rem; font-weight: 600; }
+        .kw-count { font-size: 0.75rem; color: #71767b; }
+        .kw-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .kw-tag {
+            background: #1a1a1a; border: 1px solid #333; padding: 4px 10px;
+            border-radius: 14px; font-size: 0.8rem; color: #ccc;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .kw-tag .remove {
+            cursor: pointer; color: #666; font-size: 0.9rem; line-height: 1;
+        }
+        .kw-tag .remove:hover { color: #f72585; }
+        .kw-add {
+            background: none; border: 1px dashed #333; padding: 4px 10px;
+            border-radius: 14px; font-size: 0.8rem; color: #555; cursor: pointer;
+        }
+        .kw-add:hover { border-color: #1d9bf0; color: #1d9bf0; }
+
+        /* Add keyword input */
+        .kw-input-wrap { display: none; margin-top: 8px; }
+        .kw-input-wrap input {
+            background: #1a1a1a; border: 1px solid #1d9bf0; color: #e7e9ea;
+            padding: 6px 12px; border-radius: 6px; font-size: 0.85rem;
+            width: 200px; outline: none;
+        }
+
+        /* Category colors */
+        .cat-crypto .kw-name { color: #f7931a; }
+        .cat-ai .kw-name { color: #1d9bf0; }
+        .cat-tech .kw-name { color: #00c853; }
+        .cat-stocks_macro .kw-name { color: #ff6b35; }
+        .cat-israel .kw-name { color: #0038b8; }
+        .cat-openclaw .kw-name { color: #e74c3c; }
+
+        /* Output */
+        .output-area {
+            background: #1a1a1a; border: 1px solid #333; border-radius: 8px;
+            padding: 16px; font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.78rem; color: #aaa; white-space: pre-wrap;
+            max-height: 400px; overflow-y: auto; line-height: 1.5;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 24px; border-radius: 8px; font-size: 0.9rem;
+            font-weight: 600; cursor: pointer; border: none; transition: all 0.15s;
+        }
+        .btn-primary { background: #1d9bf0; color: white; }
+        .btn-primary:hover { background: #1a8cd8; }
+        .btn-secondary { background: #1a1a1a; color: #ccc; border: 1px solid #333; }
+        .btn-secondary:hover { background: #252525; }
+        .btn-row { display: flex; gap: 10px; margin-top: 20px; }
+
+        .toast {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: #1d9bf0; color: white; padding: 10px 24px; border-radius: 8px;
+            font-size: 0.85rem; display: none; z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Password Gate -->
+<div id="gate">
+    <div id="gate-box">
+        <input type="password" id="pw" placeholder="password" autofocus>
+        <div class="gate-error" id="gate-err">wrong password</div>
+    </div>
+</div>
+
+<!-- Main App -->
+<div id="app">
+    <h1>Signal Monitor Settings</h1>
+    <p class="subtitle">Edit config · copy YAML · send to Max</p>
+
+    <!-- Feed Settings -->
+    <div class="section">
+        <div class="section-title">8am Run — Daily Digest</div>
+        <div class="row">
+            <span class="row-label">Feed</span>
+            <select class="row-value" id="am-feed">
+                <option value="Following" selected>Following</option>
+                <option value="For You">For You</option>
+            </select>
+        </div>
+        <div class="row">
+            <span class="row-label">Time window</span>
+            <input class="row-value" type="number" id="am-hours" value="24" min="1" max="48"> 
+        </div>
+        <div class="row">
+            <span class="row-label">Max tweets</span>
+            <input class="row-value" type="number" id="am-max" value="180" min="10" max="500">
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">8pm Run — Discovery</div>
+        <div class="row">
+            <span class="row-label">Feed</span>
+            <select class="row-value" id="pm-feed">
+                <option value="Following">Following</option>
+                <option value="For You" selected>For You</option>
+            </select>
+        </div>
+        <div class="row">
+            <span class="row-label">Time window</span>
+            <input class="row-value" type="number" id="pm-hours" value="12" min="1" max="48">
+        </div>
+        <div class="row">
+            <span class="row-label">Max tweets</span>
+            <input class="row-value" type="number" id="pm-max" value="180" min="10" max="500">
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Israel Monitor</div>
+        <div class="row">
+            <span class="row-label">List URL</span>
+            <input class="row-value" type="text" id="israel-url" value="https://x.com/i/lists/2031379429113331847" style="width:100%;text-align:left;">
+        </div>
+        <div class="row">
+            <span class="row-label">Max tweets</span>
+            <input class="row-value" type="number" id="israel-max" value="50" min="10" max="200">
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Noise Analysis</div>
+        <div class="row">
+            <span class="row-label">Window (days)</span>
+            <input class="row-value" type="number" id="noise-days" value="7" min="1" max="30">
+        </div>
+        <div class="row">
+            <span class="row-label">Top accounts</span>
+            <input class="row-value" type="number" id="noise-top" value="5" min="1" max="20">
+        </div>
+        <div class="row">
+            <span class="row-label">Min tweets</span>
+            <input class="row-value" type="number" id="noise-min" value="5" min="1" max="50">
+        </div>
+    </div>
+
+    <!-- Keywords -->
+    <div class="section">
+        <div class="section-title">Category Keywords</div>
+        <div id="keywords-container"></div>
+    </div>
+
+    <!-- Output -->
+    <div class="section">
+        <div class="section-title">Generated Config</div>
+        <div class="output-area" id="yaml-output"></div>
+        <div class="btn-row">
+            <button class="btn btn-primary" onclick="copyYaml()">📋 Copy YAML</button>
+            <button class="btn btn-secondary" onclick="location.href='./'">← Back to reports</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+// Password: SHA-256 hash comparison
+const PW_HASH = '74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163';
+
+async function sha256(text) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+document.getElementById('pw').addEventListener('keydown', async (e) => {
+    if (e.key === 'Enter') {
+        const hash = await sha256(e.target.value);
+        if (hash === PW_HASH) {
+            document.getElementById('gate').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+            generateYaml();
+        } else {
+            document.getElementById('gate-err').style.display = 'block';
+            e.target.value = '';
+            setTimeout(() => document.getElementById('gate-err').style.display = 'none', 2000);
+        }
+    }
+});
+
+// Keywords data
+const categories = {
+    crypto: { name: "Crypto", keywords: ["bitcoin","btc","ethereum","eth","defi","nft","web3","blockchain","solana","stablecoin","airdrop","dex","cefi","binance","coinbase","memecoin","altcoin","hodl","whale","pump","dump"] },
+    ai: { name: "AI", keywords: ["ai","artificial intelligence","llm","gpt","claude","anthropic","openai","gemini","mistral","llama","chatgpt","copilot","machine learning","deep learning","neural","transformer","agent","clawdbot","mcp"] },
+    tech: { name: "Tech", keywords: ["startup","vc","founder","saas","api","developer","programming","code","software","hardware","apple","google","microsoft","meta","tesla","spacex","launch","product"] },
+    stocks_macro: { name: "Stocks & Macro", keywords: ["fed","interest rate","inflation","recession","gdp","economy","market","stock","bond","treasury","tariff","trade war","geopolitics","china","war","election","s&p","nasdaq","dow","earnings","bull","bear","rally","crash","equity","etf","index fund","portfolio","trading","options","futures","ipo","sec","wall street","nyse","dividend","yield"] },
+    israel: { name: "Israel", keywords: ["israel","israeli","netanyahu","idf","hamas","hezbollah","gaza","west bank","iran attack","iran war","tehran","mossad","antisemitism","antisemitic","jewish","zionism","zionist","middle east conflict","ceasefire","hostages","iron dome","abraham accords","saudi normalization","settlements","knesset","shin bet","houthis","red sea","golan","intifada","kibbutz","october 7","operation roaring lion","irgc","ayatollah","khamenei","pezeshkian","two state","palestinian","tel aviv","jerusalem"] },
+    openclaw: { name: "OpenClaw", keywords: ["openclaw","open claw","clawd","clawdbot","ai agent","ai assistant","personal agent","autonomous agent","agent framework","agent platform","agent runtime","mcp","model context protocol"] }
+};
+
+function renderKeywords() {
+    const container = document.getElementById('keywords-container');
+    container.innerHTML = '';
+    for (const [catId, cat] of Object.entries(categories)) {
+        const div = document.createElement('div');
+        div.className = `kw-category cat-${catId}`;
+        div.innerHTML = `
+            <div class="kw-header">
+                <span class="kw-name">${cat.name}</span>
+                <span class="kw-count">${cat.keywords.length} keywords</span>
+            </div>
+            <div class="kw-tags" id="tags-${catId}">
+                ${cat.keywords.map(kw => `<span class="kw-tag">${kw}<span class="remove" onclick="removeKw('${catId}','${kw.replace(/'/g,"\\'")}')">&times;</span></span>`).join('')}
+                <span class="kw-add" onclick="showAddInput('${catId}')">+ add</span>
+            </div>
+            <div class="kw-input-wrap" id="input-${catId}">
+                <input type="text" placeholder="new keyword" onkeydown="addKw(event,'${catId}')">
+            </div>
+        `;
+        container.appendChild(div);
+    }
+}
+
+function removeKw(catId, kw) {
+    categories[catId].keywords = categories[catId].keywords.filter(k => k !== kw);
+    renderKeywords();
+    generateYaml();
+}
+
+function showAddInput(catId) {
+    const wrap = document.getElementById(`input-${catId}`);
+    wrap.style.display = 'block';
+    wrap.querySelector('input').focus();
+}
+
+function addKw(e, catId) {
+    if (e.key === 'Enter' && e.target.value.trim()) {
+        const kw = e.target.value.trim().toLowerCase();
+        if (!categories[catId].keywords.includes(kw)) {
+            categories[catId].keywords.push(kw);
+        }
+        e.target.value = '';
+        document.getElementById(`input-${catId}`).style.display = 'none';
+        renderKeywords();
+        generateYaml();
+    }
+    if (e.key === 'Escape') {
+        e.target.value = '';
+        document.getElementById(`input-${catId}`).style.display = 'none';
+    }
+}
+
+function generateYaml() {
+    let yaml = '# X Monitor Configuration\n# Generated from Signal Monitor Settings\n\ncategories:\n';
+    for (const [catId, cat] of Object.entries(categories)) {
+        yaml += `  ${catId}:\n    name: "${cat.name}"\n    emoji: ""\n    keywords:\n`;
+        for (const kw of cat.keywords) {
+            yaml += `      - ${kw}\n`;
+        }
+        yaml += '\n';
+    }
+
+    yaml += `# Sources\nsources:\n`;
+    yaml += `  - type: timeline\n    max: ${document.getElementById('am-max')?.value || 180}\n    hours: ${document.getElementById('am-hours')?.value || 24}\n    fallback_chain: [bird, playwright, api]\n`;
+    yaml += `  - type: list\n    url: "${document.getElementById('israel-url')?.value || ''}"\n    max: ${document.getElementById('israel-max')?.value || 50}\n    category: israel\n`;
+
+    yaml += `\n# Scraping settings\nscraping:\n  scroll_count: 30\n  scroll_delay_ms: 2000\n`;
+    yaml += `\n# Output settings\noutput:\n  reports_dir: "reports"\n  data_dir: "data"\n  github_repo: "signal-monitor"\n  github_user: "maxumbra"\n`;
+
+    document.getElementById('yaml-output').textContent = yaml;
+}
+
+function copyYaml() {
+    const yaml = document.getElementById('yaml-output').textContent;
+    navigator.clipboard.writeText(yaml).then(() => {
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        setTimeout(() => toast.style.display = 'none', 2000);
+    });
+}
+
+// Listen to all input changes
+document.addEventListener('input', (e) => {
+    if (e.target.closest('#app')) generateYaml();
+});
+
+renderKeywords();
+</script>
+</body>
+</html>
