@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <title>Signal Monitor - 2026-03-10-2000</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --text-primary: #e7e9ea;
+            --text-secondary: #71767b;
+            --accent: #1d9bf0;
+            --accent-hover: #1a8cd8;
+            --border: #2f3336;
+            --crypto: #f7931a;
+            --ai: #10a37f;
+            --tech: #8b5cf6;
+            --stocks-macro: #ef4444;
+            --openclaw: #FF4500;
+            --israel: #0038b8;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        .header-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .stats-line {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin-top: 12px;
+            letter-spacing: 0.02em;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .editorial-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .editorial-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 15px;
+        }
+        
+        .category-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .category-header .count {
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .category-crypto .category-header {
+            border-color: var(--crypto);
+        }
+        
+        .category-ai .category-header {
+            border-color: var(--ai);
+        }
+        
+        .category-tech .category-header {
+            border-color: var(--tech);
+        }
+        
+        .category-stocks_macro .category-header {
+            border-color: var(--stocks-macro);
+        }
+        .category-israel .category-header {
+            border-color: var(--israel);
+        }
+        
+        .category-openclaw .category-header {
+            border-color: var(--openclaw);
+        }
+        
+        .tweet {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        @media (hover:hover) { .tweet:hover {
+            border-color: var(--accent);
+        } }
+        
+        .tweet.priority {
+            border-left: 3px solid var(--accent);
+        }
+        
+        .tweet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .tweet-author {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .author-handle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .author-handle a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .author-handle a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-time {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .tweet-text {
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .editorial-card a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .editorial-card a:hover {
+            text-decoration: underline;
+        }
+        .tweet-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .tweet-media {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        
+        .tweet-media img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .tweet-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .tweet-metrics {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tweet-link a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .tweet-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .retweet-badge {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .priority-badge {
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .stats {
+                gap: 10px;
+            }
+            
+            .stat {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://betoneh.github.io/signal-monitor/"><img src="icon-192.png" alt="Signal Monitor" class="header-logo"></a>
+            <h1>Signal Monitor</h1>
+            <p class="subtitle">10/03/2026 - 20:00</p>
+        </header>
+
+        <div class="editorial-cards">
+            <div class="editorial-card"><strong>Crypto</strong> — Stablecoins dominated today's crypto discourse. Big US banks including Goldman Sachs and JPMorgan are <a href="https://x.com/coinbureau/status/2031272593831927886" target="_blank">considering suing the OCC</a> over national trust charters granted to crypto firms like BitGo, Ripple, and Fidelity — a clear sign incumbents feel threatened. Meanwhile Wells Fargo filed a trademark for <a href="https://x.com/coinbureau/status/2031449263499260188" target="_blank">"WFUSD"</a>, signaling its own stablecoin ambitions. Palmer Luckey discussed his new bank Erebor, arguing all banks will be <a href="https://x.com/Etherealize_io/status/2031444979969647085" target="_blank">forced to adopt stablecoins</a> to stay competitive. On the DeFi side, Morpho's $10.5B in deposits increasingly looks like <a href="https://x.com/DeFi_Andree/status/2031389980556406826" target="_blank">on-chain money markets</a> rather than yield farming — the real bottleneck is now borrow demand, not capital supply. Stripe's <a href="https://x.com/Delphi_Digital/status/2031371445754851461" target="_blank">Tempo chain</a> launched for stablecoin settlement with deterministic finality. Tether is <a href="https://x.com/MikeIppolito_/status/2031459478663807082" target="_blank">lending twice as much</a> as the rest of the market combined. Jake Chervinsky warned banks aren't just after stablecoin yield — they're <a href="https://x.com/jchervinsky/status/2031403550127886666" target="_blank">coming for DeFi</a> next.</div>
+            <div class="editorial-card"><strong>AI</strong> — Karpathy followed up autoresearch with <a href="https://x.com/Yuchenj_UW/status/2031438602383798514" target="_blank">AgentHub</a>, an open-source agent-swarm collaboration platform — "GitHub is for humans, AgentHub is for agents." Meta <a href="https://x.com/Forbes/status/2031411033051394116" target="_blank">acquired Moltbook</a>, the AI agent social network, folding its co-founders into Meta's AI research division. The a16z Top 100 Gen AI Consumer Apps report revealed the US ranks just <a href="https://x.com/a16z/status/2031455488483930317" target="_blank">20th in per-capita AI adoption</a> — cultural distrust and a large non-tech workforce hold it back despite building the biggest products. NVIDIA is launching <a href="https://x.com/Kalshi/status/2031360864989676004" target="_blank">"Nemo"</a>, an open-source AI agent platform that runs on any hardware. Claude Code shipped a <a href="https://x.com/birdabo/status/2031527810330931580" target="_blank">/btw feature</a> for side conversations mid-task without breaking flow. OKX launched an <a href="https://x.com/okx/status/2031532053444141115" target="_blank">Agent Trade Kit</a> connecting AI agents directly to exchange trading. Allie Miller noted the tide is turning toward <a href="https://x.com/alliekmiller/status/2031377664020193504" target="_blank">agent-to-agent communication</a>. Autoresearch continues to impress — someone left it running on a Mac Mini for a weekend and it <a href="https://x.com/TrevinPeterson/status/2031499599534293361" target="_blank">ran 259 experiments autonomously</a>, achieving a 30% improvement.</div>
+            <div class="editorial-card"><strong>Tech</strong> — Eric Schmidt described a programmer who writes specs and eval functions, <a href="https://x.com/r0ck3t23/status/2031520893474639937" target="_blank">turns AI loose at 7pm</a>, and reviews what was invented by 4am — the barbell economy where mid-sized companies become structural liabilities. Jensen Huang published a <a href="https://x.com/rohanpaul_ai/status/2031534443958251745" target="_blank">5-layer AI stack framework</a> (energy → chips → infrastructure → models → applications), framing AI as essential infrastructure like electricity. Tobi Lutke endorsed <a href="https://x.com/tobi/status/2031536615529570583" target="_blank">autoresearch for optimizing software</a> — make a branch, add a benchmark, and let it rip. Tunguz observed that it's now <a href="https://x.com/tunguz/status/2031398636471337378" target="_blank">far easier for a small team to build</a> than for any big company team to get stakeholder approval.</div>
+            <div class="editorial-card"><strong>Stocks & Macro</strong> — Elon Musk announced <a href="https://x.com/WatcherGuru/status/2031367535082242278" target="_blank">X Money early public access</a> launching next month. Vanguard warned Americans are taking <a href="https://x.com/Cointelegraph/status/2031520595398017208" target="_blank">hardship withdrawals from retirement</a> at record pace. Northwestern Mutual found 80% of Gen Z feel financially behind, with 32% turning to <a href="https://x.com/DeItaone/status/2031352334832267628" target="_blank">crypto and prediction markets</a> as wealth-building tools. Laura Shin covered the implications if <a href="https://x.com/laurashin/status/2031400625850683677" target="_blank">CLARITY doesn't pass</a> — the SEC has already submitted interpretive guidance on how existing securities laws apply to crypto.</div>
+            <div class="editorial-card"><strong>Israel</strong> — No significant Israel signals in this cycle.</div>
+        </div>
+
+        <section class="category category-crypto">
+            <div class="category-header">
+                <h2>Crypto</h2>
+                <span class="count">29 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Cyprx Research Lab Official</span>
+                        <span class="author-handle"><a href="https://x.com/CyprxResearch" target="_blank">@CyprxResearch</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 13:00:00 +0000 2026</span>
+                </div>
+                <div class="tweet-text">Banking’s next transformation isn’t about better apps.
+
+It’s about the bank disappearing.
+
+We’ve moved through three phases:
+
+Branches: banking tied to location
+Mobile: banking moved to apps
+Invisible: banking triggered by context, AI, and automation
+
+The next bank won’t be something you log into.
+It will operate in the background of everyday life.
+
+What’s driving it:
+- Conversations replacing interfaces
+- Personalization at scale
+- Hybrid human–AI teams
+- Intelligent decision systems
+- AI-native banking architectures
+
+The real divide ahead:
+Banks rebuilt around AI vs. banks merely using AI.
+
+The winners won’t just add AI on top.
+They’ll rebuild the bank around intelligence.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HDC_FXiXkAAGt6e.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/CyprxResearch/status/2031354385121554736" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Alex Svanevik 🐧</span>
+                        <span class="author-handle"><a href="https://x.com/ASvanevik" target="_blank">@ASvanevik</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 10, 06:24 PM</span>
+                </div>
+                <div class="tweet-text">2020: defi 10,000% APY
+
+2026: openclaw +10,000% productivity</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/ASvanevik/status/2031526700216209462" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-ai">
+            <div class="category-header">
+                <h2>AI</h2>
+                <span class="count">69 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">austin</span>
+                        <span class="author-handle"><a href="https://x.com/austin_hurwitz" target="_blank">@austin_hurwitz</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 20:49:08 +0000 2026</span>
+                </div>
+                <div class="tweet-text">The One Trend in a16z&#39;s AI Top 100 List No One is Seeing</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/austin_hurwitz/status/2031472445555888493" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">matt rothenberg</span>
+                        <span class="author-handle"><a href="https://x.com/mattrothenberg" target="_blank">@mattrothenberg</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 14:55:56 +0000 2026</span>
+                </div>
+                <div class="tweet-text">just picked up this bad boy. can&#39;t wait to write some software with it <a href="https://t.co/s2e3xEsUlR" target="_blank" rel="noopener">https://t.co/s2e3xEsUlR</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HDDsgZtWQAAquiz.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/mattrothenberg/status/2031383560062370235" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-tech">
+            <div class="category-header">
+                <h2>Tech</h2>
+                <span class="count">16 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Brian Armstrong</span>
+                        <span class="author-handle"><a href="https://x.com/brian_armstrong" target="_blank">@brian_armstrong</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 10, 07:39 PM</span>
+                </div>
+                <div class="tweet-text">Thank you Mr. President for everything you’re doing to make the US the crypto capital of the world!
+
+Building the future of financial services is critical for America vs China and other foreign competitors.</div>
+                
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/brian_armstrong/status/2031545523706958155" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Dustin</span>
+                        <span class="author-handle"><a href="https://x.com/r0ck3t23" target="_blank">@r0ck3t23</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 10, 06:01 PM</span>
+                </div>
+                <div class="tweet-text">Former Google CEO Eric Schmidt just revealed what one programmer does from 7 PM to 4 AM.
+
+Wakes up. Eats breakfast. Reviews what got invented overnight.
+
+Schmidt: “It’s mind boggling.”
+
+Concept of 10x programmer has always existed. That multiplier just became infinite.
+
+No longer writing code. Directing autonomous systems that write it for them.
+
+Schmidt: “He said, I write the spec of what I want, and then I write a test function, an evaluation function and then I turn it on at 7:00 in the evening. When does it finish? Oh four in the morning. And then he gets up, has breakfast and then he sees what’s been invented.”
+
+Absolute deletion of biological bottleneck.
+
+Elite programmers who can architect, parallelize, and control these autonomous systems become infinitely more valuable.
+
+Not writing syntax. Directing the machine.
+
+Everyone else in execution loop is now mathematically replaceable.
+
+Schmidt: “It’s always been true that the very top programmers were worth ten times more than the ones right below. Those people will become more valuable, not less valuable because these systems need to be controlled by humans.”
+
+And here’s the real prediction. What happens to the shape of the entire economy.
+
+Schmidt: “You’re going to have a relatively small number of very large companies, and a very large number of very small companies, because you don’t need as many people.”
+
+Middle disappears. AI compresses the headcount. Math eliminates the need.
+
+This is Barbell Economy.
+
+Traditional mid-sized enterprise becomes structural liability overnight.
+
+Board dominated by massive hyperscalers providing planetary compute.
+
+And millions of hyper-lean, three-person startups using AI agents to generate billion-dollar outputs.
+
+Company relies on mass human headcount to justify valuation? You’re standing on collapsing middle of bridge.
+
+No longer predicting displacement of junior knowledge worker.
+
+Actively measuring it.
+
+Stanford research confirms 20 percent drop in hiring for early-career developers since late 2022.
+
+Not temporary hiring freeze.
+
+AI actively writing 70 to 90 percent of company’s product code? Unit economics of entire engineering department permanently inverted.
+
+Teams that historically required ten junior engineers now run with two senior architects and an AI agent.
+
+Entry-level tier automated out of existence.
+
+Schmidt has been warning about this for two years.
+
+Difference now? Numbers are catching up to prediction.
+
+Hiring falling at entry level. Headcount shrinking across white collar sectors.
+
+Organizations that aggressively adopt this ratio monopolize their sector.
+
+Ones that move too slowly don’t get second chance to adapt.
+
+And by the time the hiring data goes public, the window is already closed.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2031520778710130689/img/PEGBZlLzfydsAGbw.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/r0ck3t23/status/2031520893474639937" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-stocks_macro">
+            <div class="category-header">
+                <h2>Stocks & Macro</h2>
+                <span class="count">13 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Patrick OShaughnessy</span>
+                        <span class="author-handle"><a href="https://x.com/patrick_oshag" target="_blank">@patrick_oshag</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 12:00:03 +0000 2026</span>
+                </div>
+                <div class="tweet-text">My conversation with Shyam Sankar (<a href="https://x.com/ssankar" target="_blank" rel="noopener">@ssankar</a>).
+
+Shyam has spent nearly 20 years as the most important person at Palantir that most people have never heard of. 
+
+We spend a lot of time understanding his worldview, which helps explain why he has devoted his life to this work. At the center of it is a belief in the primacy of people -- all meaningful change comes from a small number of builders willing to be heretics first.
+
+You will find few people who think as deeply about the relationship between technology and national power. In many ways, he is becoming the modern version of the heretics he most admires.
+
+We discuss:
+- What Alex Karp taught him about identifying superpowers and unlocking talent
+- Heretics + the components of American greatness
+- The origins of the FDE model
+- Ontology and chips – where value will accrue in AI
+- Why dual-use companies are the future of American industry
+- China and what it would take for the US to reindustrialize
+- His journey from Nigeria to Orlando and what his dad taught him about gratitude
+
+Enjoy!
+
+Timestamps:
+0:00 Intro
+2:23 Defining Heretics in US Military History
+8:36 Shyam’s Personal Disagreeableness
+9:49 Formative Experiences &amp; Worldview
+12:52 What Makes America Exceptional
+14:48 What Does Greatness Mean?
+15:33 Alex Karp
+16:46 How to Unlock Talent
+19:21 Identifying Superpowers and Kryptonite
+22:54 The Gamma Ray Moment
+25:00 Palantir&#39;s Next 10 Years
+27:03 Forward Deployed Engineering
+33:40 Explaining What Palantir Is
+37:50 Military vs. Commercial Customers
+39:00 The State of the US Military Today
+47:01 How to Re-Industrialize America
+51:06 Perspective on China as an Adversary
+56:17 How to Get More Heretics in Government
+1:03:53 Managing Rapid Pivots &amp; Momentum
+1:08:48 Where Will AI Value Accrue?
+1:13:33 Reasserting the Legitimacy of Institutions
+1:15:54 To Do or To Be?
+1:16:31 Reflecting on Fatherhood
+1:17:34 Kindest Thing</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2031228447024934912/img/Lti7EFwZYM88wqnb.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/patrick_oshag/status/2031339297895494137" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Dustin</span>
+                        <span class="author-handle"><a href="https://x.com/r0ck3t23" target="_blank">@r0ck3t23</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 02:36:35 +0000 2026</span>
+                </div>
+                <div class="tweet-text">Elon Musk just exposed the exact mathematical equation that causes corporations to die.
+
+When system penalizes failure more than it rewards execution, entire architecture defaults to biological self-preservation.
+
+Incrementalism is death sentence in age of superintelligence.
+
+Cannot win planetary-scale arms race making safe, two-percent improvements. Have to take massive, asymmetric bets.
+
+Musk: “If you punish people too much for failure, then they will respond accordingly. And the innovation you will get will be very incrementalist.”
+
+Humans don’t optimize for mission. They optimize for whatever the incentive structure punishes or rewards.
+
+Penalty for missing the mark is severe? Operator simply refuses to take the shot.
+
+Musk: “The risk-reward must be balanced, and favor taking bold moves. Otherwise, it will not happen.”
+
+System fires architect for pushing boundary? Boundary never moves. Entire enterprise mathematically overwritten by faster competitor.
+
+Ultimate bottleneck to technological velocity is not physics.
+
+It’s biological fear of getting fired.
+
+Musk: “Nobody’s going to try anything bold for fear of getting fired or being punished in some way.”
+
+Fatal flaw of traditional economy. Employees aren’t inherently lazy. They’re hyper-rational.
+
+Catastrophic failure pursuing breakthrough leads to termination? Human operator naturally optimizes for safest, most insignificant execution possible.
+
+Don’t build post-scarcity economy with terrified employees.
+
+Build it creating environment where aggressive failure is treated as high-velocity data ingestion, not career-ending vulnerability.
+
+Cannot build multi-planetary civilization with workforce optimizing for zero defects.
+
+Tech monopolies dominating board don’t view failure as negative metric. View it as necessary cost of rapid iteration.
+
+Not failing? Execution loop simply moving too slowly.
+
+Traditional world demands perfection on first attempt. Mathematically guarantees irrelevance.
+
+Winners demand raw velocity. Requires tolerance for breaking things on physical board.
+
+Operators winning next decade ruthlessly strip penalty of failure from organizations.
+
+Maximizing algorithmic speed over biological illusion of safety.
+
+Because the equation is simple. Punish failure and you get incrementalism. Reward bold moves and you get breakthroughs.
+
+Every dead company on the board chose biological safety over asymmetric execution.
+
+They were never outcompeted. They were outrun by someone who wasn’t afraid.</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/amplify_video_thumb/2031197423373008897/img/2Wc6a3C6i_HTmK6_.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/r0ck3t23/status/2031197494483243458" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-israel">
+            <div class="category-header">
+                <h2>Israel</h2>
+                <span class="count">50 tweets</span>
+            </div>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Zeek Arkham </span>
+                        <span class="author-handle"><a href="https://x.com/ZeekArkham" target="_blank">@ZeekArkham</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 10, 07:57 AM</span>
+                </div>
+                <div class="tweet-text">Dear Chuck Schumer,
+
+Hi. Black dude here. I can trace my family ancestry to slavery. I even know where they were slaves. My mom experienced Jim Crow. I think I’ve watched every episode of “Eyes On the Prize” when I was younger.
+
+With that said…
+
+Can you directly explain to me</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HDDfHCCXYAAC9Ax?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 73,000 · 🔁 20,000 · 💬 3,700</div>
+                    <div class="tweet-link"><a href="https://x.com/ZeekArkham/status/2031368748834165194" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                <div class="retweet-badge">🔁 Bill Ackman reposted</div>
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">New York Post</span>
+                        <span class="author-handle"><a href="https://x.com/nypost" target="_blank">@nypost</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 09, 09:20 PM</span>
+                </div>
+                <div class="tweet-text">Yamaha pulling out of California after half a century: HQ headed to Georgia 
+https://
+trib.al/UrSWdji</div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HDBNg64WAAAewcm?format=jpg&name=small" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics">❤️ 38,000 · 🔁 6,900 · 💬 1,200</div>
+                    <div class="tweet-link"><a href="https://x.com/nypost/status/2031208666158727603" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="category category-other">
+            <div class="category-header">
+                <h2>📌 Other</h2>
+                <span class="count">50 tweets</span>
+            </div>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">max</span>
+                        <span class="author-handle"><a href="https://x.com/maxbittker" target="_blank">@maxbittker</a></span>
+                    </div>
+                    <span class="tweet-time">Tue Mar 10 20:52:20 +0000 2026</span>
+                </div>
+                <div class="tweet-text">From <a href="https://x.com/karpathy" target="_blank" rel="noopener">@karpathy</a>&#39;s autoresearch .md <a href="https://t.co/snm41IT7wj" target="_blank" rel="noopener">https://t.co/snm41IT7wj</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HDE8ui-WAAA6dpp.png" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/maxbittker/status/2031473248320311326" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+
+            <article class="tweet">
+                
+                <div class="tweet-header">
+                    <div class="tweet-author">
+                        <span class="author-name">Brian Armstrong</span>
+                        <span class="author-handle"><a href="https://x.com/brian_armstrong" target="_blank">@brian_armstrong</a></span>
+                    </div>
+                    <span class="tweet-time">Mar 10, 07:30 PM</span>
+                </div>
+                <div class="tweet-text">Fun to look back at this post now that we&#39;re a little more than half way through the decade. On track I&#39;d say.
+
+(link to full article below 👇) <a href="https://t.co/oqypom5e9U" target="_blank" rel="noopener">https://t.co/oqypom5e9U</a></div>
+                <div class="tweet-media"><img src="https://pbs.twimg.com/media/HDF9ntsaMAYOfps.jpg" alt="Tweet media" loading="lazy"></div>
+                <div class="tweet-footer">
+                    <div class="tweet-metrics"></div>
+                    <div class="tweet-link"><a href="https://x.com/brian_armstrong/status/2031543133931188540" target="_blank">View on X →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <footer>
+            <p class="stats-line">232 tweets · Crypto 12% · AI 30% · Tech 7% · Stocks & Macro 6% · Israel 22% · OpenClaw 2% · Other 22%</p>
+            <p>Generated by <a href="https://betoneh.github.io/signal-monitor/">Signal Monitor</a> x <a href="https://x.com/beto_neh">@beto_neh</a> · 2026-03-10T20:00</p>
+        </footer>
+    </div>
+    <script>
+        if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+            let sy=0,p=false,d=document,b=d.body;
+            const el=d.createElement('div');
+            el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#71767b;font-size:14px;z-index:9999;transition:top 0.2s;background:#0f0f0f;';
+            el.textContent='↓ Pull to refresh';
+            b.prepend(el);
+            d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+            d.addEventListener('touchmove',e=>{
+                if(!p)return;
+                const dy=e.touches[0].clientY-sy;
+                if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+                if(dy>5)e.preventDefault();
+                const t=Math.min(dy*0.4,50);
+                el.style.top=(t-50)+'px';
+                el.textContent=dy>80?'↑ Release':'↓ Pull to refresh';
+            },{passive:false});
+            d.addEventListener('touchend',e=>{
+                if(!p){return;}p=false;
+                const dy=e.changedTouches[0].clientY-sy;
+                el.style.top='-50px';
+                if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+            });
+        }
+    </script>
+    </script>
+</body>
+</html>
