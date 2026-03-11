@@ -188,6 +188,12 @@
     header { padding: 1.5rem 1rem 1rem; }
     .site-title { font-size: 1.25rem; }
   }
+  .listen-btn {
+    font-size: 0.875rem; color: #0ec4a9; cursor: pointer;
+    user-select: none; -webkit-user-select: none;
+  }
+  .listen-btn:hover { opacity: 0.8; }
+  .listen-btn.playing { color: #ef4444; }
 </style>
 </head>
 <body>
@@ -206,6 +212,8 @@
     </span>
     <span class="sep">&bull;</span>
     <span class="reading-time" id="reading-time"></span>
+    <span class="sep">&bull;</span>
+    <span class="listen-btn" id="listen-btn" onclick="toggleListen()">🎧 Listen</span>
   </div>
 </header>
 
@@ -266,6 +274,29 @@
 </footer>
 
 <script>
+  // Listen (Web Speech API)
+  let synth = window.speechSynthesis;
+  let speaking = false;
+  function toggleListen() {
+    const btn = document.getElementById('listen-btn');
+    if (speaking) {
+      synth.cancel();
+      speaking = false;
+      btn.textContent = '🎧 Listen';
+      btn.classList.remove('playing');
+      return;
+    }
+    const text = document.querySelector('main').innerText;
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    utter.rate = 1.05;
+    utter.onend = () => { speaking = false; btn.textContent = '🎧 Listen'; btn.classList.remove('playing'); };
+    synth.speak(utter);
+    speaking = true;
+    btn.textContent = '⏹ Stop';
+    btn.classList.add('playing');
+  }
+
   // Reading time
   const text = document.querySelector('main').innerText;
   const words = text.trim().split(/\s+/).length;
