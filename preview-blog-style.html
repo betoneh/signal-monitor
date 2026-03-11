@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#212737">
+<title>Signal Monitor — 11/03/2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #212737;
+    color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: rgba(14, 196, 169, 0.75);
+    color: #212737;
+  }
+
+  a { outline-offset: 1px; outline-color: rgba(14, 196, 169, 0.75); }
+  a:focus-visible { outline: 2px dashed rgba(14, 196, 169, 0.75); text-decoration: none; }
+
+  /* Layout */
+  header, main, footer {
+    max-width: 48rem;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  /* Header */
+  header {
+    padding: 2rem 1rem 1.5rem;
+  }
+  .site-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #eaedf3;
+    text-decoration: none;
+  }
+  .site-title:hover { color: #0ec4a9; }
+  .date {
+    font-size: 0.875rem;
+    color: #8b949e;
+    margin-top: 0.25rem;
+  }
+  .stats {
+    font-size: 0.75rem;
+    color: #8b949e;
+    margin-top: 0.5rem;
+    line-height: 1.6;
+  }
+
+  /* HR */
+  .hr {
+    max-width: 48rem;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 1rem;
+  }
+  .hr hr {
+    border: none;
+    border-top: 1px solid #0a8f7b;
+  }
+
+  /* Main */
+  main { flex: 1; padding-top: 1.5rem; }
+
+  /* Category sections */
+  .category { margin-bottom: 2rem; }
+
+  .category-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #0a8f7b;
+  }
+  .category-header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #eaedf3;
+  }
+  .category-count {
+    font-size: 0.75rem;
+    color: #8b949e;
+    background: rgba(52, 63, 96, 0.75);
+    padding: 1px 8px;
+    border-radius: 3px;
+  }
+
+  /* Category accent colors */
+  .cat-crypto .category-header { border-color: #f7931a; }
+  .cat-crypto .category-header h2 { color: #f7931a; }
+  .cat-ai .category-header { border-color: #0ec4a9; }
+  .cat-ai .category-header h2 { color: #0ec4a9; }
+  .cat-tech .category-header { border-color: #8b5cf6; }
+  .cat-tech .category-header h2 { color: #8b5cf6; }
+  .cat-macro .category-header { border-color: #ef4444; }
+  .cat-macro .category-header h2 { color: #ef4444; }
+  .cat-israel .category-header { border-color: #3b82f6; }
+  .cat-israel .category-header h2 { color: #3b82f6; }
+
+  /* Editorial text */
+  .editorial {
+    line-height: 1.75;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Links */
+  a {
+    color: #0ec4a9;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 4px;
+  }
+  a:hover {
+    text-decoration-color: #eaedf3;
+  }
+
+  /* Tweet cards */
+  .tweets { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .tweet {
+    background: rgba(52, 63, 96, 0.35);
+    border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px;
+    padding: 0.875rem 1rem;
+  }
+
+  .tweet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+  .tweet-author {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #eaedf3;
+  }
+  .tweet-handle {
+    color: #8b949e;
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+  .tweet-handle a { color: #8b949e; text-decoration: none; }
+  .tweet-handle a:hover { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; }
+  .tweet-time {
+    font-size: 0.75rem;
+    color: #8b949e;
+  }
+  .tweet-text {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .tweet-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: #8b949e;
+  }
+  .tweet-metrics { display: flex; gap: 1rem; }
+  .tweet-link a { font-size: 0.75rem; }
+
+  /* Signal of the day */
+  .signal-card {
+    background: rgba(14, 196, 169, 0.08);
+    border: 1px solid rgba(14, 196, 169, 0.3);
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    line-height: 1.75;
+    font-size: 0.9rem;
+  }
+  .signal-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #0ec4a9;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Noise */
+  .noise {
+    font-size: 0.75rem;
+    color: #8b949e;
+    margin: 2rem 0 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(52, 63, 96, 0.35);
+    border-radius: 4px;
+  }
+  .noise a { color: #0ec4a9; text-decoration: none; font-size: 0.75rem; }
+  .noise a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  /* Footer */
+  footer {
+    padding: 1.5rem 1rem;
+  }
+  .footer-text {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #8b949e;
+    line-height: 1.6;
+  }
+  .footer-text a {
+    color: #eaedf3;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 4px;
+  }
+  .footer-text a:hover { color: #0ec4a9; }
+
+  @media (max-width: 640px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .site-title { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="https://betoneh.github.io/signal-monitor/" class="site-title">Signal Monitor</a>
+  <p class="date">11/03/2026 — 08:00</p>
+  <p class="stats">177 tweets · Crypto 25% · AI 10% · Tech 3% · Stocks & Macro 25% · Israel 50 from list</p>
+</header>
+
+<div class="hr"><hr></div>
+
+<main>
+
+  <div class="category cat-crypto">
+    <div class="category-header">
+      <h2>Crypto</h2>
+      <span class="category-count">45</span>
+    </div>
+    <p class="editorial">The dominant narrative today is institutional legitimacy colliding with regulatory scrutiny. Binance is simultaneously <a href="https://x.com/coinbureau/status/2031723545500475852" target="_blank">suing the WSJ for defamation</a> over Iran-linked reports while the <a href="https://x.com/zerohedge/status/2031687478025867369" target="_blank">DOJ probes</a> whether Iran used the platform to evade sanctions — a classic two-front war that could define the exchange's 2026 trajectory. On the institutional adoption front, <a href="https://x.com/BSCNews/status/2031708997691097411" target="_blank">Mastercard's Crypto Partner Program</a> with 85+ companies marks a significant normalization milestone. Bitcoin <a href="https://x.com/coinbureau/status/2031728354463010823" target="_blank">reclaimed $71K</a> but sentiment sits at <a href="https://x.com/CoinMarketCap/status/2031691879289426070" target="_blank">Fear (25)</a> — a divergence that usually resolves violently. The ECB's <a href="https://x.com/BSCNews/status/2031706704581411162" target="_blank">Appia initiative</a> for tokenized wholesale finance and Starknet's <a href="https://x.com/Starknet/status/2031691253130125316" target="_blank">STRK20 privacy standard</a> show the infrastructure layer continuing to mature beneath the noise.</p>
+    <div class="tweets">
+      <div class="tweet">
+        <div class="tweet-header">
+          <span class="tweet-author">Coin Bureau <span class="tweet-handle"><a href="https://x.com/coinbureau">@coinbureau</a></span></span>
+          <span class="tweet-time">07:42</span>
+        </div>
+        <div class="tweet-text">🚨 BREAKING: Binance sues the Wall Street Journal for defamation over Iran-related reporting. CZ calls the articles "factually incorrect and deliberately misleading."</div>
+        <div class="tweet-footer">
+          <span class="tweet-metrics">♡ 2.1k · ↻ 891</span>
+          <span class="tweet-link"><a href="https://x.com/coinbureau/status/2031723545500475852" target="_blank">view →</a></span>
+        </div>
+      </div>
+      <div class="tweet">
+        <div class="tweet-header">
+          <span class="tweet-author">Coin Bureau <span class="tweet-handle"><a href="https://x.com/coinbureau">@coinbureau</a></span></span>
+          <span class="tweet-time">07:15</span>
+        </div>
+        <div class="tweet-text">Bitcoin reclaims $71,000 as CPI comes in at 2.4% — matching expectations. Fear & Greed Index still at 25 (Fear). The market wants to rally but doesn't trust itself yet.</div>
+        <div class="tweet-footer">
+          <span class="tweet-metrics">♡ 1.8k · ↻ 642</span>
+          <span class="tweet-link"><a href="https://x.com/coinbureau/status/2031728354463010823" target="_blank">view →</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="category cat-ai">
+    <div class="category-header">
+      <h2>AI</h2>
+      <span class="category-count">18</span>
+    </div>
+    <p class="editorial">Oracle's <a href="https://x.com/coinbureau/status/2031695380014932212" target="_blank">revenue beat</a> — $17.2B vs $16.9B expected — with a $90B revenue target by 2027 is the clearest signal that AI cloud demand is reshaping enterprise tech growth curves, sending the stock up <a href="https://x.com/zerohedge/status/2031724779116347635" target="_blank">12% premarket</a>. <a href="https://x.com/zerohedge/status/2031728127999668268" target="_blank">Microsoft is backing Anthropic's bid</a> to block the Pentagon from labeling it a "supply-chain risk." Nvidia is doubling down with a <a href="https://x.com/zerohedge/status/2031702171931082918" target="_blank">$2B investment in Nebius</a>. Naval's take that <a href="https://x.com/naval/status/2031702075307176248" target="_blank">AI will drain a lot of moats</a> captures the strategic anxiety — incumbents are spending aggressively because the alternative is obsolescence.</p>
+    <div class="tweets">
+      <div class="tweet">
+        <div class="tweet-header">
+          <span class="tweet-author">ZeroHedge <span class="tweet-handle"><a href="https://x.com/zerohedge">@zerohedge</a></span></span>
+          <span class="tweet-time">07:30</span>
+        </div>
+        <div class="tweet-text">ORACLE STOCK SURGES 12% PREMARKET AFTER REVENUE BEAT. Revenue: $17.2B vs $16.9B expected. Cloud infrastructure up 49% YoY.</div>
+        <div class="tweet-footer">
+          <span class="tweet-metrics">♡ 3.2k · ↻ 1.1k</span>
+          <span class="tweet-link"><a href="https://x.com/zerohedge/status/2031724779116347635" target="_blank">view →</a></span>
+        </div>
+      </div>
+      <div class="tweet">
+        <div class="tweet-header">
+          <span class="tweet-author">Naval <span class="tweet-handle"><a href="https://x.com/naval">@naval</a></span></span>
+          <span class="tweet-time">06:50</span>
+        </div>
+        <div class="tweet-text">AI will drain a lot of moats.</div>
+        <div class="tweet-footer">
+          <span class="tweet-metrics">♡ 12.4k · ↻ 3.8k</span>
+          <span class="tweet-link"><a href="https://x.com/naval/status/2031702075307176248" target="_blank">view →</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="category cat-tech">
+    <div class="category-header">
+      <h2>Tech</h2>
+      <span class="category-count">6</span>
+    </div>
+    <p class="editorial">Thin signal this cycle. Tesla's AI agent push and Nvidia's Nebius investment both point to the same thesis: compute infrastructure and agent capabilities are the new competitive moats. <a href="https://x.com/BitcoinMagazine/status/2031705837664665878" target="_blank">Mastercard's crypto program</a> also has tech infrastructure implications — cross-border payments using digital assets represents plumbing-level change.</p>
+  </div>
+
+  <div class="category cat-macro">
+    <div class="category-header">
+      <h2>Stocks & Macro</h2>
+      <span class="category-count">45</span>
+    </div>
+    <p class="editorial">CPI came in at <a href="https://x.com/coinbureau/status/2031712021759357034" target="_blank">2.4% YoY</a>, shelter inflation at its <a href="https://x.com/zerohedge/status/2031715103758803011" target="_blank">lowest since August 2021</a> — normally an unambiguous green light for risk assets. But oil overrides everything. Crude is back <a href="https://x.com/zerohedge/status/2031708996042699240" target="_blank">above $90</a> as Iran threatens to <a href="https://x.com/JoeTruzman/status/2031730867463500261" target="_blank">block every drop through Hormuz</a>. The IEA is planning its <a href="https://x.com/zerohedge/status/2031696870006575576" target="_blank">largest-ever SPR release</a> but JPMorgan estimates only <a href="https://x.com/zerohedge/status/2031693528451920101" target="_blank">1.2M barrels/day</a> feasible — nowhere near enough to offset the 10-12M barrel/day gap. 30-year Treasury yield pushed to <a href="https://x.com/zerohedge/status/2031715500175024262" target="_blank">4.83%</a>. JPMorgan is <a href="https://x.com/zerohedge/status/2031724347212108048" target="_blank">limiting lending to private credit groups</a> — a quiet signal of credit stress.</p>
+    <div class="tweets">
+      <div class="tweet">
+        <div class="tweet-header">
+          <span class="tweet-author">ZeroHedge <span class="tweet-handle"><a href="https://x.com/zerohedge">@zerohedge</a></span></span>
+          <span class="tweet-time">07:45</span>
+        </div>
+        <div class="tweet-text">CRUDE OIL ABOVE $90 — Iran IRGC threatens to block "every drop" through Strait of Hormuz. IEA announces largest-ever coordinated SPR release. Japan to release 80M barrels starting March 16.</div>
+        <div class="tweet-footer">
+          <span class="tweet-metrics">♡ 4.7k · ↻ 2.3k</span>
+          <span class="tweet-link"><a href="https://x.com/zerohedge/status/2031708996042699240" target="_blank">view →</a></span>
+        </div>
+      </div>
+      <div class="tweet">
+        <div class="tweet-header">
+          <span class="tweet-author">Coin Bureau <span class="tweet-handle"><a href="https://x.com/coinbureau">@coinbureau</a></span></span>
+          <span class="tweet-time">06:55</span>
+        </div>
+        <div class="tweet-text">CPI for February: 2.4% YoY (as expected). Core CPI: 3.1% (vs 3.2% expected). Shelter inflation lowest since Aug 2021. Markets should love this — but oil at $90 changes everything.</div>
+        <div class="tweet-footer">
+          <span class="tweet-metrics">♡ 1.5k · ↻ 520</span>
+          <span class="tweet-link"><a href="https://x.com/coinbureau/status/2031712021759357034" target="_blank">view →</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="category cat-israel">
+    <div class="category-header">
+      <h2>Israel</h2>
+      <span class="category-count">68</span>
+    </div>
+    <p class="editorial">Operation Epic Fury is reaching its most intense phase. CENTCOM reports <a href="https://x.com/TreyYingst/status/2031725154414236009" target="_blank">5,500+ strikes</a> since the operation began, with U.S. planes hitting Iran nearly every hour. Iran's response is escalating asymmetrically: the IRGC threatening to <a href="https://x.com/JoeTruzman/status/2031730867463500261" target="_blank">block all oil through Hormuz</a>, <a href="https://x.com/AFP/status/2031699162404708795" target="_blank">three commercial ships attacked</a> in the Gulf, <a href="https://x.com/LucasFoxNews/status/2031696549202563482" target="_blank">Dubai airport attacked</a> for the second time. Israeli intelligence indicates Iran's <a href="https://x.com/jongambrellAP/status/2031720592555037066" target="_blank">new supreme leader was wounded</a>. <a href="https://x.com/RALee85/status/2031724047461990711" target="_blank">Russia is providing Iran</a> with advanced drone tactics from Ukraine. The Swiss embassy in Tehran has <a href="https://x.com/hey_itsmyturn/status/2031729278505587061" target="_blank">temporarily closed</a>. Israel's defense minister says the campaign continues <a href="https://x.com/JoeTruzman/status/2031727673295384988" target="_blank">without time limits</a>.</p>
+    <div class="tweets">
+      <div class="tweet">
+        <div class="tweet-header">
+          <span class="tweet-author">Trey Yingst <span class="tweet-handle"><a href="https://x.com/TreyYingst">@TreyYingst</a></span></span>
+          <span class="tweet-time">07:50</span>
+        </div>
+        <div class="tweet-text">CENTCOM confirms 5,500+ strikes on Iranian targets since Operation Epic Fury began. U.S. aircraft hitting targets in Iran nearly every hour on Tuesday.</div>
+        <div class="tweet-footer">
+          <span class="tweet-metrics">♡ 8.9k · ↻ 4.1k</span>
+          <span class="tweet-link"><a href="https://x.com/TreyYingst/status/2031725154414236009" target="_blank">view →</a></span>
+        </div>
+      </div>
+      <div class="tweet">
+        <div class="tweet-header">
+          <span class="tweet-author">Joe Truzman <span class="tweet-handle"><a href="https://x.com/JoeTruzman">@JoeTruzman</a></span></span>
+          <span class="tweet-time">07:55</span>
+        </div>
+        <div class="tweet-text">IRGC spokesperson: "We will block every drop of oil through the Strait of Hormuz. This is no longer a threat — it is operational doctrine."</div>
+        <div class="tweet-footer">
+          <span class="tweet-metrics">♡ 5.2k · ↻ 2.8k</span>
+          <span class="tweet-link"><a href="https://x.com/JoeTruzman/status/2031730867463500261" target="_blank">view →</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="noise">
+    📡 noise (7d): <a href="https://x.com/toly">@toly</a> 5/5 (100%) · <a href="https://x.com/elonmusk">@elonmusk</a> 52/58 (90%) · <a href="https://x.com/__agentc__">@__agentc__</a> 7/8 (88%)
+  </div>
+
+</main>
+
+<div class="hr"><hr></div>
+
+<footer>
+  <p class="footer-text">
+    Generated by <a href="https://betoneh.github.io/signal-monitor/">Signal Monitor</a> · <a href="https://x.com/beto_neh">@beto_neh</a> · 2026-03-11T08:00
+  </p>
+</footer>
+
+</body>
+</html>
