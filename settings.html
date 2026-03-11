@@ -65,6 +65,12 @@
             padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; width: 200px; outline: none;
         }
 
+        .depth-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding: 8px 0; }
+        .depth-label { font-size: 0.8rem; color: #71767b; white-space: nowrap; }
+        .depth-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 4px; background: #333; border-radius: 2px; outline: none; }
+        .depth-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #1d9bf0; cursor: pointer; }
+        .depth-value { font-size: 0.8rem; color: #ccc; min-width: 70px; text-align: right; }
+
         .cat-crypto .kw-name { color: #f7931a; }
         .cat-ai .kw-name { color: #1d9bf0; }
         .cat-tech .kw-name { color: #00c853; }
@@ -213,11 +219,11 @@ document.getElementById('pw').addEventListener('keydown', async (e) => {
 
 // Keywords data (defaults — overwritten by repo load)
 const categories = {
-    crypto: { name: "Crypto", keywords: ["bitcoin","btc","ethereum","eth","defi","nft","web3","blockchain","solana","stablecoin","airdrop","dex","cefi","binance","coinbase","memecoin","altcoin","hodl","whale","pump","dump"] },
-    ai: { name: "AI", keywords: ["ai","artificial intelligence","llm","gpt","claude","anthropic","openai","gemini","mistral","llama","chatgpt","copilot","machine learning","deep learning","neural","transformer","agent","clawdbot","mcp"] },
-    tech: { name: "Tech", keywords: ["startup","vc","founder","saas","api","developer","programming","code","software","hardware","apple","google","microsoft","meta","tesla","spacex","launch","product"] },
-    stocks_macro: { name: "Stocks & Macro", keywords: ["fed","interest rate","inflation","recession","gdp","economy","market","stock","bond","treasury","tariff","trade war","geopolitics","china","war","election","s&p","nasdaq","dow","earnings","bull","bear","rally","crash","equity","etf","index fund","portfolio","trading","options","futures","ipo","sec","wall street","nyse","dividend","yield"] },
-    israel: { name: "Israel", keywords: ["israel","israeli","netanyahu","idf","hamas","hezbollah","gaza","west bank","iran attack","iran war","tehran","mossad","antisemitism","antisemitic","jewish","zionism","zionist","middle east conflict","ceasefire","hostages","iron dome","abraham accords","saudi normalization","settlements","knesset","shin bet","houthis","red sea","golan","intifada","kibbutz","october 7","operation roaring lion","irgc","ayatollah","khamenei","pezeshkian","two state","palestinian","tel aviv","jerusalem"] }
+    crypto: { name: "Crypto", max_words: 80, keywords: ["bitcoin","btc","ethereum","eth","defi","nft","web3","blockchain","solana","stablecoin","airdrop","dex","cefi","binance","coinbase","memecoin","altcoin","hodl","whale","pump","dump"] },
+    ai: { name: "AI", max_words: 80, keywords: ["ai","artificial intelligence","llm","gpt","claude","anthropic","openai","gemini","mistral","llama","chatgpt","copilot","machine learning","deep learning","neural","transformer","agent","clawdbot","mcp"] },
+    tech: { name: "Tech", max_words: 60, keywords: ["startup","vc","founder","saas","api","developer","programming","code","software","hardware","apple","google","microsoft","meta","tesla","spacex","launch","product"] },
+    stocks_macro: { name: "Stocks & Macro", max_words: 80, keywords: ["fed","interest rate","inflation","recession","gdp","economy","market","stock","bond","treasury","tariff","trade war","geopolitics","china","war","election","s&p","nasdaq","dow","earnings","bull","bear","rally","crash","equity","etf","index fund","portfolio","trading","options","futures","ipo","sec","wall street","nyse","dividend","yield"] },
+    israel: { name: "Israel", max_words: 80, keywords: ["israel","israeli","netanyahu","idf","hamas","hezbollah","gaza","west bank","iran attack","iran war","tehran","mossad","antisemitism","antisemitic","jewish","zionism","zionist","middle east conflict","ceasefire","hostages","iron dome","abraham accords","saudi normalization","settlements","knesset","shin bet","houthis","red sea","golan","intifada","kibbutz","october 7","operation roaring lion","irgc","ayatollah","khamenei","pezeshkian","two state","palestinian","tel aviv","jerusalem"] }
 };
 
 function renderKeywords() {
@@ -226,10 +232,16 @@ function renderKeywords() {
     for (const [catId, cat] of Object.entries(categories)) {
         const div = document.createElement('div');
         div.className = `kw-category cat-${catId}`;
+        const depthLabel = cat.max_words <= 60 ? 'Brief' : cat.max_words <= 100 ? 'Standard' : cat.max_words <= 150 ? 'Detailed' : 'Deep';
         div.innerHTML = `
             <div class="kw-header">
                 <span class="kw-name">${cat.name}</span>
                 <span class="kw-count">${cat.keywords.length}</span>
+            </div>
+            <div class="depth-row">
+                <span class="depth-label">Depth</span>
+                <input type="range" class="depth-slider" id="depth-${catId}" min="40" max="200" step="10" value="${cat.max_words}" oninput="updateDepth('${catId}', this.value)">
+                <span class="depth-value" id="depth-val-${catId}">${cat.max_words}w · ${depthLabel}</span>
             </div>
             <div class="kw-tags" id="tags-${catId}">
                 ${cat.keywords.map(kw => `<span class="kw-tag">${esc(kw)}<span class="remove" onclick="removeKw('${catId}','${esc(kw)}')">&times;</span></span>`).join('')}
@@ -266,6 +278,14 @@ function addKw(e, catId) {
     if (e.key === 'Escape') { e.target.value = ''; document.getElementById(`input-${catId}`).style.display = 'none'; }
 }
 
+function updateDepth(catId, val) {
+    val = parseInt(val);
+    categories[catId].max_words = val;
+    const label = val <= 60 ? 'Brief' : val <= 100 ? 'Standard' : val <= 150 ? 'Detailed' : 'Deep';
+    document.getElementById(`depth-val-${catId}`).textContent = `${val}w · ${label}`;
+    markDirty();
+}
+
 function markDirty() {
     isDirty = true;
     document.getElementById('save-status').textContent = 'unsaved changes';
@@ -284,7 +304,7 @@ function buildConfig() {
         israel: { url: gv('israel-url'), max: gn('israel-max') },
         noise: { days: gn('noise-days'), top: gn('noise-top'), min_tweets: gn('noise-min') },
         categories: Object.fromEntries(
-            Object.entries(categories).map(([id, cat]) => [id, { name: cat.name, keywords: cat.keywords }])
+            Object.entries(categories).map(([id, cat]) => [id, { name: cat.name, max_words: cat.max_words, keywords: cat.keywords }])
         )
     };
 }
@@ -319,6 +339,7 @@ function applyConfig(cfg) {
         for (const [id, cat] of Object.entries(cfg.categories)) {
             if (categories[id]) {
                 categories[id].keywords = cat.keywords || categories[id].keywords;
+                if (cat.max_words) categories[id].max_words = cat.max_words;
             }
         }
     }
