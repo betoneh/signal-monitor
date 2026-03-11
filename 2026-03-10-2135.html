@@ -27,17 +27,17 @@
             --openclaw: #FF4500;
             --israel: #0038b8;
         }
-        
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        
+
         html {
             -webkit-text-size-adjust: 100%;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: var(--bg-primary);
@@ -46,37 +46,37 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         header {
             text-align: center;
             padding: 40px 0 30px;
             border-bottom: 1px solid var(--border);
             margin-bottom: 30px;
         }
-        
+
         .header-logo {
             width: 64px;
             height: 64px;
             border-radius: 16px;
             margin-bottom: 12px;
         }
-        
+
         h1 {
             font-size: 2rem;
             margin-bottom: 8px;
         }
-        
+
         .subtitle {
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        
+
         .stats-line {
             color: var(--text-secondary);
             font-size: 0.75rem;
@@ -86,14 +86,14 @@
             text-align: center;
             line-height: 1.8;
         }
-        
+
         .editorial-cards {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-bottom: 30px;
         }
-        
+
         .editorial-card {
             background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
             border: 1px solid var(--border);
@@ -105,11 +105,11 @@
             overflow-wrap: break-word;
             word-break: break-word;
         }
-        
+
         .category {
             margin-bottom: 30px;
         }
-        
+
         .category-header {
             display: flex;
             align-items: center;
@@ -118,12 +118,12 @@
             border-bottom: 2px solid var(--border);
             margin-bottom: 15px;
         }
-        
+
         .category-header h2 {
             font-size: 1.2rem;
             font-weight: 600;
         }
-        
+
         .category-header .count {
             background: var(--bg-tertiary);
             padding: 4px 12px;
@@ -131,30 +131,30 @@
             font-size: 0.8rem;
             color: var(--text-secondary);
         }
-        
+
         .category-crypto .category-header {
             border-color: var(--crypto);
         }
-        
+
         .category-ai .category-header {
             border-color: var(--ai);
         }
-        
+
         .category-tech .category-header {
             border-color: var(--tech);
         }
-        
+
         .category-stocks_macro .category-header {
             border-color: var(--stocks-macro);
         }
         .category-israel .category-header {
             border-color: var(--israel);
         }
-        
+
         .category-openclaw .category-header {
             border-color: var(--openclaw);
         }
-        
+
         .tweet {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
@@ -165,51 +165,51 @@
             overflow: hidden;
             max-width: 100%;
         }
-        
+
         @media (hover:hover) { .tweet:hover {
             border-color: var(--accent);
         } }
-        
+
         .tweet.priority {
             border-left: 3px solid var(--accent);
         }
-        
+
         .tweet-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 10px;
         }
-        
+
         .tweet-author {
             display: flex;
             flex-direction: column;
         }
-        
+
         .author-name {
             font-weight: 600;
             color: var(--text-primary);
         }
-        
+
         .author-handle {
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        
+
         .author-handle a {
             color: inherit;
             text-decoration: none;
         }
-        
+
         .author-handle a:hover {
             text-decoration: underline;
         }
-        
+
         .tweet-time {
             color: var(--text-secondary);
             font-size: 0.8rem;
         }
-        
+
         .tweet-text {
             margin-bottom: 12px;
             white-space: pre-wrap;
@@ -217,7 +217,7 @@
             overflow-wrap: break-word;
             word-break: break-word;
         }
-        
+
         .editorial-card a {
             color: var(--accent);
             text-decoration: none;
@@ -229,11 +229,11 @@
             color: var(--accent);
             text-decoration: none;
         }
-        
+
         .tweet-text a:hover {
             text-decoration: underline;
         }
-        
+
         .tweet-media {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -241,14 +241,14 @@
             margin-bottom: 12px;
             overflow: hidden;
         }
-        
+
         .tweet-media img {
             width: 100%;
             max-width: 100%;
             border-radius: 8px;
             border: 1px solid var(--border);
         }
-        
+
         .tweet-footer {
             display: flex;
             justify-content: space-between;
@@ -256,21 +256,21 @@
             color: var(--text-secondary);
             font-size: 0.85rem;
         }
-        
+
         .tweet-metrics {
             display: flex;
             gap: 15px;
         }
-        
+
         .tweet-link a {
             color: var(--accent);
             text-decoration: none;
         }
-        
+
         .tweet-link a:hover {
             text-decoration: underline;
         }
-        
+
         .retweet-badge {
             background: var(--bg-tertiary);
             color: var(--text-secondary);
@@ -280,7 +280,7 @@
             margin-bottom: 10px;
             display: inline-block;
         }
-        
+
         .priority-badge {
             background: var(--accent);
             color: white;
@@ -289,7 +289,7 @@
             font-size: 0.75rem;
             margin-left: 8px;
         }
-        
+
         .noise-section {
             margin-top: 40px;
             padding: 20px;
@@ -350,25 +350,25 @@
             border-top: 1px solid var(--border);
             margin-top: 30px;
         }
-        
+
         footer a {
             color: var(--accent);
             text-decoration: none;
         }
-        
+
         @media (max-width: 600px) {
             .container {
                 padding: 15px;
             }
-            
+
             h1 {
                 font-size: 1.5rem;
             }
-            
+
             .stats {
                 gap: 10px;
             }
-            
+
             .stat {
                 padding: 8px 14px;
                 font-size: 0.8rem;
@@ -385,20 +385,11 @@
         </header>
 
         <div class="editorial-cards">
-            <div class="editorial-card"><strong>Crypto</strong> — Stablecoins dominated crypto discourse with banks <a href="https://x.com/jchervinsky/status/2031403550127886666" target="_blank">pushing back</a> on stablecoin legislation, wanting payment stablecoin reserves held only at banks. Bitcoin exchange balances hit an <a href="https://x.com/Cointelegraph/status/2031370889124597954" target="_blank">all-time low</a> while stablecoin supply approaches $314B. Privacy emerged as a theme with Eli Ben Sasson arguing <a href="https://x.com/EliBenSasson/status/2031460866269282340" target="_blank">private stablecoins</a> are essential for DeFi adoption. Meanwhile the IRS is now sending <a href="https://x.com/CoinDesk/status/2031427710703063509" target="_blank">1099-DA forms</a> requiring stablecoin gain reporting.</div>
-            <div class="editorial-card"><strong>AI</strong> — Karpathy launched <a href="https://x.com/Yuchenj_UW/status/2031438602383798514" target="_blank">AgentHub</a> — "GitHub for agents" — as the natural successor to autoresearch. Meta <a href="https://x.com/CoinMarketCap/status/2031390170780455101" target="_blank">acquired Moltbook</a>, an AI agent social network. The AI memory problem remains <a href="https://x.com/signulll/status/2031468506634416580" target="_blank">unsolved</a> — brittle, fragmented, and often less helpful than no memory at all. OpenClaw's adoption in China is <a href="https://x.com/kevinsxu/status/2031526542778540202" target="_blank">accelerating</a> across AI labs, hyperscalers, and two city governments.</div>
-            <div class="editorial-card"><strong>Tech</strong> — Tobi Lutke highlighted using <a href="https://x.com/tobi/status/2031536615529570583" target="_blank">autoresearch for software optimization</a>. a16z invested in Nexthop's $500M Series B for <a href="https://x.com/a16z/status/2031358570038702195" target="_blank">AI-driven data center infrastructure</a>. Andrew Chen predicts <a href="https://x.com/andrewchen/status/2031532980032909640" target="_blank">AI code gen will kill spreadsheets</a> — anything modeled as a spreadsheet becomes a mini app.</div>
-            <div class="editorial-card"><strong>Stocks & Macro</strong> — Elon Musk announced <a href="https://x.com/WatcherGuru/status/2031367535082242278" target="_blank">X Money</a> early public access launching next month. The CLARITY Act faces pushback with concerns about <a href="https://x.com/laurashin/status/2031400625850683677" target="_blank">what happens if it doesn't pass</a>. Goldilocks macro conditions for stablecoins: higher rates, higher inflation, and growing dollar demand all <a href="https://x.com/pythianism/status/2031401850797510684" target="_blank">favor adoption</a>.</div>
-        </div>
-
-        <div style="border-top: 2px solid #0038b8; margin-top: 40px; padding-top: 30px;">
-            <section class="category category-israel">
-                <div class="category-header">
-                    <h2>🇮🇱 Israel Monitor</h2>
-                    <span class="count">50 tweets · curated list</span>
-                </div>
-                <div class="editorial-card"><strong>Israel</strong> — Iran launched another round of <a href="https://x.com/idfonline/status/2031559129488150966" target="_blank">ballistic missiles</a> at Israel, the second attack since midnight — no injuries reported. <a href="https://x.com/MyLordBebo/status/2031535015545241905" target="_blank">Cluster missiles</a> swarmed over central Tel Aviv. The Strait of Hormuz remains critical: the US Navy says <a href="https://x.com/mercoglianos/status/2031544578541519130" target="_blank">escort operations are too dangerous</a> for now, while Iran has laid <a href="https://x.com/alexbward/status/2031570794820653323" target="_blank">fewer than 10 mines</a>. US military buildup continues with plans to <a href="https://x.com/IsraelRadar_com/status/2031554716803436979" target="_blank">strike Iran intensively</a> in the next 1-2 weeks. First confirmation of destroyed Iranian <a href="https://x.com/Osinttechnical/status/2031558928367042808" target="_blank">F-14 Tomcats</a> at Khatami Air Base.</div>
-            </section>
+            <div class="editorial-card"><strong>Crypto</strong> - Stablecoins dominated crypto discourse with banks <a href="https://x.com/jchervinsky/status/2031403550127886666" target="_blank">pushing back</a> on stablecoin legislation, wanting payment stablecoin reserves held only at banks. Bitcoin exchange balances hit an <a href="https://x.com/Cointelegraph/status/2031370889124597954" target="_blank">all-time low</a> while stablecoin supply approaches $314B. Privacy emerged as a theme with Eli Ben Sasson arguing <a href="https://x.com/EliBenSasson/status/2031460866269282340" target="_blank">private stablecoins</a> are essential for DeFi adoption. Meanwhile the IRS is now sending <a href="https://x.com/CoinDesk/status/2031427710703063509" target="_blank">1099-DA forms</a> requiring stablecoin gain reporting.</div>
+            <div class="editorial-card"><strong>AI</strong> - Karpathy launched <a href="https://x.com/Yuchenj_UW/status/2031438602383798514" target="_blank">AgentHub</a> — "GitHub for agents" — as the natural successor to autoresearch. Meta <a href="https://x.com/CoinMarketCap/status/2031390170780455101" target="_blank">acquired Moltbook</a>, an AI agent social network. The AI memory problem remains <a href="https://x.com/signulll/status/2031468506634416580" target="_blank">unsolved</a> — brittle, fragmented, and often less helpful than no memory at all. OpenClaw's adoption in China is <a href="https://x.com/kevinsxu/status/2031526542778540202" target="_blank">accelerating</a> across AI labs, hyperscalers, and two city governments.</div>
+            <div class="editorial-card"><strong>Tech</strong> - Tobi Lutke highlighted using <a href="https://x.com/tobi/status/2031536615529570583" target="_blank">autoresearch for software optimization</a>. a16z invested in Nexthop's $500M Series B for <a href="https://x.com/a16z/status/2031358570038702195" target="_blank">AI-driven data center infrastructure</a>. Andrew Chen predicts <a href="https://x.com/andrewchen/status/2031532980032909640" target="_blank">AI code gen will kill spreadsheets</a> — anything modeled as a spreadsheet becomes a mini app.</div>
+            <div class="editorial-card"><strong>Stocks & Macro</strong> - Elon Musk announced <a href="https://x.com/WatcherGuru/status/2031367535082242278" target="_blank">X Money</a> early public access launching next month. The CLARITY Act faces pushback with concerns about <a href="https://x.com/laurashin/status/2031400625850683677" target="_blank">what happens if it doesn't pass</a>. Goldilocks macro conditions for stablecoins: higher rates, higher inflation, and growing dollar demand all <a href="https://x.com/pythianism/status/2031401850797510684" target="_blank">favor adoption</a>.</div>
+            <div class="editorial-card"><strong>Israel</strong> — Iran launched another round of <a href="https://x.com/idfonline/status/2031559129488150966" target="_blank">ballistic missiles</a> at Israel, the second attack since midnight — no injuries reported. <a href="https://x.com/MyLordBebo/status/2031535015545241905" target="_blank">Cluster missiles</a> swarmed over central Tel Aviv. The Strait of Hormuz remains critical: the US Navy says <a href="https://x.com/mercoglianos/status/2031544578541519130" target="_blank">escort operations are too dangerous</a> for now, while Iran has laid <a href="https://x.com/alexbward/status/2031570794820653323" target="_blank">fewer than 10 mines</a>. US military buildup continues with plans to <a href="https://x.com/IsraelRadar_com/status/2031554716803436979" target="_blank">strike Iran intensively</a> in the next 1-2 weeks. First confirmation of destroyed Iranian <a href="https://x.com/Osinttechnical/status/2031558928367042808" target="_blank">F-14 Tomcats</a> at Khatami Air Base.</div>
         </div>
 
         <div class="noise-section">
