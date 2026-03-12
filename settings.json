@@ -1,7 +1,11 @@
 {
   "version": 1,
-  "updated_at": "2026-03-11T21:15:00Z",
+  "updated_at": "2026-03-12T00:08:17.977Z",
   "model": "claude-opus-4-6",
+  "audio": {
+    "enabled": true,
+    "voice": "en-US-JennyNeural"
+  },
   "runs": {
     "am": {
       "feed": "Following",
@@ -190,9 +194,5 @@
         "jerusalem"
       ]
     }
-  },
-  "audio": {
-    "enabled": true,
-    "voice": "en-US-GuyNeural"
   }
 }
