@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#212737">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Signal Monitor — 2026-03-14-2000</title>
+<style>
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; display: flex; flex-direction: column;
+    overflow-y: scroll; scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  a { outline-offset: 1px; outline-color: rgba(14, 196, 169, 0.75); }
+  a:focus-visible { outline: 2px dashed rgba(14, 196, 169, 0.75); text-decoration: none; }
+
+  header, main, footer {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem;
+  }
+  header { padding: 2rem 1rem 1.5rem; }
+  .title-row {
+    display: flex; align-items: baseline; gap: 0.75rem;
+  }
+  .site-title {
+    display: inline-block;
+    font-size: 1.875rem; font-weight: 700; color: #0ec4a9; text-decoration: none;
+  }
+  @media (min-width: 640px) { .site-title { font-size: 2.25rem; } }
+  .site-title:hover { color: #0ec4a9; }
+  .feed-badge {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.4);
+    font-weight: 400;
+  }
+  .header-meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 0.5rem; margin-bottom: 1.5rem;
+  }
+  .header-meta .date-wrap {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.875rem; color: #eaedf3; opacity: 0.8; font-style: italic;
+  }
+  @media (min-width: 640px) { .header-meta .date-wrap { font-size: 1rem; } }
+  .header-meta .date-wrap svg {
+    display: inline-block; width: 1.25rem; height: 1.25rem; min-width: 1.25rem; flex-shrink: 0;
+  }
+  .header-meta .sep { color: rgba(234, 237, 243, 0.3); }
+  .header-meta .reading-time {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.6);
+  }
+
+  .stats { font-size: 0.75rem; color: #8b949e; margin-top: 0.5rem; line-height: 1.6; }
+
+  .hr { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  .hr hr { border: none; border-top: 1px solid #0a8f7b; }
+
+  main { flex: 1; }
+
+  .category { margin-bottom: 2rem; }
+  .category-header {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.75rem; padding-bottom: 0.5rem;
+    border-bottom: 1px solid #0a8f7b;
+  }
+  .category-header h2 { font-size: 1.25rem; font-weight: 600; color: #eaedf3; }
+  .category-count {
+    font-size: 0.75rem; color: #8b949e;
+    background: rgba(52, 63, 96, 0.75); padding: 1px 8px; border-radius: 3px;
+  }
+
+  .cat-crypto .category-header { border-color: #f7931a; }
+  .cat-crypto .category-header h2 { color: #f7931a; }
+  .cat-ai .category-header { border-color: #0ec4a9; }
+  .cat-ai .category-header h2 { color: #0ec4a9; }
+  .cat-tech .category-header { border-color: #8b5cf6; }
+  .cat-tech .category-header h2 { color: #8b5cf6; }
+  .cat-stocks_macro .category-header { border-color: #ef4444; }
+  .cat-stocks_macro .category-header h2 { color: #ef4444; }
+  .cat-israel .category-header { border-color: #3b82f6; }
+  .cat-israel .category-header h2 { color: #3b82f6; }
+  .cat-openclaw .category-header { border-color: #FF4500; }
+  .cat-openclaw .category-header h2 { color: #FF4500; }
+
+  .editorial {
+    line-height: 1.75; font-size: 1rem; margin-bottom: 1rem;
+    overflow-wrap: break-word; word-break: break-word;
+    color: #eaedf3;
+  }
+
+  a {
+    color: #0ec4a9; text-decoration: none;
+  }
+  a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .editorial a {
+    color: #0ec4a9; text-decoration: none;
+  }
+  .editorial a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+
+  .tweets { display: flex; flex-direction: column; gap: 0.75rem; }
+  .tweet {
+    background: rgba(52, 63, 96, 0.35);
+    border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.875rem 1rem;
+    overflow: hidden; max-width: 100%;
+  }
+  @media (hover:hover) { .tweet:hover { border-color: #0ec4a9; } }
+  .tweet.priority { border-left: 3px solid #0ec4a9; }
+
+  .tweet-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+  .tweet-author { font-weight: 600; font-size: 0.85rem; color: #eaedf3; }
+  .tweet-handle { color: #8b949e; font-size: 0.8rem; font-weight: 400; }
+  .tweet-handle a { color: #8b949e; text-decoration: none; }
+  .tweet-handle a:hover { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; }
+  .tweet-time { font-size: 0.75rem; color: #8b949e; }
+
+  .tweet-text {
+    font-size: 0.85rem; line-height: 1.65; margin-bottom: 0.5rem;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .tweet-text a { text-decoration: none; }
+  .tweet-text a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .tweet-media {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px; margin-bottom: 0.5rem; overflow: hidden;
+  }
+  .tweet-media img {
+    width: 100%; max-width: 100%; border-radius: 4px;
+    border: 1px solid rgba(10, 143, 123, 0.3);
+  }
+
+  .tweet-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: #8b949e;
+  }
+  .tweet-metrics { display: flex; gap: 1rem; }
+  .tweet-link a { font-size: 0.75rem; }
+
+  .retweet-badge {
+    background: rgba(52, 63, 96, 0.75); color: #8b949e;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem;
+    margin-bottom: 0.5rem; display: inline-block;
+  }
+  .priority-badge {
+    background: #0ec4a9; color: #212737;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; margin-left: 0.5rem;
+  }
+
+  .noise {
+    font-size: 0.75rem; color: #8b949e; margin: 2rem 0 1rem;
+    padding: 0.75rem 1rem; background: rgba(52, 63, 96, 0.35); border-radius: 4px;
+  }
+  .noise a { color: #0ec4a9; text-decoration: none; font-size: 0.75rem; }
+  .noise a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .audio-row {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem 1.5rem;
+  }
+  .audio-player {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: rgba(52, 63, 96, 0.35); border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.625rem 1rem;
+  }
+  .audio-player:hover { border-color: #0ec4a9; }
+  .audio-btn {
+    background: none; border: none; cursor: pointer;
+    color: #0ec4a9; font-size: 1.25rem; padding: 0; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; flex-shrink: 0;
+  }
+  .audio-btn:hover { color: #eaedf3; }
+  .audio-progress {
+    flex: 1; height: 3px; background: rgba(52, 63, 96, 0.75);
+    border-radius: 2px; cursor: pointer; position: relative;
+  }
+  .audio-progress-fill {
+    height: 100%; background: #0ec4a9; border-radius: 2px;
+    width: 0%; transition: width 100ms linear;
+  }
+  .audio-time {
+    font-size: 0.75rem; color: #8b949e; min-width: 3.5rem; text-align: right;
+  }
+  .audio-speed {
+    font-size: 0.7rem; color: #8b949e; background: rgba(52, 63, 96, 0.75);
+    border: none; border-radius: 3px; padding: 2px 6px; cursor: pointer;
+  }
+  .audio-speed:hover { color: #0ec4a9; }
+
+  footer { padding: 1.5rem 1rem; }
+  .footer-text {
+    text-align: center; font-size: 0.75rem; color: #8b949e; line-height: 1.6;
+  }
+  .footer-text a {
+    color: #eaedf3; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 4px;
+  }
+  .footer-text a:hover { color: #0ec4a9; }
+  .stats-line {
+    text-align: center; font-size: 0.75rem; color: #8b949e;
+    margin-bottom: 0.5rem; line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .site-title { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<header>
+  <div class="title-row">
+    <a href="https://betoneh.github.io/signal-monitor/" class="site-title">Signal Monitor</a>
+    <span class="feed-badge">For You</span>
+  </div>
+  <div class="header-meta">
+    <span class="date-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/><path d="M7 14h.013"/><path d="M10.01 14h.005"/><path d="M13.01 14h.005"/><path d="M16.015 14h.005"/><path d="M13.015 17h.005"/><path d="M7.01 17h.005"/><path d="M10.01 17h.005"/></svg>
+      <time>14 Mar, 2026 — 8:00pm</time>
+    </span>
+    <span class="sep">&bull;</span>
+    <span class="reading-time" id="reading-time"></span>
+  </div>
+</header>
+
+<div class="audio-row">
+  <div class="audio-player" id="audio-wrap">
+    <button class="audio-btn" id="audio-btn" aria-label="Play audio" onclick="toggleAudio()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>
+    </button>
+    <div class="audio-progress" id="audio-bar" onclick="seekAudio(event)">
+      <div class="audio-progress-fill" id="audio-fill"></div>
+    </div>
+    <span class="audio-time" id="audio-time">0:00</span>
+    <button class="audio-speed" id="audio-speed" onclick="cycleSpeed()">1x</button>
+    <audio id="audio-el" src="2026-03-14-2000.mp3" preload="metadata"></audio>
+  </div>
+</div>
+
+<main>
+
+  <div class="category cat-crypto">
+    <div class="category-header">
+      <h2>Crypto</h2>
+      <span class="category-count">122w</span>
+    </div>
+    <p class="editorial">Tether's <a href="https://x.com/fintechfrank/status/2032864694067937556" target="_blank">$1.6B investment spree</a> — Rumble, Juventus, gold companies, Anchorage Digital — reads less like treasury management and more like a conglomerate incubation. They're building a parallel financial empire with stablecoin profits while everyone else debates regulation. Meanwhile Aave DAO is <a href="https://x.com/DefiIgnas/status/2032872432315588966" target="_blank">cutting its buyback budget</a> from $50M to $30M as revenue dropped 25% from peak, shifting remaining buybacks from stablecoins to ETH — a quiet admission that DeFi's revenue boom may have peaked. The Ethereum Foundation's <a href="https://x.com/andyyy/status/2032856857753030740" target="_blank">5,000 ETH OTC sale</a> to BitMine at $2,042 signals continued institutional demand for discounted ETH blocks. Grayscale <a href="https://x.com/coinbureau/status/2032875656867098638" target="_blank">staking another 57,600 ETH</a> ($121M) reinforces the pattern. CLARITY stablecoin legislation is <a href="https://x.com/intangiblecoins/status/2032853696824873429" target="_blank">running out of time</a> — needs committee passage by end of April or it dies this session.</p>
+  </div>
+
+  <div class="category cat-ai">
+    <div class="category-header">
+      <h2>AI</h2>
+      <span class="category-count">130w</span>
+    </div>
+    <p class="editorial">Claude's <a href="https://x.com/claudeai/status/2032911276226257206" target="_blank">2x usage boost</a> during off-peak hours is a clever capacity management move disguised as generosity — they're smoothing demand curves while building goodwill. The real signal is <a href="https://x.com/JaredOfAI/status/2032978292056404168" target="_blank">OpenClaw + Codex + Claude Code</a> working as a unified engineering crew via ACP, spawning sub-agents on demand — the agent orchestration layer is becoming real infrastructure. Karpathy's <a href="https://x.com/_kaitodev/status/2032927164883153402" target="_blank">AI job exposure treemap</a> scored every US occupation — average 5.3/10, with screen-based work most exposed. Cognee's <a href="https://x.com/iruletheworldmo/status/2032964133306446114" target="_blank">self-healing AI skills</a> that observe their own failures and auto-amend is the kind of infrastructure that makes the difference between toy agents and production systems. Chrome going <a href="https://x.com/danshipper/status/2032885865375039952" target="_blank">agent-native</a> is potentially huge — the browser is the last mile for agent utility. Multi-agent reliability remains the hard problem: <a href="https://x.com/arscontexta/status/2032927243085746612" target="_blank">10 agents at 90% accuracy each = 35% system reliability</a>.</p>
+  </div>
+
+  <div class="category cat-tech">
+    <div class="category-header">
+      <h2>Tech</h2>
+      <span class="category-count">79w</span>
+    </div>
+    <p class="editorial">Naval's <a href="https://x.com/naval/status/2032893617644384525" target="_blank">"software was eaten by AI"</a> is the bumper sticker version of what's actually happening — the product design loop is collapsing from weeks to hours. Watch <a href="https://x.com/dhasandev/status/2032879033814294854" target="_blank">Codex driving Paper</a> to redesign screens iteratively — taste plus iteration speed is the new product moat. <a href="https://x.com/arvidkahl/status/2032947136199884883" target="_blank">Claude Code running OWASP security sweeps</a> of entire codebases in plan mode — security auditing is being democratized. The meta-pattern: AI isn't replacing developers, it's making the gap between builders-with-taste and everyone else even wider.</p>
+  </div>
+
+  <div class="category cat-stocks_macro">
+    <div class="category-header">
+      <h2>Stocks & Macro</h2>
+      <span class="category-count">105w</span>
+    </div>
+    <p class="editorial">Hormuz is effectively <a href="https://x.com/DeItaone/status/2032969091279966404" target="_blank">shut</a>. Goldman says flows dropped from 19.5M to 0.5M barrels/day — that's not a disruption, that's a blockade. Iran's foreign minister explicitly <a href="https://x.com/nypost/status/2032883839178023094" target="_blank">excludes US and Israeli vessels</a> from passage. Michael Burry's <a href="https://x.com/michaeljburry/status/2032221901846659235" target="_blank">"increasing fragility and coiled tension"</a> analysis hits different when 20% of global oil supply is physically cut off. Chamath asking <a href="https://x.com/chamath/status/2032848348886216719" target="_blank">"when ROI?"</a> on AI spending — not a single major company showing 2x+ returns on incremental AI investment since last fall. Mastercard's <a href="https://x.com/chamath/status/2032891953088729423" target="_blank">85-firm crypto payments push</a> and Polymarket's <a href="https://x.com/kober1337/status/2032918407444836425" target="_blank">top 20 traders all being bots</a> paint an interesting picture: traditional finance is building crypto rails while crypto-native markets are already fully automated.</p>
+  </div>
+
+  <div class="category cat-israel">
+    <div class="category-header">
+      <h2>Israel</h2>
+      <span class="category-count">131w</span>
+    </div>
+    <p class="editorial">Iran launched <a href="https://x.com/sentdefender/status/2032985751751639423" target="_blank">ballistic missiles at central Israel</a> Saturday night — impacts reported in Tel Aviv and Eilat, a <a href="https://x.com/haaretzcom/status/2032990623540670969" target="_blank">12-year-old moderately injured</a>. Multiple interceptions over Tel Aviv but <a href="https://x.com/EndGameWW3/status/2032989965697560622" target="_blank">shrapnel fell in five locations</a>. This is Iran's retaliatory strike while under sustained US/Israeli bombardment — they're burning through remaining missile stockpiles knowing time isn't on their side. The regional spillover is intensifying: <a href="https://x.com/clashreport/status/2032907843435700461" target="_blank">drones struck Kuwait's airport</a> damaging radar systems, <a href="https://x.com/Osinttechnical/status/2032964990857293987" target="_blank">first-ever FPV drone attack by Iranian militia in Iraq</a> near Baghdad airport using fiber-optic links (unjammable), and <a href="https://x.com/Jerusalem_Post/status/2032975056922402887" target="_blank">Saudi Arabia intercepted Iranian attacks on Riyadh</a>. Trump <a href="https://x.com/DeItaone/status/2032963592052445517" target="_blank">called reports of Khamenei's death "a rumor"</a> while threatening to <a href="https://x.com/Jerusalem_Post/status/2032974539248865623" target="_blank">strike Kharg Island again</a>. Top adviser Sacks is <a href="https://x.com/haaretzcom/status/2032972505527296285" target="_blank">calling for an off-ramp</a>, warning Israel may consider nuclear weapons. Six US servicemembers <a href="https://x.com/sentdefender/status/2032989372073808003" target="_blank">confirmed killed</a> in Thursday's KC-135 collision over Iraq.</p>
+  </div>
+
+  <div class="noise">📡 noise (7d): <a href="https://x.com/toly" target="_blank">@toly</a> 5/5 (100%) · <a href="https://x.com/pmarca" target="_blank">@pmarca</a> 17/18 (94%) · <a href="https://x.com/elonmusk" target="_blank">@elonmusk</a> 28/30 (93%) · <a href="https://x.com/umbrel" target="_blank">@umbrel</a> 8/10 (80%) · <a href="https://x.com/philipjohnston" target="_blank">@philipjohnston</a> 8/10 (80%)</div>
+
+</main>
+
+<div class="hr"><hr></div>
+
+<footer>
+  <p class="stats-line">89 tweets · Crypto 18% · AI 34% · Tech 7% · Stocks & Macro 10% · Noise 28 · Israel Monitor · 50 tweets from curated list · source: For You</p>
+  <p class="footer-text">
+    Generated by <a href="https://betoneh.github.io/signal-monitor/">Signal Monitor</a> ·
+    <a href="https://x.com/beto_neh">@beto_neh</a> · 2026-03-14T20:00
+  </p>
+</footer>
+
+<script>
+  // Reading time
+  const text = document.querySelector('main').innerText;
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+  document.getElementById('reading-time').textContent = minutes + ' min read';
+
+  // Progress bar
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Audio player
+  const ael=document.getElementById('audio-el');
+  if(ael){
+    const abtn=document.getElementById('audio-btn');
+    const afill=document.getElementById('audio-fill');
+    const atime=document.getElementById('audio-time');
+    const aspeed=document.getElementById('audio-speed');
+    const playIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>';
+    const pauseIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>';
+    function fmt(s){const m=Math.floor(s/60);return m+':'+(''+(Math.floor(s)%60)).padStart(2,'0');}
+    window.toggleAudio=function(){if(ael.paused){ael.play();abtn.innerHTML=pauseIcon;}else{ael.pause();abtn.innerHTML=playIcon;}};
+    ael.addEventListener('timeupdate',function(){
+      if(ael.duration){afill.style.width=(ael.currentTime/ael.duration*100)+'%';}
+      atime.textContent=fmt(ael.currentTime)+(ael.duration?' / '+fmt(ael.duration):'');
+    });
+    ael.addEventListener('ended',function(){abtn.innerHTML=playIcon;afill.style.width='0%';});
+    window.seekAudio=function(e){
+      const bar=document.getElementById('audio-bar');
+      const pct=e.offsetX/bar.offsetWidth;
+      if(ael.duration)ael.currentTime=pct*ael.duration;
+    };
+    const speeds=[1,1.25,1.5,1.75,2];let si=0;
+    window.cycleSpeed=function(){si=(si+1)%speeds.length;ael.playbackRate=speeds[si];aspeed.textContent=speeds[si]+'x';};
+  }
+
+  // Pull to refresh (PWA)
+  if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+    let sy=0,p=false,d=document,b=d.body;
+    const el=d.createElement('div');
+    el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#8b949e;font-size:14px;z-index:9999;transition:top 0.2s;background:#212737;';
+    el.textContent='\u2193 Pull to refresh';
+    b.prepend(el);
+    d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+    d.addEventListener('touchmove',e=>{
+      if(!p)return;
+      const dy=e.touches[0].clientY-sy;
+      if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+      if(dy>5)e.preventDefault();
+      const t=Math.min(dy*0.4,50);
+      el.style.top=(t-50)+'px';
+      el.textContent=dy>80?'\u2191 Release':'\u2193 Pull to refresh';
+    },{passive:false});
+    d.addEventListener('touchend',e=>{
+      if(!p){return;}p=false;
+      const dy=e.changedTouches[0].clientY-sy;
+      el.style.top='-50px';
+      if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+    });
+  }
+</script>
+</body>
+</html>
