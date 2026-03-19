@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updated_at": "2026-03-12T00:08:17.977Z",
+  "updated_at": "2026-03-19T14:10:59.390Z",
   "model": "claude-opus-4-6",
   "audio": {
-    "enabled": true,
+    "enabled": false,
     "voice": "en-US-JennyNeural"
   },
   "runs": {
