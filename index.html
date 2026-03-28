@@ -24,7 +24,33 @@
         .logo { text-align: center; margin-bottom: 16px; }
         .logo img { width: 80px; height: 80px; border-radius: 20px; }
         h1 { text-align: center; margin-bottom: 10px; }
-        .subtitle { text-align: center; color: #71767b; margin-bottom: 30px; }
+        .subtitle { text-align: center; color: #71767b; margin-bottom: 20px; }
+        
+        /* Tabs */
+        .tabs {
+            display: flex; justify-content: center; gap: 0;
+            margin-bottom: 24px; border-bottom: 1px solid #2f3336;
+        }
+        .tab {
+            padding: 10px 20px; cursor: pointer;
+            color: #71767b; font-size: 0.95em; font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+            background: none; border-top: none; border-left: none; border-right: none;
+        }
+        .tab:hover { color: #e7e9ea; }
+        .tab.active { color: #e7e9ea; border-bottom-color: #1d9bf0; }
+        .tab-reports.active { border-bottom-color: #1d9bf0; }
+        .tab-deepdives.active { border-bottom-color: #eab308; }
+        .tab-kb.active { border-bottom-color: #0ec4a9; }
+        .tab-count {
+            font-size: 0.75em; color: #71767b; background: #1a1a1a;
+            padding: 1px 6px; border-radius: 10px; margin-left: 6px;
+        }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
         ul { list-style: none; padding: 0; }
         li {
             background: #1a1a1a;
@@ -42,6 +68,16 @@
             text-decoration: none;
         }
         .date { color: #71767b; font-size: 0.85em; margin-top: 4px; }
+        .card-tags { display: inline-flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
+        .card-tag {
+            font-size: 0.7em; background: #2f3336; color: #71767b;
+            padding: 1px 6px; border-radius: 3px;
+        }
+        
+        /* Tab-specific hover colors */
+        .tab-content-deepdives li:hover { border-color: #eab308; }
+        .tab-content-kb li:hover { border-color: #0ec4a9; }
+        
         footer {
             text-align: center;
             color: #71767b;
@@ -60,37 +96,326 @@
     <div class="logo"><img src="icon-192.png" alt="Signal Monitor"></div>
     <h1>Signal Monitor</h1>
     <p class="subtitle">Timeline digest by <a href="https://x.com/beto_neh" style="color: #1d9bf0;">@beto_neh</a> · <a href="settings.html" style="color:#71767b;font-size:0.9em;">⚙️ settings</a></p>
-    <ul>
-        <li><a href="2026-03-28-0800.html">March 28, 2026 at 08:00 AM<br><span class="date">2026-03-28-0800</span><br><span class="date" style="color:#eab308;">Stochastic Thermodynamics: The Physics Behind E/ACC</span></a></li><li><a href="2026-03-27-2000.html">March 27, 2026 at 08:00 PM<br><span class="date">2026-03-27-2000</span></a></li><li><a href="2026-03-27-1309.html">March 27, 2026 at 01:09 PM<br><span class="date">2026-03-27-1309</span></a></li><li><a href="2026-03-26-2301.html">March 26, 2026 at 11:01 PM<br><span class="date">2026-03-26-2301</span></a></li><li><a href="2026-03-26-0800.html">March 26, 2026 at 08:00 AM<br><span class="date">2026-03-26-0800</span></a></li><li><a href="2026-03-25-2000.html">March 25, 2026 at 08:00 PM<br><span class="date">2026-03-25-2000</span></a></li><li><a href="2026-03-25-0800.html">March 25, 2026 at 08:00 AM<br><span class="date">2026-03-25-0800</span></a></li><li><a href="2026-03-24-2000.html">March 24, 2026 at 08:00 PM<br><span class="date">2026-03-24-2000</span></a></li><li><a href="2026-03-24-0800.html">March 24, 2026 at 08:00 AM<br><span class="date">2026-03-24-0800</span></a></li><li><a href="2026-03-23-2000.html">March 23, 2026 at 08:00 PM<br><span class="date">2026-03-23-2000</span></a></li><li><a href="2026-03-23-0800.html">March 23, 2026 at 08:00 AM<br><span class="date">2026-03-23-0800</span></a></li><li><a href="2026-03-22-2000.html">March 22, 2026 at 08:00 PM<br><span class="date">2026-03-22-2000</span></a></li><li><a href="2026-03-22-0800.html">March 22, 2026 at 08:00 AM<br><span class="date">2026-03-22-0800</span></a></li><li class="weekly"><a href="weekly/2026-W12.html">📡 Weekly Report — 2026-W12<br><span class="date">2026-W12</span></a></li><li class="weekly" style="border-color:#00c853"><a href="weekly/2026-W12-radar.html">🔭 Oasis Vault Radar — 2026-W12<br><span class="date">2026-W12</span></a></li><li><a href="2026-03-21-2000.html">March 21, 2026 at 08:00 PM<br><span class="date">2026-03-21-2000</span></a></li><li><a href="2026-03-21-0802.html">March 21, 2026 at 08:02 AM<br><span class="date">2026-03-21-0802</span></a></li><li><a href="2026-03-20-2000.html">March 20, 2026 at 08:00 PM<br><span class="date">2026-03-20-2000</span></a></li><li><a href="2026-03-20-0800.html">March 20, 2026 at 08:00 AM<br><span class="date">2026-03-20-0800</span></a></li><li><a href="2026-03-19-2000.html">March 19, 2026 at 08:00 PM<br><span class="date">2026-03-19-2000</span></a></li><li><a href="2026-03-19-0802.html">March 19, 2026 at 08:02 AM<br><span class="date">2026-03-19-0802</span></a></li><li><a href="2026-03-18-2000.html">March 18, 2026 at 08:00 PM<br><span class="date">2026-03-18-2000</span></a></li><li><a href="2026-03-18-0800.html">March 18, 2026 at 08:00 AM<br><span class="date">2026-03-18-0800</span></a></li><li><a href="2026-03-17-2000.html">March 17, 2026 at 08:00 PM<br><span class="date">2026-03-17-2000</span></a></li><li><a href="2026-03-17-0801.html">March 17, 2026 at 08:01 AM<br><span class="date">2026-03-17-0801</span></a></li><li><a href="2026-03-16-2000.html">March 16, 2026 at 08:00 PM<br><span class="date">2026-03-16-2000</span></a></li><li><a href="2026-03-16-0800.html">March 16, 2026 at 08:00 AM<br><span class="date">2026-03-16-0800</span></a></li><li><a href="2026-03-15-2001.html">March 15, 2026 at 08:01 PM<br><span class="date">2026-03-15-2001</span></a></li><li><a href="2026-03-15-0800.html">March 15, 2026 at 08:00 AM<br><span class="date">2026-03-15-0800</span></a></li><li class="weekly"><a href="weekly/2026-W11.html">📡 Weekly Report — 2026-W11<br><span class="date">2026-W11</span></a></li><li class="weekly" style="border-color:#00c853"><a href="weekly/2026-W11-radar.html">🔭 Oasis Vault Radar — 2026-W11<br><span class="date">2026-W11</span></a></li><li><a href="2026-03-14-2000.html">March 14, 2026 at 08:00 PM<br><span class="date">2026-03-14-2000</span></a></li><li><a href="2026-03-14-0800.html">March 14, 2026 at 08:00 AM<br><span class="date">2026-03-14-0800</span></a></li><li><a href="2026-03-13-2000.html">March 13, 2026 at 08:00 PM<br><span class="date">2026-03-13-2000</span></a></li><li><a href="2026-03-13-0800.html">March 13, 2026 at 08:00 AM<br><span class="date">2026-03-13-0800</span></a></li><li><a href="2026-03-12-2000.html">March 12, 2026 at 08:00 PM<br><span class="date">2026-03-12-2000</span></a></li><li><a href="2026-03-12-0800.html">March 12, 2026 at 08:00 AM<br><span class="date">2026-03-12-0800</span></a></li><li><a href="2026-03-11-2217.html">March 11, 2026 at 10:17 PM<br><span class="date">2026-03-11-2217</span></a></li><li><a href="2026-03-11-2000.html">March 11, 2026 at 08:00 PM<br><span class="date">2026-03-11-2000</span></a></li><li><a href="2026-03-11-0800.html">March 11, 2026 at 08:00 AM<br><span class="date">2026-03-11-0800</span></a></li><li><a href="2026-03-10-2300.html">March 10, 2026 at 11:00 PM<br><span class="date">2026-03-10-2300</span></a></li><li><a href="2026-03-10-2213.html">March 10, 2026 at 10:13 PM<br><span class="date">2026-03-10-2213</span></a></li><li><a href="2026-03-10-2135.html">March 10, 2026 at 09:35 PM<br><span class="date">2026-03-10-2135</span></a></li><li><a href="2026-03-10-2000.html">March 10, 2026 at 08:00 PM<br><span class="date">2026-03-10-2000</span></a></li><li><a href="2026-03-10-0800.html">March 10, 2026 at 08:00 AM<br><span class="date">2026-03-10-0800</span></a></li><li><a href="2026-03-09-2000.html">March 09, 2026 at 08:00 PM<br><span class="date">2026-03-09-2000</span></a></li><li><a href="2026-03-09-1749.html">March 09, 2026 at 05:49 PM<br><span class="date">2026-03-09-1749</span></a></li><li><a href="2026-03-09-1744.html">March 09, 2026 at 05:44 PM<br><span class="date">2026-03-09-1744</span></a></li><li><a href="2026-03-09-0838.html">March 09, 2026 at 08:38 AM<br><span class="date">2026-03-09-0838</span></a></li><li><a href="2026-03-08-2000.html">March 08, 2026 at 08:00 PM<br><span class="date">2026-03-08-2000</span></a></li><li><a href="2026-03-08-0800.html">March 08, 2026 at 08:00 AM<br><span class="date">2026-03-08-0800</span></a></li><li class="weekly"><a href="weekly/2026-W10.html">📡 Weekly Report — 2026-W10<br><span class="date">2026-W10</span></a></li><li class="weekly" style="border-color:#00c853"><a href="weekly/2026-W10-radar.html">🔭 Oasis Vault Radar — 2026-W10<br><span class="date">2026-W10</span></a></li><li><a href="2026-03-07-2001.html">March 07, 2026 at 08:01 PM<br><span class="date">2026-03-07-2001</span></a></li><li><a href="2026-03-07-0800.html">March 07, 2026 at 08:00 AM<br><span class="date">2026-03-07-0800</span></a></li><li><a href="2026-03-06-2009.html">March 06, 2026 at 08:09 PM<br><span class="date">2026-03-06-2009</span></a></li><li class="weekly"><a href="weekly/2026-W09.html">📡 Weekly Report — 2026-W09<br><span class="date">2026-W09</span></a></li><li class="weekly" style="border-color:#00c853"><a href="weekly/2026-W09-radar.html">🔭 Oasis Vault Radar — 2026-W09<br><span class="date">2026-W09</span></a></li><li class="weekly"><a href="weekly/2026-W08.html">📡 Weekly Report — 2026-W08<br><span class="date">2026-W08</span></a></li><li class="weekly" style="border-color:#00c853"><a href="weekly/2026-W08-radar.html">🔭 Oasis Vault Radar — 2026-W08<br><span class="date">2026-W08</span></a></li><li class="weekly"><a href="weekly/2026-W07.html">📡 Weekly Report — 2026-W07<br><span class="date">2026-W07</span></a></li><li class="weekly" style="border-color:#00c853"><a href="weekly/2026-W07-radar.html">🔭 Oasis Vault Radar — 2026-W07<br><span class="date">2026-W07</span></a></li>
-    </ul>
+    
+    <div class="tabs">
+        <button class="tab tab-reports active" onclick="showTab('reports')">Reports<span class="tab-count">56</span></button>
+        <button class="tab tab-deepdives" onclick="showTab('deepdives')">Deep Dives<span class="tab-count">30</span></button>
+        <button class="tab tab-kb" onclick="showTab('kb')">Knowledge Base<span class="tab-count">11</span></button>
+    </div>
+    
+    <div id="tab-reports" class="tab-content tab-content-reports active">
+        <ul><li><a href="2026-03-28-0800.html">March 28, 2026 at 08:00 AM<br><span class="date">2026-03-28-0800</span><br><span class="date" style="color:#eab308;">Stochastic Thermodynamics: The Physics Behind E/ACC</span></a></li>
+<li><a href="2026-03-27-2000.html">March 27, 2026 at 08:00 PM<br><span class="date">2026-03-27-2000</span></a></li>
+<li><a href="2026-03-27-1309.html">March 27, 2026 at 01:09 PM<br><span class="date">2026-03-27-1309</span></a></li>
+<li><a href="2026-03-26-2301.html">March 26, 2026 at 11:01 PM<br><span class="date">2026-03-26-2301</span></a></li>
+<li><a href="2026-03-26-0800.html">March 26, 2026 at 08:00 AM<br><span class="date">2026-03-26-0800</span></a></li>
+<li><a href="2026-03-25-2000.html">March 25, 2026 at 08:00 PM<br><span class="date">2026-03-25-2000</span></a></li>
+<li><a href="2026-03-25-0800.html">March 25, 2026 at 08:00 AM<br><span class="date">2026-03-25-0800</span></a></li>
+<li><a href="2026-03-24-2000.html">March 24, 2026 at 08:00 PM<br><span class="date">2026-03-24-2000</span></a></li>
+<li><a href="2026-03-24-0800.html">March 24, 2026 at 08:00 AM<br><span class="date">2026-03-24-0800</span></a></li>
+<li><a href="2026-03-23-2000.html">March 23, 2026 at 08:00 PM<br><span class="date">2026-03-23-2000</span></a></li>
+<li><a href="2026-03-23-0800.html">March 23, 2026 at 08:00 AM<br><span class="date">2026-03-23-0800</span></a></li>
+<li><a href="2026-03-22-2000.html">March 22, 2026 at 08:00 PM<br><span class="date">2026-03-22-2000</span></a></li>
+<li><a href="2026-03-22-0800.html">March 22, 2026 at 08:00 AM<br><span class="date">2026-03-22-0800</span></a></li>
+<li><a href="2026-03-21-2000.html">March 21, 2026 at 08:00 PM<br><span class="date">2026-03-21-2000</span></a></li>
+<li><a href="2026-03-21-0802.html">March 21, 2026 at 08:02 AM<br><span class="date">2026-03-21-0802</span></a></li>
+<li><a href="2026-03-20-2000.html">March 20, 2026 at 08:00 PM<br><span class="date">2026-03-20-2000</span></a></li>
+<li><a href="2026-03-20-0800.html">March 20, 2026 at 08:00 AM<br><span class="date">2026-03-20-0800</span></a></li>
+<li><a href="2026-03-19-2000.html">March 19, 2026 at 08:00 PM<br><span class="date">2026-03-19-2000</span></a></li>
+<li><a href="2026-03-19-0802.html">March 19, 2026 at 08:02 AM<br><span class="date">2026-03-19-0802</span></a></li>
+<li><a href="2026-03-18-2000.html">March 18, 2026 at 08:00 PM<br><span class="date">2026-03-18-2000</span></a></li>
+<li><a href="2026-03-18-0800.html">March 18, 2026 at 08:00 AM<br><span class="date">2026-03-18-0800</span></a></li>
+<li><a href="2026-03-17-2000.html">March 17, 2026 at 08:00 PM<br><span class="date">2026-03-17-2000</span></a></li>
+<li><a href="2026-03-17-0801.html">March 17, 2026 at 08:01 AM<br><span class="date">2026-03-17-0801</span></a></li>
+<li><a href="2026-03-16-2000.html">March 16, 2026 at 08:00 PM<br><span class="date">2026-03-16-2000</span></a></li>
+<li><a href="2026-03-16-0800.html">March 16, 2026 at 08:00 AM<br><span class="date">2026-03-16-0800</span></a></li>
+<li><a href="2026-03-15-2001.html">March 15, 2026 at 08:01 PM<br><span class="date">2026-03-15-2001</span></a></li>
+<li><a href="2026-03-15-0800.html">March 15, 2026 at 08:00 AM<br><span class="date">2026-03-15-0800</span></a></li>
+<li><a href="2026-03-14-2000.html">March 14, 2026 at 08:00 PM<br><span class="date">2026-03-14-2000</span></a></li>
+<li><a href="2026-03-14-0800.html">March 14, 2026 at 08:00 AM<br><span class="date">2026-03-14-0800</span></a></li>
+<li><a href="2026-03-13-2000.html">March 13, 2026 at 08:00 PM<br><span class="date">2026-03-13-2000</span></a></li>
+<li><a href="2026-03-13-0800.html">March 13, 2026 at 08:00 AM<br><span class="date">2026-03-13-0800</span></a></li>
+<li><a href="2026-03-12-2000.html">March 12, 2026 at 08:00 PM<br><span class="date">2026-03-12-2000</span></a></li>
+<li><a href="2026-03-12-0800.html">March 12, 2026 at 08:00 AM<br><span class="date">2026-03-12-0800</span></a></li>
+<li><a href="2026-03-11-2217.html">March 11, 2026 at 10:17 PM<br><span class="date">2026-03-11-2217</span></a></li>
+<li><a href="2026-03-11-2000.html">March 11, 2026 at 08:00 PM<br><span class="date">2026-03-11-2000</span></a></li>
+<li><a href="2026-03-11-0800.html">March 11, 2026 at 08:00 AM<br><span class="date">2026-03-11-0800</span></a></li>
+<li><a href="2026-03-10-2300.html">March 10, 2026 at 11:00 PM<br><span class="date">2026-03-10-2300</span></a></li>
+<li><a href="2026-03-10-2213.html">March 10, 2026 at 10:13 PM<br><span class="date">2026-03-10-2213</span></a></li>
+<li><a href="2026-03-10-2135.html">March 10, 2026 at 09:35 PM<br><span class="date">2026-03-10-2135</span></a></li>
+<li><a href="2026-03-10-2000.html">March 10, 2026 at 08:00 PM<br><span class="date">2026-03-10-2000</span></a></li>
+<li><a href="2026-03-10-0800.html">March 10, 2026 at 08:00 AM<br><span class="date">2026-03-10-0800</span></a></li>
+<li><a href="2026-03-09-2000.html">March 09, 2026 at 08:00 PM<br><span class="date">2026-03-09-2000</span></a></li>
+<li><a href="2026-03-09-1749.html">March 09, 2026 at 05:49 PM<br><span class="date">2026-03-09-1749</span></a></li>
+<li><a href="2026-03-09-1744.html">March 09, 2026 at 05:44 PM<br><span class="date">2026-03-09-1744</span></a></li>
+<li><a href="2026-03-09-0838.html">March 09, 2026 at 08:38 AM<br><span class="date">2026-03-09-0838</span></a></li>
+<li><a href="2026-03-08-2000.html">March 08, 2026 at 08:00 PM<br><span class="date">2026-03-08-2000</span></a></li>
+<li><a href="2026-03-08-0800.html">March 08, 2026 at 08:00 AM<br><span class="date">2026-03-08-0800</span></a></li>
+<li><a href="2026-03-07-2001.html">March 07, 2026 at 08:01 PM<br><span class="date">2026-03-07-2001</span></a></li>
+<li><a href="2026-03-07-0800.html">March 07, 2026 at 08:00 AM<br><span class="date">2026-03-07-0800</span></a></li>
+<li><a href="2026-03-06-2009.html">March 06, 2026 at 08:09 PM<br><span class="date">2026-03-06-2009</span></a></li>
+<li class="weekly"><a href="weekly/2026-W10.html">📡 Weekly Report — 2026-W10<br><span class="date">2026-W10</span></a></li>
+<li class="weekly"><a href="weekly/2026-W11.html">📡 Weekly Report — 2026-W11<br><span class="date">2026-W11</span></a></li>
+<li class="weekly"><a href="weekly/2026-W07.html">📡 Weekly Report — 2026-W07<br><span class="date">2026-W07</span></a></li>
+<li class="weekly"><a href="weekly/2026-W12.html">📡 Weekly Report — 2026-W12<br><span class="date">2026-W12</span></a></li>
+<li class="weekly"><a href="weekly/2026-W08.html">📡 Weekly Report — 2026-W08<br><span class="date">2026-W08</span></a></li>
+<li class="weekly"><a href="weekly/2026-W09.html">📡 Weekly Report — 2026-W09<br><span class="date">2026-W09</span></a></li></ul>
+    </div>
+    
+    <div id="tab-deepdives" class="tab-content tab-content-deepdives">
+        <ul><li><a href="deep-dives/001-stochastic-thermodynamics-the-physics-behind-eacc.html">
+          Stochastic Thermodynamics: The Physics Behind E/ACC<br>
+          <span class="date">#01 · 459w · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">eacc</span><span class="card-tag">energy</span><span class="card-tag">evolution</span></span>
+        </a></li>
+<li><a href="deep-dives/002-the-selfish-bit-verdons-update-to-dawkins.html">
+          The Selfish Bit: Verdon's Update to Dawkins<br>
+          <span class="date">#02 · 426w · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">computing</span><span class="card-tag">eacc</span><span class="card-tag">energy</span></span>
+        </a></li>
+<li><a href="deep-dives/003-dacc-vitaliks-defensive-acceleration.html">
+          D/ACC: Vitalik's Defensive Acceleration<br>
+          <span class="date">#03 · 442w · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">agents</span><span class="card-tag">ai</span><span class="card-tag">alignment</span><span class="card-tag">biosecurity</span></span>
+        </a></li>
+<li><a href="deep-dives/004-the-kardashev-scale-energy-as-the-measure-of-civilization.html">
+          The Kardashev Scale: Energy as the Measure of Civilization<br>
+          <span class="date">#04 · 439w · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">computing</span><span class="card-tag">dacc</span><span class="card-tag">eacc</span></span>
+        </a></li>
+<li><a href="deep-dives/005-fully-homomorphic-encryption-computing-on-secrets.html">
+          Fully Homomorphic Encryption: Computing on Secrets<br>
+          <span class="date">#05 · 477w · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">biosecurity</span><span class="card-tag">computing</span><span class="card-tag">crypto</span></span>
+        </a></li>
+<li><a href="deep-dives/006-autonomous-ai-agents-web-40-and-artificial-life.html">
+          Autonomous AI Agents: Web 4.0 and Artificial Life<br>
+          <span class="date">#06 · 461w · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">agents</span><span class="card-tag">ai</span><span class="card-tag">computing</span><span class="card-tag">crypto</span></span>
+        </a></li>
+<li><a href="deep-dives/007-crypto-as-inter-species-trust-infrastructure.html">
+          Crypto as Inter-Species Trust Infrastructure<br>
+          <span class="date">#07 · 489w · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">agents</span><span class="card-tag">ai</span><span class="card-tag">crypto</span><span class="card-tag">eacc</span></span>
+        </a></li>
+<li><a href="deep-dives/008-extropic-and-the-post-gpu-computing-revolution.html">
+          Extropic and the Post-GPU Computing Revolution<br>
+          <span class="date">#08 · 481w · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">cognitive_security</span><span class="card-tag">computing</span><span class="card-tag">eacc</span></span>
+        </a></li>
+<li><a href="deep-dives/009-cognitive-security-the-ai-prompt-war.html">
+          Cognitive Security: The AI Prompt War<br>
+          <span class="date">#09 · 468w · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">biosecurity</span><span class="card-tag">cognitive_security</span><span class="card-tag">computing</span></span>
+        </a></li>
+<li><a href="deep-dives/010-the-nuclear-analogy-can-we-regulate-ai-like-we-regulated-the.html">
+          The Nuclear Analogy: Can We Regulate AI Like We Regulated the Bomb?<br>
+          <span class="date">#10 · 520w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">computing</span><span class="card-tag">eacc</span><span class="card-tag">energy</span></span>
+        </a></li>
+<li><a href="deep-dives/011-nick-land-ccru-and-the-philosophical-roots-of-accelerationis.html">
+          Nick Land, CCRU, and the Philosophical Roots of Accelerationism<br>
+          <span class="date">#11 · 467w · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">agents</span><span class="card-tag">computing</span><span class="card-tag">crypto</span><span class="card-tag">dacc</span></span>
+        </a></li>
+<li><a href="deep-dives/012-jevons-paradox-why-efficiency-doesnt-save-resources.html">
+          Jevons' Paradox: Why Efficiency Doesn't Save Resources<br>
+          <span class="date">#12 · 504w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">computing</span><span class="card-tag">eacc</span><span class="card-tag">economics</span></span>
+        </a></li>
+<li><a href="deep-dives/013-unipolar-vs-multipolar-risk-vitaliks-threat-taxonomy.html">
+          Unipolar vs. Multipolar Risk: Vitalik's Threat Taxonomy<br>
+          <span class="date">#13 · 530w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">agents</span><span class="card-tag">ai</span><span class="card-tag">alignment</span><span class="card-tag">computing</span></span>
+        </a></li>
+<li><a href="deep-dives/014-biosecurity-and-pandemic-defense-dacc-in-practice.html">
+          Biosecurity and Pandemic Defense: D/ACC in Practice<br>
+          <span class="date">#14 · 490w · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">biosecurity</span><span class="card-tag">computing</span><span class="card-tag">crypto</span></span>
+        </a></li>
+<li><a href="deep-dives/015-rlhf-mechanistic-interpretability-and-the-accidental-alignme.html">
+          RLHF, Mechanistic Interpretability, and the Accidental Alignment Progress<br>
+          <span class="date">#15 · 514w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">alignment</span><span class="card-tag">eacc</span><span class="card-tag">information_theory</span></span>
+        </a></li>
+<li><a href="deep-dives/016-dissipative-structures-prigogines-framework-for-life-and-civ.html">
+          Dissipative Structures: Prigogine's Framework for Life and Civilization<br>
+          <span class="date">#16 · 505w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">crypto</span><span class="card-tag">eacc</span><span class="card-tag">energy</span><span class="card-tag">information_theory</span></span>
+        </a></li>
+<li><a href="deep-dives/017-the-dyson-swarm-post-earth-intelligence-infrastructure.html">
+          The Dyson Swarm: Post-Earth Intelligence Infrastructure<br>
+          <span class="date">#17 · 493w · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">eacc</span><span class="card-tag">economics</span><span class="card-tag">energy</span></span>
+        </a></li>
+<li><a href="deep-dives/018-the-anthropic-paradox-when-safety-labs-become-the-risk.html">
+          The Anthropic Paradox: When Safety Labs Become the Risk<br>
+          <span class="date">#18 · 510w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">agents</span><span class="card-tag">ai</span><span class="card-tag">alignment</span><span class="card-tag">dacc</span></span>
+        </a></li>
+<li><a href="deep-dives/019-brain-computer-interfaces-and-the-soft-merge.html">
+          Brain-Computer Interfaces and the Soft Merge<br>
+          <span class="date">#19 · 523w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">computing</span><span class="card-tag">eacc</span><span class="card-tag">information_theory</span></span>
+        </a></li>
+<li><a href="deep-dives/020-the-geopolitics-of-chip-fabs-taiwan-asml-and-the-ai-chokepoi.html">
+          The Geopolitics of Chip Fabs: Taiwan, ASML, and the AI Chokepoint<br>
+          <span class="date">#20 · 576w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">computing</span><span class="card-tag">crypto</span><span class="card-tag">eacc</span></span>
+        </a></li>
+<li><a href="deep-dives/021-the-second-amendment-for-ai-open-source-as-power-symmetry.html">
+          The Second Amendment for AI: Open Source as Power Symmetry<br>
+          <span class="date">#21 · 600w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">biosecurity</span><span class="card-tag">computing</span><span class="card-tag">crypto</span></span>
+        </a></li>
+<li><a href="deep-dives/022-vibe-coding-and-the-new-division-of-cognitive-labor.html">
+          Vibe Coding and the New Division of Cognitive Labor<br>
+          <span class="date">#22 · 629w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">crypto</span><span class="card-tag">eacc</span><span class="card-tag">neuroscience</span></span>
+        </a></li>
+<li><a href="deep-dives/023-verifiable-hardware-cameras-that-prove-what-they-see.html">
+          Verifiable Hardware: Cameras That Prove What They See<br>
+          <span class="date">#23 · 599w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">alignment</span><span class="card-tag">computing</span><span class="card-tag">crypto</span></span>
+        </a></li>
+<li><a href="deep-dives/024-the-shattered-beliefs-cycle-from-1914-to-2026.html">
+          The Shattered Beliefs Cycle: From 1914 to 2026<br>
+          <span class="date">#24 · 586w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">cognitive_security</span><span class="card-tag">dacc</span><span class="card-tag">eacc</span></span>
+        </a></li>
+<li><a href="deep-dives/025-abiogenesis-and-the-physics-of-lifes-origin.html">
+          Abiogenesis and the Physics of Life's Origin<br>
+          <span class="date">#25 · 557w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">computing</span><span class="card-tag">eacc</span><span class="card-tag">energy</span></span>
+        </a></li>
+<li><a href="deep-dives/026-online-learning-and-the-era-of-sticky-ai.html">
+          Online Learning and the Era of Sticky AI<br>
+          <span class="date">#26 · 637w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">cognitive_security</span><span class="card-tag">eacc</span><span class="card-tag">evolution</span></span>
+        </a></li>
+<li><a href="deep-dives/027-differential-privacy-the-mathematics-of-anonymity.html">
+          Differential Privacy: The Mathematics of Anonymity<br>
+          <span class="date">#27 · 605w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">computing</span><span class="card-tag">crypto</span><span class="card-tag">dacc</span><span class="card-tag">geopolitics</span></span>
+        </a></li>
+<li><a href="deep-dives/028-the-local-ai-movement-from-cloud-dependency-to-cognitive-sov.html">
+          The Local AI Movement: From Cloud Dependency to Cognitive Sovereignty<br>
+          <span class="date">#28 · 622w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">cognitive_security</span><span class="card-tag">computing</span><span class="card-tag">eacc</span></span>
+        </a></li>
+<li><a href="deep-dives/029-the-fitness-landscape-cultural-selection-and-memetic-evoluti.html">
+          The Fitness Landscape: Cultural Selection and Memetic Evolution<br>
+          <span class="date">#29 · 571w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">dacc</span><span class="card-tag">eacc</span><span class="card-tag">energy</span></span>
+        </a></li>
+<li><a href="deep-dives/030-the-trust-stack-how-humans-and-ai-will-actually-cooperate.html">
+          The Trust Stack: How Humans and AI Will Actually Cooperate<br>
+          <span class="date">#30 · 622w · 3 min</span><br>
+          <span class="card-tags"><span class="card-tag">agents</span><span class="card-tag">ai</span><span class="card-tag">cognitive_security</span><span class="card-tag">computing</span></span>
+        </a></li></ul>
+    </div>
+    
+    <div id="tab-kb" class="tab-content tab-content-kb">
+        <ul><li><a href="kb/autoresearch-genealogy.html">
+          Autoresearch Genealogy<br>
+          <span class="date">2026-03-18 · 2 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">genealogy</span><span class="card-tag">autoresearch</span><span class="card-tag">karpathy</span></span>
+        </a></li>
+<li><a href="kb/eacc-vs-dacc-vitalik-beff-jezos.html">
+          Vitalik Buterin vs Beff Jezos: AI Acceleration Debate (E/acc vs D/acc)<br>
+          <span class="date">2026-03-28 · video · 92 min</span><br>
+          <span class="card-tags"><span class="card-tag">AI</span><span class="card-tag">e/acc</span><span class="card-tag">d/acc</span><span class="card-tag">acceleration</span></span>
+        </a></li>
+<li><a href="kb/how-crypto-actually-works.html">
+          How Crypto Actually Works<br>
+          <span class="date">2026-02-27 · book · 467 min</span><br>
+          <span class="card-tags"><span class="card-tag">crypto</span><span class="card-tag">bitcoin</span><span class="card-tag">ethereum</span><span class="card-tag">solana</span></span>
+        </a></li>
+<li><a href="kb/library-of-babel-borges.html">
+          The Library of Babel<br>
+          <span class="date">2026-02-24 · fiction / essay · 17 min</span><br>
+          <span class="card-tags"><span class="card-tag">borges</span><span class="card-tag">infinity</span><span class="card-tag">epistemology</span><span class="card-tag">combinatorics</span></span>
+        </a></li>
+<li><a href="kb/marc-andreessen-real-ai-boom.html">
+          Marc Andreessen: The Real AI Boom Hasn't Even Started Yet<br>
+          <span class="date">2026-03-01 · podcast · 134 min</span><br>
+          <span class="card-tags"><span class="card-tag">ai</span><span class="card-tag">career</span><span class="card-tag">product-management</span><span class="card-tag">engineering</span></span>
+        </a></li>
+<li><a href="kb/punk6529-nfts-roundtable.html">
+          158 - You're Not Bullish Enough on NFTs with Punk6529<br>
+          <span class="date">2026-02-22 · 79 min</span><br>
+          <span class="card-tags"><span class="card-tag">nfts</span><span class="card-tag">crypto</span><span class="card-tag">digital-property</span><span class="card-tag">punk6529</span></span>
+        </a></li>
+<li><a href="kb/safe-cross-chain-fund-recovery.html">
+          Cross-Chain Fund Recovery: Safe Smart Account via CREATE2 Replay<br>
+          <span class="date">2026-03-16 · procedure · 5 min</span><br>
+          <span class="card-tags"><span class="card-tag">safe</span><span class="card-tag">erc-4337</span><span class="card-tag">create2</span><span class="card-tag">cross-chain</span></span>
+        </a></li>
+<li><a href="kb/sec-crypto-interpretation-33-11412.html">
+          Application of Federal Securities Laws to Crypto Assets<br>
+          <span class="date">2026-03-17 · paper · 94 min</span><br>
+          <span class="card-tags"><span class="card-tag">sec</span><span class="card-tag">cftc</span><span class="card-tag">crypto</span><span class="card-tag">regulation</span></span>
+        </a></li>
+<li><a href="kb/techno-optimist-manifesto.html">
+          The Techno-Optimist Manifesto<br>
+          <span class="date">2026-02-22 · manifesto · 28 min</span><br>
+          <span class="card-tags"><span class="card-tag">technology</span><span class="card-tag">philosophy</span><span class="card-tag">progress</span><span class="card-tag">capitalism</span></span>
+        </a></li>
+<li><a href="kb/where-does-money-come-from.html">
+          Where Does Money Come From?<br>
+          <span class="date">2026-03-02 · book · 10 min</span><br>
+          <span class="card-tags"><span class="card-tag">money</span><span class="card-tag">banking</span><span class="card-tag">monetary-system</span><span class="card-tag">credit</span></span>
+        </a></li>
+<li><a href="kb/where-is-my-flying-car-hall.html">
+          Where Is My Flying Car?<br>
+          <span class="date">2026-03-07 · book · 645 min</span><br>
+          <span class="card-tags"><span class="card-tag">technology</span><span class="card-tag">progress</span><span class="card-tag">stagnation</span><span class="card-tag">futurism</span></span>
+        </a></li></ul>
+    </div>
+    
     <footer>
         Powered by <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a>
     </footer>
+    
     <script>
-        // PWA pull-to-refresh (only in standalone mode)
-        if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
-            let sy=0,p=false,d=document,b=d.body;
-            const el=d.createElement('div');
-            el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#71767b;font-size:14px;z-index:9999;transition:top 0.2s;background:#0f0f0f;';
-            el.textContent='↓ Pull to refresh';
-            b.prepend(el);
-            d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
-            d.addEventListener('touchmove',e=>{
-                if(!p)return;
-                const dy=e.touches[0].clientY-sy;
-                if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
-                if(dy>5)e.preventDefault();
-                const t=Math.min(dy*0.4,50);
-                el.style.top=(t-50)+'px';
-                el.textContent=dy>80?'↑ Release':'\u2193 Pull to refresh';
-            },{passive:false});
-            d.addEventListener('touchend',e=>{
-                if(!p){return;}p=false;
-                const dy=e.changedTouches[0].clientY-sy;
-                el.style.top='-50px';
-                if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
-            });
-        }
+    function showTab(name) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+        document.getElementById('tab-' + name).classList.add('active');
+        document.querySelector('.tab-' + name).classList.add('active');
+        // Save preference
+        try { localStorage.setItem('sm-tab', name); } catch(e) {}
+    }
+    // Restore last tab
+    try {
+        const saved = localStorage.getItem('sm-tab');
+        if (saved) showTab(saved);
+    } catch(e) {}
+    
+    // PWA pull-to-refresh
+    if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+        let sy=0,p=false,d=document,b=d.body;
+        const el=d.createElement('div');
+        el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#71767b;font-size:14px;z-index:9999;transition:top 0.2s;background:#0f0f0f;';
+        el.textContent='\u2193 Pull to refresh';
+        b.prepend(el);
+        d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+        d.addEventListener('touchmove',e=>{
+            if(!p)return;
+            const dy=e.touches[0].clientY-sy;
+            if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+            if(dy>5)e.preventDefault();
+            const t=Math.min(dy*0.4,50);
+            el.style.top=(t-50)+'px';
+            el.textContent=dy>80?'\u2191 Release':'\u2193 Pull to refresh';
+        },{passive:false});
+        d.addEventListener('touchend',e=>{
+            if(!p){return;}p=false;
+            const dy=e.changedTouches[0].clientY-sy;
+            el.style.top='-50px';
+            if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+        });
+    }
     </script>
 </body>
 </html>

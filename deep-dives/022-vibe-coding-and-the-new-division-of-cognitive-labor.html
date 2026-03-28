@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe Coding and the New Division of Cognitive Labor — Signal Monitor</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: none; }
+  .content a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+</style>
+</head>
+<body>
+<header>
+  <a href="../" class="back">← Signal Monitor</a>
+  <h1>Vibe Coding and the New Division of Cognitive Labor</h1>
+  <div class="meta">3 min read · 629 words · Deep Dive #22</div>
+  <div class="tags"><span class="tag">ai</span><span class="tag">crypto</span><span class="tag">eacc</span><span class="tag">neuroscience</span><span class="tag">physics</span><span class="tag">tech</span></div>
+</header>
+<main>
+  <div class="content"><p><a href="https://extropic.ai" target="_blank">Verdon</a> casually introduces the term "vibe coding" to describe the emerging relationship between human and artificial cognition — and in doing so, names something that's already reshaping how creative and technical work happens. The concept is richer than it sounds.</p>
+<p>"Vibe coding" refers to a mode of human-AI collaboration where the human provides high-level direction — goals, aesthetics, constraints, "vibes" — and the AI handles the implementation details. You don't write code line by line; you describe what you want and the AI generates it. You don't design pixel by pixel; you convey the feel and the AI produces variations. The human operates in what Verdon calls "vibe space" — the realm of intention, taste, and judgment. The AI operates in "execution space" — the realm of syntax, optimization, and implementation.</p>
+<p>This is already happening at scale. GitHub Copilot, Cursor, and similar tools have transformed programming from "writing code" to "directing code generation." Designers use Midjourney and DALL-E not as replacement tools but as exploration engines — generating dozens of variations to find the right direction, then refining. Musicians use AI to generate melodic variations they'd never have considered. In each case, the human's value shifts from execution to curation, from production to taste.</p>
+<p>Verdon frames this as a "time scale separation" — a concept from physics where systems with different characteristic speeds interact productively. In a coupled oscillator system, slow modes set the overall trajectory while fast modes handle rapid adjustments. Humans are the slow mode: we set direction, make value judgments, and define success criteria. AI is the fast mode: it explores solution spaces, generates options, and optimizes within the constraints we set.</p>
+<p>This reframes the entire "AI taking jobs" narrative. The fear is that AI replaces human cognition entirely. The vibe coding model suggests something different: AI replaces the mechanical aspects of cognition (the "deconvolution," as Verdon puts it) while amplifying the uniquely human aspects — creativity, judgment, emotional resonance, contextual understanding. The architect doesn't become obsolete when CAD software arrives; the architect becomes more powerful because they can explore more designs faster.</p>
+<p>The economic implications are significant. If implementation becomes nearly free (AI generates code, designs, text at marginal cost near zero), then the scarce resource becomes taste — the ability to know what's good, what's right, what resonates. This inverts the traditional hierarchy. In the old model, the person who could execute was valuable. In the new model, the person who can direct is valuable. Execution is commodity; vision is scarce.</p>
+<p>There's a class dimension here that neither debater addresses directly. Vibe coding is great if you're a senior developer who understands systems architecture and can judge AI output. It's less clear what happens to the junior developer who was learning through the implementation work that AI now handles. If the apprenticeship path disappears, how do people develop the judgment needed for vibe-level direction? This is the "missing rung" problem: AI removes the ladder that future experts would have climbed.</p>
+<p>Verdon's answer would likely be that AI also serves as the teacher — interactive tutors that can adapt to each student's level and learning style. But this assumes the educational application is developed and deployed with the same urgency as the productivity application. History suggests otherwise: labor-saving tools always arrive before the educational infrastructure to adapt to them.</p>
+<p>The deeper philosophical point is about human identity. If our value is in vibes — in taste, judgment, feeling — then what does it mean to be human in the AI age? It means being the thing that has preferences. The thing that cares. The thing that finds some outputs beautiful and others ugly, for reasons that can't be fully articulated in a loss function. In a world of infinite generation capacity, the curator becomes king.</p></div>
+  <div class="source">Source: <a href="https://www.youtube.com/watch?v=NSm6GRiMkzU" target="_blank">Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</a></div>
+</main>
+<footer>
+  <a href="../">Signal Monitor</a> · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+</body>
+</html>

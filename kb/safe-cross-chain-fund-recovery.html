@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cross-Chain Fund Recovery: Safe Smart Account via CREATE2 Replay — Signal Monitor KB</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: none; }
+  .content a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+</style>
+</head>
+<body>
+<header>
+  <a href="../" class="back">← Signal Monitor</a>
+  <h1>Cross-Chain Fund Recovery: Safe Smart Account via CREATE2 Replay</h1>
+  <div class="meta">5 min read · procedure · 2026-03-16</div>
+  <div class="tags"><span class="tag">safe</span><span class="tag">erc-4337</span><span class="tag">create2</span><span class="tag">cross-chain</span><span class="tag">recovery</span><span class="tag">bsc</span><span class="tag">ethereum</span><span class="tag">usdt</span><span class="tag">pimlico</span><span class="tag">smart-account</span></div>
+</header>
+<main>
+  <div class="content"><h2>Summary</h2>
+<p>A client with a Safe smart account (ERC-4337, deployed via Pimlico bundler) on Ethereum withdrew USDT from Binance but selected BNB Smart Chain instead of Ethereum. The funds landed at the same address on BSC, where no contract existed — effectively trapping them in an ownerless address.</p>
+<p>Because Safe uses <code>CREATE2</code> for deterministic deployments, the same contract can be deployed at the same address on any EVM-compatible chain where the same factory, singleton, and initialization parameters exist. We replayed the original deployment on BSC, which gave us control of the address, then transferred the USDT out, bridged it to Ethereum, and delivered it to the client's wallet. Total loss: ~$8 in bridge fees on ~$2,800 recovered.</p>
+<p>This procedure applies to any Safe (or CREATE2-deployed smart account) where funds are sent to the correct address but on the wrong chain.</p>
+<h2>Prerequisites</h2>
+<ul><li>The original deployment transaction on the source chain (Ethereum)</li>
+<li>The Safe Proxy Factory (same address) deployed on the target chain (BSC)</li>
+<li>The Safe singleton implementation (same address) on the target chain</li>
+<li>All contracts referenced in the initializer (fallback handler, module setup) present on the target chain</li>
+<li>A small amount of native gas token on the target chain</li>
+<li>Foundry (<code>cast</code>) CLI or equivalent for signing/sending transactions</li>
+<li>Private key or seed phrase of at least one Safe owner</li>
+</ul>
+<h2>Procedure</h2>
+<h3>Step 1: Identify the original deployment parameters</h3>
+<p>Find the creation transaction on the source chain (Etherscan → address → "Contract Creator" link).</p>
+<p>The creation tx is a <code>handleOps</code> call to the ERC-4337 EntryPoint. Inside the UserOperation's <code>initCode</code> field:
+<ul><li><strong>First 20 bytes:</strong> Factory address (Safe Proxy Factory)</li>
+<li><strong>Next 4 bytes:</strong> Function selector (<code>0x1688f0b9</code> = <code>createProxyWithNonce</code>)</li>
+<li><strong>Remaining bytes:</strong> ABI-encoded parameters:</li>
+</ul>  - <code>address _singleton</code> — Safe implementation contract
+  - <code>bytes initializer</code> — encoded <code>setup()</code> call with owners, threshold, modules
+  - <code>uint256 saltNonce</code> — deterministic salt</p>
+<p>Parse the initCode from the raw calldata:
+<pre><code># initCode starts after the UserOp struct header
+# Factory = first 20 bytes
+# Selector = next 4 bytes (1688f0b9)
+# Then ABI-decode: (address singleton, bytes initializer, uint256 saltNonce)
+</code></pre></p>
+<h3>Step 2: Verify contract availability on target chain</h3>
+<p>Check that ALL referenced contracts exist at the same addresses on the target chain:
+<ul><li>Safe Proxy Factory (<code>0x4e1dcf7a...</code>) — must be identical address</li>
+<li>Singleton/implementation (<code>0x41675c09...</code>)</li>
+<li>Fallback handler (<code>0x75cf1146...</code>)</li>
+<li>Module setup contract (<code>0x2dd68b00...</code>)</li>
+</ul>
+Safe's standard deployments cover most major EVM chains. Verify on the target chain's block explorer.</p>
+<h3>Step 3: Deploy the Safe on the target chain</h3>
+<p>Call <code>createProxyWithNonce(singleton, initializer, saltNonce)</code> on the factory with the <strong>exact same parameters</strong> from Step 1. Any address can make this call — it doesn't need to be an owner.</p>
+<pre><code>cast send <FACTORY> \
+    --private-key <ANY_FUNDED_WALLET> \
+    --rpc-url <TARGET_CHAIN_RPC> \
+    --gas-limit 500000 \
+    "<FULL_FACTORY_CALLDATA>"
+</code></pre>
+<p>Verify the contract appears at the expected address with the correct owners/threshold.</p>
+<h3>Step 4: Important — threshold may differ from current state</h3>
+<p>The initializer contains the <strong>original</strong> setup parameters. If the threshold was later changed on the source chain (e.g., 1→2 via <code>changeThreshold</code>), the newly deployed contract on the target chain will have the <strong>original</strong> threshold.</p>
+<p>In ERC-4337 Safes deployed via Pimlico, the pattern is:
+1. Deploy with threshold=1 (allows single-sig UserOp for initialization)
+2. First UserOp includes <code>changeThreshold(2)</code> as an action
+3. Safe on source chain has threshold=2 from block 1</p>
+<p>On the target chain, the replayed deploy will have <strong>threshold=1</strong>, which actually simplifies recovery — only one owner signature is needed.</p>
+<h3>Step 5: Execute the token transfer</h3>
+<p>Sign and submit an <code>execTransaction</code> from the Safe:</p>
+<p>1. Fund one of the owner addresses with native gas token on the target chain
+2. Compute the Safe transaction hash: call <code>getTransactionHash()</code> on the deployed Safe
+3. Sign the hash with the owner's private key using raw <code>ecrecover</code> (NOT EIP-191)
+4. Call <code>execTransaction()</code> with the signature</p>
+<pre><code>import eth_keys
+# Sign the EXACT hash returned by getTransactionHash()
+pk_obj = eth_keys.keys.PrivateKey(bytes.fromhex(private_key[2:]))
+sig = pk_obj.sign_msg_hash(tx_hash_bytes)
+v = sig.v + 27  # Safe expects v=27 or v=28
+signature = r (32 bytes) + s (32 bytes) + v (1 byte)
+</code></pre>
+<p><strong>Critical:</strong> Use <code>eth_keys.sign_msg_hash()</code> for raw ecrecover-compatible signatures. Do NOT use EIP-191 (<code>\x19Ethereum Signed Message...</code>) wrapping — Safe uses raw EIP-712 hashes.</p>
+<h3>Step 6: Bridge back to source chain</h3>
+<p>Once tokens are in a controlled wallet:
+1. Approve the bridge contract for the token amount
+2. Use a bridge aggregator (LiFi/Jumper recommended) to bridge tokens back
+3. Specify the final destination address on the source chain</p>
+<h3>Step 7: Cleanup</h3>
+<ul><li>Delete any temporarily stored seed phrases/private keys</li>
+<li>Verify final balances on both chains</li>
+</ul>
+<h2>Key Technical Details</h2>
+<h3>Why CREATE2 makes this possible</h3>
+<p><code>CREATE2</code> computes contract addresses as:
+<pre><code>address = keccak256(0xff ++ factory ++ salt ++ keccak256(initCode))[12:]
+</code></pre></p>
+<p>The address depends only on the factory, salt, and initialization code — NOT on the chain. If the factory exists at the same address on multiple chains (which Safe ensures), the same deployment produces the same address.</p>
+<h3>Safe error codes during recovery</h3>
+<ul><li><strong>GS013:</strong> "Signatures data too short" — signature bytes < threshold × 65</li>
+<li><strong>GS026:</strong> "Invalid owner" — ecrecover returned wrong address (likely wrong hash or signature encoding)</li>
+<li><strong>GS001:</strong> "Threshold not set" — contract not properly initialized</li>
+</ul>
+<h3>ERC-4337 nonce vs Safe nonce</h3>
+<p>The Safe's internal nonce may already be >0 after deployment if the initializer triggered delegate calls (e.g., module activation via <code>setup()</code>'s <code>to</code> parameter). Always query <code>nonce()</code> on-chain before computing the transaction hash.</p>
+<h2>Cost Breakdown (this case)</h2>
+<p>| Item | Cost |
+|---|---|
+| ETH for bridging to BNB | 0.005 ETH (~$12) |
+| Safe deploy gas (BSC) | 0.0168 BNB (~$11) |
+| Owner funding (BSC) | 0.003 BNB (~$2) |
+| execTransaction gas (BSC) | ~$0.003 |
+| USDT bridge fee (BSC→ETH) | ~$8 |
+| <strong>Total cost</strong> | <strong>~$33</strong> |
+| <strong>Amount recovered</strong> | <strong>$2,795.89</strong> |</p>
+<h2>Applicability</h2>
+<p>This procedure works for:
+<ul><li>Any Safe multisig (v1.3.0+) sent funds on wrong chain</li>
+<li>Any CREATE2-deployed smart account (not just Safe)</li>
+<li>Any EVM-compatible target chain where the factory contracts exist</li>
+<li>Any ERC-20 token or native currency</li>
+</ul>
+It does NOT work if:
+<ul><li>The factory contract doesn't exist on the target chain</li>
+<li>The singleton/implementation differs between chains</li>
+<li>The account was deployed with CREATE (not CREATE2) — address would differ</li>
+<li>The target chain is non-EVM (e.g., Solana, Bitcoin)</li>
+</ul></p></div>
+  <div class="source">Source: Internal — Oasis Vault client case</div>
+</main>
+<footer>
+  <a href="../">Signal Monitor</a> · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+</body>
+</html>

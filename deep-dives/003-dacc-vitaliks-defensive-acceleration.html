@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D/ACC: Vitalik's Defensive Acceleration — Signal Monitor</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: none; }
+  .content a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+</style>
+</head>
+<body>
+<header>
+  <a href="../" class="back">← Signal Monitor</a>
+  <h1>D/ACC: Vitalik's Defensive Acceleration</h1>
+  <div class="meta">2 min read · 442 words · Deep Dive #3</div>
+  <div class="tags"><span class="tag">agents</span><span class="tag">ai</span><span class="tag">alignment</span><span class="tag">biosecurity</span><span class="tag">computing</span><span class="tag">crypto</span><span class="tag">dacc</span><span class="tag">eacc</span></div>
+</header>
+<main>
+  <div class="content"><p><a href="https://vitalik.eth.limo" target="_blank"><a href="https://vitalik.eth.limo" target="_blank">Vitalik</a> Buterin</a> coined "d/acc" — defensive acceleration — as a deliberate counterpoint to e/acc. It's often misunderstood as deceleration or caution. It's neither. It's a specific strategy: accelerate the hell out of defensive technologies while being deliberate about the pace of offensive capabilities.</p>
+<p>The core insight is that not all technologies are created equal in terms of their effect on power dynamics. Some technologies are "offense-dominant" — they make it easier to attack, control, or concentrate power. Surveillance AI, autonomous weapons, and centralized compute clusters fall into this category. Other technologies are "defense-dominant" — they make it easier to protect, resist, and distribute power. Encryption, <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank">open source</a> software, decentralized networks, bio-safety infrastructure, and privacy-preserving hardware fall here.</p>
+<p>Vitalik's argument is that we should be racing to develop defensive technologies precisely because offensive capabilities are advancing so fast. If AGI arrives and the world hasn't built robust defenses — privacy infrastructure, verifiable hardware, biosecurity, decentralized governance — then whoever controls AGI controls everything. Permanently. This is what he calls "unipolar risk": the scenario where advanced technology enables a single entity (government, corporation, or even an AI itself) to establish permanent, inescapable control.</p>
+<p>The concrete projects he's funded illustrate this: air quality monitors that use <a href="https://en.wikipedia.org/wiki/Homomorphic_encryption#Fully_homomorphic_encryption" target="_blank">fully homomorphic encryption</a> to collect public health data without exposing individual privacy. Open-source biosecurity tools that could give any country COVID-level pandemic resistance with Sweden-level freedom. Verifiable hardware that can cryptographically prove what a camera is and isn't recording.</p>
+<p>D/acc explicitly rejects the framing that you must choose between progress and safety. Instead, it says: the fastest possible progress on defense is the thing that makes offense-progress safe. It's not about slowing down the train; it's about building better brakes and crash barriers while the train accelerates.</p>
+<p>The strategic nuance is in the 4-year argument. Vitalik doesn't want to delay AI forever — he argues that 4 extra years before AGI (say, arriving in 2032 instead of 2028) would be enormously valuable because it gives humanity time to deploy defensive infrastructure. And critically, 4 years starting in 2028 are worth "100 times more" than 4 years in the 1960s, because we now have the tools to actually solve alignment and build the defenses.</p>
+<p>Critics (including <a href="https://extropic.ai" target="_blank">Verdon</a>) argue this is geopolitically naive — you can't unilaterally slow down a global technology race. Vitalik counters that the chip supply chain is already one of the most centralized things on Earth (Taiwan produces 70%+ of all advanced chips), so throttling hardware is more feasible than it appears.</p>
+<p>D/acc is the engineer's response to the philosopher's dilemma: don't argue about whether to accelerate. Just make sure the shields are stronger than the swords.</p></div>
+  <div class="source">Source: <a href="https://www.youtube.com/watch?v=NSm6GRiMkzU" target="_blank">Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</a></div>
+</main>
+<footer>
+  <a href="../">Signal Monitor</a> · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+</body>
+</html>

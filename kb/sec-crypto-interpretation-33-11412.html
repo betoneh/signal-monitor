@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application of Federal Securities Laws to Crypto Assets — Signal Monitor KB</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: none; }
+  .content a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+</style>
+</head>
+<body>
+<header>
+  <a href="../" class="back">← Signal Monitor</a>
+  <h1>Application of Federal Securities Laws to Crypto Assets</h1>
+  <div class="meta">94 min read · paper · 2026-03-17</div>
+  <div class="tags"><span class="tag">sec</span><span class="tag">cftc</span><span class="tag">crypto</span><span class="tag">regulation</span><span class="tag">securities-law</span><span class="tag">howey-test</span><span class="tag">token-taxonomy</span><span class="tag">staking</span><span class="tag">mining</span><span class="tag">airdrops</span><span class="tag">stablecoins</span><span class="tag">digital-securities</span></div>
+</header>
+<main>
+  <div class="content"><h2>Summary</h2>
+<p>The SEC (alongside CFTC guidance) finally answers the question that's haunted crypto markets since 2013: <em>when is a crypto asset a security?</em> This interpretation replaces "regulation by enforcement" with a taxonomy. The core thesis is brutally simple: crypto assets are NOT securities by default. Instead, the Commission classifies them into five buckets (digital commodities, collectibles, tools, stablecoins, digital securities) and applies Howey narrowly—a crypto asset becomes subject to an investment contract only when an issuer explicitly makes representations or promises about essential managerial efforts and a purchaser reasonably expects profits from those efforts. This is seismic. It means Bitcoin, Ethereum, and most major tokens are classified as non-security digital commodities; it creates a clear off-ramp for projects once they fulfill development promises or get abandoned; and it explicitly exempts mining, staking, wrapping, and "pure" airdrops from securities registration. The GENIUS Act exclusion for payment stablecoins is incorporated by statute. This interpretation is less regulation and more <em>clarity</em>—which, after a decade of chaos, is probably worth more than the ruleset itself.</p>
+<p>The mechanism for separation is genius-simple: a non-security crypto asset subject to an investment contract (issued with development promises) separates and loses that classification once the issuer either (a) fulfills the essential managerial efforts it promised, (b) publicly abandons the project, or (c) enough time passes that investors no longer reasonably expect the issuer to perform. This decoupling principle is the real innovation—it means a token can be sold as a security in its ICO phase and become a true commodity once the blockchain is decentralized. Secondary market purchasers only owe securities compliance if they'd reasonably expect the issuer's promises to still apply. The implications are staggering: it legitimizes the entire on-chain economy while preserving investor protections during the capital-raising phase. And for the first time, the SEC is explicitly saying what they're <em>not</em> regulating: mining rewards, staking yields, wrapped tokens, and most airdrops are not securities. This interpretation is the SEC making peace with decentralization.</p>
+<h2>Key Takeaways</h2>
+<ul><li><strong>Five-tier crypto asset taxonomy</strong>: Digital commodities (Bitcoin, Ethereum, etc. — not securities), digital collectibles (NFTs, meme coins — not securities), digital tools (domain names, credentials — not securities), stablecoins (may or may not be securities; payment stablecoins by permitted issuers are statutorily excluded post-GENIUS Act), and digital securities (on-chain representations of stocks, bonds, etc. — are securities).</li>
+</ul>
+<ul><li><strong>The Howey test still applies</strong> but is narrowed: a non-security crypto asset becomes subject to an investment contract <em>only if</em> an issuer explicitly represents or promises to undertake essential managerial efforts and a purchaser reasonably expects profits from those efforts. Marketing and promotion matter—vague whitepaper language doesn't cut it; detailed roadmaps with milestones, funding, and timelines do.</li>
+</ul>
+<ul><li><strong>Separation doctrine is the centerpiece</strong>: Non-security crypto assets can be offered and sold as investment contracts during the ICO/seed phase but <em>separate</em> from that contract once the issuer fulfills its promises, publicly abandons the project, or enough time passes that purchasers no longer expect the issuer to perform essential managerial efforts. This single principle unlocks blockchain decentralization while protecting early investors.</li>
+</ul>
+<ul><li><strong>Mining and staking are explicitly exempt</strong>: Protocol Mining (Proof-of-Work) and Protocol Staking (Proof-of-Stake) rewards are not securities transactions—they're ministerial/administrative acts, not profits from others' essential managerial efforts. Mining pools, solo mining, self-staking, delegated staking, custodial staking, and liquid staking are all covered. Staking receipt tokens (receipts for non-security crypto assets) are also not securities.</li>
+</ul>
+<ul><li><strong>Wrapping is not a securities transaction</strong>: When you deposit a non-security crypto asset to get a wrapped token (1:1 receipt), that's not creating a security or an investment contract. It's an administrative function for cross-chain interoperability—not a profit opportunity.</li>
+</ul>
+<ul><li><strong>Airdrops of non-security crypto assets are not securities offerings</strong>: If an issuer airdrops tokens to wallets or users without those recipients providing money, goods, services, or consideration in exchange, the first element of Howey (investment of money) is not met. No registration required. This covers cases where airdrop is announced after the fact (the user didn't "bargain" for it) or as a reward for prior engagement unrelated to the airdrop itself.</li>
+</ul>
+<ul><li><strong>Secondary market implications</strong>: Once a non-security crypto asset separates from an investment contract, secondary market transactions are no longer subject to securities laws unless a new investment contract is created. But if an issuer continues making promises about essential managerial efforts, secondary purchasers may still be bound by the original contract.</li>
+</ul>
+<ul><li><strong>Stablecoins post-GENIUS Act</strong>: Payment stablecoins issued by permitted issuers (bank subsidiaries, Federal/State qualified issuers) are statutorily excluded from the definition of "security"—no Howey analysis needed. Other stablecoins depend on facts and circumstances; the Staff Stablecoin Statement ("Covered Stablecoins") analysis applies pre-GENIUS Act effective date.</li>
+</ul>
+<ul><li><strong>What this empowers</strong>: Issuers can now design tokenomics and launch with confidence that non-security crypto assets won't be treated as securities by default; that fulfilled promises create a legal exit; and that community-building, mining rewards, and staking incentives are safe. The interpretation signals the SEC's intent to stop "regulation by enforcement."</li>
+</ul>
+<ul><li><strong>What remains regulated</strong>: Actual securities (equity-like tokens, debt tokens, derivatives) remain securities. Issuers making false promises about development face antifraud liability and damages even if the token later separates. Custodians, exchanges, and intermediaries dealing in digital securities must still register.</li>
+</ul>
+<h2>Full Text / Transcript</h2>
+<p>SECURITIES AND EXCHANGE COMMISSION</p>
+<p>17 CFR Parts 231 and 241</p>
+<p>[Release Nos. 33-11412; 34-105020; File No. S7-2026-09]</p>
+<p>RIN 3235-AN56</p>
+<p>COMMODITY FUTURES TRADING COMMISSION</p>
+<p>17 CFR Part 1</p>
+<p>RIN 3038-AF67</p>
+<p>Application of the Federal Securities Laws to Certain Types of Crypto Assets and Certain</p>
+<p>Transactions Involving Crypto Assets</p>
+<p>AGENCY: Securities and Exchange Commission; Commodity Futures Trading Commission</p>
+<p>ACTION: Final rule; Interpretation; Guidance</p>
+<p>SUMMARY: The Securities and Exchange Commission ("Commission" or "SEC") issues</p>
+<p>herein an interpretation regarding the application of the Federal securities laws to certain types of</p>
+<p>crypto assets and certain transactions involving crypto assets. The references in this release to</p>
+<p>"we" and "our" are to the Commission. The Commodity Futures Trading Commission ("CFTC")</p>
+<p>provides herein guidance relating to that interpretation.</p>
+<p>DATES: Effective Date: [INSERT DATE OF PUBLICATION IN THE FEDERAL REGISTER].</p>
+<p>ADDRESSES: Comments may be submitted by any of the following methods:</p>
+<p>Electronic Comments:</p>
+<p>•  Use the Commission's internet comment form (https://www.sec.gov/comments/s7-</p>
+<p>2026-09/application-federal-securities-laws-certain-types-crypto-assets-certain-</p>
+<p>transactions-involving); or</p>
+<p>•  Send an email to rule-comments@sec.gov. Please include File Number S7-2026-09</p>
+<p>on the subject line.</p>
+<p>Paper Comments:</p>
+<p>•  Send paper comments to Vanessa A. Countryman, Secretary, Securities and Exchange</p>
+<p>Commission, 100 F Street NE, Washington, DC 20549-1090.</p>
+<p>All submissions should refer to File Number S7-2026-09. This file number should be</p>
+<p>included on the subject line if email is used. To help the Commission process and review your</p>
+<p>comments more efficiently, please use only one method of submission. The Commission will</p>
+<p>post all comments on the Commission's website (https://www.sec.gov/comments/s7-2026-</p>
+<p>09/application-federal-securities-laws-certain-types-crypto-assets-certain-transactions-</p>
+<p>involving). Do not include personally identifiable information in submissions; you should submit</p>
+<p>only information that you wish to make available publicly. The Commission may redact in part</p>
+<p>or withhold entirely from publication submitted material that is obscene or subject to copyright</p>
+<p>protection.</p>
+<p>FOR FURTHER INFORMATION CONTACT:  SEC: Andrew Schoeffler, Office of Chief</p>
+<p>Counsel, at (202) 551-3500, Division of Corporation Finance, Securities and Exchange</p>
+<p>Commission, 100 F Street NE, Washington, DC 20549; CFTC: Mark Fajfar, Senior Assistant</p>
+<p>General Counsel, Office of the General Counsel, at (202) 418-6636, Commodity Futures Trading</p>
+<p>Commission, Three Lafayette Centre, 1155 21st Street, NW, Washington, DC 20581.</p>
+<p>SUPPLEMENTARY INFORMATION:</p>
+<p>Table of Contents</p>
+<p>I.</p>
+<p>INTRODUCTION ............................................................................................................... 4</p>
+<p>II.  DEFINITION OF "SECURITY" ....................................................................................... 9</p>
+<p>III.  CLASSIFICATION OF CRYPTO ASSETS ................................................................... 13</p>
+<p>A.  Digital Commodities ................................................................................................ 14</p>
+<p>B.  Digital Collectibles ................................................................................................... 16</p>
+<p>C.  Digital Tools .............................................................................................................. 20</p>
+<p>D.</p>
+<p>Stablecoins ................................................................................................................ 21</p>
+<p>E.  Digital Securities ...................................................................................................... 23</p>
+<p>IV.  CRYPTO ASSETS THAT ARE SUBJECT TO AN INVESTMENT CONTRACT .... 24</p>
+<p>A.  How Crypto Assets Become Subject to an Investment Contract ........................ 24</p>
+<p>B.</p>
+<p>Separation of a Non-Security Crypto Asset from the Issuer's Representations or
+Promises .................................................................................................................... 28</p>
+<p>1.</p>
+<p>2.</p>
+<p>3.</p>
+<p>Fulfillment of the Issuer's Representations or Promises .......................... 29</p>
+<p>Failure to Satisfy Issuer's Representations or Promises .......................... 31</p>
+<p>Application of the Interpretation ............................................................... 33</p>
+<p>V.</p>
+<p>FEDERAL SECURITIES LAWS STATUS OF THE CRYPTO ASSET ACTIVITIES
+KNOWN AS "PROTOCOL MINING" AND "PROTOCOL STAKING" .................. 34</p>
+<p>A.  Protocol Mining........................................................................................................ 35</p>
+<p>1.</p>
+<p>2.</p>
+<p>3.</p>
+<p>Protocol Mining Activities Generally ......................................................... 35</p>
+<p>Covered Protocol Mining Activities ........................................................... 37</p>
+<p>Interpretation Regarding Protocol Mining Activities .............................. 38</p>
+<p>B.</p>
+<p>Protocol Staking ....................................................................................................... 40</p>
+<p>1.</p>
+<p>2.</p>
+<p>3.</p>
+<p>4.</p>
+<p>Protocol Staking Activities Generally ........................................................ 40</p>
+<p>Covered Protocol Staking Activities ........................................................... 46</p>
+<p>Interpretation Regarding Protocol Staking Activities .............................. 47</p>
+<p>Interpretation Regarding Staking Receipt Tokens ................................... 52</p>
+<p>VI.  FEDERAL SECURITIES LAWS STATUS OF THE CRYPTO ASSET ACTIVITY</p>
+<p>KNOWN AS "WRAPPING" ............................................................................................ 54</p>
+<p>VII.  APPLICATION OF THE HOWEY TEST TO CERTAIN CRYPTO ASSET</p>
+<p>DISSEMINATIONS KNOWN AS "AIRDROPS" ......................................................... 58</p>
+<p>A.  Airdrops Generally .................................................................................................. 58</p>
+<p>B.  Covered Airdrops ..................................................................................................... 59</p>
+<p>C.</p>
+<p>Interpretation Regarding Airdrops ........................................................................ 60</p>
+<p>VIII. OTHER MATTERS .......................................................................................................... 63</p>
+<p>IX.  COMMISSION ECONOMIC CONSIDERATIONS ..................................................... 63</p>
+<p>I.</p>
+<p>INTRODUCTION</p>
+<p>The Commission has engaged with crypto assets1 for more than a decade.2 In 2017, the</p>
+<p>Commission issued a report pursuant to section 21(a) of the Securities Exchange Act of 1934</p>
+<p>(the "Exchange Act")3 regarding offers and sales of crypto assets by an unincorporated</p>
+<p>organization named "The DAO."4 The Commission, in The DAO Report, determined, among</p>
+<p>other things, that crypto assets issued by The DAO were offered and sold as investment contracts</p>
+<p>and, therefore, securities under section 2(a)(1) of the Securities Act of 1933 (the "Securities</p>
+<p>Act")5 and section 3(a)(10) of the Exchange Act.6 In making this determination, the Commission</p>
+<p>applied the "Howey test," which the U.S. Supreme Court (the "Supreme Court") has used to</p>
+<p>determine whether a contract, transaction, or scheme is an investment contract and therefore a</p>
+<p>security.7 In the years following publication of The DAO Report, the Commission applied the</p>
+<p>1   For purposes of this release: a "crypto asset" is any digital representation of value that is recorded on a</p>
+<p>cryptographically secured distributed ledger; a "crypto network" is a blockchain or similar distributed ledger
+technology network; and a "crypto application" is a software application running on a crypto network. We refer
+to crypto networks and crypto applications together in this release as "crypto systems." Further, for purposes of
+this release, "onchain" refers to transactions or data that are processed and recorded directly on a crypto
+network and "offchain" refers to transactions or data that are processed and recorded outside of a crypto
+network. The foregoing definition of "crypto asset" is defined identically to the definition of "Digital Asset" in
+section 2(6) of the Guiding and Establishing National Innovation for U.S. Stablecoins Act, Pub. L. No. 119-27,
+139 Stat. 419 (2025) ("GENIUS Act").</p>
+<p>2   For example, the first registration statement for the offer and sale of a crypto asset exchange-traded product was</p>
+<p>filed with the Commission in 2013. See Form S-1 Registration Statement filed with the Commission on July 1,
+2013, available at https://www.sec.gov/Archives/edgar/data/1579346/000119312513279830/d562329ds1.htm.</p>
+<p>3   15 U.S.C. 78a et seq.</p>
+<p>4   See Report of Investigation Pursuant to Section 21(a) of the Securities Exchange Act of 1934: The DAO,</p>
+<p>Release No. 34-81207 (July 25, 2017) ("The DAO Report").</p>
+<p>5   15 U.S.C. 77a et seq.</p>
+<p>6   See The DAO Report at 11-15.</p>
+<p>7   See SEC v. W.J. Howey Co., 328 U.S. 293 (1946) ("Howey"). The Howey test defines an investment contract as</p>
+<p>a contract, transaction, or scheme involving (1) an investment of money, (2) in a common enterprise, (3) with an
+expectation of profits derived from the efforts of others. Courts have concluded that the "Howey test has three
+elements," including "a common enterprise." SEC v. Barry, 146 F.4th 1242, 1251 (9th Cir. 2025); accord SEC v.
+Scoville, 913 F.3d 1204, 1220 (10th Cir. 2019) (the Howey test has been broken down into "three requirements,"
+including a "common enterprise"). To the extent the Commission's opinion in In re Barkate, Release No. 34-
+49542, 2004 WL 762434, at *3 n.13 (Apr. 8, 2004), or other such prior statements by the Commission or its
+staff indicate that the Commission does not view commonality as a requirement for an "investment contract"</p>
+<p>4</p>
+<p>under Howey, the Commission concludes and clarifies that, based on courts' post-Barkate decisions, the
+common enterprise element must be satisfied.</p>
+<p>Applying the Howey test to crypto assets and transactions involving crypto assets can be</p>
+<p>challenging because of the varying degrees of control that persons or groups may have over</p>
+<p>crypto systems, the diversity of the types of crypto assets with varying characteristics, uses, and</p>
+<p>functionality, and the evolving nature of crypto assets and crypto systems. These unique</p>
+<p>attributes of crypto assets have prompted divergent views among market participants, financial</p>
+<p>regulators, and the courts over the application of the Howey test to crypto assets and transactions</p>
+<p>involving crypto assets, particularly with respect to secondary market transactions involving</p>
+<p>crypto assets. Accordingly, market participants have requested guidance from the Commission</p>
+<p>regarding the circumstances under which the Commission will characterize crypto assets as</p>
+<p>securities and transactions involving crypto assets as securities transactions.9</p>
+<p>On January 21, 2025, Acting Chairman Mark T. Uyeda established the Crypto Task Force</p>
+<p>to help provide greater clarity on the application of the Federal securities laws to the crypto asset</p>
+<p>markets.10 The Crypto Task Force's focus is to support, among other things, the Commission's</p>
+<p>efforts to draw clear regulatory lines, appropriately distinguish securities from non-securities,</p>
+<p>craft tailored disclosure frameworks, provide realistic paths to registration for crypto asset</p>
+<p>offerings and intermediaries subject to the Federal securities laws, and ensure that investors have</p>
+<p>the information necessary to make informed investment decisions.11 To this end, the Crypto Task</p>
+<p>Force has hosted a series of roundtables, including a March 21, 2025 roundtable on security</p>
+<p>status titled, "How We Got Here and How We Get Out – Defining Security Status."12 The Crypto</p>
+<p>Task Force also has requested and received written input from,13 and held meetings with,</p>
+<p>members of the public.14 To date, the Crypto Task Force has received over 300 written</p>
+<p>submissions from issuers, investors (both individual and institutional), law firms and legal</p>
+<p>professionals, audit and accounting professionals and firms, academics, professional and investor</p>
+<p>associations and organizations, investment companies and advisors, market intermediaries,</p>
+<p>service providers, network foundations, foreign entities, other crypto asset market participants,</p>
+<p>and other members of the public.15</p>
+<p>In July 2025, the President's Working Group on Digital Asset Markets released a report</p>
+<p>titled, "Strengthening American Leadership in Digital Financial Technology" that, among other</p>
+<p>things, addresses the need for a taxonomy for crypto assets and sets forth a number of</p>
+<p>recommended regulatory reforms relating to the crypto asset markets.16 In particular, the report</p>
+<p>recommended that the "SEC and CFTC should use their existing authorities to provide fulsome</p>
+<p>regulatory clarity that best keeps blockchain-based innovation within the United States."17 In</p>
+<p>connection with the release of the report, Chairman Paul S. Atkins launched "Project Crypto," a</p>
+<p>Commission-wide initiative to modernize rules and regulations under the Federal securities laws</p>
+<p>in accordance with the President's Working Group's recommendations to enable America's</p>
+<p>financial markets to move onchain.18 Among other things, Chairman Atkins directed the staff to</p>
+<p>"work to develop clear guidelines that market participants can use to determine whether a crypto</p>
+<p>asset is a security or subject to an investment contract."19 On January 29, 2026, Chairman Atkins</p>
+<p>and CFTC Chairman Michael S. Selig announced that Project Crypto—previously an SEC-led</p>
+<p>initiative—will proceed as a joint effort between the SEC and the CFTC to harmonize federal</p>
+<p>oversight of crypto asset markets.20</p>
+<p>In light of the concerns raised about the Commission's approach to crypto assets before</p>
+<p>2025, the regulatory developments beginning in 2025, and the public input provided to the</p>
+<p>Crypto Task Force, the Commission has determined to issue herein an interpretation of the</p>
+<p>definition of "security" as applied to crypto assets and transactions involving crypto assets as</p>
+<p>part of its efforts to provide greater clarity regarding the Commission's treatment of crypto assets</p>
+<p>under the Federal securities laws. We first discuss the definition of "security" under the Federal</p>
+<p>securities laws, including the term "investment contract." We then classify crypto assets into</p>
+<p>categories based on their characteristics, uses, and functions, and analyze each category under</p>
+<p>the definition of "security." We also address how a "non-security crypto asset"—which is a</p>
+<p>crypto asset that itself is not a security—may become subject to, and how it may cease to be</p>
+<p>subject to, an investment contract. Further, we discuss the Federal securities laws status of the</p>
+<p>crypto asset activities known as "protocol mining," "protocol staking," and "wrapping." Finally,</p>
+<p>we discuss the application of the Howey test to certain crypto asset disseminations known as</p>
+<p>"airdrops."</p>
+<p>The interpretation in this release does not supersede or replace the Howey test, which is</p>
+<p>binding legal precedent. Rather, the interpretation conveys the Commission's views, informed by</p>
+<p>the extensive feedback the Commission and its staff have received to date on these topics</p>
+<p>(including from the Crypto Task Force's roundtables, written input, and meetings), regarding</p>
+<p>how certain aspects of the Howey test apply to crypto assets and transactions involving crypto</p>
+<p>assets.21 The Commission and its staff will administer the Federal securities laws consistent with</p>
+<p>the interpretation, including with respect to enforcement actions. The interpretation is the</p>
+<p>21   The interpretation supersedes the Commission staff's Framework for "Investment Contract" Analysis of Digital</p>
+<p>Assets (Apr. 3, 2019), available at https://www.sec.gov/corpfin/framework-investment-contract-analysis-digital-
+assets.</p>
+<p>8</p>
+<p>Commission's first step toward developing a clearer regulatory framework for the treatment of</p>
+<p>crypto assets under the Federal securities laws.22</p>
+<p>Further, the CFTC provides herein guidance that the CFTC and its staff will administer</p>
+<p>the Commodity Exchange Act23 consistent with the interpretation,24 and that certain non-security</p>
+<p>crypto assets could meet the definition of "commodity" under the Commodity Exchange Act.25</p>
+<p>The interpretation in this release is based on the Commission's current understanding of</p>
+<p>the crypto asset markets, including the typical transactional and structural features of these</p>
+<p>markets and the typical characteristics, uses, and functions of crypto assets. To help inform the</p>
+<p>Commission's ongoing consideration of the topics addressed in this release, we are soliciting</p>
+<p>public comment on the views set forth in the interpretation, including the descriptions of the</p>
+<p>crypto assets and crypto asset transactions contained herein. Based on the feedback received, the</p>
+<p>Commission may refine, revise, or expand upon the interpretation in order to provide further</p>
+<p>clarity regarding the Commission's treatment of crypto assets under the Federal securities laws.</p>
+<p>II.</p>
+<p>DEFINITION OF "SECURITY"</p>
+<p>In delineating the scope of the Federal securities laws, Congress "enacted a broad</p>
+<p>definition of 'security,' sufficient to encompass virtually any instrument that might be sold as an</p>
+<p>investment."26 While the definition of "security" includes an enumerated list of "the commonly</p>
+<p>22   See, e.g., U.S. Securities and Exchange Commission, Spring 2025 Unified Agenda of Regulatory and</p>
+<p>Deregulatory Actions, available at
+https://www.reginfo.gov/public/do/eAgendaMain?operation=OPERATION_GET_AGENCY_RULE_LIST&cur
+rentPub=true&agencyCode=&showStage=active&agencyCd=3235.</p>
+<p>23   7 U.S.C. 1 et seq.</p>
+<p>24   Nothing in this release should be construed as altering the respective statutory authorities of the SEC or CFTC.</p>
+<p>25   See infra note 48.</p>
+<p>26   SEC v. Edwards, 540 U.S. 389, 393 (2004). The definition of "security" is "essentially identical in meaning"</p>
+<p>under section 2(a)(1) of the Securities Act (15 U.S.C. 77b(a)(1)) and section 3(a)(10) of the Exchange Act (15
+U.S.C. 78c(a)(10)). Id. (citing Reves v. Ernst & Young, 494 U.S. 56, 61 n.1 (1990)).</p>
+<p>9</p>
+<p>known documents traded for speculation or investment," including "stock," "bond," and "note,"</p>
+<p>it also includes instruments "of a more variable character," such as "investment contract,"</p>
+<p>"certificate of interest or participation in a profit-sharing agreement," and "any interest or</p>
+<p>instrument commonly known as a security."27 In addition, the definition of "security" includes</p>
+<p>any "receipt for, guarantee of, or warrant or right to subscribe to or purchase" any of the financial</p>
+<p>instruments enumerated in the definition of "security."28</p>
+<p>The Supreme Court has said that "[b]ecause securities transactions are economic in</p>
+<p>character Congress intended the application of these statutes to turn on the economic realities</p>
+<p>underlying a transaction, and not the name appended thereto."29 The Supreme Court has reasoned</p>
+<p>that "in searching for the meaning and scope of the word 'security' . . ., form should be</p>
+<p>disregarded for substance and the emphasis should be on economic reality."30 Nonetheless, the</p>
+<p>definition of "security" is not boundless: "Congress, in enacting the securities laws, did not</p>
+<p>intend to provide a broad federal remedy for all fraud."31 While the securities laws cover "those</p>
+<p>instruments ordinarily and commonly considered to be securities in the commercial world," not</p>
+<p>every instrument is "the type of instrument that comes to mind when the term 'security' is used,"</p>
+<p>and not every instrument falls within "the ordinary concept of a security."32 Importantly, the</p>
+<p>27    Howey, 328 U.S. at 297.</p>
+<p>28   15 U.S.C. 77b(a)(1).</p>
+<p>29   United Housing Foundation, Inc. v. Forman, 421 U.S. 837, 849 (1975).</p>
+<p>30   Id.</p>
+<p>31   Marine Bank v. Weaver, 455 U.S. 551, 556 (1982).</p>
+<p>32   Id. at 559.</p>
+<p>10</p>
+<p>Federal securities laws generally do not apply to items that are purchased for use or</p>
+<p>consumption,33 whether they are physical or digital.</p>
+<p>There is no universal test to determine whether an instrument is a security.34 Instead, it</p>
+<p>must be analyzed to determine if it constitutes one of the financial instruments enumerated in</p>
+<p>the definition of "security." The financial instruments enumerated in the definition of "security"</p>
+<p>generally are not defined in statute or Commission rules,35 but the Supreme Court and other</p>
+<p>Federal courts have interpreted many of them based on economic reality. For example, the</p>
+<p>Supreme Court has established tests for determining whether an instrument that is designated as</p>
+<p>a "note"36 or "stock"37 is a security for purposes of the Federal securities laws.</p>
+<p>The definition of "security" is not limited to "obvious and commonplace" instruments.38</p>
+<p>In cases involving a "[n]ovel, uncommon, or irregular device," courts often evaluate whether the</p>
+<p>instrument is an "investment contract," a term that is not defined in statute or Commission</p>
+<p>33   Forman, 421 U.S. at 852-53 ("[W]hen a purchaser is motivated by a desire to use or consume the item</p>
+<p>purchased—'to occupy the land or to develop it themselves,' as the Howey court put it, ibid.—the securities
+laws do not apply." (quoting Howey, 328 U.S. at 300)).</p>
+<p>34   Louis Loss (late), Joel Seligman & Troy Paredes, Securities Regulation 3.A.1 (6th and 7th eds., 2025 Cum.</p>
+<p>Supp. 2018-2023) ("Each type of financial instrument included in the statutory definition of security is
+susceptible to a separate analysis, employing separate analytical concepts. There is no universal or generic test
+of the term.").</p>
+<p>35   Certain financial instruments enumerated in the definition of "security" are defined in statute and Commission</p>
+<p>rules and regulations, such as "security future" and "security-based swap." See, e.g., 15 U.S.C. 78c(a)(55) and
+(68).</p>
+<p>36   See Reves, 494 U.S. at 60–61 (holding that all notes are presumptively securities, with that presumption</p>
+<p>rebuttable where Reves's four-factor analysis indicates that the note was delivered in a commercial or consumer
+context and not in an investment context).</p>
+<p>37   See Landreth Timber Co. v. Landreth, 471 U.S. 681, 686 (1985) (holding that the characteristics typical of</p>
+<p>"stock" are "(i) the right to receive dividends contingent upon an apportionment of profits; (ii) negotiability;
+(iii) the ability to be pledged or hypothecated; (iv) the conferring of voting rights in proportion to the number of
+shares owned; and (v) the capacity to appreciate in value").</p>
+<p>38   SEC v. C.M. Joiner Leasing Corp., 320 U.S. 344, 351 (1943).</p>
+<p>11</p>
+<p>rules.39 The Commission and Federal courts typically have evaluated the security status of crypto</p>
+<p>assets and crypto asset transactions under an investment contract analysis.40</p>
+<p>In Howey, the Supreme Court defined the term "investment contract" in a way that it</p>
+<p>intended to be "capable of adaptation to meet the countless and variable schemes devised by</p>
+<p>those who seek the use of the money of others on the promise of profits."41 Under Howey, the</p>
+<p>term "investment contract" means any contract, transaction, or scheme whereby a person invests</p>
+<p>money in a common enterprise and reasonably expects profits to be derived from the efforts of</p>
+<p>others.42 This definition, known as the "Howey test,"43 is intended to afford "the SEC and the</p>
+<p>courts sufficient flexibility to ensure that those who market investment contracts are not able to</p>
+<p>escape the coverage of the Federal securities laws by creating new instruments that would not be</p>
+<p>covered by a more determinate definition."44 Since the Supreme Court decided Howey in 1946,</p>
+<p>Federal courts have applied the Howey test to a broad range of contracts, transactions, and</p>
+<p>schemes.45</p>
+<p>39   Id.</p>
+<p>40   See, e.g., The DAO Report; SEC v. Telegram Grp. Inc., 448 F. Supp. 3d 352 (S.D.N.Y. 2020).</p>
+<p>41   Howey, 328 U.S. at 299.</p>
+<p>42   Id. at 298-99. The Howey test's "efforts of others" requirement is satisfied when "the efforts made by those</p>
+<p>other than the investor are the undeniably significant ones, those essential managerial efforts which affect the
+failure or success of the enterprise." See, e.g., SEC v. v. Glenn W. Turner Enterprises, Inc., 474 F.2d 476, 482
+(9th Cir. 1973). Federal courts also have stated that administrative and ministerial activities are not managerial
+efforts that satisfy Howey's "efforts of others" requirement. See, e.g., First Fin. Fed. Sav. & Loan v. E.F. Hutton
+Mortgage, 834 F.2d 685 (8th Cir. 1987) (activities performed were merely administrative and ministerial in
+nature and therefore did not constitute the managerial efforts of others); Union Planters National Bank of
+Memphis v. Commercial Credit Business Loans, Inc., 651 F.2d 1174 (6th Cir. 1981) (stating that administrative
+tasks and services are not managerial under Howey); see also Donovan v. GMO-Z.com Tr. Co., Inc., 779 F.
+Supp. 3d 372, 388 (S.D.N.Y. 2025) ("Ministerial, technical, and clerical tasks often are 'necessary' for an
+investment scheme to operate and thereby generate a profit, but courts have long found such efforts to be
+insufficient under Howey's third prong."). In this release, we refer to managerial efforts that meet the Howey
+test's "efforts of others" requirement as "essential managerial efforts."</p>
+<p>43   See supra note 7.</p>
+<p>44   Reves, 494 U.S. at 63 n.2.</p>
+<p>45   As noted above, the definition of "security" also includes a "certificate of interest or participation in any profit-
+sharing agreement." The term "certificate of interest or participation in any profit-sharing agreement" does not</p>
+<p>12</p>
+<p>III.  CLASSIFICATION OF CRYPTO ASSETS</p>
+<p>Virtually any type of security, good, service, right, or interest can be represented in a</p>
+<p>digital format as a crypto asset. The developer of a crypto asset can determine the quantity of</p>
+<p>units of a crypto asset that will be generated, the parameters for distribution of the crypto asset,</p>
+<p>and the functionality (or lack thereof) of a crypto asset, among other things. The developer can</p>
+<p>generate crypto assets as fungible units or as non-fungible units (commonly known as "non-</p>
+<p>fungible tokens" or "NFTs").46 As such, crypto assets encompass a broad range of instruments</p>
+<p>with varying characteristics, uses, and functions. For purposes of this release, we classify crypto</p>
+<p>assets into five categories based on their characteristics, uses, and functions: (i) digital</p>
+<p>commodities; (ii) digital collectibles; (iii) digital tools; (iv) stablecoins; and (v) digital securities.</p>
+<p>Digital commodities, digital collectibles, and digital tools, each as further described</p>
+<p>below, are not themselves securities. However, as with any asset that is not a security, a non-</p>
+<p>security crypto asset can be offered and sold subject to an investment contract, which is a</p>
+<p>security.47 Stablecoins, as further described below, are a broad category of crypto assets that may</p>
+<p>or may not be securities depending on their characteristics. Digital securities, as further described</p>
+<p>below, are securities. Given the variations in crypto assets and the constantly evolving nature of</p>
+<p>the crypto asset markets, including the underlying technology, there may be crypto assets that do</p>
+<p>not fall within any of these five categories, as well as crypto assets with hybrid characteristics</p>
+<p>that may fall within more than one category.</p>
+<p>A.</p>
+<p>Digital Commodities48</p>
+<p>A digital commodity is a crypto asset that is intrinsically linked to and derives its value</p>
+<p>from the programmatic operation of a crypto system that is "functional,49 as well as supply and</p>
+<p>demand dynamics, rather than from the expectation of profits from the essential managerial</p>
+<p>efforts of others.50 A digital commodity does not have intrinsic economic properties or rights,</p>
+<p>such as generating a passive yield or conveying rights to future income, profits, or assets of a</p>
+<p>business enterprise or other entity, promisor, or obligor, but may have certain other rights (as</p>
+<p>discussed below). Examples of digital commodities include Aptos (APT); Avalanche (AVAX);</p>
+<p>Bitcoin (BTC); Bitcoin Cash (BCH); Cardano (ADA); Chainlink (LINK); Dogecoin (DOGE);</p>
+<p>Ether (ETH); Hedera (HBAR); Litecoin (LTC); Polkadot (DOT); Shiba Inu (SHIB); Solana</p>
+<p>(SOL); Stellar (XLM); Tezos (XTZ); and XRP (XRP).51</p>
+<p>48     For purposes of this release, we are using the term "commodity" in an economic and commercial sense (i.e.,</p>
+<p>assets that are fungible, have utility, and whose value is determined by supply and demand). However, any non-
+security crypto asset, other than a "payment stablecoin issued by a permitted payment stablecoin issuer," as
+such terms are defined in section 2 of the GENIUS Act, could meet the definition of "commodity" under the
+Commodity Exchange Act. See 7 U.S.C. 1a(9).</p>
+<p>49     For purposes of this release, a crypto system is "functional" if the system's native crypto asset can be used on</p>
+<p>the system in accordance with the programmatic utility of the system. The term "native" in the context of a
+crypto asset refers to a crypto asset generated for use on a particular crypto system.</p>
+<p>50     A digital commodity may be native to a crypto system that is decentralized. For purposes of this release, a</p>
+<p>crypto system is "decentralized" if the crypto system functions and operates autonomously with no person,
+entity, or group of persons or entities having operational, economic, or voting control of the crypto system.</p>
+<p>51     Based on our understanding of their characteristics, terms, and functions as of the date of this release, the</p>
+<p>Commission concludes that each of these crypto assets is a digital commodity because they are intrinsically
+linked to and derive their value from the programmatic operation of a crypto system that is functional, as well as
+supply and demand dynamics, rather than from the expectation of profits from the essential managerial efforts
+of others. As of the date of this release, each of these digital commodities underlies a futures contract that has
+been made available to trade on a designated contract market operating under the regulatory oversight of the
+CFTC. To be clear, it is not necessary that a crypto asset underlie such a futures contract to be a digital
+commodity; rather, the fact that these digital commodities underlie such a futures contract explains their
+selection as examples for this release. For example, based on their characteristics, terms, and functions as of the
+date of this release, Algorand (ALGO) and LBRY Credits (LBC), neither of which underlies such a futures
+contract, are digital commodities because they are intrinsically linked to and derive their value from the</p>
+<p>14</p>
+<p>programmatic operation of a crypto system that is functional, as well as supply and demand dynamics, rather
+than from the expectation of profits from the essential managerial efforts of others.</p>
+<p>A digital commodity is necessary to participate in or use certain aspects of an associated</p>
+<p>functional crypto system. The programmed purpose of a digital commodity is to facilitate and</p>
+<p>incentivize the validation, ordering, and confirmation of transactions on the associated functional</p>
+<p>crypto system, serve as a mechanism to maintain the functioning and/or security of the</p>
+<p>associated functional crypto system, and foster network effects.52 Accordingly, a digital</p>
+<p>commodity is integral to the operation of the associated functional crypto system. For example, a</p>
+<p>digital commodity typically conveys to holders certain technical rights with respect to the</p>
+<p>associated functional crypto system, such as enabling holders to participate in the system's</p>
+<p>consensus mechanism by staking (or locking up) the system's native digital commodity.53 A</p>
+<p>digital commodity also may convey to holders certain governance rights with respect to the</p>
+<p>associated functional crypto system. Such a "governance token" typically allows holders to vote</p>
+<p>on certain technical or governance matters, such as software upgrades and treasury expenditures.</p>
+<p>Further, a functional crypto system may require users to pay transaction (or "gas") fees in the</p>
+<p>system's native digital commodity. These gas fees—in addition to units of the digital commodity</p>
+<p>newly generated by the protocol—typically are used as an incentive mechanism to reward</p>
+<p>participation in and use of the associated functional crypto system.</p>
+<p>A digital commodity itself, as described in this release, is not a security because it does</p>
+<p>not have the economic characteristics of a security. A digital commodity does not constitute any</p>
+<p>of the financial instruments enumerated in the definition of "security" because, among other</p>
+<p>things, it does not represent a digitized form of any such instruments, including an investment</p>
+<p>contract. Like commodities generally, a digital commodity has intrinsic value derived from the</p>
+<p>value of the goods and services that may be produced or accessed using that commodity, as well</p>
+<p>as from supply and demand dynamics. Users of a functional crypto system use the system's</p>
+<p>native digital commodity to interact with the system's features and functionalities. A functional</p>
+<p>crypto system incorporates economic mechanisms that reward voluntary cooperation and</p>
+<p>coordination among the system's users. Users are encouraged to participate in a functional crypto</p>
+<p>system based on its economic mechanism design, and developers are incentivized to build crypto</p>
+<p>applications for functional crypto systems that successfully attract users. A functional crypto</p>
+<p>system does not have a central party54 that oversees participation or distributes rewards to users.</p>
+<p>As a result, the value of a digital commodity is intrinsically linked to the programmatic</p>
+<p>functioning of the associated functional crypto system. Therefore, given that a digital commodity</p>
+<p>is associated with a functional crypto system, a purchaser would not reasonably expect to profit</p>
+<p>based on the essential managerial efforts of others.</p>
+<p>B.</p>
+<p>Digital Collectibles</p>
+<p>A digital collectible is a crypto asset that is designed to be collected and/or used and may</p>
+<p>represent or convey rights to artwork, music, videos, trading cards, in-game items, or digital</p>
+<p>representations or references to internet memes, characters, current events, or trends, among</p>
+<p>other things. A digital collectible does not have intrinsic economic properties or rights, such as</p>
+<p>generating a passive yield or conveying rights to future income, profits, or assets of a business</p>
+<p>enterprise or other entity, promisor, or obligor. Examples of digital collectibles available in the</p>
+<p>markets today, based on our understanding of their characteristics, terms, and functions as of the</p>
+<p>date of this release, include CryptoPunks,55 Chromie Squiggles,56 Fan Tokens,57 WIF,58 and</p>
+<p>VCOIN.59</p>
+<p>54     For purposes of this release, a "central party" is a person, entity, or group of persons or entities having</p>
+<p>operational, economic, or voting control of a crypto system.</p>
+<p>55   See https://cryptopunks.app.</p>
+<p>56   See https://chromie-squiggles.com.</p>
+<p>57   See https://www.socios.com/fan-tokens. Fan Tokens have hybrid characteristics and could be classified as</p>
+<p>digital tools.</p>
+<p>58   See https://dogwifhat.us.</p>
+<p>59   See https://vcoin.imvu.com.</p>
+<p>16</p>
+<p>Like physical collectibles, digital collectibles do not provide holders with any legal rights</p>
+<p>or interest in or with respect to a business enterprise or other entity, promisor, or obligor</p>
+<p>associated with the creator of the digital collectible or otherwise.60 Digital collectibles may</p>
+<p>provide holders with a limited license or other intellectual property rights, often pursuant to an</p>
+<p>end user agreement. For example, creators of unique artwork digital collectibles often provide</p>
+<p>holders with the right to display and commercialize the acquired artwork.61 Social media</p>
+<p>platforms, video games, and other consumer applications sometimes incorporate digital</p>
+<p>collectibles to enhance the user experience and facilitate network effects. The developers of these</p>
+<p>applications often reward early users with digital collectibles or allow active users to earn digital</p>
+<p>collectibles by engaging with the application. These digital collectibles include badges, video</p>
+<p>game "skins," and rewards points.</p>
+<p>Some digital collectibles have limited or no functionality. For example, a "meme coin" is</p>
+<p>a type of crypto asset inspired by internet memes, characters, current events, or trends for which</p>
+<p>the creator seeks to attract an enthusiastic online community to purchase the meme coin and</p>
+<p>engage in its trading.62 Meme coins typically are acquired for artistic, entertainment, social, and</p>
+<p>cultural purposes, and their value is driven by supply and demand, rather than any essential</p>
+<p>managerial efforts of others. Nonetheless, meme coin holders may create uses for meme coins,</p>
+<p>such as by limiting access to a chatroom to meme coin holders or whitelisting meme coin holders</p>
+<p>for an airdrop.63 Further, a crypto asset may be offered and sold initially as a meme coin that has</p>
+<p>no functionality within an associated functional crypto system (and no related representations or</p>
+<p>promises to create such functionality or crypto system) and that derives its value from the asset's</p>
+<p>artistic, entertainment, social, or cultural significance, but later become a digital commodity</p>
+<p>because it becomes functional within an associated functional crypto system.</p>
+<p>A digital collectible itself, as described in this release, is not a security because it does not</p>
+<p>have the economic characteristics of a security.64 A digital collectible does not constitute any of</p>
+<p>62   The Division of Corporation Finance ("Corporation Finance") issued a statement addressing the</p>
+<p>characterization of meme coins under the definition of "security." See U.S. Securities and Exchange
+Commission, Division of Corporation Finance, Staff Statement on Meme Coins (Feb. 27, 2025), available at
+https://www.sec.gov/newsroom/speeches-statements/staff-statement-meme-coins. That statement and any other
+staff statement referenced in this release is not a rule, regulation, guidance, or statement of the Commission, and
+the Commission has neither approved nor disapproved its content. Staff statements have no legal force or effect:
+they do not alter or amend applicable law, and they create no new or additional obligations for any person. For
+the avoidance of doubt, the views expressed by the Commission in this release supersede any prior statements
+by the Commission or its staff on these topics.</p>
+<p>63   For purposes of this release, "whitelisting" is the practice of explicitly allowing only pre-approved applications,</p>
+<p>users, email addresses, or IP addresses to access a crypto system or service. For a description of "airdrops," see
+infra section VII.</p>
+<p>64   Digital collectibles are onchain analogues to physical collectibles, which generally have not been regulated as</p>
+<p>securities.</p>
+<p>17</p>
+<p>the financial instruments enumerated in the definition of "security" because, among other things,</p>
+<p>it does not represent a digitized form of any such instruments, including an investment contract.</p>
+<p>Digital collectibles generally have artistic, entertainment, social, or cultural value or utility. The</p>
+<p>purchase of a digital collectible is not an investment in any business enterprise or other entity,</p>
+<p>promisor, or obligor associated with the creator of the digital collectible.</p>
+<p>Like a physical collectible, a digital collectible's value is not based on the expectation of</p>
+<p>profits from any essential managerial efforts of its creator following creation but rather on supply</p>
+<p>and demand, which in many cases depends on the subject matter, popularity, or scarcity of the</p>
+<p>digital collectible, as is the case with physical collectibles. For example, buying a digital</p>
+<p>collectible with the hope that its subject matter, popularity, or scarcity will increase its price is</p>
+<p>like buying a piece of art with the hope that market forces will create demand for the art and</p>
+<p>increase its price. While the value of a digital collectible may be impacted directly or indirectly</p>
+<p>by the activities or reputation of the creator—as may occur with respect to a physical</p>
+<p>collectible—the creator of a digital collectible typically does not make representations or</p>
+<p>promises to undertake essential managerial efforts from which a purchaser would reasonably</p>
+<p>expect to derive profits.65</p>
+<p>However, as can be the case with physical collectibles,66 the offer and sale of a digital</p>
+<p>collectible that either is fractionalized or otherwise enables individuals to acquire a fractional</p>
+<p>ownership interest of a single digital collectible, could constitute the offer or sale of a security</p>
+<p>because it may involve essential managerial efforts from which a purchaser would reasonably</p>
+<p>expect to derive profits and, therefore, may be offered and sold as an investment contract.67</p>
+<p>C.</p>
+<p>Digital Tools</p>
+<p>A digital tool is a crypto asset that performs a practical function, such as a membership,</p>
+<p>ticket, credential, title instrument, or identity badge. Digital tools are commonly issued for use in</p>
+<p>connection with crypto systems and are designed to perform practical functions within such</p>
+<p>systems. Digital tools often are non-transferrable or "soul-bound,"68 and their value is derived</p>
+<p>from their practical functionality. Digital tools may be issued by a central party or autonomously</p>
+<p>in accordance with the programmatic functioning of a crypto system. A digital tool does not have</p>
+<p>intrinsic economic properties or rights, such as generating a passive yield or conveying rights to</p>
+<p>future income, profits, or assets of a business enterprise or other entity, promisor, or obligor.</p>
+<p>Examples of digital tools available in the markets today, based on our understanding of their</p>
+<p>characteristics, terms, and functions as of the date of this release, include Ethereum Name</p>
+<p>Service domain names69 and CoinDesk's 'Microcosms' NFT Consensus Ticket.70</p>
+<p>A digital tool itself, as described in this release, is not a security because it does not have</p>
+<p>the economic characteristics of a security.71 A digital tool does not constitute any of the financial</p>
+<p>instruments enumerated in the definition of "security" because, among other things, it does not</p>
+<p>represent a digitized form of such instruments, including an investment contract. Persons acquire</p>
+<p>digital tools for their functional utility and do not have any rights or interest in or with respect to</p>
+<p>a business enterprise or other entity, promisor, or obligor just as persons acquiring a museum</p>
+<p>membership do not expect to realize a profit from the essential managerial efforts of the</p>
+<p>museum's operators. The price at which the digital tool may be resold, if it may be resold at all,</p>
+<p>is based upon its functional utility rather than any expectation of profits from any essential</p>
+<p>managerial efforts of its developer. While the value of a digital tool may be impacted directly or</p>
+<p>indirectly by the activities of the developer, the creator of a digital tool typically does not make</p>
+<p>representations or promises to undertake any essential managerial efforts from which a purchaser</p>
+<p>would reasonably expect to derive profits.72</p>
+<p>D.</p>
+<p>Stablecoins</p>
+<p>A stablecoin is a crypto asset that is designed to maintain a stable value relative to a</p>
+<p>reference asset like the U.S. dollar.73 In July 2025, Congress enacted the GENIUS Act, which</p>
+<p>creates a comprehensive regulatory framework for a specific type of stablecoin called a</p>
+<p>"payment stablecoin."74 The GENIUS Act excludes from the definition of "security" any</p>
+<p>"payment stablecoin issued by a permitted payment stablecoin issuer," as such terms are defined</p>
+<p>in section 2 of the GENIUS Act.75 A "payment stablecoin" is defined as a digital asset that is, or</p>
+<p>is designed to be, used as a means of payment or settlement, and the issuer of which generally is</p>
+<p>obligated to convert, redeem, or repurchase the digital asset for a fixed amount of monetary</p>
+<p>value, and represents that it will maintain, or create the reasonable expectation that it will</p>
+<p>maintain, a stable value relative to the value of a fixed amount of monetary value.76</p>
+<p>A "permitted payment stablecoin issuer" is defined as a person formed in the United</p>
+<p>States that is: (1) a subsidiary of an insured depository institution that has been approved to issue</p>
+<p>payment stablecoins under section 5 of the GENIUS Act; (2) a Federal qualified payment</p>
+<p>stablecoin issuer; or (3) a State qualified payment stablecoin issuer.77 A permitted payment</p>
+<p>stablecoin issuer is prohibited under the GENIUS Act from paying any form of interest or yield</p>
+<p>to the permitted stablecoin holders (whether in cash, tokens, or other consideration) solely in</p>
+<p>connection with the holding, use, or retention of the payment stablecoin.78 These crypto assets</p>
+<p>categorically will not be securities by operation of statute after the effective date of the GENIUS</p>
+<p>Act. Stablecoins other than payment stablecoins issued by a permitted payment stablecoin issuer</p>
+<p>may meet the definition of "security" depending on the facts and circumstances.</p>
+<p>Prior to the enactment of the GENIUS Act, Corporation Finance issued a statement</p>
+<p>addressing the characterization of certain stablecoins—referred to therein as "Covered</p>
+<p>Stablecoins"—under the definition of "security."79 Given that the GENIUS Act is not yet</p>
+<p>effective,80 and to clarify the Commission's views on the application of the Howey test to</p>
+<p>stablecoins, the Commission interprets that, for the reasons set forth in the Staff Stablecoin</p>
+<p>Statement, the offer and sale of Covered Stablecoins does not involve the offer and sale of</p>
+<p>securities within the meaning of section 2(a)(1) of the Securities Act or section 3(a)(10) of the</p>
+<p>Exchange Act.81 Accordingly, persons involved in the process of issuing and redeeming Covered</p>
+<p>Stablecoins do not need to register those transactions with the Commission under the Securities</p>
+<p>Act or fall within one of the Securities Act's exemptions from registration. The foregoing</p>
+<p>interpretation does not address stablecoins other than Covered Stablecoins as described in the</p>
+<p>Staff Stablecoin Statement.</p>
+<p>E.</p>
+<p>Digital Securities</p>
+<p>A digital security (commonly known as a "tokenized" security) is a financial instrument</p>
+<p>enumerated in the definition "security" that is formatted as or represented by a crypto asset,</p>
+<p>where the record of ownership is maintained in whole or in part on or through one or more</p>
+<p>crypto networks.82 There are a variety of models used to tokenize securities, but they may vary in</p>
+<p>terms of structure and the rights afforded to holders. As such, the rights of a holder of the crypto</p>
+<p>asset may be materially different from the rights of a holder of the underlying security, including</p>
+<p>economic and voting rights. Tokenized securities generally fall into two categories: (1) securities</p>
+<p>tokenized by or on behalf of the issuers of such securities; and (2) securities tokenized by third</p>
+<p>parties unaffiliated with the issuers of such securities, which may involve the third party issuing</p>
+<p>a separate security that derives its value from or is otherwise linked to the subject security.</p>
+<p>A security is a security regardless of whether it is issued, or otherwise represented,</p>
+<p>offchain or onchain. All devices and instruments that have the economic characteristics of a</p>
+<p>security are securities regardless of format or label. Many digital securities convey the same</p>
+<p>legal rights with respect to a business enterprise or other entity, promisor, or obligor as offchain</p>
+<p>securities. Some digital securities do not convey the same legal rights as offchain securities but</p>
+<p>instead entitle the holder to receive economic distributions from a central party that manages a</p>
+<p>business enterprise or other entity, promisor, or obligor on behalf of digital security holders.</p>
+<p>Purchasers of this latter type of digital security invest in a business enterprise or other entity,</p>
+<p>promisor, or obligor operated by a central party and look to the central party to earn such</p>
+<p>distributions. Further, digital securities may provide non-financial benefits to holders, similar to a</p>
+<p>digital commodity, digital collectible, or digital tool. A digital security does not fall outside of the</p>
+<p>definition of "security" merely because it provides such non-financial benefits.</p>
+<p>IV.  CRYPTO ASSETS THAT ARE SUBJECT TO AN INVESTMENT CONTRACT</p>
+<p>A.</p>
+<p>How Crypto Assets Become Subject to an Investment Contract</p>
+<p>How an issuer83 markets and promotes a contract, transaction, or scheme is relevant to</p>
+<p>assessing whether the issuer is offering or selling an investment contract.84 A non-security crypto</p>
+<p>asset becomes subject to an investment contract when an issuer offers it by inducing an</p>
+<p>investment of money in a common enterprise with representations or promises to undertake</p>
+<p>essential managerial efforts from which a purchaser would reasonably expect to derive profits.85</p>
+<p>A purchaser's reasonable profit expectations depend on the issuer's representations or promises</p>
+<p>to engage in such essential managerial efforts.86 Absent such representations or promises being</p>
+<p>conveyed to purchasers,87 it would not be reasonable for a purchaser to expect profits from the</p>
+<p>contract, transaction, or scheme.</p>
+<p>Whether it would be reasonable for a purchaser to expect profits based on representations</p>
+<p>or promises to engage in essential managerial efforts depends on the specific facts and</p>
+<p>circumstances, taken as a whole, under which those representations and promises are made.88 For</p>
+<p>example, the source of the representations or promises is relevant to a purchaser's reasonable</p>
+<p>expectations. Because the issuer establishes the essential managerial efforts that it intends to</p>
+<p>undertake, it would be reasonable for a purchaser to expect profits based on the explicit</p>
+<p>representations or promises to engage in essential managerial efforts made by or on behalf of the</p>
+<p>issuer and conveyed to purchasers. In contrast, it would not be reasonable for a purchaser to</p>
+<p>expect profits based on representations or promises made by third parties,89 such as unaffiliated</p>
+<p>proponents of the relevant crypto system or holders of the relevant crypto asset, unless the</p>
+<p>representations or promises are authorized by the issuer and conveyed to purchasers.90 Moreover,</p>
+<p>the timing of the representations or promises is relevant to a purchaser's reasonable</p>
+<p>expectations.91 Of necessity, in order to shape a purchaser's expectations, the representations or</p>
+<p>promises must be conveyed to the purchaser prior to or contemporaneously with the issuer's</p>
+<p>offer or sale to the purchaser. As such, the issuer's post-sale representations or promises would</p>
+<p>not convert the prior sale into an offer or sale of an investment contract.</p>
+<p>Similarly, the manner in which the representations or promises are made is relevant to a</p>
+<p>purchaser's reasonable expectations. It is reasonable for a purchaser to expect profits based on</p>
+<p>representations or promises conveyed to purchasers in written or oral agreements, public</p>
+<p>communications through which the issuer has established a regular pattern of communicating</p>
+<p>(such as the issuer's website or official social media accounts), direct private communications</p>
+<p>between the issuer and purchasers, regulatory filings publicly available to purchasers, or</p>
+<p>documents clearly attributable to the issuer (such as a whitepaper).92 Outside of such channels,</p>
+<p>the reasonableness of a purchaser's expectations of profit depends on whether the representations</p>
+<p>or promises are widely disseminated, the specific means by which the representations or</p>
+<p>promises are conveyed, and the issuer's established communication practices.</p>
+<p>Further, representations or promises are more likely to create reasonable expectations of</p>
+<p>profit when they are explicit and unambiguous as to the essential managerial efforts to be</p>
+<p>undertaken by the issuer, contain sufficient details demonstrating the issuer's ability to</p>
+<p>implement the proposed project, and explain how the issuer's efforts will produce the profits that</p>
+<p>purchasers reasonably expect. Representations or promises by an issuer conveyed to purchasers</p>
+<p>to develop and achieve functionality for a non-security crypto asset and/or develop an associated</p>
+<p>crypto system together with a business plan containing detailed milestones, a timeline,</p>
+<p>information about personnel, sources of funding and other resources needed to meet those</p>
+<p>milestones, and an explanation of how holders of the non-security crypto asset will profit from</p>
+<p>those efforts, likely would reasonably create an expectation of profit because they speak directly</p>
+<p>to those essential managerial efforts that affect the failure or success of the project.93 In contrast,</p>
+<p>representations or promises that are vague or contain no semblance of an actionable business</p>
+<p>plan, such as those lacking milestones, funding, or other plans for needed resources, likely would</p>
+<p>not create reasonable expectations of profit.</p>
+<p>The issuer's representations or promises to engage in essential managerial efforts from</p>
+<p>which a purchaser would reasonably expect to derive profits, when combined with an investment</p>
+<p>of money in a common enterprise, creates an investment contract under the Howey test. As is the</p>
+<p>case with other non-security assets,94 the fact that a non-security crypto asset is subject to an</p>
+<p>investment contract does not transform the non-security crypto asset itself into a security. For</p>
+<p>this reason, a non-security crypto asset that has been subject to an investment contract does not</p>
+<p>remain subject to the associated investment contract in secondary market transactions where</p>
+<p>purchasers would not reasonably expect such representations or promises to remain connected to</p>
+<p>the non-security crypto asset. If, on the other hand, purchasers would reasonably expect such</p>
+<p>representations or promises to remain connected to the non-security crypto asset, the non-</p>
+<p>security crypto asset would continue to be subject to the associated investment contract in</p>
+<p>secondary market transactions. Under such circumstances, secondary market offers and sales of</p>
+<p>such a non-security crypto asset would constitute securities transactions that must be registered</p>
+<p>under the Securities Act or conducted pursuant to an available exemption from registration. The</p>
+<p>associated investment contract will continue to be transferred to subsequent purchasers of the</p>
+<p>non-security crypto asset in secondary market transactions until the non-security crypto asset</p>
+<p>separates from the issuer's representations or promises, as discussed below.</p>
+<p>B.</p>
+<p>Separation of a Non-Security Crypto Asset from the Issuer's Representations</p>
+<p>or Promises</p>
+<p>A non-security crypto asset that was offered and sold subject to an investment contract</p>
+<p>does not necessarily remain subject to the associated investment contract in perpetuity. A non-</p>
+<p>security crypto asset remains subject to the associated investment contract if purchasers continue</p>
+<p>to have a reasonable expectation of profits to be derived from the issuer's essential managerial</p>
+<p>efforts. For that to be so, purchasers must continue to reasonably expect the issuer's</p>
+<p>representations or promises to engage in essential managerial efforts to remain connected to the</p>
+<p>non-security crypto asset.</p>
+<p>When a purchaser of a non-security crypto asset that has been subject to an investment</p>
+<p>contract could no longer reasonably expect the issuer's representations or promises to engage in</p>
+<p>essential managerial efforts to remain connected to the non-security crypto asset, the non-</p>
+<p>security crypto asset separates from such representations or promises, and thereafter the non-</p>
+<p>security crypto asset is not subject to the Federal securities laws. This separation of the non-</p>
+<p>security crypto asset from the issuer's representations or promises to engage in essential</p>
+<p>managerial efforts may occur at any time after the offer of the associated investment contract,</p>
+<p>such as immediately upon delivery of the non-security crypto asset to purchasers or at a future</p>
+<p>date. As discussed below, we would not expect a non-security crypto asset to be subject to an</p>
+<p>investment contract when any of the following non-exclusive indicia of separation is present.</p>
+<p>1.</p>
+<p>Fulfillment of the Issuer's Representations or Promises</p>
+<p>A non-security crypto asset that was offered and sold subject to an investment contract is</p>
+<p>no longer subject to the associated investment contract once the issuer has fulfilled its</p>
+<p>representations or promises to engage in essential managerial efforts, even if the issuer continues</p>
+<p>to provide efforts that are not essential managerial efforts with respect to the non-security crypto</p>
+<p>asset or an associated crypto system or other software project.95 Because the issuer has fulfilled</p>
+<p>the essential managerial efforts it represented or promised it would undertake, purchasers no</p>
+<p>longer have any reasonable expectations of profits to be derived from those efforts. Such</p>
+<p>representations or promises to engage in essential managerial efforts could, for example, relate to</p>
+<p>developing certain functionalities or features for the non-security crypto asset or the associated</p>
+<p>crypto system or other software project, achieving certain software development milestones on a</p>
+<p>roadmap, or open-sourcing related computer code.96 Upon the issuer's fulfillment of such</p>
+<p>representations or promises, the issuer is no longer offering or selling an investment contract and</p>
+<p>the investment contract itself ceases to exist.  Accordingly, the issuer's subsequent offers or sales</p>
+<p>of the non-security crypto asset would not constitute securities transactions unless the issuer</p>
+<p>creates a new investment contract to which the non-security crypto asset is subject.</p>
+<p>To illustrate, a non-security crypto asset may be offered and sold subject to an investment</p>
+<p>contract in a primary offering for immediate delivery or delayed delivery. In an offering</p>
+<p>involving immediate delivery, such as through an "initial coin offering," the issuer agrees to</p>
+<p>deliver newly generated non-security crypto assets immediately to investors in exchange for their</p>
+<p>investment. In an offering involving delayed delivery, such as through a "simple agreement for</p>
+<p>future tokens," the issuer agrees to deliver non-security crypto assets that have not yet been</p>
+<p>generated to investors at a later date in exchange for their investment today. In either case, the</p>
+<p>sale of the non-security crypto assets occurs at the time of entry into the agreement with the</p>
+<p>investors (with settlement occurring either immediately or at a future date),97 at which time the</p>
+<p>non-security crypto assets become subject to an investment contract regardless of when they are</p>
+<p>delivered.</p>
+<p>Upon delivery, where a purchaser would not reasonably expect profit from the efforts of</p>
+<p>the issuer (such as where the issuer has publicly disclosed that it completed the essential</p>
+<p>managerial efforts it represented or promised it would undertake), the non-security crypto assets</p>
+<p>are no longer subject to the associated investment contract because a necessary element of an</p>
+<p>investment contract no longer exists. In contrast, upon delivery, where a purchaser would</p>
+<p>reasonably expect profits from the efforts of the issuer (such as where the issuer has continued</p>
+<p>providing essential managerial efforts in accordance with its representations or promises or has</p>
+<p>not publicly disclosed that it completed the essential managerial efforts it represented or</p>
+<p>promised it would undertake), the non-security crypto assets would continue to be subject to the</p>
+<p>associated investment contract.</p>
+<p>2.</p>
+<p>Failure to Satisfy Issuer's Representations or Promises</p>
+<p>A non-security crypto asset that was offered and sold subject to an investment contract is</p>
+<p>no longer subject to an investment contract if a purchaser would not reasonably expect the issuer</p>
+<p>to be able to fulfill or to continue to engage in the essential managerial efforts it represented or</p>
+<p>promised it would undertake. There are several reasons why this could occur. For example, a</p>
+<p>sufficiently long period of time may have passed since the issuer's offer and sale of the</p>
+<p>investment contract and, during this time period, it has become clear to investors that the issuer</p>
+<p>has neither conducted the essential managerial efforts it represented or promised it would</p>
+<p>undertake nor indicated that it still intends to conduct such efforts. Similarly, the issuer may</p>
+<p>publicly announce that it will no longer perform the essential managerial efforts it represented or</p>
+<p>promised it would undertake (e.g., where the issuer effectively "abandons" the development of a</p>
+<p>crypto system).98</p>
+<p>Under these circumstances, a purchaser of the non-security crypto asset would not</p>
+<p>reasonably expect an issuer's past representations or promises to engage in essential managerial</p>
+<p>efforts to continue to remain connected to the non-security crypto asset. Accordingly, such</p>
+<p>purchaser would not reasonably expect the non-security crypto asset to be subject to the</p>
+<p>associated investment contract. An issuer that fails to perform or otherwise complete the essential</p>
+<p>managerial efforts it represented or promised it would undertake may face liabilities under the</p>
+<p>Federal securities laws for these failures, including under the anti-fraud provisions of the Federal</p>
+<p>securities laws.</p>
+<p>To illustrate, a non-security crypto asset is offered and sold subject to an investment</p>
+<p>contract comprising the issuer's representations or promises to undertake certain essential</p>
+<p>managerial efforts in connection with the development of a crypto system. The offer and sale of</p>
+<p>that investment contract must be registered under the Securities Act or conducted pursuant to an</p>
+<p>exemption from registration. As the issuer endeavors to develop the crypto system, the issuer</p>
+<p>experiences difficulties that affect its ability to fulfill the essential managerial efforts it</p>
+<p>represented or promised to undertake, such as insufficient funding or other resources, poor</p>
+<p>system architecture, technical issues (e.g., scalability problems, smart contract flaws, or security</p>
+<p>vulnerabilities), competition, poor management, and market conditions. Based on these</p>
+<p>difficulties, the issuer decides that it is unable or unwilling to fulfill the essential managerial</p>
+<p>efforts it promised to undertake and abandons the development of the crypto system.</p>
+<p>In such case, if the issuer publicly announces through a widely disseminated</p>
+<p>communication that it is abandoning the development of the crypto asset and will no longer</p>
+<p>perform the essential managerial efforts it represented or promised it would undertake when the</p>
+<p>investment contract was created, it would not be reasonable to expect the issuer's representations</p>
+<p>or promises to engage in such essential managerial efforts to remain connected to the non-</p>
+<p>security crypto asset. Accordingly, the non-security crypto asset would no longer be subject to</p>
+<p>the associated investment contract, and the associated investment contract would cease to exist.</p>
+<p>Nevertheless, the issuer would continue to be potentially liable for material misstatements or</p>
+<p>omissions in connection with its failure to perform or otherwise complete the essential</p>
+<p>managerial efforts that it represented or promised that it would undertake.</p>
+<p>3.</p>
+<p>Application of the Interpretation</p>
+<p>The interpretation above assumes that an investment contract has been created and does</p>
+<p>not address or otherwise affect the analysis regarding its creation under the Howey test. The</p>
+<p>interpretation only addresses certain circumstances under which a non-security crypto asset that</p>
+<p>is subject to an existing investment contract may separate from that investment contract and no</p>
+<p>longer be subject to that investment contract. Consequently, the interpretation only applies after</p>
+<p>an investment contract is created, even if the investment contract later ceases to exist because the</p>
+<p>issuer is unable or unwilling to complete the essential managerial efforts it represented or</p>
+<p>promised to undertake when the investment contract was created.</p>
+<p>Similarly, the fact that a non-security crypto asset may separate from the associated</p>
+<p>investment contract at some time following its creation does not affect the application of the</p>
+<p>Federal securities laws with respect to that investment contract. For example, the offer and sale</p>
+<p>of a non-security crypto asset that is subject to an investment contract must be registered under</p>
+<p>the Securities Act or conducted pursuant to an available exemption. If the issuer fails to register</p>
+<p>the offering of that investment contract or conduct it pursuant to an available exemption, the</p>
+<p>issuer will violate the Securities Act and investors will have certain rights against the issuer</p>
+<p>under the Federal securities laws for this failure to register or use an applicable exemption, even</p>
+<p>if the non-security crypto asset subsequently separates from the associated investment contract</p>
+<p>and that investment contract ceases to exist. Moreover, if the issuer makes material</p>
+<p>misstatements or omissions in connection with the creation of the associated investment contract</p>
+<p>or at any time during the existence of that investment contract, the issuer may be subject to</p>
+<p>liability under the anti-fraud provisions of the Federal securities laws for such conduct, even if</p>
+<p>the non-security crypto asset subsequently separates from the associated investment contract and</p>
+<p>that investment contract ceases to exist.</p>
+<p>The interpretation in this section IV is intended to underscore the Commission's view</p>
+<p>that how an issuer markets and promotes a contract, transaction, or scheme impacts whether the</p>
+<p>issuer is offering or selling an investment contract. To the extent issuers make representations or</p>
+<p>promises about essential managerial efforts they plan to undertake, we encourage issuers to</p>
+<p>clearly and in sufficient detail outline those efforts, provide a timeline and milestones for</p>
+<p>completing those efforts, explain the resources needed to complete those efforts, and publicly</p>
+<p>disclose the completion of those efforts.</p>
+<p>V.</p>
+<p>FEDERAL SECURITIES LAWS STATUS OF THE CRYPTO ASSET ACTIVITIES</p>
+<p>KNOWN AS "PROTOCOL MINING" AND "PROTOCOL STAKING"</p>
+<p>Crypto networks rely on cryptography and economic mechanism design to eliminate the</p>
+<p>need for designated trusted intermediaries to verify crypto network transactions and provide</p>
+<p>settlement assurances to users. The operation of each crypto network is governed by an</p>
+<p>underlying software protocol, consisting of computer code, which programmatically enforces</p>
+<p>certain rules, technical requirements, and reward distributions. Each protocol incorporates a</p>
+<p>"consensus mechanism," which is a method for enabling the distributed network of unrelated</p>
+<p>computers (known as "nodes") that maintain the peer-to-peer network to agree on the "state" (or</p>
+<p>authoritative record of network address ownership balances, transactions, smart contract code,</p>
+<p>and other data) of the network. Public, permissionless crypto networks allow anyone to</p>
+<p>participate in the crypto network's operation, including the validation of new transactions to the</p>
+<p>crypto network in accordance with the crypto network's consensus mechanism.</p>
+<p>In the following discussion, we provide an interpretation regarding the application of the</p>
+<p>Federal securities laws to: (1) certain digital commodity activities known as "mining" on public,</p>
+<p>permissionless crypto networks that use proof-of-work ("PoW") as a consensus mechanism</p>
+<p>("PoW Networks"); and (2) certain digital commodity activities known as "staking" on public,</p>
+<p>permissionless crypto networks that use proof-of-stake ("PoS") as a consensus mechanism ("PoS</p>
+<p>Networks"). In this release, we refer to mining digital commodities on PoW Networks as</p>
+<p>"Protocol Mining"99 and staking digital commodities on PoS Networks as "Protocol Staking."100</p>
+<p>A.</p>
+<p>Protocol Mining</p>
+<p>1.</p>
+<p>Protocol Mining Activities Generally</p>
+<p>PoW is a consensus mechanism that incentivizes transaction validation by rewarding</p>
+<p>participants, called "miners," who operate nodes adding computational resources to the PoW</p>
+<p>Network. PoW involves validating transactions on a PoW Network and adding them in blocks to</p>
+<p>the distributed ledger. The "work" in PoW is the computational resources that miners contribute</p>
+<p>to validate transactions and add new blocks to the PoW Network. Miners do not have to own the</p>
+<p>PoW Network's digital commodity to validate transactions.</p>
+<p>Miners use computers to solve complex mathematical equations in the form of</p>
+<p>cryptographic puzzles. Miners compete with their peers to solve these puzzles, and the first</p>
+<p>miner to solve a puzzle is charged with accepting batches of transactions from other nodes and</p>
+<p>validating (or proposing) new blocks of transactions to the PoW Network. In exchange for</p>
+<p>providing validation services, miners earn rewards in the form of newly generated digital</p>
+<p>commodities that are delivered under the terms of the PoW Network's software protocol.101 In</p>
+<p>this way, PoW provides an incentive for miners to invest the resources necessary to add valid</p>
+<p>blocks to the PoW Network.</p>
+<p>A miner providing validation services receives the reward only after the other nodes on</p>
+<p>the PoW Network verify, through the software protocol, that the solution is correct and valid. To</p>
+<p>this end, once a miner finds the correct solution, it broadcasts this information to other miners</p>
+<p>who can verify whether the miner properly solved the puzzle to receive the reward. Once</p>
+<p>verified, all miners then add the new block to their own copies of the PoW Network. PoW is</p>
+<p>designed to secure the PoW Network by requiring miners to spend considerable time and</p>
+<p>computational resources to authenticate transactions. When the validation process functions in</p>
+<p>this way, it not only makes it less likely that someone would seek to undermine a PoW Network</p>
+<p>but also makes it less likely that miners could include altered transactions, such as those enabling</p>
+<p>the "double spending" of digital commodities.102</p>
+<p>In addition to self (or solo) mining, miners can join "mining pools," which allow miners</p>
+<p>to combine their computational resources to increase their chances of successfully validating</p>
+<p>transactions and mining new blocks on the PoW Network. There are several types of mining</p>
+<p>pools, each with differing methods of operation and reward distribution.103 A pool operator</p>
+<p>typically is responsible for coordinating the miners' computational resources, maintaining the</p>
+<p>pool's mining hardware and software, overseeing the pool's security measures to protect against</p>
+<p>theft and cyberattacks, and ensuring that the miners are paid their rewards. In return, the pool</p>
+<p>operator charges a fee that is deducted from the rewards earned by the mining pool. Reward</p>
+<p>payouts vary among pools, although rewards often are distributed across the mining pool in</p>
+<p>proportion to the amount of computational resources that each miner contributes to the pool.</p>
+<p>Miners generally have no obligation to stay in a pool and can choose to leave a pool at any time.</p>
+<p>2.</p>
+<p>Covered Protocol Mining Activities</p>
+<p>The interpretation below pertains to the following Protocol Mining activities when such</p>
+<p>activities conform to the descriptions in this release ("Protocol Mining Activities" and each a</p>
+<p>"Protocol Mining Activity"): (1) mining digital commodities on a PoW Network; and (2) the</p>
+<p>roles of mining pools and pool operators involved in the Protocol Mining process, including their</p>
+<p>roles in connection with the earning and distribution of rewards. Only Protocol Mining Activities</p>
+<p>undertaken in connection with the following types of Protocol Mining are addressed in this</p>
+<p>release:</p>
+<p>Self (or Solo) Mining, which involves a miner mining digital commodities using its own</p>
+<p>computational resources. The miner may work alone or together with others to operate a node</p>
+<p>and mine digital commodities.</p>
+<p>Mining Pool, which involves miners combining their computational resources with other</p>
+<p>miners to increase their chances of successfully validating transactions and mining new blocks</p>
+<p>on the PoW Network. Reward payments may flow from the PoW Network directly to the miners</p>
+<p>or indirectly to them through the pool operator.</p>
+<p>3.</p>
+<p>Interpretation Regarding Protocol Mining Activities</p>
+<p>Protocol Mining Activities, in the manner and under the circumstances described in this</p>
+<p>release, do not involve the offer and sale of a security within the meaning of section 2(a)(1) of</p>
+<p>the Securities Act and section 3(a)(10) of the Exchange Act. Accordingly, participants in Protocol</p>
+<p>Mining Activities do not need to register transactions with the Commission under the Securities</p>
+<p>Act or fall within an available exemption from registration in connection with these Protocol</p>
+<p>Mining Activities.</p>
+<p>As noted above,104 a digital commodity itself does not constitute any of the financial</p>
+<p>instruments enumerated in the definition of "security." Accordingly, we conduct our analysis of</p>
+<p>certain transactions involving digital commodities in the context of Protocol Mining under the</p>
+<p>Howey test.</p>
+<p>Self (or Solo) Mining. A miner's self (or solo) mining is not undertaken with a reasonable</p>
+<p>expectation of profits to be derived from the essential managerial efforts of others. Rather, a</p>
+<p>miner contributes its own computational resources, which secure the PoW Network and enable</p>
+<p>the miner to earn rewards issued by the PoW Network in accordance with its software protocol.</p>
+<p>To earn rewards, the miner's activities must comply with the rules of the PoW Network's</p>
+<p>software protocol. By adding its computational resources to the PoW Network, the miner merely</p>
+<p>is engaging in an administrative or ministerial activity to secure the PoW Network, validate</p>
+<p>transactions and add new blocks, and receive rewards. A miner's expectation to receive rewards</p>
+<p>is not derived from any third party's essential managerial efforts upon which the PoW Network's</p>
+<p>success depends. Instead, the expected financial incentive from the PoW Network's software</p>
+<p>protocol is derived from the administrative or ministerial act of Protocol Mining performed by</p>
+<p>the miner. As such, rewards are payments to the miner in exchange for services it provides to the</p>
+<p>PoW Network rather than profits derived from the essential managerial efforts of others.</p>
+<p>Mining Pool. Likewise, when a miner combines its computational resources with other</p>
+<p>miners to increase their chances of successfully mining new blocks on the PoW Network, the</p>
+<p>miner has no expectation of profit derived from the essential managerial efforts of others. By</p>
+<p>adding its own computational resources to a mining pool, the miner merely is engaging in an</p>
+<p>administrative or ministerial activity to secure the PoW Network, validate transactions and add</p>
+<p>new blocks, and receive rewards. In addition, any expectation of profits that the miners have is</p>
+<p>not derived from the efforts of a third party, such as a pool operator. Even when participating in a</p>
+<p>mining pool, individual miners still perform the actual mining activity by contributing their</p>
+<p>computational power to solve the cryptographic puzzles for validation of new blocks.105</p>
+<p>Moreover, whether a miner self (or solo) mines or mines as a member of a mining pool does not</p>
+<p>alter the nature of Protocol Mining for purposes of the Howey test. In either case, Protocol</p>
+<p>Mining, as described in this release, remains an administrative or ministerial activity. Further, a</p>
+<p>pool operator's activities in operating the mining pool using the combined computational</p>
+<p>resources of participating miners are administrative or ministerial in nature. While some of the</p>
+<p>pool operator's activities may benefit the group of miners, any such efforts are not sufficient to</p>
+<p>constitute essential managerial efforts because miners are expecting the computational resources</p>
+<p>that they provide in conjunction with other members to the mining pool to earn profits.106 To this</p>
+<p>end, a miner does not join a mining pool based on the ability to earn profits passively from the</p>
+<p>activities of the pool operator.</p>
+<p>B.</p>
+<p>Protocol Staking</p>
+<p>1.</p>
+<p>Protocol Staking Activities Generally</p>
+<p>PoS is a consensus mechanism used to prove that operators of nodes ("Node Operators")</p>
+<p>participating in the PoS Network have contributed value to the PoS Network that, in some cases,</p>
+<p>can be forfeited if they act dishonestly.107 In a PoS Network, a Node Operator must stake the PoS</p>
+<p>Network's digital commodity to be selected programmatically by the PoS Network's software</p>
+<p>protocol to validate new blocks of data to, and update the state of, the PoS Network. 108 When</p>
+<p>selected, the Node Operator serves as a "Validator." In exchange for providing validation</p>
+<p>services, Validators earn rewards of two types: (1) newly generated digital commodities that are</p>
+<p>programmatically distributed to the Validator by the PoS Network in accordance with its</p>
+<p>software protocol; and (2) a percentage of the transaction fees, paid in digital commodities, by</p>
+<p>parties who are seeking to add their transactions to the PoS Network.109</p>
+<p>In PoS Networks, Node Operators must commit or "stake" digital commodities to be</p>
+<p>eligible to validate and earn rewards, which typically is effected using a smart contract. When</p>
+<p>initially staked, digital commodities are subject to a "bonding period," which is a length of time</p>
+<p>set by the terms of the applicable PoS Network's software protocol after which the staked digital</p>
+<p>commodities become eligible to earn rewards. While staked, the digital commodities are locked</p>
+<p>up and cannot be transferred.110 The Validator does not take possession or control of the staked</p>
+<p>digital commodities, which means that ownership and control of the staked digital commodities</p>
+<p>do not change.</p>
+<p>Each PoS Network's software protocol contains the rules for operating and maintaining</p>
+<p>the PoS Network, including the method of selecting Validators among Node Operators. Some</p>
+<p>software protocols provide for random selection of Validators while others employ specific</p>
+<p>criteria for selecting Validators, such as the number of digital commodities staked by the Node</p>
+<p>Operators. Protocols also may contain rules intended to deter activities that are detrimental to the</p>
+<p>PoS Network's security and integrity, such as validating invalid blocks or double signing (which</p>
+<p>occurs when a Validator attempts to add the same transaction to the PoS Network multiple times,</p>
+<p>effectively spending the same crypto assets more than once).111</p>
+<p>Rewards from Protocol Staking provide an economic incentive for participants to use</p>
+<p>their digital commodities to secure the PoS Network and ensure its continued operation. An</p>
+<p>increase in the amount of staked digital commodities can increase the security of PoS Networks</p>
+<p>and mitigate the risk of a hostile party gaining control of a majority of the total staked digital</p>
+<p>commodities, which would allow the party to manipulate the PoS Network by influencing the</p>
+<p>validation of transactions and potentially altering the PoS Network's transaction history.</p>
+<p>Digital commodity owners ("Owners") can earn rewards by serving as a Node Operator</p>
+<p>and staking their own digital commodities. When self (or solo) staking, the Owner maintains</p>
+<p>ownership and control of its digital commodities and cryptographic private "keys" at all times.</p>
+<p>Alternatively, Owners can participate in the PoS Network validation process without</p>
+<p>running their own nodes by using self-custodial staking directly with a third party. Owners grant</p>
+<p>their validation rights to a third-party Node Operator.112 When using a third-party Node Operator,</p>
+<p>the Owner receives a portion of the rewards, with the Node Operator also earning a portion of the</p>
+<p>rewards for its services in validating transactions. When using self-custodial staking directly with</p>
+<p>a third party, the Owner retains ownership and control of its digital commodities and its private</p>
+<p>keys.</p>
+<p>In addition to self (or solo) staking and self-custodial staking directly with a third party, a</p>
+<p>third form of Protocol Staking is "custodial" staking, in which a third party (a "Custodian") takes</p>
+<p>custody of an Owner's digital commodities and facilitates staking them on behalf of the Owner.</p>
+<p>When Owners (in this context, "Depositors") deposit their digital commodities with a Custodian,</p>
+<p>the Custodian holds the deposited digital commodities in a cryptographic wallet that the</p>
+<p>Custodian controls. The Custodian stakes the digital commodities on the Depositor's behalf for</p>
+<p>an agreed-upon portion of any rewards, either using a node the Custodian operates or through a</p>
+<p>third-party Node Operator the Custodian selects. At all times during the staking process, the</p>
+<p>deposited digital commodities remain in the control of the Custodian, and the Depositor is</p>
+<p>intended to retain ownership of the digital commodities held by the Custodian.113 Further, the</p>
+<p>deposited digital commodities: (1) are not used by the Custodian for operational or general</p>
+<p>business purposes; (2) are not lent, pledged, or rehypothecated for any reason; and (3) are held in</p>
+<p>a manner designed not to subject them to claims by third parties. To this end, the Custodian may</p>
+<p>not use the deposited digital commodities to engage in leverage, trading, speculation, or</p>
+<p>discretionary activities.</p>
+<p>A fourth type of Protocol Staking is "Liquid Staking," whereby Depositors receive newly</p>
+<p>generated crypto assets ("Staking Receipt Tokens") that evidence Depositors' ownership of the</p>
+<p>deposited digital commodities and any rewards that accrue to the deposited digital</p>
+<p>commodities.114 As part of Liquid Staking, Staking Receipt Tokens are issued to Depositors on a</p>
+<p>one-for-one basis to the amount of the deposited digital commodities.115 Staking Receipt Tokens</p>
+<p>enable their holders to maintain liquidity without having to withdraw the deposited digital</p>
+<p>commodities from staking. For example, holders can use Staking Receipt Tokens as collateral or</p>
+<p>to participate in crypto applications, including those that can provide a return to the holder,</p>
+<p>although any such transactions are separate and independent of the Protocol Staking activities.</p>
+<p>Staking Receipt Tokens do not change any of the rights or obligations of the deposited digital</p>
+<p>commodities and are characterized as receipts for the deposited digital commodities. Depositors</p>
+<p>can redeem the Staking Receipt Tokens for the deposited digital commodities and any rewards</p>
+<p>that accrue to the deposited digital commodities,116 subject to any applicable unbonding</p>
+<p>period.117</p>
+<p>Persons can participate in Liquid Staking through protocol-based or third-party service</p>
+<p>providers (both referred to in this release as "Liquid Staking Providers"). The Liquid Staking</p>
+<p>Provider facilitates the staking of the deposited digital commodities on behalf of the Depositor.</p>
+<p>The Liquid Staking Provider holds the deposited digital commodities either in a cryptographic</p>
+<p>wallet that the Liquid Staking Provider controls or in a smart contract. The Liquid Staking</p>
+<p>Provider stakes the deposited digital commodities on behalf of the Depositor for an agreed-upon</p>
+<p>fee that reduces the amount of rewards that would otherwise accrue to the deposited digital</p>
+<p>commodities, either using a node the Liquid Staking Provider operates or through a third-party</p>
+<p>Node Operator the Liquid Staking Provider selects.118 In the latter case, this selection is the</p>
+<p>Liquid Staking Provider's only decision in the staking process, and that decision may be</p>
+<p>automated. At all times during this Liquid Staking arrangement, the deposited digital</p>
+<p>commodities remain in the control of the Liquid Staking Provider and the Depositor (or any</p>
+<p>subsequent transferee of the Depositor's Staking Receipt Tokens) is intended to retain ownership</p>
+<p>of the deposited digital commodities.119</p>
+<p>When using a protocol-based Liquid Staking Provider, Depositors deposit their digital</p>
+<p>commodities into a software protocol that holds the deposited digital commodities in a smart</p>
+<p>contract on behalf of the Depositors, stakes the deposited digital commodities on behalf of the</p>
+<p>Depositors, and issues Staking Receipt Tokens to the Depositors, all in a programmatic manner</p>
+<p>through self-executing computer code. The generating, issuing, and redeeming of the Staking</p>
+<p>Receipt Tokens is performed without the need for or reliance on a third-party intermediary.</p>
+<p>When using a third-party Liquid Staking Provider, such as a Custodian, Depositors</p>
+<p>deposit their digital commodities with the third-party Liquid Staking Provider, who holds the</p>
+<p>deposited digital commodities in a cryptographic wallet on behalf of the Depositors, stakes the</p>
+<p>deposited digital commodities on behalf of the Depositors, and issues Staking Receipt Tokens to</p>
+<p>Depositors. The generating, issuing, and redeeming of the Staking Receipt Tokens is</p>
+<p>performed by the third-party Liquid Staking Provider.</p>
+<p>In a Liquid Staking arrangement, rewards accrue to, and slashing120 losses are deducted</p>
+<p>from, the staked digital commodities. Rewards are deposited with the Liquid Staking Provider,</p>
+<p>and staked digital commodities are forfeited if there are slashing losses, in either case in a</p>
+<p>programmatic manner through self-executing computer code. There are two methods through</p>
+<p>which Staking Receipt Tokens reflect rewards and/or slashing losses. In the first method, the</p>
+<p>Staking Receipt Token itself evidences ownership of more digital commodities as and when</p>
+<p>rewards accrue and fewer digital commodities as and when slashing losses occur. This means</p>
+<p>that the ratio of one Staking Receipt Token to one digital commodity changes as rewards accrue</p>
+<p>and/or slashing losses occur. For example, as rewards accrue the ratio changes from one-to-one</p>
+<p>to one-to-more-than-one, with one Staking Receipt Token representing more than one digital</p>
+<p>commodity. In the second method, Staking Receipt Token holders receive additional Staking</p>
+<p>Receipt Tokens as and when rewards accrue and lose Staking Receipt Tokens as and when</p>
+<p>slashing losses occur. This means that the ratio of Staking Receipt Tokens to digital commodities</p>
+<p>always remains one-to-one. In either case, the Staking Receipt Tokens can be redeemed with the</p>
+<p>Liquid Staking Provider at any time for the deposited digital commodities, subject to any</p>
+<p>applicable unbonding period.</p>
+<p>2.</p>
+<p>Covered Protocol Staking Activities</p>
+<p>The interpretation below pertains to the following Protocol Staking activities when such</p>
+<p>activities conform to the descriptions in this release ("Protocol Staking Activities" and each a</p>
+<p>"Protocol Staking Activity"): (1) staking digital commodities on a PoS Network; (2) the</p>
+<p>activities undertaken by third parties involved in the Protocol Staking process—including, but</p>
+<p>not limited to, third-party Node Operators, Validators, Custodians, Delegates, Nominators, and</p>
+<p>Liquid Staking Providers (collectively, "Service Providers")—including their roles in connection</p>
+<p>with the earning and distribution of rewards; (3) the activities undertaken by Liquid Staking</p>
+<p>Providers in connection with generating, issuing, and redeeming Staking Receipt Tokens; and (4)</p>
+<p>providing Ancillary Services (as defined below). Only Protocol Staking Activities undertaken in</p>
+<p>connection with the following types of Protocol Staking are addressed in this release:</p>
+<p>Self (or Solo) Staking, which involves a Node Operator staking digital commodities it</p>
+<p>owns and controls using its own resources. The Node Operator may include one or more persons</p>
+<p>acting together to operate a node and stake their digital commodities.</p>
+<p>Self-Custodial Staking Directly with a Third Party, which involves a Node Operator,</p>
+<p>under the terms of the PoS Network's protocol, being granted Owners' validation rights. Reward</p>
+<p>payments may flow from the PoS Network directly to the Owners or indirectly to them through</p>
+<p>the Node Operator.</p>
+<p>Custodial Arrangement, which involves a Custodian staking on behalf of Depositors. For</p>
+<p>example, a crypto asset trading platform holding deposited digital commodities may stake such</p>
+<p>digital commodities on behalf of Depositors on a PoS Network that permits delegation on behalf</p>
+<p>of and with the consent of the Depositors. The Custodian will stake the deposited digital</p>
+<p>commodities using its own node or select a third-party Node Operator. In the latter case, this</p>
+<p>selection is the Custodian's only decision in the staking process.</p>
+<p>Liquid Staking, which involves a Liquid Staking Provider staking on behalf of Depositors</p>
+<p>who receive a Staking Receipt Token that evidences their ownership of the deposited digital</p>
+<p>commodities and any rewards that accrue to the deposited digital commodities. The Liquid</p>
+<p>Staking Provider will stake the deposited digital commodities using its own node or select a</p>
+<p>third-party Node Operator. In the latter case, this selection is the Liquid Staking Provider's only</p>
+<p>decision in the Liquid Staking process.</p>
+<p>3.</p>
+<p>Interpretation Regarding Protocol Staking Activities</p>
+<p>Protocol Staking Activities, in the manner and under the circumstances described in this</p>
+<p>release, do not involve the offer and sale of a security within the meaning of section 2(a)(1) of</p>
+<p>the Securities Act or section 3(a)(10) of the Exchange Act. Accordingly, participants in Protocol</p>
+<p>Staking Activities do not need to register transactions with the Commission under the Securities</p>
+<p>Act or fall within an exemption from registration in connection with these Protocol Staking</p>
+<p>Activities.</p>
+<p>As noted above,121 a digital commodity itself does not constitute any of the financial</p>
+<p>instruments enumerated in the definition of "security." Accordingly, we conduct our analysis of</p>
+<p>certain transactions involving digital commodities in the context of Protocol Staking under the</p>
+<p>Howey test.122</p>
+<p>Self (or Solo) Staking. A Node Operator's self (or solo) staking is not undertaken with a</p>
+<p>reasonable expectation of profits to be derived from the essential managerial efforts of others.</p>
+<p>Rather, Node Operators contribute their own resources and stake their own digital commodities,</p>
+<p>thereby helping to secure the PoS Network and facilitating the PoS Network's operation through</p>
+<p>the validation of new blocks, which enables them to qualify for rewards issued by the PoS</p>
+<p>Network in accordance with its underlying software protocol. To earn rewards, the Node</p>
+<p>Operator's activities must comply with the rules of the PoS Network's software protocol. By</p>
+<p>staking its own digital commodities and engaging in Protocol Staking, the Node Operator is</p>
+<p>merely engaging in an administrative or ministerial activity to secure the PoS Network and</p>
+<p>facilitate its operation. A Node Operator's expectation to receive rewards is not derived from any</p>
+<p>third party's essential managerial efforts upon which the PoS Network's success depends.</p>
+<p>Instead, the expected financial incentive from the PoS Network's software protocol is derived</p>
+<p>solely from the administrative or ministerial act of Protocol Staking. As such, rewards are</p>
+<p>payments to the Node Operator in exchange for the services it provides to the PoS Network</p>
+<p>rather than profits derived from the essential managerial efforts of others.</p>
+<p>Self-Custodial Staking Directly with a Third Party. Likewise, where an Owner grants its</p>
+<p>validation rights to a Node Operator, the Owner has no expectation of profit derived from the</p>
+<p>essential managerial efforts of others. The Node Operator's service to the Owner is</p>
+<p>administrative or ministerial in nature and does not constitute essential managerial efforts for the</p>
+<p>reasons discussed above with respect to self (or solo) staking. Whether a Node Operator stakes</p>
+<p>its own digital commodities or is granted validation rights from Owners does not alter the nature</p>
+<p>of Protocol Staking for purposes of the Howey test. In either case, Protocol Staking remains an</p>
+<p>administrative or ministerial activity, and the expected financial incentive is derived solely from</p>
+<p>such activity and not the success of the PoS Network or some other third party. Further, the Node</p>
+<p>Operator does not guarantee or otherwise set or fix the amount of the rewards owed to Owners,</p>
+<p>although the Node Operator may subtract from such amount its fees (whether fixed or a</p>
+<p>percentage of such amount).</p>
+<p>Custodial Arrangement. In a custodial arrangement, the Custodian (whether a Node</p>
+<p>Operator or not) does not provide essential managerial efforts to Depositors for whom it provides</p>
+<p>this service. These arrangements are like those discussed above where an Owner grants its</p>
+<p>validation rights to a third party but, in this instance, they also involve the Owner granting</p>
+<p>custody of its deposited digital commodities. The Custodian does not decide whether, when, or</p>
+<p>how much of a Depositor's digital commodities to stake. The Custodian acts as an agent in</p>
+<p>connection with staking the deposited digital commodities on behalf of the Depositor.123 In</p>
+<p>addition, the Custodian's taking custody of the deposited digital commodities and in some cases</p>
+<p>selecting a Node Operator do not constitute essential managerial efforts because these activities</p>
+<p>are administrative or ministerial in nature. Further, the Custodian does not guarantee or otherwise</p>
+<p>set or fix the amount of the rewards owed to Depositors, although the Custodian may subtract</p>
+<p>from such amount its fees (whether fixed or a percentage of such amount).124</p>
+<p>Liquid Staking. In Liquid Staking, the Liquid Staking Provider (whether a Node Operator</p>
+<p>or not) does not provide essential managerial efforts to Depositors for whom it provides this</p>
+<p>service. These arrangements are like those discussed above with respect to a "Custodial</p>
+<p>Arrangement." The Liquid Staking Provider does not decide whether, when, or how much of a</p>
+<p>Depositor's digital commodities to stake and is acting as an agent in connection with staking the</p>
+<p>digital commodities on behalf of the Depositor.125 In addition, the Liquid Staking Provider's</p>
+<p>taking custody of the deposited digital commodities and in some cases selecting a Node Operator</p>
+<p>does not constitute essential managerial efforts because these activities are administrative or</p>
+<p>ministerial in nature. Further, the Liquid Staking Provider does not guarantee or otherwise set the</p>
+<p>amount of the rewards owed to Depositors, although the Liquid Staking Provider may subtract</p>
+<p>from such amount its fees (whether fixed or a percentage of such amount).126</p>
+<p>Ancillary Services. Service Providers may provide the services described below</p>
+<p>("Ancillary Services") to Owners and Depositors in connection with Protocol Staking. Each of</p>
+<p>these Ancillary Services is merely administrative or ministerial in nature and does not involve</p>
+<p>essential managerial efforts. They are facets of a general activity—Protocol Staking—that itself</p>
+<p>does not constitute essential managerial efforts. Whether offered separately or as a group of</p>
+<p>services, the Service Provider does not provide essential managerial efforts if it provides any or</p>
+<p>all of these services.127</p>
+<p>Slashing Coverage, where the Service Provider reimburses or indemnifies a staking</p>
+<p>customer against loss resulting from slashing. This protection is similar to that offered by service</p>
+<p>providers in many types of traditional commercial transactions.</p>
+<p>Early Unbonding, where a Service Provider allows digital commodities to be returned to</p>
+<p>an Owner or Depositor before the end of the applicable unbonding period of a PoS Network's</p>
+<p>software protocol. This service merely shortens the applicable unbonding period as a</p>
+<p>convenience to the Owner or Depositor by reducing the burden of the unbonding period.</p>
+<p>Alternate Rewards Payment Schedules and Amounts, where the Service Provider delivers</p>
+<p>earned rewards at a cadence and in an amount that differs from the set schedule of a PoS</p>
+<p>Network's software protocol and/or where the rewards are paid earlier or less frequently than a</p>
+<p>PoS Network's software protocol distributes them, provided the reward amounts are not fixed,</p>
+<p>guaranteed, or greater than those awarded by the PoS Network's software protocol. Similar to</p>
+<p>early unbonding, this is merely an optional convenience afforded to Owners and Depositors in</p>
+<p>connection with the administration of rewards allocation and delivery.</p>
+<p>Aggregation of Digital Commodities, where the Service Provider offers the ability for</p>
+<p>Owners or Depositors to aggregate their digital commodities to meet any applicable staking</p>
+<p>minimum of a PoS Network's software protocol. This service is part of the validation process,</p>
+<p>which itself is administrative or ministerial in nature. Without more, aggregating the digital</p>
+<p>commodities of Owners or Depositors to help enable staking is similarly administrative or</p>
+<p>ministerial in nature.</p>
+<p>4.</p>
+<p>Interpretation Regarding Staking Receipt Tokens</p>
+<p>The offer and sale of a Staking Receipt Token that is a receipt for a non-security crypto</p>
+<p>asset that is not subject to an investment contract, in the manner and under the circumstances</p>
+<p>described in this release, does not involve the offer and sale of a security within the meaning of</p>
+<p>section 2(a)(1) of the Securities Act or section 3(a)(10) of the Exchange Act. Accordingly,</p>
+<p>persons involved in the process of generating, issuing, and redeeming a Staking Receipt Token</p>
+<p>that is a receipt for a non-security crypto asset that is not subject to an investment contract, in the</p>
+<p>manner and under the circumstances described in this release, as well as persons involved in</p>
+<p>secondary market offers and sales of such Staking Receipt Tokens, do not need to register those</p>
+<p>transactions with the Commission under the Securities Act or fall within an exemption from</p>
+<p>registration. In contrast, the offer or sale of a Staking Receipt Token that is a receipt for a digital</p>
+<p>security or a non-security crypto asset that is subject to an investment contract is an offer or sale</p>
+<p>of a security within the meaning of section 2(a)(1) of the Securities Act or section 3(a)(10) of</p>
+<p>the Exchange Act.</p>
+<p>A Staking Receipt Token that is a receipt for a non-security crypto asset that is not subject</p>
+<p>to an investment contract does not constitute any of the common financial instruments</p>
+<p>enumerated in the definition of "security" because, among other things, it does not have the</p>
+<p>economic characteristics of a security. While Depositors are entitled to rewards accruing with</p>
+<p>respect to their deposited digital commodity, such a Staking Receipt Token itself does not</p>
+<p>generate rewards. Rather, rewards are generated from the underlying Protocol Staking Activities,</p>
+<p>which (as discussed above) do not involve securities transactions. Further, such a Staking</p>
+<p>Receipt Token does not constitute any of the derivative financial instruments enumerated in the</p>
+<p>definition of "security."128 Thus, such a Staking Receipt Token merely evidences the deposited</p>
+<p>digital commodity held with the Liquid Staking Provider to which the Depositor is entitled as the</p>
+<p>Owner. The definition of "security" specifically includes "receipt for" any security.129 A Staking</p>
+<p>Receipt Token is a receipt, which is an instrument certifying that a stated amount of a digital</p>
+<p>commodity has been deposited with the Liquid Staking Provider issuing the receipt, because it</p>
+<p>evidences the holder's ownership of the deposited digital commodity.130 Accordingly, a Staking</p>
+<p>Receipt Token that is a receipt for a non-security crypto asset that is not subject to an investment</p>
+<p>contract is not a receipt for a security. In contrast, a Staking Receipt Token that is a receipt for a</p>
+<p>digital security or non-security crypto asset that is subject to an investment contract is a security.</p>
+<p>Consideration also must be given to whether a Staking Receipt Token that is a receipt for</p>
+<p>a non-security crypto asset that is not subject to an investment contract itself may be offered and</p>
+<p>sold subject to an investment contract. Such a Staking Receipt Token is not offered and sold</p>
+<p>subject to an investment contract because the parties involved in the process of generating,</p>
+<p>issuing, and redeeming such a Staked Receipt Token do not provide essential managerial efforts</p>
+<p>to holders of such a Staked Receipt Token and any economic benefits realized by holders of such</p>
+<p>a Staking Receipt Token are not derived from any such efforts.131 That is, the value of such a</p>
+<p>Staking Receipt Token is derived from the value of the deposited digital commodity and not from</p>
+<p>the essential managerial efforts of the Liquid Staking Provider or any other third party involved</p>
+<p>in the process of generating, issuing, and redeeming such a Staking Receipt Token. Moreover,</p>
+<p>any rewards accruing with respect to the deposited digital commodity are realized from Protocol</p>
+<p>Staking Activities that, as discussed above, do not involve the offer and sale of a security within</p>
+<p>the meaning of section 2(a)(1) of the Securities Act or section 3(a)(10) of the Exchange Act.</p>
+<p>VI.</p>
+<p>FEDERAL SECURITIES LAWS STATUS OF THE CRYPTO ASSET ACTIVITY</p>
+<p>KNOWN AS "WRAPPING"</p>
+<p>In the following discussion, we provide an interpretation regarding the "wrapping" of</p>
+<p>crypto assets. The "wrapping" of crypto assets refer to the process through which a person</p>
+<p>deposits a crypto asset with a Custodian or cross-chain bridge132 (the "Wrapped Token Provider")</p>
+<p>and in return the Wrapped Token Provider generates an equivalent amount of "Redeemable</p>
+<p>Wrapped Tokens"133 on a one-for-one basis without directly or indirectly offering any return,</p>
+<p>yield, profit opportunity, or additional good or service. The Wrapped Token Provider holds the</p>
+<p>deposited crypto asset in a manner intended to ensure that, for the Redeemable Wrapped Tokens</p>
+<p>in circulation, there is an equivalent amount of the deposited crypto asset being held.134 The</p>
+<p>Wrapped Token Provider holds the deposited crypto asset for the benefit of the Redeemable</p>
+<p>Wrapped Token holders and the deposited crypto asset effectively is "locked up" and cannot be</p>
+<p>transferred, lent, pledged, rehypothecated, or otherwise used for any reason. The holder of a</p>
+<p>Redeemable Wrapped Token—whether the original depositor of the crypto asset or a subsequent</p>
+<p>transferee—has the right to redeem the Redeemable Wrapped Token for the deposited crypto</p>
+<p>asset on a one-for-one basis. To redeem, the Redeemable Wrapped Token holder reverses the</p>
+<p>process described above: the holder sends the Redeemable Wrapped Tokens back to the Wrapped</p>
+<p>Token Provider, who burns (or destroys) the Redeemable Wrapped Tokens and releases the</p>
+<p>equivalent amount of the deposited crypto asset back to the holder on a one-for-one basis.</p>
+<p>The offer or sale of a Redeemable Wrapped Token that is a receipt for a non-security</p>
+<p>crypto asset that is not subject to an investment contract, in the manner and under the</p>
+<p>circumstances described in this release, does not involve the offer and sale of a security within</p>
+<p>the meaning of section 2(a)(1) of the Securities Act or section 3(a)(10) of the Exchange Act.</p>
+<p>Accordingly, persons who participate in the offer or sale of a Redeemable Wrapped Token that is</p>
+<p>a receipt for a non-security crypto asset that is not subject to an investment contract, in the</p>
+<p>manner and under the circumstances described in this release, do not need to register their</p>
+<p>transactions with the Commission under the Securities Act or fall within an exemption from</p>
+<p>registration. In contrast, the offer or sale of a Redeemable Wrapped Token that is a receipt for a</p>
+<p>digital security or a non-security crypto asset that is subject to an investment contract is an offer</p>
+<p>or sale of a security within the meaning of section 2(a)(1) of the Securities Act or section</p>
+<p>3(a)(10) of the Exchange Act.</p>
+<p>A Redeemable Wrapped Token that is a receipt for a non-security crypto asset that is not</p>
+<p>subject to an investment contract does not constitute any of the common financial instruments</p>
+<p>enumerated in the definition of "security" because, among other things, it does not have the</p>
+<p>economic characteristics of a security. Further, such a Redeemable Wrapped Token does not</p>
+<p>constitute any of the derivative financial instruments enumerated in the definition of</p>
+<p>"security."135 Thus, such a Redeemable Wrapped Token merely evidences the deposited crypto</p>
+<p>asset held with the Wrapped Token Provider to which the Redeemable Wrapped Token holder is</p>
+<p>entitled. The definition of "security" specifically lists "receipt for" any security. A Redeemable</p>
+<p>Wrapped Token is a receipt, which is an instrument certifying that a stated amount of a crypto</p>
+<p>asset has been deposited with the Wrapped Token Provider issuing the receipt, because it</p>
+<p>evidences the holder's ownership of the deposited crypto asset and does not change any of the</p>
+<p>rights, obligations, or benefits of the deposited crypto asset.136 Accordingly, a Redeemable</p>
+<p>Wrapped Token that is a receipt for a non-security crypto asset that is not subject to an</p>
+<p>investment contract is not a receipt for a security. In contrast, a Redeemable Wrapped Token that</p>
+<p>is a receipt for a digital security or non-security crypto asset that is subject to an investment</p>
+<p>contract is a security.</p>
+<p>Consideration also must be given to whether a Redeemable Wrapped Token that is a</p>
+<p>receipt for a non-security crypto asset that is not subject to an investment contract itself may be</p>
+<p>offered and sold subject to an investment contract. The offer and sale of such a Redeemable</p>
+<p>Wrapped Token do not involve an investment in an enterprise and the parties involved in the</p>
+<p>wrapping process do not provide essential managerial efforts upon which any return would be</p>
+<p>derived. First, holders of such a Redeemable Wrapped Token are not making an investment in an</p>
+<p>enterprise. That is, their funds are neither pooled together to be deployed by promoters or other</p>
+<p>third parties for developing any enterprise, nor are their fortunes tied to the efforts of a promoter</p>
+<p>or other third party or shared with those of a promoter or other third party. As noted above, the</p>
+<p>Wrapped Token Provider holds the deposited crypto asset for the benefit of holders of such a</p>
+<p>Redeemable Wrapped Token, and the deposited crypto asset is locked up and cannot be</p>
+<p>transferred or otherwise used. Second, any economic benefits realized by holders of such a</p>
+<p>Redeemable Wrapped Token are not derived from the essential managerial efforts of others. That</p>
+<p>is, the value of such a Redeemable Wrapped Token is derived from the value of the deposited</p>
+<p>crypto asset and not from the efforts of any third party involved in the wrapping process. The</p>
+<p>wrapping process itself is an administrative or ministerial function typically used to facilitate or</p>
+<p>enhance the interoperability between different crypto networks and different token standards 137</p>
+<p>by allowing a crypto asset to be represented and used in a crypto system with which it is not</p>
+<p>otherwise compatible.138 In addition, there is no financial incentive derived from the wrapping</p>
+<p>process because a Redeemable Wrapped Token is redeemable for the deposited crypto asset only</p>
+<p>on a fixed, one-for-one basis without any additional financial incentive or benefit. Moreover, the</p>
+<p>activities of the parties involved in the wrapping process, including those of Wrapped Token</p>
+<p>Providers, are administrative or ministerial in nature and do not constitute essential managerial</p>
+<p>efforts.</p>
+<p>VII.  APPLICATION OF THE HOWEY TEST TO CERTAIN CRYPTO ASSET</p>
+<p>DISSEMINATIONS KNOWN AS "AIRDROPS"</p>
+<p>In the following discussion, we provide an interpretation regarding the investment</p>
+<p>contract status of certain crypto asset disseminations known as "airdrops" for purposes of</p>
+<p>Section 2(a)(1) of the Securities Act. As discussed below, this interpretation addresses only</p>
+<p>airdrops of non-security crypto assets by issuers to recipients who do not provide the issuer with</p>
+<p>money, goods, services, or other consideration in exchange for the airdropped non-security</p>
+<p>crypto assets.</p>
+<p>A.</p>
+<p>Airdrops Generally</p>
+<p>An "airdrop" is a means for crypto asset issuers to disseminate their crypto assets in</p>
+<p>exchange for no or nominal consideration. The issuer, usually in the early stages of development</p>
+<p>of a crypto system, effectuates an airdrop by transferring its crypto asset to specific</p>
+<p>cryptographic wallets or other addresses. Issuers use airdrops for a variety of reasons, such as to</p>
+<p>generate interest in and expand ownership and use of their crypto assets, reward early users or</p>
+<p>loyalty of users of a crypto system, promote a software application, build a community,</p>
+<p>decentralize governance authority with respect to an open-source crypto system, or award high-</p>
+<p>scoring players of an associated video game. An increase in the ownership base of a crypto asset</p>
+<p>can help grow and increase participation in the associated crypto system by more users, support</p>
+<p>decentralization of the crypto system, and facilitate network effects.</p>
+<p>Issuers choose the recipients and all other terms of their airdrops. For example, an issuer</p>
+<p>could airdrop its crypto asset only to cryptographic wallets holding another specified crypto</p>
+<p>asset, with or without minimum ownership thresholds of that other crypto asset, or to</p>
+<p>cryptographic wallets of users of a particular trading platform that facilitates participation in</p>
+<p>the airdrop. Or an issuer may airdrop its crypto asset to selected crypto system users who meet</p>
+<p>specific criteria, such as holding a minimum amount of the crypto asset or based on their prior or</p>
+<p>current level of activity with the associated crypto system. Further, an issuer may airdrop its</p>
+<p>crypto asset in exchange for the recipient providing a service. That service could include, for</p>
+<p>example, a task aimed at raising awareness of the issuer's crypto asset and associated crypto</p>
+<p>system through various channels, such as following the issuer on social media, "retweeting" (or</p>
+<p>reposting) a post sent by the issuer, writing an article about the associated crypto system,</p>
+<p>referring another person to the associated crypto system, or fixing bugs in the associated crypto</p>
+<p>system's software.</p>
+<p>B.</p>
+<p>Covered Airdrops</p>
+<p>The interpretation below pertains to airdrops of non-security crypto assets to recipients</p>
+<p>who do not provide the issuer with money, goods, services, or other consideration in exchange</p>
+<p>for the airdropped non-security crypto asset.139 The interpretation does not pertain to any</p>
+<p>airdrops of non-security crypto assets where the recipient provides the issuer with money, goods,</p>
+<p>services, or other consideration in exchange for the airdropped non-security crypto asset, such as</p>
+<p>where the recipient performs a service in exchange for the airdropped non-security crypto asset.</p>
+<p>The interpretation does, however, pertain to airdrops of non-security crypto assets in which the</p>
+<p>recipients have provided to the issuer money, goods, services, or other consideration where the</p>
+<p>consideration was not provided to the issuer in exchange for the airdropped non-security crypto</p>
+<p>assets. In other words, the recipient must not bargain for or choose to provide such consideration</p>
+<p>in exchange for the airdropped non-security crypto asset for the interpretation to apply. For</p>
+<p>example, where such consideration was provided to the issuer prior to the announcement140 of</p>
+<p>the airdrop and the recipients are not required to provide any further consideration to the issuer</p>
+<p>after such announcement in order to obtain the airdropped non-security crypto asset, we would</p>
+<p>not view such consideration as being provided to the issuer in exchange for the airdropped non-</p>
+<p>security crypto asset.141</p>
+<p>C.</p>
+<p>Interpretation Regarding Airdrops142</p>
+<p>Where an issuer conducts an airdrop of non-security crypto assets in the manner and</p>
+<p>under the circumstances described in this release, the non-security crypto asset does not become</p>
+<p>subject to an investment contract because the first element of the Howey test—requiring an</p>
+<p>investment of money143—is not met.144 Recipients of the airdropped non-security crypto asset are</p>
+<p>not making an "investment of money" because they provide no money, goods, services, or other</p>
+<p>consideration to the issuer in exchange for the airdropped non-security crypto asset, and the</p>
+<p>issuer is not offering them the non-security crypto asset in exchange for any such</p>
+<p>consideration.145 Accordingly, issuers conducting airdrops of non-security crypto assets in the</p>
+<p>manner and under the circumstances described in this release do not need to register those</p>
+<p>transactions with the Commission under the Securities Act or fall within one of the Securities</p>
+<p>Act's exemptions from registration.146</p>
+<p>This interpretation would include the following scenarios where recipients do not provide</p>
+<p>consideration to the issuer in exchange for the airdropped non-security crypto asset:</p>
+<p>• An issuer airdrops its non-security crypto asset to persons who hold another specified</p>
+<p>crypto asset in their digital wallets, and the issuer does not announce the airdrop</p>
+<p>before the non-security crypto asset is disseminated.147</p>
+<p>• An issuer creates a new crypto system that utilizes a non-security crypto asset. Prior</p>
+<p>to deploying the crypto system, the issuer deploys a testing environment version of</p>
+<p>the crypto system and interested users transact using such version during that phase of</p>
+<p>the crypto system's development. After the crypto system is fully functional and</p>
+<p>operational, the issuer announces that persons who used the testing environment</p>
+<p>version during a specific prior period would receive the non-security crypto asset in</p>
+<p>an airdrop for that prior engagement.148</p>
+<p>• An issuer airdrops its non-security crypto asset free of charge to users of a related</p>
+<p>software application who satisfy certain eligibility criteria based upon such users' use</p>
+<p>of the application. Airdrop eligibility is solely based on the users' use of the</p>
+<p>application prior to the date of the airdrop, and the issuer does not announce the</p>
+<p>airdrop before the non-security crypto asset is disseminated.</p>
+<p>This interpretation does not address airdrops of digital securities. This interpretation also</p>
+<p>does not address or otherwise alter our views of what does or does not constitute a "sale" under</p>
+<p>section 2(a)(3) of the Securities Act, which includes "every contract of sale or disposition of a</p>
+<p>security or interest in a security, for value," or section 3(a)(14) of the Exchange Act. Section</p>
+<p>2(a)(3) of the Securities Act and section 3(a)(14) of the Exchange Act by their terms do not apply</p>
+<p>to airdrops of non-security crypto assets that are not subject to an investment contract.</p>
+<p>VIII.  OTHER MATTERS</p>
+<p>Pursuant to the Congressional Review Act,149 the Office of Management and Budget</p>
+<p>("OMB") has designated the interpretation in this release as a "major rule," as defined by 5</p>
+<p>U.S.C. 804(2). Notwithstanding such designation, the interpretation in this release may take</p>
+<p>effect immediately pursuant to 5 U.S.C. 808(2) because it is an interpretive rule and thus exempt</p>
+<p>from the Administrative Procedure Act's notice and comment requirements. The interpretation in</p>
+<p>this release is a significant regulatory action under section 3(f) of Executive Order 12866, as</p>
+<p>amended, and has been reviewed by OMB. The interpretation in this release concerns the Federal</p>
+<p>securities laws and the guidance included herein concerns the administration of the Commodity</p>
+<p>Exchange Act by the CFTC. No interference is intended with respect to any other legal regime,</p>
+<p>including the Federal tax laws under the Internal Revenue Code or the Bank Secrecy Act of 1970</p>
+<p>and the Anti-Money Laundering Act of 2020, which are outside the scope of the interpretation in</p>
+<p>this release.</p>
+<p>IX.  COMMISSION ECONOMIC CONSIDERATIONS</p>
+<p>The interpretation in this release is intended to advise the public on the Commission's</p>
+<p>views of the application of the Federal securities laws to certain types of crypto assets and certain</p>
+<p>transactions in crypto assets. The interpretation does not itself create any new legal obligations</p>
+<p>for issuers of, and investors in, digital securities and crypto asset-related securities (i.e., when a</p>
+<p>crypto asset is subject to an investment contract). Nonetheless, we recognize that, to the extent</p>
+<p>the understanding and behavior of issuers and investors are currently not consistent with the</p>
+<p>interpretation, the interpretation would have economic effects. We discuss the potential economic</p>
+<p>effects of the interpretation below, including the potential for improvements in efficiency, capital</p>
+<p>formation, and competition.</p>
+<p>The interpretation may affect issuers of and investors in digital securities and crypto</p>
+<p>asset-related securities; creators and acquirers of non-security crypto assets; users of crypto</p>
+<p>systems; and financial intermediaries. The main effect of the interpretation will be to reduce</p>
+<p>uncertainty by finally providing clarity about the Commission's views on the application of the</p>
+<p>Federal securities laws to certain types of crypto assets and certain transactions in crypto assets.</p>
+<p>The impact of this clarification, however, is limited in certain respects. First, given the passage of</p>
+<p>the GENIUS Act, affected parties are already on notice that payment stablecoins issued by a</p>
+<p>permitted payment stablecoin issuer will be excluded from the statutory definition of "security"</p>
+<p>after the effective date of the GENIUS Act. Second, to the extent that affected parties are already</p>
+<p>acting consistently with the interpretation, the interpretation will have minimal economic impact.</p>
+<p>By providing more clarity, the interpretation should reduce costs for issuers of digital</p>
+<p>securities and crypto asset-related securities, as well as other market participants and creators of</p>
+<p>non-security crypto assets by reducing the cost of legal advice to determine their obligations</p>
+<p>consistent with the Commission's views on the application of the Federal securities laws to</p>
+<p>crypto assets and transactions involving crypto assets. A reduction in costs could result in more</p>
+<p>issuers issuing, offering, and selling crypto assets securities and crypto asset-related securities.</p>
+<p>These effects could spur competition in the market for these securities and lead to increased</p>
+<p>entrepreneurship and innovation in this market, to the benefit of investors. The added clarity and</p>
+<p>associated reduction in costs from the interpretation could also spur more activity in the markets</p>
+<p>for non-security crypto assets, thus increasing competition among creators and among buyers. As</p>
+<p>a result of these effects, the additional clarity that the interpretation provides could accelerate</p>
+<p>growth and innovation in blockchain or similar distributed ledger technology.</p>
+<p>Further, to the extent that confusion about the Commission's views on the application of</p>
+<p>the Federal securities laws to certain crypto assets and certain transactions involving crypto</p>
+<p>assets has chilled activity in the crypto asset markets or encouraged crypto asset activity to shift</p>
+<p>outside of the United States, added clarity from the interpretation could reduce the perceived risk</p>
+<p>of engaging in the crypto asset markets and encourage more crypto asset activity in the United</p>
+<p>States.</p>
+<p>It is possible that some issuers of digital securities and crypto asset-related securities may</p>
+<p>determine that they must change business practices as a result of the interpretation. To the extent</p>
+<p>that their past understandings and behavior were not consistent with the interpretation, they may</p>
+<p>incur costs of changing their practices, including potentially with respect to registration and</p>
+<p>exemption from registration of securities offerings under the Federal securities laws. Other</p>
+<p>potential issuers of digital securities or crypto asset-related securities may choose either to not</p>
+<p>undertake future issuances or to alter the form of their crypto asset issuances.</p>
+<p>We also expect the interpretation to have some effects on current and potential investors</p>
+<p>in digital securities and crypto asset-related securities and acquirers of non-security crypto assets.</p>
+<p>Such investors and acquirers may change their investment behavior if their prior understanding</p>
+<p>of the application of the Federal securities laws to certain types of crypto assets or certain</p>
+<p>transactions in crypto assets differs from the interpretation. For instance, some individuals and</p>
+<p>entities may prefer to hold digital securities or crypto asset-related securities. Because the</p>
+<p>interpretation provides further clarification about when the Commission believes a crypto asset is</p>
+<p>itself a security or is subject to an investment contract, it should help inform these investors'</p>
+<p>investment choices. In addition, clarifying the Commission's views on the application of the</p>
+<p>Federal securities laws to crypto assets and transactions involving crypto assets could lessen any</p>
+<p>related uncertainty-driven distortions that may have affected prices for digital securities and</p>
+<p>crypto asset-related securities, as well as non-security crypto assets, thereby enhancing pricing</p>
+<p>efficiency.</p>
+<p>In sum, we expect the interpretation to enhance clarity for issuers and investors regarding</p>
+<p>the Commission's views on the application of the Federal securities laws to certain crypto assets</p>
+<p>and certain crypto asset transactions. For the reasons discussed above, this could: enhance</p>
+<p>pricing efficiency in digital securities, crypto asset-related securities, and non-security crypto</p>
+<p>assets; increase capital formation; and improve competition, which could facilitate innovation</p>
+<p>and entrepreneurship in the markets for crypto assets.</p>
+<p>Statutory Authority</p>
+<p>The interpretation in this release is being adopted pursuant to sections 2(a)(1) and 19 of</p>
+<p>the Securities Act and sections 3(a)(10) and 23 of the Exchange Act.</p>
+<p>List of Subjects in 17 CFR Parts 231 and 241</p>
+<p>Securities.</p>
+<p>Text of Amendments</p>
+<p>For the reasons set forth above, the Commission is amending title 17, chapter II of the</p>
+<p>Code of Federal Regulations as set forth below:</p>
+<p>PART 231 – INTERPRETATIVE RELEASES RELATING TO THE SECURITIES ACT</p>
+<p>OF 1933 AND GENERAL RULES AND REGULATIONS THEREUNDER</p>
+<p>1. The authority citation for part 231 continues to read as follows:</p>
+<p>Authority: 15 U.S.C. 77a et seq.</p>
+<p>2. Amend § 231 by adding an entry at the end of the table to read as follows:</p>
+<p><em> </em> <em> </em> <em> </em> *</p>
+<p>Subject</p>
+<p>Application of the Federal
+Securities Laws to Certain Types
+of Crypto Assets and Certain
+Transactions Involving Crypto
+Assets</p>
+<p>Release No.</p>
+<p>Date</p>
+<p>Fed. Reg. Vol. and page</p>
+<p>33-11412</p>
+<p>March 17, 2026</p>
+<p>[INSERT FEDERAL
+REGISTER DOCUMENT
+CITATION].</p>
+<p>67</p>
+<p>PART 241 – INTERPRETATIVE RELEASES RELATING TO THE SECURITIES</p>
+<p>EXCHANGE ACT OF 1934 AND GENERAL RULES AND REGULATIONS</p>
+<p>THEREUNDER</p>
+<p>3. The authority citation for part 241 continues to read as follows:</p>
+<p>Authority: 15 U.S.C. 78a et seq.</p>
+<p>4. Amend § 241 by adding an entry at the end of the table to read as follows:</p>
+<p>Release No.</p>
+<p>Date</p>
+<p>Fed. Reg. Vol. and page</p>
+<p>34-105020</p>
+<p>March 17, 2026</p>
+<p>[INSERT FEDERAL
+REGISTER DOCUMENT
+CITATION].</p>
+<p><em> </em> <em> </em> <em> </em> *</p>
+<p>Subject</p>
+<p>Application of the Federal
+Securities Laws to Certain Types
+of Crypto Assets and Certain
+Transactions Involving Crypto
+Assets</p>
+<p>By the Commission.</p>
+<p>Dated: March 17, 2026</p>
+<p>Vanessa A. Countryman,</p>
+<p>Secretary.</p></div>
+  <div class="source">Source: <a href="https://www.sec.gov/files/rules/interp/2026/33-11412.pdf" target="_blank">https://www.sec.gov/files/rules/interp/2026/33-11412.pdf</a></div>
+</main>
+<footer>
+  <a href="../">Signal Monitor</a> · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+</body>
+</html>

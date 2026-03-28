@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autoresearch Genealogy — Signal Monitor KB</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: none; }
+  .content a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+</style>
+</head>
+<body>
+<header>
+  <a href="../" class="back">← Signal Monitor</a>
+  <h1>Autoresearch Genealogy</h1>
+  <div class="meta">2 min read · 2026-03-18</div>
+  <div class="tags"><span class="tag">ai</span><span class="tag">genealogy</span><span class="tag">autoresearch</span><span class="tag">karpathy</span><span class="tag">claude-code</span><span class="tag">obsidian</span></div>
+</header>
+<main>
+  <div class="content"><h2>Summary</h2>
+<p>Open-source toolkit for AI-assisted genealogy research, built on Karpathy's autoresearch pattern (autonomous goal-directed loops). Designed for Claude Code but adaptable to any AI tool. The author used it to produce 105 files spanning 9 generations across 6 family lines.</p>
+<h2>What's Included</h2>
+<h3>12 Autoresearch Prompts</h3>
+Each defines Goal, Metric, Direction, Verify, Guard rails, Iterations, Protocol. They run autonomously — searching the web, updating vault, verifying their own work.
+<p>1. <strong>Tree expansion</strong> — push every branch back as far as possible
+2. <strong>Cross-reference audit</strong> — find/fix discrepancies between tree and sources
+3. <strong>FindAGrave sweep</strong> — locate memorials for deceased ancestors
+4. <strong>GEDCOM completeness</strong> — ensure GEDCOM matches vault data
+5. <strong>Source citation audit</strong> — verify every person cites 2+ independent sources
+6. <strong>Unresolved persons</strong> — identify unnamed people in documents
+7. <strong>Timeline gap analysis</strong> — find events where records should exist but aren't found
+8. <strong>Open question resolution</strong> — systematically attack every research question
+9. <strong>Bygdebok extraction</strong> — extract data from digitized local history books (any country)
+10. <strong>Colonial records search</strong> — pre-1800 American records
+11. <strong>Immigration search</strong> — passenger manifests and naturalization records
+12. <strong>DNA chromosome analysis</strong> — map genetic segments per chromosome</p>
+<h3>Obsidian Vault Template (19 files)</h3>
+Complete starter kit with YAML frontmatter. Core files: family tree, research log, open questions, data inventory, timeline, genetic profile, chromosome painting, witness network, unresolved persons, research strategy. Templates for person, transcription, certificate, postcard, region, surname, hypothesis, draft letter.
+<h3>Archive Guides (24 countries/regions)</h3>
+<ul><li>Europe: Ireland, England/Wales, Scotland, France, Italy, Spain/Portugal, Germany, Netherlands, Austria, Hungary, Norway, Sweden, Poland, Russia/Ukraine</li>
+<li>Americas: USA (colonial, immigration, census, vital records), African American, Canada, Mexico/Latin America</li>
+<li>Oceania: Australia/New Zealand</li>
+<li>Cross-national: Jewish genealogy</li>
+</ul>
+<h3>Methodology (9 docs)</h3>
+Confidence tiers, source hierarchy, DNA interpretation guardrails, naming conventions, GEDCOM format, common pitfalls, glossary, AI capabilities assessment.
+<h3>Workflows (7 guides)</h3>
+Getting started, OCR pipeline, new ancestor intake, document triage, oral history protocol, discrepancy resolution, phase planning.
+<h3>Worked Examples (6)</h3>
+Tree expansion, cross-reference audit, DNA-to-genealogy mapping, name resolution, colonial deep dive.
+<h2>Key Insight</h2>
+<p>Genealogy has no compiler — sources disagree, confidence is probabilistic, names vary across records. The autoresearch approach handles this by:
+<ul><li>Measurable metrics (sourced claims count, resolved questions, remaining discrepancies)</li>
+<li>Verification after every iteration (cross-reference, not just accumulation)</li>
+<li>Logging negative results (what you searched for and didn't find)</li>
+<li>Confidence tiers: Strong Signal / Moderate Signal / Speculative</li>
+</ul>
+<h2>How to Use</h2></p>
+<p>1. Clone the repo
+2. Copy <code>vault-template/</code> into Obsidian (or any markdown editor)
+3. Fill in <code>Family_Tree.md</code> with what you know (start with yourself, work backward)
+4. Scan physical documents (certificates, photos, letters)
+5. Open Claude Code, paste <code>prompts/01-tree-expansion.md</code>, run it
+6. Review results, run <code>prompts/02-cross-reference-audit.md</code> to verify</p>
+<h2>Relevance for Alberto</h2>
+<p>Multi-country family history (Mexico, potentially Middle East/Europe) — the archive guides cover Mexico/Latin America and Jewish genealogy specifically. Could be run with Claude Code or adapted for Max to execute.</p></div>
+  <div class="source">Source: <a href="https://github.com/mattprusak/autoresearch-genealogy" target="_blank">https://github.com/mattprusak/autoresearch-genealogy</a></div>
+</main>
+<footer>
+  <a href="../">Signal Monitor</a> · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+</body>
+</html>
