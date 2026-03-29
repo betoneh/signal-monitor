@@ -161,6 +161,20 @@
 </head>
 <body>
 
+<div id="gate" style="display:flex;align-items:center;justify-content:center;min-height:100vh;">
+    <div style="text-align:center;">
+        <div style="font-size:1.5rem;font-weight:600;margin-bottom:1.5rem;color:#eaedf3;">Signal Monitor</div>
+        <div style="display:flex;gap:8px;justify-content:center;">
+            <input type="password" id="pw" placeholder="password" autofocus
+                style="background:rgba(52,63,96,0.35);border:1px solid rgba(10,143,123,0.3);color:#eaedf3;padding:10px 20px;border-radius:4px;font-size:1rem;width:220px;text-align:center;outline:none;font-family:inherit;">
+            <button onclick="tryLogin()" style="background:#0ec4a9;color:#212737;border:none;padding:10px 16px;border-radius:4px;font-size:0.9rem;cursor:pointer;font-family:inherit;font-weight:600;">→</button>
+        </div>
+        <div id="gate-err" style="color:#ef4444;font-size:0.8rem;margin-top:8px;display:none;">wrong password</div>
+    </div>
+</div>
+
+<div id="app" style="display:none;">
+
 <header>
     <a href="/" class="site-title">Signal Monitor</a>
     <nav>
@@ -784,8 +798,39 @@
 <footer>
     <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
+
+</div><!-- /app -->
     
     <script>
+    const PW_HASH = '74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163';
+    async function sha256(text) {
+        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+    async function tryLogin() {
+        const pw = document.getElementById('pw').value;
+        const hash = await sha256(pw);
+        if (hash === PW_HASH) {
+            document.getElementById('gate').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+            try { sessionStorage.setItem('sm-auth', '1'); } catch(e) {}
+        } else {
+            document.getElementById('gate-err').style.display = 'block';
+            document.getElementById('pw').value = '';
+            setTimeout(() => document.getElementById('gate-err').style.display = 'none', 2000);
+        }
+    }
+    document.getElementById('pw').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') tryLogin();
+    });
+    // Auto-login if already authenticated this session
+    try {
+        if (sessionStorage.getItem('sm-auth') === '1') {
+            document.getElementById('gate').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+        }
+    } catch(e) {}
+
     function showTab(name) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
