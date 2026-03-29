@@ -122,17 +122,24 @@
         }
         .read-btn:hover { color: #0ec4a9; }
         .read-btn .read-icon::before { content: '○'; font-size: 1em; }
-        /* In report (auto-marked) — yellow */
+        /* In report (auto-marked) — yellow left border */
+        .dd-item.in-report {
+            border-left: 3px solid #eab308; opacity: 0.45;
+            padding-left: 0;
+        }
+        .dd-item.in-report:hover { opacity: 0.7; }
         .dd-item.in-report .read-btn .read-icon::before { content: '✓'; }
         .dd-item.in-report .read-btn { color: #eab308; }
-        .dd-item.in-report { opacity: 0.4; }
-        .dd-item.in-report:hover { opacity: 0.7; }
-        /* Manually read — teal */
+        /* Manually read — teal left border */
+        .dd-item.is-read {
+            border-left: 3px solid #0ec4a9; opacity: 0.45;
+            padding-left: 0;
+        }
+        .dd-item.is-read:hover { opacity: 0.7; }
         .dd-item.is-read .read-btn .read-icon::before { content: '✓'; }
         .dd-item.is-read .read-btn { color: #0ec4a9; }
-        .dd-item.is-read { opacity: 0.4; }
-        .dd-item.is-read:hover { opacity: 0.7; }
-        /* Both: in-report wins visually */
+        /* Both: in-report wins */
+        .dd-item.in-report.is-read { border-left-color: #eab308; }
         .dd-item.in-report.is-read .read-btn { color: #eab308; }
 
         footer {
