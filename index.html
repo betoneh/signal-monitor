@@ -122,10 +122,18 @@
         }
         .read-btn:hover { color: #0ec4a9; }
         .read-btn .read-icon::before { content: '○'; font-size: 1em; }
+        /* In report (auto-marked) — yellow */
+        .dd-item.in-report .read-btn .read-icon::before { content: '✓'; }
+        .dd-item.in-report .read-btn { color: #eab308; }
+        .dd-item.in-report { opacity: 0.4; }
+        .dd-item.in-report:hover { opacity: 0.7; }
+        /* Manually read — teal */
         .dd-item.is-read .read-btn .read-icon::before { content: '✓'; }
         .dd-item.is-read .read-btn { color: #0ec4a9; }
         .dd-item.is-read { opacity: 0.4; }
         .dd-item.is-read:hover { opacity: 0.7; }
+        /* Both: in-report wins visually */
+        .dd-item.in-report.is-read .read-btn { color: #eab308; }
 
         footer {
             max-width: 48rem; margin: 0 auto; width: 100%;
@@ -795,6 +803,9 @@
     function toggleRead(e, id) {
         e.preventDefault();
         e.stopPropagation();
+        // Don't toggle items that are in-report (they stay yellow)
+        const el = e.target.closest('.dd-item');
+        if (el && el.dataset.preRead === 'true') return;
         let list = getReadList();
         const idx = list.indexOf(id);
         if (idx >= 0) { list.splice(idx, 1); } else { list.push(id); }
@@ -805,13 +816,16 @@
         const list = getReadList();
         document.querySelectorAll('.dd-item').forEach(el => {
             const id = parseInt(el.dataset.ddId);
-            // Pre-read (from report) always stays read
             const preRead = el.dataset.preRead === 'true';
+            const manuallyRead = list.includes(id);
+            // In report = yellow check, manual = teal check
+            el.classList.toggle('in-report', preRead);
+            el.classList.toggle('is-read', manuallyRead && !preRead);
+            // Auto-add pre-read to list so toggle works correctly
             if (preRead && !list.includes(id)) {
                 list.push(id);
                 saveReadList(list);
             }
-            el.classList.toggle('is-read', list.includes(id));
         });
     }
     applyReadState();
