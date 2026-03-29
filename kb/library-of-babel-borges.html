@@ -52,30 +52,37 @@
   @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
 
   
-  .share-section {
-    text-align: center; margin: 2rem 0 1rem; padding-top: 1.5rem;
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2rem 0 1rem; padding-top: 1.5rem;
     border-top: 1px solid #0a8f7b;
   }
-  .share-section .label {
-    font-style: italic; color: #8b949e; font-size: 0.875rem; margin-bottom: 0.75rem;
+  @media (min-width: 640px) {
+    .share-row { flex-direction: row; justify-content: space-between; align-items: flex-end; }
   }
-  .share-icons { display: flex; justify-content: center; gap: 0.25rem; flex-wrap: wrap; }
+  .share-left .label {
+    font-style: italic; color: #8b949e; font-size: 0.875rem; margin-bottom: 0.5rem;
+  }
+  .share-icons { display: flex; gap: 0; flex-wrap: wrap; }
   .share-icons a, .share-icons button {
     display: inline-flex; align-items: center; justify-content: center;
-    padding: 0.75rem; color: #8b949e; text-decoration: none;
+    padding: 0.75rem 0.5rem; color: #8b949e; text-decoration: none;
     background: none; border: none; cursor: pointer; font-family: inherit;
     transition: color 0.15s, transform 0.15s;
   }
+  @media (min-width: 640px) {
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
-  .share-icons svg { width: 1.75rem; height: 1.75rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .share-footer {
-    display: flex; justify-content: flex-end; margin-top: 1rem;
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
   }
   .back-top-btn {
     background: none; border: none; cursor: pointer; color: #8b949e;
     font-family: inherit; font-size: 0.875rem; display: inline-flex;
     align-items: center; gap: 0.25rem; padding: 0.25rem 0;
-    transition: opacity 0.15s;
+    white-space: nowrap; transition: opacity 0.15s;
   }
   .back-top-btn:hover { opacity: 0.75; color: #eaedf3; }
 
@@ -380,27 +387,27 @@ Bioy Cassares and the Real World. Also of possible interest would
 be the HyperDiscordia
 Reading Room. --Al]</p></div>
   
-<div class="share-section">
-  <div class="label">Share this post on:</div>
-  <div class="share-icons">
-    <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/kb/library-of-babel-borges.html" target="_blank" rel="noopener" title="Share on X">
-      <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
-    </a>
-    <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/kb/library-of-babel-borges.html" target="_blank" rel="noopener" title="Share on WhatsApp">
-      <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
-    </a>
-    <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/kb/library-of-babel-borges.html" target="_blank" rel="noopener" title="Share on Telegram">
-      <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
-    </a>
-    <a href="mailto:?subject=The Library of Babel&body=https://betoneh.github.io/signal-monitor/kb/library-of-babel-borges.html" title="Share via email">
-      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
-    </a>
-    <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
-      <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-    </button>
+<div class="share-row">
+  <div class="share-left">
+    <div class="label">Share this post on:</div>
+    <div class="share-icons">
+      <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/kb/library-of-babel-borges.html" target="_blank" rel="noopener" title="Share on X">
+        <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+      </a>
+      <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/kb/library-of-babel-borges.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+      </a>
+      <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/kb/library-of-babel-borges.html" target="_blank" rel="noopener" title="Share on Telegram">
+        <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+      </a>
+      <a href="mailto:?subject=The Library of Babel&body=https://betoneh.github.io/signal-monitor/kb/library-of-babel-borges.html" title="Share via email">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+      </a>
+      <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
+    </div>
   </div>
-</div>
-<div class="share-footer">
   <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
     <span>Back to Top</span>
