@@ -117,7 +117,10 @@
 
 <div id="gate">
     <div id="gate-box">
-        <input type="password" id="pw" placeholder="password" autofocus>
+        <div style="display:flex;gap:8px;justify-content:center;">
+            <input type="password" id="pw" placeholder="password" autofocus>
+            <button onclick="tryLogin()" style="background:#0ec4a9;color:#212737;border:none;padding:8px 16px;border-radius:6px;font-size:0.9rem;cursor:pointer;font-family:inherit;font-weight:600;">→</button>
+        </div>
         <div class="gate-error" id="gate-err">wrong password</div>
     </div>
 </div>
@@ -229,20 +232,22 @@ function decryptToken(password) {
     return new TextDecoder().decode(dec);
 }
 
-document.getElementById('pw').addEventListener('keydown', async (e) => {
-    if (e.key === 'Enter') {
-        const hash = await sha256(e.target.value);
-        if (hash === PW_HASH) {
-            ghToken = decryptToken(e.target.value);
-            document.getElementById('gate').style.display = 'none';
-            document.getElementById('app').style.display = 'block';
-            loadFromRepo();
-        } else {
-            document.getElementById('gate-err').style.display = 'block';
-            e.target.value = '';
-            setTimeout(() => document.getElementById('gate-err').style.display = 'none', 2000);
-        }
+async function tryLogin() {
+    const pw = document.getElementById('pw').value;
+    const hash = await sha256(pw);
+    if (hash === PW_HASH) {
+        ghToken = decryptToken(pw);
+        document.getElementById('gate').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+        loadFromRepo();
+    } else {
+        document.getElementById('gate-err').style.display = 'block';
+        document.getElementById('pw').value = '';
+        setTimeout(() => document.getElementById('gate-err').style.display = 'none', 2000);
     }
+}
+document.getElementById('pw').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') tryLogin();
 });
 
 // Keywords data (defaults — overwritten by repo load)
