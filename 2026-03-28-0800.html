@@ -226,13 +226,17 @@
   .share-row {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 0.5rem; margin: 2rem 0 1rem; padding-top: 1.5rem;
-    border-top: 1px solid #0a8f7b;
+    border-top: 1px solid #0a8f7b; text-align: center;
   }
   @media (min-width: 640px) {
-    .share-row { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+    .share-row { flex-direction: row; justify-content: space-between; align-items: flex-end; text-align: left; }
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  @media (min-width: 640px) {
+    .share-left { align-items: flex-start; }
   }
   .share-left .share-label { font-style: italic; color: #8b949e; font-size: 0.875rem; margin-bottom: 0.5rem; }
-  .share-icons { display: flex; gap: 0; flex-wrap: wrap; }
+  .share-icons { display: flex; gap: 0; flex-wrap: wrap; justify-content: center; }
   .share-icons a, .share-icons button {
     display: inline-flex; align-items: center; justify-content: center;
     padding: 0.75rem 0.5rem; color: #8b949e; text-decoration: none;
