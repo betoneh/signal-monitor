@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0f0f0f">
+    <meta name="theme-color" content="#212737">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="manifest.json">
@@ -11,123 +11,158 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
     <title>Signal Monitor</title>
     <style>
-        html { scroll-behavior:smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0f0f0f;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                         "Liberation Mono", "Courier New", monospace;
+            background: #212737;
             -webkit-font-smoothing: antialiased;
-            color: #e7e9ea;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            color: #eaedf3;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: scroll;
         }
-        .logo { text-align: center; margin-bottom: 16px; }
-        .logo img { width: 80px; height: 80px; border-radius: 20px; }
-        h1 { text-align: center; margin-bottom: 10px; }
-        .subtitle { text-align: center; color: #71767b; margin-bottom: 20px; }
-        
+        ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+        a { outline-offset: 1px; outline-color: rgba(14, 196, 169, 0.75); }
+        a:focus-visible { outline: 2px dashed rgba(14, 196, 169, 0.75); text-decoration: none; }
+
+        header {
+            max-width: 48rem; margin: 0 auto; width: 100%;
+            padding: 2rem 1rem 1rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .site-title {
+            font-size: 1.5rem; line-height: 1.75rem; font-weight: 600;
+            color: #eaedf3; text-decoration: none; white-space: nowrap;
+        }
+        nav { display: flex; align-items: center; gap: 1.25rem; }
+        nav a {
+            color: #eaedf3; text-decoration: none; font-weight: 500;
+            padding: 0.25rem 0.5rem; font-size: 0.875rem;
+        }
+        nav a:hover { color: #0ec4a9; }
+
+        .hr { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+        .hr hr { border: none; border-top: 1px solid #0a8f7b; }
+
+        main {
+            max-width: 48rem; margin: 0 auto; width: 100%;
+            padding: 0 1rem; flex: 1;
+        }
+
         /* Tabs */
         .tabs {
-            display: flex; justify-content: center; gap: 0;
-            margin-bottom: 24px; border-bottom: 1px solid #2f3336;
+            max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem;
+            display: flex; gap: 0;
+            margin-bottom: 1.5rem; border-bottom: 1px solid #0a8f7b;
         }
         .tab {
-            padding: 10px 20px; cursor: pointer;
-            color: #71767b; font-size: 0.95em; font-weight: 500;
+            padding: 0.625rem 1.25rem; cursor: pointer;
+            color: #8b949e; font-size: 0.875rem; font-weight: 500;
             border-bottom: 2px solid transparent;
             transition: color 0.2s, border-color 0.2s;
             background: none; border-top: none; border-left: none; border-right: none;
+            font-family: inherit;
         }
-        .tab:hover { color: #e7e9ea; }
-        .tab.active { color: #e7e9ea; border-bottom-color: #1d9bf0; }
-        .tab-reports.active { border-bottom-color: #1d9bf0; }
+        .tab:hover { color: #eaedf3; }
+        .tab.active { color: #eaedf3; }
+        .tab-reports.active { border-bottom-color: #0ec4a9; }
         .tab-deepdives.active { border-bottom-color: #eab308; }
         .tab-kb.active { border-bottom-color: #0ec4a9; }
         .tab-count {
-            font-size: 0.75em; color: #71767b; background: #1a1a1a;
-            padding: 1px 6px; border-radius: 10px; margin-left: 6px;
+            font-size: 0.7em; color: #8b949e; background: rgba(52, 63, 96, 0.75);
+            padding: 1px 6px; border-radius: 3px; margin-left: 6px;
         }
-        
+
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        
+
         ul { list-style: none; padding: 0; }
         li {
-            background: #1a1a1a;
-            border: 1px solid #2f3336;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            transition: border-color 0.2s, transform 0.15s;
+            border-bottom: 1px solid rgba(10, 143, 123, 0.3);
+            transition: background 0.15s;
         }
-        @media (hover:hover) { li:hover { border-color: #1d9bf0; transform:translateY(-1px); } }
-        li:active { transform:scale(0.99); }
-        a {
-            display: block;
-            padding: 16px 20px;
-            color: #e7e9ea;
-            text-decoration: none;
+        li:last-child { border-bottom: none; }
+        @media (hover:hover) { li:hover { background: rgba(52, 63, 96, 0.2); } }
+
+        li a {
+            display: block; padding: 1rem 0;
+            color: #eaedf3; text-decoration: none;
         }
-        .date { color: #71767b; font-size: 0.85em; margin-top: 4px; }
-        .card-tags { display: inline-flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
+        li a:hover { color: #0ec4a9; }
+        .entry-title {
+            font-size: 1rem; font-weight: 500; line-height: 1.4;
+        }
+        .date {
+            font-size: 0.8rem; color: #8b949e; margin-top: 0.25rem;
+        }
+        .dd-title { color: #eab308; }
+        .card-tags { display: inline-flex; gap: 4px; margin-top: 0.25rem; flex-wrap: wrap; }
         .card-tag {
-            font-size: 0.7em; background: #2f3336; color: #71767b;
+            font-size: 0.7em; background: rgba(52, 63, 96, 0.75); color: #8b949e;
             padding: 1px 6px; border-radius: 3px;
         }
-        .card-tag-source {
-            color: #8b949e; font-style: italic;
-        }
-        
-        /* Tab-specific hover colors */
-        .tab-content-deepdives li:hover { border-color: #eab308; }
-        .tab-content-kb li:hover { border-color: #0ec4a9; }
-        
-        footer {
-            text-align: center;
-            color: #71767b;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #2f3336;
-            font-size: 0.85em;
-        }
-        footer a { color: #1d9bf0; text-decoration: none; }
-        .weekly { border-color: #58a6ff; background: linear-gradient(135deg, #1a1a2e, #16213e); }
-        .weekly:hover { border-color: #79b8ff; }
-        .section-label { color: #71767b; font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px; margin: 24px 0 8px; }
-        
+        .card-tag-source { font-style: italic; }
+
+        /* Tab-specific hover */
+        .tab-content-deepdives li a:hover { color: #eab308; }
+        .tab-content-kb li a:hover { color: #0ec4a9; }
+
         /* Deep dive read toggle */
-        .dd-row {
-            display: flex; align-items: stretch;
-        }
-        .dd-link {
-            flex: 1; padding: 16px 20px;
-        }
+        .dd-row { display: flex; align-items: stretch; }
+        .dd-link { flex: 1; padding: 1rem 0; }
         .dd-item a { padding: 0; }
         .read-btn {
             display: flex; align-items: center; justify-content: center;
-            width: 44px; border: none; background: none; cursor: pointer;
-            border-left: 1px solid #2f3336; color: #71767b;
-            transition: color 0.2s, background 0.2s;
-            flex-shrink: 0; border-radius: 0 12px 12px 0;
+            width: 2.5rem; border: none; background: none; cursor: pointer;
+            border-left: 1px solid rgba(10, 143, 123, 0.3); color: #8b949e;
+            transition: color 0.2s; flex-shrink: 0; font-family: inherit;
         }
-        .read-btn:hover { background: rgba(14, 196, 169, 0.1); color: #0ec4a9; }
-        .read-btn .read-icon::before { content: '○'; font-size: 1.1em; }
+        .read-btn:hover { color: #0ec4a9; }
+        .read-btn .read-icon::before { content: '○'; font-size: 1em; }
         .dd-item.is-read .read-btn .read-icon::before { content: '✓'; }
         .dd-item.is-read .read-btn { color: #0ec4a9; }
-        .dd-item.is-read { opacity: 0.45; }
+        .dd-item.is-read { opacity: 0.4; }
         .dd-item.is-read:hover { opacity: 0.7; }
+
+        footer {
+            max-width: 48rem; margin: 0 auto; width: 100%;
+            padding: 1.5rem 1rem; text-align: center;
+            font-size: 0.875rem; color: #8b949e;
+        }
+        footer a {
+            color: #eaedf3; text-decoration: underline;
+            text-decoration-style: dashed; text-underline-offset: 4px;
+        }
+        footer a:hover { color: #0ec4a9; }
+
+        @media (max-width: 640px) {
+            header { padding: 1.5rem 1rem 0.75rem; }
+            .site-title { font-size: 1.25rem; }
+        }
     </style>
 </head>
 <body>
-    <div class="logo"><img src="icon-192.png" alt="Signal Monitor"></div>
-    <h1>Signal Monitor</h1>
-    <p class="subtitle">Timeline digest by <a href="https://x.com/beto_neh" style="color: #1d9bf0;">@beto_neh</a> · <a href="settings.html" style="color:#71767b;font-size:0.9em;">⚙️ settings</a></p>
-    
-    <div class="tabs">
-        <button class="tab tab-reports active" onclick="showTab('reports')">Reports<span class="tab-count">56</span></button>
-        <button class="tab tab-deepdives" onclick="showTab('deepdives')">Deep Dives<span class="tab-count">40</span></button>
-        <button class="tab tab-kb" onclick="showTab('kb')">Knowledge Base<span class="tab-count">11</span></button>
-    </div>
-    
+
+<header>
+    <a href="/" class="site-title">Signal Monitor</a>
+    <nav>
+        <a href="https://x.com/beto_neh">@beto_neh</a>
+        <a href="settings.html">settings</a>
+    </nav>
+</header>
+
+<div class="hr"><hr></div>
+
+<div class="tabs">
+    <button class="tab tab-reports active" onclick="showTab('reports')">Reports<span class="tab-count">56</span></button>
+    <button class="tab tab-deepdives" onclick="showTab('deepdives')">Deep Dives<span class="tab-count">40</span></button>
+    <button class="tab tab-kb" onclick="showTab('kb')">KB<span class="tab-count">11</span></button>
+</div>
+
+<main>
     <div id="tab-reports" class="tab-content tab-content-reports active">
         <ul><li><a href="2026-03-28-0800.html">March 28, 2026 at 08:00 AM<br><span class="date" style="color:#eab308;">Stochastic Thermodynamics: The Physics Behind E/ACC</span></a></li>
 <li><a href="2026-03-27-2000.html">March 27, 2026 at 08:00 PM</a></li>
@@ -186,7 +221,7 @@
 <li class="weekly"><a href="weekly/2026-W08.html">📡 Weekly Report — 2026-W08<br><span class="date">2026-W08</span></a></li>
 <li class="weekly"><a href="weekly/2026-W09.html">📡 Weekly Report — 2026-W09<br><span class="date">2026-W09</span></a></li></ul>
     </div>
-    
+
     <div id="tab-deepdives" class="tab-content tab-content-deepdives">
         <ul><li class="dd-item" data-dd-id="40" data-pre-read="false">
           <div class="dd-row">
@@ -669,7 +704,7 @@
           </div>
         </li></ul>
     </div>
-    
+
     <div id="tab-kb" class="tab-content tab-content-kb">
         <ul><li><a href="kb/eacc-vs-dacc-vitalik-beff-jezos.html">
           Vitalik Buterin vs Beff Jezos: AI Acceleration Debate (E/acc vs D/acc)<br>
@@ -727,10 +762,13 @@
           <span class="card-tags"><span class="card-tag card-tag-source">10 deep dives</span></span>
         </a></li></ul>
     </div>
-    
-    <footer>
-        Powered by <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a>
-    </footer>
+</main>
+
+<div class="hr"><hr></div>
+
+<footer>
+    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
     
     <script>
     function showTab(name) {
