@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Baumol Premium: Why Human Touch Gets More Valuable as Machines Improve — Signal Monitor</title>
+<meta property="og:title" content="The Baumol Premium: Why Human Touch Gets More Valuable as Machines Improve">
+<meta property="og:description" content="Deep Dive #49 — Signal Monitor">
+<meta property="og:image" content="https://betoneh.github.io/signal-monitor/og/049-the-baumol-premium-why-human-touch-gets-more-valuable-as-machines-improve.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; overflow-wrap: break-word; word-break: break-word; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 8px; }
+  .content a:hover { text-decoration-color: #eaedf3; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+
+  
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+
+  
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .label {
+    font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem;
+  }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+  .source-line { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .source-line a { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .source-line a:hover { color: #eaedf3; }
+</style>
+</head>
+<body id="top">
+<div class="progress-bar" id="progress"></div>
+<header>
+  <a href="../" class="back">← Signal Monitor</a>
+  <h1>The Baumol Premium: Why Human Touch Gets More Valuable as Machines Improve</h1>
+  <div class="meta">3 min read · 608 words · Deep Dive #49 · 2026-03-28</div>
+  <div class="source-line">Source: <a href="https://x.com/pmarca/status/2037816674716729455" target="_blank">The Lump of Labor Fallacy — Marc Andreessen (X thread)</a> · <a href="../kb/pmarca-lump-of-labor-fallacy-agi.html">KB #12</a></div>
+</header>
+<main>
+  <div class="content"><p>There is a class of economic goods that becomes more valuable, not less, precisely because machines get better at producing everything else. Call it the Baumol premium — the rising relative price and rising relative demand for irreducibly human experiences as the machine-produced alternatives get dramatically cheaper. This is not a wishful story about human uniqueness. It is the straightforward arithmetic of how scarcity and price interact when productivity gains are uneven across sectors. And it has implications for how we should think about work, wages, and the long-run employment effects of AGI that cut against both the catastrophist and the naive-optimist positions.</p><p>The mechanism starts with <a href="https://en.wikipedia.org/wiki/William_Baumol" target="_blank">William Baumol</a>'s foundational insight about uneven productivity growth across sectors. As mechanized sectors get dramatically cheaper, household budgets — holding total income constant — automatically increase in the share available for human-intensive services. But this understates the effect, because total income is not constant. Productivity-driven growth raises real incomes, and a disproportionate share of the additional income goes into the categories that can't be cheapened by machines.</p><p>The evidence for this is already visible in premium goods markets. As mass production made adequate wine globally available at low cost, demand for and prices of exceptional wine from specific human producers — with named winemakers, specific vineyards, artisanal methods — rose dramatically. The commodity got cheaper; the artisanal human version got more expensive. The same pattern holds for food: industrial food production has made adequate nutrition cheap globally, while simultaneously creating booming markets for farm-to-table restaurants, craft food producers, and branded chef experiences. The machine doing more makes the human doing it by hand more scarce and therefore more valuable.</p><p>In services, the Baumol premium is even more pronounced. As AI systems become capable of providing competent legal information, financial advice, therapeutic support, and educational content at near-zero marginal cost, the demand for human professionals in those fields does not collapse — it bifurcates. A large volume of routine need gets served by AI at low cost. A smaller but high-value tier of clients with complex, high-stakes, or deeply personal needs seeks human professionals specifically because the human relationship is part of the product they're buying. The human lawyer is not selling legal analysis. She's selling accountability, judgment under uncertainty, and the trust that comes from professional liability and genuine relationship. None of that is replicated by an AI that can write a better brief.</p><p>The philosopher <a href="https://en.wikipedia.org/wiki/Albert_Borgmann" target="_blank">Albert Borgmann</a> described something adjacent to this in his concept of <a href="https://en.wikipedia.org/wiki/Albert_Borgmann#Device_paradigm" target="_blank">focal practices</a> — activities whose value lies precisely in their resistance to technological commodification. Cooking a meal for someone you love is not an inefficient way to deliver calories. Its value is constituted by the human effort, care, and presence it embodies. No delivery app, however fast and cheap, substitutes for it on its own terms. As delivery apps get better and cheaper, they don't eliminate the demand for home cooking as a meaningful activity — they free up time for it by handling the functional food requirement.</p><p>The long-run implication of the Baumol premium for employment is counterintuitive and important. A world in which AGI handles most routine cognitive production is not a world of less human work. It is a world in which human work that cannot be AGI-produced commands a substantial and rising premium — and in which the total hours demanded of that human work may well increase, because a richer world with cheaper machine-produced goods has more time and money to spend on the human-intensive remainder. The masseuse, the therapist, the teacher, the artisan chef, the performance artist — these are not consolation prizes for people displaced by AGI. They are the premium products of a post-scarcity world in which human attention is the one thing that cannot be mass-produced.</p></div>
+  <div class="source">Source: <a href="https://x.com/pmarca/status/2037816674716729455" target="_blank">The Lump of Labor Fallacy — Marc Andreessen (X thread)</a></div>
+  
+<div class="share-row">
+  <div class="share-left">
+    <div class="label">Share this post on:</div>
+    <div class="share-icons">
+      <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/deep-dives/049-the-baumol-premium-why-human-touch-gets-more-valuable-as-machines-improve.html" target="_blank" rel="noopener" title="Share on X">
+        <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+      </a>
+      <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/deep-dives/049-the-baumol-premium-why-human-touch-gets-more-valuable-as-machines-improve.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+      </a>
+      <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/deep-dives/049-the-baumol-premium-why-human-touch-gets-more-valuable-as-machines-improve.html" target="_blank" rel="noopener" title="Share on Telegram">
+        <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+      </a>
+      <a href="mailto:?subject=The Baumol Premium: Why Human Touch Gets More Valuable as Machines Improve&body=https://betoneh.github.io/signal-monitor/deep-dives/049-the-baumol-premium-why-human-touch-gets-more-valuable-as-machines-improve.html" title="Share via email">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+      </a>
+      <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
+    </div>
+  </div>
+  <div style="width:100%;text-align:center;margin-top:0.5rem;">
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>Back to Top</span>
+    </button>
+  </div>
+</div>
+
+</main>
+<footer>
+  <a href="../">Signal Monitor</a> · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+
+<script>
+  (function(){
+    var bar = document.getElementById('progress');
+    if (!bar) return;
+    function up() {
+      var s = window.pageYOffset || document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = (h > 0 ? s / h * 100 : 0) + '%';
+    }
+    window.onscroll = up;
+    up();
+  })();
+</script>
+
+</body>
+</html>
