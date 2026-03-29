@@ -54,41 +54,32 @@
   
   .share-row {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.5rem; margin: 2rem 0 1rem; padding-top: 1.5rem;
-    border-top: 1px solid #0a8f7b; text-align: center;
-  }
-  @media (min-width: 640px) {
-    .share-row { flex-direction: row; justify-content: space-between; align-items: flex-end; text-align: left; }
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
   }
   .share-left { display: flex; flex-direction: column; align-items: center; }
-  @media (min-width: 640px) {
-    .share-left { align-items: flex-start; }
-  }
   .share-left .label {
-    font-style: italic; color: #8b949e; font-size: 0.875rem; margin-bottom: 0.5rem;
+    font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem;
   }
-  .share-icons { display: flex; gap: 0; flex-wrap: wrap; justify-content: center; }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
   .share-icons a, .share-icons button {
     display: inline-flex; align-items: center; justify-content: center;
-    padding: 0.75rem 0.5rem; color: #8b949e; text-decoration: none;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
     background: none; border: none; cursor: pointer; font-family: inherit;
-    transition: color 0.15s, transform 0.15s;
-  }
-  @media (min-width: 640px) {
-    .share-icons a, .share-icons button { padding: 0.5rem; }
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
   }
   .back-top-btn {
-    background: none; border: none; cursor: pointer; color: #8b949e;
+    background: none; border: none; cursor: pointer; color: #eaedf3;
     font-family: inherit; font-size: 0.875rem; display: inline-flex;
     align-items: center; gap: 0.25rem; padding: 0.25rem 0;
     white-space: nowrap; transition: opacity 0.15s;
   }
-  .back-top-btn:hover { opacity: 0.75; color: #eaedf3; }
+  .back-top-btn:hover { opacity: 0.75; }
 
   .source-line { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
   .source-line a { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
