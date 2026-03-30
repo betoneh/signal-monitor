@@ -114,35 +114,10 @@
         .tab-content-kb li a:hover { color: #0ec4a9; }
 
         /* Deep dive read toggle */
-        .dd-row { display: flex; align-items: stretch; }
-        .dd-link { flex: 1; padding: 1.25rem 0 !important; }
-        .read-btn {
-            display: flex; align-items: center; justify-content: center;
-            width: 2.5rem; border: none; background: none; cursor: pointer;
-            border-left: 1px solid rgba(10, 143, 123, 0.3); color: #8b949e;
-            transition: color 0.2s; flex-shrink: 0; font-family: inherit;
-        }
-        .read-btn:hover { color: #0ec4a9; }
-        .read-btn .read-icon::before { content: '○'; font-size: 1em; }
-        /* In report (auto-marked) — yellow left border */
-        .dd-item.in-report {
-            border-left: 3px solid #eab308; opacity: 0.45;
-            padding-left: 0;
-        }
-        .dd-item.in-report:hover { opacity: 0.7; }
-        .dd-item.in-report .read-btn .read-icon::before { content: '✓'; }
-        .dd-item.in-report .read-btn { color: #eab308; }
-        /* Manually read — teal left border */
-        .dd-item.is-read {
-            border-left: 3px solid #0ec4a9; opacity: 0.45;
-            padding-left: 0;
-        }
-        .dd-item.is-read:hover { opacity: 0.7; }
-        .dd-item.is-read .read-btn .read-icon::before { content: '✓'; }
-        .dd-item.is-read .read-btn { color: #0ec4a9; }
-        /* Both: in-report wins */
-        .dd-item.in-report.is-read { border-left-color: #eab308; }
-        .dd-item.in-report.is-read .read-btn { color: #eab308; }
+
+
+        /* In report — yellow text */
+        .dd-item.in-report .dd-title { color: #eab308; }
 
         footer {
             max-width: 48rem; margin: 0 auto; width: 100%;
@@ -254,555 +229,305 @@
     </div>
 
     <div id="tab-deepdives" class="tab-content tab-content-deepdives">
-        <ul><li class="dd-item" data-dd-id="50" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/050-claude-knows-when-ai-writes-its-own-defense.html" class="dd-link">
-              <span class="dd-title">Claude Knows: When AI Writes Its Own Defense</span><br>
-              <span class="date">#50 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 50)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+        <ul><li class="dd-item">
+          <a href="deep-dives/050-claude-knows-when-ai-writes-its-own-defense.html">
+            <span class="dd-title">Claude Knows: When AI Writes Its Own Defense</span><br>
+            <span class="date">#50 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="49" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/049-the-baumol-premium-why-human-touch-gets-more-valuable-as-machines-improve.html" class="dd-link">
-              <span class="dd-title">The Baumol Premium: Why Human Touch Gets More Valuable as Machines Improve</span><br>
-              <span class="date">#49 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 49)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/049-the-baumol-premium-why-human-touch-gets-more-valuable-as-machines-improve.html">
+            <span class="dd-title">The Baumol Premium: Why Human Touch Gets More Valuable as Machines Improve</span><br>
+            <span class="date">#49 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="48" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/048-transition-velocity-the-real-risk-in-technological-disruption.html" class="dd-link">
-              <span class="dd-title">Transition Velocity: The Real Risk in Technological Disruption</span><br>
-              <span class="date">#48 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 48)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/048-transition-velocity-the-real-risk-in-technological-disruption.html">
+            <span class="dd-title">Transition Velocity: The Real Risk in Technological Disruption</span><br>
+            <span class="date">#48 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="47" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/047-the-infinite-wants-problem-why-human-demand-never-saturates.html" class="dd-link">
-              <span class="dd-title">The Infinite Wants Problem: Why Human Demand Never Saturates</span><br>
-              <span class="date">#47 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 47)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/047-the-infinite-wants-problem-why-human-demand-never-saturates.html">
+            <span class="dd-title">The Infinite Wants Problem: Why Human Demand Never Saturates</span><br>
+            <span class="date">#47 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="46" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/046-rifkin-keynes-and-the-graveyard-of-unemployment-predictions.html" class="dd-link">
-              <span class="dd-title">Rifkin, Keynes, and the Graveyard of Unemployment Predictions</span><br>
-              <span class="date">#46 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 46)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/046-rifkin-keynes-and-the-graveyard-of-unemployment-predictions.html">
+            <span class="dd-title">Rifkin, Keynes, and the Graveyard of Unemployment Predictions</span><br>
+            <span class="date">#46 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="45" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/045-the-atm-paradox-when-automation-creates-more-jobs-than-it-destroys.html" class="dd-link">
-              <span class="dd-title">The ATM Paradox: When Automation Creates More Jobs Than It Destroys</span><br>
-              <span class="date">#45 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 45)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/045-the-atm-paradox-when-automation-creates-more-jobs-than-it-destroys.html">
+            <span class="dd-title">The ATM Paradox: When Automation Creates More Jobs Than It Destroys</span><br>
+            <span class="date">#45 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="44" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/044-ricardos-comparative-advantage-why-agi-wont-make-humans-useless.html" class="dd-link">
-              <span class="dd-title">Ricardo's Comparative Advantage: Why AGI Won't Make Humans Useless</span><br>
-              <span class="date">#44 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 44)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/044-ricardos-comparative-advantage-why-agi-wont-make-humans-useless.html">
+            <span class="dd-title">Ricardo's Comparative Advantage: Why AGI Won't Make Humans Useless</span><br>
+            <span class="date">#44 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="43" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/043-the-baumol-effect-why-haircuts-get-expensive-when-factories-get-efficient.html" class="dd-link">
-              <span class="dd-title">The Baumol Effect: Why Haircuts Get Expensive When Factories Get Efficient</span><br>
-              <span class="date">#43 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 43)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/043-the-baumol-effect-why-haircuts-get-expensive-when-factories-get-efficient.html">
+            <span class="dd-title">The Baumol Effect: Why Haircuts Get Expensive When Factories Get Efficient</span><br>
+            <span class="date">#43 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="42" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/042-says-law-and-the-productivity-demand-feedback-loop.html" class="dd-link">
-              <span class="dd-title">Say's Law and the Productivity-Demand Feedback Loop</span><br>
-              <span class="date">#42 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 42)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/042-says-law-and-the-productivity-demand-feedback-loop.html">
+            <span class="dd-title">Say's Law and the Productivity-Demand Feedback Loop</span><br>
+            <span class="date">#42 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="41" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/041-the-lump-of-labor-fallacy-200-years-of-being-wrong-about-jobs.html" class="dd-link">
-              <span class="dd-title">The Lump of Labor Fallacy: 200 Years of Being Wrong About Jobs</span><br>
-              <span class="date">#41 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 41)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/041-the-lump-of-labor-fallacy-200-years-of-being-wrong-about-jobs.html">
+            <span class="dd-title">The Lump of Labor Fallacy: 200 Years of Being Wrong About Jobs</span><br>
+            <span class="date">#41 · 2026-03-28 · 3 min · The Lump of Labor Fallacy — Marc Andreessen (X thread)</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="40" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/040-the-2-percent-problem-nordhaus-and-the-philanthropic-nature-of-innovation.html" class="dd-link">
-              <span class="dd-title">The 2% Problem: Nordhaus and the Philanthropic Nature of Innovation</span><br>
-              <span class="date">#40 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 40)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/040-the-2-percent-problem-nordhaus-and-the-philanthropic-nature-of-innovation.html">
+            <span class="dd-title">The 2% Problem: Nordhaus and the Philanthropic Nature of Innovation</span><br>
+            <span class="date">#40 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="39" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/039-sowells-constrained-vs-unconstrained-vision.html" class="dd-link">
-              <span class="dd-title">Sowell's Constrained vs Unconstrained Vision</span><br>
-              <span class="date">#39 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 39)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/039-sowells-constrained-vs-unconstrained-vision.html">
+            <span class="dd-title">Sowell's Constrained vs Unconstrained Vision</span><br>
+            <span class="date">#39 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="38" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/038-julian-simons-ultimate-resource-why-more-people-means-more-progress.html" class="dd-link">
-              <span class="dd-title">Julian Simon's Ultimate Resource: Why More People Means More Progress</span><br>
-              <span class="date">#38 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 38)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/038-julian-simons-ultimate-resource-why-more-people-means-more-progress.html">
+            <span class="dd-title">Julian Simon's Ultimate Resource: Why More People Means More Progress</span><br>
+            <span class="date">#38 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="37" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/037-ephemeralization-buckminster-fullers-vision-of-doing-more-with-less.html" class="dd-link">
-              <span class="dd-title">Ephemeralization: Buckminster Fuller's Vision of Doing More With Less</span><br>
-              <span class="date">#37 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 37)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/037-ephemeralization-buckminster-fullers-vision-of-doing-more-with-less.html">
+            <span class="dd-title">Ephemeralization: Buckminster Fuller's Vision of Doing More With Less</span><br>
+            <span class="date">#37 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="36" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/036-the-green-revolution-how-technology-solved-starvation.html" class="dd-link">
-              <span class="dd-title">The Green Revolution: How Technology Solved Starvation</span><br>
-              <span class="date">#36 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 36)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/036-the-green-revolution-how-technology-solved-starvation.html">
+            <span class="dd-title">The Green Revolution: How Technology Solved Starvation</span><br>
+            <span class="date">#36 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="35" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/035-nietzsches-last-man-the-philosophy-behind-stagnation-fear.html" class="dd-link">
-              <span class="dd-title">Nietzsche's Last Man: The Philosophy Behind Stagnation Fear</span><br>
-              <span class="date">#35 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 35)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/035-nietzsches-last-man-the-philosophy-behind-stagnation-fear.html">
+            <span class="dd-title">Nietzsche's Last Man: The Philosophy Behind Stagnation Fear</span><br>
+            <span class="date">#35 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="34" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/034-schumpeters-creative-destruction-the-engine-of-capitalism.html" class="dd-link">
-              <span class="dd-title">Schumpeter's Creative Destruction: The Engine of Capitalism</span><br>
-              <span class="date">#34 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 34)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/034-schumpeters-creative-destruction-the-engine-of-capitalism.html">
+            <span class="dd-title">Schumpeter's Creative Destruction: The Engine of Capitalism</span><br>
+            <span class="date">#34 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="33" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/033-hayeks-knowledge-problem-why-central-planning-always-fails.html" class="dd-link">
-              <span class="dd-title">Hayek's Knowledge Problem: Why Central Planning Always Fails</span><br>
-              <span class="date">#33 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 33)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/033-hayeks-knowledge-problem-why-central-planning-always-fails.html">
+            <span class="dd-title">Hayek's Knowledge Problem: Why Central Planning Always Fails</span><br>
+            <span class="date">#33 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="32" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/032-the-precautionary-principle-how-safety-killed-progress.html" class="dd-link">
-              <span class="dd-title">The Precautionary Principle: How Safety Killed Progress</span><br>
-              <span class="date">#32 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 32)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/032-the-precautionary-principle-how-safety-killed-progress.html">
+            <span class="dd-title">The Precautionary Principle: How Safety Killed Progress</span><br>
+            <span class="date">#32 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="31" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/031-the-techno-capital-machine-nick-land-meets-silicon-valley.html" class="dd-link">
-              <span class="dd-title">The Techno-Capital Machine: Nick Land Meets Silicon Valley</span><br>
-              <span class="date">#31 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 31)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/031-the-techno-capital-machine-nick-land-meets-silicon-valley.html">
+            <span class="dd-title">The Techno-Capital Machine: Nick Land Meets Silicon Valley</span><br>
+            <span class="date">#31 · 2026-03-28 · 3 min · The Techno-Optimist Manifesto — Marc Andreessen</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="30" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/030-the-trust-stack-how-humans-and-ai-will-actually-cooperate.html" class="dd-link">
-              <span class="dd-title">The Trust Stack: How Humans and AI Will Actually Cooperate</span><br>
-              <span class="date">#30 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 30)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/030-the-trust-stack-how-humans-and-ai-will-actually-cooperate.html">
+            <span class="dd-title">The Trust Stack: How Humans and AI Will Actually Cooperate</span><br>
+            <span class="date">#30 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="29" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/029-the-fitness-landscape-cultural-selection-and-memetic-evoluti.html" class="dd-link">
-              <span class="dd-title">The Fitness Landscape: Cultural Selection and Memetic Evolution</span><br>
-              <span class="date">#29 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 29)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/029-the-fitness-landscape-cultural-selection-and-memetic-evoluti.html">
+            <span class="dd-title">The Fitness Landscape: Cultural Selection and Memetic Evolution</span><br>
+            <span class="date">#29 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="28" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/028-the-local-ai-movement-from-cloud-dependency-to-cognitive-sov.html" class="dd-link">
-              <span class="dd-title">The Local AI Movement: From Cloud Dependency to Cognitive Sovereignty</span><br>
-              <span class="date">#28 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 28)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/028-the-local-ai-movement-from-cloud-dependency-to-cognitive-sov.html">
+            <span class="dd-title">The Local AI Movement: From Cloud Dependency to Cognitive Sovereignty</span><br>
+            <span class="date">#28 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="27" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/027-differential-privacy-the-mathematics-of-anonymity.html" class="dd-link">
-              <span class="dd-title">Differential Privacy: The Mathematics of Anonymity</span><br>
-              <span class="date">#27 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 27)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/027-differential-privacy-the-mathematics-of-anonymity.html">
+            <span class="dd-title">Differential Privacy: The Mathematics of Anonymity</span><br>
+            <span class="date">#27 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="26" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/026-online-learning-and-the-era-of-sticky-ai.html" class="dd-link">
-              <span class="dd-title">Online Learning and the Era of Sticky AI</span><br>
-              <span class="date">#26 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 26)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/026-online-learning-and-the-era-of-sticky-ai.html">
+            <span class="dd-title">Online Learning and the Era of Sticky AI</span><br>
+            <span class="date">#26 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="25" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/025-abiogenesis-and-the-physics-of-lifes-origin.html" class="dd-link">
-              <span class="dd-title">Abiogenesis and the Physics of Life's Origin</span><br>
-              <span class="date">#25 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 25)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/025-abiogenesis-and-the-physics-of-lifes-origin.html">
+            <span class="dd-title">Abiogenesis and the Physics of Life's Origin</span><br>
+            <span class="date">#25 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="24" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/024-the-shattered-beliefs-cycle-from-1914-to-2026.html" class="dd-link">
-              <span class="dd-title">The Shattered Beliefs Cycle: From 1914 to 2026</span><br>
-              <span class="date">#24 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 24)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/024-the-shattered-beliefs-cycle-from-1914-to-2026.html">
+            <span class="dd-title">The Shattered Beliefs Cycle: From 1914 to 2026</span><br>
+            <span class="date">#24 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="23" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/023-verifiable-hardware-cameras-that-prove-what-they-see.html" class="dd-link">
-              <span class="dd-title">Verifiable Hardware: Cameras That Prove What They See</span><br>
-              <span class="date">#23 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 23)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/023-verifiable-hardware-cameras-that-prove-what-they-see.html">
+            <span class="dd-title">Verifiable Hardware: Cameras That Prove What They See</span><br>
+            <span class="date">#23 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="22" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/022-vibe-coding-and-the-new-division-of-cognitive-labor.html" class="dd-link">
-              <span class="dd-title">Vibe Coding and the New Division of Cognitive Labor</span><br>
-              <span class="date">#22 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 22)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/022-vibe-coding-and-the-new-division-of-cognitive-labor.html">
+            <span class="dd-title">Vibe Coding and the New Division of Cognitive Labor</span><br>
+            <span class="date">#22 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="21" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/021-the-second-amendment-for-ai-open-source-as-power-symmetry.html" class="dd-link">
-              <span class="dd-title">The Second Amendment for AI: Open Source as Power Symmetry</span><br>
-              <span class="date">#21 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 21)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/021-the-second-amendment-for-ai-open-source-as-power-symmetry.html">
+            <span class="dd-title">The Second Amendment for AI: Open Source as Power Symmetry</span><br>
+            <span class="date">#21 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="20" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/020-the-geopolitics-of-chip-fabs-taiwan-asml-and-the-ai-chokepoi.html" class="dd-link">
-              <span class="dd-title">The Geopolitics of Chip Fabs: Taiwan, ASML, and the AI Chokepoint</span><br>
-              <span class="date">#20 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 20)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/020-the-geopolitics-of-chip-fabs-taiwan-asml-and-the-ai-chokepoi.html">
+            <span class="dd-title">The Geopolitics of Chip Fabs: Taiwan, ASML, and the AI Chokepoint</span><br>
+            <span class="date">#20 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="19" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/019-brain-computer-interfaces-and-the-soft-merge.html" class="dd-link">
-              <span class="dd-title">Brain-Computer Interfaces and the Soft Merge</span><br>
-              <span class="date">#19 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 19)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/019-brain-computer-interfaces-and-the-soft-merge.html">
+            <span class="dd-title">Brain-Computer Interfaces and the Soft Merge</span><br>
+            <span class="date">#19 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="18" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/018-the-anthropic-paradox-when-safety-labs-become-the-risk.html" class="dd-link">
-              <span class="dd-title">The Anthropic Paradox: When Safety Labs Become the Risk</span><br>
-              <span class="date">#18 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 18)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/018-the-anthropic-paradox-when-safety-labs-become-the-risk.html">
+            <span class="dd-title">The Anthropic Paradox: When Safety Labs Become the Risk</span><br>
+            <span class="date">#18 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="17" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/017-the-dyson-swarm-post-earth-intelligence-infrastructure.html" class="dd-link">
-              <span class="dd-title">The Dyson Swarm: Post-Earth Intelligence Infrastructure</span><br>
-              <span class="date">#17 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 17)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/017-the-dyson-swarm-post-earth-intelligence-infrastructure.html">
+            <span class="dd-title">The Dyson Swarm: Post-Earth Intelligence Infrastructure</span><br>
+            <span class="date">#17 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="16" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/016-dissipative-structures-prigogines-framework-for-life-and-civ.html" class="dd-link">
-              <span class="dd-title">Dissipative Structures: Prigogine's Framework for Life and Civilization</span><br>
-              <span class="date">#16 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 16)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/016-dissipative-structures-prigogines-framework-for-life-and-civ.html">
+            <span class="dd-title">Dissipative Structures: Prigogine's Framework for Life and Civilization</span><br>
+            <span class="date">#16 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="15" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/015-rlhf-mechanistic-interpretability-and-the-accidental-alignme.html" class="dd-link">
-              <span class="dd-title">RLHF, Mechanistic Interpretability, and the Accidental Alignment Progress</span><br>
-              <span class="date">#15 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 15)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/015-rlhf-mechanistic-interpretability-and-the-accidental-alignme.html">
+            <span class="dd-title">RLHF, Mechanistic Interpretability, and the Accidental Alignment Progress</span><br>
+            <span class="date">#15 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="14" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/014-biosecurity-and-pandemic-defense-dacc-in-practice.html" class="dd-link">
-              <span class="dd-title">Biosecurity and Pandemic Defense: D/ACC in Practice</span><br>
-              <span class="date">#14 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 14)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/014-biosecurity-and-pandemic-defense-dacc-in-practice.html">
+            <span class="dd-title">Biosecurity and Pandemic Defense: D/ACC in Practice</span><br>
+            <span class="date">#14 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="13" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/013-unipolar-vs-multipolar-risk-vitaliks-threat-taxonomy.html" class="dd-link">
-              <span class="dd-title">Unipolar vs. Multipolar Risk: Vitalik's Threat Taxonomy</span><br>
-              <span class="date">#13 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 13)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/013-unipolar-vs-multipolar-risk-vitaliks-threat-taxonomy.html">
+            <span class="dd-title">Unipolar vs. Multipolar Risk: Vitalik's Threat Taxonomy</span><br>
+            <span class="date">#13 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="12" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/012-jevons-paradox-why-efficiency-doesnt-save-resources.html" class="dd-link">
-              <span class="dd-title">Jevons' Paradox: Why Efficiency Doesn't Save Resources</span><br>
-              <span class="date">#12 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 12)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/012-jevons-paradox-why-efficiency-doesnt-save-resources.html">
+            <span class="dd-title">Jevons' Paradox: Why Efficiency Doesn't Save Resources</span><br>
+            <span class="date">#12 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="11" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/011-nick-land-ccru-and-the-philosophical-roots-of-accelerationis.html" class="dd-link">
-              <span class="dd-title">Nick Land, CCRU, and the Philosophical Roots of Accelerationism</span><br>
-              <span class="date">#11 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 11)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/011-nick-land-ccru-and-the-philosophical-roots-of-accelerationis.html">
+            <span class="dd-title">Nick Land, CCRU, and the Philosophical Roots of Accelerationism</span><br>
+            <span class="date">#11 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="10" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/010-the-nuclear-analogy-can-we-regulate-ai-like-we-regulated-the.html" class="dd-link">
-              <span class="dd-title">The Nuclear Analogy: Can We Regulate AI Like We Regulated the Bomb?</span><br>
-              <span class="date">#10 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 10)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/010-the-nuclear-analogy-can-we-regulate-ai-like-we-regulated-the.html">
+            <span class="dd-title">The Nuclear Analogy: Can We Regulate AI Like We Regulated the Bomb?</span><br>
+            <span class="date">#10 · 2026-03-28 · 3 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="9" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/009-cognitive-security-the-ai-prompt-war.html" class="dd-link">
-              <span class="dd-title">Cognitive Security: The AI Prompt War</span><br>
-              <span class="date">#09 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 9)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/009-cognitive-security-the-ai-prompt-war.html">
+            <span class="dd-title">Cognitive Security: The AI Prompt War</span><br>
+            <span class="date">#09 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="8" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/008-extropic-and-the-post-gpu-computing-revolution.html" class="dd-link">
-              <span class="dd-title">Extropic and the Post-GPU Computing Revolution</span><br>
-              <span class="date">#08 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 8)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/008-extropic-and-the-post-gpu-computing-revolution.html">
+            <span class="dd-title">Extropic and the Post-GPU Computing Revolution</span><br>
+            <span class="date">#08 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="7" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/007-crypto-as-inter-species-trust-infrastructure.html" class="dd-link">
-              <span class="dd-title">Crypto as Inter-Species Trust Infrastructure</span><br>
-              <span class="date">#07 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 7)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/007-crypto-as-inter-species-trust-infrastructure.html">
+            <span class="dd-title">Crypto as Inter-Species Trust Infrastructure</span><br>
+            <span class="date">#07 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="6" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/006-autonomous-ai-agents-web-40-and-artificial-life.html" class="dd-link">
-              <span class="dd-title">Autonomous AI Agents: Web 4.0 and Artificial Life</span><br>
-              <span class="date">#06 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 6)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/006-autonomous-ai-agents-web-40-and-artificial-life.html">
+            <span class="dd-title">Autonomous AI Agents: Web 4.0 and Artificial Life</span><br>
+            <span class="date">#06 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="5" data-pre-read="false">
-          <div class="dd-row">
-            <a href="deep-dives/005-fully-homomorphic-encryption-computing-on-secrets.html" class="dd-link">
-              <span class="dd-title">Fully Homomorphic Encryption: Computing on Secrets</span><br>
-              <span class="date">#05 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 5)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item">
+          <a href="deep-dives/005-fully-homomorphic-encryption-computing-on-secrets.html">
+            <span class="dd-title">Fully Homomorphic Encryption: Computing on Secrets</span><br>
+            <span class="date">#05 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="4" data-pre-read="true">
-          <div class="dd-row">
-            <a href="deep-dives/004-the-kardashev-scale-energy-as-the-measure-of-civilization.html" class="dd-link">
-              <span class="dd-title">The Kardashev Scale: Energy as the Measure of Civilization</span><br>
-              <span class="date">#04 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 4)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item in-report">
+          <a href="deep-dives/004-the-kardashev-scale-energy-as-the-measure-of-civilization.html">
+            <span class="dd-title">The Kardashev Scale: Energy as the Measure of Civilization</span><br>
+            <span class="date">#04 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="3" data-pre-read="true">
-          <div class="dd-row">
-            <a href="deep-dives/003-dacc-vitaliks-defensive-acceleration.html" class="dd-link">
-              <span class="dd-title">D/ACC: Vitalik's Defensive Acceleration</span><br>
-              <span class="date">#03 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 3)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item in-report">
+          <a href="deep-dives/003-dacc-vitaliks-defensive-acceleration.html">
+            <span class="dd-title">D/ACC: Vitalik's Defensive Acceleration</span><br>
+            <span class="date">#03 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="2" data-pre-read="true">
-          <div class="dd-row">
-            <a href="deep-dives/002-the-selfish-bit-verdons-update-to-dawkins.html" class="dd-link">
-              <span class="dd-title">The Selfish Bit: Verdon's Update to Dawkins</span><br>
-              <span class="date">#02 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 2)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item in-report">
+          <a href="deep-dives/002-the-selfish-bit-verdons-update-to-dawkins.html">
+            <span class="dd-title">The Selfish Bit: Verdon's Update to Dawkins</span><br>
+            <span class="date">#02 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li>
-<li class="dd-item" data-dd-id="1" data-pre-read="true">
-          <div class="dd-row">
-            <a href="deep-dives/001-stochastic-thermodynamics-the-physics-behind-eacc.html" class="dd-link">
-              <span class="dd-title">Stochastic Thermodynamics: The Physics Behind E/ACC</span><br>
-              <span class="date">#01 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
-            </a>
-            <button class="read-btn" onclick="toggleRead(event, 1)" title="Mark as read">
-              <span class="read-icon"></span>
-            </button>
-          </div>
+<li class="dd-item in-report">
+          <a href="deep-dives/001-stochastic-thermodynamics-the-physics-behind-eacc.html">
+            <span class="dd-title">Stochastic Thermodynamics: The Physics Behind E/ACC</span><br>
+            <span class="date">#01 · 2026-03-28 · 2 min · Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</span>
+          </a>
         </li></ul>
     </div>
 
@@ -921,43 +646,6 @@
         const saved = localStorage.getItem('sm-tab');
         if (saved) showTab(saved);
     } catch(e) {}
-    
-    // Deep dive read state (localStorage + pre-marked from reports)
-    function getReadList() {
-        try { return JSON.parse(localStorage.getItem('sm-dd-read') || '[]'); } catch(e) { return []; }
-    }
-    function saveReadList(list) {
-        try { localStorage.setItem('sm-dd-read', JSON.stringify(list)); } catch(e) {}
-    }
-    function toggleRead(e, id) {
-        e.preventDefault();
-        e.stopPropagation();
-        // Don't toggle items that are in-report (they stay yellow)
-        const el = e.target.closest('.dd-item');
-        if (el && el.dataset.preRead === 'true') return;
-        let list = getReadList();
-        const idx = list.indexOf(id);
-        if (idx >= 0) { list.splice(idx, 1); } else { list.push(id); }
-        saveReadList(list);
-        applyReadState();
-    }
-    function applyReadState() {
-        const list = getReadList();
-        document.querySelectorAll('.dd-item').forEach(el => {
-            const id = parseInt(el.dataset.ddId);
-            const preRead = el.dataset.preRead === 'true';
-            const manuallyRead = list.includes(id);
-            // In report = yellow check, manual = teal check
-            el.classList.toggle('in-report', preRead);
-            el.classList.toggle('is-read', manuallyRead && !preRead);
-            // Auto-add pre-read to list so toggle works correctly
-            if (preRead && !list.includes(id)) {
-                list.push(id);
-                saveReadList(list);
-            }
-        });
-    }
-    applyReadState();
     
     // PWA pull-to-refresh
     if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
