@@ -120,10 +120,25 @@
         .dd-item.in-report .dd-title { color: #eab308; }
         /* Manually read — teal text */
         .dd-item.is-read .dd-title { color: #0ec4a9; }
-        /* Checkbox */
+        /* Checkbox — custom styled */
         .dd-check {
-            width: 1.25rem; height: 1.25rem; accent-color: #0ec4a9;
-            cursor: pointer; flex-shrink: 0; margin-top: 0.2rem;
+            -webkit-appearance: none; appearance: none;
+            width: 1.5rem; height: 1.5rem; flex-shrink: 0; margin-top: 0.15rem;
+            border: 2px solid rgba(10, 143, 123, 0.4); border-radius: 4px;
+            background: transparent; cursor: pointer;
+            transition: all 0.15s; position: relative;
+        }
+        .dd-check:hover { border-color: #0ec4a9; }
+        .dd-check:checked {
+            background: #0ec4a9; border-color: #0ec4a9;
+        }
+        .dd-check:checked::after {
+            content: '✓'; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); color: #212737;
+            font-size: 0.85rem; font-weight: 700;
+        }
+        .dd-item.in-report .dd-check:checked {
+            background: #eab308; border-color: #eab308;
         }
         .dd-check-row {
             display: flex; align-items: flex-start; gap: 0.75rem;
