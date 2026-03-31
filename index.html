@@ -205,7 +205,7 @@
 
 <div class="tabs">
     <button class="tab tab-reports active" onclick="showTab('reports')">Reports<span class="tab-count">56</span></button>
-    <button class="tab tab-deepdives" onclick="showTab('deepdives')">Deep Dives<span class="tab-count">65</span></button>
+    <button class="tab tab-deepdives" onclick="showTab('deepdives')">Deep Dives<span class="tab-count">68</span></button>
     <button class="tab tab-kb" onclick="showTab('kb')">KB<span class="tab-count">13</span></button>
 </div>
 
@@ -270,7 +270,34 @@
     </div>
 
     <div id="tab-deepdives" class="tab-content tab-content-deepdives">
-        <ul><li class="dd-item" data-dd-id="65">
+        <ul><li class="dd-item" data-dd-id="68">
+          <div class="dd-check-row">
+            <input type="checkbox" class="dd-check" data-id="68" data-title="The E-Shaped Career: Why T-Shaped Is Dead and Multidisciplinary Wins" onchange="toggleDDRead(68)">
+            <a href="deep-dives/068-the-e-shaped-career-why-t-shaped-is-dead-and-multidisciplinary-wins.html">
+              <span class="dd-title">The E-Shaped Career: Why T-Shaped Is Dead and Multidisciplinary Wins</span><br>
+              <span class="date">#68 · 2026-03-31 · 3 min · Marc Andreessen: The Real AI Boom Hasn't Even Started Yet — Lenny's Podcast</span>
+            </a>
+          </div>
+        </li>
+<li class="dd-item" data-dd-id="67">
+          <div class="dd-check-row">
+            <input type="checkbox" class="dd-check" data-id="67" data-title="Bloom's Two Sigma: The Tutoring Effect That AI Finally Democratizes" onchange="toggleDDRead(67)">
+            <a href="deep-dives/067-blooms-two-sigma-the-tutoring-effect-that-ai-finally-democratizes.html">
+              <span class="dd-title">Bloom's Two Sigma: The Tutoring Effect That AI Finally Democratizes</span><br>
+              <span class="date">#67 · 2026-03-31 · 3 min · Marc Andreessen: The Real AI Boom Hasn't Even Started Yet — Lenny's Podcast</span>
+            </a>
+          </div>
+        </li>
+<li class="dd-item" data-dd-id="66">
+          <div class="dd-check-row">
+            <input type="checkbox" class="dd-check" data-id="66" data-title="The Philosopher's Stone: Why Sand-to-Thought Is the Most Important Metaphor in AI" onchange="toggleDDRead(66)">
+            <a href="deep-dives/066-the-philosophers-stone-why-sand-to-thought-is-the-most-important-metaphor-in-ai.html">
+              <span class="dd-title">The Philosopher's Stone: Why Sand-to-Thought Is the Most Important Metaphor in AI</span><br>
+              <span class="date">#66 · 2026-03-31 · 3 min · Marc Andreessen: The Real AI Boom Hasn't Even Started Yet — Lenny's Podcast</span>
+            </a>
+          </div>
+        </li>
+<li class="dd-item" data-dd-id="65">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="65" data-title=""Do Not Bring Your Whole Self to Work": Against Authenticity Culture" onchange="toggleDDRead(65)">
             <a href="deep-dives/065-do-not-bring-your-whole-self-to-work-against-authenticity-cu.html">
@@ -901,7 +928,7 @@
 <li><a href="kb/marc-andreessen-real-ai-boom.html">
           Marc Andreessen: The Real AI Boom Hasn't Even Started Yet<br>
           <span class="date">#5 · 2026-03-01 · podcast · 134 min</span><br>
-          <span class="card-tags"></span>
+          <span class="card-tags"><span class="card-tag card-tag-source">3 deep dives</span></span>
         </a></li>
 <li><a href="kb/how-crypto-actually-works.html">
           How Crypto Actually Works<br>
@@ -993,7 +1020,11 @@
     function toggleDDRead(id) {
         let list = getDDRead();
         const idx = list.indexOf(id);
-        if (idx >= 0) return; // Once read, can't uncheck
+        if (idx >= 0) {
+            // Already read — force checkbox back to checked
+            syncDDState();
+            return;
+        }
         list.push(id);
         saveDDRead(list);
         syncDDState();
