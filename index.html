@@ -205,7 +205,7 @@
 
 <div class="tabs">
     <button class="tab tab-reports active" onclick="showTab('reports')">Reports<span class="tab-count">56</span></button>
-    <button class="tab tab-deepdives" onclick="showTab('deepdives')">Deep Dives<span class="tab-count">68</span></button>
+    <button class="tab tab-deepdives" onclick="showTab('deepdives')">Deep Dives<span class="tab-count">71</span></button>
     <button class="tab tab-kb" onclick="showTab('kb')">KB<span class="tab-count">13</span></button>
 </div>
 
@@ -270,7 +270,34 @@
     </div>
 
     <div id="tab-deepdives" class="tab-content tab-content-deepdives">
-        <ul><li class="dd-item" data-dd-id="68">
+        <ul><li class="dd-item" data-dd-id="71">
+          <div class="dd-check-row">
+            <input type="checkbox" class="dd-check" data-id="71" data-title="The Depopulation Trap: Why AI Arrives Just in Time" onchange="toggleDDRead(71)">
+            <a href="deep-dives/071-the-depopulation-trap-why-ai-arrives-just-in-time.html">
+              <span class="dd-title">The Depopulation Trap: Why AI Arrives Just in Time</span><br>
+              <span class="date">#71 · 2026-03-31 · 3 min · Marc Andreessen: The Real AI Boom Hasn't Even Started Yet — Lenny's Podcast</span>
+            </a>
+          </div>
+        </li>
+<li class="dd-item" data-dd-id="70">
+          <div class="dd-check-row">
+            <input type="checkbox" class="dd-check" data-id="70" data-title="The Productivity Paradox: 50 Years of Slow Growth That Nobody Noticed" onchange="toggleDDRead(70)">
+            <a href="deep-dives/070-the-productivity-paradox-50-years-of-slow-growth-that-nobody-noticed.html">
+              <span class="dd-title">The Productivity Paradox: 50 Years of Slow Growth That Nobody Noticed</span><br>
+              <span class="date">#70 · 2026-03-31 · 3 min · Marc Andreessen: The Real AI Boom Hasn't Even Started Yet — Lenny's Podcast</span>
+            </a>
+          </div>
+        </li>
+<li class="dd-item" data-dd-id="69">
+          <div class="dd-check-row">
+            <input type="checkbox" class="dd-check" data-id="69" data-title="The Mexican Standoff: When PM, Engineer, and Designer All Think They Can Replace Each Other" onchange="toggleDDRead(69)">
+            <a href="deep-dives/069-the-mexican-standoff-when-pm-engineer-and-designer-all-think-they-can-replace-each-other.html">
+              <span class="dd-title">The Mexican Standoff: When PM, Engineer, and Designer All Think They Can Replace Each Other</span><br>
+              <span class="date">#69 · 2026-03-31 · 3 min · Marc Andreessen: The Real AI Boom Hasn't Even Started Yet — Lenny's Podcast</span>
+            </a>
+          </div>
+        </li>
+<li class="dd-item" data-dd-id="68">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="68" data-title="The E-Shaped Career: Why T-Shaped Is Dead and Multidisciplinary Wins" onchange="toggleDDRead(68)">
             <a href="deep-dives/068-the-e-shaped-career-why-t-shaped-is-dead-and-multidisciplinary-wins.html">
@@ -928,7 +955,7 @@
 <li><a href="kb/marc-andreessen-real-ai-boom.html">
           Marc Andreessen: The Real AI Boom Hasn't Even Started Yet<br>
           <span class="date">#5 · 2026-03-01 · podcast · 134 min</span><br>
-          <span class="card-tags"><span class="card-tag card-tag-source">3 deep dives</span></span>
+          <span class="card-tags"><span class="card-tag card-tag-source">6 deep dives</span></span>
         </a></li>
 <li><a href="kb/how-crypto-actually-works.html">
           How Crypto Actually Works<br>
@@ -1018,14 +1045,15 @@
         try { localStorage.setItem(DD_READ_KEY, JSON.stringify(list)); } catch(e) {}
     }
     function toggleDDRead(id) {
-        let list = getDDRead();
-        const idx = list.indexOf(id);
-        if (idx >= 0) {
-            // Already read — force checkbox back to checked
+        // In-report items can't be unchecked
+        const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
+        if (el && el.classList.contains('in-report')) {
             syncDDState();
             return;
         }
-        list.push(id);
+        let list = getDDRead();
+        const idx = list.indexOf(id);
+        if (idx >= 0) { list.splice(idx, 1); } else { list.push(id); }
         saveDDRead(list);
         syncDDState();
     }
