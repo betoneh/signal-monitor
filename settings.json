@@ -81,7 +81,7 @@
       ]
     },
     "tech": {
-      "name": "Tech",
+      "name": "Tech & Quantum",
       "max_words": 110,
       "keywords": [
         "startup",
@@ -101,7 +101,11 @@
         "tesla",
         "spacex",
         "launch",
-        "product"
+        "product",
+        "quantum",
+        "quantum computing",
+        "qubit",
+        "post-quantum"
       ]
     },
     "stocks_macro": {
