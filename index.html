@@ -774,7 +774,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item" data-dd-id="9">
+<li class="dd-item in-report" data-dd-id="9">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="9" data-title="Cognitive Security: The AI Prompt War" onchange="toggleDDRead(9)">
             <a href="deep-dives/009-cognitive-security-the-ai-prompt-war.html">
@@ -993,7 +993,8 @@
     function toggleDDRead(id) {
         let list = getDDRead();
         const idx = list.indexOf(id);
-        if (idx >= 0) { list.splice(idx, 1); } else { list.push(id); }
+        if (idx >= 0) return; // Once read, can't uncheck
+        list.push(id);
         saveDDRead(list);
         syncDDState();
     }
