@@ -1040,7 +1040,7 @@
         if (hash === PW_HASH) {
             document.getElementById('gate').style.display = 'none';
             document.getElementById('app').style.display = 'block';
-            try { sessionStorage.setItem('sm-auth', '1'); } catch(e) {}
+            try { localStorage.setItem('sm-auth', Date.now().toString()); } catch(e) {}
         } else {
             document.getElementById('gate-err').style.display = 'block';
             document.getElementById('pw').value = '';
@@ -1052,9 +1052,12 @@
     });
     // Auto-login if already authenticated this session
     try {
-        if (sessionStorage.getItem('sm-auth') === '1') {
+        const authTs = parseInt(localStorage.getItem('sm-auth') || '0');
+        if (authTs && (Date.now() - authTs) < 7 * 24 * 60 * 60 * 1000) {
             document.getElementById('gate').style.display = 'none';
             document.getElementById('app').style.display = 'block';
+        } else {
+            localStorage.removeItem('sm-auth');
         }
     } catch(e) {}
 
