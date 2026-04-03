@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#212737">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Signal Monitor — 2026-04-03-0814</title>
+<style>
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; display: flex; flex-direction: column;
+    overflow-y: scroll; scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  a { outline-offset: 1px; outline-color: rgba(14, 196, 169, 0.75); }
+  a:focus-visible { outline: 2px dashed rgba(14, 196, 169, 0.75); text-decoration: none; }
+
+  header, main, footer {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem;
+  }
+  header { padding: 2rem 1rem 1.5rem; }
+  .title-row {
+    display: flex; align-items: baseline; gap: 0.75rem;
+  }
+  .site-title {
+    display: inline-block;
+    font-size: 1.875rem; font-weight: 700; color: #0ec4a9; text-decoration: none;
+  }
+  @media (min-width: 640px) { .site-title { font-size: 2.25rem; } }
+  .site-title:hover { color: #0ec4a9; }
+  .feed-badge {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.4);
+    font-weight: 400;
+  }
+  .header-meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 0.5rem; margin-bottom: 1.5rem;
+  }
+  .header-meta .date-wrap {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.875rem; color: #eaedf3; opacity: 0.8; font-style: italic;
+  }
+  @media (min-width: 640px) { .header-meta .date-wrap { font-size: 1rem; } }
+  .header-meta .date-wrap svg {
+    display: inline-block; width: 1.25rem; height: 1.25rem; min-width: 1.25rem; flex-shrink: 0;
+  }
+  .header-meta .sep { color: rgba(234, 237, 243, 0.3); }
+  .header-meta .reading-time {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.6);
+  }
+
+  .stats { font-size: 0.75rem; color: #8b949e; margin-top: 0.5rem; line-height: 1.6; }
+
+  .hr { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  .hr hr { border: none; border-top: 1px solid #0a8f7b; }
+
+  main { flex: 1; }
+
+  .category { margin-bottom: 2rem; }
+  .category-header {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.75rem; padding-bottom: 0.5rem;
+    border-bottom: 1px solid #0a8f7b;
+  }
+  .category-header h2 { font-size: 1.25rem; font-weight: 600; color: #eaedf3; }
+  .category-count {
+    font-size: 0.75rem; color: #8b949e;
+    background: rgba(52, 63, 96, 0.75); padding: 1px 8px; border-radius: 3px;
+  }
+
+  .cat-crypto .category-header { border-color: #f7931a; }
+  .cat-crypto .category-header h2 { color: #f7931a; }
+  .cat-ai .category-header { border-color: #0ec4a9; }
+  .cat-ai .category-header h2 { color: #0ec4a9; }
+  .cat-tech .category-header { border-color: #8b5cf6; }
+  .cat-tech .category-header h2 { color: #8b5cf6; }
+  .cat-stocks_macro .category-header { border-color: #ef4444; }
+  .cat-stocks_macro .category-header h2 { color: #ef4444; }
+  .cat-israel .category-header { border-color: #3b82f6; }
+  .cat-israel .category-header h2 { color: #3b82f6; }
+  .cat-openclaw .category-header { border-color: #FF4500; }
+  .cat-openclaw .category-header h2 { color: #FF4500; }
+
+  .editorial {
+    line-height: 1.75; font-size: 1rem; margin-bottom: 1rem;
+    overflow-wrap: break-word; word-break: break-word;
+    color: #eaedf3;
+  }
+  .editorial p {
+    margin-bottom: 0.75rem; line-height: 1.75;
+  }
+  .editorial p:last-child { margin-bottom: 0; }
+
+  a {
+    color: #0ec4a9; text-decoration: none;
+  }
+  a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .editorial a {
+    color: #0ec4a9; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 8px;
+  }
+  .editorial a:hover { text-decoration-color: #eaedf3; }
+
+  .tweets { display: flex; flex-direction: column; gap: 0.75rem; }
+  .tweet {
+    background: rgba(52, 63, 96, 0.35);
+    border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.875rem 1rem;
+    overflow: hidden; max-width: 100%;
+  }
+  @media (hover:hover) { .tweet:hover { border-color: #0ec4a9; } }
+  .tweet.priority { border-left: 3px solid #0ec4a9; }
+
+  .tweet-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+  .tweet-author { font-weight: 600; font-size: 0.85rem; color: #eaedf3; }
+  .tweet-handle { color: #8b949e; font-size: 0.8rem; font-weight: 400; }
+  .tweet-handle a { color: #8b949e; text-decoration: none; }
+  .tweet-handle a:hover { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; }
+  .tweet-time { font-size: 0.75rem; color: #8b949e; }
+
+  .tweet-text {
+    font-size: 0.85rem; line-height: 1.65; margin-bottom: 0.5rem;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .tweet-text a { text-decoration: none; }
+  .tweet-text a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .tweet-media {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px; margin-bottom: 0.5rem; overflow: hidden;
+  }
+  .tweet-media img {
+    width: 100%; max-width: 100%; border-radius: 4px;
+    border: 1px solid rgba(10, 143, 123, 0.3);
+  }
+
+  .tweet-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: #8b949e;
+  }
+  .tweet-metrics { display: flex; gap: 1rem; }
+  .tweet-link a { font-size: 0.75rem; }
+
+  .retweet-badge {
+    background: rgba(52, 63, 96, 0.75); color: #8b949e;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem;
+    margin-bottom: 0.5rem; display: inline-block;
+  }
+  .priority-badge {
+    background: #0ec4a9; color: #212737;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; margin-left: 0.5rem;
+  }
+
+  .noise {
+    font-size: 0.75rem; color: #8b949e; margin: 2rem 0 1rem;
+    padding: 0.75rem 1rem; background: rgba(52, 63, 96, 0.35); border-radius: 4px;
+  }
+  .noise a { color: #0ec4a9; text-decoration: none; font-size: 0.75rem; }
+  .noise a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .audio-row {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem 1.5rem;
+  }
+  .audio-player {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: rgba(52, 63, 96, 0.35); border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.625rem 1rem;
+  }
+  .audio-player:hover { border-color: #0ec4a9; }
+  .audio-btn {
+    background: none; border: none; cursor: pointer;
+    color: #0ec4a9; font-size: 1.25rem; padding: 0; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; flex-shrink: 0;
+  }
+  .audio-btn:hover { color: #eaedf3; }
+  .audio-progress {
+    flex: 1; height: 3px; background: rgba(52, 63, 96, 0.75);
+    border-radius: 2px; cursor: pointer; position: relative;
+  }
+  .audio-progress-fill {
+    height: 100%; background: #0ec4a9; border-radius: 2px;
+    width: 0%; transition: width 100ms linear;
+  }
+  .audio-time {
+    font-size: 0.75rem; color: #8b949e; min-width: 3.5rem; text-align: right;
+  }
+  .audio-speed {
+    font-size: 0.7rem; color: #8b949e; background: rgba(52, 63, 96, 0.75);
+    border: none; border-radius: 3px; padding: 2px 6px; cursor: pointer;
+  }
+  .audio-speed:hover { color: #0ec4a9; }
+
+  footer { padding: 1.5rem 1rem; }
+  .footer-text {
+    text-align: center; font-size: 0.75rem; color: #8b949e; line-height: 1.6;
+  }
+  .footer-text a {
+    color: #eaedf3; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 4px;
+  }
+  .footer-text a:hover { color: #0ec4a9; }
+  .stats-line {
+    text-align: center; font-size: 0.75rem; color: #8b949e;
+    margin-bottom: 0.5rem; line-height: 1.6;
+  }
+
+  /* Share bar */
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .share-label { font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem; }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+  /* Deep Dive section — matches category style */
+  .cat-deepdive .category-header { border-color: #eab308; }
+  .cat-deepdive .category-header h2 { color: #eab308; }
+  .deepdive-source {
+    font-size: 0.75rem; color: #8b949e; margin-top: 0.75rem;
+  }
+  .deepdive-source a { color: #8b949e; text-decoration: none; }
+  .deepdive-source a:hover { color: #eab308; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+
+  @media (max-width: 640px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .site-title { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<header>
+  <div class="title-row">
+    <span class="site-title">Signal Monitor</span>
+    <span class="feed-badge">Following</span>
+  </div>
+  <div class="header-meta">
+    <span class="date-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/><path d="M7 14h.013"/><path d="M10.01 14h.005"/><path d="M13.01 14h.005"/><path d="M16.015 14h.005"/><path d="M13.015 17h.005"/><path d="M7.01 17h.005"/><path d="M10.01 17h.005"/></svg>
+      <time>3 Apr, 2026 — 8:14am</time>
+    </span>
+    <span class="sep">&bull;</span>
+    <span class="reading-time" id="reading-time"></span>
+  </div>
+</header>
+
+<main>
+
+  <div class="category cat-crypto">
+    <div class="category-header">
+      <h2>Crypto</h2>
+      <span class="category-count">136w</span>
+    </div>
+    <p class="editorial">Ethereum's dominance in tokenized assets keeps compounding — <a href="https://x.com/Etherealize_io/status/2040069330327494828" target="_blank">61.4% market share across $206 billion in tokenized assets</a> is a moat that no alt-L1 has meaningfully dented. Meanwhile, the stablecoin landscape is fracturing: <a href="https://x.com/CoinMarketCap/status/2040067850258235829" target="_blank">stablecoin supply hit a record $315 billion in Q1 2026</a> but the real story is USDC gaining $2B while USDT shed $3B, the first meaningful divergence since 2022. That split matters more than the headline number — regulated issuers are eating market share, even as ZachXBT's damning report alleges <a href="https://x.com/BSCNews/status/2040062635312349525" target="_blank">over $420 million in Circle compliance failures since 2022</a>. The irony of USDC gaining ground on a "trust" narrative while its issuer faces serious compliance questions is not lost on anyone paying attention. Lido's push for <a href="https://x.com/LidoFinance/status/2040063591227789563" target="_blank">one-click cross-chain staking via wstETH</a> is the kind of UX compression that eventually makes self-custody competitive with CEX yields.</p>
+  </div>
+
+  <div class="category cat-ai">
+    <div class="category-header">
+      <h2>AI</h2>
+      <span class="category-count">136w</span>
+    </div>
+    <p class="editorial">Steipete's frustration about <a href="https://x.com/steipete/status/2040067429242675523" target="_blank">hitting GitHub API quota limits not designed with agents in mind</a> is a canary — every major platform API was built for human-paced interaction, and the agentic wave is exposing those assumptions fast. On the other end of the spectrum, ICP is betting that <a href="https://x.com/BSCNews/status/2040066632618242476" target="_blank">Caffeine v3.0 will enable natural language-based app development</a>, which sounds like vaporware until someone actually ships it. The real AI infrastructure play this cycle is Dune quietly building <a href="https://x.com/Dune/status/2040068340119642492" target="_blank">a dbt Connector to Datashare pipeline across 130+ chains</a> — unsexy plumbing that becomes essential when every fund wants custom onchain analytics. Grok's trajectory is notable too: <a href="https://x.com/BSCNews/status/2040055117941002735" target="_blank">293.3 million website visits in the last 30 days</a> puts it in the top 70 globally, though "becoming the new Google" is a stretch when search intent and chat intent remain fundamentally different behaviors.</p>
+  </div>
+
+  <div class="category cat-tech">
+    <div class="category-header">
+      <h2>Tech & Quantum</h2>
+      <span class="category-count">96w</span>
+    </div>
+    <p class="editorial">The quantum clock is ticking louder than most realize. Laura Shin's conversation highlights that <a href="https://x.com/laurashin/status/2040064526520066244" target="_blank">a quantum attack could execute in 9 minutes against Bitcoin's 1-hour confirmation window</a>, a timeline mismatch that should terrify anyone holding unrotated UTXOs. Starknet's claim of having <a href="https://x.com/Starknet/status/2040042618562678861" target="_blank">one of the cleanest paths to post-quantum wallets in crypto</a> is self-serving but technically defensible — STARK proofs are already quantum-resistant by construction. On the fintech side, <a href="https://x.com/CoinMarketCap/status/2040051724161896455" target="_blank">SoFi launching a regulated platform for 24/7 dollar and crypto settlement</a> is another brick in the wall between traditional banking and crypto rails. The distinction is becoming academic.</p>
+  </div>
+
+  <div class="category cat-stocks_macro">
+    <div class="category-header">
+      <h2>Stocks & Macro</h2>
+      <span class="category-count">91w</span>
+    </div>
+    <p class="editorial">The labor market narrative remains incoherent — <a href="https://x.com/zerohedge/status/2040056847189614871" target="_blank">huge disconnects between payrolls and employed workers persist</a>, and <a href="https://x.com/profplum99/status/2040063067812253992" target="_blank">entrepreneurial dynamism in the US labor market exceeds all pre-2020 periods</a>, which either means the economy is genuinely restructuring or the measurement tools are broken. Both possibilities should make you uncomfortable. In crypto-native markets, <a href="https://x.com/CoinMarketCap/status/2040063795691680151" target="_blank">Hyperliquid's perpetual futures volume nearly doubled to 6% of global share, approaching $200 billion monthly</a> — a DEX eating into CEX territory at that pace is the kind of structural shift that shows up in earnings calls six months from now.</p>
+  </div>
+
+  <div class="category cat-israel">
+    <div class="category-header">
+      <h2>Israel</h2>
+      <span class="category-count">144w</span>
+    </div>
+    <p class="editorial">Iran scored its first major tactical hit of the conflict, <a href="https://x.com/KobeissiLetter/status/2040051502983544855" target="_blank">shooting down a US F-15E Strike Eagle over southern Iran</a> — a significant escalation that immediately triggered deep CSAR operations with <a href="https://x.com/Osinttechnical/status/2040059365189722249" target="_blank">HC-130J and HH-60G Pave Hawks penetrating Iranian airspace</a> to recover the two-person crew. The situation on the ground turned ugly fast, with <a href="https://x.com/clashreport/status/2040036784071967041" target="_blank">Iranian state TV offering rewards for capturing the US pilot alive</a> and <a href="https://x.com/FaytuksNetwork/status/2040059962911555760" target="_blank">civilians reportedly shooting at American rescue helicopters</a>. This is the most dangerous US-Iran flashpoint since the war began — a downed crew in hostile territory with an active manhunt changes the calculus from strategic air campaign to urgent extraction crisis. Separately, <a href="https://x.com/IDF/status/2040057855508717941" target="_blank">the IDF struck roughly 75 Hezbollah targets in Lebanon</a> as the northern front grinds on, and <a href="https://x.com/Israel/status/2039771423229550752" target="_blank">the Western Wall stood empty during Passover due to Iranian missile threats</a>, a haunting image of the war's reach into daily life.</p>
+  </div>
+
+  <div class="category cat-deepdive">
+    <div class="category-header">
+      <h2>Today's Deep Dive: The Second Amendment for AI: Open Source as Power Symmetry</h2>
+      <span class="category-count">600w</span>
+    </div>
+    <div class="deepdive-source">Source: <a href="https://www.youtube.com/watch?v=NSm6GRiMkzU" target="_blank">Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</a> · KB #11</div>
+    <div class="editorial"><p><a href="https://extropic.ai" target="_blank">Verdon</a> drops one of the debate's most provocative analogies: "Just like the <a href="https://en.wikipedia.org/wiki/Second_Amendment_to_the_United_States_Constitution" target="_blank">Second Amendment</a> is about the government not having a monopoly on violence so you can vibe check the government if it goes out of hand — you need that for AI." This isn't throwaway rhetoric. It's a structural argument about power architecture that deserves serious unpacking.</p>
+<p>The Second Amendment analogy maps cleanly onto the AI power distribution problem. The original rationale for civilian gun ownership wasn't hunting or home defense — it was the prevention of tyranny. An armed populace creates a floor on how badly a government can behave, because the cost of enforcing total control becomes prohibitive. You don't need citizens to actually revolt; the theoretical possibility of revolt constrains government behavior.</p>
+<p>Verdon argues AI needs the same structural constraint. If only governments and large corporations can run frontier AI models, they have an asymmetric cognitive advantage over individuals. They can model your behavior, predict your decisions, and manipulate your information environment — and you can't do the same to them. This isn't theoretical: it's the current business model of social media, scaled up by several orders of magnitude.</p>
+<p>Open source AI is the "arms" in this framework. When Meta releases Llama weights, when Mistral publishes their models, when anyone can download and run a capable model locally — that's the Second Amendment in action. It means no entity can have a monopoly on intelligence. Even if the government builds GPT-7 internally, the populace has GPT-6 running on their hardware. The gap exists but isn't unbridgeable.</p>
+<p>The critics of this analogy are obvious. Guns are simple technology with limited destructive range. AI is complex technology with potentially unlimited impact. A gun in the hands of a bad actor can harm dozens; an AI in the hands of a bad actor could potentially harm millions (through engineered pandemics, financial system attacks, infrastructure sabotage). The Second Amendment analogy proves too much: it justifies distributing any technology to prevent power concentration, regardless of the technology's destructive potential.</p>
+<p>Verdon's counter is the same one he makes throughout the debate: the alternative is worse. Concentrating AI in the hands of the "responsible" few creates the exact power asymmetry that leads to oppression. Even well-intentioned gatekeepers become tools of power — as the <a href="https://anthropic.com" target="_blank">Anthropic</a> episode demonstrates. The risks of distribution are real but bounded; the risks of concentration are existential and permanent.</p>
+<p>There's a deeper structural point that transcends the gun analogy. In information technology, openness has historically been the winning strategy for preventing capture. The internet was designed to route around censorship. Open source software prevents vendor lock-in. Cryptocurrency prevents financial censorship. Each represents the same principle: distribute the capability widely enough that no single actor can control it.</p>
+<p>The uncomfortable truth is that this principle applies equally to beneficial and harmful capabilities. You can't have an open internet that empowers activists without also empowering criminals. You can't have <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank">open source</a> AI that empowers individuals without also empowering malicious actors. The e/acc position is that this trade-off is worth making — that the damage from concentration consistently exceeds the damage from distribution. History, they'd argue, supports this. The printing press empowered both democratic movements and propaganda. The net effect was overwhelmingly positive. AI may follow the same pattern.</p>
+<p>Whether you buy this argument depends on whether you believe AI is more like the printing press (powerful but manageable) or more like nuclear weapons (powerful and existentially dangerous). The debate doesn't resolve this question, but it clarifies the stakes: the architecture we choose for AI distribution will shape power dynamics for generations.</p></div>
+  </div>
+
+  <div class="noise">📡 noise (7d): <a href="https://x.com/zerolore" target="_blank">@zerolore</a> 5/5 (100%) · <a href="https://x.com/peerxyz" target="_blank">@peerxyz</a> 5/6 (83%) · <a href="https://x.com/jack" target="_blank">@jack</a> 5/6 (83%) · <a href="https://x.com/philipjohnston" target="_blank">@philipjohnston</a> 13/19 (68%) · <a href="https://x.com/beffjezos" target="_blank">@beffjezos</a> 14/21 (67%)</div>
+
+  <div class="share-row">
+    <div class="share-left">
+      <div class="share-label">Share this post on:</div>
+      <div class="share-icons">
+        <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/2026-04-03-0814.html" target="_blank" rel="noopener" title="Share on X">
+          <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+        </a>
+        <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/2026-04-03-0814.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+        </a>
+        <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/2026-04-03-0814.html" target="_blank" rel="noopener" title="Share on Telegram">
+          <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+        </a>
+        <a href="mailto:?subject=Signal%20Monitor%202026-04-03-0814&body=https://betoneh.github.io/signal-monitor/2026-04-03-0814.html" title="Share via email">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+        </a>
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'},1500)})" title="Copy link">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+      </div>
+    </div>
+    <div style="width:100%;text-align:center;margin-top:0.5rem;">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>Back to Top</span>
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<div class="hr"><hr></div>
+
+<footer>
+  <p class="stats-line">175 tweets · Crypto 23% · AI 19% · Tech & Quantum 9% · Stocks & Macro 23% · Noise 44 · Israel Monitor · 50 tweets from curated list · source: Following</p>
+  <p class="footer-text">
+    Generated by Signal Monitor ·
+    <a href="https://x.com/beto_neh">@beto_neh</a>
+  </p>
+</footer>
+
+<script>
+  // Reading time
+  const text = document.querySelector('main').innerText;
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+  document.getElementById('reading-time').textContent = minutes + ' min read';
+
+  // Progress bar
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Audio player
+  const ael=document.getElementById('audio-el');
+  if(ael){
+    const abtn=document.getElementById('audio-btn');
+    const afill=document.getElementById('audio-fill');
+    const atime=document.getElementById('audio-time');
+    const aspeed=document.getElementById('audio-speed');
+    const playIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>';
+    const pauseIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>';
+    function fmt(s){const m=Math.floor(s/60);return m+':'+(''+(Math.floor(s)%60)).padStart(2,'0');}
+    window.toggleAudio=function(){if(ael.paused){ael.play();abtn.innerHTML=pauseIcon;}else{ael.pause();abtn.innerHTML=playIcon;}};
+    ael.addEventListener('timeupdate',function(){
+      if(ael.duration){afill.style.width=(ael.currentTime/ael.duration*100)+'%';}
+      atime.textContent=fmt(ael.currentTime)+(ael.duration?' / '+fmt(ael.duration):'');
+    });
+    ael.addEventListener('ended',function(){abtn.innerHTML=playIcon;afill.style.width='0%';});
+    window.seekAudio=function(e){
+      const bar=document.getElementById('audio-bar');
+      const pct=e.offsetX/bar.offsetWidth;
+      if(ael.duration)ael.currentTime=pct*ael.duration;
+    };
+    const speeds=[1,1.25,1.5,1.75,2];let si=0;
+    window.cycleSpeed=function(){si=(si+1)%speeds.length;ael.playbackRate=speeds[si];aspeed.textContent=speeds[si]+'x';};
+  }
+
+  // Pull to refresh (PWA)
+  if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+    let sy=0,p=false,d=document,b=d.body;
+    const el=d.createElement('div');
+    el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#8b949e;font-size:14px;z-index:9999;transition:top 0.2s;background:#212737;';
+    el.textContent='\u2193 Pull to refresh';
+    b.prepend(el);
+    d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+    d.addEventListener('touchmove',e=>{
+      if(!p)return;
+      const dy=e.touches[0].clientY-sy;
+      if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+      if(dy>5)e.preventDefault();
+      const t=Math.min(dy*0.4,50);
+      el.style.top=(t-50)+'px';
+      el.textContent=dy>80?'\u2191 Release':'\u2193 Pull to refresh';
+    },{passive:false});
+    d.addEventListener('touchend',e=>{
+      if(!p){return;}p=false;
+      const dy=e.changedTouches[0].clientY-sy;
+      el.style.top='-50px';
+      if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+    });
+  }
+</script>
+</body>
+</html>
