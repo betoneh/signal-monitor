@@ -1365,7 +1365,7 @@
         }).catch(() => { prompt('Copia manualmente:', text); });
     }
     function syncUnreportFab() {
-        // Now handled by syncDDState
+        syncDDState();
     }
     // Restore unreport state from localStorage
     (function restoreUnreport() {
