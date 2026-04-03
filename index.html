@@ -159,11 +159,7 @@
         .fab-btn:hover { background: #0a8f7b; }
         .fab-tg { background: #0ec4a9; }
         .fab-copy { background: rgba(52, 63, 96, 0.9); color: #eaedf3; }
-        .fab-unreport { background: #eab308; color: #212737; }
-        .fab-unreport:hover { background: #ca9a06; }
-        #dd-unreport-fab { position: fixed; bottom: 1.5rem; left: 1.5rem;
-            display: none; flex-direction: column; gap: 0.5rem; z-index: 50; }
-        #dd-unreport-fab.visible { display: flex; }
+
         .dd-item.in-report.unreport .dd-check { background: transparent; border-color: #eab308; }
         .dd-item.in-report.unreport .dd-check::after { content: ''; }
         .dd-item.in-report.unreport .dd-title { color: #8b949e; text-decoration: line-through; }
@@ -1213,9 +1209,7 @@
   <button class="fab-btn fab-copy" onclick="copyDDRead()">📋 Copiar</button>
 </div>
 
-<div id="dd-unreport-fab">
-  <button class="fab-btn fab-unreport" onclick="copyUnreport()">🔄 Copiar resets</button>
-</div>
+
 
 <div class="hr"><hr></div>
 
@@ -1318,27 +1312,45 @@
             if (cb) cb.checked = isRead || inReport;
             el.classList.toggle('is-read', isRead && !inReport);
         });
-        // Show/hide FAB
+        // Show/hide FAB (visible if any teal checks OR any yellow unreports)
         const hasManual = list.filter(id => {
             const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
             return el && !el.classList.contains('in-report');
         }).length > 0;
+        const ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
         const fab = document.getElementById('dd-fab');
-        if (fab) fab.classList.toggle('visible', hasManual);
+        if (fab) fab.classList.toggle('visible', hasManual || ur.length > 0);
     }
     function buildDDText() {
+        const sections = [];
+        // Teal checks (mark as read)
         const list = getDDRead();
-        const lines = ['read_dives'];
+        const readLines = [];
         document.querySelectorAll('.dd-item').forEach(el => {
             const id = parseInt(el.dataset.ddId);
             if (list.includes(id) && !el.classList.contains('in-report')) {
                 const title = el.querySelector('.dd-check')?.dataset.title || '';
-                lines.push('#' + id + ' ' + title);
+                readLines.push('#' + id + ' ' + title);
             }
         });
-        lines.push('');
-        lines.push('Marca estos deep dives como leídos para que no se repitan en futuros signal monitor reports.');
-        return lines.join('\n');
+        if (readLines.length) {
+            sections.push('read_dives');
+            sections.push(...readLines);
+        }
+        // Yellow unreports (reset used_dates)
+        const ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
+        const unreportLines = [];
+        ur.sort((a,b) => a-b).forEach(id => {
+            const el = document.querySelector(`.dd-item[data-dd-id="${id}"] .dd-check`);
+            const title = el ? el.dataset.title : '';
+            unreportLines.push('#' + id + ' ' + title);
+        });
+        if (unreportLines.length) {
+            if (sections.length) sections.push('');
+            sections.push('unreport_dives');
+            sections.push(...unreportLines);
+        }
+        return sections.join('\n');
     }
     function sendDDTelegram() {
         const text = buildDDText();
@@ -1353,29 +1365,7 @@
         }).catch(() => { prompt('Copia manualmente:', text); });
     }
     function syncUnreportFab() {
-        const ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
-        const fab = document.getElementById('dd-unreport-fab');
-        if (fab) fab.classList.toggle('visible', ur.length > 0);
-    }
-    function buildUnreportText() {
-        const ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
-        const lines = ['unreport_dives'];
-        ur.sort((a,b) => a-b).forEach(id => {
-            const el = document.querySelector(`.dd-item[data-dd-id="${id}"] .dd-check`);
-            const title = el ? el.dataset.title : '';
-            lines.push('#' + id + ' ' + title);
-        });
-        lines.push('');
-        lines.push('Resetea estos deep dives para que vuelvan a aparecer en futuros signal monitor reports.');
-        return lines.join('\n');
-    }
-    function copyUnreport() {
-        const text = buildUnreportText();
-        navigator.clipboard.writeText(text).then(() => {
-            const btn = document.querySelector('.fab-unreport');
-            btn.textContent = '✅ Copiado';
-            setTimeout(() => { btn.textContent = '🔄 Copiar resets'; }, 1500);
-        }).catch(() => { prompt('Copia manualmente:', text); });
+        // Now handled by syncDDState
     }
     // Restore unreport state from localStorage
     (function restoreUnreport() {
@@ -1388,7 +1378,6 @@
                 if (cb) cb.checked = false;
             }
         });
-        syncUnreportFab();
     })();
     syncDDState();
 
