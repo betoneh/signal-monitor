@@ -1345,6 +1345,8 @@
             sections.push('unreport_dives');
             sections.push(...unreportLines);
         }
+        sections.push('');
+        sections.push('Procesa los cambios y haz push al repo de GitHub Pages.');
         return sections.join('\n');
     }
     function sendDDTelegram() {
