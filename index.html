@@ -159,6 +159,14 @@
         .fab-btn:hover { background: #0a8f7b; }
         .fab-tg { background: #0ec4a9; }
         .fab-copy { background: rgba(52, 63, 96, 0.9); color: #eaedf3; }
+        .fab-unreport { background: #eab308; color: #212737; }
+        .fab-unreport:hover { background: #ca9a06; }
+        #dd-unreport-fab { position: fixed; bottom: 1.5rem; left: 1.5rem;
+            display: none; flex-direction: column; gap: 0.5rem; z-index: 50; }
+        #dd-unreport-fab.visible { display: flex; }
+        .dd-item.in-report.unreport .dd-check { background: transparent; border-color: #eab308; }
+        .dd-item.in-report.unreport .dd-check::after { content: ''; }
+        .dd-item.in-report.unreport .dd-title { color: #8b949e; text-decoration: line-through; }
 
         footer {
             max-width: 48rem; margin: 0 auto; width: 100%;
@@ -1205,6 +1213,10 @@
   <button class="fab-btn fab-copy" onclick="copyDDRead()">📋 Copiar</button>
 </div>
 
+<div id="dd-unreport-fab">
+  <button class="fab-btn fab-unreport" onclick="copyUnreport()">🔄 Copiar resets</button>
+</div>
+
 <div class="hr"><hr></div>
 
 <footer>
@@ -1269,10 +1281,25 @@
         try { localStorage.setItem(DD_READ_KEY, JSON.stringify(list)); } catch(e) {}
     }
     function toggleDDRead(id) {
-        // In-report items can't be unchecked
         const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
+        // In-report items: toggle unreport state and copy to clipboard
         if (el && el.classList.contains('in-report')) {
-            syncDDState();
+            el.classList.toggle('unreport');
+            const cb = el.querySelector('.dd-check');
+            if (el.classList.contains('unreport')) {
+                if (cb) cb.checked = false;
+                // Add to unreport list
+                let ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
+                if (!ur.includes(id)) ur.push(id);
+                localStorage.setItem('dd_unreport', JSON.stringify(ur));
+            } else {
+                if (cb) cb.checked = true;
+                let ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
+                ur = ur.filter(x => x !== id);
+                localStorage.setItem('dd_unreport', JSON.stringify(ur));
+            }
+            // Show/hide unreport FAB
+            syncUnreportFab();
             return;
         }
         let list = getDDRead();
@@ -1325,6 +1352,44 @@
             setTimeout(() => { btn.textContent = '📋 Copiar'; }, 1500);
         }).catch(() => { prompt('Copia manualmente:', text); });
     }
+    function syncUnreportFab() {
+        const ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
+        const fab = document.getElementById('dd-unreport-fab');
+        if (fab) fab.classList.toggle('visible', ur.length > 0);
+    }
+    function buildUnreportText() {
+        const ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
+        const lines = ['unreport_dives'];
+        ur.sort((a,b) => a-b).forEach(id => {
+            const el = document.querySelector(`.dd-item[data-dd-id="${id}"] .dd-check`);
+            const title = el ? el.dataset.title : '';
+            lines.push('#' + id + ' ' + title);
+        });
+        lines.push('');
+        lines.push('Resetea estos deep dives para que vuelvan a aparecer en futuros signal monitor reports.');
+        return lines.join('\n');
+    }
+    function copyUnreport() {
+        const text = buildUnreportText();
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.querySelector('.fab-unreport');
+            btn.textContent = '✅ Copiado';
+            setTimeout(() => { btn.textContent = '🔄 Copiar resets'; }, 1500);
+        }).catch(() => { prompt('Copia manualmente:', text); });
+    }
+    // Restore unreport state from localStorage
+    (function restoreUnreport() {
+        const ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
+        ur.forEach(id => {
+            const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
+            if (el && el.classList.contains('in-report')) {
+                el.classList.add('unreport');
+                const cb = el.querySelector('.dd-check');
+                if (cb) cb.checked = false;
+            }
+        });
+        syncUnreportFab();
+    })();
     syncDDState();
 
     // PWA pull-to-refresh
