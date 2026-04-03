@@ -1361,17 +1361,20 @@
             setTimeout(() => { btn.textContent = '📋 Copiar'; }, 1500);
         }).catch(() => { prompt('Copia manualmente:', text); });
     }
-    // Restore unreport state from localStorage
+    // Restore unreport state from localStorage (clean stale entries)
     (function restoreUnreport() {
         const ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
+        const valid = [];
         ur.forEach(id => {
             const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
             if (el && el.classList.contains('in-report')) {
                 el.classList.add('unreport');
                 const cb = el.querySelector('.dd-check');
                 if (cb) cb.checked = false;
+                valid.push(id);
             }
         });
+        localStorage.setItem('dd_unreport', JSON.stringify(valid));
     })();
     syncDDState();
 
