@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Techno-Optimism (d/acc) — Signal Monitor KB</title>
+<meta property="og:title" content="My Techno-Optimism (d/acc)">
+<meta property="og:description" content="Knowledge Base — Signal Monitor">
+<meta property="og:image" content="https://betoneh.github.io/signal-monitor/og/kb-vitalik-my-techno-optimism-dacc.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; overflow-wrap: break-word; word-break: break-word; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 8px; }
+  .content a:hover { text-decoration-color: #eaedf3; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+
+  
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+
+  
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .label {
+    font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem;
+  }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+</style>
+</head>
+<body id="top">
+<div class="progress-bar" id="progress"></div>
+<header>
+  <h1>My Techno-Optimism (d/acc)</h1>
+  <div class="meta">58 min read · article · 2026-04-02</div>
+  <div class="tags"><span class="tag">d/acc</span><span class="tag">techno-optimism</span><span class="tag">AI safety</span><span class="tag">defensive acceleration</span><span class="tag">Vitalik Buterin</span><span class="tag">crypto</span><span class="tag">existential risk</span><span class="tag">governance</span><span class="tag">open source</span><span class="tag">biosecurity</span><span class="tag">surveillance</span><span class="tag">differential technology</span><span class="tag">zero-knowledge proofs</span><span class="tag">blockchain</span></div>
+  <div class="source" style="margin-top:0.5rem">Source: <a href="https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html" target="_blank">https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html</a></div>
+</header>
+<main>
+  <div class="content"><h2>Summary</h2>
+<p>Vitalik's foundational d/acc manifesto — his direct response to Marc Andreessen's Techno-Optimist Manifesto. The core thesis: technology is overwhelmingly good and delay costs lives, but direction matters as much as magnitude. Unlike both the doomers who want to stop progress and the accelerationists who want to accelerate everything indiscriminately, Vitalik argues for <em>intentional</em> acceleration of defensive technologies while being cautious about technologies that concentrate power. His framework splits into four defensive domains: macro physical (resilient infrastructure, multi-planetary civilization), micro physical (biosecurity, pandemic defense), cyber (blockchains, ZK proofs, cryptography), and info (Community Notes, prediction markets, social epistemology).</p>
+<p>The essay's most provocative move is treating AI as fundamentally unlike every previous technology. Not because it's powerful — but because it's a <em>new type of mind</em> that could become the apex species. This puts AI in the category of "humans surpassing monkeys" rather than "the printing press." From this follows the existential risk argument, the "sky is near, emperor is everywhere" thesis (AI eliminates the natural limits on centralized power that have historically protected freedom), and the concern that even a <em>friendly</em> superintelligent AI world might reduce humans to pets (the Culture series critique). His proposed solution isn't to stop AI but to massively accelerate defensive tech: open-source biosecurity, privacy-preserving cryptography, decentralized governance, and eventually human-AI merge through brain-computer interfaces.</p>
+<p>What makes this essay exceptional is its intellectual honesty. Vitalik explicitly states he finds slowdown arguments uncomfortable and makes them "with a heavy heart." He acknowledges that anti-technology movements have historically been disastrous (forced sterilizations, China's one-child policy). But he argues the 21st century is genuinely different — AI could create permanent lock-in, either through extinction or through enabling dictatorships that can never be overthrown. The essay is simultaneously the most rigorous case for techno-optimism and the most compelling case for why indiscriminate acceleration is dangerous.</p>
+<h2>Key Takeaways</h2>
+<ul><li><strong>Direction matters, not just speed.</strong> Technology is amazing but "maximize profit" won't automatically select the right directions. Intentional human effort drove every major environmental success (ozone, smog, solar).</li>
+<li><strong>AI is a new apex species, not just another tool.</strong> The correct comparison class isn't "printing press" but "humans surpassing monkeys." This demands unique caution.</li>
+<li><strong>d/acc = defensive/decentralized/differential/democratic acceleration.</strong> Accelerate technologies that favor defense over offense, decentralization over concentration.</li>
+<li><strong>"The sky is near, the emperor is everywhere."</strong> AI eliminates the natural limits (distance, attention) that have historically constrained centralized power. A 500-person elite with AI could control a country as efficiently as OpenAI serves 100M users with 500 employees.</li>
+<li><strong>The Culture series problem.</strong> Even in the <em>best</em> sci-fi depictions of friendly superintelligent AI, humans are basically pets. Hard to escape this attractor once AI surpasses us.</li>
+<li><strong>Four defensive domains:</strong> macro physical (resilient infrastructure), micro bio (pandemic defense), cyber (ZK proofs, blockchains), info (prediction markets, Community Notes).</li>
+<li><strong>The happy path is merge, not control.</strong> Brain-computer interfaces and human cognitive augmentation, not trying to keep superintelligent AI on a leash forever.</li>
+<li><strong>Crypto as defensive infrastructure.</strong> Blockchains, ZK proofs, and decentralized identity aren't just financial tools — they're essential infrastructure for maintaining freedom in an AI-dominated world.</li>
+</ul>
+<h2>Full Text</h2>
+<p><a href="../../../../index.html" target="_blank">See all posts</a>
+My techno-optimism
+*Special thanks to Morgan Beller, Juan Benet, Eli Dourado, Karl
+Floersch, Sriram Krishnan, Nate Soares, Jaan Tallinn, Vincent Weisser,
+Balvi volunteers and others for feedback and review.*
+Last month, Marc Andreessen published his "<a href="https://a16z.com/the-techno-optimist-manifesto/" target="_blank">techno-optimist
+manifesto</a>", arguing for a renewed enthusiasm about technology, and
+for markets and capitalism as a means of building that technology and
+propelling humanity toward a much brighter future. The manifesto
+unambiguously rejects what it describes as an ideology of stagnation,
+that fears advancements and prioritizes preserving the world as it
+exists today. This manifesto has received a lot of attention, including
+response articles from <a href="https://www.noahpinion.blog/p/thoughts-on-techno-optimism" target="_blank">Noah
+Smith</a>, <a href="https://www.overcomingbias.com/p/which-political-axis" target="_blank">Robin
+Hanson</a>, <a href="https://joshuagans.substack.com/p/marc-andreessens-techno-optimism" target="_blank">Joshua
+Gans</a> (more positive), and <a href="https://davekarpf.substack.com/p/why-cant-our-tech-billionaires-learn" target="_blank">Dave
+Karpf</a>, <a href="https://gizmodo.com/marc-andreessen-is-wrong-about-everything-1850934367" target="_blank">Luca
+Ropek</a>, <a href="https://www.nytimes.com/2023/10/26/opinion/marc-andreessen-reactionary-futurism.html" target="_blank">Ezra
+Klein</a> (more negative) and many others. Not connected to this
+manifesto, but along similar themes, are James Pethokoukis's "<a href="https://www.amazon.com/Conservative-Futurist-Create-Sci-Fi-Promised/dp/1546005544" target="_blank">The
+Conservative Futurist</a>" and Palladium's "<a href="https://www.palladiummag.com/2020/04/30/its-time-to-build-for-good/" target="_blank">It's
+Time To Build for Good</a>". This month, we saw a similar debate
+<em>enacted</em> through the <a href="https://www.nytimes.com/2023/11/18/technology/open-ai-sam-altman-what-happened.html" target="_blank">OpenAI
+dispute</a>, which involved many discussions centering around the
+dangers of superintelligent AI and the possibility that OpenAI is moving
+too fast.
+My own feelings about techno-optimism are warm, but nuanced. I
+believe in a future that is vastly brighter than the present thanks to
+radically transformative technology, and I believe in humans and
+humanity. I reject the mentality that the best we should try to do is to
+keep the world roughly the same as today but with less greed and more
+public healthcare. However, I think that not just magnitude but also
+direction matters. There are certain types of technology that much more
+reliably make the world better than other types of technology. There are
+certain types of technlogy that could, if developed, mitigate the
+negative impacts of <em>other</em> types of technology. The world
+over-indexes on some directions of tech development, and under-indexes
+on others. We need active human intention to choose the directions that
+we want, as the formula of "maximize profit" will not arrive at them
+automatically.
+Anti-technology view: safety behind, dystopia ahead.
+Accelerationist view: dangers behind, utopia ahead.
+My view: dangers behind, but multiple paths forward ahead: some
+good, some bad.
+In this post, I will talk about what techno-optimism means to
+<em>me</em>. This includes the broader worldview that motivates my work
+on certain types of blockchain and cryptography applications and social
+technology, as well as other areas of science in which I have expressed
+an interest. But perspectives on this broader question also have
+implications for AI, and for many other fields. Our rapid advances in
+technology are likely going to be the most important social issue in the
+twenty first century, and so it's important to think about them
+carefully.
+<h2>Table of contents</h2>
+* <a href="#tech" target="_blank">Technology is amazing, and there are very high costs
+to delaying it</a>
++ <a href="#environment" target="_blank">The environment, and the importance of
+coordinated intention</a>
+* <a href="#ai" target="_blank">AI is fundamentally different from other tech, and it
+is worth being uniquely careful</a>
++ <a href="#xrisk" target="_blank">Existential risk is a big deal</a>
++ <a href="#superintgood" target="_blank">Even if we survive, is a superintelligent AI
+future a world we want to live in?</a>
++ <a href="#emperor" target="_blank">The sky is near, the emperor is
+everywhere</a>
+* <a href="#dacc" target="_blank">d/acc: Defensive (or decentralization, or
+differential) acceleration</a>
++ <a href="#defensedemocracy" target="_blank">Defense-favoring worlds help healthy and
+democratic governance thrive</a>
++ <a href="#macro" target="_blank">Macro physical defense</a>
++ <a href="#micro" target="_blank">Micro physical defense (aka bio)</a>
++ <a href="#cyber" target="_blank">Cyber defense, blockchains and
+cryptography</a>
++ <a href="#info" target="_blank">Info defense</a>
++ <a href="#social" target="_blank">Social technology beyond the "defense"
+framing</a>
+* <a href="#paths" target="_blank">So what are the paths forward for
+superintelligence?</a>
++ <a href="#merge" target="_blank">A happy path: merge with the AIs?</a>
+* <a href="#compatible" target="_blank">Is d/acc compatible with your existing
+philosophy?</a>
+* <a href="#brighteststar" target="_blank">We are the brightest star</a>
+<h2>Technology is amazing, and there are very high costs to delaying it</h2>
+In some circles, it is common to downplay the benefits of technology,
+and see it primarily as a source of dystopia and risk. For the last half
+century, this often stemmed either from environmental concerns, or from
+concerns that the benefits will accrue only to the rich, who will
+entrench their power over the poor. More recently, I have also started
+to see <em>libertarians</em> becoming worried about some technologies,
+out of fear that the tech will lead to centralization of power. This
+month, I did <a href="https://warpcast.com/vitalik.eth/0xe8587909" target="_blank">some
+polls</a> asking the following question: if a technology <em>had to</em>
+be restricted, because it was too dangerous to be set free for anyone to
+use, would they prefer it be monopolized or delayed by ten years? I was
+surpised to see, across three platforms and three choices for who the
+monopolist would be, a uniform overwhelming vote for a delay.
+And so at times I worry that we have overcorrected, and many people
+miss the opposite side of the argument: that **the <a href="https://docs.google.com/presentation/d/1AYRGNK9lU4W3BCIM_hZG14aJE8-S43UFCwrzjeidByM/edit#slide=id.g14b964cd1c8_0_1294" target="_blank">benefits
+of technology</a> are *<a href="https://images.squarespace-cdn.com/content/v1/5bc6826490f904980a50659a/26b5f7ef-88af-4d85-a6dd-2dd419328ca4/Look%2Bback2b.jpg?format=2500w" target="_blank">really
+friggin massive</a>*, on those axes where we can measure if the good
+massively outshines the bad, and the costs of even a decade of delay are
+incredibly high**.
+To give one concrete example, let's look at a life expectancy
+chart:
+What do we see? Over the last century, truly massive progress. This
+is true across the entire world, both the historically wealthy and
+dominant regions and the poor and exploited regions.
+Some blame technology for creating or exacerbating calamities such as
+totalitarianism and wars. In fact, we can see the deaths caused by the
+wars on the charts: one in the 1910s (WW1), and one in the 1940s (WW2).
+If you look carefully, The Spanish Flu, the Great Leap Foward, and other
+non-military tragedies are also visible. But there is one thing that the
+chart makes clear: even calamities as horrifying as those are
+overwhelmed by the sheer magnitude of the unending march of improvements
+in <a href="https://en.wikipedia.org/wiki/Green_Revolution" target="_blank">food</a>, <a href="https://www.theguardian.com/society/2007/jan/19/health.medicineandhealth3" target="_blank">sanitation</a>,
+<a href="https://www.britannica.com/science/history-of-medicine/Medicine-in-the-20th-century" target="_blank">medicine</a>
+and infrastructure that took place over that century.
+This is mirrored by large improvements to our everyday lives. Thanks
+to the internet, <a href="https://www.statista.com/chart/30342/cellular-and-broadband-internet-subscriptions-smartphone-penetration-rates/" target="_blank">most
+people around the world</a> have access to information at their
+fingertips that would have been unobtainable twenty years ago. The
+global economy is becoming more accessible thanks to improvements in
+international payments and finance. Global poverty is <a href="https://ourworldindata.org/grapher/reconstruction-of-historical-global-extreme-poverty-rates-1820-2017-roser-and-hasell-2021-and-world-bank2020" target="_blank">rapidly
+dropping</a>. Thanks to online maps, we no longer have to worry about
+getting lost in the city, and if you need to get back home quickly, we
+now have far easier ways to call a car to do so. Our property becoming
+digitized, and our <a href="https://www.visualcapitalist.com/inflation-chart-tracks-price-changes-us-goods-services/" target="_blank">physical
+goods becoming cheap</a>, means that we have much less to fear from
+physical theft. Online shopping has reduced the disparity in access to
+goods betweeen the global megacities and the rest of the world. In all
+kinds of ways, automation has brought us the eternally-underrated
+benefit of simply making <a href="https://www.econlib.org/convenience-vs-social-desirability-bias/" target="_blank">our
+lives more convenient</a>.
+These improvements, both quantifiable and unquantifiable, are
+<em>large</em>. And in the twenty first century, there's a good chance
+that even larger improvements are soon to come. Today, ending aging and
+disease seem utopian. But from the point of view of <a href="https://en.wikipedia.org/wiki/ENIAC" target="_blank">computers as they existed in
+1945</a>, the modern era of putting chips into pretty much everything
+would have seemed utopian: even science fiction movies often kept their
+computers room-sized. If biotech advances as much over the next 75 years
+as computers advanced over the last 75 years, the future may be more
+impressive than almost anyone's expectations.
+Meanwhile, arguments expressing skepticism about progress have often
+gone to dark places. Even medical textbooks, like this one in the 1990s
+(credit <a href="https://twitter.com/EmmaSzewczak/status/1725137589127016675" target="_blank">Emma
+Szewczak</a> for finding it), sometimes make extreme claims denying the
+value of two centuries of medical science and even arguing that it's not
+obviously good to save human lives:
+The <a href="https://en.wikipedia.org/wiki/The_Limits_to_Growth" target="_blank">"limits to
+growth"</a> thesis, an idea advanced in the 1970s arguing that growing
+population and industry would eventually deplete Earth's limited
+resources, ended up inspiring <a href="https://www.jstor.org/stable/20192474?seq=1#metadata_info_tab_contents" target="_blank">China's
+one child policy</a> and <a href="https://www.cato.org/policy-analysis/neo-malthusianism-coercive-population-control-china-india-overpopulation-concerns#introduction" target="_blank">massive
+forced sterilizations in India</a>. In earlier eras, concerns about
+overpopulation were used to <a href="https://www.econlib.org/archives/2012/05/eugenics_malthu.html" target="_blank">justify</a>
+mass <a href="https://www.amazon.com/Merchants-Despair-Environmentalists-Pseudo-Scientists-Antihumanism/dp/159403737X" target="_blank">murder</a>.
+And those ideas, argued <a href="https://en.wikipedia.org/wiki/An_Essay_on_the_Principle_of_Population" target="_blank">since
+1798</a>, have a long history of <a href="https://quillette.com/2022/09/08/in-defence-of-progress/" target="_blank">being
+proven wrong</a>.
+It is for reasons like these that, as a starting point, I find myself
+very uneasy about arguments to slow down technology or human progress.
+Given how much all the sectors are interconnected, even
+<em>sectoral</em> slowdowns are risky. And so when I write things like
+what I will say later in this post, departing from open enthusiasm for
+progress-no-matter-what-its-form, those are statements that I make with
+a heavy heart - and yet, the 21st century is different and unique enough
+that these nuances are worth considering.
+That said, there is one important point of nuance to be made on the
+broader picture, particularly when we move past "technology as a whole
+is good" and get to the topic of "which specific technologies are
+good?". And here we need to get to many people's issue of main concern:
+the environment.
+<h3>The environment, and the importance of coordinated intention</h3>
+A <a href="https://twitter.com/PoliticOfNature/status/1692322314430345689" target="_blank">major
+exception</a> to the trend of pretty much everything getting better over
+the last hundred years is climate change:
+Even pessimistic scenarios of ongoing temperature rises would not
+come anywhere near causing the literal extinction of humanity. But such
+scenarios could plausibly kill more people than major wars, and severely
+harm people's health and livelihoods in the regions where people are
+already struggling the most. <a href="https://www.weforum.org/agenda/2021/06/impact-climate-change-global-gdp/" target="_blank">A
+Swiss Re institute study</a> suggests that a worst-case climate change
+scenario might lower the world's poorest countries' GDP by as much as
+25%. <a href="https://www.lse.ac.uk/economics/Assets/Documents/personal-pages/robin-burgess/weather-climate-change-and-death.pdf" target="_blank">This
+study</a> suggests that life spans in rural India might be a decade
+lower than they otherwise would be, and studies like <a href="https://www.nature.com/articles/s41467-021-24487-w#Fig3" target="_blank">this
+one</a> and <a href="https://www.v-20.org/new-health-data-shows-unabated-climate-change-will-cause-3.4-million-deaths-per-year-by-century-end" target="_blank">this
+one</a> suggest that climate change could cause a hundred million excess
+deaths by the end of the century.
+These problems are a big deal. My answer to why I am optimistic about
+our ability to overcome these challenges is twofold. First, after
+decades of hype and wishful thinking, <a href="https://ourworldindata.org/grapher/solar-energy-consumption?time=2022" target="_blank">solar
+power</a> is <a href="https://www.noahpinion.blog/p/our-climate-change-debates-are-out" target="_blank">finally</a>
+turning <a href="https://www.independent.co.uk/tech/solar-panel-prices-fossil-fuels-b2419251.html" target="_blank">a
+corner</a>, and <a href="https://arstechnica.com/science/2021/05/eternally-five-years-away-no-batteries-are-improving-under-your-nose/" target="_blank">supportive
+techologies like batteries</a> are making similar progress. Second, we
+can look at humanity's track record in solving previous environmental
+problems. Take, for example, air pollution. Meet the dystopia of the
+past: the Great Smog of London, 1952.
+What happened since then? Let's ask Our World In Data again:
+As it turns out, 1952 was not even the peak: in the late 19th
+century, even higher concentrations of air pollutants were just
+<em>accepted and normal</em>. Since then, we've seen a century of
+ongoing and rapid declines. I got to personally experience the tail end
+of this in my visits to China: in 2014, high levels of smog in the air,
+<a href="https://www.cnbc.com/id/100871380" target="_blank">estimated to reduce life
+expectancy by over five years</a>, were normal, but by 2020, the air
+often seemed as clean as many Western cities. This is not our only
+success story. In many parts of the world, <a href="https://ourworldindata.org/grapher/forest-area-as-share-of-land-area?tab=chart&time=1600..latest&country=FRA~USA~JPN~Scotland~England" target="_blank">forest
+areas are increasing</a>. The acid rain crisis <a href="https://link.springer.com/article/10.1007/s13280-019-01244-4" target="_blank">is
+improving</a>. The <a href="https://www.unep.org/news-and-stories/press-release/ozone-layer-recovery-track-helping-avoid-global-warming-05degc" target="_blank">ozone
+layer has been recovering</a> for decades.
+To me, the moral of the story is this. Often, it really is the case
+that **version N of our civilization's technology causes a
+problem, and version N+1 fixes it. However, *this does not happen
+automatically, and requires intentional human effort<em>*</em>. The
+ozone layer is recovering because, <a href="https://www.eea.europa.eu/en/topics/in-depth/climate-change-mitigation-reducing-emissions/current-state-of-the-ozone-layer" target="_blank">through
+international agreements like the Montreal Protocol, we made it
+recover</a>. Air pollution is improving because we made it improve. And
+similarly, solar panels have not gotten massively better because it was
+a preordained part of the energy tech tree; solar panels have gotten
+massively better because decades of awareness of the importance of
+solving climate change have motivated both engineers to work on the
+problem, and companies and governments to fund their research.
+**It is intentional action, coordinated through public discourse
+and culture shaping the perspectives of governments, scientists,
+philanthropists and businesses, and not an <a href="https://www.city-journal.org/article/was-nietzsche-a-techno-optimist" target="_blank">inexorable
+"techno-capital machine"</a>, that had solved these
+problems**.
+<h2>AI is fundamentally different from other tech, and it is worth being uniquely careful</h2>
+A lot of the dismissive takes I have seen about AI come from the
+perspective that it is "just another technology": something that is in
+the same general class of thing as social media, encryption,
+contraception, telephones, airplanes, guns, the printing press, and the
+wheel. These things are clearly very socially consequential. They are
+not just isolated improvements to the well-being of individuals: they
+radically transform culture, change balances of power, and harm people
+who heavily depended on the previous order. Many <a href="https://newsletter.pessimistsarchive.org/" target="_blank">opposed them</a>. And
+on balance, the pessimists have invariably turned out wrong.
+But there is a different way to think about what AI is: it's a
+<em>new type of mind</em> that is rapidly gaining in intelligence, and
+it stands a serious chance of overtaking humans' mental faculties and
+becoming the new apex species on the planet. The class of things in
+<em>that</em> category is much smaller: we might plausibly include
+humans surpassing monkeys, multicellular life surpassing unicellular
+life, the <a href="https://en.wikipedia.org/wiki/Abiogenesis" target="_blank">origin of
+life itself</a>, and perhaps the Industrial Revolution, in which machine
+edged out man in <em>physical</em> strength. Suddenly, it feels like we
+are walking on much less well-trodden ground.
+<h3>Existential risk is a big deal</h3>
+One way in which AI gone wrong could make the world worse is (<a href="https://en.wikipedia.org/wiki/Suffering_risks" target="_blank">almost</a>) the
+worst possible way: it could <a href="https://www.lesswrong.com/posts/uMQ3cqWDPHhjtiesc/agi-ruin-a-list-of-lethalities" target="_blank">literally
+cause human extinction</a>. This is an extreme claim: as much harm as
+the worst-case scenario of climate change, or an artificial pandemic or
+a nuclear war, might cause, there are many islands of civilization that
+would remain intact to pick up the pieces. But a superintelligent AI, if
+it decides to turn against us, may well leave no survivors, and end
+humanity for good. Even <a href="https://www.dailymail.co.uk/sciencetech/article-8782693/Elon-Musk-says-humans-interplanetary-species-sun-engulfed-earth.html" target="_blank">Mars</a>
+may not be safe.
+A big reason to be worried centers around <a href="https://en.wikipedia.org/wiki/Instrumental_convergence" target="_blank">instrumental
+convergence</a>: for a very wide class of goals that a superintelligent
+entity could have, two very natural intermediate steps that the AI could
+take to better achieve those goals are (i) consuming resources, and (ii)
+ensuring its safety. The Earth contains lots of resources, and humans
+are a <a href="https://en.wikipedia.org/wiki/Thucydides_Trap" target="_blank">predictable
+threat</a> to such an entity's safety. We <em>could</em> try to give the
+AI an explicit goal of loving and protecting humans, but we have <a href="https://www.lesswrong.com/posts/EPAofvLzsCwqYnekj/what-s-in-your-list-of-unsolved-problems-in-ai-alignment" target="_blank">no
+idea</a> how to <a href="https://www.alignmentforum.org/posts/EjgfreeibTXRx9Ham/ten-levels-of-ai-alignment-difficulty" target="_blank">actually</a>
+do <a href="https://arxiv.org/abs/2109.13916" target="_blank">that</a> in a way that
+won't completely break down as soon as the AI <a href="https://towardsdatascience.com/out-of-distribution-generalization-66b6f8980ef3" target="_blank">encounters
+an unexpected situation</a>. Ergo, we have a problem.
+<a href="https://twitter.com/robbensinger/status/1537724894678380544" target="_blank">MIRI
+researcher Rob Bensinger's attempt</a> at illustrating different
+people's estimates of the probability that AI will either kill everyone
+or do something almost as bad. Many of the positions are rough
+approximations based on people's public statements, but many others have
+publicly given their precise estimates; quite a few have a "probability
+of doom" over 25%.
+A <a href="https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/#Extinction_from_AI" target="_blank">survey
+of machine learning researchers</a> from 2022 showed that on average,
+researchers think that there is a 5-10% chance that AI will literally
+kill us all: about the same probability as the statistically expected
+chance that <a href="https://en.wikipedia.org/wiki/List_of_causes_of_death_by_rate" target="_blank">you
+will die of non-biological causes like injuries</a>.
+This is all a speculative hypothesis, and we should all be wary of
+speculative hypotheses that involve complex multi-step stories. However,
+these arguments have survived over a decade of scrutiny, and so, it
+seems worth worrying at least a little bit. But even if you're not
+worried about literal extinction, there are other reasons to be scared
+as well.
+<h3>Even if we survive, is a superintelligent AI future a world we want to live in?</h3>
+A lot of modern science fiction is dystopian, and paints AI in a bad
+light. Even non-science-fiction attempts to identify possible AI futures
+often give <a href="https://www.eknowledger.com/files/life3_Summary_of_ai.png" target="_blank">quite
+unappealing answers</a>. And so I went around and asked the question:
+what is a depiction, whether science fiction or otherwise, of a future
+that contains superintelligent AI that we would <em>want</em> to live
+in. The answer that came back by far the most often is Iain Banks's <a href="https://en.wikipedia.org/wiki/Culture_series" target="_blank">Culture
+series</a>.
+The Culture series features a far-future interstellar civilization
+primarily occupied by two kinds of actors: regular humans, and
+superintelligent AIs called Minds. Humans have been augmented, but only
+slightly: medical technology theoretically allows humans to live
+indefinitely, but most choose to live only for around 400 years,
+seemingly because they get bored of life at that point.
+From a superficial perspective, life as a human seems to be good:
+it's comfortable, health issues are taken care of, there is a wide
+variety of options for entertainment, and there is a positive and
+synergistic relationship between humans and Minds. When we look deeper,
+however, there is a problem: **it seems like the Minds are
+completely in charge, and humans' only role in the stories is to act as
+pawns of Minds, performing tasks on their behalf.**
+Quoting from <a href="https://www.gleech.org/culture" target="_blank">Gavin Leech's
+"Against the Culture"</a>:
+<blockquote>The humans are not the protagonists. Even when the books seem to have<br>a human protagonist, doing large serious things, they are actually the<br>agent of an AI. (Zakalwe is one of the only exceptions, because he can<br>do immoral things the Minds don't want to.) "The Minds in the Culture<br>don't need the humans, and yet the humans need to be needed." (I think<br>only a small number of humans need to be needed - or, only a small<br>number of them need it enough to forgo the many comforts. Most people do<br>not live on this scale. It's still a fine critique.)</blockquote>
+>
+<blockquote>The projects the humans take on risk inauthenticity. Almost anything<br>they do, a machine could do better. What can you do? You can order the<br>Mind to not catch you if you fall from the cliff you're<br>climbing-just-because; you can delete the backups of your mind so that<br>you are actually risking. You can also just leave the Culture and rejoin<br>some old-fashioned, unfree "strongly evaluative" civ. The alternative is<br>to evangelise freedom by joining Contact.</blockquote>
+I would argue that even the "meaningful" roles that humans are given
+in the Culture series are a stretch; I asked ChatGPT (who else?) why
+humans are given the roles that they are given, instead of Minds doing
+everything completely by themselves, and I personally found <a href="https://chat.openai.com/share/3dbe04c4-f5f3-4d2f-9437-d32732adde99" target="_blank">its
+answers</a> quite underwhelming. **It seems very hard to have a
+"friendly" superintelligent-AI-dominated world where humans are anything
+other than pets.**
+<em>The world I don't want to see.</em>
+Many other scifi series posit a world where superintelligent AIs
+exist, but <em>take orders</em> from (unenhanced) biological human
+masters. Star Trek is a good example, showing a vision of harmony
+between the starships with their <a href="https://memory-alpha.fandom.com/wiki/Computer" target="_blank">AI "computers"</a>
+(and <a href="https://memory-alpha.fandom.com/wiki/Data" target="_blank">Data</a>) and
+their human operators crewmembers. However, this feels like an
+incredibly unstable equilibrium. The world of Star Trek appears idyllic
+in the moment, but it's hard to imagine its vision of human-AI relations
+as anything but a transition stage a decade before starships become
+<em>entirely</em> computer-controlled, and can stop bothering with large
+hallways, artificial gravity and climate control.
+A human giving orders to a superintelligent machine would be far less
+intelligent than the machine, and it would have access to less
+information. In a universe that has any degree of competition, the
+civilizations where humans take a back seat would outperform those where
+humans stubbornly insist on control. Furthermore, the *computers
+themselves* may wrest control. To see why, imagine that you are
+legally a literal slave of an eight year old child. If you could talk
+with the child for a long time, do you think you could convince the
+child to sign a piece of paper setting you free? I have not run this
+experiment, but my instinctive answer is a strong yes. And so all in
+all, humans becoming pets seems like an attractor that is very hard to
+escape.
+<h3>The sky is near, the emperor is everywhere</h3>
+The Chinese proverb 天高皇帝远 ("tian gao huang di yuan"), "the sky
+is high, the emperor is far away", encapsulates a basic fact about the
+limits of centralization in politics. Even in a nominally large and
+despotic empire - in fact, <em>especially</em> if the despotic empire is
+large, there are practical limits to the leadership's reach and
+attention, the leadership's need to delegate to local agents to enforce
+its will dilutes its ability to enforce its intentions, and so there are
+always places where a certain degree of practical freedom reigns.
+Sometimes, this can have downsides: the absence of a faraway power
+enforcing uniform principles and laws can create space for local
+hegemons to steal and oppress. But if the centralized power goes bad,
+practical limitations of attention and distance can create practical
+limits to how bad it can get.
+With AI, no longer. In the twentieth century, modern transportation
+technology made limitations of distance a much weaker constraint on
+centralized power than before; the great totalitarian empires of the
+1940s were in part a result. In the twenty first, scalable information
+gathering and automation may mean that attention will no longer be a
+constraint either. The consequences of natural limits to government
+disappearing <em>entirely</em> could be dire.
+Digital authoritarianism has been <a href="https://freedomhouse.org/report/freedom-net/2018/rise-digital-authoritarianism" target="_blank">on
+the rise for a decade</a>, and surveillance technology has already given
+authoritarian governments powerful new strategies to crack down on
+opposition: let the protests happen, but then detect and <a href="https://www.reuters.com/article/us-russia-politics-navalny-tech-idUSKBN2AB1U2" target="_blank">quietly
+go after</a> the participants <a href="https://www.rferl.org/a/russia-dissent-cctv-detentions-days-later-strategy/31227889.html" target="_blank">after
+the fact</a>. More generally, my basic fear is that the same kinds of
+managerial technologies that allow OpenAI to serve over a hundred
+million customers with <a href="https://en.wikipedia.org/wiki/OpenAI" target="_blank">500 employees</a> will also
+allow a 500-person political elite, or even a 5-person board, to
+maintain an iron fist over an entire country. With modern surveillance
+to collect information, and modern AI to interpret it, there may be no
+place to hide.
+It gets worse when we think about the consequences of AI in warfare.
+Quoting a <a href="https://im0xalpha.notion.site/AI-to-the-Left-Crypto-to-the-Right-914c101cfc314659a18dbbabc89d152b" target="_blank">semi-famous
+post</a> on the philosophy of AI and crypto by <a href="https://twitter.com/0x_Alpha" target="_blank">0xAlpha</a>:
+<blockquote>When there is no need for political-ideological work and war<br>mobilization, the supreme commander of war only needs to consider the<br>situation itself as if it were a game of chess and completely ignore the<br>thoughts and emotions of the pawns/knights/rooks on the chessboard. War<br>becomes a purely technological game.</blockquote>
+>
+<blockquote>Furthermore, political-ideological work and war mobilization require<br>a justification for anyone to wage war. Don't underestimate the<br>importance of such "justification". It has been a legitimacy constraint<br>on the wars in human society for thousands of years. Anyone who wants to<br>wage war has to have a reason, or at least a superficially justifiable<br>excuse. You might argue that this constraint is so weak because, in many<br>instances, this has been nothing more than an excuse. For example, some<br>(if not all) of the Crusades were really to occupy land and rob wealth,<br>but they had to be done in the name of God, even if the city being<br>robbed was God's Constantinople. However, even a weak constraint is<br>still a constraint! This little excuse requirement alone actually<br>prevents the warmakers from being completely unscrupulous in achieving<br>their goals. Even an evil like Hitler could not just launch a war right<br>off the bat–he had to spend years first trying to convince the German<br>nation to fight for the living space for the noble Aryan race.</blockquote>
+Today, the "human in the loop" serves as an important check on a
+dictator's power to start wars, or to oppress its citizens internally.
+Humans in the loop have <a href="https://www.theguardian.com/science/2017/oct/27/vasili-arkhipov-soviet-submarine-captain-who-averted-nuclear-war-awarded-future-of-life-prize" target="_blank">prevented</a>
+nuclear <a href="https://en.wikipedia.org/wiki/Stanislav_Petrov" target="_blank">wars</a>, <a href="https://www.npr.org/sections/parallels/2014/11/06/361785478/the-man-who-disobeyed-his-boss-and-opened-the-berlin-wall" target="_blank">allowed
+the opening of the Berlin wall</a>, and saved lives during <a href="https://en.wikipedia.org/wiki/Paul_Rusesabagina" target="_blank">atrocities</a>
+like <a href="https://en.wikipedia.org/wiki/Oskar_Schindler" target="_blank">the</a> <a href="https://en.wikipedia.org/wiki/Chiune_Sugihara" target="_blank">Holocaust</a>. If
+armies are robots, this check disappears completely. A dictator could
+get drunk at 10 PM, get angry at people being mean to them on twitter at
+11 PM, and a robotic invasion fleet could cross the border to rain
+hellfire on a neighboring nation's civilians and infrastructure before
+midnight.
+And unlike previous eras, where there is always some distant corner,
+where the sky is high and the emperor is far away, where opponents of a
+regime could regroup and hide and eventually find a way to make things
+better, with 21st century AI a totalitarian regime may well maintain
+enough surveillance and control over the world to remain "locked in"
+forever.
+<h2>d/acc: Defensive (or decentralization, or differential) acceleration</h2>
+Over the last few months, the "e/acc" ("effective accelerationist")
+movement has gained a lot of steam. <a href="https://beff.substack.com/p/notes-on-eacc-principles-and-tenets" target="_blank">Summarized
+by "Beff Jezos" here</a>, e/acc is fundamentally about an appreciation
+of the truly massive benefits of technological progress, and a desire to
+<em>accelerate</em> this trend to bring those benefits sooner.
+I find myself sympathetic to the e/acc perspective in a lot of
+contexts. There's a lot of evidence that <a href="https://marginalrevolution.com/marginalrevolution/2015/08/is-the-fda-too-conservative-or-too-aggressive.html" target="_blank">the
+FDA is far too conservative</a> in its willingness to delay or block the
+approval of drugs, and bioethics in general far too often seems to
+operate by the principle that "20 people dead in a medical experiment
+gone wrong is a tragedy, but 200000 people dead from life-saving
+treatments being delayed is a statistic". The delays to approving <a href="https://www.niskanencenter.org/how-the-fda-among-others-failed-us/" target="_blank">covid
+tests and vaccines</a>, and <a href="https://worksinprogress.co/issue/why-we-didnt-get-a-malaria-vaccine-sooner/" target="_blank">malaria
+vaccines</a>, seem to further confirm this. However, it is possible to
+take this perspective too far.
+In addition to my AI-related concerns, I feel particularly ambivalent
+about the <a href="https://twitter.com/bayeslord/status/1726441610412532192" target="_blank">e/acc
+enthusiasm</a> for <a href="https://a16z.com/how-the-u-s-can-rewire-the-pentagon-for-a-new-era/" target="_blank">military
+technology</a>. In the current context in 2023, where this technology is
+being made by the United States and immediately applied to defend
+Ukraine, it is easy to see how it can be a force for good. Taking a
+broader view, however, **enthusiasm about modern military
+technology as a force for good seems to require believing that the
+dominant technological power will reliably be one of the good guys in
+most conflicts, now and in the future**: military technology is
+good because military technology is being built and controlled by
+America and America is good. Does being an e/acc require being an
+America maximalist, betting everything on both the government's present
+and future morals and the country's future success?
+On the other hand, I see the need for new approaches in thinking of
+how to reduce these risks. The <a href="https://openai.com/our-structure" target="_blank">OpenAI governance structure</a>
+is a good example: it seems like a well-intentioned effort to balance
+the need to make a profit to satisfy investors who provide the initial
+capital with the desire to have a check-and-balance to push against
+moves that risk OpenAI blowing up the world. In practice, however, their
+recent <a href="https://www.theverge.com/2023/11/17/23965982/openai-ceo-sam-altman-fired" target="_blank">attempt
+to fire Sam Altman</a> makes the structure seem like an abject failure:
+it centralized power in an undemocratic and unaccountable board of five
+people, who made key decisions based on secret information and refused
+to give any details on their reasoning <a href="https://finance.yahoo.com/news/ilya-sutskever-openai-cofounder-helped-154539130.html" target="_blank">until
+employees threatened to quit</a> en-masse. Somehow, the non-profit board
+played their hands so poorly that the company's employees <a href="https://www.indiatoday.in/technology/news/story/openai-is-nothing-without-its-people-tweet-employees-as-many-of-them-expect-to-follow-fired-boss-sam-altman-2465332-2023-11-20" target="_blank">created</a>
+an <a href="https://www.nytimes.com/interactive/2023/11/20/technology/letter-to-the-open-ai-board.html" target="_blank">impromptu
+de-facto union</a>... to side with the billionaire CEO against them.
+Across the board, I see far too many plans to save the world that
+involve giving a small group of people extreme and opaque power and
+hoping that they use it wisely. And so I find myself drawn to a
+different philosophy, one that has detailed ideas for how to deal with
+risks, but which seeks to create and maintain a more democratic world
+and tries to avoid centralization as the go-to solution to our problems.
+**This philosophy also goes quite a bit broader than AI, and I
+would argue that it applies well even in worlds where AI risk concerns
+turn out to be largely unfounded**. I will refer to this
+philosophy by the name of <strong>d/acc</strong>.
+The "d" here can stand for many things; particularly,
+<strong>defense</strong>, <strong>decentralization</strong>,
+<strong>democracy</strong> and <strong>differential</strong>. First,
+think of it about defense, and then we can see how this ties into the
+other interpretations.
+<h3>Defense-favoring worlds help healthy and democratic governance thrive</h3>
+One frame to think about the macro consequences of technology is to
+look at the <strong>balance of defense vs offense</strong>. Some
+technologies make it easier to attack others, in the broad sense of the
+term: do things that go against their interests, that they feel the need
+to react to. Others make it easier to defend, and even defend without
+reliance on large centralized actors.
+A defense-favoring world is a better world, for many reasons. First
+of course is the direct benefit of safety: fewer people die, less
+economic value gets destroyed, less time is wasted on conflict. What is
+less appreciated though is that a defense-favoring world makes it easier
+for healthier, more open and more freedom-respecting forms of governance
+to thrive.
+An obvious example of this is <strong>Switzerland</strong>.
+Switzerland is often considered to be the closest thing the real world
+has to a classical-liberal governance utopia. Huge amounts of power are
+devolved to provinces (called "cantons"), major decisions are <a href="https://www.economist.com/the-economist-explains/2021/06/17/how-does-switzerlands-referendum-system-work" target="_blank">decided
+by referendums</a>, and many locals <a href="https://www.econlib.org/archives/2018/03/imagine_not_kno.html" target="_blank">do
+not even know who the president is</a>. How can a country like this
+survive <a href="https://en.wikipedia.org/wiki/Switzerland_during_the_World_Wars" target="_blank">extremely
+challenging</a> political <a href="https://en.wikipedia.org/wiki/Switzerland_in_the_Napoleonic_era" target="_blank">pressures</a>?
+Part of the <a href="https://jamesdillard.medium.com/why-switzerland-8650c1ace4d8" target="_blank">answer</a>
+is <a href="https://www.wearethemighty.com/mighty-history/insane-defenses-switzerland-remain-neutral/" target="_blank">excellent
+political strategy</a>, but the other major part is <a href="https://en.wikipedia.org/wiki/National_Redoubt_%28Switzerland%29" target="_blank">very
+defense-favoring geography</a> in the form of its mountainous
+terrain.
+<em>The flag is a big plus. But so are the mountains.</em>
+Anarchist societies in Zomia, famously profiled in James C Scott's
+new book <a href="https://en.wikipedia.org/wiki/The_Art_of_Not_Being_Governed" target="_blank">"The
+Art of Not Being Governed"</a>, are another example: they too maintain
+their freedom and independence in large part thanks to mountainous
+terrain. Meanwhile, the Eurasian steppes are <a href="https://en.wikipedia.org/wiki/Destruction_under_the_Mongol_Empire" target="_blank">the
+exact opposite of a governance utopia</a>. Sarah Paine's exposition of
+<a href="https://www.dwarkeshpatel.com/p/sarah-paine#details" target="_blank">maritime
+versus continental powers</a> makes similar points, though focusing on
+water as a defensive barrier rather than mountains. In fact, the
+combination of ease of voluntary trade and difficulty of involuntary
+invasion, common to both Switzerland and the island states, seems ideal
+for human flourishing.
+I discovered a related phenomenon when advising quadratic funding
+experiments within the Ethereum ecosystem: specifically the <a href="https://grants.gitcoin.co/" target="_blank">Gitcoin Grants funding rounds</a>. In
+<a href="../../../2020/01/28/round4.html" target="_blank">round 4</a>, a mini-scandal
+arose when some of the highest-earning recipients were Twitter
+influencers, whose contributions are viewed by some as positive and
+others as negative. My own interpretation of this phenomenon was that
+there is an imbalance: <a href="../../../2019/12/07/quadratic.html" target="_blank">quadratic funding</a> allows
+you to signal that you think something is a <em>public good</em>, but it
+gives no way to signal that something is a <em>public bad</em>. In the
+extreme, a fully neutral quadratic funding system would fund both sides
+of a war. And so for <a href="../../../2020/04/30/round5.html" target="_blank">round
+5</a>, I proposed that Gitcoin should include *negative
+contributions<em>: you pay $1 to </em>reduce* the amount of money
+that a given project receives (and implicitly redistribute it to all
+other projects). The result: *<a href="http://web.archive.org/web/20200409232449/https%3A//twitter.com/evan_van_ness/status/1248390335048216576" target="_blank">lots</a>
+of <a href="https://twitter.com/ljxie/status/1250178888946176000?s=20" target="_blank">people</a>
+hated <a href="https://twitter.com/josephdelong/status/1250175753372807170?s=20" target="_blank">it</a>*.
+*One of the many internet memes that floated around after round
+5.*
+This seemed to me to be a microcosm of a bigger pattern:
+**creating decentralized governance mechanisms to deal with
+<em>negative</em> externalities is socially a very hard
+problem**. There is a reason why the go-to example of
+decentralized governance going wrong is mob justice. There is <a href="https://en.wikipedia.org/wiki/Loss_aversion" target="_blank">something about human
+psychology</a> that makes responding to negatives much more tricky, and
+much more likely to go very wrong, than responding to positives. And
+this is a reason why even in otherwise highly democratic organizations,
+decisions of how to respond to negatives are often left to a centralized
+board.
+In many cases, this conundrum is one of the deep reasons why the
+concept of "freedom" is so valuable. If someone says something that
+offends you, or has a lifestyle that you consider disgusting, the pain
+and disgust that you feel is real, and you may even find it less bad to
+be physically punched than to be exposed to such things. But trying to
+agree on what kinds of offense and disgust are socially actionable can
+have far more costs and dangers than simply reminding ourselves that
+certain kinds of weirdos and jerks are the price we pay for living in a
+free society.
+At other times, however, the "grin and bear it" approach is
+unrealistic. And in such cases, another answer that is sometimes worth
+looking toward is defensive technology. The more that the internet is
+secure, the less we need to violate people's privacy and use shady
+international diplomatic tactics to go after each individual hacker. The
+more that we can build <a href="https://www.blockpartyapp.com/" target="_blank">personalized tools for blocking
+people on Twitter</a>, <a href="https://www.joinfire.xyz/" target="_blank">in-browser
+tools for detecting scams</a> and <a href="../../../2023/08/16/communitynotes.html" target="_blank">collective tools for
+telling apart misinformation</a> and <a href="https://worksinprogress.co/issue/markets-in-fact-checking" target="_blank">truth</a>,
+the less we have to fight over censorship. The faster we can make
+vaccines, the less we have to go after people for being superspreaders.
+Such solutions don't work in all domains - we certainly don't want a
+world where everyone has to wear literal body armor - but in domains
+where we <em>can</em> build technology to make the world more
+defense-favoring, there is enormous value in doing so.
+This core idea, that some technologies are defense-favoring and are
+worth promoting, while other technologies are offense-favoring and
+should be discouraged, has roots in effective altruist literature under
+a different name: <strong>differential technology development</strong>.
+There is a good <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4213670" target="_blank">exposition
+of this principle from University of Oxford researchers</a> from
+2022:
+*Figure 1: Mechanisms by which differential technology development
+can reduce negative societal impacts.*
+There are inevitably going to be imperfections in classifying
+technologies as offensive, defensive or neutral. Like with "freedom",
+where one can debate whether social-democratic government policies
+decrease freedom by levying heavy taxes and coercing employers or
+increase freedom by reducing average people's need to worry about many
+kinds of risks, with "defense" too there are some technologies that
+could fall on both sides of the spectrum. Nuclear weapons are
+offense-favoring, but nuclear <em>power</em> is <a href="https://e360.yale.edu/features/why-nuclear-power-must-be-part-of-the-energy-solution-environmentalists-climate" target="_blank">human-flourishing-favoring</a>
+and offense-defense-neutral. Different technologies may play different
+roles at different time horizons. But much like with "freedom" (or
+"equality", or "rule of law"), ambiguity at the edges is not so much an
+argument against the principle, as it is an opportunity to better
+understand its nuances.
+Now, let's see how to apply this principle to a more comprehensive
+worldview. We can think of defensive technology, like <a href="https://venturebeat.com/business/vc-peter-thiel-you-can-either-invest-in-bits-or-atoms/" target="_blank">other
+technology</a>, as being split into two spheres: the **world of
+atoms<strong> and the </strong>world of bits**. The world of
+atoms, in turn, can be split into <strong>micro</strong> (ie. biology,
+later nanotech) and <strong>macro</strong> (ie. what we conventionally
+think of "defense", but also resilient physical infrastructure). The
+world of bits I will split on a different axis: **how hard is it
+to agree, in principle, who the attacker is?**. Sometimes it's
+easy; I call this <strong>cyber defense</strong>. At other times it's
+harder; I call this <strong>info defense</strong>.
+<h3>Macro physical defense</h3>
+The most underrated defensive technology in the macro sphere is not
+even <a href="https://en.wikipedia.org/wiki/Iron_Dome" target="_blank">iron domes</a>
+(including <a href="https://www.politico.eu/article/ukraine-air-defense-repel-barrage-russia-missile-kyiv/" target="_blank">Ukraine's
+new system</a>) and other anti-tech and anti-missile military hardware,
+but rather <em>resilient physical infrastructure</em>. The majority of
+deaths from a nuclear war are likely to come from <a href="https://www.ncbi.nlm.nih.gov/books/NBK219173/" target="_blank">supply chain
+disruptions</a>, rather than the initial radiation and blast, and
+low-infrastructure internet solutions like Starlink have been crucial in
+<a href="https://en.wikipedia.org/wiki/Starlink_in_the_Russo-Ukrainian_War" target="_blank">maintaining
+Ukraine's connectivity</a> for the last year and a half.
+Building tools to help people survive and even live comfortable lives
+independently or semi-independently of long international supply chains
+seems like a valuable defensive technology, and one with a low risk of
+turning out to be useful for offense.
+The quest to <a href="https://www.dailymail.co.uk/sciencetech/article-8782693/Elon-Musk-says-humans-interplanetary-species-sun-engulfed-earth.html" target="_blank">make
+humanity a multi-planetary civilization</a> can also be viewed from a
+d/acc perspective: having at least a few of us live self-sufficiently on
+other planets can increase our resilience against something terrible
+happening on Earth. Even if the full vision proves unviable for the time
+being, the <em>forms of self-sufficient living</em> that will need to be
+developed to make such a project possible may well also be turned to
+help improve our civilizational resilience on Earth.
+<h3>Micro physical defense (aka bio)</h3>
+Especially due to its <a href="https://doi.org/10.1101/2023.07.27.23293177" target="_blank">long-term health
+effects</a>, Covid continues to be a <a href="https://www.statnews.com/2023/09/20/do-long-covid-odds-increase-with-second-infection/" target="_blank">concern</a>.
+But Covid is far from the last pandemic that we will face; there are
+many aspects of the modern world that make it likely that more pandemics
+are soon to come:
+* <strong>Higher population density</strong> makes it much easier for
+airborne viruses and other pathogens to spread. Epidemic diseases are
+relatively new in human history and most began with urbanization <a href="https://press.princeton.edu/books/hardcover/9780691192123/plagues-upon-the-earth" target="_blank">only
+a few thousand years ago</a>. <a href="https://ourworldindata.org/grapher/urban-population-share-2050?tab=chart" target="_blank">Ongoing
+rapid urbanization</a> means that population densities will increase
+further over the next half century.
+* <strong>Increased air travel</strong> means that airborne pathogens
+spread very quickly worldwide. People rapidly becoming wealthier means
+that air travel will likely <a href="https://www.statista.com/statistics/1089782/forecasted-number-air-passengers-worldwide-generation/" target="_blank">increase
+<em>much</em> further</a> over the next half century; complexity
+modeling suggests that <a href="https://necsi.edu/longrange-interaction-and-evolutionary-stability-in-a-predatorprey-system" target="_blank">even
+small increases</a> may have drastic effects. Climate change may
+increase this risk even further.
+* <strong>Animal domestication and factory farming</strong> are major
+risk factors. <a href="https://www.science.org/doi/10.1126/science.aba9411" target="_blank">Measles</a>
+probably evolved from a cow virus less than 3000 years ago. <a href="https://www.openaccessgovernment.org/factory-farming-zoonotic-disease-and-the-risk-of-pandemics/121592/" target="_blank">Today's
+factory farms</a> are also farming new strains of influenza (as well as
+<a href="https://www.saveourantibiotics.org/the-issue/antibiotic-overuse-in-livestock-farming/" target="_blank">fueling
+antibiotic resistance</a>, with consequences for <a href="https://www.ox.ac.uk/news/2023-04-25-antimicrobial-use-agriculture-can-breed-bacteria-resistant-first-line-human-defences" target="_blank">human
+innate immunity</a>).
+* <strong>Modern bio-engineering</strong> makes it easier to create
+new and more virulent pathogens. Covid <a href="https://www.metaculus.com/questions/8605/most-of-us-ic-favor-covid-lab-leak-hypothesis/" target="_blank">may
+or may not have leaked</a> from a lab doing intentional "gain of
+function" research. Regardless, <a href="https://www.amazon.co.uk/Dark-Winter-insiders-pandemics-biosecurity/dp/1742237673" target="_blank">lab
+leaks happen all the time</a>, and tools are rapidly improving to make
+it easier to intentionally create extremely deadly viruses, or even <a href="https://www.nature.com/articles/s41467-018-04584-z" target="_blank">prions</a> (<a href="https://english.elpais.com/science-tech/2023-10-20/an-investigation-has-been-opened-into-the-death-of-a-scientist-who-was-studying-a-transmissible-and-deadly-disease-in-spain.html" target="_blank">zombie
+proteins</a>). Artificial plagues are particularly concerning in part
+because <a href="https://www.science.org/content/article/surprise-nuclear-strike-heres-how-well-figure-out-who-did-it" target="_blank">unlike
+nukes</a>, they are unattributable: you can release a virus without
+anyone being able to tell who created it. It is possible *right
+now* to design a genetic sequence and send it to a <a href="https://www.twistbioscience.com/products/genes" target="_blank">wet lab</a> for
+synthesis, and have it shipped to you within five days.
+This is an area where <a href="https://cryptorelief.in/" target="_blank">CryptoRelief</a> and <a href="https://twitter.com/VitalikButerin/status/1487073875808583682" target="_blank">Balvi</a>,
+two orgs spun up and funded as a result of a large accidental <a href="https://fortune.com/2021/05/13/shiba-inu-coin-donation-india-covid-19-crisis-crypto/" target="_blank">windfall
+of Shiba Inu coins</a> in 2021, have been very active. CryptoRelief
+initially focused on responding to the immediate crisis and more
+recently has been building up a long-term medical research ecosystem in
+India, while Balvi has been focusing on moonshot projects to improve our
+ability to detect, prevent and treat Covid and other airborne diseases.
+++Balvi has insisted that projects it funds must be open source++.
+Taking inspiration from <a href="https://en.wikipedia.org/wiki/London_sewer_system#History" target="_blank">the
+19th century water engineering movement that defeated cholera</a> and
+other waterborne pathogens, it has funded projects across the whole
+spectrum of technologies that can make the world more hardened against
+airborne pathogens by default (see: <a href="https://twitter.com/VitalikButerin/status/1522017142320685057" target="_blank">update
+1</a> and <a href="https://twitter.com/VitalikButerin/status/1567908552714616832" target="_blank">update
+2</a>), including:
+* <a href="https://cybernightmarket.com/products/mini-far-uvc-lights-set" target="_blank">Far-UVC</a>
+irradiation <a href="https://www.osluv.org/" target="_blank">R&D</a>
+* Air filtering and quality monitoring in <a href="https://www.thehindubusinessline.com/news/national/balvi-fund-activebuildings-join-hands-to-deploy-air-quality-monitors/article65337605.ece" target="_blank">India</a>,
+Sri Lanka, <a href="https://shesc.asu.edu/centers/CleanIndoorAir/projects" target="_blank">the United
+States</a> and elsewhere, and air quality monitoring
+* Equipment for cheap and effective <a href="https://www.openaeros.com/opencpc" target="_blank">decentralized air quality
+testing</a>
+* Research on Long Covid causes and potential treatment options (the
+primary cause may be <a href="https://www.nature.com/articles/s41590-023-01601-2" target="_blank">straightforward</a>
+but <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3001687" target="_blank">clarifying
+mechanisms</a> and finding treatment is harder)
+* Vaccines (eg. <a href="https://radvac.org" target="_blank">RaDVaC</a>, <a href="https://popvax.com" target="_blank">PopVax</a>) and vaccine injury research
+* A set of entirely novel non-invasive medical tools
+* Early detection of epidemics using analysis of open-source data (eg.
+<a href="https://www.epiwatch.org/" target="_blank">EPIWATCH</a>)
+* Testing, including very cheap molecular rapid tests
+* Biosafety-appropriate masks for when other approaches fail
+Other promising areas of interest include <a href="https://www.nature.com/articles/s41591-022-01940-x" target="_blank">wastewater
+surveillance of pathogens</a>, <a href="https://forum.effectivealtruism.org/posts/q7dJz9ZaZGTSZL8Jk/obstacles-to-the-implementation-of-indoor-air-quality#4__Recommendations" target="_blank">improving
+filtering and ventilation in buildings</a>, and better understanding and
+mitigating <a href="https://www.healthdata.org/research-analysis/health-risks-issues/air-pollution-research-library" target="_blank">risks
+from poor air quality</a>.
+There is an opportunity to <a href="https://cybernightmarket.com" target="_blank">build a world</a> that is much more
+hardened against airborne pandemics, both natural and artificial, by
+default. This world would feature a highly optimized pipeline where we
+can go from a pandemic starting, to being automatically detected, to
+people around the world having access to targeted, <a href="https://popvax.com" target="_blank">locally-manufacturable and verifiable open
+source vaccines</a> or <a href="https://www.nytimes.com/2023/09/28/well/live/nasal-sprays-covid-treatment-prevention.html" target="_blank">other
+prophylactics</a>, administered via <a href="https://brighterworld.mcmaster.ca/articles/new-inhaled-covid-19-vaccine-receives-more-than-8m-for-next-stage-of-human-trials/" target="_blank">nebulization</a>
+or <a href="https://www.healthcentral.com/condition/coronavirus/are-covid-nasal-vaccines-on-the-way" target="_blank">nose
+spray</a> (meaning: self-administerable if needed, and no needles
+required), all within a month. In the meantime, much better air quality
+would drastically reduce the rate of spread, and prevent many pandemics
+from getting off the ground at all.
+Imagine a future that doesn't have to resort to the sledgehammer of
+social compulsion - no mandates and worse, and no risk of <a href="https://thepastisaforeignpantry.com/2020/03/29/the-leicester-method-19th-century/" target="_blank">poorly
+designed and implemented mandates that arguably make things worse</a> -
+because the infrastructure of public health is woven into the fabric of
+civilization. **These worlds are possible, and a medium amount of
+funding into bio-defense could make it happen. The work would happen
+even more smoothly if developments are open source, free to users and
+protected as public goods.**
+<h3>Cyber defense, blockchains and cryptography</h3>
+It is generally understood among security professionals that the
+current state of computer security is pretty terrible. That said, it's
+easy to understate the amount of progress that has been made. Hundreds
+of billions of dollars of cryptocurrency are available to anonymously
+steal by anyone who can hack into users' wallets, and while <a href="https://bitcoinmagazine.com/culture/bitcoin-self-defense-part-i-wallet-protection-1368758841" target="_blank">far
+more gets lost or stolen</a> than I would like, it's also a fact that
+most of it has remained un-stolen for over a decade. Recently, there
+have been improvements:
+<em> <a href="https://www.androidauthority.com/titan-m2-google-3261547/" target="_blank"></em>*Trusted
+hardware chips inside of users' phones**</a>, effectively
+creating a much smaller high-security operating system inside the phone
+that can remain protected even if the rest of the phone gets hacked.
+Among many other use cases, these chips are increasingly being explored
+as a way to make <a href="https://www.getclave.io/" target="_blank">more secure crypto
+wallets</a>.
+* <strong>Browsers as the de-facto operating system</strong>. Over the
+last ten years, there has been a quiet shift from downloadable
+applications to <em>in-browser</em> applications. This has been largely
+enabled by <a href="https://webassembly.org/" target="_blank">WebAssembly (WASM)</a>.
+Even Adobe Photoshop, long cited as a major reason why many people
+cannot practically use Linux because of its necessity and
+Linux-incompatibility, is now Linux-friendly thanks to being inside the
+browser. This is also a large security boon: while <a href="https://techmonitor.ai/technology/cybersecurity/four-big-tech-browsers-hit-by-one-zero-day-vulnerability" target="_blank">browsers
+do have flaws</a>, in general they come with much more sandboxing than
+installed applications: apps cannot access arbitrary files on your
+computer.
+* <strong>Hardened operating systems</strong>. <a href="https://grapheneos.org/" target="_blank">GrapheneOS</a> for mobile exists, and is
+very usable. <a href="https://www.qubes-os.org/" target="_blank">QubesOS</a> for desktop
+exists; it is currently somewhat less usable than Graphene, at least in
+my experience, but it is improving.
+* <strong>Attempts at moving beyond passwords</strong>. Passwords are,
+unfortunately, difficult to secure both because they are hard to
+remember, and because <a href="https://www.independent.co.uk/tech/cyber-security-passwords-hackers-a9070411.html" target="_blank">they
+are easy to eavesdrop on</a>. Recently, there has been a growing
+movement toward reducing emphasis on passwords, and making multi-factor
+hardware-based authentication <a href="https://developers.google.com/identity/passkeys" target="_blank">actually
+work</a>.
+However, the <em>lack</em> of cyber defense in other spheres has also
+led to major setbacks. The need to protect against spam has led to email
+becoming <a href="https://cfenollosa.com/blog/after-self-hosting-my-email-for-twenty-three-years-i-have-thrown-in-the-towel-the-oligopoly-has-won.html" target="_blank">very
+oligopolistic in practice</a>, making it very hard to self-host or
+create a new email provider. Many online apps, <a href="https://www.reuters.com/technology/twitter-now-needs-users-sign-view-tweets-2023-06-30/" target="_blank">including
+Twitter</a>, are requiring users to be logged in to access content, and
+blocking IPs from VPNs, making it harder to access the internet in a way
+that protects privacy. Software centralization is also risky because of
+<a href="https://www.amazon.co.uk/Uses-Abuses-Weaponized-Interdependence/dp/0815738374" target="_blank">"weaponized
+interdependence"</a>: the tendency of modern technology to route through
+centralized choke points, and for the operators of those choke points to
+use that power to gather information, manipulate outcomes or exclude
+specific actors - a strategy that seems to even be currently employed <a href="https://www.coindesk.com/consensus-magazine/2023/03/22/the-reality-behind-the-crypto-banking-crackdown-operation-choke-point-20-is-here/" target="_blank">against
+the blockchain industry itself</a>.
+These are concerning trends, because it threatens what has
+historically been one of my big hopes for why the future of freedom and
+privacy, despite deep tradeoffs, might still turn out to be bright. In
+his book <a href="http://www.daviddfriedman.com/Future_Imperfect/Chapter5.html" target="_blank">"Future
+Imperfect"</a>, David Friedman predicts that we might get a compromise
+future: the in-person world would be more and more surveilled, but
+through cryptography, the online world would retain, and even improve,
+its privacy. Unfortunately, as we have seen, such a counter-trend is far
+from guaranteed.
+**This is where my own emphasis on cryptographic technologies
+such as blockchains and <a href="../../../2021/01/26/snarks.html" target="_blank">zero-knowledge proofs</a> comes
+in**. Blockchains let us create economic and social structures
+with a "shared hard drive" without having to depend on centralized
+actors. Cryptocurrency allows individuals to save money and make
+financial transactions, as they could before the internet with cash,
+without dependence on trusted third parties that could change their
+rules on a whim. They can also serve as a fallback anti-sybil mechanism,
+<a href="https://ethresear.ch/t/conditional-proof-of-stake-hashcash/1301" target="_blank">making
+attacks and spam expensive</a> even for users who do not have or do not
+want to reveal their meat-space identity. Account abstraction, and
+notably <a href="../../../2021/01/11/recovery.html" target="_blank">social recovery
+wallets</a>, can protect our crypto-assets, and potentially other assets
+in the future, without over-relying on centralized intermediaries.
+Zero knowledge proofs can be used <a href="../../../2022/06/15/using_snarks.html" target="_blank">for privacy</a>, allowing
+users to prove things about themselves without revealing private
+information. For example, wrap a <a href="https://crypto.stackexchange.com/questions/75058/using-epassport-with-active-chip-authentication-to-sign-documents" target="_blank">digital
+passport signature</a> in a ZK-SNARK to prove that you are a unique
+citizen of a given country, *without revealing which citizen you
+are*. Technologies like this can let us maintain the benefits of
+privacy and anonymity - properties that are widely agreed as being <a href="https://en.wikipedia.org/wiki/Secret_ballot" target="_blank">necessary for
+applications like voting</a> - while still getting security guarantees
+and fighting spam and bad actors.
+*A proposed design for a ZK social media system, where moderation
+actions can happen and users can be penalized, all without needing to
+know anyone's identity.*
+<a href="https://zupass.org/" target="_blank">Zupass</a>, incubated at <a href="https://www.palladiummag.com/2023/10/06/why-i-built-zuzalu" target="_blank">Zuzalu</a>
+earlier this year, is an excellent example of this in practice. This is
+an application, which has already been used by hundreds of people at
+Zuzalu and more recently by thousands of people for ticketing at <a href="https://devconnect.org/" target="_blank">Devconnect</a>, that allows you to hold
+tickets, memberships, (<a href="../../../2022/01/26/soulbound.html" target="_blank">non-transferable</a>) digital
+collectibles, and other attestations, and prove things about them all
+without compromising your privacy. For example, you can prove that you
+are a unique registered resident of Zuzalu, or a Devconnect ticket
+holder, <em>without revealing anything else about who you are</em>.
+These proofs can be shown in-person, via a QR code, or digitally, to log
+in to applications like <a href="https://zupoll.org/" target="_blank">Zupoll</a>, an
+anonymized voting system available only to Zuzalu residents.
+**These technologies are an excellent example of d/acc
+principles: they allow users and communities to verify trustworthiness
+without compromising privacy, and protect their security without relying
+on centralized choke points that impose their own definitions of who is
+good and bad.** They improve global accessibility by creating
+better and fairer ways to protect a user or service's security than
+common techniques used today, such as discriminating against entire
+countries that are deemed untrustworthy. These are very powerful
+primitives that could be necessary if we want to preserve a
+decentralized vision of information security going into the 21st
+century. Working on defensive technologies for cyberspace more broadly
+can make the internet more open, safe and free in very important ways
+going forward.
+<h3>Info-defense</h3>
+Cyber-defense, as I have described it, is about situations where it's
+easy for reasonable human beings to all come to consensus on who the
+attacker is. If someone tries to hack into your wallet, it's easy to
+agree that the hacker is the bad guy. If someone tries to DoS attack a
+website, it's easy to agree that they're being malicious, and are not
+morally the same as a regular user trying to read what's on the site.
+There are other situations where the lines are more blurry. It is the
+tools for improving our defense in these situations that I call
+"info-defense".
+Take, for example, fact checking (aka, preventing "misinformation").
+I am a <a href="../../../2023/08/16/communitynotes.html" target="_blank">huge fan of
+Community Notes</a>, which has done a lot to help users identify truths
+and falsehoods in what other users are tweeting. Community Notes uses a
+new algorithm which surfaces not the notes that are the *most
+popular<em>, but rather the notes that are </em>most approved by users
+across the political spectrum*.
+<em>Community Notes in action.</em>
+I am also a fan of prediction markets, which can help identify the
+significance of events <em>in real time</em>, before the dust settles
+and there is consensus on which direction is which. The <a href="https://polymarket.com/event/sam-back-as-ceo-of-openai" target="_blank">Polymarket
+on Sam Altman</a> is very helpful in giving a useful summary of the
+ultimate consequences of hour-by-hour revelations and negotiations,
+giving much-needed context to people who only see the individual news
+items and don't understand the significance of each one.
+Prediction markets are often flawed. But Twitter influencers who are
+willing to confidently express what they think "will" happen over the
+next year are often even more flawed. There is still room to improve
+prediction markets much further. For example, a major practical flaw of
+prediction markets is their low volume on all but the most high-profile
+events; a natural direction to try to solve this would be to have
+prediction markets that are played by AIs.
+Within the blockchain space, there is a particular type of info
+defense that I think we need much more of. Namely, wallets should be
+much more opinionated and active in helping users determine the meaning
+of things that they are signing, and protecting them from fraud and
+scams. This is an intermediate case: what is and is not a scam is less
+subjective than perspectives on controversial social events, but it's
+more subjective than telling apart legitimate users from DoS attackers
+or hackers. Metamask has an scam database already, and automatically
+blocks users from visiting scam sites:
+Applications like <a href="https://www.joinfire.xyz/" target="_blank">Fire</a> are an
+example of one way to go much further. However, security software like
+this should not be something that requires explicit installs; it should
+be part of crypto wallets, or even browsers, by default.
+Because of its more subjective nature, info-defense is inherently
+more collective than cyber-defense: you need to somehow plug into a
+large and sophisticated group of people to identify what might be true
+or false, and what kind of application is a deceptive ponzi. There is an
+opportunity for developers to go much further in developing effective
+info-defense, and in hardening existing forms of info-defense. Something
+like Community Notes could be included in browsers, and cover not just
+social media platforms but also the whole internet.
+<h3>Social technology beyond the "defense" framing</h3>
+To some degree, I can be justifiably accused of shoehorning by
+describing some of these info technologies as being about "defense".
+After all, defense is about helping well-meaning actors be protected
+from badly-intentioned actors (or, in some cases, from nature). Some of
+these social technologies, however, are about *helping
+well-intentioned actors form consensus*.
+A good example of this is <a href="https://pol.is/home" target="_blank">pol.is</a>,
+which uses an algorithm similar to Community Notes (and which predates
+Community Notes) to help communities identify points of agreement
+between sub-tribes who otherwise disagree on a lot. <a href="https://viewpoints.xyz/" target="_blank">Viewpoints.xyz</a> was inspired by
+pol.is, and has a similar spirit:
+Technologies like this could be used to enable more decentralized
+governance over contentious decisions. Again, blockchain communities are
+a good testing ground for this, and one where such algorithms have
+already shown valuable. Generally, decisions over which improvements
+("<a href="https://eips.ethereum.org/" target="_blank">EIPs</a>") to make to the
+Ethereum protocol are made by a fairly small group in meetings called
+"<a href="https://github.com/ethereum/pm" target="_blank">All Core Devs calls</a>". For
+highly technical decisions, where most community members have no strong
+feelings, this works reasonably well. For more consequential decisions,
+which affect protocol economics, or more fundamental values like
+immutability and censorship resistance, this is often not enough. Back
+in 2016-17, when a series of contentious decisions around implementing
+the <a href="https://en.wikipedia.org/wiki/The_DAO" target="_blank">DAO fork</a>,
+reducing issuance and (not) <a href="https://www.cnbc.com/2017/11/08/accidental-bug-may-have-frozen-280-worth-of-ether-on-parity-wallet.html" target="_blank">unfreezing
+the Parity wallet</a>, tools like Carbonvote, as well as social media
+voting, helped the community and the developers to see which way the
+bulk of the community opinion was facing.
+<em>Carbonvote on the DAO fork.</em>
+Carbonvote <a href="../../../2017/12/17/voting.html" target="_blank">had its
+flaws</a>: it relied on ETH holdings to determine who was a member of
+the Ethereum community, making the outcome dominated by a few wealthy
+ETH holders ("whales"). With modern tools, however, we could make a much
+better Carbonvote, leveraging multiple signals such as <a href="https://poap.xyz/" target="_blank">POAPs</a>, Zupass stamps, <a href="https://passport.gitcoin.co/" target="_blank">Gitcoin passports</a>, <a href="https://protocol-guild.readthedocs.io/en/latest/" target="_blank">Protocol Guild
+memberships</a>, as well as ETH (or even solo-staked-ETH) holdings to
+gauge community membership.
+Tools like this could be used by any community to make higher-quality
+decisions, find points of commonality, coordinate (physical or digital)
+migrations or do a number of other things without relying on opaque
+centralized leadership. This is not defense acceleration per se, but it
+can certainly be called democracy acceleration. Such tools could even be
+used to improve and democratize the governance of key actors and
+institutions working in AI.
+<h2>So what are the paths forward for superintelligence?</h2>
+The above is all well and good, and could make the world a much more
+harmonious, safer and freer place for the next century. However, it does
+not yet address the big elephant in the room: superintelligent AI.
+The default path forward suggested by many of those who worry about
+AI essentially leads to a <strong>minimal AI world government</strong>.
+Near-term versions of this include a proposal for a <a href="https://www.conjecture.dev/research/multinational-agi-consortium-magic-a-proposal-for-international-coordination-on-ai" target="_blank">"multinational
+AGI consortium"</a> ("MAGIC"). Such a consortium, if it gets established
+and succeeds at its goals of creating superintelligent AI, would have a
+natural path to becoming a de-facto minimal world government.
+Longer-term, there are ideas like the <a href="https://arbital.com/p/pivotal/" target="_blank">"pivotal act"</a> theory: we
+create an AI that performs a <em>single one-time act</em> which
+rearranges the world into a game where from that point forward humans
+are still in charge, but where the game board is somehow more
+defense-favoring and more fit for human flourishing.
+The main practical issue that I see with this so far is that
+*people don't seem to actually trust any specific governance
+mechanism with the power to build such a thing*. This fact becomes
+stark when you look at the results to my recent Twitter polls, asking if
+people would prefer to see AI monopolized by a single entity with a
+decade head-start, or AI delayed by a decade for everyone:
+The size of each poll is small, but the polls make up for it in the
+uniformity of their result across a wide diversity of sources and
+options. **In nine out of nine cases, the majority of people would
+rather see highly advanced AI delayed by a decade outright than be
+monopolized by a single group, whether it's a corporation, government or
+multinational body**. In seven out of nine cases, delay won by at
+least two to one. This seems like an important fact to understand for
+anyone pursuing AI regulation. Current approaches have been focusing on
+creating licensing schemes and regulatory requirements, trying to
+restrict AI development to a smaller number of people, but these have
+seen popular pushback precisely because people don't want to see anyone
+monopolize something so powerful. Even if such top-down regulatory
+proposals reduce risks of extinction, they risk increasing the chance of
+some kind of permanent lock-in to centralized totalitarianism.
+Paradoxically, could agreements banning extremely advanced AI research
+<em>outright</em> (perhaps with exceptions for biomedical AI), combined
+with measures like <em>mandating</em> open source for those models that
+are not banned as a way of reducing profit motives while further
+improving equality of access, be <em>more</em> popular?
+The main approach preferred by opponents of the "let's get one global
+org to do AI and make its governance really really good" route is
+**<a href="https://twitter.com/balajis/status/1725595769003221092" target="_blank">polytheistic
+AI</a>: intentionally try to make sure there's lots of people and
+companies developing lots of AIs, so that none of them grows far more
+powerful than the other**. This way, the theory goes, even as AIs
+become superintelligent, we can retain a balance of power.
+This philosophy is interesting, but my experience trying to ensure
+"polytheism" within the Ethereum ecosystem does make me worry that this
+is an inherently unstable equilibrium. In Ethereum, we have
+intentionally tried to ensure decentralization of many parts of the
+stack: ensuring that there's no single codebase that controls <a href="https://clientdiversity.org/" target="_blank">more than half of the proof of stake
+network</a>, trying to counteract the <a href="https://fortune.com/2022/06/11/lido-largest-ether-staking-service-has-centralization-problem-raising-red-flags/" target="_blank">dominance
+of large staking pools</a>, improving <a href="https://ethernodes.org/" target="_blank">geographic decentralization</a>, and so
+on. Essentially, Ethereum is actually attempting to execute on the old
+libertarian dream of a market-based society that uses social pressure,
+rather than government, as the antitrust regulator. To some extent, this
+has worked: the <a href="https://cryptoslate.com/ethereums-client-diversity-with-66-running-prysm-is-the-merge-safe-to-pursue/" target="_blank">Prysm
+client's dominance</a> has dropped from above 70% to under 45%. But this
+is not some automatic market process: it's the result of human intention
+and coordinated action.
+My experience within Ethereum is mirrored by learnings from the
+broader world as a whole, where many markets have proven to be <a href="https://en.wikipedia.org/wiki/Natural_monopoly" target="_blank">natural
+monopolies</a>. With superintelligent AIs acting independently of
+humans, the situation is even more unstable. Thanks to <a href="https://www.lesswrong.com/tag/recursive-self-improvement" target="_blank">recursive
+self-improvement</a>, the strongest AI may pull ahead very quickly, and
+once AIs are more powerful than humans, there is no force that can push
+things back into balance.
+Additionally, even if we <em>do</em> get a polytheistic world of
+superintelligent AIs that ends up stable, we still have the
+<em>other</em> problem: that we get a universe where humans are
+pets.
+<h3>A happy path: merge with the AIs?</h3>
+A different option that I have heard about more recently is to
+**focus less on AI as something separate from humans, and more on
+tools that <em>enhance</em> human cognition rather than
+<em>replacing</em> it**.
+One near-term example of something that goes in this direction is AI
+drawing tools. Today, the most prominent tools for making AI-generated
+images only have one step at which the human gives their input, and AI
+fully takes over from there. An alternative would be to focus more on AI
+versions of Photoshop: tools where the artist or the AI might make an
+early draft of a picture, and then the two collaborate on improving it
+with a process of real-time feedback.
+*Photoshop generative AI fill, 2023. <a href="https://www.elegantthemes.com/blog/design/photoshop-ai" target="_blank">Source</a>.
+I tried, it and it takes time to get used to but it actually works quite
+well!*
+Another direction in a similar spirit is the <a href="https://www.lesswrong.com/posts/5hApNw5f7uG8RXxGS/the-open-agency-model" target="_blank">Open
+Agency Architecture</a>, which proposes splitting the different parts of
+an AI "mind" (eg. making plans, executing on plans, interpreting
+information from the outside world) into separate components, and
+introducing diverse human feedback in between these parts.
+So far, this sounds mundane, and something that almost everyone can
+agree that it would be good to have. The economist Daron Acemoglu's work
+is far from this kind of AI futurism, but his new book <a href="https://www.amazon.com/Power-Progress-Thousand-Year-Technology-Prosperity/dp/1541702530" target="_blank">Power
+and Progress</a> hints at wanting to see more of exactly these types of
+AI.
+**But if we want to extrapolate this idea of human-AI
+cooperation further, we get to more radical conclusions**. Unless
+we create a world government powerful enough to detect and stop every
+small group of people hacking on individual GPUs with laptops, someone
+is going to create a superintelligent AI eventually - one that can think
+a <a href="https://www.lesswrong.com/posts/Ccsx339LE9Jhoii9K/slow-motion-videos-as-ai-risk-intuition-pumps" target="_blank">thousand
+times faster</a> than we can - and no combination of humans using tools
+with their hands is going to be able to hold its own against that. And
+so we need to take this idea of human-computer cooperation much deeper
+and further.
+**A first natural step is <a href="https://en.wikipedia.org/wiki/Brain%E2%80%93computer_interface" target="_blank">brain-computer
+interfaces</a>**. Brain-computer interfaces can give humans much
+more direct access to more-and-more powerful forms of computation and
+cognition, reducing the two-way communication loop between man and
+machine from seconds to milliseconds. This would also greatly reduce the
+"mental effort" cost to getting a computer to help you gather facts,
+give suggestions or execute on a plan.
+Later stages of such a roadmap admittedly get weird. In addition to
+brain-computer interfaces, there are various paths to improving our
+brains directly through innovations in biology. An eventual further
+step, which merges both paths, may involve <a href="https://en.wikipedia.org/wiki/Mind_uploading" target="_blank">uploading our
+minds</a> to run on computers directly. This would also be the ultimate
+d/acc for physical security: protecting ourselves from harm would no
+longer be a challenging problem of protecting inevitably-squishy human
+bodies, but rather a much simpler problem of making data backups.
+Directions like this are sometimes met with worry, in part because
+they are irreversible, and in part because they may give powerful people
+more advantages over the rest of us. Brain-computer interfaces in
+particular have dangers - after all, we are talking about *literally
+reading and writing to people's minds*. These concerns are exactly
+why I think it would be ideal for a leading role in this path to be held
+by a security-focused open-source movement, rather than closed and
+proprietary corporations and venture capital funds. Additionally, all of
+these issues are <em>worse</em> with superintelligent AIs that operate
+independently from humans, than they are with augmentations that are
+closely tied to humans. The divide between "enhanced" and "unenhanced"
+already exists today due to <a href="https://www.digitaltrends.com/computing/these-countries-chatgpt-banned/" target="_blank">limitations
+in who can and can't use ChatGPT</a>.
+**If we want a future that is both superintelligent
+<em>and</em> "human", one where human beings are not just pets, but
+actually retain meaningful agency over the world, then it feels like
+something like this is the most natural option**. There are also
+good arguments why this could be a safer AI alignment path: by involving
+human feedback at each step of decision-making, we reduce the incentive
+to offload high-level planning responsibility to the AI itself, and
+thereby reduce the chance that the AI does something totally unaligned
+with humanity's values on its own.
+One other argument in favor of this direction is that it may be more
+<em>socially</em> palatable than simply shouting "<a href="https://twitter.com/PauseAI" target="_blank">pause AI</a>" without a complementary
+message providing an alternative path forward. It will require a
+philosophical shift from the current mentality that tech advancements
+that touch humans are dangerous but advancements that are separate from
+humans are by-default safe. But it has a huge countervailing benefit:
+<em>it gives developers something to do</em>. Today, the AI safety
+movement's primary message to AI developers seems to be "<a href="https://twitter.com/So8res/status/1715380167911067878" target="_blank">you should
+just stop</a>". One can <a href="https://forum.effectivealtruism.org/posts/7WXPkpqKGKewAymJf/how-to-pursue-a-career-in-technical-ai-alignment" target="_blank">work
+on alignment research</a>, but today this lacks economic incentives.
+Compared to this, the common e/acc message of "you're already a hero
+just the way you are" is understandably extremely appealing. A d/acc
+message, one that says "you should build, and build profitable things,
+but be much more selective and intentional in making sure you are
+building things that help you and humanity thrive", may be a winner.
+<h2>Is d/acc compatible with your existing philosophy?</h2>
+* If you are an <strong>e/acc</strong>, then d/acc is a subspecies of
+e/acc - just one that is much more selective and intentional.
+<em> If you are an <a href="https://www.effectivealtruism.org/" target="_blank"></em>*effective
+altruist**</a>, then d/acc is a re-branding of the
+effective-altruist idea of <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4213670" target="_blank">differential
+technology development</a>, though with a greater emphasis on liberal
+and democratic values.
+* If you are a <strong>libertarian</strong>, then d/acc is a
+sub-species of techno-libertarianism, though a more pragmatic one that
+is more critical of "the techno-capital machine", and willing to accept
+government interventions today (at least, if cultural interventions
+don't work) to prevent much worse un-freedom tomorrow.
+* If you are a <strong>Pluralist</strong>, in the <a href="https://www.plurality.net/v/eng/" target="_blank">Glen Weyl sense of the term</a>,
+then d/acc is a frame that can easily include the emphasis on better
+democratic coordination technology that Plurality values.
+* If you are a <strong>public health advocate</strong>, then d/acc
+ideas can be a source of a broader long-term vision, and opportunity to
+find common ground with "tech people" that you might otherwise feel at
+odds with.
+* If you are a <strong>blockchain advocate</strong>, then d/acc is a
+more modern and broader narrative to embrace than the fifteen-year-old
+emphasis on hyperinflation and banks, which puts blockchains into
+context as one of many tools in a concrete strategy to build toward a
+brighter future.
+* If you are a <strong><a href="https://builtin.com/greentech/solarpunk" target="_blank">solarpunk</a></strong>,
+then d/acc is a subspecies of solarpunk, and incorporates a similar
+emphasis on intentionality and collective action.
+* If you are a <strong><a href="https://www.coindesk.com/layer2/2022/09/20/what-are-solarpunk-and-lunarpunk-anyway/" target="_blank">lunarpunk</a></strong>,
+then you will appreciate the d/acc emphasis on informational defense,
+through maintaining privacy and freedom.
+<h2>We are the brightest star</h2>
+I love technology because technology expands human potential. Ten
+thousand years ago, we could build some hand tools, change which plants
+grow on a small patch of land, and <a href="https://www.newscientist.com/article/2392894-earliest-evidence-of-buildings-made-from-wood-is-476000-years-old/" target="_blank">build
+basic houses</a>. Today, we can build <a href="https://en.wikipedia.org/wiki/Burj_Khalifa" target="_blank">800-meter-tall
+towers</a>, store the entirety of recorded human knowledge in a device
+we can hold in our hands, communicate instantly across the globe, double
+our lifespan, and live happy and fulfilling lives without fear of our
+best friends regularly dropping dead of disease.
+<em>We started from the bottom, now we're here.</em>
+I believe that these things are deeply good, and that expanding
+humanity's reach even further to the planets and stars is deeply good,
+because <strong>I believe humanity is deeply good</strong>. It is
+fashionable in some circles to be skeptical of this: the <a href="https://en.wikipedia.org/wiki/Voluntary_Human_Extinction_Movement" target="_blank">voluntary
+human extinction movement</a> argues that the Earth would be better off
+without humans existing at all, and many more want to see <a href="https://www.scientificamerican.com/article/population-decline-will-change-the-world-for-the-better/" target="_blank">much
+smaller number of human beings</a> see the light of this world in the
+centuries to come. It is common to <a href="https://www.vox.com/science-and-health/2017/12/14/16687388/cruelty-border-immigration-psychology-human-nature" target="_blank">argue</a>
+that <a href="https://www.advisory.com/daily-briefing/2018/10/31/people-are-terrible" target="_blank">humans
+are bad</a> because we cheat and steal, engage in colonialism and war,
+and mistreat and annihilate other species. My reply to this style of
+thinking is one simple question: <strong>compared to what?</strong>
+Yes, human beings are often mean, but we much more often show
+kindness and mercy, and work together for our common benefit. Even
+during wars we often take care to protect civilians - certainly not
+nearly enough, but also far more than <a href="https://bmcr.brynmawr.edu/2022/2022.01.23/" target="_blank">we did 2000 years
+ago</a>. The next century may well bring widely available
+non-animal-based meat, eliminating the <a href="https://www.openphilanthropy.org/focus/farm-animal-welfare/" target="_blank">largest
+moral catastrophe</a> that human beings can justly be blamed for today.
+Non-human animals are not like this. There is no situation where a cat
+will adopt an entire lifestyle of refusing to eat mice as a matter of
+ethical principle. The Sun is growing brighter every year, and in about
+<a href="https://theconversation.com/will-the-earth-last-forever-203021" target="_blank">one
+billion years</a>, it is expected that this will make the Earth too hot
+to sustain life. Does the Sun even <em>think</em> about the genocide
+that it is going to cause?
+And so it is my firm belief that, out of all the things that we have
+known and seen in our universe, **we, humans, are the brightest
+star**. We are the one thing that we know about that, even if
+imperfectly, sometimes make an earnest effort to care about "the good",
+and adjust our behavior to better serve it. Two billion years from now,
+if the Earth or any part of the universe still bears the beauty of
+Earthly life, it will be human artifices like space travel and <a href="https://nap.nationalacademies.org/catalog/25762/reflecting-sunlight-recommendations-for-solar-geoengineering-research-and-research-governance" target="_blank">geoengineering</a>
+that will have made it happen.
+We need to build, and accelerate. But there is a very real question
+that needs to be asked: what is the thing that we are accelerating
+towards? The 21st century may well be <a href="https://www.cold-takes.com/most-important-century/" target="_blank"><em>the</em>
+pivotal century</a> for humanity, the century in which our fate for
+millennia to come gets decided. Do we fall into one of a number of traps
+from which we cannot escape, or do we find a way toward a future where
+we retain our freedom and agency? These are challenging problems. But I
+look forward to watching and participating in our species' grand
+collective effort to find the answers.</p></div>
+  
+<div class="share-row">
+  <div class="share-left">
+    <div class="label">Share this post on:</div>
+    <div class="share-icons">
+      <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/kb/vitalik-my-techno-optimism-dacc.html" target="_blank" rel="noopener" title="Share on X">
+        <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+      </a>
+      <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/kb/vitalik-my-techno-optimism-dacc.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+      </a>
+      <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/kb/vitalik-my-techno-optimism-dacc.html" target="_blank" rel="noopener" title="Share on Telegram">
+        <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+      </a>
+      <a href="mailto:?subject=My Techno-Optimism (d/acc)&body=https://betoneh.github.io/signal-monitor/kb/vitalik-my-techno-optimism-dacc.html" title="Share via email">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+      </a>
+      <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
+    </div>
+  </div>
+  <div style="width:100%;text-align:center;margin-top:0.5rem;">
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>Back to Top</span>
+    </button>
+  </div>
+</div>
+
+</main>
+<footer>
+  Signal Monitor · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+
+<script>
+  (function(){
+    var bar = document.getElementById('progress');
+    if (!bar) return;
+    function up() {
+      var s = window.pageYOffset || document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = (h > 0 ? s / h * 100 : 0) + '%';
+    }
+    window.onscroll = up;
+    up();
+  })();
+</script>
+
+</body>
+</html>
