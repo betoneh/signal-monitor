@@ -157,8 +157,8 @@
             transition: background 0.15s;
         }
         .fab-btn:hover { background: #0a8f7b; }
-        .fab-tg { background: #0ec4a9; }
-        .fab-copy { background: rgba(52, 63, 96, 0.9); color: #eaedf3; }
+        .fab-save { background: #22c55e; color: #fff; }
+        .fab-save:hover { background: #16a34a; }
 
         footer {
             max-width: 48rem; margin: 0 auto; width: 100%;
@@ -1247,7 +1247,7 @@
 </main>
 
 <div class="fab-container" id="dd-fab">
-  <button class="fab-btn fab-copy" onclick="copyDDRead()">📋 Copiar</button>
+  <button class="fab-btn fab-save" id="dd-save-btn" onclick="saveDDState()">💾 Save</button>
 </div>
 
 <div class="hr"><hr></div>
@@ -1260,6 +1260,18 @@
     
     <script>
     const PW_HASH = '74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163';
+    const ENC_TOKEN = 'E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==';
+    const REPO = 'betoneh/signal-monitor';
+    let ghToken = null;
+    function decryptToken(password) {
+        const key = new Uint8Array(32);
+        const hashHex = PW_HASH;
+        for (let i = 0; i < 32; i++) key[i] = parseInt(hashHex.substr(i*2, 2), 16);
+        const enc = Uint8Array.from(atob(ENC_TOKEN), c => c.charCodeAt(0));
+        const dec = new Uint8Array(enc.length);
+        for (let i = 0; i < enc.length; i++) dec[i] = enc[i] ^ key[i % key.length];
+        return new TextDecoder().decode(dec);
+    }
     async function sha256(text) {
         const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
         return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
@@ -1268,6 +1280,7 @@
         const pw = document.getElementById('pw').value;
         const hash = await sha256(pw);
         if (hash === PW_HASH) {
+            ghToken = decryptToken(pw);
             document.getElementById('gate').style.display = 'none';
             document.getElementById('app').style.display = 'block';
             try { localStorage.setItem('sm-auth', Date.now().toString()); } catch(e) {}
@@ -1355,32 +1368,43 @@
         const fab = document.getElementById('dd-fab');
         if (fab) fab.classList.toggle('visible', hasManual);
     }
-    function buildDDText() {
+    async function saveDDState() {
+        const btn = document.getElementById('dd-save-btn');
+        btn.disabled = true;
+        btn.textContent = '⏳ Saving...';
         const readList = getDDRead();
         const unreadList = getDDUnread();
-        const lines = ['read_dives'];
-        document.querySelectorAll('.dd-item').forEach(el => {
-            const id = parseInt(el.dataset.ddId);
-            if (readList.includes(id) || unreadList.includes(id)) {
-                const title = el.querySelector('.dd-check')?.dataset.title || '';
-                lines.push('#' + id + ' ' + title);
+        const state = { read: readList, unreport: unreadList };
+        const content = btoa(JSON.stringify(state, null, 2));
+        let sha = null;
+        try {
+            const r = await fetch(`https://api.github.com/repos/${REPO}/contents/dd-state.json`, {
+                headers: { 'Authorization': `token ${ghToken}`, 'Accept': 'application/vnd.github.v3+json' }
+            });
+            if (r.ok) { const d = await r.json(); sha = d.sha; }
+        } catch(e) {}
+        const body = { message: 'Update dd-state.json', content };
+        if (sha) body.sha = sha;
+        try {
+            const r = await fetch(`https://api.github.com/repos/${REPO}/contents/dd-state.json`, {
+                method: 'PUT',
+                headers: { 'Authorization': `token ${ghToken}`, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
+                body: JSON.stringify(body)
+            });
+            if (r.ok) {
+                try { localStorage.removeItem(DD_READ_KEY); localStorage.removeItem(DD_UNREAD_KEY); } catch(e) {}
+                btn.textContent = '✅ Saved';
+                document.getElementById('dd-fab').classList.remove('visible');
+            } else {
+                btn.textContent = '❌ Error';
+                btn.disabled = false;
+                setTimeout(() => { btn.textContent = '💾 Save'; }, 3000);
             }
-        });
-        lines.push('');
-        lines.push('Marca estos deep dives como leídos para que no se repitan en futuros signal monitor reports.');
-        return lines.join('\n');
-    }
-    function sendDDTelegram() {
-        const text = buildDDText();
-        window.open('https://t.me/Max1616_bot?text=' + encodeURIComponent(text), '_blank');
-    }
-    function copyDDRead() {
-        const text = buildDDText();
-        navigator.clipboard.writeText(text).then(() => {
-            const btn = document.querySelector('.fab-copy');
-            btn.textContent = '✅ Copiado';
-            setTimeout(() => { btn.textContent = '📋 Copiar'; }, 1500);
-        }).catch(() => { prompt('Copia manualmente:', text); });
+        } catch(e) {
+            btn.textContent = '❌ Error';
+            btn.disabled = false;
+            setTimeout(() => { btn.textContent = '💾 Save'; }, 3000);
+        }
     }
     syncDDState();
 
