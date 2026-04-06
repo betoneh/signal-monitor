@@ -1281,6 +1281,7 @@
         const hash = await sha256(pw);
         if (hash === PW_HASH) {
             ghToken = decryptToken(pw);
+            try { sessionStorage.setItem('sm-pw', pw); } catch(e) {}
             document.getElementById('gate').style.display = 'none';
             document.getElementById('app').style.display = 'block';
             try { localStorage.setItem('sm-auth', Date.now().toString()); } catch(e) {}
@@ -1299,6 +1300,8 @@
         if (authTs && (Date.now() - authTs) < 7 * 24 * 60 * 60 * 1000) {
             document.getElementById('gate').style.display = 'none';
             document.getElementById('app').style.display = 'block';
+            const savedPw = sessionStorage.getItem('sm-pw');
+            if (savedPw) ghToken = decryptToken(savedPw);
         } else {
             localStorage.removeItem('sm-auth');
         }
@@ -1370,6 +1373,13 @@
     }
     async function saveDDState() {
         const btn = document.getElementById('dd-save-btn');
+        if (!ghToken) {
+            // Token not available (auto-login without session) — force re-login
+            document.getElementById('gate').style.display = 'flex';
+            document.getElementById('app').style.display = 'none';
+            localStorage.removeItem('sm-auth');
+            return;
+        }
         btn.disabled = true;
         btn.textContent = '⏳ Saving...';
         const readList = getDDRead();
