@@ -140,9 +140,6 @@
         .dd-item.in-report .dd-check:checked {
             background: #eab308; border-color: #eab308;
         }
-        .dd-item.in-report.unreport .dd-check { background: transparent; border-color: #eab308; }
-        .dd-item.in-report.unreport .dd-check::after { content: ''; }
-        .dd-item.in-report.unreport .dd-title { color: #8b949e; text-decoration: line-through; }
         .dd-check-row {
             display: flex; align-items: center; gap: 0.75rem;
         }
@@ -867,7 +864,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="34">
+<li class="dd-item" data-dd-id="34">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="34" data-title="Schumpeter's Creative Destruction: The Engine of Capitalism" onchange="toggleDDRead(34)">
             <a href="deep-dives/034-schumpeters-creative-destruction-the-engine-of-capitalism.html">
@@ -876,7 +873,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="33">
+<li class="dd-item" data-dd-id="33">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="33" data-title="Hayek's Knowledge Problem: Why Central Planning Always Fails" onchange="toggleDDRead(33)">
             <a href="deep-dives/033-hayeks-knowledge-problem-why-central-planning-always-fails.html">
@@ -885,7 +882,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="32">
+<li class="dd-item" data-dd-id="32">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="32" data-title="The Precautionary Principle: How Safety Killed Progress" onchange="toggleDDRead(32)">
             <a href="deep-dives/032-the-precautionary-principle-how-safety-killed-progress.html">
@@ -894,7 +891,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="31">
+<li class="dd-item" data-dd-id="31">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="31" data-title="The Techno-Capital Machine: Nick Land Meets Silicon Valley" onchange="toggleDDRead(31)">
             <a href="deep-dives/031-the-techno-capital-machine-nick-land-meets-silicon-valley.html">
@@ -903,7 +900,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="30">
+<li class="dd-item" data-dd-id="30">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="30" data-title="The Trust Stack: How Humans and AI Will Actually Cooperate" onchange="toggleDDRead(30)">
             <a href="deep-dives/030-the-trust-stack-how-humans-and-ai-will-actually-cooperate.html">
@@ -912,7 +909,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="29">
+<li class="dd-item" data-dd-id="29">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="29" data-title="The Fitness Landscape: Cultural Selection and Memetic Evolution" onchange="toggleDDRead(29)">
             <a href="deep-dives/029-the-fitness-landscape-cultural-selection-and-memetic-evoluti.html">
@@ -921,7 +918,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="28">
+<li class="dd-item" data-dd-id="28">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="28" data-title="The Local AI Movement: From Cloud Dependency to Cognitive Sovereignty" onchange="toggleDDRead(28)">
             <a href="deep-dives/028-the-local-ai-movement-from-cloud-dependency-to-cognitive-sov.html">
@@ -1317,22 +1314,9 @@
         try { localStorage.setItem(DD_READ_KEY, JSON.stringify(list)); } catch(e) {}
     }
     function toggleDDRead(id) {
+        // In-report items can't be unchecked
         const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
-        // In-report items: toggle unreport state
         if (el && el.classList.contains('in-report')) {
-            el.classList.toggle('unreport');
-            const cb = el.querySelector('.dd-check');
-            if (el.classList.contains('unreport')) {
-                if (cb) cb.checked = false;
-                let ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
-                if (!ur.includes(id)) ur.push(id);
-                localStorage.setItem('dd_unreport', JSON.stringify(ur));
-            } else {
-                if (cb) cb.checked = true;
-                let ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
-                ur = ur.filter(x => x !== id);
-                localStorage.setItem('dd_unreport', JSON.stringify(ur));
-            }
             syncDDState();
             return;
         }
@@ -1352,47 +1336,27 @@
             if (cb) cb.checked = isRead || inReport;
             el.classList.toggle('is-read', isRead && !inReport);
         });
-        // Show/hide FAB (visible if any teal checks OR any yellow unreports)
+        // Show/hide FAB
         const hasManual = list.filter(id => {
             const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
             return el && !el.classList.contains('in-report');
         }).length > 0;
-        const ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
         const fab = document.getElementById('dd-fab');
-        if (fab) fab.classList.toggle('visible', hasManual || ur.length > 0);
+        if (fab) fab.classList.toggle('visible', hasManual);
     }
     function buildDDText() {
-        const sections = [];
-        // Teal checks (mark as read)
         const list = getDDRead();
-        const readLines = [];
+        const lines = ['read_dives'];
         document.querySelectorAll('.dd-item').forEach(el => {
             const id = parseInt(el.dataset.ddId);
             if (list.includes(id) && !el.classList.contains('in-report')) {
                 const title = el.querySelector('.dd-check')?.dataset.title || '';
-                readLines.push('#' + id + ' ' + title);
+                lines.push('#' + id + ' ' + title);
             }
         });
-        if (readLines.length) {
-            sections.push('read_dives');
-            sections.push(...readLines);
-        }
-        // Yellow unreports (reset used_dates)
-        const ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
-        const unreportLines = [];
-        ur.sort((a,b) => a-b).forEach(id => {
-            const el = document.querySelector(`.dd-item[data-dd-id="${id}"] .dd-check`);
-            const title = el ? el.dataset.title : '';
-            unreportLines.push('#' + id + ' ' + title);
-        });
-        if (unreportLines.length) {
-            if (sections.length) sections.push('');
-            sections.push('unreport_dives');
-            sections.push(...unreportLines);
-        }
-        sections.push('');
-        sections.push('Procesa los cambios y haz push al repo de GitHub Pages.');
-        return sections.join('\n');
+        lines.push('');
+        lines.push('Marca estos deep dives como leídos para que no se repitan en futuros signal monitor reports.');
+        return lines.join('\n');
     }
     function sendDDTelegram() {
         const text = buildDDText();
@@ -1406,21 +1370,6 @@
             setTimeout(() => { btn.textContent = '📋 Copiar'; }, 1500);
         }).catch(() => { prompt('Copia manualmente:', text); });
     }
-    // Restore unreport state from localStorage (clean stale entries)
-    (function restoreUnreport() {
-        const ur = JSON.parse(localStorage.getItem('dd_unreport') || '[]');
-        const valid = [];
-        ur.forEach(id => {
-            const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
-            if (el && el.classList.contains('in-report')) {
-                el.classList.add('unreport');
-                const cb = el.querySelector('.dd-check');
-                if (cb) cb.checked = false;
-                valid.push(id);
-            }
-        });
-        localStorage.setItem('dd_unreport', JSON.stringify(valid));
-    })();
     syncDDState();
 
     // PWA pull-to-refresh
