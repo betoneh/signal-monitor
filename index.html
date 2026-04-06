@@ -1416,10 +1416,10 @@
             setTimeout(() => { btn.textContent = '💾 Save'; }, 3000);
         }
     }
-    // On load: fetch dd-state.json from repo and apply pending states client-side
-    (async function loadPendingState() {
+    // On load: fetch dd-state.json from repo, merge into localStorage, then sync UI
+    (async function loadAndSync() {
         try {
-            const r = await fetch('dd-state.json');
+            const r = await fetch('dd-state.json?_=' + Date.now(), {cache: 'no-store'});
             if (r.ok) {
                 const state = await r.json();
                 const readList = getDDRead();
@@ -1428,11 +1428,10 @@
                 (state.unreport || []).forEach(id => { if (!unreadList.includes(id)) unreadList.push(id); });
                 saveDDRead(readList);
                 saveDDUnread(unreadList);
-                syncDDState();
             }
         } catch(e) {}
+        syncDDState();
     })();
-    syncDDState();
 
     // PWA pull-to-refresh
     if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
