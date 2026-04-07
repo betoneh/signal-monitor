@@ -1312,6 +1312,9 @@
         document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
         document.getElementById('tab-' + name).classList.add('active');
         document.querySelector('.tab-' + name).classList.add('active');
+        // Show FAB only on deep dives tab
+        const fab = document.getElementById('dd-fab');
+        if (fab) fab.classList.toggle('visible', name === 'deepdives');
         // Save preference
         try { localStorage.setItem('sm-tab', name); } catch(e) {}
     }
@@ -1366,10 +1369,9 @@
             el.classList.remove('is-read');
             if (cb) cb.checked = effectivelyInReport;
         });
-        // Show/hide FAB when there are any manual toggles
-        const hasManual = readList.length > 0 || unreadList.length > 0;
+        // FAB always visible on deep dives tab
         const fab = document.getElementById('dd-fab');
-        if (fab) fab.classList.toggle('visible', hasManual);
+        if (fab) fab.classList.add('visible');
     }
     async function saveDDState() {
         const btn = document.getElementById('dd-save-btn');
