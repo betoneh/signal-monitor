@@ -1366,17 +1366,29 @@
     }
     function syncDDState() {
         const readList = getDDRead();
-        const unreadList = getDDUnread();
+        let unreadList = getDDUnread();
+        // Prune unread list: if server says in-report, trust the server
+        const serverReportIds = [];
+        document.querySelectorAll('.dd-item[data-orig-report="true"]').forEach(el => {
+            serverReportIds.push(parseInt(el.dataset.ddId));
+        });
+        const pruned = unreadList.filter(id => !serverReportIds.includes(id));
+        if (pruned.length !== unreadList.length) {
+            unreadList = pruned;
+            saveDDUnread(unreadList);
+        }
+        // Also prune read list: remove IDs that server already marks as in-report
+        const prunedRead = readList.filter(id => !serverReportIds.includes(id));
+        if (prunedRead.length !== readList.length) saveDDRead(prunedRead);
         document.querySelectorAll('.dd-item').forEach(el => {
             const id = parseInt(el.dataset.ddId);
             const cb = el.querySelector('.dd-check');
             const origReport = el.dataset.origReport === 'true';
-            const effectivelyInReport = (origReport && !unreadList.includes(id)) || readList.includes(id);
+            const effectivelyInReport = (origReport && !unreadList.includes(id)) || prunedRead.includes(id);
             el.classList.toggle('in-report', effectivelyInReport);
             el.classList.remove('is-read');
             if (cb) cb.checked = effectivelyInReport;
         });
-        // FAB visibility managed by showTab — no action needed here
     }
     async function saveDDState() {
         const btn = document.getElementById('dd-save-btn');
