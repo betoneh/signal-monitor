@@ -157,9 +157,9 @@
             transition: background 0.15s;
         }
         .fab-btn:hover { background: #0a8f7b; }
-        .fab-save { background: rgba(52,63,96,0.85); color: #eaedf3; border: 1px solid rgba(10,143,123,0.3); backdrop-filter: blur(8px); }
-        .fab-save:hover { background: rgba(10,143,123,0.4); }
-        .fab-save svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -2px; margin-right: 6px; }
+        .fab-save, .fab-generate { background: rgba(52,63,96,0.85); color: #eaedf3; border: 1px solid rgba(10,143,123,0.3); backdrop-filter: blur(8px); }
+        .fab-save:hover, .fab-generate:hover { background: rgba(10,143,123,0.4); }
+        .fab-save svg, .fab-generate svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -2px; margin-right: 6px; }
 
         footer {
             max-width: 48rem; margin: 0 auto; width: 100%;
@@ -1251,6 +1251,10 @@
   <button class="fab-btn fab-save" id="dd-save-btn" onclick="saveDDState()"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save</button>
 </div>
 
+<div class="fab-container" id="gen-fab">
+  <button class="fab-btn fab-generate" id="gen-btn" onclick="triggerGenerate()"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>Generate</button>
+</div>
+
 <div class="hr"><hr></div>
 
 <footer>
@@ -1313,17 +1317,19 @@
         document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
         document.getElementById('tab-' + name).classList.add('active');
         document.querySelector('.tab-' + name).classList.add('active');
-        // Show FAB only on deep dives tab
-        const fab = document.getElementById('dd-fab');
-        if (fab) fab.classList.toggle('visible', name === 'deepdives');
+        // Show FABs per tab
+        const ddFab = document.getElementById('dd-fab');
+        const genFab = document.getElementById('gen-fab');
+        if (ddFab) ddFab.classList.toggle('visible', name === 'deepdives');
+        if (genFab) genFab.classList.toggle('visible', name === 'reports');
         // Save preference
         try { localStorage.setItem('sm-tab', name); } catch(e) {}
     }
-    // Restore last tab
+    // Restore last tab (default to reports)
     try {
-        const saved = localStorage.getItem('sm-tab');
-        if (saved) showTab(saved);
-    } catch(e) {}
+        const saved = localStorage.getItem('sm-tab') || 'reports';
+        showTab(saved);
+    } catch(e) { showTab('reports'); }
     
     // Deep dive read checkboxes
     const DD_READ_KEY = 'sm-dd-read';      // manually checked (non-report items)
@@ -1434,6 +1440,50 @@
         } catch(e) {}
         syncDDState();
     })();
+
+    // Generate report trigger
+    async function triggerGenerate() {
+        const btn = document.getElementById('gen-btn');
+        if (!ghToken) {
+            document.getElementById('gate').style.display = 'flex';
+            document.getElementById('app').style.display = 'none';
+            localStorage.removeItem('sm-auth');
+            return;
+        }
+        btn.disabled = true;
+        btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Triggering...';
+        const now = new Date().toISOString();
+        const trigger = { requested_at: now, feed: 'default' };
+        const content = btoa(JSON.stringify(trigger, null, 2));
+        let sha = null;
+        try {
+            const r = await fetch(`https://api.github.com/repos/${REPO}/contents/trigger.json`, {
+                headers: { 'Authorization': `token ${ghToken}`, 'Accept': 'application/vnd.github.v3+json' }
+            });
+            if (r.ok) { const d = await r.json(); sha = d.sha; }
+        } catch(e) {}
+        const body = { message: 'Trigger report generation', content };
+        if (sha) body.sha = sha;
+        try {
+            const r = await fetch(`https://api.github.com/repos/${REPO}/contents/trigger.json`, {
+                method: 'PUT',
+                headers: { 'Authorization': `token ${ghToken}`, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
+                body: JSON.stringify(body)
+            });
+            if (r.ok) {
+                btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Triggered!';
+                setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>Generate'; btn.disabled = false; }, 5000);
+            } else {
+                btn.innerHTML = '❌ Error';
+                btn.disabled = false;
+                setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>Generate'; }, 3000);
+            }
+        } catch(e) {
+            btn.innerHTML = '❌ Error';
+            btn.disabled = false;
+            setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>Generate'; }, 3000);
+        }
+    }
 
     // PWA pull-to-refresh
     if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
