@@ -428,15 +428,11 @@ Reading Room. --Al]</p></div>
     var bar = document.getElementById('progress');
     if (!bar) return;
     function up() {
-      var s = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      var h = Math.max(
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight
-      ) - window.innerHeight;
-      bar.style.width = (h > 0 ? Math.min(s / h * 100, 100) : 0) + '%';
+      var s = window.pageYOffset || document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = (h > 0 ? s / h * 100 : 0) + '%';
     }
-    window.addEventListener('scroll', up, {passive: true});
-    document.addEventListener('scroll', up, {passive: true});
+    window.onscroll = up;
     up();
   })();
 </script>
