@@ -1446,6 +1446,7 @@
     const CHECK_ICON = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     const CLOCK_ICON = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
     let genTimer = null;
+    let triggerSha = null;
 
     function nextCheckTime() {
         const now = new Date();
@@ -1465,44 +1466,78 @@
         return '<1m';
     }
 
-    function startCountdown() {
+    function startCountdown(sha) {
         const btn = document.getElementById('gen-btn');
-        btn.disabled = true;
-        btn.style.opacity = '0.7';
+        btn.disabled = false;
+        btn.style.opacity = '';
+        if (sha) triggerSha = sha;
         localStorage.setItem('sm-trigger-at', Date.now().toString());
+        if (triggerSha) localStorage.setItem('sm-trigger-sha', triggerSha);
         function tick() {
             const next = nextCheckTime();
             const diff = next - Date.now();
             if (diff <= 0) {
-                btn.innerHTML = GEN_ICON + 'Generate';
-                btn.disabled = false;
-                btn.style.opacity = '';
-                localStorage.removeItem('sm-trigger-at');
-                if (genTimer) clearInterval(genTimer);
-                genTimer = null;
+                resetGenBtn();
                 return;
             }
             btn.innerHTML = CLOCK_ICON + 'Triggered · ' + fmtCountdown(diff);
         }
         tick();
+        if (genTimer) clearInterval(genTimer);
         genTimer = setInterval(tick, 30000);
+    }
+
+    function resetGenBtn() {
+        const btn = document.getElementById('gen-btn');
+        btn.innerHTML = GEN_ICON + 'Generate';
+        btn.disabled = false;
+        btn.style.opacity = '';
+        localStorage.removeItem('sm-trigger-at');
+        localStorage.removeItem('sm-trigger-sha');
+        triggerSha = null;
+        if (genTimer) clearInterval(genTimer);
+        genTimer = null;
+    }
+
+    async function cancelTrigger() {
+        const btn = document.getElementById('gen-btn');
+        btn.disabled = true;
+        btn.innerHTML = CLOCK_ICON + 'Cancelling...';
+        const sha = triggerSha || localStorage.getItem('sm-trigger-sha');
+        if (sha && ghToken) {
+            try {
+                await fetch(`https://api.github.com/repos/${REPO}/contents/trigger.json`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `token ${ghToken}`, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
+                    body: JSON.stringify({ message: 'Cancel trigger', sha })
+                });
+            } catch(e) {}
+        }
+        resetGenBtn();
     }
 
     // Restore countdown if page reloads while triggered
     (function restoreTrigger() {
         const t = localStorage.getItem('sm-trigger-at');
         if (!t) return;
+        triggerSha = localStorage.getItem('sm-trigger-sha');
         const next = nextCheckTime();
         if (Date.now() >= next.getTime() && (Date.now() - parseInt(t)) > 3600000) {
             localStorage.removeItem('sm-trigger-at');
+            localStorage.removeItem('sm-trigger-sha');
             return;
         }
         if (next - Date.now() > 0) startCountdown();
-        else localStorage.removeItem('sm-trigger-at');
+        else { localStorage.removeItem('sm-trigger-at'); localStorage.removeItem('sm-trigger-sha'); }
     })();
 
     async function triggerGenerate() {
         const btn = document.getElementById('gen-btn');
+        // If already triggered, cancel
+        if (localStorage.getItem('sm-trigger-at')) {
+            await cancelTrigger();
+            return;
+        }
         if (!ghToken) {
             document.getElementById('gate').style.display = 'flex';
             document.getElementById('app').style.display = 'none';
@@ -1530,7 +1565,8 @@
                 body: JSON.stringify(body)
             });
             if (r.ok) {
-                startCountdown();
+                const d = await r.json();
+                startCountdown(d.content ? d.content.sha : null);
             } else {
                 btn.innerHTML = '❌ Error';
                 btn.disabled = false;
