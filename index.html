@@ -1367,17 +1367,12 @@
     function syncDDState() {
         const readList = getDDRead();
         let unreadList = getDDUnread();
-        // Prune unread list: if server says in-report, trust the server
+        // Collect server-side in-report IDs for display logic
         const serverReportIds = [];
         document.querySelectorAll('.dd-item[data-orig-report="true"]').forEach(el => {
             serverReportIds.push(parseInt(el.dataset.ddId));
         });
-        const pruned = unreadList.filter(id => !serverReportIds.includes(id));
-        if (pruned.length !== unreadList.length) {
-            unreadList = pruned;
-            saveDDUnread(unreadList);
-        }
-        // Also prune read list: remove IDs that server already marks as in-report
+        // Prune read list: remove IDs that server already marks as in-report (no need to double-mark)
         const prunedRead = readList.filter(id => !serverReportIds.includes(id));
         if (prunedRead.length !== readList.length) saveDDRead(prunedRead);
         document.querySelectorAll('.dd-item').forEach(el => {
