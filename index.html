@@ -156,8 +156,9 @@
             transition: background 0.15s;
         }
         .fab-btn:hover { background: #0a8f7b; }
-        .fab-save { background: #22c55e; color: #fff; }
-        .fab-save:hover { background: #16a34a; }
+        .fab-save { background: rgba(52,63,96,0.85); color: #eaedf3; border: 1px solid rgba(10,143,123,0.3); backdrop-filter: blur(8px); }
+        .fab-save:hover { background: rgba(10,143,123,0.4); }
+        .fab-save svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -2px; margin-right: 6px; }
 
         footer {
             max-width: 48rem; margin: 0 auto; width: 100%;
@@ -1246,7 +1247,7 @@
 </main>
 
 <div class="fab-container" id="dd-fab">
-  <button class="fab-btn fab-save" id="dd-save-btn" onclick="saveDDState()">💾 Save</button>
+  <button class="fab-btn fab-save" id="dd-save-btn" onclick="saveDDState()"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save</button>
 </div>
 
 <div class="hr"><hr></div>
@@ -1368,9 +1369,7 @@
             el.classList.remove('is-read');
             if (cb) cb.checked = effectivelyInReport;
         });
-        // FAB always visible on deep dives tab
-        const fab = document.getElementById('dd-fab');
-        if (fab) fab.classList.add('visible');
+        // FAB visibility managed by showTab — no action needed here
     }
     async function saveDDState() {
         const btn = document.getElementById('dd-save-btn');
@@ -1404,17 +1403,17 @@
             });
             if (r.ok) {
                 try { localStorage.removeItem(DD_READ_KEY); localStorage.removeItem(DD_UNREAD_KEY); } catch(e) {}
-                btn.textContent = '✅ Saved';
+                btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Saved';
                 document.getElementById('dd-fab').classList.remove('visible');
             } else {
-                btn.textContent = '❌ Error';
+                btn.innerHTML = '❌ Error';
                 btn.disabled = false;
-                setTimeout(() => { btn.textContent = '💾 Save'; }, 3000);
+                setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save'; }, 3000);
             }
         } catch(e) {
-            btn.textContent = '❌ Error';
+            btn.innerHTML = '❌ Error';
             btn.disabled = false;
-            setTimeout(() => { btn.textContent = '💾 Save'; }, 3000);
+            setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save'; }, 3000);
         }
     }
     // On load: fetch dd-state.json from repo, merge into localStorage, then sync UI
