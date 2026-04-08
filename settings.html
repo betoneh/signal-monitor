@@ -178,6 +178,16 @@
     </div>
 
     <div class="section">
+        <div class="section-title">Generate Button (Manual)</div>
+        <div class="row"><span class="row-label">Feed</span>
+            <select class="row-value" id="watcher-feed"><option value="Following" selected>Following</option><option value="For You">For You</option></select></div>
+        <div class="row"><span class="row-label">Time window (hours)</span>
+            <input class="row-value" type="number" id="watcher-hours" value="24" min="1" max="48"></div>
+        <div class="row"><span class="row-label">Max tweets</span>
+            <input class="row-value" type="number" id="watcher-max" value="180" min="10" max="500"></div>
+    </div>
+
+    <div class="section">
         <div class="section-title">Israel Monitor</div>
         <div class="row"><span class="row-label">List URL</span>
             <input class="row-value" type="text" id="israel-url" value="https://x.com/i/lists/2031379429113331847" style="width:100%;text-align:left;"></div>
@@ -340,7 +350,8 @@ function buildConfig() {
         },
         runs: {
             am: { feed: gv('am-feed'), hours: gn('am-hours'), max: gn('am-max') },
-            pm: { feed: gv('pm-feed'), hours: gn('pm-hours'), max: gn('pm-max') }
+            pm: { feed: gv('pm-feed'), hours: gn('pm-hours'), max: gn('pm-max') },
+            watcher: { feed: gv('watcher-feed'), hours: gn('watcher-hours'), max: gn('watcher-max') }
         },
         israel: { url: gv('israel-url'), max: gn('israel-max') },
         noise: { days: gn('noise-days'), top: gn('noise-top'), min_tweets: gn('noise-min') },
@@ -370,6 +381,11 @@ function applyConfig(cfg) {
         document.getElementById('pm-feed').value = cfg.runs.pm.feed || 'For You';
         document.getElementById('pm-hours').value = cfg.runs.pm.hours || 12;
         document.getElementById('pm-max').value = cfg.runs.pm.max || 180;
+    }
+    if (cfg.runs?.watcher) {
+        document.getElementById('watcher-feed').value = cfg.runs.watcher.feed || 'Following';
+        document.getElementById('watcher-hours').value = cfg.runs.watcher.hours || 24;
+        document.getElementById('watcher-max').value = cfg.runs.watcher.max || 180;
     }
     if (cfg.israel) {
         document.getElementById('israel-url').value = cfg.israel.url || '';
