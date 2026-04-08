@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#212737">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Signal Monitor — 2026-04-07-2000</title>
+<style>
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; display: flex; flex-direction: column;
+    overflow-y: scroll; scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  a { outline-offset: 1px; outline-color: rgba(14, 196, 169, 0.75); }
+  a:focus-visible { outline: 2px dashed rgba(14, 196, 169, 0.75); text-decoration: none; }
+
+  header, main, footer {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem;
+  }
+  header { padding: 2rem 1rem 1.5rem; }
+  .title-row {
+    display: flex; align-items: baseline; gap: 0.75rem;
+  }
+  .site-title {
+    display: inline-block;
+    font-size: 1.875rem; font-weight: 700; color: #0ec4a9; text-decoration: none;
+  }
+  @media (min-width: 640px) { .site-title { font-size: 2.25rem; } }
+  .site-title:hover { color: #0ec4a9; }
+  .feed-badge {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.4);
+    font-weight: 400;
+  }
+  .header-meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 0.5rem; margin-bottom: 1.5rem;
+  }
+  .header-meta .date-wrap {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.875rem; color: #eaedf3; opacity: 0.8; font-style: italic;
+  }
+  @media (min-width: 640px) { .header-meta .date-wrap { font-size: 1rem; } }
+  .header-meta .date-wrap svg {
+    display: inline-block; width: 1.25rem; height: 1.25rem; min-width: 1.25rem; flex-shrink: 0;
+  }
+  .header-meta .sep { color: rgba(234, 237, 243, 0.3); }
+  .header-meta .reading-time {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.6);
+  }
+
+  .model-meta { font-size: 0.75rem; color: rgba(234, 237, 243, 0.4); margin-top: 0.25rem; letter-spacing: 0.01em; }
+
+  .stats { font-size: 0.75rem; color: #8b949e; margin-top: 0.5rem; line-height: 1.6; }
+
+  .hr { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  .hr hr { border: none; border-top: 1px solid #0a8f7b; }
+
+  main { flex: 1; }
+
+  .category { margin-bottom: 2rem; }
+  .category-header {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.75rem; padding-bottom: 0.5rem;
+    border-bottom: 1px solid #0a8f7b;
+  }
+  .category-header h2 { font-size: 1.25rem; font-weight: 600; color: #eaedf3; }
+  .category-count {
+    font-size: 0.75rem; color: #8b949e;
+    background: rgba(52, 63, 96, 0.75); padding: 1px 8px; border-radius: 3px;
+  }
+
+  .cat-crypto .category-header { border-color: #f7931a; }
+  .cat-crypto .category-header h2 { color: #f7931a; }
+  .cat-ai .category-header { border-color: #0ec4a9; }
+  .cat-ai .category-header h2 { color: #0ec4a9; }
+  .cat-tech .category-header { border-color: #8b5cf6; }
+  .cat-tech .category-header h2 { color: #8b5cf6; }
+  .cat-stocks_macro .category-header { border-color: #ef4444; }
+  .cat-stocks_macro .category-header h2 { color: #ef4444; }
+  .cat-israel .category-header { border-color: #3b82f6; }
+  .cat-israel .category-header h2 { color: #3b82f6; }
+  .cat-openclaw .category-header { border-color: #FF4500; }
+  .cat-openclaw .category-header h2 { color: #FF4500; }
+
+  .editorial {
+    line-height: 1.75; font-size: 1rem; margin-bottom: 1rem;
+    overflow-wrap: break-word; word-break: break-word;
+    color: #eaedf3;
+  }
+  .editorial p {
+    margin-bottom: 0.75rem; line-height: 1.75;
+  }
+  .editorial p:last-child { margin-bottom: 0; }
+
+  a {
+    color: #0ec4a9; text-decoration: none;
+  }
+  a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .editorial a {
+    color: #0ec4a9; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 8px;
+  }
+  .editorial a:hover { text-decoration-color: #eaedf3; }
+
+  .tweets { display: flex; flex-direction: column; gap: 0.75rem; }
+  .tweet {
+    background: rgba(52, 63, 96, 0.35);
+    border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.875rem 1rem;
+    overflow: hidden; max-width: 100%;
+  }
+  @media (hover:hover) { .tweet:hover { border-color: #0ec4a9; } }
+  .tweet.priority { border-left: 3px solid #0ec4a9; }
+
+  .tweet-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+  .tweet-author { font-weight: 600; font-size: 0.85rem; color: #eaedf3; }
+  .tweet-handle { color: #8b949e; font-size: 0.8rem; font-weight: 400; }
+  .tweet-handle a { color: #8b949e; text-decoration: none; }
+  .tweet-handle a:hover { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; }
+  .tweet-time { font-size: 0.75rem; color: #8b949e; }
+
+  .tweet-text {
+    font-size: 0.85rem; line-height: 1.65; margin-bottom: 0.5rem;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .tweet-text a { text-decoration: none; }
+  .tweet-text a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .tweet-media {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px; margin-bottom: 0.5rem; overflow: hidden;
+  }
+  .tweet-media img {
+    width: 100%; max-width: 100%; border-radius: 4px;
+    border: 1px solid rgba(10, 143, 123, 0.3);
+  }
+
+  .tweet-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: #8b949e;
+  }
+  .tweet-metrics { display: flex; gap: 1rem; }
+  .tweet-link a { font-size: 0.75rem; }
+
+  .retweet-badge {
+    background: rgba(52, 63, 96, 0.75); color: #8b949e;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem;
+    margin-bottom: 0.5rem; display: inline-block;
+  }
+  .priority-badge {
+    background: #0ec4a9; color: #212737;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; margin-left: 0.5rem;
+  }
+
+  .noise {
+    font-size: 0.75rem; color: #8b949e; margin: 2rem 0 1rem;
+    padding: 0.75rem 1rem; background: rgba(52, 63, 96, 0.35); border-radius: 4px;
+  }
+  .noise a { color: #0ec4a9; text-decoration: none; font-size: 0.75rem; }
+  .noise a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .audio-row {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem 1.5rem;
+  }
+  .audio-player {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: rgba(52, 63, 96, 0.35); border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.625rem 1rem;
+  }
+  .audio-player:hover { border-color: #0ec4a9; }
+  .audio-btn {
+    background: none; border: none; cursor: pointer;
+    color: #0ec4a9; font-size: 1.25rem; padding: 0; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; flex-shrink: 0;
+  }
+  .audio-btn:hover { color: #eaedf3; }
+  .audio-progress {
+    flex: 1; height: 3px; background: rgba(52, 63, 96, 0.75);
+    border-radius: 2px; cursor: pointer; position: relative;
+  }
+  .audio-progress-fill {
+    height: 100%; background: #0ec4a9; border-radius: 2px;
+    width: 0%; transition: width 100ms linear;
+  }
+  .audio-time {
+    font-size: 0.75rem; color: #8b949e; min-width: 3.5rem; text-align: right;
+  }
+  .audio-speed {
+    font-size: 0.7rem; color: #8b949e; background: rgba(52, 63, 96, 0.75);
+    border: none; border-radius: 3px; padding: 2px 6px; cursor: pointer;
+  }
+  .audio-speed:hover { color: #0ec4a9; }
+
+  footer { padding: 1.5rem 1rem; }
+  .footer-text {
+    text-align: center; font-size: 0.75rem; color: #8b949e; line-height: 1.6;
+  }
+  .footer-text a {
+    color: #eaedf3; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 4px;
+  }
+  .footer-text a:hover { color: #0ec4a9; }
+  .stats-line {
+    text-align: center; font-size: 0.75rem; color: #8b949e;
+    margin-bottom: 0.5rem; line-height: 1.6;
+  }
+
+  /* Share bar */
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .share-label { font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem; }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+  /* Deep Dive section — matches category style */
+  .cat-deepdive .category-header { border-color: #eab308; }
+  .cat-deepdive .category-header h2 { color: #eab308; }
+  .deepdive-source {
+    font-size: 0.75rem; color: #8b949e; margin-top: 0.75rem;
+  }
+  .deepdive-source a { color: #8b949e; text-decoration: none; }
+  .deepdive-source a:hover { color: #eab308; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+
+  @media (max-width: 640px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .site-title { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<header>
+  <div class="title-row">
+    <span class="site-title">Signal Monitor</span>
+    <span class="feed-badge">For You</span>
+  </div>
+  <div class="header-meta">
+    <span class="date-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/><path d="M7 14h.013"/><path d="M10.01 14h.005"/><path d="M13.01 14h.005"/><path d="M16.015 14h.005"/><path d="M13.015 17h.005"/><path d="M7.01 17h.005"/><path d="M10.01 17h.005"/></svg>
+      <time>7 Apr, 2026 — 8:00pm</time>
+    </span>
+    <span class="sep">&bull;</span>
+    <span class="reading-time" id="reading-time"></span>
+  </div>
+  <div class="model-meta">claude-opus-4-6 &middot; $0.1778</div>
+</header>
+
+<main>
+
+  <div class="category cat-crypto">
+    <div class="category-header">
+      <h2>Crypto</h2>
+      <span class="category-count">138w</span>
+    </div>
+    <p class="editorial">Morpho's institutional flywheel keeps spinning — <a href="https://x.com/Morpho/status/2041527510803075075" target="_blank">the Ethereum Foundation doubled down on its treasury allocation</a> alongside Binance, OKX, and others extending yield through Morpho vaults — but the DeFi risk-reward thesis remains broken. As one builder put it bluntly, <a href="https://x.com/shafu0x/status/2041325304908505246" target="_blank">the risk of losing everything for an extra 40 bps does not make sense</a>, and declining yields across Aave and peers confirm the compression is structural, not cyclical. Meanwhile <a href="https://x.com/BitcoinMagazine/status/2041564518187249970" target="_blank">Morgan Stanley becomes the first bank to launch a spot Bitcoin ETF tomorrow</a> with 16,000 advisors ready to distribute — the institutional crypto arc from plumbing to product is now complete. Stablecoin rails are quietly becoming neobank infrastructure: <a href="https://x.com/jerallaire/status/2041552048429134184" target="_blank">Circle's cross-chain forwarding to Solana is now live</a>, and <a href="https://x.com/tempo/status/2041565228433825896" target="_blank">Tempo published a practical guide for stablecoin-powered neobank products</a> — adoption is less a moment than a slow annexation of traditional payment plumbing.</p>
+  </div>
+
+  <div class="category cat-ai">
+    <div class="category-header">
+      <h2>AI</h2>
+      <span class="category-count">143w</span>
+    </div>
+    <p class="editorial">Anthropic's unreleased Mythos model is the talk of the feed — <a href="https://x.com/hosseeb/status/2041579488224657581" target="_blank">it found bugs in every major operating system and web browser with 83% first-attempt exploitation</a> — and the decision to withhold public release signals a new phase where capability outpaces any responsible deployment framework. At <a href="https://x.com/NinaDSchick/status/2041623274069839900" target="_blank">ten trillion parameters and an estimated ten billion dollar training cost</a>, Mythos validates the capex flywheel thesis while simultaneously illustrating why it terrifies even its creators; Andreessen's observation that <a href="https://x.com/pmarca/status/2041662281092886546" target="_blank">AGI pricing tiers now range from twenty dollars a month to ten billion dollars</a> maps the economic strata of intelligence access with uncomfortable clarity. On the sovereignty front, Karpathy's LLM wiki ecosystem accelerates: <a href="https://x.com/NousResearch/status/2041378745332961462" target="_blank">Nous Research integrated it as a built-in Hermes-Agent skill</a>, and <a href="https://x.com/DataChaz/status/2041624689001558213" target="_blank">Karpathy has ditched traditional RAG for an autonomous Obsidian file system</a> — the cognitive sovereignty stack is assembling itself faster than any corporate roadmap predicted.</p>
+  </div>
+
+  <div class="category cat-tech">
+    <div class="category-header">
+      <h2>Tech & Quantum</h2>
+      <span class="category-count">90w</span>
+    </div>
+    <p class="editorial">Apple's design philosophy keeps aging well — <a href="https://x.com/aakashgupta/status/2041377689366647222" target="_blank">the drag-to-install .app bundle is a self-contained folder with every dependency inside it</a>, which reads as philosophical alignment with local-first sovereignty just as <a href="https://x.com/LocallyAIApp/status/2041547389584945618" target="_blank">Gemma 4 models arrived on Mac via MLX for M-series chips</a>. Google shipped something more prosaic but overdue: <a href="https://x.com/Google/status/2041564884098240833" target="_blank">Chrome vertical tabs are rolling out now</a>, borrowing from Arc and Dia as Tobi noted. The real signal is convergence — local AI, self-contained apps, and edge inference are collapsing into a single user experience where the cloud is optional, not required.</p>
+  </div>
+
+  <div class="category cat-stocks_macro">
+    <div class="category-header">
+      <h2>Stocks & Macro</h2>
+      <span class="category-count">113w</span>
+    </div>
+    <p class="editorial">Ray Dalio said the quiet part loud: <a href="https://x.com/RayDalio/status/2041531182018367773" target="_blank">we are in a world war that is not going to end anytime soon</a>. With every asset class still hostage to the Iran binary, Hyperliquid's synthetic oil markets have become <a href="https://x.com/ThinkingUSD/status/2041576239211610121" target="_blank">the most interesting market in the world right now</a> — crypto-native perps pricing geopolitical risk faster than traditional energy desks. DeFi yield compression is confirmed across the stack: <a href="https://x.com/Delphi_Digital/status/2041501380486291546" target="_blank">Delphi Digital documented how lending rates on Aave are algorithmically declining as utilization drops</a>. Three green weeks in twelve for the S&P wasn't a correction — it was a market structurally unable to discount what just happened, and the ceasefire terms suggest the repricing is far from over.</p>
+  </div>
+
+  <div class="category cat-israel">
+    <div class="category-header">
+      <h2>Israel</h2>
+      <span class="category-count">187w</span>
+    </div>
+    <p class="editorial">The ceasefire landed — and it reads like capitulation dressed as diplomacy. <a href="https://x.com/TheMaineWonk/status/2041669828050624798" target="_blank">Friday's Pakistan talks will be based on Iran's ten-point plan, not Trump's fifteen-point plan.</a> Iran's supreme council is claiming victory, <a href="https://x.com/MeidasTouch/status/2041670282558234836" target="_blank">Trump is attacking CNN for airing the full Iranian statement</a>, and the terms are remarkable: <a href="https://x.com/RonFilipkowski/status/2041670130652901689" target="_blank">no regime change, sanctions lifted, missile capabilities retained, enriched uranium kept, and Hormuz toll rights granted</a>. The cost ledger is brutal — <a href="https://x.com/MilesTaylorUSA/status/2041659343183937564" target="_blank">thirteen American lives lost, thousands of Iranian dead, soaring gas prices, and NATO damage</a> for a strait that was already open. But the ceasefire is already fraying: <a href="https://x.com/sentdefender/status/2041675191860842673" target="_blank">the UAE and Qatar report Iranian ballistic missile and drone waves since the ceasefire began</a>, <a href="https://x.com/Osinttechnical/status/2041686414438367608" target="_blank">Israel is bombing Iranian missile launch sites tonight</a>, and <a href="https://x.com/Osinttechnical/status/2041678458300891391" target="_blank">Iran and Oman will charge fees for Strait of Hormuz transit</a>. The only unambiguous win: <a href="https://x.com/SecRubio/status/2041676716343509184" target="_blank">Secretary Rubio announced the release of kidnapped American journalist Shelly Kittleson from Iraq</a>. The off-ramp we said was demolished may have been hastily rebuilt — but with Iran holding the toll booth and <a href="https://x.com/sentdefender/status/2041690304802136352" target="_blank">Khamenei ordering forces to cease fire</a>, the question is whether this freeze holds or merely resets the escalation clock.</p>
+  </div>
+
+  <div class="category cat-deepdive">
+    <div class="category-header">
+      <h2>Today's Deep Dive: The Precautionary Principle: How Safety Killed Progress</h2>
+      <span class="category-count">590w</span>
+    </div>
+    <div class="deepdive-source">Source: <a href="https://a16z.com/the-techno-optimist-manifesto/" target="_blank">The Techno-Optimist Manifesto — Marc Andreessen</a> · KB #2</div>
+    <div class="editorial"><p>The <a href="https://en.wikipedia.org/wiki/Precautionary_principle" target="_blank">Precautionary Principle</a> sounds obviously reasonable: before deploying a new technology at scale, prove it won't cause harm. Who could argue with that? Andreessen does — viciously — and the intellectual history of the principle explains why he's not being reckless.</p><p>The Precautionary Principle as a formal regulatory concept emerged in West German environmental law in the 1970s under the term <em>Vorsorgeprinzip</em> — "foresight principle." It made its way into international law through the <a href="https://en.wikipedia.org/wiki/Rio_Declaration_on_Environment_and_Development" target="_blank">Rio Declaration</a> in 1992 and has since been embedded in EU regulation, WHO guidelines, and dozens of national regulatory frameworks. The core formulation: "Where there are threats of serious or irreversible damage, lack of full scientific certainty shall not be used as a reason for postponing cost-effective measures to prevent environmental degradation."</p><p>The problem is asymmetry. The principle is exquisitely sensitive to the harms of action but essentially blind to the harms of inaction. If a new drug might cause liver damage in 0.1% of patients, the Precautionary Principle demands we delay until we know more. But delaying means people who would have survived with the drug instead die from the disease. Those deaths are just as real — they're simply invisible, statistical, counterfactual. The precautionary approach systematically underweights them.</p><p><a href="https://en.wikipedia.org/wiki/Cass_Sunstein" target="_blank">Cass Sunstein</a>, in his 2005 book <a href="https://en.wikipedia.org/wiki/Laws_of_Fear" target="_blank"><em>Laws of Fear</em></a>, identified this as the principle's fatal flaw: it is "paralyzing" because any significant action carries risks, and any significant inaction also carries risks. The principle provides no guidance for choosing between them — it just makes the visible risks feel larger than the invisible ones. This is not wisdom; it is cognitive bias enshrined in policy.</p><p>Andreessen's specific target is nuclear power. In the 1970s, following <a href="https://en.wikipedia.org/wiki/Three_Mile_Island_accident" target="_blank">Three Mile Island</a> and intense antinuclear activism, the Precautionary Principle effectively froze US nuclear plant construction. The argument was: we don't know the full risks of nuclear power. What followed was not a golden age of safety — it was decades of coal and natural gas, which kill an estimated 7 million people per year globally through air pollution according to the WHO. The precautionary approach to nuclear didn't eliminate deaths from energy production; it just shifted them to sources whose harms were diffuse and slow-moving enough to be politically invisible.</p><p>The deeper problem is that the Precautionary Principle is not actually neutral — it is structurally conservative. It protects existing technologies (which have already run the gauntlet of public scrutiny and become normalized) against new ones. Coal plants are grandfathered; nuclear faces infinite regulatory review. Gasoline cars are the default; electric alternatives must prove a negative. This is regulatory capture in slow motion: incumbents use uncertainty-framing to freeze out disruptive competition under the banner of safety.</p><p><a href="https://en.wikipedia.org/wiki/Nassim_Nicholas_Taleb" target="_blank">Nassim Taleb</a> offers a version of the principle that's actually coherent: apply it strictly only to technologies with tail risks that are global, irreversible, and non-linear — things like engineered pathogens or uncontrolled self-replicating nanotech. For everything else, you need cost-benefit analysis that counts both sides of the ledger. Taleb's version requires actual reasoning about magnitude and reversibility. The standard regulatory version just requires someone to feel nervous.</p><p>The honest version of safety analysis asks: safe compared to what? Compared to doing nothing? Compared to the alternatives? Andreessen's claim is not that risk doesn't matter — it's that precautionary logic, as actually practiced, loads all the risk on the side of progress and none on the side of stagnation. That asymmetry has real victims. Counting them is the more honest form of safety analysis.</p></div>
+  </div>
+
+  <div class="noise">📡 noise (7d): <a href="https://x.com/blockbee_io" target="_blank">@blockbee_io</a> 6/6 (100%) · <a href="https://x.com/somewheresy" target="_blank">@somewheresy</a> 6/6 (100%) · <a href="https://x.com/interserver" target="_blank">@interserver</a> 5/5 (100%) · <a href="https://x.com/nateliason" target="_blank">@nateliason</a> 5/5 (100%) · <a href="https://x.com/dotta" target="_blank">@dotta</a> 5/5 (100%)</div>
+
+  <div class="share-row">
+    <div class="share-left">
+      <div class="share-label">Share this post on:</div>
+      <div class="share-icons">
+        <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/2026-04-07-2000.html" target="_blank" rel="noopener" title="Share on X">
+          <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+        </a>
+        <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/2026-04-07-2000.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+        </a>
+        <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/2026-04-07-2000.html" target="_blank" rel="noopener" title="Share on Telegram">
+          <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+        </a>
+        <a href="mailto:?subject=Signal%20Monitor%202026-04-07-2000&body=https://betoneh.github.io/signal-monitor/2026-04-07-2000.html" title="Share via email">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+        </a>
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'},1500)})" title="Copy link">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+      </div>
+    </div>
+    <div style="width:100%;text-align:center;margin-top:0.5rem;">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>Back to Top</span>
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<div class="hr"><hr></div>
+
+<footer>
+  <p class="stats-line">156 tweets · Crypto 13% · AI 32% · Tech & Quantum 6% · Stocks & Macro 12% · Noise 59 · Israel Monitor · 50 tweets from curated list · source: For You</p>
+  <p class="footer-text">
+    Generated by Signal Monitor ·
+    <a href="https://x.com/beto_neh">@beto_neh</a>
+  </p>
+</footer>
+
+<script>
+  // Reading time
+  const text = document.querySelector('main').innerText;
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+  document.getElementById('reading-time').textContent = minutes + ' min read';
+
+  // Progress bar
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Audio player
+  const ael=document.getElementById('audio-el');
+  if(ael){
+    const abtn=document.getElementById('audio-btn');
+    const afill=document.getElementById('audio-fill');
+    const atime=document.getElementById('audio-time');
+    const aspeed=document.getElementById('audio-speed');
+    const playIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>';
+    const pauseIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>';
+    function fmt(s){const m=Math.floor(s/60);return m+':'+(''+(Math.floor(s)%60)).padStart(2,'0');}
+    window.toggleAudio=function(){if(ael.paused){ael.play();abtn.innerHTML=pauseIcon;}else{ael.pause();abtn.innerHTML=playIcon;}};
+    ael.addEventListener('timeupdate',function(){
+      if(ael.duration){afill.style.width=(ael.currentTime/ael.duration*100)+'%';}
+      atime.textContent=fmt(ael.currentTime)+(ael.duration?' / '+fmt(ael.duration):'');
+    });
+    ael.addEventListener('ended',function(){abtn.innerHTML=playIcon;afill.style.width='0%';});
+    window.seekAudio=function(e){
+      const bar=document.getElementById('audio-bar');
+      const pct=e.offsetX/bar.offsetWidth;
+      if(ael.duration)ael.currentTime=pct*ael.duration;
+    };
+    const speeds=[1,1.25,1.5,1.75,2];let si=0;
+    window.cycleSpeed=function(){si=(si+1)%speeds.length;ael.playbackRate=speeds[si];aspeed.textContent=speeds[si]+'x';};
+  }
+
+  // Pull to refresh (PWA)
+  if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+    let sy=0,p=false,d=document,b=d.body;
+    const el=d.createElement('div');
+    el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#8b949e;font-size:14px;z-index:9999;transition:top 0.2s;background:#212737;';
+    el.textContent='\u2193 Pull to refresh';
+    b.prepend(el);
+    d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+    d.addEventListener('touchmove',e=>{
+      if(!p)return;
+      const dy=e.touches[0].clientY-sy;
+      if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+      if(dy>5)e.preventDefault();
+      const t=Math.min(dy*0.4,50);
+      el.style.top=(t-50)+'px';
+      el.textContent=dy>80?'\u2191 Release':'\u2193 Pull to refresh';
+    },{passive:false});
+    d.addEventListener('touchend',e=>{
+      if(!p){return;}p=false;
+      const dy=e.changedTouches[0].clientY-sy;
+      el.style.top='-50px';
+      if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+    });
+  }
+</script>
+</body>
+</html>
