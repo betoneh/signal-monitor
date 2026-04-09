@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#212737">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Signal Monitor — 2026-04-09-0820</title>
+<style>
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; display: flex; flex-direction: column;
+    overflow-y: scroll; scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  a { outline-offset: 1px; outline-color: rgba(14, 196, 169, 0.75); }
+  a:focus-visible { outline: 2px dashed rgba(14, 196, 169, 0.75); text-decoration: none; }
+
+  header, main, footer {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem;
+  }
+  header { padding: 2rem 1rem 1.5rem; }
+  .title-row {
+    display: flex; align-items: baseline; gap: 0.75rem;
+  }
+  .site-title {
+    display: inline-block;
+    font-size: 1.875rem; font-weight: 700; color: #0ec4a9; text-decoration: none;
+  }
+  @media (min-width: 640px) { .site-title { font-size: 2.25rem; } }
+  .site-title:hover { color: #0ec4a9; }
+  .feed-badge {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.4);
+    font-weight: 400;
+  }
+  .header-meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 0.5rem; margin-bottom: 1.5rem;
+  }
+  .header-meta .date-wrap {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.875rem; color: #eaedf3; opacity: 0.8; font-style: italic;
+  }
+  @media (min-width: 640px) { .header-meta .date-wrap { font-size: 1rem; } }
+  .header-meta .date-wrap svg {
+    display: inline-block; width: 1.25rem; height: 1.25rem; min-width: 1.25rem; flex-shrink: 0;
+  }
+  .header-meta .sep { color: rgba(234, 237, 243, 0.3); }
+  .header-meta .reading-time {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.6);
+  }
+
+  .model-meta { font-size: 0.75rem; color: rgba(234, 237, 243, 0.4); margin-top: 0.25rem; letter-spacing: 0.01em; }
+
+  .stats { font-size: 0.75rem; color: #8b949e; margin-top: 0.5rem; line-height: 1.6; }
+
+  .hr { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  .hr hr { border: none; border-top: 1px solid #0a8f7b; }
+
+  main { flex: 1; }
+
+  .category { margin-bottom: 2rem; }
+  .category-header {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.75rem; padding-bottom: 0.5rem;
+    border-bottom: 1px solid #0a8f7b;
+  }
+  .category-header h2 { font-size: 1.25rem; font-weight: 600; color: #eaedf3; }
+  .category-count {
+    font-size: 0.75rem; color: #8b949e;
+    background: rgba(52, 63, 96, 0.75); padding: 1px 8px; border-radius: 3px;
+  }
+
+  .cat-crypto .category-header { border-color: #f7931a; }
+  .cat-crypto .category-header h2 { color: #f7931a; }
+  .cat-ai .category-header { border-color: #0ec4a9; }
+  .cat-ai .category-header h2 { color: #0ec4a9; }
+  .cat-tech .category-header { border-color: #8b5cf6; }
+  .cat-tech .category-header h2 { color: #8b5cf6; }
+  .cat-stocks_macro .category-header { border-color: #ef4444; }
+  .cat-stocks_macro .category-header h2 { color: #ef4444; }
+  .cat-israel .category-header { border-color: #3b82f6; }
+  .cat-israel .category-header h2 { color: #3b82f6; }
+  .cat-openclaw .category-header { border-color: #FF4500; }
+  .cat-openclaw .category-header h2 { color: #FF4500; }
+
+  .editorial {
+    line-height: 1.75; font-size: 1rem; margin-bottom: 1rem;
+    overflow-wrap: break-word; word-break: break-word;
+    color: #eaedf3;
+  }
+  .editorial p {
+    margin-bottom: 0.75rem; line-height: 1.75;
+  }
+  .editorial p:last-child { margin-bottom: 0; }
+
+  a {
+    color: #0ec4a9; text-decoration: none;
+  }
+  a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .editorial a {
+    color: #0ec4a9; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 8px;
+  }
+  .editorial a:hover { text-decoration-color: #eaedf3; }
+
+  .tweets { display: flex; flex-direction: column; gap: 0.75rem; }
+  .tweet {
+    background: rgba(52, 63, 96, 0.35);
+    border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.875rem 1rem;
+    overflow: hidden; max-width: 100%;
+  }
+  @media (hover:hover) { .tweet:hover { border-color: #0ec4a9; } }
+  .tweet.priority { border-left: 3px solid #0ec4a9; }
+
+  .tweet-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+  .tweet-author { font-weight: 600; font-size: 0.85rem; color: #eaedf3; }
+  .tweet-handle { color: #8b949e; font-size: 0.8rem; font-weight: 400; }
+  .tweet-handle a { color: #8b949e; text-decoration: none; }
+  .tweet-handle a:hover { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; }
+  .tweet-time { font-size: 0.75rem; color: #8b949e; }
+
+  .tweet-text {
+    font-size: 0.85rem; line-height: 1.65; margin-bottom: 0.5rem;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .tweet-text a { text-decoration: none; }
+  .tweet-text a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .tweet-media {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px; margin-bottom: 0.5rem; overflow: hidden;
+  }
+  .tweet-media img {
+    width: 100%; max-width: 100%; border-radius: 4px;
+    border: 1px solid rgba(10, 143, 123, 0.3);
+  }
+
+  .tweet-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: #8b949e;
+  }
+  .tweet-metrics { display: flex; gap: 1rem; }
+  .tweet-link a { font-size: 0.75rem; }
+
+  .retweet-badge {
+    background: rgba(52, 63, 96, 0.75); color: #8b949e;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem;
+    margin-bottom: 0.5rem; display: inline-block;
+  }
+  .priority-badge {
+    background: #0ec4a9; color: #212737;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; margin-left: 0.5rem;
+  }
+
+  .noise {
+    font-size: 0.75rem; color: #8b949e; margin: 2rem 0 1rem;
+    padding: 0.75rem 1rem; background: rgba(52, 63, 96, 0.35); border-radius: 4px;
+  }
+  .noise a { color: #0ec4a9; text-decoration: none; font-size: 0.75rem; }
+  .noise a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .audio-row {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem 1.5rem;
+  }
+  .audio-player {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: rgba(52, 63, 96, 0.35); border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.625rem 1rem;
+  }
+  .audio-player:hover { border-color: #0ec4a9; }
+  .audio-btn {
+    background: none; border: none; cursor: pointer;
+    color: #0ec4a9; font-size: 1.25rem; padding: 0; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; flex-shrink: 0;
+  }
+  .audio-btn:hover { color: #eaedf3; }
+  .audio-progress {
+    flex: 1; height: 3px; background: rgba(52, 63, 96, 0.75);
+    border-radius: 2px; cursor: pointer; position: relative;
+  }
+  .audio-progress-fill {
+    height: 100%; background: #0ec4a9; border-radius: 2px;
+    width: 0%; transition: width 100ms linear;
+  }
+  .audio-time {
+    font-size: 0.75rem; color: #8b949e; min-width: 3.5rem; text-align: right;
+  }
+  .audio-speed {
+    font-size: 0.7rem; color: #8b949e; background: rgba(52, 63, 96, 0.75);
+    border: none; border-radius: 3px; padding: 2px 6px; cursor: pointer;
+  }
+  .audio-speed:hover { color: #0ec4a9; }
+
+  footer { padding: 1.5rem 1rem; }
+  .footer-text {
+    text-align: center; font-size: 0.75rem; color: #8b949e; line-height: 1.6;
+  }
+  .footer-text a {
+    color: #eaedf3; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 4px;
+  }
+  .footer-text a:hover { color: #0ec4a9; }
+  .stats-line {
+    text-align: center; font-size: 0.75rem; color: #8b949e;
+    margin-bottom: 0.5rem; line-height: 1.6;
+  }
+
+  /* Share bar */
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .share-label { font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem; }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+  /* Deep Dive section — matches category style */
+  .cat-deepdive .category-header { border-color: #eab308; }
+  .cat-deepdive .category-header h2 { color: #eab308; }
+  .deepdive-source {
+    font-size: 0.75rem; color: #8b949e; margin-top: 0.75rem;
+  }
+  .deepdive-source a { color: #8b949e; text-decoration: none; }
+  .deepdive-source a:hover { color: #eab308; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+
+  @media (max-width: 640px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .site-title { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<header>
+  <div class="title-row">
+    <span class="site-title">Signal Monitor</span>
+    <span class="feed-badge">Following</span>
+  </div>
+  <div class="header-meta">
+    <span class="date-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/><path d="M7 14h.013"/><path d="M10.01 14h.005"/><path d="M13.01 14h.005"/><path d="M16.015 14h.005"/><path d="M13.015 17h.005"/><path d="M7.01 17h.005"/><path d="M10.01 17h.005"/></svg>
+      <time>9 Apr, 2026 — 8:20am</time>
+    </span>
+    <span class="sep">&bull;</span>
+    <span class="reading-time" id="reading-time"></span>
+  </div>
+  <div class="model-meta">claude-opus-4-6 &middot; $0.1810</div>
+</header>
+
+<main>
+
+  <div class="category cat-crypto">
+    <div class="category-header">
+      <h2>Crypto</h2>
+      <span class="category-count">142w</span>
+    </div>
+    <p class="editorial">Strategy's <a href="https://x.com/coinbureau/status/2042232837680820420" target="_blank">fourteen-point-five billion dollar unrealized Q1 loss</a> is the price of conviction at scale — the largest quarterly BTC drawdown since 2018 hitting 762K coins. Saylor added 4,871 BTC anyway, doubling down while the paper bleeds. Meanwhile Tether's <a href="https://x.com/paoloardoino/status/2042234048957837384" target="_blank">open-source QVAC SDK for cross-platform AI</a> extends Ardoino's local-intelligence thesis into developer tooling, and a <a href="https://x.com/zerohedge/status/2042245831168856493" target="_blank">coordinated exploit on Hyperliquid</a> underscores that the venue morphing into a full-spectrum derivatives layer still carries exotic tail risk. Morpho's <a href="https://x.com/Morpho/status/2042233650880848061" target="_blank">AI agent that checks positions and constructs transactions</a> via Claude and Cursor is the first clean implementation of the agent-DeFi stack we've been tracking — no SDK, no docs, just natural-language access to vault operations. Circle's Arc ecosystem keeps thickening: <a href="https://x.com/BSCNews/status/2042234284287660386" target="_blank">Arc opens source code and launches bounty program</a> ahead of mainnet, exactly the testnet-to-production pipeline Allaire needs for CPN's stablecoin distribution layer to have credible neutral infrastructure underneath it.</p>
+  </div>
+
+  <div class="category cat-ai">
+    <div class="category-header">
+      <h2>AI</h2>
+      <span class="category-count">105w</span>
+    </div>
+    <p class="editorial">Visa's <a href="https://x.com/CoinMarketCap/status/2042237895822512188" target="_blank">Intelligent Commerce Connect platform for AI agent purchases</a> is now public-facing — the quiet bombshell we flagged in prior cycles has graduated from pilot to product announcement, enabling autonomous agents to transact across both Visa and non-Visa rails. This is the AI-agent commerce stack crystallizing in real time: pair it with Morpho's agent beta and Tether's <a href="https://x.com/paoloardoino/status/2042232315888238630" target="_blank">QVAC SDK decoupling intelligence from the cloud</a> and you have three independent vectors — payments, DeFi operations, and local model deployment — all shipping in the same week. The convergence is no longer theoretical; the plumbing exists for agents that can reason locally, execute financially, and settle autonomously.</p>
+  </div>
+
+  <div class="category cat-tech">
+    <div class="category-header">
+      <h2>Tech & Quantum</h2>
+      <span class="category-count">117w</span>
+    </div>
+    <p class="editorial">Software's collapse is accelerating — <a href="https://x.com/zerohedge/status/2042245318448722282" target="_blank">the biggest two-day drop on record for software versus semis</a> extends yesterday's historic 8.4% plunge by another five percent, signaling that the AI-capex rotation is cannibalizing traditional SaaS faster than most portfolios are repositioned. The market is repricing the entire software layer as commodity now that frontier models can generate and maintain code autonomously. On the funding side, <a href="https://x.com/CoinMarketCap/status/2042229314368770460" target="_blank">top crypto fundraising last week led by OpenFX at ninety-four million</a> shows capital still flowing hard into payments and RWA infrastructure — the picks-and-shovels bet for a tokenized financial system. Real consumer demand running at <a href="https://x.com/BobEUnlimited/status/2042232000187191662" target="_blank">roughly 1.2 percent for six months before the oil shock</a> makes the consensus 3% growth forecast look like fantasy.</p>
+  </div>
+
+  <div class="category cat-stocks_macro">
+    <div class="category-header">
+      <h2>Stocks & Macro</h2>
+      <span class="category-count">133w</span>
+    </div>
+    <p class="editorial">US GDP Q4 revision <a href="https://x.com/coinbureau/status/2042243075179991344" target="_blank">came in at half a percent versus the expected seven-tenths</a> — the economy is softer than priced and the oil shock hasn't even fully propagated. Goldman's CTA model <a href="https://x.com/zerohedge/status/2042243170231013386" target="_blank">projects thirty-four billion in S&P buying over the next week</a> as systematic shorts flip long, setting up a mechanical bid into deteriorating fundamentals — classic late-cycle whiplash. Binance's <a href="https://x.com/BSCNews/status/2042245124764143897" target="_blank">listing of ten new Ondo tokenized stocks and ETFs</a> including AMD, Adobe, and TSM quietly advances the tokenized-equities thesis; traditional exchanges should notice that the on-ramp for global retail into US equities no longer requires a brokerage account. The US fertility rate hitting <a href="https://x.com/charliebilello/status/2042238863339323635" target="_blank">an all-time low of 1.57 births per woman</a> is the slow macro signal nobody trades but everybody should — it reprices housing, entitlements, and labor supply on a decade horizon.</p>
+  </div>
+
+  <div class="category cat-israel">
+    <div class="category-header">
+      <h2>Israel</h2>
+      <span class="category-count">156w</span>
+    </div>
+    <p class="editorial">The ceasefire is now a fiction maintained only by nomenclature. <a href="https://x.com/BarakRavid/status/2042234424406806726" target="_blank">No senior Trump administration official is actually in charge of the Lebanon file</a> even as Israeli strikes continue — <a href="https://x.com/BarakRavid/status/2042238094804443605" target="_blank">evacuation orders for Beirut and ground operations in southern Lebanon's largest town</a> proceeded hours after Vance suggested Israel would self-restrain. American soldiers <a href="https://x.com/mkaplantv/status/2042219629485916605" target="_blank">dispute the Pentagon's account of Iran's deadliest attack</a> on US troops, alleging they were left unprotected on a known target — the domestic credibility cost of this war is compounding. The Hormuz corridor remains the real leverage point: <a href="https://x.com/DeItaone/status/2042233402464637109" target="_blank">Iran capping transit at fifteen vessels per day</a> with only 55% odds of normalization before July, while <a href="https://x.com/michaeldweiss/status/2042203205912723588" target="_blank">American oil executives ask why they'd pay tolls to Iran</a> after supposedly winning the war. China is <a href="https://x.com/MarioNawfal/status/2042221237598875874" target="_blank">shipping sodium perchlorate to Iran to restock missile factories</a> — the war's supply chain has a silent third party, and the ceasefire's structural contradictions are multiplying faster than diplomats can paper over them.</p>
+  </div>
+
+  <div class="category cat-deepdive">
+    <div class="category-header">
+      <h2>Today's Deep Dive: Ephemeralization: Buckminster Fuller's Vision of Doing More With Less</h2>
+      <span class="category-count">598w</span>
+    </div>
+    <div class="deepdive-source">Source: <a href="https://a16z.com/the-techno-optimist-manifesto/" target="_blank">The Techno-Optimist Manifesto — Marc Andreessen</a> · KB #2</div>
+    <div class="editorial"><p><a href="https://en.wikipedia.org/wiki/Buckminster_Fuller" target="_blank">Buckminster Fuller</a> coined the word "ephemeralization" in 1938 to describe a trend he observed across the history of technology: doing more and more with less and less material, until eventually you can do everything with essentially nothing. It's an ungainly word for a profound idea — one that economists now call <a href="https://en.wikipedia.org/wiki/Dematerialization_(economics)" target="_blank">dematerialization</a> — and it has become one of the most empirically well-supported claims in the techno-optimist canon.</p><p>Fuller was an architect, engineer, futurist, and professional eccentric who spent his life designing systems at the intersection of physics and human flourishing. His most famous invention, the <a href="https://en.wikipedia.org/wiki/Geodesic_dome" target="_blank">geodesic dome</a>, is itself an embodiment of ephemeralization: a structure that achieves extraordinary strength-to-weight ratios by distributing stress across its entire surface rather than concentrating it in pillars. The same enclosed volume, vastly less material. The same structural function, achieved through geometry rather than brute mass.</p><p>The historical pattern Fuller identified is striking. The first transatlantic telegraph cables required enormous amounts of copper and were fragile and expensive. Each subsequent generation of communication technology carried more information using fewer physical resources. Today a fiber-optic cable the width of a human hair carries millions of times more information than those early copper cables, using photons rather than electrons, at a tiny fraction of the energy cost. The trend across 150 years is unmistakable: more signal, less stuff.</p><p>The same pattern holds across industries. A Boeing 787 uses 20% less fuel than the aircraft it replaced, with a higher percentage of its structure made from carbon fiber composites rather than aluminum. A modern smartphone contains more computing power than a room-sized mainframe of the 1970s, at a millionth of the energy cost. Global steel consumption per unit of GDP has been falling for decades as structures are engineered more efficiently. LED lighting delivers the same lumens as incandescent bulbs using 80% less electricity. The physical economy is quietly becoming lighter, even as it becomes richer.</p><p>The economist <a href="https://en.wikipedia.org/wiki/Jesse_Ausubel" target="_blank">Jesse Ausubel</a> and his colleagues at Rockefeller University have documented this dematerialization across dozens of industries and materials — a body of research that directly challenges the resource-depletion narrative. The US economy uses less steel, aluminum, copper, and timber per unit of economic output than it did in 1970, and in absolute terms many of these have peaked as well. The idea that economic growth necessarily means proportionally more resource consumption is empirically false, and has been for decades.</p><p>Fuller's broader framework connected ephemeralization to a long-run vision of universal abundance. If you can do the same work with less material each generation, then the long-run trajectory of technology is toward a world where the physical constraints on human flourishing — scarcity of raw materials, energy inputs, physical labor — become progressively less binding. Andreessen's version of this is that physical goods should eventually become "as cheap as pencils" — not because pencils are worthless, but because they are produced so efficiently that their material scarcity is irrelevant to your decision to use them.</p><p>The interesting tension in Fuller's vision is between ephemeralization and energy. Doing more with less material typically requires more sophisticated information processing — better design, smarter algorithms, more complex manufacturing. Information processing requires energy. The dematerialization of physical goods is partly offset by the increased energy intensity of the knowledge economy that produces them. Fuller anticipated this: his answer was the same technology curve applied to energy — solar, nuclear, eventually fusion — that would make energy itself effectively free. At that point, the material limits on human ambition dissolve into pure physics. Fuller called this "livingry" — the technology of life support — and he thought it was the actual project of civilization, if we were serious about it.</p></div>
+  </div>
+
+  <div class="noise">📡 noise (7d): <a href="https://x.com/stanikulechov" target="_blank">@stanikulechov</a> 7/7 (100%) · <a href="https://x.com/somewheresy" target="_blank">@somewheresy</a> 6/6 (100%) · <a href="https://x.com/interserver" target="_blank">@interserver</a> 5/5 (100%) · <a href="https://x.com/nateliason" target="_blank">@nateliason</a> 5/5 (100%) · <a href="https://x.com/blockbee_io" target="_blank">@blockbee_io</a> 5/5 (100%)</div>
+
+  <div class="share-row">
+    <div class="share-left">
+      <div class="share-label">Share this post on:</div>
+      <div class="share-icons">
+        <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/2026-04-09-0820.html" target="_blank" rel="noopener" title="Share on X">
+          <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+        </a>
+        <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/2026-04-09-0820.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+        </a>
+        <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/2026-04-09-0820.html" target="_blank" rel="noopener" title="Share on Telegram">
+          <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+        </a>
+        <a href="mailto:?subject=Signal%20Monitor%202026-04-09-0820&body=https://betoneh.github.io/signal-monitor/2026-04-09-0820.html" title="Share via email">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+        </a>
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'},1500)})" title="Copy link">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+      </div>
+    </div>
+    <div style="width:100%;text-align:center;margin-top:0.5rem;">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>Back to Top</span>
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<div class="hr"><hr></div>
+
+<footer>
+  <p class="stats-line">176 tweets · Crypto 19% · AI 20% · Tech & Quantum 7% · Stocks & Macro 27% · Noise 43 · Israel Monitor · 50 tweets from curated list · source: Following</p>
+  <p class="footer-text">
+    Generated by Signal Monitor ·
+    <a href="https://x.com/beto_neh">@beto_neh</a>
+  </p>
+</footer>
+
+<script>
+  // Reading time
+  const text = document.querySelector('main').innerText;
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+  document.getElementById('reading-time').textContent = minutes + ' min read';
+
+  // Progress bar
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Audio player
+  const ael=document.getElementById('audio-el');
+  if(ael){
+    const abtn=document.getElementById('audio-btn');
+    const afill=document.getElementById('audio-fill');
+    const atime=document.getElementById('audio-time');
+    const aspeed=document.getElementById('audio-speed');
+    const playIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>';
+    const pauseIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>';
+    function fmt(s){const m=Math.floor(s/60);return m+':'+(''+(Math.floor(s)%60)).padStart(2,'0');}
+    window.toggleAudio=function(){if(ael.paused){ael.play();abtn.innerHTML=pauseIcon;}else{ael.pause();abtn.innerHTML=playIcon;}};
+    ael.addEventListener('timeupdate',function(){
+      if(ael.duration){afill.style.width=(ael.currentTime/ael.duration*100)+'%';}
+      atime.textContent=fmt(ael.currentTime)+(ael.duration?' / '+fmt(ael.duration):'');
+    });
+    ael.addEventListener('ended',function(){abtn.innerHTML=playIcon;afill.style.width='0%';});
+    window.seekAudio=function(e){
+      const bar=document.getElementById('audio-bar');
+      const pct=e.offsetX/bar.offsetWidth;
+      if(ael.duration)ael.currentTime=pct*ael.duration;
+    };
+    const speeds=[1,1.25,1.5,1.75,2];let si=0;
+    window.cycleSpeed=function(){si=(si+1)%speeds.length;ael.playbackRate=speeds[si];aspeed.textContent=speeds[si]+'x';};
+  }
+
+  // Pull to refresh (PWA)
+  if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+    let sy=0,p=false,d=document,b=d.body;
+    const el=d.createElement('div');
+    el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#8b949e;font-size:14px;z-index:9999;transition:top 0.2s;background:#212737;';
+    el.textContent='\u2193 Pull to refresh';
+    b.prepend(el);
+    d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+    d.addEventListener('touchmove',e=>{
+      if(!p)return;
+      const dy=e.touches[0].clientY-sy;
+      if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+      if(dy>5)e.preventDefault();
+      const t=Math.min(dy*0.4,50);
+      el.style.top=(t-50)+'px';
+      el.textContent=dy>80?'\u2191 Release':'\u2193 Pull to refresh';
+    },{passive:false});
+    d.addEventListener('touchend',e=>{
+      if(!p){return;}p=false;
+      const dy=e.changedTouches[0].clientY-sy;
+      el.style.top='-50px';
+      if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+    });
+  }
+</script>
+</body>
+</html>
