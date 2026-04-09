@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-07T04:11:51.640Z",
+  "updated_at": "2026-04-09T01:32:15.195Z",
   "model": "claude-opus-4-6",
   "audio": {
     "enabled": false,
@@ -13,6 +13,11 @@
       "max": 180
     },
     "pm": {
+      "feed": "For You",
+      "hours": 12,
+      "max": 180
+    },
+    "watcher": {
       "feed": "For You",
       "hours": 12,
       "max": 180
