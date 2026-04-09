@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updated_at": "2026-04-09T01:32:15.195Z",
-  "model": "claude-opus-4-6",
+  "updated_at": "2026-04-09T02:05:29.383Z",
+  "model": "gemma3:12b",
   "audio": {
     "enabled": false,
     "voice": "en-US-JennyNeural"
