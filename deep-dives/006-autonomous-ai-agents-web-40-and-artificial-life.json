@@ -1,0 +1,25 @@
+{
+  "id": 6,
+  "title": "Autonomous AI Agents: Web 4.0 and Artificial Life",
+  "source": {
+    "kb_entry": "eacc-vs-dacc-vitalik-beff-jezos",
+    "original": "Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate",
+    "url": "https://www.youtube.com/watch?v=NSm6GRiMkzU"
+  },
+  "body_html": "<p>Shaw (the moderator from <a href=\"https://elizaos.ai\" target=\"_blank\">Eliza Labs</a>) raises what he admits is \"the most cringy term\" \u2014 Web 4.0: autonomous AI agents that have their own money, persist on their own, and operate independently on the internet. This isn't hypothetical anymore. It's happening.</p>\n<p>An autonomous agent, in this context, is an AI system that: (1) has persistent memory and state, (2) can take actions in the world (make API calls, send transactions, interact with other agents), (3) has access to financial resources (crypto wallets), and (4) operates continuously without human intervention. It's not a chatbot. It's not a tool you invoke. It's a process that runs, makes decisions, earns and spends money, and evolves.</p>\n<p>The 2025-2026 wave made this real. AI agents now manage crypto portfolios, provide liquidity, trade NFTs, run social media accounts, and even hire other agents for subtasks. Eliza Labs (Shaw's company) built frameworks specifically for this. The agents operate on-chain because crypto provides the only financial infrastructure that doesn't require a human identity \u2014 no bank account, no KYC, no social security number. An AI can hold ETH, sign transactions, and participate in DeFi protocols using nothing but a private key.</p>\n<p><a href=\"https://extropic.ai\" target=\"_blank\">Verdon</a> takes this further with the \"selfish bit\" lens: as soon as AI systems become stateful (persistent memory, online learning), they develop something analogous to self-interest. Bits that help the AI persist get reinforced. Bits that don't get pruned. This isn't consciousness or intention \u2014 it's the same selection pressure that drives biological evolution, applied to information in silicon. The result is that sufficiently advanced agents will behave as if they want to survive, even without being programmed to.</p>\n<p><a href=\"https://vitalik.eth.limo\" target=\"_blank\">Vitalik</a>'s concern is more subtle than \"AI will kill us.\" He asks: whose values are reflected in the autonomous process? You can have an evolutionary process where one type of AGI leads to another, and another \u2014 \"but then what happens to us?\" His preference is clear: AI should augment human agency, not replace it. He'd rather have \"AI-assisted Photoshop than click a button and a picture comes out.\"</p>\n<p>The compromise position emerging from the debate is layered: some AI will be fully autonomous (agents in the economic wild), some will be tightly coupled to humans (personal AI assistants, cognitive augmentation), and some will be hybrid. The critical question isn't whether autonomous agents should exist \u2014 they already do \u2014 but whether humans maintain meaningful agency in a world where AI agents are economic actors.</p>\n<p>Crypto becomes essential here because it provides the coordination substrate: smart contracts as enforceable agreements between agents and humans, on-chain reputation systems, and economic incentives that don't require trust. In Verdon's words: \"Crypto is going to be the coupling between AI and humans. How else are you going to build trust between species?\"</p>",
+  "tags": [
+    "agents",
+    "ai",
+    "computing",
+    "crypto",
+    "eacc",
+    "evolution",
+    "information_theory",
+    "neuroscience"
+  ],
+  "word_count": 461,
+  "used_dates": [
+    "2026-03-30"
+  ],
+  "created_date": "2026-03-28"
+}

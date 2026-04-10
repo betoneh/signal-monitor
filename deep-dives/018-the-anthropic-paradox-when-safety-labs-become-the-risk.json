@@ -1,0 +1,25 @@
+{
+  "id": 18,
+  "title": "The Anthropic Paradox: When Safety Labs Become the Risk",
+  "source": {
+    "kb_entry": "eacc-vs-dacc-vitalik-beff-jezos",
+    "original": "Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate",
+    "url": "https://www.youtube.com/watch?v=NSm6GRiMkzU"
+  },
+  "body_html": "<p><a href=\"https://vitalik.eth.limo\" target=\"_blank\">Vitalik</a> references the <a href=\"https://anthropic.com\" target=\"_blank\">Anthropic</a> situation — where the company faced pressure for refusing to let its AI be used for autonomous weapons and mass surveillance — as an example of unipolar risk. This episode illuminates a deeply ironic dynamic: AI safety organizations may create the very power concentration they were designed to prevent.</p>\n<p>Anthropic was founded in 2021 by former <a href=\"https://openai.com\" target=\"_blank\">OpenAI</a> researchers who left because they believed OpenAI wasn't taking safety seriously enough. The founding thesis was explicit: build a safety-focused AI lab that would develop powerful AI responsibly, with robust controls, extensive testing, and a corporate structure (public benefit corporation) that prioritized safety over profit.</p>\n<p>The paradox is structural. To do safety research on frontier AI, you need to build frontier AI. To build frontier AI, you need billions of dollars, the best researchers, and massive compute infrastructure. To get billions of dollars, you need investors who expect returns. To attract researchers, you need to be competitive with labs that are less safety-focused. The result: safety labs end up in the same arms race as everyone else, just with better PR.</p>\n<p>More insidiously, the safety narrative itself becomes a tool for power concentration. \"We're the responsible ones\" is also \"we should be the ones in charge.\" If you convince regulators that AI is dangerous and only certain labs can handle it safely, you've just created a regulatory moat that protects incumbents from competition. The AI safety movement, born from genuine concern, risks becoming the mechanism by which a few organizations permanently dominate the most transformative technology in history.</p>\n<p>This is exactly what <a href=\"https://extropic.ai\" target=\"_blank\">Verdon</a> warned about from the beginning of e/acc: \"Our worry was that the AI safety meme was so potent that certain power-seeking individuals could weaponize it to consolidate control over AI and convince you that you shouldn't have access to AI for your own good.\" The Anthropic episode validated this concern — not because Anthropic is evil, but because the system dynamics make capture inevitable.</p>\n<p>The deeper lesson is about institutional incentives. Even genuinely well-intentioned organizations are subject to the pressures of their environment. Anthropic's leaders may sincerely believe in safety, but they operate in a world where governments want weapons, investors want returns, and competitors want market share. The safety mission gets deformed by these pressures — not through corruption, but through the accumulated weight of a thousand small compromises.</p>\n<p>Vitalik's solution is structural rather than institutional: don't rely on any organization being good; build technology that makes badness less dangerous. Open source means no single lab controls the technology. Decentralized compute means no single provider can be pressured. Privacy-preserving tools mean surveillance is technically difficult regardless of who wants it. The d/acc approach doesn't require trusting Anthropic, OpenAI, or anyone — it changes the game so that trustworthiness matters less.</p>\n<p>This is perhaps the most profound convergence between e/acc and d/acc: both reject the idea that safety comes from the right people being in charge. Both argue that safety must be structural — embedded in the technology itself, not in the intentions of its controllers.</p>",
+  "tags": [
+    "agents",
+    "ai",
+    "alignment",
+    "dacc",
+    "eacc",
+    "economics",
+    "geopolitics",
+    "memetics"
+  ],
+  "word_count": 510,
+  "used_dates": [
+    "2026-04-02"
+  ],
+  "created_date": "2026-03-28"
+}

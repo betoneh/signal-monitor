@@ -1,0 +1,25 @@
+{
+  "id": 13,
+  "title": "Unipolar vs. Multipolar Risk: Vitalik's Threat Taxonomy",
+  "source": {
+    "kb_entry": "eacc-vs-dacc-vitalik-beff-jezos",
+    "original": "Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate",
+    "url": "https://www.youtube.com/watch?v=NSm6GRiMkzU"
+  },
+  "body_html": "<p><a href=\"https://vitalik.eth.limo\" target=\"_blank\">Vitalik</a> introduces a crucial framework that gets insufficient attention in AI discourse: the distinction between unipolar and multipolar risks. Understanding this taxonomy is essential because different risk types demand fundamentally different responses.</p>\n<p>Unipolar risk is the concentration of overwhelming power in a single entity — a government, corporation, or AI system that achieves dominance so complete that no other actor can meaningfully resist or compete. Historical examples include totalitarian states, but AI makes the scale qualitatively different. A sufficiently advanced AI controlled by a single actor could enable permanent surveillance, prediction of dissent before it forms, and suppression so precise that resistance becomes not just difficult but conceptually impossible. Vitalik's example is chilling: Russia went from \"protesting is impossible\" to \"you can protest, but the cameras will see you, and a week later you get a knock at 2 a.m.\"</p>\n<p>Multipolar risk is the danger that arises from competition between multiple powerful actors — arms races, tragedy of the commons, race-to-the-bottom dynamics where everyone cuts safety corners because their competitors are cutting them. The classic example is nuclear proliferation: no single nation wanted nuclear war, but the competitive dynamic made the world collectively less safe. In AI, multipolar risk manifests as companies racing to deploy models faster than they can ensure safety, or nations competing to develop AGI before their rivals.</p>\n<p>The crucial insight is that solutions to unipolar risk often exacerbate multipolar risk, and vice versa. If you centralize AI development in a single lab to prevent a dangerous arms race (addressing multipolar risk), you create the exact power concentration that enables unipolar risk. If you distribute AI development widely to prevent concentration (addressing unipolar risk), you get more actors racing with less coordination, increasing multipolar risk.</p>\n<p>E/acc and d/acc handle this trade-off differently. <a href=\"https://extropic.ai\" target=\"_blank\">Verdon</a>'s e/acc prioritizes preventing unipolar risk through diffusion — <a href=\"https://en.wikipedia.org/wiki/Open-source_software\" target=\"_blank\">open source</a>, open hardware, making AI power available to everyone. The logic: if everyone has AI, no one can dominate. The risk he accepts: more actors with less coordination, more potential for misuse. Vitalik's d/acc tries to address both simultaneously through defensive technology — tools that protect individuals (addressing unipolar risk) while reducing the damage potential of any single actor (addressing multipolar risk). Privacy-preserving sensors, verifiable hardware, and encrypted computation are technologies that increase safety regardless of whether the threat is one giant or many.</p>\n<p>Where both agree is that surveillance is a pure amplifier of unipolar risk. Surveillance makes whoever is currently strongest even stronger by removing the spaces where alternatives can form. This is why both are so passionate about privacy technology — not as a matter of personal preference, but as a structural defense against power concentration. In a world with advanced AI and no privacy, the first mover wins permanently. In a world with advanced AI and strong privacy, pluralism can survive.</p>\n<p>The framework also explains why both fear government capture of AI more than corporate capture. Corporations can be competed with; governments can change laws to eliminate competition entirely. The <a href=\"https://anthropic.com\" target=\"_blank\">Anthropic</a> situation Vitalik references — where the company was penalized for refusing to build autonomous weapons and mass surveillance — illustrates the mechanism: state power redirecting AI development toward unipolar outcomes.</p>",
+  "tags": [
+    "agents",
+    "ai",
+    "alignment",
+    "computing",
+    "dacc",
+    "eacc",
+    "economics",
+    "energy"
+  ],
+  "word_count": 530,
+  "used_dates": [
+    "2026-03-31"
+  ],
+  "created_date": "2026-03-28"
+}

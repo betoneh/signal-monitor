@@ -1,0 +1,21 @@
+{
+  "id": 57,
+  "title": "F. Scott Fitzgerald Was Wrong: The American Theory of Second Acts",
+  "source": {
+    "kb_entry": "pmarca-20vc-interview-ai-labor-venture",
+    "original": "Marc Andreessen: Will a16z Go Public & Why Labour Displacement with AI is Wrong (20VC)",
+    "url": "https://www.youtube.com/watch?v=c4tvVKDhpiY"
+  },
+  "body_html": "<p>Andreessen quotes F. Scott Fitzgerald's famous line \u2014 \"there are no second acts in American lives\" \u2014 and then demolishes it. This isn't just literary criticism; it's a core operating belief about what makes the American tech ecosystem uniquely productive.</p><p>The counterargument is empirical. Steve Jobs was fired from Apple, wandered in the wilderness for a decade, and returned to build the most valuable company in history. Marc Andreessen himself co-founded Netscape (glory), watched it get destroyed by Microsoft (shame), and then built a16z into one of the most powerful venture firms in history (glory again). The pattern \"oh the glory of it, oh the shame of it, oh the glory of it\" is more compelling than uninterrupted success precisely because the recovery demonstrates something that initial success doesn't: resilience, learning, and determination.</p><p>This connects to Andreessen's earlier point about the scalded stove. American culture \u2014 at least in its Silicon Valley variant \u2014 has a mechanism for letting go of failure that other cultures lack. \"As long as you're still alive and you haven't brought some fundamental legal issue on your head, I think second chances are actually available.\" This isn't universally true (he notes Europe is somewhat less forgiving), but in the tech world, it's deeply embedded.</p><p>The economic implication is significant. A culture that allows second acts gets more innovation per capita, because the cost of failure is lower. If failing once means you're permanently marked, rational people take fewer risks. If failing once means you get a chance to apply what you learned, rational people take more risks. More risk-taking means more experiments, which means more discoveries, which means more value creation. The tolerance for failure isn't soft-hearted generosity \u2014 it's an economic optimization that produces strictly better outcomes than the alternative.</p>",
+  "tags": [
+    "resilience",
+    "second-acts",
+    "failure",
+    "american-culture",
+    "innovation",
+    "risk"
+  ],
+  "word_count": 296,
+  "used_dates": [],
+  "created_date": "2026-03-30"
+}

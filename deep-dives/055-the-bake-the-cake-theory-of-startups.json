@@ -1,0 +1,21 @@
+{
+  "id": 55,
+  "title": "The Bake-the-Cake Theory of Startups",
+  "source": {
+    "kb_entry": "pmarca-20vc-interview-ai-labor-venture",
+    "original": "Marc Andreessen: Will a16z Go Public & Why Labour Displacement with AI is Wrong (20VC)",
+    "url": "https://www.youtube.com/watch?v=c4tvVKDhpiY"
+  },
+  "body_html": "<p>Andreessen's most vivid metaphor for startup founding is simple and devastating: \"If you leave the sugar out of the cake, you can't pour sugar on the cake afterwards and fix your mistake.\"</p><p>The first two years of a startup are when you're baking the cake. The product, the team, the culture, the business model, the technical architecture \u2014 these are ingredients that get mixed in during inception. Get them right, and the payoff compounds for decades. Get them wrong, and \"even if your company succeeds, you're going to live with those sins forever. They're going to extrapolate out.\"</p><p>This is why Andreessen insists that early stage is the core of the venture business, regardless of how large a16z grows. The $5 million seed check has the exact same upside potential as the $500 million growth check \u2014 both can produce $10 billion or $100 billion returns. But the seed investment has something the growth investment doesn't: the chance to be in the room when the cake is being baked.</p><p>The relationship formed at that stage is qualitatively different from any later partnership. The early investor builds an \"incredible emotional bond\" with the founders. They have \"complete context on why all the decisions got made.\" They \"remember how hard it was.\" This isn't sentimentality \u2014 it's information advantage. The investor who was there at inception understands the company's DNA in a way that no amount of due diligence can replicate for a later-stage investor.</p><p>The cake metaphor also explains why certain startup pathologies are unfixable. A company that starts with a toxic culture can't install a healthy culture later \u2014 the original culture has permeated the organization. A company that builds on the wrong technical architecture can't easily migrate \u2014 the technical debt compounds. A company that brings on the wrong co-founder can't simply replace them \u2014 the early decisions they made are baked in.</p><p>This has implications for founders choosing investors. The early investor isn't just providing capital \u2014 they're becoming a permanent ingredient in the cake. Their advice, their network, their temperament, their risk appetite \u2014 all of this shapes the company during its most formative period. Choosing an investor for their brand or their check size while ignoring their operational philosophy is like choosing cake ingredients based on packaging rather than flavor.</p>",
+  "tags": [
+    "startups",
+    "founding",
+    "culture",
+    "first-principles",
+    "venture-capital",
+    "early-stage"
+  ],
+  "word_count": 384,
+  "used_dates": [],
+  "created_date": "2026-03-30"
+}

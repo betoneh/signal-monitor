@@ -1,0 +1,25 @@
+{
+  "id": 7,
+  "title": "Crypto as Inter-Species Trust Infrastructure",
+  "source": {
+    "kb_entry": "eacc-vs-dacc-vitalik-beff-jezos",
+    "original": "Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate",
+    "url": "https://www.youtube.com/watch?v=NSm6GRiMkzU"
+  },
+  "body_html": "<p>Both debaters converge on a remarkable claim: cryptocurrency and blockchain technology may be the essential infrastructure for human-AI coexistence. Not as speculation or store of value — as a trust protocol between different types of intelligence.</p>\n<p>The logic is elegant. Trust between humans relies on shared biology, culture, legal systems, and social norms. None of these transfer to AI agents. An AI doesn't fear prison, doesn't have a reputation to protect (in the human sense), and doesn't share our evolutionary history of cooperation. Traditional trust mechanisms — contracts enforced by courts, reputations maintained through social pressure, institutions backed by the threat of violence — don't work when one party is software running on a server somewhere.</p>\n<p>Blockchain provides an alternative trust model: trust through math, not institutions. Smart contracts execute automatically when conditions are met — no court needed. On-chain history provides verifiable, immutable reputation — no social pressure needed. Cryptographic proofs demonstrate compliance without revealing private information — no surveillance needed. This is exactly the kind of trust infrastructure that works regardless of whether the counterparty is human, AI, or something in between.</p>\n<p>Consider a concrete scenario: an autonomous AI agent manages a supply chain optimization service. Companies pay it in stablecoins to reduce their logistics costs. The agent earns revenue, pays for its own compute, and reinvests in improving its models. How do you verify that the agent is actually optimizing for the company's benefit and not skimming? On-chain auditable financials. How do you enforce the service agreement? Smart contracts with cryptographic proofs of performance. How does the agent build reputation? Verifiable track record on-chain.</p>\n<p>This extends to more speculative scenarios. If AI agents eventually operate as independent economic entities — providing services, trading resources, forming coalitions — they need a financial system that doesn't require human identity. Traditional banking is built on KYC (Know Your Customer) — but what if the customer isn't human? Crypto wallets require only a private key. DeFi protocols are permissionless. An AI agent can be a first-class economic actor on <a href=\"https://ethereum.org\" target=\"_blank\">Ethereum</a> today.</p>\n<p><a href=\"https://vitalik.eth.limo\" target=\"_blank\">Vitalik</a>'s Ethereum was built for \"programmable money\" and \"world computer\" use cases that seemed abstract in 2015. A decade later, the killer application might be exactly what he's describing: the economic and trust layer for a world where humans and AI agents need to cooperate without either side being able to fully trust the other.</p>\n<p><a href=\"https://extropic.ai\" target=\"_blank\">Verdon</a> frames this as civilizational necessity: \"We're going to need to start thinking about crypto as inter-species trust infrastructure — really thoughtfully.\" Not as an investment thesis, but as a survival requirement. If AI agents fork off into autonomous existence (running on decentralized infrastructure, earning their own money), the only way to maintain peaceful economic exchange is through trustless protocols.</p>\n<p>The irony is rich: crypto spent years searching for its \"killer app.\" It might turn out that the killer app was always AI coordination — we just needed the AI to show up first.</p>",
+  "tags": [
+    "agents",
+    "ai",
+    "crypto",
+    "eacc",
+    "evolution",
+    "information_theory",
+    "open_source",
+    "privacy"
+  ],
+  "word_count": 489,
+  "used_dates": [
+    "2026-03-30"
+  ],
+  "created_date": "2026-03-28"
+}

@@ -1,0 +1,25 @@
+{
+  "id": 29,
+  "title": "The Fitness Landscape: Cultural Selection and Memetic Evolution",
+  "source": {
+    "kb_entry": "eacc-vs-dacc-vitalik-beff-jezos",
+    "original": "Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate",
+    "url": "https://www.youtube.com/watch?v=NSm6GRiMkzU"
+  },
+  "body_html": "<p><a href=\"https://extropic.ai\" target=\"_blank\">Verdon</a>'s claim that \"those that adopt that culture will literally have higher fitness\" sounds like Social Darwinism to most ears. But he's making a more precise and more interesting argument rooted in evolutionary theory — specifically, the concept of fitness landscapes as applied to cultural and memetic evolution.</p>\n<p>A fitness landscape is a mathematical abstraction from evolutionary biology, introduced by Sewall Wright in 1932. Imagine a vast terrain of hills and valleys. Each point on the terrain represents a possible genotype (or, in Verdon's framework, a possible configuration of cultural memes and technological choices). The height at each point represents the fitness of that configuration — how well it survives and replicates. Evolution is the process of populations climbing toward peaks on this landscape.</p>\n<p>The landscape metaphor reveals several non-obvious truths. First, there are many local peaks — configurations that are better than all their neighbors but not globally optimal. A culture that's locally adapted (efficient within its current paradigm) can be stuck on a low peak, unable to reach a higher one without first descending through a valley of lower fitness. This is the \"innovator's dilemma\" at civilizational scale: successful cultures resist the disruption needed to reach better configurations.</p>\n<p>Second, the landscape itself changes over time. When the environment shifts (new technology, climate change, contact with other cultures), previously high peaks can become valleys. The culture that was perfectly adapted to an agrarian economy is catastrophically maladapted to an industrial one. Rapid environmental change — which is exactly what accelerating technology produces — means the landscape is constantly reshuffling. Standing still is death; the peak you're on is sinking.</p>\n<p>Third, variance matters more than optimization. In a static landscape, you want to be precisely on the peak. In a rapidly changing landscape, you want to be spread across the terrain — maintaining a diverse portfolio of strategies so that when the landscape shifts, some of your variants are already near the new peaks. This is why Verdon argues against collapsing variance: \"We need more alternative bets. We need to maintain variance, not collapse entropy of our search over any design space — whether it's policies, cultures, whatever.\"</p>\n<p>Applied to the e/acc vs. d/acc debate, the fitness landscape framework provides clarity. Verdon argues that acceleration itself — increasing energy capture, information processing, and complexity — is the meta-strategy that keeps you moving uphill regardless of how the landscape shifts. Cultures that embrace acceleration have higher fitness across a wider range of possible futures. Cultures that decelerate are betting that the current landscape won't change, which is a losing bet in a world where the landscape changes continuously.</p>\n<p><a href=\"https://vitalik.eth.limo\" target=\"_blank\">Vitalik</a>'s counter is more subtle. He doesn't dispute that acceleration increases fitness on average. He argues that some landscape features — specifically, catastrophic cliffs where the terrain drops to zero fitness (extinction events) — require navigation, not speed. Running faster toward a cliff edge doesn't increase fitness. Sometimes the optimal strategy is slowing down long enough to identify the cliffs and build guardrails.</p>\n<p>The memetic dimension is equally important. Ideas, like genes, are subject to selection on fitness landscapes. E/acc itself is a meme competing for adoption. Its fitness depends on whether the cultures that adopt it actually perform better than those that don't. Verdon claims this is provable from thermodynamics. Skeptics claim it's a hypothesis dressed up as a theorem. The experiment is running in real time, with civilizations as the test subjects.</p>",
+  "tags": [
+    "ai",
+    "dacc",
+    "eacc",
+    "energy",
+    "evolution",
+    "information_theory",
+    "memetics",
+    "physics"
+  ],
+  "word_count": 571,
+  "used_dates": [
+    "2026-04-06"
+  ],
+  "created_date": "2026-03-28"
+}
