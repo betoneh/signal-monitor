@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#212737">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Signal Monitor — 2026-04-12-0800</title>
+<style>
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; display: flex; flex-direction: column;
+    overflow-y: scroll; scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  a { outline-offset: 1px; outline-color: rgba(14, 196, 169, 0.75); }
+  a:focus-visible { outline: 2px dashed rgba(14, 196, 169, 0.75); text-decoration: none; }
+
+  header, main, footer {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem;
+  }
+  header { padding: 2rem 1rem 1.5rem; }
+  .title-row {
+    display: flex; align-items: baseline; gap: 0.75rem;
+  }
+  .site-title {
+    display: inline-block;
+    font-size: 1.875rem; font-weight: 700; color: #0ec4a9; text-decoration: none;
+  }
+  @media (min-width: 640px) { .site-title { font-size: 2.25rem; } }
+  .site-title:hover { color: #0ec4a9; }
+  .feed-badge {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.4);
+    font-weight: 400;
+  }
+  .header-meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 0.5rem; margin-bottom: 1.5rem;
+  }
+  .header-meta .date-wrap {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.875rem; color: #eaedf3; opacity: 0.8; font-style: italic;
+  }
+  @media (min-width: 640px) { .header-meta .date-wrap { font-size: 1rem; } }
+  .header-meta .date-wrap svg {
+    display: inline-block; width: 1.25rem; height: 1.25rem; min-width: 1.25rem; flex-shrink: 0;
+  }
+  .header-meta .sep { color: rgba(234, 237, 243, 0.3); }
+  .header-meta .reading-time {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.6);
+  }
+
+  .model-meta { font-size: 0.75rem; color: rgba(234, 237, 243, 0.4); margin-top: 0.25rem; letter-spacing: 0.01em; }
+
+  .stats { font-size: 0.75rem; color: #8b949e; margin-top: 0.5rem; line-height: 1.6; }
+
+  .hr { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  .hr hr { border: none; border-top: 1px solid #0a8f7b; }
+
+  main { flex: 1; }
+
+  .category { margin-bottom: 2rem; }
+  .category-header {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.75rem; padding-bottom: 0.5rem;
+    border-bottom: 1px solid #0a8f7b;
+  }
+  .category-header h2 { font-size: 1.25rem; font-weight: 600; color: #eaedf3; }
+  .category-count {
+    font-size: 0.75rem; color: #8b949e;
+    background: rgba(52, 63, 96, 0.75); padding: 1px 8px; border-radius: 3px;
+  }
+
+  .cat-crypto .category-header { border-color: #f7931a; }
+  .cat-crypto .category-header h2 { color: #f7931a; }
+  .cat-ai .category-header { border-color: #0ec4a9; }
+  .cat-ai .category-header h2 { color: #0ec4a9; }
+  .cat-tech .category-header { border-color: #8b5cf6; }
+  .cat-tech .category-header h2 { color: #8b5cf6; }
+  .cat-stocks_macro .category-header { border-color: #ef4444; }
+  .cat-stocks_macro .category-header h2 { color: #ef4444; }
+  .cat-israel .category-header { border-color: #3b82f6; }
+  .cat-israel .category-header h2 { color: #3b82f6; }
+  .cat-openclaw .category-header { border-color: #FF4500; }
+  .cat-openclaw .category-header h2 { color: #FF4500; }
+
+  .editorial {
+    line-height: 1.75; font-size: 1rem; margin-bottom: 1rem;
+    overflow-wrap: break-word; word-break: break-word;
+    color: #eaedf3;
+  }
+  .editorial p {
+    margin-bottom: 0.75rem; line-height: 1.75;
+  }
+  .editorial p:last-child { margin-bottom: 0; }
+
+  a {
+    color: #0ec4a9; text-decoration: none;
+  }
+  a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .editorial a {
+    color: #0ec4a9; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 8px;
+  }
+  .editorial a:hover { text-decoration-color: #eaedf3; }
+
+  .tweets { display: flex; flex-direction: column; gap: 0.75rem; }
+  .tweet {
+    background: rgba(52, 63, 96, 0.35);
+    border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.875rem 1rem;
+    overflow: hidden; max-width: 100%;
+  }
+  @media (hover:hover) { .tweet:hover { border-color: #0ec4a9; } }
+  .tweet.priority { border-left: 3px solid #0ec4a9; }
+
+  .tweet-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+  .tweet-author { font-weight: 600; font-size: 0.85rem; color: #eaedf3; }
+  .tweet-handle { color: #8b949e; font-size: 0.8rem; font-weight: 400; }
+  .tweet-handle a { color: #8b949e; text-decoration: none; }
+  .tweet-handle a:hover { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; }
+  .tweet-time { font-size: 0.75rem; color: #8b949e; }
+
+  .tweet-text {
+    font-size: 0.85rem; line-height: 1.65; margin-bottom: 0.5rem;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .tweet-text a { text-decoration: none; }
+  .tweet-text a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .tweet-media {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px; margin-bottom: 0.5rem; overflow: hidden;
+  }
+  .tweet-media img {
+    width: 100%; max-width: 100%; border-radius: 4px;
+    border: 1px solid rgba(10, 143, 123, 0.3);
+  }
+
+  .tweet-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: #8b949e;
+  }
+  .tweet-metrics { display: flex; gap: 1rem; }
+  .tweet-link a { font-size: 0.75rem; }
+
+  .retweet-badge {
+    background: rgba(52, 63, 96, 0.75); color: #8b949e;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem;
+    margin-bottom: 0.5rem; display: inline-block;
+  }
+  .priority-badge {
+    background: #0ec4a9; color: #212737;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; margin-left: 0.5rem;
+  }
+
+  .noise {
+    font-size: 0.75rem; color: #8b949e; margin: 2rem 0 1rem;
+    padding: 0.75rem 1rem; background: rgba(52, 63, 96, 0.35); border-radius: 4px;
+  }
+  .noise a { color: #0ec4a9; text-decoration: none; font-size: 0.75rem; }
+  .noise a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .audio-row {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem 1.5rem;
+  }
+  .audio-player {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: rgba(52, 63, 96, 0.35); border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.625rem 1rem;
+  }
+  .audio-player:hover { border-color: #0ec4a9; }
+  .audio-btn {
+    background: none; border: none; cursor: pointer;
+    color: #0ec4a9; font-size: 1.25rem; padding: 0; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; flex-shrink: 0;
+  }
+  .audio-btn:hover { color: #eaedf3; }
+  .audio-progress {
+    flex: 1; height: 3px; background: rgba(52, 63, 96, 0.75);
+    border-radius: 2px; cursor: pointer; position: relative;
+  }
+  .audio-progress-fill {
+    height: 100%; background: #0ec4a9; border-radius: 2px;
+    width: 0%; transition: width 100ms linear;
+  }
+  .audio-time {
+    font-size: 0.75rem; color: #8b949e; min-width: 3.5rem; text-align: right;
+  }
+  .audio-speed {
+    font-size: 0.7rem; color: #8b949e; background: rgba(52, 63, 96, 0.75);
+    border: none; border-radius: 3px; padding: 2px 6px; cursor: pointer;
+  }
+  .audio-speed:hover { color: #0ec4a9; }
+
+  footer { padding: 1.5rem 1rem; }
+  .footer-text {
+    text-align: center; font-size: 0.75rem; color: #8b949e; line-height: 1.6;
+  }
+  .footer-text a {
+    color: #eaedf3; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 4px;
+  }
+  .footer-text a:hover { color: #0ec4a9; }
+  .stats-line {
+    text-align: center; font-size: 0.75rem; color: #8b949e;
+    margin-bottom: 0.5rem; line-height: 1.6;
+  }
+
+  /* Share bar */
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .share-label { font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem; }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+  /* Deep Dive section — matches category style */
+  .cat-deepdive .category-header { border-color: #eab308; }
+  .cat-deepdive .category-header h2 { color: #eab308; }
+  .deepdive-source {
+    font-size: 0.75rem; color: #8b949e; margin-top: 0.75rem;
+  }
+  .deepdive-source a { color: #8b949e; text-decoration: none; }
+  .deepdive-source a:hover { color: #eab308; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+
+  @media (max-width: 640px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .site-title { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<header>
+  <div class="title-row">
+    <span class="site-title">Signal Monitor</span>
+    <span class="feed-badge">Following</span>
+  </div>
+  <div class="header-meta">
+    <span class="date-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/><path d="M7 14h.013"/><path d="M10.01 14h.005"/><path d="M13.01 14h.005"/><path d="M16.015 14h.005"/><path d="M13.015 17h.005"/><path d="M7.01 17h.005"/><path d="M10.01 17h.005"/></svg>
+      <time>12 Apr, 2026 — 8:00am</time>
+    </span>
+    <span class="sep">&bull;</span>
+    <span class="reading-time" id="reading-time"></span>
+  </div>
+  <div class="model-meta">claude-opus-4-6 &middot; $0.1717</div>
+</header>
+
+<main>
+
+  <div class="category cat-crypto">
+    <div class="category-header">
+      <h2>Crypto</h2>
+      <span class="category-count">149w</span>
+    </div>
+    <p class="editorial">Bitcoin's breach below $71K isn't a new story — it's the same Hormuz-BTC math from last week playing out with higher stakes. <a href="https://x.com/coinbureau/status/2043328168795455875" target="_blank">Bitcoin fell below $71,000</a> on news Trump ordered a full naval blockade of the Strait, not merely failed diplomacy but active kinetic escalation. <a href="https://x.com/BSCNews/status/2043316862935523349" target="_blank">BTC retraced to $71,000 after U.S.-Iran talks ended without agreement</a> confirms what the wiki established: when the geopolitical bid evaporates, there's no organic transaction demand underneath. Saylor <a href="https://x.com/coinbureau/status/2043298490357588269" target="_blank">confirms another Bitcoin purchase this week</a> while Strategy sits on $14.5B in unrealized losses — dollar-cost averaging into a war whose physics he cannot influence. Meanwhile <a href="https://x.com/coinbureau/status/2043300599509532907" target="_blank">BlackRock's crypto portfolio fell $20.47 billion in Q1</a>, a 26% drawdown that makes the institutional adoption narrative feel distinctly late-cycle. The Justin Sun accusation that <a href="https://x.com/coinbureau/status/2043310665864184051" target="_blank">WLFI embedded a hidden blacklist function to freeze his wallet</a> adds a governance crisis to what was already a credibility problem for the Trump-adjacent crypto complex.</p>
+  </div>
+
+  <div class="category cat-ai">
+    <div class="category-header">
+      <h2>AI</h2>
+      <span class="category-count">133w</span>
+    </div>
+    <p class="editorial">The local-agent-fleet thesis is gaining coherence. <a href="https://x.com/umbrel/status/2043327903161831729" target="_blank">Umbrel envisions households running fleets of AI agents locally</a> — finance, scheduling, home automation, communication — none touching the internet, all talking to each other. This is the Andreessen "agent is just its files" concept made domestic, and it maps cleanly onto the harness thesis from the wiki: the model is commodity, the discipline wrapper and persistence layer are the moat. <a href="https://x.com/steipete/status/2043323073789935969" target="_blank">OpenClaw users report dramatically improved responses</a> after behavioral tuning, validating the strict execution contract approach to managing brilliant but unreliable models. Separately, the <a href="https://x.com/coinbureau/status/2043328284612542628" target="_blank">CFTC Chair's defense of prediction markets as more accurate than polls</a> is a quiet institutional legitimization of crypto-native information markets — the same infrastructure that prices Hormuz risk in real time on Polymarket is now being endorsed by the regulator who oversees it.</p>
+  </div>
+
+  <div class="category cat-tech">
+    <div class="category-header">
+      <h2>Tech & Quantum</h2>
+      <span class="category-count">124w</span>
+    </div>
+    <p class="editorial"><a href="https://x.com/BSCNews/status/2043248757903355965" target="_blank">Chinese investment in Brazil is shifting from infrastructure to consumer goods</a>, with Meituan committing $1B to challenge iFood — this is the Brazil-as-commodity-security-hedge thesis from the wiki expanding into consumer platform competition. China isn't just buying Brazilian iron ore; it's colonizing Brazilian dinner tables. <a href="https://x.com/coinbase/status/2043298264888508639" target="_blank">Coinbase launched leveraged exposure to Mag 7 stocks</a> for non-US traders without legacy brokerage accounts, which is less a product announcement than a demonstration of how crypto rails are quietly absorbing traditional equity distribution. The <a href="https://x.com/TechLayoffLover/status/2043315488332099731" target="_blank">CS orientation reality briefing showing only 284 of 847 freshmen placed as engineers</a> is the SaaS commodity repricing story hitting labor markets — when Anthropic can replace a Cloudflare product with one model, the downstream effect on entry-level engineering headcount was always arithmetic, not speculation.</p>
+  </div>
+
+  <div class="category cat-stocks_macro">
+    <div class="category-header">
+      <h2>Stocks & Macro</h2>
+      <span class="category-count">130w</span>
+    </div>
+    <p class="editorial">The Pakistan talks didn't just fail — they escalated. <a href="https://x.com/WallStreetMav/status/2043325066935505190" target="_blank">Trump launched a naval blockade of all ships through the Persian Gulf</a>, transforming a diplomatic pause into an active interdiction posture. <a href="https://x.com/kaitlancollins/status/2043295789124932065" target="_blank">No members of the negotiating team stayed behind in Islamabad</a>, including Kushner and Witkoff, meaning there is no diplomatic back-channel left open. The S&P is <a href="https://x.com/BSCNews/status/2043320733380555068" target="_blank">down 4.3% year-to-date but holding a narrow rising trend</a> as Wall Street tries to pivot from geopolitics to earnings fundamentals — a pivot that assumes Hormuz is priced in when a naval blockade has just made it dramatically worse. Goldman's CTA model projecting $34B in systematic buying meets a commodity shock that hasn't finished propagating through input costs. The gap between mechanical positioning flows and physical-world deterioration is the widest it has been all year.</p>
+  </div>
+
+  <div class="category cat-israel">
+    <div class="category-header">
+      <h2>Israel</h2>
+      <span class="category-count">134w</span>
+    </div>
+    <p class="editorial"><a href="https://x.com/sentdefender/status/2043031595112702250" target="_blank">Two U.S. Navy destroyers transited the Strait of Hormuz on Saturday</a>, the first American warship passage since the mining campaign began — a direct physical challenge to Iran's control of the waterway. <a href="https://x.com/TheStudyofWar/status/2043186199427256762" target="_blank">Iran is using naval mines to force ships into Iranian territorial waters</a> for shakedown fees, confirming the wiki's assessment that Hormuz is an engineering problem, not a diplomatic one. <a href="https://x.com/tomaskenn/status/2043189740518646149" target="_blank">Diplomatic talks collapsed in Islamabad while the Secretary of State was at a UFC fight in Miami</a> — the contrast captures the administration's bandwidth problem perfectly. With <a href="https://x.com/CattardSlim/status/2043119072028811425" target="_blank">Vance's security posture in Pakistan drawing unfavorable comparisons to Biden's Ukraine visit</a>, the optics of American seriousness are deteriorating alongside the substance. No European interlocutor, no back-channel team left behind, and now a naval blockade replacing negotiation — this conflict just shifted from diplomacy-failing to diplomacy-abandoned.</p>
+  </div>
+
+  <div class="category cat-deepdive">
+    <div class="category-header">
+      <h2>Today's Deep Dive: Say's Law and the Productivity-Demand Feedback Loop</h2>
+      <span class="category-count">618w</span>
+    </div>
+    <div class="deepdive-source">Source: <a href="https://x.com/pmarca/status/2037816674716729455" target="_blank">The Lump of Labor Fallacy — Marc Andreessen (X thread)</a> · KB #12</div>
+    <div class="editorial"><p>In 1803, a French economist named <a href="https://en.wikipedia.org/wiki/Jean-Baptiste_Say" target="_blank">Jean-Baptiste Say</a> articulated something that seemed obvious to him but has been contested ever since: supply creates its own demand. When you produce something, you generate income — for workers, suppliers, owners — and that income goes back into the economy as spending. The economy is not a fixed pool of purchasing power. It expands when production expands. This became known as <a href="https://en.wikipedia.org/wiki/Say%27s_law" target="_blank">Say's Law</a>, and while its precise formulation has been debated, disputed by Keynes, and refined over two centuries, its core insight is the key to understanding why automation does not destroy aggregate demand for labor.</p><p>The mechanism works like this. When a technology increases the productivity of labor — or replaces labor entirely in a given task — it lowers the cost of producing whatever that task was part of. Lower production costs translate into one of three outcomes: lower prices for consumers (raising real purchasing power), higher profits for producers (which get reinvested, paid as dividends, or spent as wages elsewhere), or both. In all three cases, real aggregate income in the economy rises. That additional real income does not evaporate. It gets spent on something — including goods and services that didn't previously exist or were too expensive to consume at scale.</p><p>The historical evidence for this mechanism is overwhelming. In 1900, the average American household spent roughly 43% of its income on food. Today, that figure is around 10%. The mechanization of agriculture — the combine harvester, the tractor, the chemical fertilizer regime — didn't produce a nation of starving unemployed farm laborers. It freed up 33 percentage points of household income to be spent on categories that barely existed in 1900: automobiles, air conditioning, healthcare, education, travel, consumer electronics, entertainment, streaming services. The workers who left farms didn't fall into permanent unemployment. They went to the factories, the offices, the service industries, the information industries that the freed purchasing power called into being.</p><p>This is the productivity-demand feedback loop: technology raises productivity, productivity lowers costs, lower costs raise real incomes, higher real incomes generate demand for new goods and services, demand for new goods and services generates employment. It is an engine, not a reservoir. The engine metaphor matters because it captures the self-reinforcing character of the process — it does not simply maintain equilibrium, it expands.</p><p><a href="https://en.wikipedia.org/wiki/John_Maynard_Keynes" target="_blank">John Maynard Keynes</a> famously challenged Say's Law in the 1930s, arguing that in a demand-constrained depression, supply does not automatically create its own demand — savings can leak out of the spending circuit, and economies can get trapped below full employment. Keynes was right about this as a short-run phenomenon under specific conditions. But the Keynesian critique of Say's Law does not vindicate the lump of labor fallacy. Keynes himself, in his 1930 essay <a href="https://en.wikipedia.org/wiki/Economic_Possibilities_for_our_Grandchildren" target="_blank">"Economic Possibilities for Our Grandchildren,"</a> predicted that rising productivity would generate so much leisure that the 15-hour workweek would become standard by 2030. He was wrong in the opposite direction — not because productivity didn't rise, but because human wants expanded to absorb the additional income.</p><p>The modified version of Say's Law relevant to AGI is not the naive claim that supply always creates exactly its own demand with no friction. It is the more robust claim that productivity gains generate real income, and real income in the hands of humans with infinite wants does not sit idle — it flows into new demands, new markets, new employment. The bottleneck to this process is not the existence of wants (which are effectively unlimited) but the speed at which labor markets can reallocate. That's a transition problem. It is not a structural permanent unemployment problem. Say's Law, suitably modified, remains the engine under the economy — and it does not have an off switch.</p></div>
+  </div>
+
+  <div class="noise">📡 noise (7d): <a href="https://x.com/jason" target="_blank">@jason</a> 6/6 (100%) · <a href="https://x.com/hisensesports" target="_blank">@hisensesports</a> 5/5 (100%) · <a href="https://x.com/chosta_eth" target="_blank">@chosta_eth</a> 5/6 (83%) · <a href="https://x.com/rabby_io" target="_blank">@rabby_io</a> 4/5 (80%) · <a href="https://x.com/a16z" target="_blank">@a16z</a> 14/21 (67%)</div>
+
+  <div class="share-row">
+    <div class="share-left">
+      <div class="share-label">Share this post on:</div>
+      <div class="share-icons">
+        <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/2026-04-12-0800.html" target="_blank" rel="noopener" title="Share on X">
+          <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+        </a>
+        <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/2026-04-12-0800.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+        </a>
+        <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/2026-04-12-0800.html" target="_blank" rel="noopener" title="Share on Telegram">
+          <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+        </a>
+        <a href="mailto:?subject=Signal%20Monitor%202026-04-12-0800&body=https://betoneh.github.io/signal-monitor/2026-04-12-0800.html" title="Share via email">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+        </a>
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'},1500)})" title="Copy link">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+      </div>
+    </div>
+    <div style="width:100%;text-align:center;margin-top:0.5rem;">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>Back to Top</span>
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<div class="hr"><hr></div>
+
+<footer>
+  <p class="stats-line">169 tweets · Crypto 16% · AI 23% · Tech & Quantum 8% · Stocks & Macro 25% · Noise 45 · Israel Monitor · 50 tweets from curated list · source: Following</p>
+  <p class="footer-text">
+    Generated by Signal Monitor ·
+    <a href="https://x.com/beto_neh">@beto_neh</a>
+  </p>
+</footer>
+
+<script>
+  // Reading time
+  const text = document.querySelector('main').innerText;
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+  document.getElementById('reading-time').textContent = minutes + ' min read';
+
+  // Progress bar
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Audio player
+  const ael=document.getElementById('audio-el');
+  if(ael){
+    const abtn=document.getElementById('audio-btn');
+    const afill=document.getElementById('audio-fill');
+    const atime=document.getElementById('audio-time');
+    const aspeed=document.getElementById('audio-speed');
+    const playIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>';
+    const pauseIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>';
+    function fmt(s){const m=Math.floor(s/60);return m+':'+(''+(Math.floor(s)%60)).padStart(2,'0');}
+    window.toggleAudio=function(){if(ael.paused){ael.play();abtn.innerHTML=pauseIcon;}else{ael.pause();abtn.innerHTML=playIcon;}};
+    ael.addEventListener('timeupdate',function(){
+      if(ael.duration){afill.style.width=(ael.currentTime/ael.duration*100)+'%';}
+      atime.textContent=fmt(ael.currentTime)+(ael.duration?' / '+fmt(ael.duration):'');
+    });
+    ael.addEventListener('ended',function(){abtn.innerHTML=playIcon;afill.style.width='0%';});
+    window.seekAudio=function(e){
+      const bar=document.getElementById('audio-bar');
+      const pct=e.offsetX/bar.offsetWidth;
+      if(ael.duration)ael.currentTime=pct*ael.duration;
+    };
+    const speeds=[1,1.25,1.5,1.75,2];let si=0;
+    window.cycleSpeed=function(){si=(si+1)%speeds.length;ael.playbackRate=speeds[si];aspeed.textContent=speeds[si]+'x';};
+  }
+
+  // Pull to refresh (PWA)
+  if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+    let sy=0,p=false,d=document,b=d.body;
+    const el=d.createElement('div');
+    el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#8b949e;font-size:14px;z-index:9999;transition:top 0.2s;background:#212737;';
+    el.textContent='\u2193 Pull to refresh';
+    b.prepend(el);
+    d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+    d.addEventListener('touchmove',e=>{
+      if(!p)return;
+      const dy=e.touches[0].clientY-sy;
+      if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+      if(dy>5)e.preventDefault();
+      const t=Math.min(dy*0.4,50);
+      el.style.top=(t-50)+'px';
+      el.textContent=dy>80?'\u2191 Release':'\u2193 Pull to refresh';
+    },{passive:false});
+    d.addEventListener('touchend',e=>{
+      if(!p){return;}p=false;
+      const dy=e.changedTouches[0].clientY-sy;
+      el.style.top='-50px';
+      if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+    });
+  }
+</script>
+</body>
+</html>
