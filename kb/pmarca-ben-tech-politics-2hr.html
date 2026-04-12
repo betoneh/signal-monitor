@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>On Tech Politics/Policy — Signal Monitor KB</title>
+<meta property="og:title" content="On Tech Politics/Policy">
+<meta property="og:description" content="Knowledge Base — Signal Monitor">
+<meta property="og:image" content="https://betoneh.github.io/signal-monitor/og/kb-pmarca-ben-tech-politics-2hr.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; overflow-wrap: break-word; word-break: break-word; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 8px; }
+  .content a:hover { text-decoration-color: #eaedf3; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+
+  
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+
+  
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .label {
+    font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem;
+  }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+</style>
+</head>
+<body id="top">
+<div class="progress-bar" id="progress"></div>
+<header>
+  <h1>On Tech Politics/Policy</h1>
+  <div class="meta">113 min read · podcast / video · 2026-04-11</div>
+  <div class="tags"><span class="tag">tech-policy</span><span class="tag">lobbying</span><span class="tag">ai-regulation</span><span class="tag">crypto-regulation</span><span class="tag">open-source</span><span class="tag">big-tech-vs-little-tech</span><span class="tag">antitrust</span><span class="tag">china</span><span class="tag">decentralization</span><span class="tag">andreessen</span><span class="tag">horowitz</span><span class="tag">a16z</span></div>
+  <div class="source" style="margin-top:0.5rem">Source: <a href="https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video" target="_blank">https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video</a></div>
+</header>
+<main>
+  <div class="content"><h2>Summary</h2>
+<p>Andreessen and Horowitz lay out the most coherent articulation of a16z's political turn: tech can no longer ignore Washington because Washington stopped ignoring tech. The thesis is that "big tech" and "little tech" (startups + open source) have fully diverged in interest, and that big tech is now actively lobbying to outlaw its competition under the cover of "safety" — particularly in AI. The firm has committed to a decade-long, bipartisan, well-funded lobbying push to defend startup innovation, open source, and the regulatory environment that lets America stay America in the next 100 years.</p>
+<p>The substantive arguments cut across AI, crypto, antitrust, and global competition. On AI: they argue every harmful use of AI is already illegal under existing law, so regulating "the math" instead of "the use" is both incoherent and a Trojan horse for monopoly capture by Microsoft/Google/Anthropic. On crypto: blockchain is the only credible answer to monopolistic data ownership and the only realistic infrastructure for decentralized AI training, inference, data marketplaces, and provenance/deepfake defense. On China: we're in Cold War 2.0, there will be two AI stacks (Western and Chinese), and America's only competitive advantage is decentralization and open source — exactly what big tech is lobbying to ban.</p>
+<p>The deeper political argument is about the American Dream itself. Andreessen's closing platform observation: in every sector where technology and markets are allowed to operate (TVs, software, video games), prices crash and consumers win; in every sector where the government dominates (healthcare, education, housing), prices skyrocket. An entire generation has rationally concluded the American Dream is unreachable. That demographic-psychological collapse is, in his view, the actual root cause of the country's political pathologies — and the only fix is letting builders build.</p>
+<h2>Key Takeaways</h2>
+<ul><li><strong>Big tech ≠ little tech.</strong> The interests have fully diverged. Big tech wants regulatory moats; little tech wants freedom to compete. Conflating them is a category error that has cost Silicon Valley a decade of policy losses.</li>
+<li><strong>Safety theater = monopoly capture.</strong> Big tech's lobbying for AI "safety" regulation is a deliberate attempt to outlaw open source and freeze the market into a 3-company cartel (Microsoft/OpenAI, Google, Anthropic). Meta is the notable exception, playing the Android-vs-iOS card with open-source Llama.</li>
+<li><strong>Regulate uses, not math.</strong> Every harmful use of AI is already illegal. Regulating "linear algebra above N variables" is incoherent and would freeze American innovation while doing nothing about adversaries.</li>
+<li><strong>The leapfrog dynamic.</strong> AI is currently a hyper-competitive market with Anthropic, Google, OpenAI, Mistral, Databricks, Meta all leapfrogging each other. Big tech CEOs' nightmare scenario isn't a doomer apocalypse — it's that AI becomes a commodity. That's why they're in DC.</li>
+<li><strong>Crypto as the decentralization layer.</strong> Blockchain is the credible answer to: (1) decentralized AI training and inference, (2) data marketplaces with provenance and consent, (3) deepfake defense via cryptographic identity signing, (4) putting AI compute back in the hands of universities and individuals.</li>
+<li><strong>Bipartisan reality.</strong> Neither party is uniformly pro- or anti-tech. Democrats have more tech fluency but a radical anti-business wing; Republicans have a free-market wing but also industrial-policy interventionists like Hawley. The only way to make progress is to engage both sides.</li>
+<li><strong>Cold War 2.0 with China.</strong> Two AI stacks are inevitable. America's only structural advantage is decentralization and open source — which is exactly what big tech and certain VCs (named: Vinod Khosla) are trying to ban. Banning open source = handing China the future.</li>
+<li><strong>Anglo-American vs. Continental legal traditions.</strong> The EU's "precautionary principle" — ban first, prove harmless, then maybe allow — is the philosophical opposite of American "freedom to innovate." If applied historically, we'd still be in mud huts. France is the lone European counterweight (driven by Mistral, mirroring its stance on civilian nuclear).</li>
+<li><strong>The TikTok bill</strong> has bipartisan supermajority support and reveals the bipartisan-on-China dynamic. Real opposition comes from far-left (TikTok = constituent reach) and David Sachs–style libertarian right (any new regulatory tool will eventually be used against US companies too).</li>
+<li><strong>The American Dream as platform.</strong> Where tech operates → prices crash (TVs, software, games). Where government dominates → prices explode (healthcare, education, housing). An entire generation has rationally concluded they can't form families, own homes, or live their parents' lives. This is the true root of political pessimism. Fix it by letting builders build.</li>
+<li><strong>University AI is dying.</strong> No university — possibly no group of universities combined — can afford a competitive AI cluster anymore. Without decentralized/open compute, the next generation of researchers gets boxed out entirely.</li>
+<li><strong>The Manhattan Project rebuttal.</strong> Khosla's "AI is the Manhattan Project, must be closed source" argument collapses immediately: real Manhattan Project had a sealed city, vetted personnel, no foreign nationals. OpenAI/Google have Chinese nationals working on their core IP — and one literally just stole Google's next-gen AI chip designs and walked them to Beijing. The horse is out of the barn. Closed source doesn't protect anything; it only protects monopoly profits.</li>
+</ul>
+<h2>Full Text / Transcript</h2>
+<blockquote>Marc Andreessen and Ben Horowitz, recorded April 4, 2024. 1h53m. Verbatim from Substack transcript player.</blockquote>
+<pre><code>0:00
+You know, ignoring tech is kind of no longer an option in the government. Big tech has been present in Washington, but big tech's interests are not only very different than kind of startup innovation, innovators' interests, but we think also kind of divergent from America's interest as a whole.
+0:22
+You know, if America is going to be America in the next hundred years, we have to get this right.
+0:38
+Welcome back, everybody. We are very excited for this episode. We are going to be discussing a lot of hot topics. The theme of today's show is tech and policy and politics. And so there's just a tremendous amount of heat right now in the tech world about politics.
+0:54
+There's a tremendous amount of heat in the political world about tech. And then we as a firm and actually I and both Ben and I as individuals have been spending a lot more time in policy and politics circles over the last several months.
+1:06
+And we as a firm have a much bigger pusher than we used to, which Ben will describe in a moment. But we're gonna go into quite a bit of detail. The big disclaimer that we wanna provide upfront for this is that we are a nonpartisan firm. We are 100% focused on tech politics and policy.
+1:23
+We today in this episode are going to be describing a fair number of topics, some of which involve partisan politics. Our goal is to describe anything that is partisan as accurately as possible and to kind of try to be as sort of fair minded and representing multiple points of view as we can be.
+1:42
+We are we are going to try very hard to not take any sort of personal political position. partisan positions. So please, if you could grant us some generosity of interpretation in what we say, we are trying to describe and explain as opposed to advocate for anything specifically partisan. We advocate for tech policy topics.
+2:00
+We do not advocate for other partisan topics. And actually, so yeah, on that theme, Ben, could you, you know, we wrote a little while ago, you wrote a blog post about and published about our firm's engagement in politics and policy. We sort of laid out our goals and then also how we're going about it.
+2:19
+And we're actually quite transparent about this. And so I was hoping maybe as an introduction for people who haven't seen that, if you could walk through what our plan and strategy is and how we think about this.
+2:29
+Yeah, it kind of starts with, you know, why now? You know, why get involved in politics now? You know, historically, tech has been a little involved in politics, but it's been relatively obscure issues. H-1B visas, stock option accounting. carried interest, things like that. But now the issues are much more mainstream.
+2:51
+And it turns out that, you know, for most of kind of the software industry's life, you know, Washington just hasn't been that interested in tech or in regulating tech for the most part. But starting kind of in the mid-2000s as software ate the world and
+3:09
+tech started to invade all aspects of life, you know, ignoring tech is kind of no longer an option in the government in that, you know, they've seen it impact elections and education and everything. And they, you know, I think policymakers really want to get in front of it is a term that we hear a lot.
+3:31
+You know, we need to be in front of these things this time, not like last time when we were behind the curve. And so, yeah, Tech really needs a voice, and in particular, little tech needs a voice.
+3:43
+So big tech has been present in Washington, but big tech's interests are not only very different than kind of startup innovation, innovators' interests, but we think also kind of divergent from America's interest as a whole.
+4:03
+And so that just makes it quite imperative for us to be involved, not only to represent the startup community, but also to kind of get to the right answer for the country. And for the country, this is, we think, a mission-critical effort, because if you look at the last century of the world,
+4:24
+You say, okay, why was America strong? And why was basically any country significant in terms of military power, economic power, cultural power in the last hundred years? And it was really those countries that got to the Industrial Revolution first and exploited it best.
+4:45
+And now at the dawn of the kind of information age revolution, we need to be there and not fall behind, not lose kind of our innovative edge. And that's all really up for grabs. And really the kind of biggest way America would lose it because we're still like, you know, from a
+5:08
+you know, capitalistic system standpoint, from an education standpoint and so forth, from a talent standpoint, we're extremely strong and should be a great innovator.
+5:16
+But the thing that would stop that would be kind of bad or misguided regulation that forces innovation elsewhere out of the country and kind of prevents us ourselves, America and the American government from adopting these technologies as well. And kind of driving that, driving the things that would kind of make us
+5:41
+bad on tech regulation are first really big tech whose goal is not to drive innovation or make America strong, but to preserve their monopoly. We've seen that act out now in AI in a really spectacular way where big tech has pushed for the banning of open source for safety reasons, safety reasons.
+6:03
+Now, you can't find anybody who's been in the computer industry who can tell you that any open source project is less safe. First of all, from a hacking standpoint, and you talk about things like prompt injection and then new attacks and so forth, you would much more trust an open source solution for that kind of thing.
+6:24
+but also for a lot of the concerns of the U.S. government about copyrights, where does this technology come from, and so forth. Not only should the source code be open, but the data should probably also be open as well, so we know what these things were trained on.
+6:40
+And that's also for figuring out what their bias is and so forth. How can you know if it's a black box? So this idea that closed source would be safer.
+6:48
+And big tech actually got this, you know, some of this language into the Biden administration executive order, like literally on, you know, like under the guise of safety to protect themselves, you know, against competition is really, really scary. And so that's kind of a big driver. The other kind of related driver is, I think, this combination of
+7:12
+big tech pushing for fake safetyism to preserve their monopoly, and then rather thin understanding of how the technologies work in the federal government. And so without somebody kind of bridging the education gap, we are as a country very vulnerable to these bad ideas.
+7:36
+We also think it's just a critical point in technology's history to get it right, because if you think about what's possible with AI, so many of our country's biggest challenges are very solvable now. Things like education, better and more equal healthcare, just
+7:58
+thinning out the bureaucracy that we've built and making the government easier to deal with, particularly for kind of underprivileged people trying to get into business and do things and become entrepreneurs. All these things are made much, much better by AI. Similarly, crypto is really our best answer for kind of getting back to
+8:22
+delivering the internet back to the people and away from the large tech monopolies. It is the one technology that can really do that. And if we don't do that, over the next five years, these monopolies are going to get much, much stronger. Probably some of them will be stronger than the US government itself.
+8:40
+And we have this technology that can help us, you know, get to this, you know, dream of stakeholder capitalism and participation for all economically. And we could undermine the whole thing with poor regulation.
+8:53
+And then finally, you know, in the area of biology, which is, we're at an amazing point in that if you look at the kind of history of capitalism, biology, we've never had a language, just much like we never had a language to describe physics for a thousand years.
+9:11
+We didn't have a language to really model biology till now, the language for physics was calculus, the language for biology is AI.
+9:19
+And so we have the opportunity to cure a whole host of things we could never touch before, as well as kind of address populations that we never even did any testing on before and always put in danger.
+9:34
+And, you know, this again, you have big pharma whose interest is in preserving the existing system because it kind of locks out all the kind of innovative competition. And so for all those reasons, we've like massively committed the flag and the firm to being involved in politics. So you've been spending a tremendous amount of time in Washington.
+9:55
+I've been spending time in Washington. You know, many of our other partners like Chris Dixon, BJ Pondy have been spending time in Washington. We have like real actual kind of a lobbying capability within the firm. And we'll talk about that some more, but call it government affairs. But, you know, they're registered lobbyists and they're working.
+10:16
+to work with the government and set up the right meetings and help us get our message across. Then we're deploying a really significant amount of money to basically pushing innovation forward, making getting to the right regulation on tech that preserves America's strength. And we are not only committed to doing that this year, but for the next decade.
+10:41
+And so this is a big effort for us, and we thought it'd be a good idea to talk about it on the podcast.
+10:48
+Yeah, thank you. That was great. And then, yeah, the key point there at the end is worth double underlining, I think, which is long-term commitment.
+10:55
+You know, there have been times with tech, specifically where there have been people who have kind of cannonballed their way onto the political scene, you know, with, you know, large, you know, kind of bomb, you know, sort of money bombs. And then, you know, maybe they were just single issue or whatever, but they're in and out.
+11:09
+Or, you know, they're just in and out. They just, you know, it was just like they thought they could have short-term impact. They, you know, then two years later, they're gone. We're thinking about that very differently.
+11:19
+Yeah. And that's why I brought up the historical lens. We really think that if America is going to be America in the next hundred years, we have to get this right.
+11:30
+Good. Okay. We're going to unpack a lot of what you talked about and go into more detail about it. So I will get going on the questions, which again, thank you everybody for submitting questions on X. We have a great lineup today. So I'm going to combine a bunch of these questions because there were some themes.
+11:44
+So Jared asks, why has tech been so reluctant to engage in the political process, both at the local and national level until now? And then Kate asks, interestingly, the opposite question, which I find this juxtaposition very interesting because this gets to the nature of kind of how we've gotten to where we've gotten to.
+12:01
+Kate asks, tech leaders have spent hundreds of millions lobbying in D.C., right? The opposite point. In your opinion, has it worked? And what should we be doing differently as an industry when it comes to working with D.C.? And so I wanted to kind of juxtapose these two questions because I actually think they're both true.
+12:15
+And the way that they're both true is that there is no single tech. Right. And to your point, there is no single tech.
+12:22
+And so and maybe once upon a time there was, you know, and I would say, you know, my involvement in political, you know, kind of efforts and, you know, in this domain started, you know, 30 years ago. And so I've seen a lot of the evolution over the last three decades.
+12:35
+And I was, you know, I was in the room for the founding of TechNet, which is one of the sort of legacy, you know, kind of tech lobbying groups. Yeah. John Chambers and John Doerr. So, you know, so I've kind of seen a lot of twists and turns on this over the last 30 years.
+12:47
+And I think, you know, the way I would describe it is, you know, as Ben said, you know, so one is, look, they're just, you know, was there a diversion? Was there sort of a distinction and a real difference of view between big tech and little tech 20, 30 years ago? Yes, there was. It's much wider now.
+13:04
+I would say that whole thing has really gapped out. You know, the big tech, even big, you probably remember big tech companies in the 80s and 90s often actually didn't really do much in politics.
+13:14
+You know, they didn't really have, you know, and probably most famously Microsoft probably, you know, Microsoft probably would, everybody at Microsoft during that period would probably say they had underinvested, you know, kind of given what happened with the antitrust case that unfolded.
+13:27
+Yeah, actually, the one issue we were united on was the stock option accounting, which, you know, interestingly, and we were against Warren Buffett. And, you know, Warren Buffett was absolutely wrong on it and won. And it's actually very much strengthened tech monopolies. So it, I think, did the opposite of what, you know, people in...
+13:49
+Certainly in Silicon Valley wanted, and I think people in Washington, DC and in America would have wanted was to make these monopolies so strong and using their market cap to further strengthen their monopoly because we moved from stock options to, it's too esoteric to get into here, but let's just say, trust me, it was bad.
+14:10
+Yes. Yes. It was very good for big companies, very bad for startups. So, yeah.
+14:15
+And actually, that's another thing that actually happened in the 90s and 2000s is so there's a fundamental characteristic of the tech industry and in particular tech startups and tech founders, which Ben and I would include ourselves in that group, which is we are idiosyncratic, disagreeable, iconoclastic people. And so there is no tech startup association.
+14:35
+Every industry group in the country has an association that has offices in D.C. and lobbyists and major financial firepower. And you know these under names like the MPAA in the music industry or the movie industry and the RAA in the record industry and the National Association of Broadcasters and the National Oil and Gas Association and so forth.
+14:54
+Every other industry has these groups where basically the industry participants come together and agree on a policy agenda. They hire lobbyists and they put a lot of money behind it. The tech industry, we've just never been good at actually, especially the startups, we've never been good at agreeing on a common platform.
+15:10
+And in fact, you know, Ben, you just mentioned the stock option accounting thing like that. That's actually that's my view of what happened at TechNet, which is TechNet was an attempt to actually get like the startup founders and the new, you know, kind of the new dynamic tech companies together.
+15:21
+But the problem was we all couldn't agree on anything other than basically there were two issues. We could agree on stock option expensing as an issue and we could agree on carried interest for venture capital firms as an issue. Yeah, they're an interest tax treatment.
+15:33
+And so they were the basically what ended up happening was, in my view, you know, kind of TechNet early on got anchored on these, I would say, pretty esoteric accounting and financial issues and just never had a view on, you know, could not come to agreement on many other issues. And I think a lot of.
+15:51
+attempts to coordinate tech policy in the Valley have had that characteristic. Then look, quite honestly, the other side of it, Ben, you highlighted this, but I want to really underline it. It's just like, look, the world has changed.
+16:01
+Up until 2010, I would say we're up around until about 2010, I think you could argue that politics and tech were just never that relevant to each other. You know, for the most part, what tech companies did was they made tools. You know, those tools got sold to customers. They use them in different ways.
+16:16
+And so, you know, how do you regulate it? You know, database software or an operating system or a word processor or a router.
+16:22
+Regulating a power drill or a hammer, right?
+16:25
+Yeah, exactly. Right. Exactly. Like, yeah, what, you know, what are appropriate shovel regulations? And so it just wasn't that important.
+16:31
+And then, you know, look, this is where I think Silicon Valley deserves, you know, kind of deserves its share of blame for anything, whatever's gone wrong, which is as a consequence, I think we all just never actually thought it was that important.
+16:41
+to really explain what we were doing and to be really engaged in the process out there. And then, look, the other thing that happened was there was a love affair for a long time. There was just a view that tech startups are purely good for society. Tech is purely good for society.
+16:55
+There were really no political implications to tech. And by the way, this actually continued, interestingly, up through 2012. You know, people now know of all the headlines that, you know, social media is destroying democracy and, you know, all these things that kind of really, you know, kicked into gear after 2015, 2016.
+17:11
+But, you know, even 2012, like the narrative, you know, social media had become very important actually in the 2012 election, but the narrative in the press was like almost uniformly positive. You know, it was very specifically that social media is protecting democracy by making sure that certain candidates get elected. And then also, by the way...
+17:27
+Obama, you know, there were literally headlines from, you know, very, you know, newspapers and magazines today that are very anti-tech, that were very pro-tech at that point because the view is tech helped Obama get reelected. And then the other thing was actually the Arab Spring.
+17:41
+You know, there was this moment where it was like tech is not only going to protect democracy in the U.S., but it's going to protect democracy all over the world. And, you know, Facebook and Google were the catalysts.
+17:49
+At the time, we're viewed as the catalyst for the Arab Spring, which is going to, of course, bring a flowering of democracy in the Middle East. It didn't work out that way, by the way. Did not work out that way.
+17:58
+And so anyway, the point is, like, it is relatively recent in the last 10, 12 years that it's just sort of just like everything has just kind of come together. And all of a sudden, you know, people in the policy arena are very focused on tech.
+18:12
+People in the tech world have very strong policy, politics opinions, the media weighs in all the time. By the way, none of this is a US only phenomenon. We'll talk about other countries later on, but there's also a global thing. These issues are playing out globally in many different ways.
+18:29
+One thing I would add is when I'm in, I do a fair amount in DC on the non-political side, and when I'm in meetings involving national security or intelligence or civil policy of whatever kind, it's striking how many topics that you would not think are tech topics and end up being tech topics.
+18:49
+And so, you know, and it's just because like when the state exercises power now, it does so through, you know, with technologically enabled means. And then when citizens, you know, basically resist the state or fight back against the state, they do so with technologically enabled means.
+19:01
+And so there's sort of, you know, there's sort of this, you know, sometimes say we're the dog that caught the bus on this stuff, right? Which is, you know, we all wanted tech to be important in the world. It turns out tech is important in the world.
+19:11
+And then it turns out the things that are important in the world end up getting pulled into politics.
+19:16
+Yeah, and I think that's right. You know, on the second part of the question, I think that's a, you know, like, why is tech been so ineffective despite pouring all the money in? And I think there are like a few kind of important issues around that.
+19:28
+One is really arrogance in that I think we in tech and a lot of the people who went in are like, oh, we're the good guys, we're for the good and everybody will love us when we get there and we can just push our agenda on the policy makers.
+19:46
+without really putting in the time and the work to understand the issues and the things that you face as somebody in Congress or somebody in the White House in trying to figure out what the right policy is. And I think that,
+20:04
+You know, we are coming at that from kind of our cultural value, which is we take a long view of relationships. We try never to be transactional. And I think that's especially important on policy because these things are massively complex. And so we understand our issues and our needs, but we have to take the time to understand
+20:26
+you know, the issues of the policymakers and make sure that, you know, we work with them to come up with a solution that is viable for everyone. And so I think that's thing one. I think Texas has been very bad on that. And the second one is I think that, you know, they've been
+20:42
+partisan where like it's been like not necessary or not even smart to be partisan. So people have come in with whatever like political bet, mostly kind of Democrat, Democratic Party that they have and like, okay, we're going to go in without understanding you and only work with Democrats because we're Democrats and this kind of thing.
+21:07
+And I think, you know, our approach is, look, we are here to represent tech. We want to work with policymakers on both sides of the aisle. We want to do what's best for America. We think that if we can describe that correctly, then we'll get support from both sides. And that's just a really different approach.
+21:26
+So hopefully that's right, and hopefully we can make progress.
+21:30
+Okay, good. So let's go to the next question. So this is, again, a two-part question. So Sheen asks, in what ways do you see the relationship between Silicon Valley and D.C. evolving in coming years, particularly in light of recent regulatory efforts targeting tech giants? And we'll talk about TikTok later on.
+21:47
+But, you know, there's been obviously big, you know, there's big flashpoint kind of events happening right now. By the way, also for people who haven't seen, you know, the DOJ just filed a massive antitrust lawsuit against Apple.
+21:57
+Yeah.
+21:57
+You know that. The tech topics are very hot right now in D.C.
+22:03
+So how do we see the reliance? By the way, that one's an interesting one of the things that I've talked about, which is a lot of little tech, I think, is very much in alignment with some of the things that the FTC is doing. But probably we would...
+22:24
+do it in a very different, against a different kind of set of practices and behaviors of some of the tech monopolies. And, you know, it just shows why, like, more conversation is important on these things.
+22:39
+Because, you know, what we think is the kind of abuse of the monopoly and, you know, what the lawsuit is, I would say are not exactly the same thing.
+22:48
+Well, let's talk about that. Let's talk about that for a moment, because this is a good case study of kind of the dynamics here. So
+22:54
+The traditional kind of free market libertarian view is sort of very critical of antitrust theory in general, and it's certainly very critical of the current prevailing antitrust theories, which are kind of more expansive and aggressive than the ones of the last 50 years, as shown in things like the Apple lawsuit and many other actions recently.
+23:14
+And so for people in business, there's sort of a reflexive view that basically says businesses should be allowed to operate.
+23:21
+But then very specifically, there's this view, or there are certainly people who have this view that basically says any additional involvement of the political machine, especially the sort of prosecutorial machine in tech, is invariably going to make everything worse in tech.
+23:34
+And so, yeah, they sue Apple today, and maybe you're happy because you don't like Apple today because they abused your startup or whatever. But if they win against Apple, they're just going to keep coming and coming and coming and do more and more of these.
+23:46
+The opposing view, the opposite view would be the view that says, no, actually, to your point, the interests of big tech and little tech have actually really diverged. And that actually, if there is not actually strong and vigorous investigation and enforcement, and then ultimately things like the Apple lawsuit,
+24:02
+Um, you know, actually these, these companies are going to get so powerful that they may be able to, you know, really seriously damage, you know, little tech, uh, you know, for, for, for, for a very long time.
+24:10
+So maybe we've been talking a little bit about how, you know, kind of, we, we think through that kind of, you know, cause we, we even debate this inside our firm. Um, but then talk a little bit through about how, how to, how to process through that.
+24:19
+And then, you know, what you think, and then also kind of where, where you think those lines of argument are taking us.
+24:24
+Yeah, so look, I definitely think, and by the way, right, you know, I mean, I should full disclosure, when we were at Netscape, we were certainly on the side of little tech against big tech. And, you know, Microsoft at that time had a 97%, you know, market share on desktop.
+24:40
+And, you know, it was very, very difficult to innovate on the desktop. It was just bad for innovation to have them in that level of position of power. And I think that's happened on the smartphone now, particularly with Apple.
+24:54
+I think the Epic case and the Spotify cases are really great examples of that, where I am fielding a product that's competitive with Spotify, and I am charging Spotify a 30% tax on their product. Like, that seems unfair, just from like a consumer, like just from the standpoint of the world.
+25:21
+And, you know, it does seem like it's, you know, using monopoly power in a very aggressive way. I think it's certainly against our interest and the interest of new companies for the monopolies to exploit their power to that degree.
+25:35
+you know, like when the government gets involved, it's not going to be like a clean surgical, like, okay, here's exactly the change that's needed.
+25:45
+But I also think, you know, with these global businesses with tremendous lock-in, you know, you just have to, you know, at least have the conversation and say, okay, what is this going to do for consumers if we let it run? And I
+26:01
+And, you know, we need to represent that point of view, I think, from the kind of small tech perspective. Yeah.
+26:08
+And the big tech companies are certainly not doing us favors right now. They're certainly not acting in ways that are pro-startups, I think we could say as a general. No, no, no, the opposite, sure. Quite the opposite.
+26:20
+One of my ideas I kick around a lot is it feels like companies, it feels like any company is either too scrappy or too arrogant
+26:29
+Yeah.
+26:30
+But never in the middle.
+26:32
+Yeah, yeah, yeah. It's like people.
+26:35
+Right. You're either the underdog or you're the overdog and there's not a lot of Not a lot of reasonable dogs.
+26:44
+Exactly, exactly.
+26:45
+Yeah, so there's an inherent tension there. It seems very hard for these companies to reach a point of dominance and not figure out some way to abuse it.
+26:52
+I also think you kind of touched on an important point, which is, you know, we're, you know, in representing little tech, we're not a pure libertarian, anti-regulatory kind of company. force here. We think we need regulation in places. We certainly need it in drug development.
+27:10
+We certainly need regulation in crypto and financial services, the financial services aspect of crypto. It's very, very important. It's very important to the industry that it, you know, that it be strong in America with a proper kind of regulatory regime. So we're not anti-regulation.
+27:27
+We're kind of pro the kind of regulation that will kind of make both innovation strong and, you know, the country strong.
+27:37
+Yeah, and we should also say, look, like when we're advocating on behalf of Little Tech, obviously there's self-interest, you know, kind of as a component of that because we're a venture capital firm and we back startups. And so there's obviously a straight financial interest there.
+27:48
+You know, I will say, you know, I think Ben, you'd agree with me. Like we also feel like philosophically, like this is a very sort of pro-America position, very pro-consumer position.
+27:56
+And the reason for that is very straightforward, which is, you know, Ben, as you've said many times in the past, the motto of any monopoly is, or what's the motto? Yeah.
+28:06
+We don't care because we don't have to. Right, exactly. And so you probably experienced if you've called customer service when one of these monopolies has, you know, kicked you off their platform.
+28:18
+Yes, exactly. Yes, exactly. And so, yeah, it's just that there is something in the nature of monopolies where they just they have a, you know, if they no longer have to compete. And if they're no longer disciplined by the market, they basically go bad. And then how do you prevent that from happening?
+28:35
+The way you prevent that is from forcing them to compete the way that they have to compete. In some cases, they compete with each other, although often they collude with each other, which is another thing. Monopoly and cartel are kind of two sides of the same coin.
+28:46
+But really, at least in the history of the tech industry, it's really when they're faced with startup competition.
+28:51
+Um, you know, when they've got, you know, when they've got a, when the elephant has a terrier at his heels, nipping at him, you know, taking increasingly big bites out of his foot, like that, that's when big companies actually act. And when they, when they, when they, when, and when they do new things.
+29:02
+Um, and so without healthy startup competition, you know, like let's say there are many sectors of the economy where it's just very clear now that there's not enough startup competition because the incumbents that everybody deals with on a daily basis are just practically intolerable.
+29:15
+And it's not in anybody's interest, ultimately, from a national policy standpoint, for that to be the case. Things can get bad where it's to the benefit of the big companies to preserve those monopolies, but very much not to anybody else's benefit.
+29:29
+Yeah, no, exactly. Exactly. You know, which is, I would say, such a big impetus behind our kind of political activity.
+29:36
+Yeah, that's right. Okay, we'll keep going. So in what ways do you, okay, now we're going to future looking. So in what ways do you see the relationship between Silicon Valley and D.C. evolving in the coming years?
+29:45
+And then specifically, and again, we're not going to be making partisan recommendations here, but, you know, there is an election coming up. And it is a big deal. And it's going to have both what happens in the White House and what happens in Congress is going to have big consequences for everything we've just been discussing.
+30:04
+So how do we see the upcoming election affecting tech policy? And Ben, why don't you start?
+30:10
+Yeah, well, I think there are several issues that end up being really important to kind of educate people on now because whatever platform you run on, you know, as a Congress person or as the president, you want to kind of live up to that promise when you get elected.
+30:33
+And so a lot of these kinds of positions that will persist over the next four years are gonna be established now. I think in, you know, crypto in particular, you know, we've been very active on this because there's,
+30:48
+you know, we have a big kind of donation to something called the Fair Shake Pack, which is kind of work on this and just identifying for kind of citizens, like, okay, which politicians are on what side of these issues? You know, who are the kind of, just flat out anti-crypto, anti-innovation, anti-blockchain, anti-decentralized technology candidates.
+31:14
+And like, let's at least know who they are so that we can tell them we don't like it. And then tell all the kind of people who agree with us that we don't like it. And a lot of it ends up being You know, look, we want the right regulation for crypto.
+31:32
+We've, you know, worked hard with policymakers to, you know, kind of help them formulate things that will, you know, prevent scams, prevent nefarious uses of the technology for things like money laundering and so forth.
+31:47
+um and then enable uh the good companies the companies that are you know pro-consumer helping you own your own data and not have it owned by some monopoly corporation who can exploit it or just lose it you know like get broken into and so you now have identity theft problems and so forth um that can kind of help uh kind of a fair economy for creative so that
+32:12
+You know, there's not a 99% take rate on, you know, things that you create on social media and these kinds of things. And so, you know, like it's just important to kind of, I think, educate the populace on where every candidate stands on these issues. And so we're really, really focused on that.
+32:32
+And I think, you know, same true for AI, same true for bio.
+32:35
+I'd also add, I don't, maybe talk a little bit more with the election in a moment, but I'd also add like, it's not actually the case that there's a single party in DC that's pro-tech and a single party that's anti-tech. Definitely not.
+32:47
+There's not, and by the way, if that were the case, it would make, might make life a lot easier. Yes. But it's not the case. And I'll just give, Ben, I'll just give a thumbnail sketch of at least what I see when I'm in DC and see if you agree with this.
+33:00
+So it would say the Democrats are sort of, Democrats are much more fluent in tech. And I think that has to do with who their kind of elites are. It has to do with this kind of very long established revolving door.
+33:12
+And I mean that in both the positive and pejorative sense between the tech companies and the Democratic Party, Democratic politicians, political offices, congressional offices, White House offices. There's just a lot more integration. The big tech companies tend to be very democratic, which you see in all the donation numbers and voting numbers.
+33:30
+And so there's just like there are just a lot more, I would say, tech fluent, tech aware Democrats, especially in powerful positions. You know, many of them have actually worked in tech companies. Just as an example, the current White House chief of staff is a former board member at Metta where I'm on the board.
+33:45
+And so there's just you know, there's there's a lot of sort of connective tissue. But between those, having said that, the current Democratic Party, and in particular certain of its more radical wings, have become extremely anti-tech to the point of being arguably, in some cases, outright anti-business, anti-tech.
+34:04
+And so, you know, there's a real kind of back and forth there. You know, Republicans, on the other hand, like, you know, in theory and the stereotype would have you believe, you know, Republicans are sort of inherently, you know, more pro-business and more pro-free markets and should therefore be more pro-tech.
+34:19
+But I would say there again, it's a mixed bag because number one, a lot of Republicans just basically think of Silicon Valley, but it's all Democrats. And so Silicon Valley is all Democrats. If we're Republicans, that means they're de facto the enemy. They hate us. They're trying to defeat us. They're trying to defeat our policies.
+34:35
+And so they must be the enemy. And so there's a lot of, I would say, some combination of distrust and fear and hate kind of on that front. And then again, with much less connective tissue, there are many fewer Republican executives at these companies, which means there are many fewer Republican officials or staffers who have tech experience.
+34:54
+And so there's a lot of mistrust And of course, you know, there have been flashpoint issues around this lately, like social media censorship that have really exacerbated this conflict. And then the other thing is there are very serious policy disagreements.
+35:09
+And again, there are at least wings of the modern Republican Party that are actually quite sort of economically interventionist. And so the term at the moment is industrial policy, which basically there are Republicans who are very much in favor of a much more interventionist government approach towards dealing with business and in particular dealing with tech.
+35:32
+And so I guess say like there's real there's real like this is not a this is not an either or thing like there are real issues on both sides. The way we think about that is therefore there's a real requirement to engage on both sides.
+35:43
+There's a real requirement, Ben, to your point to to educate on both sides. And there's a real, you know, you know, if you're going to make any progress in tech issues, there's a real need to have a bipartisan approach here because you do have to actually work with both sides.
+35:54
+Yeah, and I think that's absolutely right. And just to kind of name names a little, if you look at like the Democratic side, you know, you've got people like Richie Torres out of the Bronx.
+36:08
+And, you know, like, by the way, a huge swath of the Congressional Black Caucus that sees, wow, crypto is a real opportunity to equal the financial system, which has historically been, you know, you know, documentedly racist against kind of a lot of their constituents.
+36:25
+And then also, you know, the creatives, which they represent a lot to kind of get a fair shake. And then on the other hand, you have Elizabeth Warren, who has taken a very totalitarian view of the financial system and is moving to consolidate everything in the hands of, you know, a very small number of banks. And
+36:45
+basically control who can participate and who cannot in finance. So, you know, these are just very, very different views out of the same party. And I think that, you know, we need to just make the specific issues really, really clear.
+37:01
+Yeah. And the same thing we could, you know, spend a long time also naming names on the Republican side. So, yes. Yes. Which we'll do later. But so, yeah, well, I should do it right now just to make sure that we're fair on this.
+37:14
+You know, there are there are there are Republicans, you know, there are Republicans who are like full on pro free market, you know, you know, very much pro, you know, are very opposed to all current government efforts to, you know, intervene in markets like crypto.
+37:26
+By the way, many of those same Republicans are also very negative in the antitrust action. They're very ideologically opposed to antitrust, and so they would also be opposed to things like the Apple lawsuit that a lot of startup founders might actually like.
+37:39
+And then on the flip side, you have folks like Josh Hawley, for example, that are, I would say, quite vocally, I would say, irate at Silicon Valley and very in favor of much more government intervention and control. I think a Hawley administration, just as an example, would be extremely interventionist in...
+37:56
+in Silicon Valley and would be very, you know, kind of very pro-industrial policy, very much trying to both, you know, sort of set goals and sort of have government management of more of tech, but also much more dramatic action against, you know, at least perceived a real enemy. So it's the same kind of mixed bag.
+38:13
+Yeah, so anyway, I wanted to go through that, though. That's kind of the long, winding answer to the question of how will the upcoming election affect tech policy, which is, look, there are real issues with the Biden administration, in particular with the agencies and with some of the affiliated senators, as Ben just described.
+38:29
+So there are certainly issues where... you know, the agencies, you know, under the Trump administration, the agencies would be headed by very different kinds of people.
+38:39
+Having said that, it's not that, you know, it's not that a Trump presidency would necessarily be a clean win, you know, and there are many people in sort of that wing who might be hostile in, by the way, in different ways, or actually might be hostile in some cases in the same ways.
+38:53
+Yeah, and by the way, you know, Trump himself has been quite the moving target on this. You know, he He tried to ban TikTok, and now he's very pro-TikTok. He has been negative on AI. He was originally negative on crypto. He's now positive on crypto.
+39:09
+So it's complex, which is why I think the foundation of all of this is Yeah, education and we, you know, why we're spending so much time in Washington and so forth is to make sure that, you know, we communicate all that we know about technology so that at least these decisions are highly informed that the politicians make.
+39:31
+Good. Okay, so moving forward. So three questions in one. So Alex asks, as tech regulation becomes more and more popular within Congress, which is happening, do you anticipate a lowering in general of the rate of innovation within the industry?
+39:46
+Number two, Tyler asks, what is a key policy initiative that if passed in the next decade could bolster the U.S. for a century? And then Elliot Parker asks, what's one regulation that if removed would have the biggest positive impact on economic growth? Yeah, so I think that... Ben, see if you disagree with this.
+40:02
+I don't know that there's a single regulation or a single law or a single issue. There are certainly individual laws or regulations that are important. But I think the thematic thing is a much bigger problem. The thematic thing is the thing that matters.
+40:17
+The things that are coming are much more serious than the things that have been. I think that's correct.
+40:23
+Okay, we'll talk about that. Yeah, go ahead.
+40:26
+Yeah, I mean, so... if you look at the current state of regulation, if it stayed here, there's not anything that like, we really feel like a burning desire to remove in the same way that things that are on the table could be extremely destructive.
+40:51
+And basically, look, if we ban large language or large models in general, or we force them to go through some kind of government approval,
+41:03
+or if we ban open source technology, that would have just a devastating... It would basically take America out of the AI game and make us extremely vulnerable from a military standpoint, make us extremely vulnerable from a technology standpoint in general. And so that's devastating. Similarly, if we don't get...
+41:30
+kind of proper regulation around crypto, the trust in the system and the business model is going to fade or is going to kind of be in jeopardy in that it's not going to be the best place in the world to build crypto companies and blockchain companies, which would be a real shame. You know, the kind of
+41:52
+analog would be the kind of creation of the SEC, you know, after the Great Depression, which really helped put trust into the U.S. capital markets.
+42:01
+And I think that, you know, trust into the blockchain system as a way to kind of invest, participate, be a consumer, be an entrepreneur are really, really important and necessary and very important to get those right.
+42:15
+Okay. And then speaking of, okay, let's move straight into the specific issues then more. So expand on that. So Lenny asks, what form do you think AI regulation will take over the next two administrations? B. Sikandi asks, will AI regulation result in a concentrated few companies or an explosion of startups and new innovation?
+42:33
+E. Ray asks, how would you prevent the AI industry from being monopolized, centralized with just a few tech corps? And then our friend Beth Jesus asks, how do you see the regulation of AI compute and open source models realistically playing out?
+42:46
+Where can we apply pressure to make sure we maintain our freedom to build and own AI systems?
+42:49
+It's really interesting because there's like a regulatory dimension of that. And then there's the kind of technological kind of you know, version of that. And they do intersect.
+43:05
+So if you look at what big tech has been trying to do, they're trying, they're very worried about new competition to the point where they've taken it upon themselves to go to Washington and try and outlaw their competitors. And
+43:20
+you know, if they succeed with that, then I think it is like super concentrated AI power, you know, making the kind of concentrated power of social media or search or so forth kind of really pale in comparison. I mean, it would be very dramatic if there were only three companies that were allowed to build AI.
+43:39
+And that's certainly what they're pushing for. So I think in one regulatory world where big tech wins, then there's very few companies doing AI. Probably Google, Microsoft, and Meta. Microsoft having basically full control of OpenAI as they demonstrated.
+44:03
+They have the source code, they have the way to set you when as far as saying that, we own everything. Then they also control who the CEO is as they demonstrated beautifully. If you take that, it will all be owned by three, maybe four companies.
+44:21
+If you just follow though the technological dimension, I think what we're seeing play out has been super exciting in that we were all wondering, would there be one model that ruled them all?
+44:36
+And even within a company, I think we're finding that there's no current architecture that's going to gain, you know, on a single thing, a transformer model, a diffusion model and so forth, that's going to become so smart in itself that once you make it big enough, it's just going to know everything and that's going to be that.
+44:55
+What we've seen is even the large companies are deploying a technique called a mixture of experts, which kind of implies you need different architectures for different things. They need to be integrated in a certain way and the system has to work.
+45:08
+And that just opens the aperture for a lot of competition because there's many, many ways to construct a mixture of experts to architect every piece of that. We've seen little companies like Mistral field models that are highly competitive with the larger models very quickly.
+45:28
+And, you know, and then there's other kind of factors like, you know, latency, cost, et cetera, that factor into this. And then there's also good enough, like when is a language model good enough? You know, when it speaks English, when it knows about what things, what are you using it for? And then there's domain specific data.
+45:48
+You know, I've been doing whatever medical research for years and I've got, you know, data around all these kinds of genetic things. patterns and diseases and so forth, you know, I can build a model against that data that's differentiated by the data and so on.
+46:03
+So I think what we will, we're likely to see kind of a great kind of Cambrian explosion of innovation across all sectors, you know, big companies, small companies and so forth, provided that the regulation doesn't outlaw the small companies. But that would be my prediction right now.
+46:24
+Yeah, and I'd add a bunch of things to this. So one is even on the big model side, there's been this leapfrogging thing that's taken place. And so, you know, there's, you know, opening, you know, GPT-4 was kind of, you know, the dominant model not that long ago.
+46:38
+And then it's been leapfrogged in significant ways recently by both Google, what's their Gemini Pro, especially the one with the so-called long context window where you can feed it 700,000 words or an hour of full motion video as, you know, context for a question, which is a huge advance.
+46:53
+And then the Anthropic, their big model, Claude, a lot of people now are finding that to be a more advanced model than GPT-4. And one assumes OpenAI is going to come back. And this leapfrogging will probably happen for a while. So even at the highest end, at the moment, these companies are still competing with each other.
+47:13
+But there's still this leapfrogging that's taking place. And then, Ben, as you articulate it very well, there is this giant explosion of models of all kinds of shapes and sizes. Our company, Databricks, just released what looks like a big leapfrog on the smaller model side.
+47:30
+I think it's the best small model now in the benchmarks, and it's so efficient it will run on a MacBook.
+47:36
+Yeah, and they have the advantage of, you know, as an enterprise, you can connect it to a system that gives you not only like enterprise quality access control and all that kind of thing, but also, you know, gives you the power to do SQL queries with it, gives you the power to basically create a catalog so that you can have a
+47:57
+common understood definition of all the weird corporate words you have. By the way, one of which is customer. There's almost no two companies that define customer in the same way. And in most companies, there are several definitions of customer. Is it a department at AT&T? Is it AT&T? Is it some division of AT&T, et cetera, et cetera?
+48:20
+I think, I don't want to literally speak for them, but I think if you put the CEOs of the big companies under truth serum, I think what they would say is their big fear is that AI is actually not going to lead to a monopoly for them. It's going to lead to a commodity.
+48:33
+It's going to lead to a sort of a race to the bottom on price. And you see that a little bit now, which is people who are using one of the big models APIs are able to swap to another big model API from another company pretty easily. And then
+48:46
+The main business model for these big models, at least so far, is API, basically pay per token generated or per answer. If these companies really have to compete with each other, it may be that it actually is a hyper-competitive market. It may be the opposite of a search market or an operating system market.
+49:04
+It may be a market where there's just continuous competition and improvement and leapfrogging and then constant price competition. And then, of course, the payoff from that is to everybody else in the world is like an enormously vibrant market where there's constant innovation happening and then there's constant cost optimization happening.
+49:19
+And then as a customer downstream of this, the entire world that's going to use AI is going to benefit from this kind of hyper competition that's going to potentially run for decades. And so I think if you put these CEOs in a truth serum, what they would say is that's actually their nightmare.
+49:33
+Yeah, well, that's why they're in Washington.
+49:36
+That's why they're in Washington. So that is what's actually happening. That is the scenario they're trying to prevent. They are actually trying to shut off competition. And by the way, actually, I will tell you this. There is a funny thing.
+49:48
+Tech is so historically bad at politics that I think some of these folks think they're being very clever in how they go about this. And so, you know, because they show up in Washington with the kind of public service narrative or end of the world narrative, whatever it is.
+50:02
+And I think they think that they're going to very cleverly kind of trick everybody, trick people in Washington into giving them a sort of cartel status. And the people in Washington don't realize until it's too late. But it actually turns out people in Washington are actually quite cynical. They've been lobbied before. Exactly.
+50:16
+And so there is this thing and they won't, they don't, I get this from them off the record a lot, especially after a couple of drinks, which is basically if you've been in Washington for longer than two minutes, you have seen many industries come to Washington.
+50:27
+many big companies come to Washington and want monopoly or cartel kind of regulatory protection. And so you've seen this, and if you're in Washington, you've seen this play out. In some cases, the guy's been there for a long time, dozens or hundreds of times.
+50:40
+And so my sense is like nine months ago or something, there was a moment where it seemed like the big tech companies could kind of get away with this. I think it's actually, I'm still concerned and we're still working on it, but I think the edges come off a little bit because I think the cynicism of Washington
+50:56
+in this case, is actually correct. And I think they're kind of onto these companies. And then, you know, look, if there's a unifying issue, there's basically two unifying issues in Washington. One is they don't like China and the other is they don't like big tech. And so, you know, this is a winnable war.
+51:10
+Like this is a winnable war on behalf of startups and open source and freedom and competition. And so I'm actually, yeah, I'm worried, but I'm feeling much better about it than I was nine months ago.
+51:22
+Well, look, we had to show up. I mean, that's the other thing. I mean, it's taught me a real lesson, which is, you know, you can't expect people to know what's in your head. You know, you've got to go see them. You've got to put in the time. You've got to kind of say what you think.
+51:36
+And then, you know, and if you don't, you don't have any right to like wring your hands with how like, you know, bad things are.
+51:44
+Yeah. And then I just wanted to know one more thing. You kind of mentioned the big companies being Microsoft, Google, Meta. It is worth noting Meta is on the open source side of this. And so Meta is actually working quite hard. And this is a big deal because it's very contrary to the image.
+52:02
+I think people have Meta in prior issues, correctly or not. But on the open source AI topic and on freedom to innovate, at least for now, Meta is, I think, very strongly on that side.
+52:16
+Yeah, I think that's right.
+52:17
+It's actually a very interesting point and I think essential for people to understand is that the way Meta is thinking about this and the way that they're actually behaving and executing is very similar to how Google thought about Android, where their main concern was that Apple not have a monopoly on the smartphone, not so much that they make money on the smartphone themselves.
+52:43
+Because, you know, a monopoly on the smartphone for Apple would mean that Google's other business was in real jeopardy. And so they ended up being kind of an actor for good.
+52:54
+And, you know, Android's been an amazing thing for the world, I think, you know, including getting smartphones in the hands of people who wouldn't be able to get them otherwise, you know, all over the world.
+53:06
+And Meta is doing kind of a very similar effort where in order to make sure that they have AI as a great ingredient in their products and services, is willing to open source it and kind of gives all of their very, very kind of large investment
+53:28
+in AI to the world so that, you know, entrepreneurs and everybody can kind of keep them competitive, even though they don't plan to be in the business of AI in the same way that, you know, like Google is in the business of smartphones to some extent, but it's not their kind of key business.
+53:45
+And, you know, Meta doesn't have a plan to be in the AI business, maybe, you know, to some extent they will, but that's not the main goal.
+53:52
+And then I would put one other company on the concerning side on this, and it's truly to tell, but where they're going to shake out. But, you know, Amazon just announced they're investing a lot more money in Anthropic. So I think they're now, basically Amazon is to Anthropic what Microsoft is to OpenAI. Yeah, I think that's right.
+54:08
+Yep, yep.
+54:10
+Yeah, and so like there's a, Anthropic is very much in the group of kind of big tech, you know, kind of new incumbent big tech, you know, lobbying very aggressively for regulation and regulatory capture in D.C.
+54:21
+And so I think it's sort of an open question whether Amazon is going to pick up that agenda as Anthropic increasingly becomes effectively a subsidiary of Amazon.
+54:29
+Yeah, well, this is another place where we're on the side of Washington, D.C. and the current regulatory motion where the big tech companies have done this thing, which we thought was illegal because we observed it occur at AOL and people went to jail. what they've done is they invest in startups, you know, huge amounts of money.
+54:52
+Microsoft and Amazon and Google are all doing it, you know, like billions of dollars with the requirement, with the explicit requirement that those companies then buy GPUs from them Yeah, like not the the discount that they'd ordinarily get, but at a relatively high price, and then be in their clouds.
+55:15
+So that kind of and then, you know, in the Microsoft case, even more aggressive, give me your source code, give me your weights, you know, which is Like extremely aggressive.
+55:26
+So, you know, they're moving money from the balance sheet to their P&L, you know, in a way that at least from an accounting standpoint, it was our understanding wasn't legal. And the FTC is, you know, looking at that now, but it'll be interesting to see how that plays out.
+55:44
+Yeah, well, the other is that's one area. Another issue, you know, that people should watch is, you know, that's why it's around tripping. The other one is just consolidation. You know, if you own, you know, half of a company and you get to appoint the management team.
+55:59
+Like, is that, you know, is that a, like, is that not a subsidiary? You know, there are rules on that.
+56:04
+Like, at what point you have to- You own the company equity. You own the intellectual property of the company. And you control the management team. Yeah. Is that not your company?
+56:15
+Yeah. And then at that point, if you're not consolidating it, like, is that legal? And so the SEC is going to weigh in on that. And then, of course, you know, to the extent that some of these companies have nonprofit components to them, there's, you know, tax implications to the conversion to for-profit and the-
+56:27
+so forth and so like there there's a lot of yeah this this this yeah the the stakes the stakes in the legal i would say the stakes in the legal regulatory and political game that's being played here i think are quite quite high quite high yes yes ben and i ben and i as ben mentioned as ben and i are old enough where we do know a bunch of people who've gone to jail
+56:47
+So some of these issues turn out to be serious. So Gabriel asks, what would happen if there was zero regulation of AI, the good, the bad, and the ugly? And this is actually a really important topic. So we're vigorously arguing in DC that there should be, basically, anybody should be completely capable of building AI, deploying AI.
+57:06
+Big companies should be allowed to do it. Small companies should be allowed to do it. Open source should be allowed to do it.
+57:11
+And look, a lot of the regulatory pushes we've been discussing that comes from the big companies and from the activists is to prevent that from happening and put everything in the hands of the big companies. So we're definitely on the side of freedom to innovate.
+57:22
+Having said that, that's not the same as saying no regulations of anything ever. And so we're definitely not approaching this with kind of a hardcore libertarian lens.
+57:31
+The interesting thing about regulation of AI is that it turns out when you kind of go down the list of the things that I would say reasonable people kind of, you know, kind of, you know, thoughtful people consider to be concerns around AI on both sides of the aisle.
+57:49
+Basically, the implications that they're worried about are less the technology itself and are more the use of the technology in practice, either for good or for bad. And so, Ben, you brought up, for example, if AI is making decisions on things like granting credit or mortgages,
+58:05
+uh or insurance then you know there are very serious policy issues around you know who how those answers are derived at which groups are affected in different ways um you know the flip side is you know if ai is used to plan a crime um you know or to uh you know plan a bank robbery or something like that or terrorist attack um you know that's that's you know that's obviously something that people focused on national security law enforcement are very concerned about
+58:26
+Look, our approach on this is actually very straightforward, which is it seems completely reasonable to regulate uses of AI in things that would be dangerous.
+58:35
+Now, the interesting thing about that is, as far as I can tell, and I've been talking to a lot of people in DC about this, as far as I can tell, every single use of AI to do something bad is already illegal under current laws. and regulations. And so it's already illegal to be discriminatory in lending.
+58:50
+It's already illegal to redline in mortgages. It's already illegal to plan bank robberies. It's already illegal to plan terrorist attacks. Like these things are already illegal and there's, you know, decades or centuries of case law and regulation and, you know, law enforcement and intelligence capabilities around all of these.
+59:07
+And so to be clear, like we think it's like completely appropriate that those authorities be used. And if there are new laws or regulations needed due to, you know, other bad uses, that makes total sense.
+59:16
+But that basically the issues that people are worried about can be contained and controlled to the level of the use, as opposed to somehow saying, by the way, as some of the Doomer activists do, we need to literally prevent people from doing linear algebra on their computers.
+59:30
+Yeah. Well, I think that's important to point out, like, what is AI? And it turns out to be, you know, it's math and specifically kind of like a mathematical model.
+59:42
+So you can think of it for those of you who study math in school, you know, in math, you can have an equation like, you know, Y equals X squared plus B or something. And that equation can kind of model the behavior of something in physics or
+59:58
+you know, something in the real world so that you can predict, you know, something happening, like the speed that an object will drop or so forth and so on.
+1:00:08
+And then AI is kind of that, but with huge computer power applied so that you get much bigger equations with, you know, instead of two or three or four variables, you could have, you know, 300 billion variables of
+1:00:23
+And so if you get into the challenge with that, of course, is if you get into regulating math and you say, well, math is okay up to a certain number of variables, but then at the two billionth and first variable, then it's dangerous.
+1:00:40
+Then you're in a pretty bad place and that you're going to prevent everything good from the technology. from happening as well as anything that you might think is bad. So you really do want to be in the business of regulating the kind of applications of the technology, not the math.
+1:00:57
+In the same way that, you know, you wouldn't have wanted to, like nuclear power is very potentially dangerous as nuclear weapons are extremely dangerous. You wouldn't want to kind of put parameters around what physics you could study in order to, you know, like literally in the abstract, in order to kind of prevent somebody from getting a nuke.
+1:01:19
+Like you can no longer study physics in Iran because then you might be able to build a nuke would be kind of the conclusion. And that has been kind of what big tech has been pushing for, not because they want safety, but because, you know, again, they want a monopoly.
+1:01:38
+And so I think we have to be very, very careful not to do that. I do think there will probably be some cases that come up that are enabled by AI new applications that do need to be regulated potentially. For example, I don't know that there's a law that if you recreate something that sounds exactly like Drake,
+1:02:01
+and then kind of put out a song that sounds like a Drake song. Like, I don't know that that's illegal. Maybe that should be illegal. I think those things need to be considered for sure. And, you know, there's certainly danger in that.
+1:02:14
+I also think we need technological solutions, not just regulatory solutions for things like deepfakes that kind of help us get to, you know, what's human, what's not human. And interesting, a lot of those are kind of you know, viable now based on kind of blockchain crypto technology.
+1:02:33
+Yeah. So let's just on the voice thing real quick. Yeah. So it actually, I believe this to be the case. It is not currently possible to copyright a voice. Yeah. Right. You can copyright lyrics and you can copyright music and you can copyright tunes. Yeah. Right. Melodies and so forth. Right. Copyright a voice.
+1:02:51
+And yeah, that, that seems like a perfect example where that it seems like that probably is a good idea to have a law that lets you copyright your voice.
+1:02:57
+Yeah, I feel that way. You know, particularly if people call their voice Drake squared or something, right? Like, you know, it could get very dodgy.
+1:03:05
+Yeah, well, again, you know, again, it's just the details, you know, trademark, you can trademark your name. So you could probably prosecute on that. But by the way, having said that, look, this also gets to the complexity of these things.
+1:03:17
+There is actually an issue around copywriting a voice, which is, okay, well, how close to the voice of Drake does... Like there are a lot of people who have like a lot of voices in the world and like how close do you have to get before you're violating copyright?
+1:03:27
+And what if my natural voice actually sounds like Drake? Like, am I now in trouble?
+1:03:31
+Right.
+1:03:31
+And do I outlaw like Jamie Foxx imitating Quincy Jones and that kind of thing, right? Exactly. So anyway, yeah. But I mean, look, I, you know, agreeing violently with you on this is like that seems like a great topic that needs to be taken up and looked at seriously from a legal standpoint.
+1:03:46
+that is sort of, is actually, you know, is obviously exact, you know, sort of an issue that's sort of elevated by AI, but it's a general kind of concept of like being able to copyright and trademark things, which has a long history in US law. Yeah, for sure. Yeah.
+1:03:57
+So let's talk about the decentralization and the blockchain aspects of this. So I want to get into this. So Goose asks, how important is the development of decentralized AI and how can the private sector catalyze prudent and pragmatic regulations to ensure U.S. retains innovation leadership in this space?
+1:04:13
+So, yeah, let's talk about decentralized AI and then maybe I'll just highlight real quick and then you can build on it. Decentralized AI, the default way that AI systems are being built today is with basically supercomputer clusters in a Cloud.
+1:04:29
+You'll have a single data center somewhere that's got 10,000 or 100,000 ships and then a whole bunch of systems interconnect them and make them all work. Then you have a company that basically owns and controls that. These AI companies are raising a lot of money to do that now. These are very large-scale centralized kinds of operations.
+1:04:48
+And to train a state-of-the-art model, you're at $100 million plus. To train a big one, to train a small one, like the Databricks model that just came out, it's like on the order of $10 million. And so these are large centralized efforts.
+1:05:00
+And by the way, we all think that the big models are going to end up costing a billion and up in the future. And so, so then this raises the question of like, is there an alternate way to do this?
+1:05:10
+And the alternate way to do this is with, we believe strongly is with a decentralized approach and in particular with a blockchain based approach. It's actually the kind of thing that the blockchain web three kind of method, you know, it seems like it would work with very well.
+1:05:22
+And in fact, we are already backing companies and startups that are doing this. And then I would say there's at least three kind of obvious layers that you could decentralize that seem like they're increasingly important. So one is the training layer. Well, actually, let me say four. There's the training layer, which is building the model.
+1:05:38
+There's the inference layer, which is running the model to answer questions.
+1:05:41
+There's the data layer, Ben, to your point on opening up the black box of where the data is coming from, which is there should probably be a blockchain-based system where people who own it can contribute it for training of AIs and then get paid for it and where you track all that.
+1:05:55
+And then there's a fourth that you alluded to, which is deepfakes. It seems obvious to us that the answer to deepfakes, and I should pause for a second and say, in my last three months of trips to D.C., the number one issue politicians are focused on with AI is deepfakes. It's the one that directly affects them.
+1:06:15
+And I think every politician right now who's thought about this has a nightmare scenario of, you know, it's three days before their reelection campaign, you know, three days before the vote. And a deep fake goes out with them, you know, saying something absolutely horrible. And it's so good.
+1:06:27
+And the voters get confused and like and then they lose the election on that. And so I would say, like, that's actually the thing. That's that's the thing that actually has the most potency right now. And then what basically a lot of people say, including the politicians is, so therefore we need basically a way to detect deepfakes.
+1:06:43
+And so either the AI systems need to watermark AI generated content so that you can tell that it's a deepfake or you need these kind of scanners, like the scanners that are being used in some schools now to try to detect that something is AI generated.
+1:06:53
+Our view as, I would say both technologists and investors in this space is that the methods of detecting AI generated content after the fact are basically not gonna work. They're not going to work because AI is already too good at doing this.
+1:07:10
+By the way, for example, if you happen to have kids that are in a school and they're running one of these scanner programs that is supposed to detect whether your kid is submitting an essay or use ChatGP to write the essay, those really don't work in a reliable way.
+1:07:24
+There's a lot of both false positives and false negatives off of those that are very bad. Those are actually very bad ideas. And for the same reason, like detection of AI-generated photos and videos and speech is not going to be possible. And so our view is you have to flip the problem. You have to invert the problem.
+1:07:41
+And what you have to do instead is basically have a system in which real people can certify that content about them is real.
+1:07:49
+And where content has provenance as well. Ben, go ahead and describe how that would work. Yeah. One of the amazing things about crypto blockchain is it deploys something known as a public key infrastructure, which enables every human to have a key that's unique to them where they can sign. So if I was in a video,
+1:08:13
+or in a photo, or I wrote something, I can certify that, yes, this is exactly what I wrote. And you cannot alter it to make it into something else. It is just exactly that.
+1:08:24
+And then, you know, as that thing, you know, gets transferred for the world, let's say that it's something, you know, like a song that you sell and so forth, you can track just like with a
+1:08:38
+in a less precise way, but with the work of art, we track the provenance or with a house, who owned it before you and so forth. That's also like an easy application on the blockchain.
+1:08:49
+And so that combination of capabilities can make this whole kind of program much more viable in terms of like, okay, knowing what's real, what's fake, where it came from, where it started, where it's going and so forth.
+1:09:05
+You know, kind of going back, the data one I think is really, really important in that, you know, these systems, you know, one of the things that they've done that's, I would say, dodgy.
+1:09:19
+And, you know, there have been, like, big pushback against it with, you know, Elon trying to lock down Twitter and the New York Times suing OpenAI and so forth.
+1:09:30
+you know, these systems have gone out and just slurped in data from all over the internet and all over kind of, you know, people's businesses and so forth and train their models on them. And, you know,
+1:09:46
+I think that there's a question of whether the people who created that data should have any say in whether the model is trained on that data. Blockchain is an unbelievably great system for this because you can permission people to use it. You can charge them a fee.
+1:10:02
+It can be all automated in a way where you can say, sure, come train. I think training data ought to be of this nature where there's a data marketplace. And people can say, yes, take this data for free. I want the model to have this knowledge.
+1:10:16
+Or no, you can't have it for free, but you can have it. Or no, you can't have it at all. Rather than what's gone on, which is this very aggressive scraping. And like you have these very smart models where these companies are making enormous amounts of money taken from data that certainly didn't belong to them.
+1:10:35
+Maybe it's in the public domain or what have you, but
+1:10:38
+You know, that ought to be an explicit relationship, and it's not today, and that's a very great blockchain solution, you know, and part of the reason we need the correct regulation on blockchain and we need the SECs to stop harassing and terrorizing, you know, people trying to innovate in this category.
+1:10:58
+And so that's kind of the second category. And then you have like training and inference. And I would say, you know, right now the push against kind of decentralized training and inference is, well, you know, you need this very fast interconnect and you need it to all be in one place technologically.
+1:11:16
+But, and I think that's true for people who have more money than time, right? Which is like, you know, startups and big companies and so forth. But for people in academia who have more time than money, they're getting completely frozen out of AI research.
+1:11:31
+You can't do, there's not enough money in all of academia to participate anymore in AI research. And so, you know, having a decentralized approach where you can share, you know, all the GPUs across your network. And hey, yeah, maybe it takes a lot longer to train your network or to serve it. But you know what?
+1:11:51
+You still can do your research. You can still innovate, you know, create new ideas, do architectures and test them out at large scale, which, you know, will be amazing if we can do it.
+1:12:03
+And again, we need, you know, the SEC to stop, you know, kind of illegally terrorizing every crypto company and trying to block laws from being put in place that help us, you know, enable this.
+1:12:18
+Yeah, there's actually a really, and you alluded to it, the college thing actually really matters. So we have a friend, you know, who runs one of the, you know, is very involved in one of the big computer science programs, one of the major American research universities.
+1:12:29
+And of course, by the way, a lot of the technology we're talking about was developed at American research universities.
+1:12:34
+Absolutely.
+1:12:35
+And Canadian ones too, Toronto. Canadian ones and European ones, exactly.
+1:12:39
+You know, historically, as with every other wave of technology in the last, you know, whatever, hundred years, you know, the research universities, you know, across these countries have been kind of the gems of the, you know, the wellsprings of a lot of the new technology that have been empowering, you know, the economy and everything else around us.
+1:12:55
+We have a friend involved in running one of these, and this friend said a while ago that his concern was that his university would be unable to fund a competitive AI cluster, basically, so a compute grid that would actually let students and professors at that university actually work in AI.
+1:13:14
+Because it's now getting to be too expensive and universities are just not funded to have CapEx programs that big.
+1:13:20
+And then he said his concern more recently has been all research universities together might not be able to afford to do that, which means all universities together might not be able to actually have, you know, basically cutting edge AI work. happening on the university side.
+1:13:34
+And then I happened to have a conversation, I was in D.C., I was in a bipartisan house meeting the other day on these AI topics.
+1:13:43
+And actually one of the, in this case, Democratic congresswomen asked me, the question which comes up, which is a very serious question always, which is how do you get more members of underrepresented groups involved in tech?
+1:13:56
+And, you know, I found myself giving the same answer that I always give on that, which is the most effective thing you need to do is you need to go upstream and you need to have more people coming out of college with computer science degrees who are, you know, skilled and qualified and trained, right, and mentored to be able to participate in the industry.
+1:14:12
+And, you know, you and I, Ben, both came out of state schools, you know, with computer science programs, you know, where we were able to then have the careers we've had. I find myself answering the question saying, well, we need more computer science graduates from every group.
+1:14:29
+But in the back of my head, I was like, it's going to be impossible to do that because none of these places are going to be able to afford to actually have the compute resources to be able to actually have AI programs in the future.
+1:14:39
+And so, like, you know, maybe the government can fix this by just dumping a ton of money on top of these universities. And maybe that's what will happen. And, you know, the current political environment seems like maybe it's not quite feasible for a variety of reasons.
+1:14:52
+And then the other approach would be a decentralized approach, would be a blockchain-based approach. that everybody could participate in if that were something that the government were willing to support, which right now it's not.
+1:15:04
+And so I think there's a really, really, really, really central, important, vital issue here that I think is being glossed over by a lot of people that I think should really be looked at.
+1:15:14
+Yeah, no, I think it's absolutely critical. And this is, you know, again, kind of going back to our original thing, like it's so important to the country being what, you know, America being what America should be to get these issues right.
+1:15:29
+And we're definitely in danger of that not happening, you know, because, you know, look, I think people are taking much too narrow view of some of these technologies and not understanding their full capabilities. And, you know, we get into, oh, the AI could, you know, say something racist. Therefore, we won't cure cancer.
+1:15:47
+I mean, like we're getting into that kind of dumb thing. And, you know, we need to have a tech forward kind of solution to some of these things and then the right regulatory approach to kind of make the whole environment work.
+1:16:03
+So let's go to the next phase of this now, which is the sort of global implications. So I'm gonna conjoin two different topics here, but I'm gonna do it on purpose. So Michael Frank Martin asks, what could the US do to position itself as the global leader of open source software?
+1:16:16
+Do you see any specific legislation or regulatory constraints that are hampering the development of open source projects? Arda asks similar question, what would an ideal AI policy for open-source software models looks like? Then Sarah Holmes asks the China question.
+1:16:30
+Do you think we will end up with two AI tech stacks, the Western China and ultimately companies will have to pick one side and stay on it?
+1:16:36
+And so, look, I would say that this is where you get to like the really, really big geopolitical long-term issue, which is basically my understanding of things is, is, is sort of as follows, which is, you know, basically the, the, for a variety of reasons, technological development in the West is being centralized into the United States, you know, with, with, you know, some in Canada and some in Europe, although, you know, quite frankly, a lot of, a lot of the best Canadian and, and you know, European, you know, tech founders are coming to Silicon Valley, you know, Yann LeCun, you know, teach,
+1:17:02
+Yann LeCun is a hero in France, teaches at NYU and works at Meta, both of which are American institutions. And so they're sort of an American or let's say American plus European kind of tech vanguard wedge in the world. And then there's China. And really, it's actually quite a bipolar situation.
+1:17:22
+I would say the dreams of tech being fully democratized and spreading throughout the world have been realized for sure on the use side, but not nearly as much on the entrepreneurship side or the invention side.
+1:17:34
+And again, immigration being a great virtue, but for the countries that are the beneficiaries of immigration, the other side of that is other countries are going to be less competitive because they're best and brightest moving to the US. So anyway, so we are in a bipolar tech world. It is primarily a bipolar tech world.
+1:17:52
+It's primarily the US and China. This is not the first time we have been in a bipolar world involving geopolitics and technology. The US and China have two very different systems. The Chinese system has all of the virtues and downsides of being centralized. The US system has all the virtues and downsides of being more decentralized.
+1:18:16
+There is a very different set of views of the two systems on how society should be ordered and what freedom means and what people should be able to do and not do.
+1:18:27
+And then look, both the US and China have visions of global supremacy and visions of basically care and agendas and programs to carry forward their points of view on the technology of AI and on the societal implications of AI throughout the world. And so, you know, there is this Cold War.
+1:18:45
+Oh, and then the other thing is just in D.C., it's just crystal clear that there's this now dynamic happening where Republicans and Democrats right now are trying to leapfrog each other every day on being more anti-China.
+1:18:57
+And so, you know, our friend Neil Ferguson is using the term, I think, Cold War 2.0, like we're in, whether we want to or not, like we're in Cold War 2.0, like we're in a dynamic similar to the one was with the USSR 30, 40, 50 years ago.
+1:19:12
+To Sarah Holmes' question, it's 100 percent going to be the case. There are two AI tech stacks and there are two AI governance models and there are two AI deployment systems.
+1:19:23
+There are two ways in which AI dovetails in everything from surveillance to smart cities, to transportation, self-driving cars, drones, who controls what, who gets access to what, who sees what. The degree by the way to which AI is used as a method for population control. There are very different visions. And these are national visions and global visions.
+1:19:41
+And there's a very big competition developing. And, you know, it certainly looks to me like there's going to be a winner and a loser. I think it's overwhelmingly in our best interest for the U.S. to be the winner. For the U.S. winner, we have to lean into our strengths.
+1:19:57
+And the downside of our system is that we are not as well organized and orchestrated top-down as China is. The upside of our system, at least remarkably, is that we're able to benefit from decentralization. We're able to benefit from competition, from a market economy, from a private sector.
+1:20:14
+where we're able to basically have a much larger number of smart people making lots of small decisions to be able to get to good outcomes as opposed to having a dictatorial system in which there's a small number of people trying to make decisions.
+1:20:26
+I mean, look, and this is how we won the Cold War against Russia, is our decentralized system just worked better economically, technologically, and ultimately militarily than the Soviet centralized system. And so it just seems fairly obvious to me that we have to lean into our strengths. We better lean into our strengths.
+1:20:41
+Because if we think we're just going to be like another version of a centralized system, but without all the advantages that China has with having a more centralized system, that just seems like a bad formula. So, yeah, let me pause there and, Ben, see what you think.
+1:20:52
+Yeah, I know, for sure. I think that'd be disastrous. And I think this is why it's so clear that if there's one, you know, to answer the question, if there's one regulatory policy that we would enact that would ensure America's competitiveness, it would be open source.
+1:21:08
+And the reason being that, as you said, this enables the largest number of participants to kind of contribute to A.I., to innovate, to come up with novel solutions, and so forth. And I think that you're right. What's going to happen in China is they're going to pick one because they can.
+1:21:26
+And they're going to kind of drive all their wood behind that arrow in a way that we could never do because we just don't work that way. And they're going to impose that on their society and try and impose it on the world.
+1:21:39
+And our best counter to that is to put it in the hands of all of our smart people. We have so many smart people from all over the world. As we like to say, diversity is our strength. We've got this tremendous different points of view, different kinds of people in our country.
+1:21:58
+And the more that we can enable them, the more likely we'll be competitive. And I'll give you a tremendous example of this. You know, I think if you go back to 2017 and you read any, you know, foreign policy magazine, et cetera, there wasn't a single one that didn't say China was ahead in AI.
+1:22:17
+They have more patents. They have more students going to universities. They're ahead in AI. They're ahead in AI. Like, we're behind in AI. And then, you know, Chad GPT comes out and goes, oh, I guess we're not behind in AI. We're ahead in AI.
+1:22:30
+And the truth of it was what China was ahead on was in integrating AI into the government, their one AI into their government in that way. And, you know, look, we're working on doing a better job of that with American dynamism, but we're never going to be good at that model.
+1:22:49
+You know, that's the model that they're going to be great at. And we have to be great at our model. And if we start limiting that, outlawing startups and outlawing anybody but the big companies from developing AI and all that kind of thing,
+1:23:00
+uh we'll definitely shoot ourselves in the foot i would say related or like another kind of important point i think in kind of the safety of the world um is you know when you talk about two ais
+1:23:14
+That's like two AI stacks, perhaps, but it's very important that countries that are in America, that are in China can align AI to their values. And I'll just give you kind of one really important example, which, you know, like I've been spending a lot of time in the Middle East.
+1:23:33
+And if you look at the kind of history of a country like Saudi Arabia, they're coming from a world of fundamentalism and a kind of set of values that they're trying to modernize. And they've done tremendous things with women's rights and so forth.
+1:23:50
+But, you know, look, there's still the fact that they've got, you know, people who don't want to go to that future so fast, and they need to preserve some of their history in order to not have a revolution or extreme violence and so forth.
+1:24:06
+And, yeah, we're seeing al-Qaeda re-spark up in Afghanistan and all these kinds of things, which are, by the way, al-Qaeda's real enemy of modern Saudi, just as much as they're an enemy of America. And so if Saudi can't align an AI to the current Saudi values, they could literally spark a revolution in their country.
+1:24:29
+And so it's very important that as we have technology that we develop, that it not be totally proprietary clone source, that it be kind of modifiable by our allies who need to kind of progress at their pace to keep their kind of country safe and keep us safe in doing so.
+1:24:48
+And so this has got great geopolitical ramifications, what we do here. Like, if we go to the China model that Google and Microsoft are advocating for, this Chinese model of only a few can control AI, we're going to be in big trouble.
+1:25:05
+Yeah, and then I just want to close on the open source point because it's so critical. So this is where, you know, I would say I get extremely irate at the idea of closing down open source, which, you know, people in a number of these people are lobbying for very actively.
+1:25:17
+By the way, I'm going to name one more name. We even have VCs lobbying to outlaw open source, which I find to just be completely staggering and impolite.
+1:25:27
+Vinod?
+1:25:28
+Vinod. So Vinod Khosla, who is, this is just incredible to me, he's the founder of Sun Microsystems, which was in many ways a company built on open source, built on open source Unix out of Berkeley, and then itself built a lot of open source, critical open source.
+1:25:40
+And then of course, you know, it was the .com, which of course, you know, the internet was all built on open source. And Vinod has been lobbying to ban open source AI. And by the way, he denies that he's been doing this, but I saw him with my own eyes when the U.S.
+1:25:53
+Congressional China Committee came to Stanford. I was in the meeting where he was with, you know, 30, 20 or 30 congressmen and lobbying actively for this. And so I've seen him do it myself. And, you know, look, he's got a big stake in OpenAI. You know, maybe it's financial self-interest.
+1:26:08
+By the way, maybe he's a true believer in the dangers.
+1:26:10
+But in any event. Well, I think he proved on Twitter he was not a true believer in the dangers. I'll get into that. I'll explain that.
+1:26:18
+Yeah. So, yeah, I mean, even within little tech, even within the startup world, we are not uniform in this. And I think that's extremely dangerous. Look, open source, like what is open source software? Like open source software is, you know, it is quite literally, you know, it's the technological equivalent of free speech.
+1:26:36
+which means it's the technological equivalent of free thought. And it is the way that the software industry has developed to be able to build many of the most critical components of the modern technological world.
+1:26:45
+And then Ben, as you said earlier, to be able to secure those and to be able to have those actually be safe and reliable. And then to have the transparency that we've talked about so that you know how they work and how they're making decisions.
+1:26:58
+And then to your last point also, so that you can have customized AI in many different environments. So you don't end up with a world where you just have one or a couple AIs, but you actually have a diversity of AIs with lots of different points of view and lots of different capabilities.
+1:27:11
+And so the open source fight is actually at the core of this.
+1:27:15
+And, and of course, the reason why, you know, the sort of, you know, sort of people with an eye towards monopoly or cartel want to ban this as open source is a tremendous threat to monopoly or cartel, like, you know, in many ways is a guarantee that monopoly or cartel can't last.
+1:27:28
+But it is absolutely 100%, you know, required for the, you know, for the furtherance of monopoly. Number one, a vibrant private sector. Number two, a vibrant startup sector.
+1:27:36
+And then right back to the academia point, like without open source, then at that point, you know, university, college kids are just not going to be able to, they're not even going to be able to learn how the technology works. They're just going to be like completely boxed out.
+1:27:48
+And so a world where open source is banned is bad on so many fronts. It's just incredible to me that anybody's advocating for it, but it needs to be, I think it needs to be recognized as the threat that it is.
+1:27:57
+Yeah. And on the note, you know, it was such a funny dialogue between you and he. So, like, I'll just give you a quick summary of it. Basically, you know, he was arguing for closed source, you for open source. His core argument was this is the Manhattan Project, and therefore we can't let anybody know the secrets.
+1:28:19
+And you countered that by saying, well, if this is in fact the Manhattan Project, then it's like, you know, it's the open AI team, you know, locked. In a remote location, do they screen all their employees very, very carefully? Is it airlocked? Is there super high security? Of course, none of that is close to true.
+1:28:38
+In fact, I'm quite sure they have Chinese nationals working there. Probably some are spies for the Chinese government. There's no any kind of strong security at OpenAI or at Google or at any of these places. anywhere near the Manhattan Project, which is where they built a whole city that nobody knew about. So they couldn't get into it.
+1:29:00
+And, you know, once you caught him in that, he said nothing. And then he says back, well, you know, it costs billions of dollars to train these models. You just want to give that away? Is that good? You know, is that good economics?
+1:29:11
+Like that was his like final counterpoint to you, which basically said, oh yeah, I'm trying to preserve a monopoly here. Like, what are you doing? I'm an investor. And I think that's true for all these arguments.
+1:29:23
+Well, the kicker, you know, the kicker, Ben, to that story, the kicker to that is three days later, the Justice Department indicted a Chinese national Google employee who stole Google's next generation AI chip designs, which is quite literally the family tools.
+1:29:40
+uh for an ai program it's you know it's the equivalent of stealing the you know if you stretch the metaphor the equivalent of stealing the design for the bomb um and that google employee um uh took that those chips downloaded them and took them to china and by definition you know my definition that means took them to the chinese government because there's no distinction in china uh between the private sector and the government um it's an integrated thing um the government owns and controls everything um and so you know 100 100 guaranteed that that went straight to the chinese government chinese military
+1:30:08
+And Google, which, you know, like, you know, Google has like a big information security team and all the rest of it. Google did not realize, according to the indictment, Google did not realize that that engineer had been in China for six months.
+1:30:20
+Yeah. Amazing. Well, hold on. It gets better. It gets better. This is the same Google with the same CEO who refused to sell Google proprietary AI technology to the U.S. Department of Defense.
+1:30:35
+So they're supplying China with AI and not supplying the U.S., which just goes back to, look, if it's not open source, we're never going to compete. Like, yeah, we've lost the future of the world right here, which is why, you know, it's the single most important AI issue for sure.
+1:30:55
+Yeah. And and you're not going to lock this stuff up like you're not going to lock it up. Nobody's locking it up. It's not locked up. These companies are security Swiss cheese. And like, you know, you're not going to you know, and you'd have a debate about the tactical relevance of chip embargoes and so forth.
+1:31:09
+But like you're you're you're not the horse has left the barn on this, not least because these companies are without a doubt riddled with with with foreign assets and they're very easy to penetrate. Um, and so we, we, we just have to be like, I would say very realistic about the actual state of play here.
+1:31:24
+Um, and, and, and we have to, we have to, we have to play in reality and we have to, we have to play in reality. We have to win in reality. Um, and the, as we need innovation, we need competition. We need free thought. We need free speech.
+1:31:33
+We need, we need to embrace the virtues of our system. Um, and, and, and not shut ourselves down in the face of, uh, in the face of, uh, the, uh, you know, the, the conflicts that are, that are coming. Another one. Andreas asks, why are USVCs so much more engaged in politics and policy than their global counterparts?
+1:31:51
+And I really appreciate that question because it basically, if that's the question, then it means that, boy, VCs outside the US must not be engaged at all because USVCs are barely engaged.
+1:32:03
+Yeah.
+1:32:04
+And then what do you believe the impact of this is on both the VC ecosystem and society in general? And then directly related question, Vincent asks, are European AI companies becoming less interesting investment targets for US-based VCs due to the strict and predictably unpredictable regulatory landscape in Europe?
+1:32:21
+Would you advise early stage European AI companies to consider relocating to the US as a result?
+1:32:26
+Great question. Well, look, I think that it kind of goes back to a little of what you said earlier, which is, you know, in startup world, like there's, you know, in the West, there's the United States and then there's everywhere else. And the United States is kind of bigger than everywhere else combined.
+1:32:45
+And, you know, so it's natural. And look, you know, in these kind of political things, it kind of starts with, the leader. And, you know, U.S. is the leader in VC. We feel like we're the leaders in U.S. VC, so we need to go to Washington. Until we go, you know, nobody's going.
+1:33:07
+And so that's a lot of the reason why we started things. Wow, on European regulatory policy, look, it's I think generally regulatory policy is likely to dictate where you can build these companies. We've seen some interesting things. France turns out to be leading a revolution in Europe on AI regulatory.
+1:33:34
+where they're basically telling the EU to pound sand, you know, and a large reason because they have a company there, Mistral, and, you know, it's a national jewel for the country, and they don't want to give it up because, you know, the EU has some crazy safetyism, you know, thing going on there.
+1:33:53
+Yeah, and I would also note France also, of course, is playing the same role with nuclear policy in Europe.
+1:33:57
+Yeah, yeah. They're the one country in Europe. They're the cleanest country, probably one of the cleanest countries in the world as a result.
+1:34:04
+Right, but have been staunchly pro-nuclear and trying to hold off, I think in a lot of ways, sort of attempts throughout the rest of Europe and especially from Germany to basically ban nuclear, civilian nuclear power.
+1:34:15
+Yeah, and the UK has sort of been flip-flopping on AI policy and we'll see where they come out. Yeah. Yeah, Brussels has been ridiculous as they've been on almost everything.
+1:34:26
+Yeah, the big thing I think I note here is there's a really big philosophical distinction. I think it's rooted actually in the difference between, traditionally it's been called, I think, the sort of Anglo-American kind of approach to law and then the continental European approach.
+1:34:39
+And I forget these, it's like, I forget the terms for it, but the legal...
+1:34:44
+There's like common law and then, yeah.
+1:34:47
+I think it's civil law. Yeah, yes. So the difference basically is that which is not outlawed is legal. Right. Or that which is specifically legal is legal. And anything that's not explicitly legal is outlawed. Right. In other words, like by default, do you have freedom and then you impose the law to have constraints?
+1:35:09
+Or by default, do you have no ability to do anything and then the law enables you to do things? And these are sort of, this is like a fundamental, like philosophical, legal, political distinction.
+1:35:21
+And then this shows up in a lot of these policy issues with this idea called the precautionary principle, which is sort of the rewording of the sort of traditional European approach, which is basically the precautionary principle says new technologies should not be allowed to be fielded until they are proven to be harmless.
+1:35:38
+And of course, the precautionary principle very specifically is sort of a hallmark of the European approach to regulation and increasingly by the US approach. And specifically, its origin, it was actually sort of described in that way and given that name actually by the German Greens in the 1970s as a means to ban civilian nuclear power.
+1:36:01
+By the way, with just catastrophic results. And we could spend a lot of time on that. But I think everybody at this point agrees, including the Germans, increasingly agree that that was a big mistake.
+1:36:10
+Among other things, has led to basically Europe funding Russia's invasion of Ukraine through the need for imported energy because they keep shutting down their nuclear plants. And so just like a sort of a catastrophic decision. But the precautionary principle has become, like I would say, extremely trendy. Like it's one of these things, like it sounds great, right?
+1:36:28
+It's like, well, why would you want anything to be released in the world if it's not proved to be harmless? Like how can you possibly be in support of anything that's going to cause harm? But the obvious problem with that is with that principle, you could have never deployed technology such as fire, electric power,
+1:36:44
+internal combustion, engines, cars, airplanes, the computer, right? Like every single piece of technology we have that powers modern day civilization has some way in which it can be used to hurt people. Every single one. Technologies are double-edged swords. You can use fire to protect your village or to attack the neighboring village.
+1:37:05
+These things can be used in both different ways. Basically, if we had applied the precautionary principle historically, we would still be living in mud huts. We would be just absolutely miserable. The idea of imposing the precautionary principle today, if you're coming from an Anglo-American perspective or from a freedom to innovate perspective, that's just incredibly horrifying.
+1:37:28
+It's basically guaranteed to stall out progress. This is very much the mentality of the EU bureaucrats in particular, and this is the mentality behind a lot of their recent legislation on technology issues. France does seem to be the main counterweight against this in Europe.
+1:37:46
+Ben, to your point, the UK has been a counterweight in some areas, but UK also has, like I would say, they've received a full dose of this programming.
+1:37:53
+Yeah, they have that tendency.
+1:37:56
+Yeah. And they've been in AI in particular, I think they've been on the wrong side of that, which hopefully they'll reconsider. So again, this is one of these things like this, this is a really, really important issue. And just the surface level thing of like, okay, this technology might be able to be used for some harmful purpose.
+1:38:10
+Like that, if that is allowed to be the end of the discussion, like we are never going to, nothing new is ever going to happen in the world. Like that will cause us ultimately to stall out completely. Yeah.
+1:38:18
+Um, and, and then, you know, if, if we stall out that, that will over time lead to regression and, and like literally, you know, I mean, this is happening, like the power is going out, like, you know, German society, German, German society, German, uh, industrial companies are shutting down because they can't afford the power that's resulted from this, this, uh, you know, kind of the imposition of this policy in the energy sector.
+1:38:36
+Um, and so this is a very, very, very important thing. I think the EU bureaucracy is lost on this. And so I think it's going to be up to the individual countries, um, to directly confront this if they want to.
+1:38:47
+Anyway, so I really applaud what France has done, and I hope more European countries join them in kind of being on the right side on this.
+1:38:53
+Yeah, you know, it always is funny to me to hear the EU and like the economists and these kinds of things say, oh, the EU may not be the leader in innovation, but we're the leaders in regulation. And I'm like, well, you realize those go together. They're like one is a function of the other.
+1:39:10
+Okay, good. And then let's do one more global question. Lap Gong Leong asks, are there any other countries that could be receptive to techno-optimism? For example, could Britain, Argentina, or Japan be ideal targets for our message and mission?
+1:39:24
+Yes. So we'll look for work on that in Britain. And look, we've got some pretty good reception from the UK government. There's a lot of very, very smart people there. We're working with them, you know, tightly on... their AI and crypto efforts, and we're hoping that's the case.
+1:39:46
+Japan, having spent a lot of time there, they've obviously shown that capability over time, and then there's a lot about the way Japanese society works that holds them back from that at times as well.
+1:40:05
+you know, without getting into all the specifics, there's, you know, they have a very, I would just say, unusual and unique culture that has a great deference for the old way of doing things, which sometimes makes it hard to kind of promote the new way of doing things.
+1:40:20
+I also think, you know, around the world, you know, the Middle East is very, very kind of subject and kind of on board with techno-optimism. The UAE,
+1:40:33
+Saudi, Israel, of course, many countries out there are very excited about these kinds of ideas and taking the world forward and just creating a better world through technology, which I think that, look, with our population growth, if we don't have a better world through technology, we're going to have a worse world without technology.
+1:40:53
+I think that's very obvious. So it's a very compelling message. And oh, by the way, South America, I should say also, there are a lot of countries who are really embracing techno-optimism now in South America, and some great new leadership there that's pushing that.
+1:41:14
+Yeah, I would also say if you look at the polling on this, what I think you find is what you could describe as the younger countries are more enthusiastic about technology. And I don't mean younger here literally of like when they were formed, but I mean two things.
+1:41:25
+One is how recently they've kind of emerged into what we would consider to be modernity. And so, you know, for example, to embrace concepts like democracy or free market capitalism or innovation generally. you know, or global trade and so forth.
+1:41:37
+And then the other is just quite simply the number of the demographics, you know, the countries with a larger number of people. And those are often by the way the same countries, right? They have the reverse demographic pyramid we have where they actually have a lot of young people.
+1:41:51
+And young people are both, you know, young people both need economic opportunity and are very fired up about new ideas.
+1:41:56
+Yeah, by the way, this is true in Africa as well. In many African countries, you know, Nigeria, Rwanda, Ghana, they were there. Techno-optimism, I think, has taken hold in a real way. Some of them need governance improvements, but they definitely also have young populations. Saudi, I think 70% of the population is under 30.
+1:42:17
+So just to your point, very, very, very hopeful in those areas.
+1:42:26
+Ben, Goltra asks, do you think the lobbying efforts by good faith American crypto firms will be able to move the needle politically in the next few years? What areas make you optimistic as it relates to American crypto regulation? Crypto, blockchain, Web3.
+1:42:38
+Yeah, so I think that I'm as hopeful as I've ever been. So there's a bunch of things that have been really positive. First of all, the SEC has lost I think five cases in a row. So, you know, like some of their like arbitrary, um, enforcement of things that aren't laws is not working.
+1:42:58
+Um, secondly, uh, you know, there was a bill that passed through the house, um, or the house financial services committee, uh, which is a very, I would say good bill on crypto regulation. And, you know, hopefully that will eventually pass the house and the Senate. Um, there's, uh,
+1:43:19
+You know, we've seen Wyoming, I think, adopt really good new laws around DAOs. And so there's some progress there. And then, you know, there's been, you know, we've been working really, really hard to educate members of Congress and the administration on kind of the value of the technology.
+1:43:41
+There are strong opponents to it, you know, as I mentioned earlier. And, you know, that continues to be worrisome. But I think we're making great progress. And the Fair Shake Pack has done just a tremendous job of, you know, kind of backing pro-crypto candidates.
+1:44:01
+And with great success, there were six different races on Super Tuesday that they backed and all six won. So, you know, another good sign. Fantastic.
+1:44:13
+I had a couple other topics here quickly to get under the wire. So Father Time asks, can you give us your thoughts on the recent TikTok legislation? If passed, what does this mean for big tech going forward? And so I'll just give a quick swing at that. So the TikTok legislation being proposed by the U.S.
+1:44:28
+Congress and currently being taken up in the Senate, which, by the way, the president Biden has already said he'll sign it if the Senate and the House pass it. This is legislation that would require a divestment of TikTok from its Chinese parent company, ByteDance.
+1:44:43
+TikTok would have to be a purely American company or would have to be owned by a purely American company. Then failing that, it would be a ban of TikTok in the US.
+1:44:53
+This bill is a great example of the bipartisan dynamic in DC right now on the topic of China, which is this bill is being enthusiastically supported by the majority of politicians on both sides of the aisle.
+1:45:05
+I think it passed out of its committee like 50 to zero, which, you know, is basically like it's impossible to get anybody in D.C. to agree on anything right now, except basically basically this. So this is like super bipartisan. And then it's, you know, the head of that committee is a Republican, Mike Gallagher.
+1:45:21
+And, you know, he immediately and he worked in a bipartisan way with his committee members. But. The Democratic White House immediately endorsed his bill. So this bill has serious momentum. The Senate is taking it up right now. They're likely to modify it in some way, but it seems reasonably likely to pass based on what we can see.
+1:45:40
+You know, I would say, like I said, overwhelmingly bipartisan support. And, you know, look, the argument for the ban is, I would say, a couple different ways.
+1:45:48
+The divestment of the ban, number one, is just like, you know, an app on Americans, on the phones of a large percent of Americans with surveillance and potential propaganda kind of aspects of that, you know, certainly has people in Washington concerned. And then, quite frankly, there's an underlying industrial, you know, dynamic, which is, you know, the U.S.
+1:46:08
+Internet companies can't operate in China. So there's a sort of an unfair asymmetry underneath this that really undercuts, I think, a lot of the arguments from ByteDance.
+1:46:17
+It has been striking to see that there are actually opponents of this bill who have emerged, and I would describe on sort of the further to the right and further to the left in their respective parties. And those folks, and I won't go through detail, but those folks make a variety of arguments
+1:46:34
+And let me characterize the surface level.
+1:46:39
+I think further on the left, I think that there are people who think that, especially kind of further left, Congress people who feel like TikTok is actually a really important and vital messaging system for them to be able to use with their constituents who tend to be younger and very internet centric.
+1:46:53
+And so there's that, which is interesting. But then further on the right, there is a lot, and our friend David Sachs, for example, might be an example of this, There are a fair number of people who are very worried that the U.S.
+1:47:06
+government is so prone to abuse any regulatory capability with respect to tech, and especially with respect to censorship, that basically if you hand the U.S.
+1:47:14
+government any new regulatory authority or legal authority at all to come down on tech, it will inevitably be used not just against the Chinese company, but it will also then be used against the American companies. And so there's some drama surfacing around this, and we'll see whether the opponents can...
+1:47:29
+you know, can kind of kind of pull it through. You know, look, quite frankly, I, you know, I, you know, without coming down particularly on, like, I think there's one of those cases where it's actually like excellent arguments, like on all three sides. Like, I think there are like very legitimate questions here.
+1:47:43
+And so, you know, I think it's great that the issue is being confronted. But I think it's also great that the, you know, the arguments have surfaced and that we're going to, you know, hopefully figure out the right thing to do. A couple of closing things. Close on, let's see, hopefully a semi-optimistic note.
+1:47:58
+So John Potter asks, how do you most effectively find common ground with groups and interests that you benefit from working with, but with which you are usually opposed ideologically or otherwise?
+1:48:09
+I mean, I think this is, you know, there's this term in Washington, common ground. And I think that, you know, you always want to start by finding the common ground, because I'll tell you something in politics generally, is most people have the same intention. You know, like in Washington, in fact, people want life to be fair.
+1:48:35
+You know, they don't want people to go hungry. They want citizens to be safe but have plenty of opportunity. There's a lot of common ground that the differences lie not in the intent, but how you get there, what is the right policy to achieve the goal.
+1:48:56
+I think it's always important to start with the goal and then work our way through why we think our policy position is correct. You know, like, we don't really have a lot of disagreements on stated intent, at least. I mean, I think there are some intentions that are very difficult in Washington, you know, like the...
+1:49:23
+you know, the intention to kind of control the financial system is, you know, from the government or nationalize the banks or kind of achieve the equivalent of nationalizing the banks is, you know, when you have that intent, that's tough.
+1:49:37
+But like, if you start with, you know, most intentions are, I think, you know, shared between, you know, us and policymakers on both sides.
+1:49:47
+And then we'll close on this great question. Zach asks, would either of you ever consider running for office? And for fun, what would be your platform?
+1:49:57
+So I want, just because, look, you know, I think being a politician requires a certain kind of skill set and attitude and energy from certain things that I don't possess, unfortunately. Do you have a platform you would run on if you did run? Okay, yeah, let's hear your platform.
+1:50:25
+The American Dream. So I won't do it now, but I like to put up this chart that shows the change in prices in different sectors of the economy over time. And what you basically see is the price of like television sets and software and video games are like crashing hard, right?
+1:50:40
+In a way that's like great for consumers. I saw 75 inch flat screen ultra high def TVs now are down below $500. It's great. It's amazing. When technology is allowed to work its magic, prices crash in a way that's just great for consumers. And it's equivalent of a giant, basically when prices drop, it's equivalent of a raise.
+1:50:59
+So it makes human welfare a lot better. The three elements of the economy that are central to the American dream are healthcare, education, and housing. And so if you think about what does it mean to have the American dream, it means to be able to buy and own a home.
+1:51:14
+It means being able to send your kids to great schools, get a great education, to have a great life. And then it means great healthcare to be able to take care of yourself and your family. The prices on those are skyrocketing. They're just like straight to the moon.
+1:51:27
+Of course, those are the sectors that are the most controlled by the government, where there's the most subsidies for demand from the government, there's the most restrictions on supply from the government, and there is the most interference with the ability to field technology and startups.
+1:51:43
+And the result is we have an entire generation of kids who basically, I think, are quite rational in looking forward and basically saying, I'm never going to be able to achieve the American dream. I'm never going to be able to own a home.
+1:51:53
+I'm never going to be able to get a good education or send my kids to good education. I'm not going to be able to get good health care. Basically, I'm not going to be able to live the life that my parents lived or my grandparents lived.
+1:52:02
+And I'm not going to be I'm not going to be able to fundamentally form a family, provide for my kids. And I think that's the I think that's my opinion. That's the underlying theme to kind of what has gone wrong sort of socially, politically, psychologically in the country.
+1:52:16
+That's what's led to this sort of intense level of pessimism. That's what's led to sort of this attraction, you know, kind of very zero sum politics to, you know, recrimination over over over optimism and building. And so I would confront that absolutely directly.
+1:52:31
+And then of course, I would point out that I don't think anybody in Washington is doing that right now. So either I would win because I'm the only one saying it out loud or I would lose because nobody cares.
+1:52:41
+But I think it would, I've always wondered whether that actually would, both on the substance and on the message, whether that would be the right platform.
+1:52:51
+Yeah, no, it would certainly be the thing to do. It's the thing, it's very complex in that, you know, healthcare policy is largely national, but education policy and housing policy has also got a very large local component. So it would be a complicated set of policies that you'd have to enforce.
+1:53:13
+We still have a ton of questions, so we may do part two on this at some point, but we really appreciate your time and attention and we will see you soon.
+1:53:19
+Okay, thank you.
+</code></pre>
+<h2>Topic Index (for deep-dive generation)</h2>
+<p>1. <strong>Big tech vs little tech divergence</strong> — interests have fully separated; conflating them is a category error
+2. <strong>Safety theater as monopoly capture</strong> — big tech AI lobbying; the Biden EO smuggle
+3. <strong>Regulating uses, not math</strong> — every harmful AI use is already illegal
+4. <strong>The leapfrog dynamic</strong> — AI as commodity is big tech's actual nightmare
+5. <strong>Crypto / blockchain as decentralization layer</strong> — training, inference, data marketplaces, deepfake provenance
+6. <strong>The Vinod Khosla / Manhattan Project debate</strong> — closed source as security theater
+7. <strong>Cold War 2.0 with China</strong> — two AI stacks, decentralization as strategic edge
+8. <strong>The Anglo-American vs Continental legal traditions</strong> — precautionary principle dissected
+9. <strong>Meta's open-source bet as Android-style strategy</strong> — Llama as anti-Apple play
+10. <strong>The American Dream platform</strong> — where tech operates prices crash, where government dominates prices explode
+11. <strong>University AI capacity collapse</strong> — without decentralization, academia is boxed out
+12. <strong>TikTok bill bipartisan dynamics</strong> — left/right opposition reasoning
+13. <strong>VC engagement asymmetry</strong> — why US VCs are barely engaged and global VCs not at all
+14. <strong>France as European counterweight</strong> — Mistral, nuclear, the Paris exception
+15. <strong>Round-tripping investment dynamics</strong> — big tech investing in startups conditional on GPU/cloud purchases</p></div>
+  
+<div class="share-row">
+  <div class="share-left">
+    <div class="label">Share this post on:</div>
+    <div class="share-icons">
+      <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/kb/pmarca-ben-tech-politics-2hr.html" target="_blank" rel="noopener" title="Share on X">
+        <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+      </a>
+      <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/kb/pmarca-ben-tech-politics-2hr.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+      </a>
+      <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/kb/pmarca-ben-tech-politics-2hr.html" target="_blank" rel="noopener" title="Share on Telegram">
+        <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+      </a>
+      <a href="mailto:?subject=On Tech Politics/Policy&body=https://betoneh.github.io/signal-monitor/kb/pmarca-ben-tech-politics-2hr.html" title="Share via email">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+      </a>
+      <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
+    </div>
+  </div>
+  <div style="width:100%;text-align:center;margin-top:0.5rem;">
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>Back to Top</span>
+    </button>
+  </div>
+</div>
+
+</main>
+<footer>
+  Signal Monitor · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+
+<script>
+  (function(){
+    var bar = document.getElementById('progress');
+    if (!bar) return;
+    function up() {
+      var s = window.pageYOffset || document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = (h > 0 ? s / h * 100 : 0) + '%';
+    }
+    window.onscroll = up;
+    up();
+  })();
+</script>
+
+</body>
+</html>
