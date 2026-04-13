@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-13T08:44:09.000Z",
+  "updated_at": "2026-04-13T08:45:08.658Z",
   "model": "venice/claude-opus-4-6",
   "audio": {
     "enabled": false,
