@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#212737">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Signal Monitor — 2026-04-13-0800</title>
+<style>
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; display: flex; flex-direction: column;
+    overflow-y: scroll; scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  a { outline-offset: 1px; outline-color: rgba(14, 196, 169, 0.75); }
+  a:focus-visible { outline: 2px dashed rgba(14, 196, 169, 0.75); text-decoration: none; }
+
+  header, main, footer {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem;
+  }
+  header { padding: 2rem 1rem 1.5rem; }
+  .title-row {
+    display: flex; align-items: baseline; gap: 0.75rem;
+  }
+  .site-title {
+    display: inline-block;
+    font-size: 1.875rem; font-weight: 700; color: #0ec4a9; text-decoration: none;
+  }
+  @media (min-width: 640px) { .site-title { font-size: 2.25rem; } }
+  .site-title:hover { color: #0ec4a9; }
+  .feed-badge {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.4);
+    font-weight: 400;
+  }
+  .header-meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 0.5rem; margin-bottom: 1.5rem;
+  }
+  .header-meta .date-wrap {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.875rem; color: #eaedf3; opacity: 0.8; font-style: italic;
+  }
+  @media (min-width: 640px) { .header-meta .date-wrap { font-size: 1rem; } }
+  .header-meta .date-wrap svg {
+    display: inline-block; width: 1.25rem; height: 1.25rem; min-width: 1.25rem; flex-shrink: 0;
+  }
+  .header-meta .sep { color: rgba(234, 237, 243, 0.3); }
+  .header-meta .reading-time {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.6);
+  }
+
+  .model-meta { font-size: 0.75rem; color: rgba(234, 237, 243, 0.4); margin-top: 0.25rem; letter-spacing: 0.01em; }
+
+  .stats { font-size: 0.75rem; color: #8b949e; margin-top: 0.5rem; line-height: 1.6; }
+
+  .hr { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  .hr hr { border: none; border-top: 1px solid #0a8f7b; }
+
+  main { flex: 1; }
+
+  .category { margin-bottom: 2rem; }
+  .category-header {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.75rem; padding-bottom: 0.5rem;
+    border-bottom: 1px solid #0a8f7b;
+  }
+  .category-header h2 { font-size: 1.25rem; font-weight: 600; color: #eaedf3; }
+  .category-count {
+    font-size: 0.75rem; color: #8b949e;
+    background: rgba(52, 63, 96, 0.75); padding: 1px 8px; border-radius: 3px;
+  }
+
+  .cat-crypto .category-header { border-color: #f7931a; }
+  .cat-crypto .category-header h2 { color: #f7931a; }
+  .cat-ai .category-header { border-color: #0ec4a9; }
+  .cat-ai .category-header h2 { color: #0ec4a9; }
+  .cat-tech .category-header { border-color: #8b5cf6; }
+  .cat-tech .category-header h2 { color: #8b5cf6; }
+  .cat-stocks_macro .category-header { border-color: #ef4444; }
+  .cat-stocks_macro .category-header h2 { color: #ef4444; }
+  .cat-israel .category-header { border-color: #3b82f6; }
+  .cat-israel .category-header h2 { color: #3b82f6; }
+  .cat-openclaw .category-header { border-color: #FF4500; }
+  .cat-openclaw .category-header h2 { color: #FF4500; }
+
+  .editorial {
+    line-height: 1.75; font-size: 1rem; margin-bottom: 1rem;
+    overflow-wrap: break-word; word-break: break-word;
+    color: #eaedf3;
+  }
+  .editorial p {
+    margin-bottom: 0.75rem; line-height: 1.75;
+  }
+  .editorial p:last-child { margin-bottom: 0; }
+
+  a {
+    color: #0ec4a9; text-decoration: none;
+  }
+  a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .editorial a {
+    color: #0ec4a9; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 8px;
+  }
+  .editorial a:hover { text-decoration-color: #eaedf3; }
+
+  .tweets { display: flex; flex-direction: column; gap: 0.75rem; }
+  .tweet {
+    background: rgba(52, 63, 96, 0.35);
+    border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.875rem 1rem;
+    overflow: hidden; max-width: 100%;
+  }
+  @media (hover:hover) { .tweet:hover { border-color: #0ec4a9; } }
+  .tweet.priority { border-left: 3px solid #0ec4a9; }
+
+  .tweet-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+  .tweet-author { font-weight: 600; font-size: 0.85rem; color: #eaedf3; }
+  .tweet-handle { color: #8b949e; font-size: 0.8rem; font-weight: 400; }
+  .tweet-handle a { color: #8b949e; text-decoration: none; }
+  .tweet-handle a:hover { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; }
+  .tweet-time { font-size: 0.75rem; color: #8b949e; }
+
+  .tweet-text {
+    font-size: 0.85rem; line-height: 1.65; margin-bottom: 0.5rem;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .tweet-text a { text-decoration: none; }
+  .tweet-text a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .tweet-media {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px; margin-bottom: 0.5rem; overflow: hidden;
+  }
+  .tweet-media img {
+    width: 100%; max-width: 100%; border-radius: 4px;
+    border: 1px solid rgba(10, 143, 123, 0.3);
+  }
+
+  .tweet-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: #8b949e;
+  }
+  .tweet-metrics { display: flex; gap: 1rem; }
+  .tweet-link a { font-size: 0.75rem; }
+
+  .retweet-badge {
+    background: rgba(52, 63, 96, 0.75); color: #8b949e;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem;
+    margin-bottom: 0.5rem; display: inline-block;
+  }
+  .priority-badge {
+    background: #0ec4a9; color: #212737;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; margin-left: 0.5rem;
+  }
+
+  .noise {
+    font-size: 0.75rem; color: #8b949e; margin: 2rem 0 1rem;
+    padding: 0.75rem 1rem; background: rgba(52, 63, 96, 0.35); border-radius: 4px;
+  }
+  .noise a { color: #0ec4a9; text-decoration: none; font-size: 0.75rem; }
+  .noise a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .audio-row {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem 1.5rem;
+  }
+  .audio-player {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: rgba(52, 63, 96, 0.35); border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.625rem 1rem;
+  }
+  .audio-player:hover { border-color: #0ec4a9; }
+  .audio-btn {
+    background: none; border: none; cursor: pointer;
+    color: #0ec4a9; font-size: 1.25rem; padding: 0; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; flex-shrink: 0;
+  }
+  .audio-btn:hover { color: #eaedf3; }
+  .audio-progress {
+    flex: 1; height: 3px; background: rgba(52, 63, 96, 0.75);
+    border-radius: 2px; cursor: pointer; position: relative;
+  }
+  .audio-progress-fill {
+    height: 100%; background: #0ec4a9; border-radius: 2px;
+    width: 0%; transition: width 100ms linear;
+  }
+  .audio-time {
+    font-size: 0.75rem; color: #8b949e; min-width: 3.5rem; text-align: right;
+  }
+  .audio-speed {
+    font-size: 0.7rem; color: #8b949e; background: rgba(52, 63, 96, 0.75);
+    border: none; border-radius: 3px; padding: 2px 6px; cursor: pointer;
+  }
+  .audio-speed:hover { color: #0ec4a9; }
+
+  footer { padding: 1.5rem 1rem; }
+  .footer-text {
+    text-align: center; font-size: 0.75rem; color: #8b949e; line-height: 1.6;
+  }
+  .footer-text a {
+    color: #eaedf3; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 4px;
+  }
+  .footer-text a:hover { color: #0ec4a9; }
+  .stats-line {
+    text-align: center; font-size: 0.75rem; color: #8b949e;
+    margin-bottom: 0.5rem; line-height: 1.6;
+  }
+
+  /* Share bar */
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .share-label { font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem; }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+  /* Deep Dive section — matches category style */
+  .cat-deepdive .category-header { border-color: #eab308; }
+  .cat-deepdive .category-header h2 { color: #eab308; }
+  .deepdive-source {
+    font-size: 0.75rem; color: #8b949e; margin-top: 0.75rem;
+  }
+  .deepdive-source a { color: #8b949e; text-decoration: none; }
+  .deepdive-source a:hover { color: #eab308; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+
+  @media (max-width: 640px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .site-title { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<header>
+  <div class="title-row">
+    <span class="site-title">Signal Monitor</span>
+    <span class="feed-badge">Following</span>
+  </div>
+  <div class="header-meta">
+    <span class="date-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/><path d="M7 14h.013"/><path d="M10.01 14h.005"/><path d="M13.01 14h.005"/><path d="M16.015 14h.005"/><path d="M13.015 17h.005"/><path d="M7.01 17h.005"/><path d="M10.01 17h.005"/></svg>
+      <time>13 Apr, 2026 — 8:00am</time>
+    </span>
+    <span class="sep">&bull;</span>
+    <span class="reading-time" id="reading-time"></span>
+  </div>
+  <div class="model-meta">claude-opus-4-6 &middot; $0.4247</div>
+</header>
+
+<main>
+
+  <div class="category cat-crypto">
+    <div class="category-header">
+      <h2>Crypto</h2>
+      <span class="category-count">659w</span>
+    </div>
+    <p class="editorial">{"crypto":"BitMine now <a href="https://x.com/CoinMarketCap/status/2043677288625995963" target="_blank">holds nearly 4.9 million ETH at an average cost of $2,206</a> — 4% of total Ethereum supply locked in a single entity running the Saylor playbook on a second asset, just as the macro backdrop that stress-tested Strategy's BTC balance sheet intensifies. This is accumulation into a war: oil <a href="https://x.com/zerohedge/status/2043681561975894254" target="_blank">is screaming risk while markets refuse to listen</a>, and the gap between mechanical positioning flows and physical-world deterioration flagged all quarter just got a second leveraged balance sheet bolted on. Meanwhile, Binance Alpha draws <a href="https://x.com/sjdedic/status/2043683313999663526" target="_blank">blatant pump-and-dump accusations worth hundreds of millions on the RAVE token</a>, a reminder that exchange-adjacent extraction mechanisms thrive regardless of which direction institutional rails expand.","ai":"Anti-AI violence crossed another threshold as <a href="https://x.com/zerohedge/status/2043676349861134837" target="_blank">gunfire struck Sam Altman's San Francisco home days after a Molotov cocktail attack</a> — the physical threat surface around AI leadership is no longer episodic, it's a pattern. On the builder side, MemPalace <a href="https://x.com/GithubProjects/status/2043683182797840569" target="_blank">keeps raw conversation history intact and runs entirely on your machine</a>, a clean validation of the cognitive sovereignty thesis: when models commoditize, local memory persistence and retrieval discipline become the defensible layer. Prediction markets <a href="https://x.com/zerohedge/status/2043690457197146195" target="_blank">price only a 35% chance the blockade lifts by month end</a>, implying the commodity shock driving macro chaos has months of runway left — relevant context for anyone building AI infrastructure that depends on stable energy pricing and chip supply chains.","tech":"Levelsio's data point that <a href="https://x.com/levelsio/status/2043672330040205751" target="_blank">young people barely use websites, with 70% preferring apps</a> gets sharper with his own gloss: the replacement isn't new apps, it's <a href="https://x.com/levelsio/status/2043665605581053960" target="_blank">AI models responding to your question and solving problems that SaaS used to charge for</a>, collapsing standalone product categories into conversational interfaces inside platforms people already inhabit. Hyperliquid gets <a href="https://x.com/ThinkingUSD/status/2043673710423364053" target="_blank">profiled as the most profitable startup per employee on earth</a>, the structural proof of the wiki's fee-compression thesis — when you cross-margin perps with prediction markets at 4-7 bps, headcount is overhead not moat. Levelsio himself is <a href="https://x.com/levelsio/status/2043655981981114818" target="_blank">generating 3D game assets entirely with AI tools</a>, demonstrating content production costs approaching zero even for spatial media — the SaaS repricing he describes is already eating his own creative pipeline.","stocks_macro":"JPMorgan <a href="https://x.com/BSCNews/status/2043683623619174900" target="_blank">urges investors to buy the dip and forecasts a V-shaped recovery</a> on the same morning <a href="https://x.com/zerohedge/status/2043667037730246670" target="_blank">futures slide and oil spikes above $100 ahead of the Hormuz blockade going live</a> — the institutional buy-the-dip call arriving simultaneous with the commodity shock's next leg is the Fed credibility gap made visible in sell-side research. Oracle <a href="https://x.com/TechLayoffLover/status/2043686248137580551" target="_blank">fired 30,000 workers at sunrise while posting a 95% profit surge and handing its new CFO a $26 million stock package</a>, the starkest signal yet that AI-driven margin expansion and mass headcount destruction are the same trade. Goldman <a href="https://x.com/zerohedge/status/2043680377861001347" target="_blank">saw FICC unexpectedly miss despite its highest overall profit in five years</a>, suggesting the fixed-income volatility bonanza from the blockade hasn't fully printed into trading desks yet. The potential off-ramp nobody expected: <a href="https://x.com/zerohedge/status/2043688319846944899" target="_blank">Iranian officials are studying abandoning uranium enrichment as a U.S. condition for ending the war</a> — if real, this is the first crack in the escalation spiral since Vance left Islamabad empty-handed. Hungary's Magyar <a href="https://x.com/zerohedge/status/2043678922642960402" target="_blank">confirmed Budapest won't stop buying Russian oil and hopes the EU lifts sanctions post-war</a>, the pragmatic energy realism of Europe's newest democratic government already complicating the diplomatic opening his election was supposed to create.","israel":"The blockade is no longer theoretical — <a href="https://x.com/sentdefender/status/2043683585178083562" target="_blank">tanker and container traffic remains visible in the Persian Gulf as it goes live</a>. The USS George H.W. Bush <a href="https://x.com/MarioNawfal/status/2043666102807343375" target="_blank">transited the Strait of Gibraltar heading east into the Mediterranean</a>, adding a third carrier strike group to a theater already at interdiction posture, while <a href="https://x.com/FaytuksNetwork/status/2043667159943876936" target="_blank">B-52 bombers are being repositioned for a potential bombing campaign on Iran</a>, escalating from blockade to strike readiness in a single news cycle. Iran's <a href="https://x.com/DeItaone/status/2043688413874761982" target="_blank">potential willingness to abandon uranium enrichment</a> is the first diplomatic signal since the Islamabad collapse — but Netanyahu <a href="https://x.com/netanyahu/status/2043675689153400986" target="_blank">spent the day promoting Golan development</a>, broadcasting zero interest in the de-escalation window enrichment concessions might open. The escalation ladder has more rungs than off-ramps, and Washington's 2:43 AM blockade announcement timeline [T</p>
+  </div>
+
+  <div class="category cat-ai">
+    <div class="category-header">
+      <h2>AI</h2>
+      <span class="category-count">0w</span>
+    </div>
+  </div>
+
+  <div class="category cat-tech">
+    <div class="category-header">
+      <h2>Tech & Quantum</h2>
+      <span class="category-count">0w</span>
+    </div>
+  </div>
+
+  <div class="category cat-stocks_macro">
+    <div class="category-header">
+      <h2>Stocks & Macro</h2>
+      <span class="category-count">0w</span>
+    </div>
+  </div>
+
+  <div class="category cat-israel">
+    <div class="category-header">
+      <h2>Israel</h2>
+      <span class="category-count">0w</span>
+    </div>
+  </div>
+
+  <div class="category cat-deepdive">
+    <div class="category-header">
+      <h2>Today's Deep Dive: Rifkin, Keynes, and the Graveyard of Unemployment Predictions</h2>
+      <span class="category-count">645w</span>
+    </div>
+    <div class="deepdive-source">Source: <a href="https://x.com/pmarca/status/2037816674716729455" target="_blank">The Lump of Labor Fallacy — Marc Andreessen (X thread)</a> · KB #12</div>
+    <div class="editorial"><p>In 1930, at the depths of the Great Depression, <a href="https://en.wikipedia.org/wiki/John_Maynard_Keynes" target="_blank">John Maynard Keynes</a> wrote an essay called <a href="https://en.wikipedia.org/wiki/Economic_Possibilities_for_our_Grandchildren" target="_blank">"Economic Possibilities for Our Grandchildren."</a> It contained one of the most famous wrong predictions in the history of economics: by 2030, rising productivity would be so dramatic that the average person would need to work only 15 hours a week to maintain a comfortable standard of living. The real problem, Keynes predicted, would not be unemployment but too much leisure — humanity would struggle to fill its days meaningfully once technology had solved the material problem.</p><p>Keynes was spectacularly wrong, but in an illuminating way. He correctly predicted the productivity gains — they happened, and then some. What he failed to anticipate was the infinite expansibility of human wants. As people got richer, they didn't decide to work less. They decided to want more things, including things that didn't exist in 1930. The 15-hour workweek never arrived because rising income created rising aspirations faster than productivity could satisfy them. The material problem was not solved; it was constantly redefined upward.</p><p>The more consequential tradition of unemployment catastrophism runs through <a href="https://en.wikipedia.org/wiki/Jeremy_Rifkin" target="_blank">Jeremy Rifkin</a>, whose 1995 book <a href="https://en.wikipedia.org/wiki/The_End_of_Work" target="_blank"><em>The End of Work</em></a> became the defining statement of the technology-destroys-jobs thesis for the internet era. Rifkin argued that the third industrial revolution — computers, automation, the internet — would hollow out employment across manufacturing, services, and white-collar work simultaneously, producing structural mass unemployment that no amount of retraining or policy adjustment could address. The book was serious, widely read, and influential. It was also completely wrong.</p><p>What happened in the thirty years after Rifkin's prediction? The United States computerized its entire economy, saturated the workforce with internet-connected devices, automated enormous swaths of manufacturing and clerical work — and reached its lowest peacetime unemployment rate in recorded history, 3.5% in 2019. Total employment approximately doubled in absolute numbers between 1983 and 2019. The specific jobs Rifkin worried about did shrink or disappear. But the new jobs created by the internet economy — software engineers, UX designers, social media managers, data scientists, podcast producers, app developers, cloud architects — dwarfed them in number and exceeded them substantially in median wage.</p><p>The pattern extends much further back. The mechanization of agriculture was supposed to produce a permanent surplus of landless laborers. Instead, it produced the Industrial Revolution. The introduction of mass production assembly lines was supposed to deskill and ultimately displace the factory workforce. Instead, it created the industrial working class and the middle-income consumer society. The mainframe computer was supposed to eliminate accounting departments. Instead, it created the information economy. The personal computer was supposed to automate white-collar work out of existence. Instead, it created Silicon Valley and the knowledge economy.</p><p>The track record is not ambiguous: zero for approximately ten. Every major wave of technological unemployment catastrophism has been empirically falsified, and the falsification has not been marginal. In every case, aggregate employment grew. In most cases, median real wages grew. The composition of employment changed dramatically. The specific jobs displaced did disappear. But the economy's capacity to generate new categories of work — categories that couldn't be predicted in advance, that required the new technology to exist — consistently outpaced displacement.</p><p>This doesn't mean the next prediction is automatically wrong. Intellectual honesty requires acknowledging that ten failures doesn't guarantee an eleventh failure. AGI may genuinely be different in degree and kind from prior automation. But the burden of proof sits entirely with the catastrophists. They need to specify the precise mechanism by which the demand-creation feedback loop — which has held without exception across 250 years of industrial history — breaks down with AGI. "It's really powerful this time" is not a mechanism. It is the same claim the Luddites made about power looms, that Rifkin made about the internet, and that both got wrong by the same structure of error. The graveyard of wrong predictions is not a reason for complacency. It is evidence about where the prior probability should sit.</p></div>
+  </div>
+
+  <div class="noise">📡 noise (7d): <a href="https://x.com/hisensesports" target="_blank">@hisensesports</a> 5/5 (100%) · <a href="https://x.com/playdoitcasino" target="_blank">@playdoitcasino</a> 5/5 (100%) · <a href="https://x.com/honorglobal" target="_blank">@honorglobal</a> 5/5 (100%) · <a href="https://x.com/chosta_eth" target="_blank">@chosta_eth</a> 5/6 (83%) · <a href="https://x.com/uniswap" target="_blank">@uniswap</a> 4/5 (80%)</div>
+
+  <div class="share-row">
+    <div class="share-left">
+      <div class="share-label">Share this post on:</div>
+      <div class="share-icons">
+        <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/2026-04-13-0800.html" target="_blank" rel="noopener" title="Share on X">
+          <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+        </a>
+        <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/2026-04-13-0800.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+        </a>
+        <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/2026-04-13-0800.html" target="_blank" rel="noopener" title="Share on Telegram">
+          <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+        </a>
+        <a href="mailto:?subject=Signal%20Monitor%202026-04-13-0800&body=https://betoneh.github.io/signal-monitor/2026-04-13-0800.html" title="Share via email">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+        </a>
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'},1500)})" title="Copy link">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+      </div>
+    </div>
+    <div style="width:100%;text-align:center;margin-top:0.5rem;">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>Back to Top</span>
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<div class="hr"><hr></div>
+
+<footer>
+  <p class="stats-line">174 tweets · Crypto 24% · AI 16% · Tech & Quantum 10% · Stocks & Macro 25% · Noise 38 · Israel Monitor · 50 tweets from curated list · source: Following</p>
+  <p class="footer-text">
+    Generated by Signal Monitor ·
+    <a href="https://x.com/beto_neh">@beto_neh</a>
+  </p>
+</footer>
+
+<script>
+  // Reading time
+  const text = document.querySelector('main').innerText;
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+  document.getElementById('reading-time').textContent = minutes + ' min read';
+
+  // Progress bar
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Audio player
+  const ael=document.getElementById('audio-el');
+  if(ael){
+    const abtn=document.getElementById('audio-btn');
+    const afill=document.getElementById('audio-fill');
+    const atime=document.getElementById('audio-time');
+    const aspeed=document.getElementById('audio-speed');
+    const playIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>';
+    const pauseIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>';
+    function fmt(s){const m=Math.floor(s/60);return m+':'+(''+(Math.floor(s)%60)).padStart(2,'0');}
+    window.toggleAudio=function(){if(ael.paused){ael.play();abtn.innerHTML=pauseIcon;}else{ael.pause();abtn.innerHTML=playIcon;}};
+    ael.addEventListener('timeupdate',function(){
+      if(ael.duration){afill.style.width=(ael.currentTime/ael.duration*100)+'%';}
+      atime.textContent=fmt(ael.currentTime)+(ael.duration?' / '+fmt(ael.duration):'');
+    });
+    ael.addEventListener('ended',function(){abtn.innerHTML=playIcon;afill.style.width='0%';});
+    window.seekAudio=function(e){
+      const bar=document.getElementById('audio-bar');
+      const pct=e.offsetX/bar.offsetWidth;
+      if(ael.duration)ael.currentTime=pct*ael.duration;
+    };
+    const speeds=[1,1.25,1.5,1.75,2];let si=0;
+    window.cycleSpeed=function(){si=(si+1)%speeds.length;ael.playbackRate=speeds[si];aspeed.textContent=speeds[si]+'x';};
+  }
+
+  // Pull to refresh (PWA)
+  if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+    let sy=0,p=false,d=document,b=d.body;
+    const el=d.createElement('div');
+    el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#8b949e;font-size:14px;z-index:9999;transition:top 0.2s;background:#212737;';
+    el.textContent='\u2193 Pull to refresh';
+    b.prepend(el);
+    d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+    d.addEventListener('touchmove',e=>{
+      if(!p)return;
+      const dy=e.touches[0].clientY-sy;
+      if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+      if(dy>5)e.preventDefault();
+      const t=Math.min(dy*0.4,50);
+      el.style.top=(t-50)+'px';
+      el.textContent=dy>80?'\u2191 Release':'\u2193 Pull to refresh';
+    },{passive:false});
+    d.addEventListener('touchend',e=>{
+      if(!p){return;}p=false;
+      const dy=e.changedTouches[0].clientY-sy;
+      el.style.top='-50px';
+      if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+    });
+  }
+</script>
+</body>
+</html>
