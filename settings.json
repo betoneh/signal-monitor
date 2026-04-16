@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-16T18:05:00.000Z",
+  "updated_at": "2026-04-16T18:10:01.065Z",
   "model": "anthropic/claude-opus-4-7",
   "audio": {
     "enabled": false,
