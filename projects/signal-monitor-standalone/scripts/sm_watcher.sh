@@ -9,6 +9,7 @@ STANDALONE_DIR="/Users/maxumbra/clawd/projects/signal-monitor-standalone"
 TRIGGER_FILE="$REPO_DIR/trigger.json"
 SETTINGS_FILE="$REPO_DIR/settings.json"
 PROCESSOR="$STANDALONE_DIR/scripts/process_kb_ingest.py"
+MODEL_PROCESSOR="$STANDALONE_DIR/scripts/process_model_onboarding.py"
 LOG="$STANDALONE_DIR/data/watcher.log"
 
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S') $1" >> "$LOG"; }
@@ -81,6 +82,7 @@ KB_MODEL=""
 KB_EXISTING_ENTRY=""
 KB_EXISTING_DD="0"
 KB_EXISTING_MODEL=""
+MODEL_REQUEST=""
 if [ -f "$SETTINGS_FILE" ]; then
     KB_URL="$(read_kb_field kb_ingest url)"
     KB_DD="$(read_kb_field kb_ingest deep_dives_count)"
@@ -88,6 +90,17 @@ if [ -f "$SETTINGS_FILE" ]; then
     KB_EXISTING_ENTRY="$(read_kb_field kb_existing_dd entry)"
     KB_EXISTING_DD="$(read_kb_field kb_existing_dd deep_dives_count)"
     KB_EXISTING_MODEL="$(read_kb_field kb_existing_dd model)"
+    MODEL_REQUEST="$(read_kb_field model_onboarding request)"
+fi
+
+if [ -n "$MODEL_REQUEST" ]; then
+    log "Model onboarding found: $MODEL_REQUEST"
+    if /opt/homebrew/bin/python3.13 "$MODEL_PROCESSOR" --request "$MODEL_REQUEST" >> "$LOG" 2>&1; then
+        push_repo_change "Process model_onboarding"
+        log "Model onboarding processed."
+    else
+        log "Model onboarding failed; leaving request pending."
+    fi
 fi
 
 if [ -n "$KB_URL" ]; then

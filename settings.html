@@ -132,19 +132,13 @@
     <div class="section">
         <div class="section-title">Model</div>
         <div class="row"><span class="row-label">Editorial model</span>
-            <select class="row-value" id="model" style="width:220px;">
-                <option value="openclaw">OpenClaw (local)</option>
-                <option value="anthropic/claude-opus-4-7">Claude Opus 4.7</option>
-                <option value="claude-opus-4-6">Claude Opus 4</option>
-                <option value="claude-sonnet-4-6">Claude Sonnet 4</option>
-                <option value="grok-3">Grok 3</option>
-                <option value="grok-4">Grok 4</option>
-                <option value="gemma3:12b">Gemma 3 12B (local)</option>
-                <option value="glm-5">GLM 5.1 (Venice)</option>
-                <option value="venice/claude-opus-4-6">Claude Opus 4.6 (Venice)</option>
-                <option value="venice/claude-sonnet-4-6">Claude Sonnet 4.6 (Venice)</option>
-                <option value="venice/openai-gpt-54">GPT-5.4 (Venice)</option>
-            </select></div>
+            <select class="row-value" id="model" style="width:220px;"></select></div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Model Onboarding</div>
+        <div class="row"><span class="row-label">Request</span>
+            <input class="row-value" type="text" id="model-onboarding-request" value="" placeholder="opus 4.7 de venice" style="width:100%;text-align:left;"></div>
     </div>
 
     <div class="section">
@@ -154,19 +148,7 @@
         <div class="row"><span class="row-label">Deep dives</span>
             <input class="row-value" type="number" id="kb-ingest-deep-dives" value="0" min="0" max="50"></div>
         <div class="row"><span class="row-label">AI model</span>
-            <select class="row-value" id="kb-ingest-model" style="width:220px;">
-                <option value="openclaw">OpenClaw (local)</option>
-                <option value="anthropic/claude-opus-4-7">Claude Opus 4.7</option>
-                <option value="claude-opus-4-6">Claude Opus 4</option>
-                <option value="claude-sonnet-4-6">Claude Sonnet 4</option>
-                <option value="grok-3">Grok 3</option>
-                <option value="grok-4">Grok 4</option>
-                <option value="gemma3:12b">Gemma 3 12B (local)</option>
-                <option value="glm-5">GLM 5.1 (Venice)</option>
-                <option value="venice/claude-opus-4-6">Claude Opus 4.6 (Venice)</option>
-                <option value="venice/claude-sonnet-4-6">Claude Sonnet 4.6 (Venice)</option>
-                <option value="venice/openai-gpt-54">GPT-5.4 (Venice)</option>
-            </select></div>
+            <select class="row-value" id="kb-ingest-model" style="width:220px;"></select></div>
     </div>
 
     <div class="section">
@@ -176,19 +158,7 @@
         <div class="row"><span class="row-label">Deep dives</span>
             <input class="row-value" type="number" id="kb-existing-dd-count" value="0" min="0" max="50"></div>
         <div class="row"><span class="row-label">AI model</span>
-            <select class="row-value" id="kb-existing-dd-model" style="width:220px;">
-                <option value="openclaw">OpenClaw (local)</option>
-                <option value="anthropic/claude-opus-4-7">Claude Opus 4.7</option>
-                <option value="claude-opus-4-6">Claude Opus 4</option>
-                <option value="claude-sonnet-4-6">Claude Sonnet 4</option>
-                <option value="grok-3">Grok 3</option>
-                <option value="grok-4">Grok 4</option>
-                <option value="gemma3:12b">Gemma 3 12B (local)</option>
-                <option value="glm-5">GLM 5.1 (Venice)</option>
-                <option value="venice/claude-opus-4-6">Claude Opus 4.6 (Venice)</option>
-                <option value="venice/claude-sonnet-4-6">Claude Sonnet 4.6 (Venice)</option>
-                <option value="venice/openai-gpt-54">GPT-5.4 (Venice)</option>
-            </select></div>
+            <select class="row-value" id="kb-existing-dd-model" style="width:220px;"></select></div>
     </div>
 
     <div class="section">
@@ -322,6 +292,22 @@ const categories = {
     israel: { name: "Israel", max_words: 110, keywords: ["israel","israeli","netanyahu","idf","hamas","hezbollah","gaza","west bank","iran attack","iran war","tehran","mossad","antisemitism","antisemitic","jewish","zionism","zionist","middle east conflict","ceasefire","hostages","iron dome","abraham accords","saudi normalization","settlements","knesset","shin bet","houthis","red sea","golan","intifada","kibbutz","october 7","operation roaring lion","irgc","ayatollah","khamenei","pezeshkian","two state","palestinian","tel aviv","jerusalem"] }
 };
 
+const DEFAULT_MODELS = [
+    { id: 'openclaw', label: 'OpenClaw (local)', enabled: true, pricing: { input: 0, output: 0, cache_read: 0, cache_write: 0 } },
+    { id: 'anthropic/claude-opus-4-7', label: 'Claude Opus 4.7', enabled: true, pricing: { input: 15, output: 75, cache_read: 1.5, cache_write: 3.75 } },
+    { id: 'claude-opus-4-6', label: 'Claude Opus 4', enabled: true, pricing: { input: 15, output: 75, cache_read: 1.5, cache_write: 3.75 } },
+    { id: 'claude-sonnet-4-6', label: 'Claude Sonnet 4', enabled: true, pricing: { input: 3, output: 15, cache_read: 0.3, cache_write: 0.75 } },
+    { id: 'grok-3', label: 'Grok 3', enabled: true, pricing: { input: 3, output: 15, cache_read: 0, cache_write: 0 } },
+    { id: 'grok-4', label: 'Grok 4', enabled: true, pricing: { input: 3, output: 15, cache_read: 0, cache_write: 0 } },
+    { id: 'gemma3:12b', label: 'Gemma 3 12B (local)', enabled: true, pricing: { input: 0, output: 0, cache_read: 0, cache_write: 0 } },
+    { id: 'glm-5', label: 'GLM 5.1 (Venice)', enabled: true, pricing: { input: 1, output: 3.2, cache_read: 0, cache_write: 0 } },
+    { id: 'venice/claude-opus-4-6', label: 'Claude Opus 4.6 (Venice)', enabled: true, pricing: { input: 6, output: 30, cache_read: 0.6, cache_write: 7.5 } },
+    { id: 'venice/claude-sonnet-4-6', label: 'Claude Sonnet 4.6 (Venice)', enabled: true, pricing: { input: 3.6, output: 18, cache_read: 0.36, cache_write: 4.5 } },
+    { id: 'venice/openai-gpt-54', label: 'GPT-5.4 (Venice)', enabled: true, pricing: { input: 3.13, output: 18.8, cache_read: 0.313, cache_write: 0 } }
+];
+
+let modelCatalog = cloneModels(DEFAULT_MODELS);
+
 function renderKeywords() {
     const container = document.getElementById('keywords-container');
     container.innerHTML = '';
@@ -351,6 +337,55 @@ function renderKeywords() {
 }
 
 function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/'/g,'&#39;').replace(/"/g,'&quot;'); }
+
+function cloneModels(models) {
+    return (models || []).map(model => ({
+        id: model.id,
+        label: model.label,
+        enabled: model.enabled !== false,
+        pricing: {
+            input: Number(model.pricing?.input) || 0,
+            output: Number(model.pricing?.output) || 0,
+            cache_read: Number(model.pricing?.cache_read) || 0,
+            cache_write: Number(model.pricing?.cache_write) || 0
+        }
+    }));
+}
+
+function normalizeModelCatalog(cfg) {
+    const source = Array.isArray(cfg?.available_models) && cfg.available_models.length
+        ? cfg.available_models
+        : DEFAULT_MODELS;
+    const seen = new Set();
+    const models = [];
+    for (const raw of source) {
+        if (!raw?.id || seen.has(raw.id)) continue;
+        seen.add(raw.id);
+        models.push({
+            id: raw.id,
+            label: raw.label || raw.id,
+            enabled: raw.enabled !== false,
+            pricing: {
+                input: Number(raw.pricing?.input) || 0,
+                output: Number(raw.pricing?.output) || 0,
+                cache_read: Number(raw.pricing?.cache_read) || 0,
+                cache_write: Number(raw.pricing?.cache_write) || 0
+            }
+        });
+    }
+    return models.length ? models : cloneModels(DEFAULT_MODELS);
+}
+
+function renderModelSelect(id, selectedValue, fallbackValue = 'claude-opus-4-6') {
+    const select = document.getElementById(id);
+    const enabledModels = modelCatalog.filter(model => model.enabled !== false);
+    select.innerHTML = enabledModels.map(model =>
+        `<option value="${esc(model.id)}">${esc(model.label)}</option>`
+    ).join('');
+    const allowed = new Set(enabledModels.map(model => model.id));
+    const fallback = allowed.has(fallbackValue) ? fallbackValue : (enabledModels[0]?.id || '');
+    select.value = allowed.has(selectedValue) ? selectedValue : fallback;
+}
 
 function removeKw(catId, kw) {
     categories[catId].keywords = categories[catId].keywords.filter(k => k !== kw);
@@ -393,6 +428,10 @@ function buildConfig() {
         version: 1,
         updated_at: new Date().toISOString(),
         model: gv('model'),
+        available_models: cloneModels(modelCatalog),
+        model_onboarding: {
+            request: gv('model-onboarding-request').trim()
+        },
         kb_ingest: {
             url: gv('kb-ingest-url').trim(),
             deep_dives_count: gn('kb-ingest-deep-dives'),
@@ -424,17 +463,18 @@ function gv(id) { return document.getElementById(id)?.value || ''; }
 function gn(id) { return parseInt(document.getElementById(id)?.value) || 0; }
 
 function applyConfig(cfg) {
-    if (cfg.model) {
-        document.getElementById('model').value = cfg.model;
-    }
+    modelCatalog = normalizeModelCatalog(cfg);
+    const defaultModel = cfg.model || 'claude-opus-4-6';
+    renderModelSelect('model', defaultModel, 'claude-opus-4-6');
+    document.getElementById('model-onboarding-request').value = cfg.model_onboarding?.request || '';
     const kbIngest = cfg.kb_ingest || {};
     document.getElementById('kb-ingest-url').value = kbIngest.url || '';
     document.getElementById('kb-ingest-deep-dives').value = Number.isFinite(kbIngest.deep_dives_count) ? kbIngest.deep_dives_count : (kbIngest.url ? 15 : 0);
-    document.getElementById('kb-ingest-model').value = kbIngest.model || cfg.model || 'claude-opus-4-6';
+    renderModelSelect('kb-ingest-model', kbIngest.model || defaultModel, defaultModel);
     const kbExistingDd = cfg.kb_existing_dd || {};
     document.getElementById('kb-existing-dd-entry').value = kbExistingDd.entry || '';
     document.getElementById('kb-existing-dd-count').value = Number.isFinite(kbExistingDd.deep_dives_count) ? kbExistingDd.deep_dives_count : (kbExistingDd.entry ? 15 : 0);
-    document.getElementById('kb-existing-dd-model').value = kbExistingDd.model || cfg.model || 'claude-opus-4-6';
+    renderModelSelect('kb-existing-dd-model', kbExistingDd.model || defaultModel, defaultModel);
     if (cfg.audio) {
         document.getElementById('audio-enabled').checked = cfg.audio.enabled !== false;
         if (cfg.audio.voice) document.getElementById('audio-voice').value = cfg.audio.voice;
