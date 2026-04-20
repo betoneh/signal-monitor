@@ -7,6 +7,11 @@
     "deep_dives_count": 0,
     "model": "claude-opus-4-6"
   },
+  "kb_existing_dd": {
+    "entry": "",
+    "deep_dives_count": 0,
+    "model": "claude-opus-4-6"
+  },
   "audio": {
     "enabled": false,
     "voice": "en-US-JennyNeural"
