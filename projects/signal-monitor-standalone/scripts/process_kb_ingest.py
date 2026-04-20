@@ -442,8 +442,26 @@ def fetch_youtube_source(url: str) -> SourcePayload:
     if YouTubeTranscriptApi is None:
         raise RuntimeError("youtube_transcript_api is not installed")
     video_id = extract_youtube_id(url)
-    transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=["en", "es"])
-    full_text = " ".join(item["text"] for item in transcript)
+    transcript_items: list[Any]
+    if hasattr(YouTubeTranscriptApi, "get_transcript"):
+        transcript_items = YouTubeTranscriptApi.get_transcript(video_id, languages=["en", "es"])
+    else:
+        api = YouTubeTranscriptApi()
+        transcript_list = api.list(video_id)
+        transcript_obj = transcript_list.find_transcript(["en", "es"])
+        transcript_items = list(transcript_obj.fetch())
+    full_text_parts = []
+    for item in transcript_items:
+        if isinstance(item, dict):
+            text = item.get("text", "")
+        else:
+            text = getattr(item, "text", "")
+        text = normalize_ws(text)
+        if text:
+            full_text_parts.append(text)
+    full_text = " ".join(full_text_parts)
+    if not full_text:
+        raise RuntimeError(f"Transcript fetch returned no text for YouTube video {video_id}")
     html = fetch_text(url, headers={"user-agent": "Mozilla/5.0"})
     title, _ = html_to_text(html)
     return SourcePayload(
