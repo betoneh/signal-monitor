@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-20T05:20:23.298Z",
+  "updated_at": "2026-04-20T20:22:50.296Z",
   "model": "anthropic/claude-opus-4-6",
   "available_models": [
     {
@@ -96,8 +96,8 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "",
-    "deep_dives_count": 0,
+    "url": "https://x.com/theotherparker_/status/2045980216200470697?s=46&t=OHfXTbjdV4tiD3nnG1lsTw",
+    "deep_dives_count": 5,
     "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
