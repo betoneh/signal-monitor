@@ -25,7 +25,7 @@ REPO_DIR = PROJECT_DIR / "repos" / "signal-monitor"
 SETTINGS_PATH = REPO_DIR / "settings.json"
 CHAT_ID = "-1003658657415"
 THREAD_ID = "29"
-DEFAULT_RESOLVER_MODEL = "claude-sonnet-4-6"
+DEFAULT_RESOLVER_MODEL = "anthropic/claude-sonnet-4-6"
 
 sys.path.insert(0, str(SCRIPT_DIR))
 from x_editorial import calc_cost, call_llm_routed, load_dotenv  # noqa: E402
@@ -216,7 +216,7 @@ def load_xai_candidates() -> list[Candidate]:
         items.append(
             Candidate(
                 provider="xai",
-                runtime_id=model_id,
+                runtime_id=f"xai/{model_id}",
                 raw_id=model_id,
                 label=humanize_model_name(model_id, "xai"),
                 pricing=infer_pricing("xai", model_id),

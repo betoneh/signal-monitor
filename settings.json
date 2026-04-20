@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updated_at": "2026-04-20T05:20:23.298Z",
-  "model": "claude-opus-4-6",
+  "model": "anthropic/claude-opus-4-6",
   "available_models": [
     {
       "id": "openclaw",
@@ -26,8 +26,8 @@
       }
     },
     {
-      "id": "claude-opus-4-6",
-      "label": "Claude Opus 4",
+      "id": "anthropic/claude-opus-4-6",
+      "label": "Claude Opus 4.6",
       "enabled": true,
       "pricing": {
         "input": 15,
@@ -37,8 +37,8 @@
       }
     },
     {
-      "id": "claude-sonnet-4-6",
-      "label": "Claude Sonnet 4",
+      "id": "anthropic/claude-sonnet-4-6",
+      "label": "Claude Sonnet 4.6",
       "enabled": true,
       "pricing": {
         "input": 3,
@@ -48,7 +48,7 @@
       }
     },
     {
-      "id": "grok-3",
+      "id": "xai/grok-3",
       "label": "Grok 3",
       "enabled": true,
       "pricing": {
@@ -59,34 +59,12 @@
       }
     },
     {
-      "id": "grok-4",
+      "id": "xai/grok-4",
       "label": "Grok 4",
       "enabled": true,
       "pricing": {
         "input": 3,
         "output": 15,
-        "cache_read": 0,
-        "cache_write": 0
-      }
-    },
-    {
-      "id": "gemma3:12b",
-      "label": "Gemma 3 12B (local)",
-      "enabled": true,
-      "pricing": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0,
-        "cache_write": 0
-      }
-    },
-    {
-      "id": "glm-5",
-      "label": "GLM 5.1 (Venice)",
-      "enabled": true,
-      "pricing": {
-        "input": 1,
-        "output": 3.2,
         "cache_read": 0,
         "cache_write": 0
       }
@@ -112,17 +90,6 @@
         "cache_read": 0.36,
         "cache_write": 4.5
       }
-    },
-    {
-      "id": "venice/openai-gpt-54",
-      "label": "GPT-5.4 (Venice)",
-      "enabled": true,
-      "pricing": {
-        "input": 3.13,
-        "output": 18.8,
-        "cache_read": 0.313,
-        "cache_write": 0
-      }
     }
   ],
   "model_onboarding": {
@@ -131,12 +98,12 @@
   "kb_ingest": {
     "url": "https://youtu.be/Hrbq66XqtCo",
     "deep_dives_count": 22,
-    "model": "claude-opus-4-6"
+    "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
     "entry": "",
     "deep_dives_count": 0,
-    "model": "claude-opus-4-6"
+    "model": "anthropic/claude-opus-4-6"
   },
   "audio": {
     "enabled": false,

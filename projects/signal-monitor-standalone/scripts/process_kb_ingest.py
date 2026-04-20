@@ -875,7 +875,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--url")
     parser.add_argument("--kb-entry")
     parser.add_argument("--deep-dives", type=int, default=0)
-    parser.add_argument("--model", default="claude-opus-4-6")
+    parser.add_argument("--model", default="anthropic/claude-opus-4-6")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
     if bool(args.url) == bool(args.kb_entry):

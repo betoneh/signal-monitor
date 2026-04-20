@@ -43,7 +43,7 @@ from pathlib import Path
 
 settings = Path(sys.argv[1])
 data = json.loads(settings.read_text()) if settings.exists() else {}
-model = data.get("kb_ingest", {}).get("model") or data.get("model") or "claude-opus-4-6"
+model = data.get("kb_ingest", {}).get("model") or data.get("model") or "anthropic/claude-opus-4-6"
 data["kb_ingest"] = {"url": "", "deep_dives_count": 0, "model": model}
 settings.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
 PY
@@ -57,7 +57,7 @@ from pathlib import Path
 
 settings = Path(sys.argv[1])
 data = json.loads(settings.read_text()) if settings.exists() else {}
-model = data.get("kb_existing_dd", {}).get("model") or data.get("model") or "claude-opus-4-6"
+model = data.get("kb_existing_dd", {}).get("model") or data.get("model") or "anthropic/claude-opus-4-6"
 data["kb_existing_dd"] = {"entry": "", "deep_dives_count": 0, "model": model}
 settings.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
 PY
@@ -105,7 +105,7 @@ fi
 
 if [ -n "$KB_URL" ]; then
     log "KB ingest found: $KB_URL (dd=$KB_DD, model=$KB_MODEL)"
-    if /opt/homebrew/bin/python3.13 "$PROCESSOR" --url "$KB_URL" --deep-dives "${KB_DD:-0}" --model "${KB_MODEL:-claude-opus-4-6}" >> "$LOG" 2>&1; then
+    if /opt/homebrew/bin/python3.13 "$PROCESSOR" --url "$KB_URL" --deep-dives "${KB_DD:-0}" --model "${KB_MODEL:-anthropic/claude-opus-4-6}" >> "$LOG" 2>&1; then
         clear_kb_ingest
         push_repo_change "Clear kb_ingest"
         log "KB ingest completed."
@@ -116,7 +116,7 @@ fi
 
 if [ -n "$KB_EXISTING_ENTRY" ]; then
     log "KB existing_dd found: $KB_EXISTING_ENTRY (dd=$KB_EXISTING_DD, model=$KB_EXISTING_MODEL)"
-    if /opt/homebrew/bin/python3.13 "$PROCESSOR" --kb-entry "$KB_EXISTING_ENTRY" --deep-dives "${KB_EXISTING_DD:-0}" --model "${KB_EXISTING_MODEL:-claude-opus-4-6}" >> "$LOG" 2>&1; then
+    if /opt/homebrew/bin/python3.13 "$PROCESSOR" --kb-entry "$KB_EXISTING_ENTRY" --deep-dives "${KB_EXISTING_DD:-0}" --model "${KB_EXISTING_MODEL:-anthropic/claude-opus-4-6}" >> "$LOG" 2>&1; then
         clear_kb_existing_dd
         push_repo_change "Clear kb_existing_dd"
         log "KB existing_dd completed."
