@@ -1,0 +1,22 @@
+{
+  "id": 146,
+  "title": "First In, First Out: How Nvidia Actually Allocates Scarce GPUs",
+  "source": {
+    "kb_entry": "jensen-huang-will-nvidia-s-moat-persist",
+    "original": "Jensen Huang – Will Nvidia's moat persist?",
+    "url": "https://youtu.be/Hrbq66XqtCo"
+  },
+  "body_html": "<p>Amid GPU scarcity and headline-grabbing stories about tech moguls begging Jensen Huang for chips over dinner, the actual allocation mechanism Nvidia uses is far more prosaic than the mythology suggests. Huang explicitly denies that allocation is based on highest bidder, strategic favoritism, or personal relationships. The system, he insists, is fundamentally <strong>first in, first out</strong>—anchored to purchase orders, not promises.</p><p>The process begins with forecasting. Nvidia works extensively with customers to align demand signals with supply chain timelines, since the systems take months to build and data centers take even longer to stand up. But forecasting alone doesn't secure allocation. <em>You have to place a purchase order.</em> Without a PO, no amount of conversation matters. Huang directly addresses the famous dinner with Larry Ellison and Elon Musk: they had dinner, it was wonderful, but at no point did anyone beg for GPUs. They simply needed to place orders.</p><p>There is one practical adjustment: if a customer's data center isn't ready to receive hardware, Nvidia may serve another customer first to maximize the throughput of its own factory. This isn't favoritism—it's logistics optimization. But Huang is emphatic that Nvidia never raises prices when demand surges. The price is the price, and dependability is the brand.</p><p>This pricing discipline mirrors Nvidia's relationship with TSMC, which has operated for nearly 30 years without a formal legal contract. Huang describes it as <em>rough justice</em>—sometimes one side gets the better deal, sometimes the other, but the relationship endures because both parties can completely depend on each other. It's a model Huang wants to extend to the entire industry: Nvidia as the dependable foundation that ships every year, on schedule, with order-of-magnitude improvements.</p><p>The strategic benefit of this approach is trust at scale. When a customer knows that a $100 billion AI factory order will be fulfilled on the same terms as a single rack, it creates a kind of institutional reliability that no auction-based allocation could replicate. In Huang's framing, this consistency <em>is</em> the moat—not just the technology, but the certainty that Nvidia will show up.</p>",
+  "tags": [
+    "gpu-allocation",
+    "nvidia",
+    "supply-chain",
+    "pricing-strategy",
+    "tsmc",
+    "ai-infrastructure",
+    "trust"
+  ],
+  "word_count": 343,
+  "used_dates": [],
+  "created_date": "2026-04-20"
+}
