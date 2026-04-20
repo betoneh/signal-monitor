@@ -26,6 +26,16 @@ SETTINGS_PATH = REPO_DIR / "settings.json"
 CHAT_ID = "-1003658657415"
 THREAD_ID = "29"
 DEFAULT_RESOLVER_MODEL = "anthropic/claude-sonnet-4-6"
+SUPPORTED_RUNTIME_IDS = {
+    "openclaw",
+    "anthropic/claude-opus-4-7",
+    "anthropic/claude-opus-4-6",
+    "anthropic/claude-sonnet-4-6",
+    "xai/grok-3",
+    "xai/grok-4",
+    "venice/claude-opus-4-6",
+    "venice/claude-sonnet-4-6",
+}
 
 sys.path.insert(0, str(SCRIPT_DIR))
 from x_editorial import calc_cost, call_llm_routed, load_dotenv  # noqa: E402
@@ -287,8 +297,7 @@ def load_candidates() -> list[Candidate]:
     items.extend(load_anthropic_candidates())
     items.extend(load_venice_candidates())
     items.extend(load_xai_candidates())
-    items.extend(load_ollama_candidates())
-    return items
+    return [item for item in items if item.runtime_id in SUPPORTED_RUNTIME_IDS]
 
 
 def detect_provider_hints(request: str) -> set[str]:
