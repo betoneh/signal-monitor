@@ -148,6 +148,28 @@
     </div>
 
     <div class="section">
+        <div class="section-title">KB Ingest</div>
+        <div class="row"><span class="row-label">Source URL</span>
+            <input class="row-value" type="text" id="kb-ingest-url" value="" placeholder="https://..." style="width:100%;text-align:left;"></div>
+        <div class="row"><span class="row-label">Deep dives</span>
+            <input class="row-value" type="number" id="kb-ingest-deep-dives" value="0" min="0" max="50"></div>
+        <div class="row"><span class="row-label">AI model</span>
+            <select class="row-value" id="kb-ingest-model" style="width:220px;">
+                <option value="openclaw">OpenClaw (local)</option>
+                <option value="anthropic/claude-opus-4-7">Claude Opus 4.7</option>
+                <option value="claude-opus-4-6">Claude Opus 4</option>
+                <option value="claude-sonnet-4-6">Claude Sonnet 4</option>
+                <option value="grok-3">Grok 3</option>
+                <option value="grok-4">Grok 4</option>
+                <option value="gemma3:12b">Gemma 3 12B (local)</option>
+                <option value="glm-5">GLM 5.1 (Venice)</option>
+                <option value="venice/claude-opus-4-6">Claude Opus 4.6 (Venice)</option>
+                <option value="venice/claude-sonnet-4-6">Claude Sonnet 4.6 (Venice)</option>
+                <option value="venice/openai-gpt-54">GPT-5.4 (Venice)</option>
+            </select></div>
+    </div>
+
+    <div class="section">
         <div class="section-title">Audio</div>
         <div class="row"><span class="row-label">Generate TTS audio</span>
             <label class="toggle"><input type="checkbox" id="audio-enabled" checked><span class="toggle-slider"></span></label></div>
@@ -349,6 +371,11 @@ function buildConfig() {
         version: 1,
         updated_at: new Date().toISOString(),
         model: gv('model'),
+        kb_ingest: {
+            url: gv('kb-ingest-url').trim(),
+            deep_dives_count: gn('kb-ingest-deep-dives'),
+            model: gv('kb-ingest-model') || gv('model')
+        },
         audio: {
             enabled: document.getElementById('audio-enabled').checked,
             voice: gv('audio-voice')
@@ -373,6 +400,10 @@ function applyConfig(cfg) {
     if (cfg.model) {
         document.getElementById('model').value = cfg.model;
     }
+    const kbIngest = cfg.kb_ingest || {};
+    document.getElementById('kb-ingest-url').value = kbIngest.url || '';
+    document.getElementById('kb-ingest-deep-dives').value = Number.isFinite(kbIngest.deep_dives_count) ? kbIngest.deep_dives_count : (kbIngest.url ? 15 : 0);
+    document.getElementById('kb-ingest-model').value = kbIngest.model || cfg.model || 'claude-opus-4-6';
     if (cfg.audio) {
         document.getElementById('audio-enabled').checked = cfg.audio.enabled !== false;
         if (cfg.audio.voice) document.getElementById('audio-voice').value = cfg.audio.voice;
