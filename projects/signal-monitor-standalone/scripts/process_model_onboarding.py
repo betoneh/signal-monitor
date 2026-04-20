@@ -297,6 +297,22 @@ def load_candidates() -> list[Candidate]:
     items.extend(load_anthropic_candidates())
     items.extend(load_venice_candidates())
     items.extend(load_xai_candidates())
+    seen = {item.runtime_id for item in items}
+    for runtime_id in SUPPORTED_RUNTIME_IDS:
+        if runtime_id in seen:
+            continue
+        if runtime_id == "openclaw":
+            continue
+        provider, raw_id = runtime_id.split("/", 1)
+        items.append(
+            Candidate(
+                provider=provider,
+                runtime_id=runtime_id,
+                raw_id=raw_id,
+                label=humanize_model_name(raw_id, provider),
+                pricing=infer_pricing(provider, raw_id),
+            )
+        )
     return [item for item in items if item.runtime_id in SUPPORTED_RUNTIME_IDS]
 
 
