@@ -144,6 +144,71 @@
             display: flex; align-items: center; gap: 0.75rem;
         }
         .dd-check-row a { flex: 1; }
+        .dd-flat-list { display: none; }
+        .dd-groups-root {
+            display: flex; flex-direction: column; gap: 0.85rem;
+        }
+        .dd-section, .dd-source-group {
+            border: 1px solid rgba(10, 143, 123, 0.18);
+            border-radius: 10px;
+            background: rgba(52, 63, 96, 0.18);
+            overflow: hidden;
+        }
+        .dd-section > summary,
+        .dd-source-group > summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.8rem 0.95rem;
+        }
+        .dd-section > summary::-webkit-details-marker,
+        .dd-source-group > summary::-webkit-details-marker { display: none; }
+        .dd-section > summary {
+            background: rgba(52, 63, 96, 0.28);
+            border-bottom: 1px solid rgba(10, 143, 123, 0.12);
+        }
+        .dd-source-group > summary {
+            background: rgba(52, 63, 96, 0.12);
+        }
+        .dd-summary-label {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #eaedf3;
+        }
+        .dd-summary-meta {
+            font-size: 0.75rem;
+            color: #8b949e;
+            text-align: right;
+        }
+        .dd-source-name {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #eab308;
+            line-height: 1.35;
+        }
+        .dd-source-meta {
+            font-size: 0.72rem;
+            color: #8b949e;
+            text-align: right;
+            white-space: nowrap;
+        }
+        .dd-source-groups {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            padding: 0.8rem;
+        }
+        .dd-list {
+            padding: 0 0.8rem 0.8rem;
+        }
+        .dd-empty {
+            padding: 0.85rem 0.95rem;
+            color: #8b949e;
+            font-size: 0.82rem;
+        }
         /* FAB buttons */
         .fab-container {
             position: fixed; bottom: 1.5rem; right: 1.5rem;
@@ -1951,6 +2016,105 @@
     function saveDDUnread(list) {
         try { localStorage.setItem(DD_UNREAD_KEY, JSON.stringify(list)); } catch(e) {}
     }
+    function getDDSource(el) {
+        const dateText = el.querySelector('.date')?.textContent?.trim() || '';
+        const parts = dateText.split(' · ').map(part => part.trim()).filter(Boolean);
+        return parts.slice(3).join(' · ') || 'Unknown source';
+    }
+    function ensureDeepDiveGroupsRoot() {
+        const tab = document.getElementById('tab-deepdives');
+        if (!tab) return null;
+        let root = tab.querySelector('.dd-groups-root');
+        if (root) return root;
+        const list = tab.querySelector('ul');
+        if (!list) return null;
+        list.classList.add('dd-flat-list');
+        root = document.createElement('div');
+        root.className = 'dd-groups-root';
+        list.insertAdjacentElement('afterend', root);
+        return root;
+    }
+    function renderDeepDiveGroups() {
+        const tab = document.getElementById('tab-deepdives');
+        const root = ensureDeepDiveGroupsRoot();
+        if (!tab || !root) return;
+
+        const openState = {};
+        root.querySelectorAll('details[data-dd-key]').forEach(el => {
+            openState[el.dataset.ddKey] = el.open;
+        });
+
+        const items = Array.from(tab.querySelectorAll('.dd-item'))
+            .sort((a, b) => parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId));
+
+        const states = [
+            { key: 'unread', label: 'Unread', defaultOpen: true, matches: el => !el.querySelector('.dd-check')?.checked },
+            { key: 'read', label: 'Read', defaultOpen: false, matches: el => !!el.querySelector('.dd-check')?.checked }
+        ];
+
+        root.replaceChildren();
+
+        states.forEach(state => {
+            const stateItems = items.filter(state.matches);
+            const section = document.createElement('details');
+            section.className = 'dd-section';
+            section.dataset.ddKey = `state:${state.key}`;
+            section.open = openState[section.dataset.ddKey] ?? state.defaultOpen;
+
+            const summary = document.createElement('summary');
+            const sourceCount = new Set(stateItems.map(getDDSource)).size;
+            summary.innerHTML = `
+                <span class="dd-summary-label">${state.label}</span>
+                <span class="dd-summary-meta">${stateItems.length} deep dives${sourceCount ? ` · ${sourceCount} sources` : ''}</span>
+            `;
+            section.appendChild(summary);
+
+            if (!stateItems.length) {
+                const empty = document.createElement('div');
+                empty.className = 'dd-empty';
+                empty.textContent = state.key === 'unread' ? 'Nothing pending right now.' : 'No deep dives marked read yet.';
+                section.appendChild(empty);
+                root.appendChild(section);
+                return;
+            }
+
+            const groupsWrap = document.createElement('div');
+            groupsWrap.className = 'dd-source-groups';
+            const groups = new Map();
+
+            stateItems.forEach(item => {
+                const source = getDDSource(item);
+                if (!groups.has(source)) groups.set(source, []);
+                groups.get(source).push(item);
+            });
+
+            Array.from(groups.entries()).forEach(([source, groupItems], index) => {
+                const ids = groupItems.map(item => parseInt(item.dataset.ddId)).sort((a, b) => b - a);
+                const sourceDetails = document.createElement('details');
+                sourceDetails.className = 'dd-source-group';
+                sourceDetails.dataset.ddKey = `source:${state.key}:${source}`;
+                sourceDetails.open = openState[sourceDetails.dataset.ddKey] ?? (state.key === 'unread' && index === 0);
+
+                const sourceSummary = document.createElement('summary');
+                const minId = ids[ids.length - 1];
+                const maxId = ids[0];
+                sourceSummary.innerHTML = `
+                    <span class="dd-source-name">${source}</span>
+                    <span class="dd-source-meta">${groupItems.length} items · #${minId}${maxId !== minId ? `-#${maxId}` : ''}</span>
+                `;
+                sourceDetails.appendChild(sourceSummary);
+
+                const list = document.createElement('ul');
+                list.className = 'dd-list';
+                groupItems.forEach(item => list.appendChild(item));
+                sourceDetails.appendChild(list);
+                groupsWrap.appendChild(sourceDetails);
+            });
+
+            section.appendChild(groupsWrap);
+            root.appendChild(section);
+        });
+    }
     function toggleDDRead(id) {
         const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
         const origReport = el?.dataset.origReport === 'true';
@@ -1984,11 +2148,14 @@
             const id = parseInt(el.dataset.ddId);
             const cb = el.querySelector('.dd-check');
             const origReport = el.dataset.origReport === 'true';
-            const effectivelyInReport = (origReport && !unreadList.includes(id)) || prunedRead.includes(id);
-            el.classList.toggle('in-report', effectivelyInReport);
-            el.classList.remove('is-read');
+            const inReport = origReport && !unreadList.includes(id);
+            const manualRead = !origReport && prunedRead.includes(id);
+            const effectivelyInReport = inReport || manualRead;
+            el.classList.toggle('in-report', inReport);
+            el.classList.toggle('is-read', manualRead);
             if (cb) cb.checked = effectivelyInReport;
         });
+        renderDeepDiveGroups();
     }
     async function saveDDState() {
         const btn = document.getElementById('dd-save-btn');
