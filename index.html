@@ -144,6 +144,54 @@
             display: flex; align-items: center; gap: 0.75rem;
         }
         .dd-check-row a { flex: 1; }
+        .dd-flat-list { display: none; }
+        .dd-split-root { display: block; }
+        .dd-split-section + .dd-split-section {
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(10, 143, 123, 0.18);
+        }
+        .dd-split-header,
+        .dd-split-toggle {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.8rem;
+        }
+        .dd-split-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #eaedf3;
+            letter-spacing: 0.01em;
+        }
+        .dd-split-count {
+            font-size: 0.75rem;
+            color: #8b949e;
+        }
+        .dd-split-toggle {
+            cursor: pointer;
+            list-style: none;
+        }
+        .dd-split-toggle::-webkit-details-marker { display: none; }
+        .dd-split-toggle .dd-split-label::before {
+            content: '▸';
+            display: inline-block;
+            margin-right: 0.45rem;
+            color: #8b949e;
+            transition: transform 0.15s ease;
+        }
+        details[open] > .dd-split-toggle .dd-split-label::before {
+            transform: rotate(90deg);
+        }
+        .dd-list {
+            padding: 0;
+        }
+        .dd-empty {
+            padding: 0.2rem 0;
+            color: #8b949e;
+            font-size: 0.82rem;
+        }
         /* FAB buttons */
         .fab-container {
             position: fixed; bottom: 1.5rem; right: 1.5rem;
@@ -1950,6 +1998,92 @@
     }
     function saveDDUnread(list) {
         try { localStorage.setItem(DD_UNREAD_KEY, JSON.stringify(list)); } catch(e) {}
+    }
+    function ensureDeepDiveSplitRoot() {
+        const tab = document.getElementById('tab-deepdives');
+        if (!tab) return null;
+        let root = tab.querySelector('.dd-split-root');
+        if (root) return root;
+        const list = tab.querySelector('ul');
+        if (!list) return null;
+        list.classList.add('dd-flat-list');
+        root = document.createElement('div');
+        root.className = 'dd-split-root';
+        list.insertAdjacentElement('afterend', root);
+        return root;
+    }
+    function renderDeepDiveSections() {
+        const tab = document.getElementById('tab-deepdives');
+        const root = ensureDeepDiveSplitRoot();
+        if (!tab || !root) return;
+
+        const openState = {};
+        root.querySelectorAll('details[data-dd-key]').forEach(el => {
+            openState[el.dataset.ddKey] = el.open;
+        });
+
+        const items = Array.from(tab.querySelectorAll('.dd-item'))
+            .sort((a, b) => parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId));
+
+        // Keep local read checks visually in place inside Unread.
+        // Items only move sections when the LaunchAgent republishes the index
+        // with updated server-side membership.
+        const unreadItems = items.filter(el => el.dataset.origReport !== 'true');
+        const readItems = items
+            .filter(el => el.dataset.origReport === 'true')
+            .sort((a, b) => parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId));
+
+        root.replaceChildren();
+
+        const readSection = document.createElement('details');
+        readSection.className = 'dd-split-section';
+        readSection.dataset.ddKey = 'state:read';
+        readSection.open = openState[readSection.dataset.ddKey] ?? false;
+        const readSummary = document.createElement('summary');
+        readSummary.className = 'dd-split-toggle';
+        readSummary.innerHTML = `
+            <span class="dd-split-label">Read</span>
+            <span class="dd-split-count">${readItems.length}</span>
+        `;
+        readSection.appendChild(readSummary);
+        if (readItems.length) {
+            const readList = document.createElement('ul');
+            readList.className = 'dd-list';
+            readItems.forEach(item => readList.appendChild(item));
+            readSection.appendChild(readList);
+        } else {
+            const empty = document.createElement('div');
+            empty.className = 'dd-empty';
+            empty.textContent = 'No published deep dives in Read right now.';
+            readSection.appendChild(empty);
+        }
+        root.appendChild(readSection);
+
+        const unreadSection = document.createElement('details');
+        unreadSection.className = 'dd-split-section';
+        unreadSection.dataset.ddKey = 'state:unread';
+        unreadSection.open = openState[unreadSection.dataset.ddKey] ?? true;
+        const unreadSummary = document.createElement('summary');
+        unreadSummary.className = 'dd-split-toggle';
+        unreadSummary.innerHTML = `
+                <span class="dd-split-label">Unread</span>
+                <span class="dd-split-count">${unreadItems.length}</span>
+        `;
+        unreadSection.appendChild(unreadSummary);
+        if (unreadItems.length) {
+            const unreadList = document.createElement('ul');
+            unreadList.className = 'dd-list';
+            unreadItems
+                .sort((a, b) => parseInt(a.dataset.ddId) - parseInt(b.dataset.ddId))
+                .forEach(item => unreadList.appendChild(item));
+            unreadSection.appendChild(unreadList);
+        } else {
+            const empty = document.createElement('div');
+            empty.className = 'dd-empty';
+            empty.textContent = 'Nothing pending right now.';
+            unreadSection.appendChild(empty);
+        }
+        root.appendChild(unreadSection);
     }
     function toggleDDRead(id) {
         const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
