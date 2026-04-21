@@ -1,4 +1,7 @@
 (function () {
+  if (window.__smDeepDiveNavigationLoaded) return;
+  window.__smDeepDiveNavigationLoaded = true;
+
   const DD_READ_KEY = 'sm-dd-read';
   const DD_UNREAD_KEY = 'sm-dd-unread';
 
