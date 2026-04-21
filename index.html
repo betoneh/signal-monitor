@@ -144,104 +144,6 @@
             display: flex; align-items: center; gap: 0.75rem;
         }
         .dd-check-row a { flex: 1; }
-        .dd-flat-list { display: none; }
-        .dd-split-root {
-            display: block;
-            padding-bottom: 1.75rem;
-        }
-        .dd-split-section {
-            overflow: hidden;
-        }
-        .dd-split-section + .dd-split-section {
-            margin-top: 1.5rem;
-            padding-top: 0;
-            border-top: none;
-        }
-        .dd-split-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            height: 24px;
-            min-height: 24px;
-            padding: 0;
-            color: #eaedf3;
-            box-sizing: border-box;
-        }
-        details[open] > .dd-split-toggle { margin-bottom: 0.8rem; }
-        .dd-split-title {
-            display: inline-flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-            min-width: 0;
-            height: 24px;
-        }
-        .dd-split-label {
-            font-size: 1rem;
-            font-weight: 500;
-            color: inherit;
-            letter-spacing: 0.01em;
-            line-height: 1.25rem;
-        }
-        .dd-split-count {
-            display: inline-flex;
-            align-items: center;
-            height: 24px;
-            font-size: 0.75rem;
-            color: #8b949e;
-            line-height: 1.25rem;
-        }
-        .dd-split-toggle {
-            cursor: pointer;
-            list-style: none;
-        }
-        .dd-split-toggle::-webkit-details-marker { display: none; }
-        .dd-split-icon {
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
-            margin-top: 0.125rem;
-            color: currentColor;
-            transition: transform 0.15s ease, opacity 0.15s ease;
-        }
-        .dd-split-toggle:hover {
-            opacity: 0.75;
-        }
-        .dd-split-icon path {
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .dd-split-icon path:first-child {
-            stroke: none;
-        }
-        .dd-split-section[data-dd-key="state:read"] > .dd-split-toggle {
-            color: #eab308;
-        }
-        .dd-split-section[data-dd-key="state:unread"] > .dd-split-toggle {
-            color: #0ec4a9;
-        }
-        .dd-split-section[data-dd-key="state:read"] > .dd-split-toggle .dd-split-count,
-        .dd-split-section[data-dd-key="state:unread"] > .dd-split-toggle .dd-split-count {
-            color: #8b949e;
-        }
-        details[open] > .dd-split-toggle .dd-split-icon {
-            transform: rotate(90deg);
-        }
-        .dd-list {
-            padding: 0;
-        }
-        details:not([open]) > .dd-list,
-        details:not([open]) > .dd-empty {
-            display: none;
-        }
-        .dd-empty {
-            padding: 0.2rem 0;
-            color: #8b949e;
-            font-size: 0.82rem;
-        }
         /* FAB buttons */
         .fab-container {
             position: fixed; bottom: 1.5rem; right: 1.5rem;
@@ -310,7 +212,8 @@
 
 <main>
     <div id="tab-reports" class="tab-content tab-content-reports active">
-        <ul><li><a href="2026-04-20-2000.html">April 20, 2026 at 08:00 PM<br><span class="date" style="color:#eab308;">The Anduril Regret: When Politics Overrides Investment Judgment</span></a></li>
+        <ul><li><a href="2026-04-21-0800.html">April 21, 2026 at 08:00 AM<br><span class="date" style="color:#eab308;">Bloom's Two Sigma: The Tutoring Effect That AI Finally Democratizes</span></a></li>
+<li><a href="2026-04-20-2000.html">April 20, 2026 at 08:00 PM<br><span class="date" style="color:#eab308;">The Anduril Regret: When Politics Overrides Investment Judgment</span></a></li>
 <li><a href="2026-04-20-0801.html">April 20, 2026 at 08:01 AM<br><span class="date" style="color:#eab308;">The Mushroom Talk: Why a16z Treats LPs as Partners</span></a></li>
 <li><a href="2026-04-19-2001.html">April 19, 2026 at 08:01 PM<br><span class="date" style="color:#eab308;">F. Scott Fitzgerald Was Wrong: The American Theory of Second Acts</span></a></li>
 <li><a href="2026-04-19-0800.html">April 19, 2026 at 08:00 AM<br><span class="date" style="color:#eab308;">The Weight of Voice: How Authority Distorts Information</span></a></li>
@@ -359,7 +262,6 @@
 <li><a href="2026-04-05-2000.html">April 05, 2026 at 08:00 PM<br><span class="date" style="color:#eab308;">The Precautionary Principle: How Safety Killed Progress</span></a></li>
 <li><a href="2026-04-05-1546.html">April 05, 2026 at 03:46 PM<br><span class="date" style="color:#eab308;">The Techno-Capital Machine: Nick Land Meets Silicon Valley</span></a></li>
 <li><a href="2026-04-05-1542.html">April 05, 2026 at 03:42 PM<br><span class="date" style="color:#eab308;">The Trust Stack: How Humans and AI Will Actually Cooperate</span></a></li>
-<li><a href="2026-04-05-1513.html">April 05, 2026 at 03:13 PM<br><span class="date" style="color:#eab308;">The Local AI Movement: From Cloud Dependency to Cognitive Sovereignty</span></a></li>
 <li class="weekly"><a href="weekly/2026-W10.html">📡 Weekly Report — 2026-W10<br><span class="date">2026-W10</span></a></li>
 <li class="weekly"><a href="weekly/2026-W11.html">📡 Weekly Report — 2026-W11<br><span class="date">2026-W11</span></a></li>
 <li class="weekly"><a href="weekly/2026-W07.html">📡 Weekly Report — 2026-W07<br><span class="date">2026-W07</span></a></li>
@@ -954,7 +856,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item" data-dd-id="100">
+<li class="dd-item in-report" data-dd-id="100" data-orig-report="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="100" data-title="Who Should Create Money? Full Reserve, CBDC, and the Crypto Bet" onchange="toggleDDRead(100)">
             <a href="deep-dives/100.html">
@@ -963,7 +865,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item" data-dd-id="99">
+<li class="dd-item in-report" data-dd-id="99" data-orig-report="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="99" data-title="How Bank Credit Inflates Housing and Why That Is a Feature, Not a Bug" onchange="toggleDDRead(99)">
             <a href="deep-dives/099.html">
@@ -972,7 +874,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item" data-dd-id="98">
+<li class="dd-item in-report" data-dd-id="98" data-orig-report="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="98" data-title="The Household Debt Analogy Is a Political Weapon, Not an Economic Argument" onchange="toggleDDRead(98)">
             <a href="deep-dives/098.html">
@@ -1251,7 +1153,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item" data-dd-id="67">
+<li class="dd-item in-report" data-dd-id="67" data-orig-report="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="67" data-title="Bloom's Two Sigma: The Tutoring Effect That AI Finally Democratizes" onchange="toggleDDRead(67)">
             <a href="deep-dives/067-blooms-two-sigma-the-tutoring-effect-that-ai-finally-democratizes.html">
@@ -1260,7 +1162,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item" data-dd-id="66">
+<li class="dd-item in-report" data-dd-id="66" data-orig-report="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="66" data-title="The Philosopher's Stone: Why Sand-to-Thought Is the Most Important Metaphor in AI" onchange="toggleDDRead(66)">
             <a href="deep-dives/066-the-philosophers-stone-why-sand-to-thought-is-the-most-important-metaphor-in-ai.html">
@@ -1269,7 +1171,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item" data-dd-id="65">
+<li class="dd-item in-report" data-dd-id="65" data-orig-report="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="65" data-title=""Do Not Bring Your Whole Self to Work": Against Authenticity Culture" onchange="toggleDDRead(65)">
             <a href="deep-dives/065-do-not-bring-your-whole-self-to-work-against-authenticity-cu.html">
@@ -1278,7 +1180,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item" data-dd-id="64">
+<li class="dd-item in-report" data-dd-id="64" data-orig-report="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="64" data-title="The Real Function of Technology: Marginal Productivity, Not Labor Replacement" onchange="toggleDDRead(64)">
             <a href="deep-dives/064-the-real-function-of-technology-marginal-productivity-not-la.html">
@@ -1287,7 +1189,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item" data-dd-id="63">
+<li class="dd-item in-report" data-dd-id="63" data-orig-report="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="63" data-title="The Zuckerberg First Meeting: What Silence Reveals About Founders" onchange="toggleDDRead(63)">
             <a href="deep-dives/063-the-zuckerberg-first-meeting-what-silence-reveals-about-foun.html">
@@ -1296,7 +1198,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item" data-dd-id="62">
+<li class="dd-item in-report" data-dd-id="62" data-orig-report="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="62" data-title="Silicon Valley's Gravitational Collapse: Why AI Made Geography Matter More" onchange="toggleDDRead(62)">
             <a href="deep-dives/062-silicon-valley-s-gravitational-collapse-why-ai-made-geograph.html">
@@ -1305,7 +1207,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item" data-dd-id="61">
+<li class="dd-item in-report" data-dd-id="61" data-orig-report="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="61" data-title="Overfunding Kills Companies: The Lock Box Nobody Opens" onchange="toggleDDRead(61)">
             <a href="deep-dives/061-overfunding-kills-companies-the-lock-box-nobody-opens.html">
@@ -1314,7 +1216,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item" data-dd-id="60">
+<li class="dd-item in-report" data-dd-id="60" data-orig-report="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="60" data-title="Europe's Knowing-Doing Gap: The Draghi Report Problem" onchange="toggleDDRead(60)">
             <a href="deep-dives/060-europe-s-knowing-doing-gap-the-draghi-report-problem.html">
@@ -2049,104 +1951,6 @@
     function saveDDUnread(list) {
         try { localStorage.setItem(DD_UNREAD_KEY, JSON.stringify(list)); } catch(e) {}
     }
-    function ensureDeepDiveSplitRoot() {
-        const tab = document.getElementById('tab-deepdives');
-        if (!tab) return null;
-        let root = tab.querySelector('.dd-split-root');
-        if (root) return root;
-        const list = tab.querySelector('ul');
-        if (!list) return null;
-        list.classList.add('dd-flat-list');
-        root = document.createElement('div');
-        root.className = 'dd-split-root';
-        list.insertAdjacentElement('afterend', root);
-        return root;
-    }
-    function renderDeepDiveSections() {
-        const tab = document.getElementById('tab-deepdives');
-        const root = ensureDeepDiveSplitRoot();
-        if (!tab || !root) return;
-
-        const openState = {};
-        root.querySelectorAll('details[data-dd-key]').forEach(el => {
-            openState[el.dataset.ddKey] = el.open;
-        });
-
-        const items = Array.from(tab.querySelectorAll('.dd-item'))
-            .sort((a, b) => parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId));
-
-        // Keep local read checks visually in place inside Unread.
-        // Items only move sections when the LaunchAgent republishes the index
-        // with updated server-side membership.
-        const unreadItems = items.filter(el => el.dataset.origReport !== 'true');
-        const readItems = items
-            .filter(el => el.dataset.origReport === 'true')
-            .sort((a, b) => parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId));
-
-        root.replaceChildren();
-
-        const readSection = document.createElement('details');
-        readSection.className = 'dd-split-section';
-        readSection.dataset.ddKey = 'state:read';
-        readSection.open = openState[readSection.dataset.ddKey] ?? false;
-        const readSummary = document.createElement('summary');
-        readSummary.className = 'dd-split-toggle';
-        readSummary.innerHTML = `
-            <span class="dd-split-title">
-                <svg viewBox="0 0 24 24" aria-hidden="true" class="dd-split-icon">
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <path d="M9 6l6 6l-6 6"></path>
-                </svg>
-                <span class="dd-split-label">Read</span>
-            </span>
-            <span class="dd-split-count">${readItems.length}</span>
-        `;
-        readSection.appendChild(readSummary);
-        if (readItems.length) {
-            const readList = document.createElement('ul');
-            readList.className = 'dd-list';
-            readItems.forEach(item => readList.appendChild(item));
-            readSection.appendChild(readList);
-        } else {
-            const empty = document.createElement('div');
-            empty.className = 'dd-empty';
-            empty.textContent = 'No published deep dives in Read right now.';
-            readSection.appendChild(empty);
-        }
-        root.appendChild(readSection);
-
-        const unreadSection = document.createElement('details');
-        unreadSection.className = 'dd-split-section';
-        unreadSection.dataset.ddKey = 'state:unread';
-        unreadSection.open = openState[unreadSection.dataset.ddKey] ?? true;
-        const unreadSummary = document.createElement('summary');
-        unreadSummary.className = 'dd-split-toggle';
-        unreadSummary.innerHTML = `
-                <span class="dd-split-title">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" class="dd-split-icon">
-                        <path stroke="none" d="M0 0h24v24H0z"></path>
-                        <path d="M9 6l6 6l-6 6"></path>
-                    </svg>
-                    <span class="dd-split-label">Unread</span>
-                </span>
-                <span class="dd-split-count">${unreadItems.length}</span>
-        `;
-        unreadSection.appendChild(unreadSummary);
-        if (unreadItems.length) {
-            const unreadList = document.createElement('ul');
-            unreadList.className = 'dd-list';
-            unreadItems
-                .sort((a, b) => parseInt(a.dataset.ddId) - parseInt(b.dataset.ddId))
-                .forEach(item => unreadList.appendChild(item));
-            unreadSection.appendChild(unreadList);
-        } else {
-            const empty = document.createElement('div');
-            empty.className = 'dd-empty';
-            empty.textContent = 'Nothing pending right now.';
-            unreadSection.appendChild(empty);
-        }
-        root.appendChild(unreadSection);
-    }
     function toggleDDRead(id) {
         const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
         const origReport = el?.dataset.origReport === 'true';
@@ -2180,14 +1984,11 @@
             const id = parseInt(el.dataset.ddId);
             const cb = el.querySelector('.dd-check');
             const origReport = el.dataset.origReport === 'true';
-            const inReport = origReport && !unreadList.includes(id);
-            const manualRead = !origReport && prunedRead.includes(id);
-            const effectivelyInReport = inReport || manualRead;
-            el.classList.toggle('in-report', inReport);
-            el.classList.toggle('is-read', manualRead);
+            const effectivelyInReport = (origReport && !unreadList.includes(id)) || prunedRead.includes(id);
+            el.classList.toggle('in-report', effectivelyInReport);
+            el.classList.remove('is-read');
             if (cb) cb.checked = effectivelyInReport;
         });
-        renderDeepDiveSections();
     }
     async function saveDDState() {
         const btn = document.getElementById('dd-save-btn');
