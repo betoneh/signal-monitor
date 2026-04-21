@@ -2025,9 +2025,7 @@
         const items = Array.from(tab.querySelectorAll('.dd-item'))
             .sort((a, b) => parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId));
 
-        // Keep local read checks visually in place inside Unread.
-        // Items only move sections when the LaunchAgent republishes the index
-        // with updated server-side membership.
+        // Local checks stay visually in Unread until the next published run.
         const unreadItems = items.filter(el => el.dataset.origReport !== 'true');
         const readItems = items
             .filter(el => el.dataset.origReport === 'true')
@@ -2066,8 +2064,8 @@
         const unreadSummary = document.createElement('summary');
         unreadSummary.className = 'dd-split-toggle';
         unreadSummary.innerHTML = `
-                <span class="dd-split-label">Unread</span>
-                <span class="dd-split-count">${unreadItems.length}</span>
+            <span class="dd-split-label">Unread</span>
+            <span class="dd-split-count">${unreadItems.length}</span>
         `;
         unreadSection.appendChild(unreadSummary);
         if (unreadItems.length) {
@@ -2123,6 +2121,7 @@
             el.classList.remove('is-read');
             if (cb) cb.checked = effectivelyInReport;
         });
+        renderDeepDiveSections();
     }
     async function saveDDState() {
         const btn = document.getElementById('dd-save-btn');

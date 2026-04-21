@@ -110,7 +110,6 @@
 <p>For Vitalik's air quality sensors, differential privacy works beautifully. Each sensor adds random noise to its readings before transmitting. The central server aggregates thousands of noisy readings. By the law of large numbers, the noise cancels out in the aggregate (it's symmetrically distributed around zero), so the aggregate air quality map is accurate. But any individual sensor's true reading is hidden behind noise that can't be removed.</p>
 <p>The combination with FHE is especially powerful. Differential privacy protects individuals in the aggregate output. FHE protects individuals during the computation itself. Together, they create a system where: (1) individual readings are encrypted and can't be seen by the server (FHE), (2) computations on encrypted data produce encrypted results that, when decrypted, (3) contain calibrated noise that prevents individual identification (differential privacy). It's privacy defense in depth.</p>
 <p>The broader philosophical point: differential privacy proves that the trade-off between collective benefit and individual privacy is not inherent — it's an engineering problem with mathematical solutions. You don't have to choose between public health surveillance and personal privacy. You can have both. You just need the right math. This is the d/acc thesis in one equation: technology that makes the trade-off disappear.</p></div>
-  <div class="source">Source: <a href="https://www.youtube.com/watch?v=NSm6GRiMkzU" target="_blank">Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate</a></div>
   
 <div class="share-row">
   <div class="share-left">
@@ -145,6 +144,8 @@
 <footer>
   Signal Monitor · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
+
+<script src="deep-dive-navigation.js?v=20260421-1"></script>
 
 <script>
   (function(){
