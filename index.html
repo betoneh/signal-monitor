@@ -146,8 +146,11 @@
         .dd-check-row a { flex: 1; }
         .dd-flat-list { display: none; }
         .dd-split-root { display: block; }
+        .dd-split-section {
+            overflow: hidden;
+        }
         .dd-split-section + .dd-split-section {
-            margin-top: 0;
+            margin-top: 1.5rem;
             padding-top: 0;
             border-top: none;
         }
@@ -216,6 +219,10 @@
         }
         .dd-list {
             padding: 0;
+        }
+        details:not([open]) > .dd-list,
+        details:not([open]) > .dd-empty {
+            display: none;
         }
         .dd-empty {
             padding: 0.2rem 0;
