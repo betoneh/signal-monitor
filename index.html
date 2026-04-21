@@ -2017,18 +2017,39 @@
         const root = ensureDeepDiveSplitRoot();
         if (!tab || !root) return;
 
-        const openState = {};
-        root.querySelectorAll('details[data-dd-key]').forEach(el => {
-            openState[el.dataset.ddKey] = el.open;
-        });
-
         const items = Array.from(tab.querySelectorAll('.dd-item'))
             .sort((a, b) => parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId));
 
-        const unreadItems = items.filter(el => !el.querySelector('.dd-check')?.checked);
+        const unreadItems = items
+            .filter(el => !el.querySelector('.dd-check')?.checked)
+            .sort((a, b) => parseInt(a.dataset.ddId) - parseInt(b.dataset.ddId));
         const readItems = items.filter(el => !!el.querySelector('.dd-check')?.checked);
 
         root.replaceChildren();
+
+        const readSection = document.createElement('details');
+        readSection.className = 'dd-split-section';
+        readSection.dataset.ddKey = 'state:read';
+        readSection.open = false;
+        const readSummary = document.createElement('summary');
+        readSummary.className = 'dd-read-toggle';
+        readSummary.innerHTML = `
+            <span class="dd-split-label">Read</span>
+            <span class="dd-split-count">${readItems.length}</span>
+        `;
+        readSection.appendChild(readSummary);
+        if (readItems.length) {
+            const readList = document.createElement('ul');
+            readList.className = 'dd-list';
+            readItems.forEach(item => readList.appendChild(item));
+            readSection.appendChild(readList);
+        } else {
+            const empty = document.createElement('div');
+            empty.className = 'dd-empty';
+            empty.textContent = 'No deep dives marked read yet.';
+            readSection.appendChild(empty);
+        }
+        root.appendChild(readSection);
 
         const unreadSection = document.createElement('section');
         unreadSection.className = 'dd-split-section';
@@ -2050,30 +2071,6 @@
             unreadSection.appendChild(empty);
         }
         root.appendChild(unreadSection);
-
-        const readSection = document.createElement('details');
-        readSection.className = 'dd-split-section';
-        readSection.dataset.ddKey = 'state:read';
-        readSection.open = openState[readSection.dataset.ddKey] ?? false;
-        const readSummary = document.createElement('summary');
-        readSummary.className = 'dd-read-toggle';
-        readSummary.innerHTML = `
-            <span class="dd-split-label">Read</span>
-            <span class="dd-split-count">${readItems.length}</span>
-        `;
-        readSection.appendChild(readSummary);
-        if (readItems.length) {
-            const readList = document.createElement('ul');
-            readList.className = 'dd-list';
-            readItems.forEach(item => readList.appendChild(item));
-            readSection.appendChild(readList);
-        } else {
-            const empty = document.createElement('div');
-            empty.className = 'dd-empty';
-            empty.textContent = 'No deep dives marked read yet.';
-            readSection.appendChild(empty);
-        }
-        root.appendChild(readSection);
     }
     function toggleDDRead(id) {
         const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
