@@ -156,24 +156,31 @@
             align-items: center;
             justify-content: space-between;
             gap: 1rem;
+            height: 24px;
             min-height: 24px;
-            padding: 0.1rem 0;
+            padding: 0;
+            color: #eaedf3;
+            box-sizing: border-box;
         }
         details[open] > .dd-split-toggle { margin-bottom: 0.8rem; }
         .dd-split-title {
             display: inline-flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 0.5rem;
             min-width: 0;
+            height: 24px;
         }
         .dd-split-label {
             font-size: 0.9rem;
             font-weight: 600;
-            color: #eaedf3;
+            color: inherit;
             letter-spacing: 0.01em;
             line-height: 1.25rem;
         }
         .dd-split-count {
+            display: inline-flex;
+            align-items: center;
+            height: 24px;
             font-size: 0.75rem;
             color: #8b949e;
             line-height: 1.25rem;
@@ -187,12 +194,12 @@
             width: 24px;
             height: 24px;
             flex-shrink: 0;
-            color: #8b949e;
+            margin-top: 0.125rem;
+            color: currentColor;
             transition: transform 0.15s ease, opacity 0.15s ease;
         }
-        .dd-split-toggle:hover .dd-split-icon,
-        .dd-split-toggle:hover .dd-split-label {
-            opacity: 0.8;
+        .dd-split-toggle:hover {
+            opacity: 0.75;
         }
         .dd-split-icon path {
             fill: none;
