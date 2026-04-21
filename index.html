@@ -152,7 +152,7 @@
             border-top: 1px solid rgba(10, 143, 123, 0.18);
         }
         .dd-split-header,
-        .dd-read-toggle {
+        .dd-split-toggle {
             display: flex;
             align-items: baseline;
             justify-content: space-between;
@@ -169,19 +169,19 @@
             font-size: 0.75rem;
             color: #8b949e;
         }
-        .dd-read-toggle {
+        .dd-split-toggle {
             cursor: pointer;
             list-style: none;
         }
-        .dd-read-toggle::-webkit-details-marker { display: none; }
-        .dd-read-toggle .dd-split-label::before {
+        .dd-split-toggle::-webkit-details-marker { display: none; }
+        .dd-split-toggle .dd-split-label::before {
             content: '▸';
             display: inline-block;
             margin-right: 0.45rem;
             color: #8b949e;
             transition: transform 0.15s ease;
         }
-        details[open] > .dd-read-toggle .dd-split-label::before {
+        details[open] > .dd-split-toggle .dd-split-label::before {
             transform: rotate(90deg);
         }
         .dd-list {
@@ -2017,6 +2017,11 @@
         const root = ensureDeepDiveSplitRoot();
         if (!tab || !root) return;
 
+        const openState = {};
+        root.querySelectorAll('details[data-dd-key]').forEach(el => {
+            openState[el.dataset.ddKey] = el.open;
+        });
+
         const items = Array.from(tab.querySelectorAll('.dd-item'))
             .sort((a, b) => parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId));
 
@@ -2030,9 +2035,9 @@
         const readSection = document.createElement('details');
         readSection.className = 'dd-split-section';
         readSection.dataset.ddKey = 'state:read';
-        readSection.open = false;
+        readSection.open = openState[readSection.dataset.ddKey] ?? false;
         const readSummary = document.createElement('summary');
-        readSummary.className = 'dd-read-toggle';
+        readSummary.className = 'dd-split-toggle';
         readSummary.innerHTML = `
             <span class="dd-split-label">Read</span>
             <span class="dd-split-count">${readItems.length}</span>
@@ -2051,14 +2056,17 @@
         }
         root.appendChild(readSection);
 
-        const unreadSection = document.createElement('section');
+        const unreadSection = document.createElement('details');
         unreadSection.className = 'dd-split-section';
-        unreadSection.innerHTML = `
-            <div class="dd-split-header">
+        unreadSection.dataset.ddKey = 'state:unread';
+        unreadSection.open = openState[unreadSection.dataset.ddKey] ?? true;
+        const unreadSummary = document.createElement('summary');
+        unreadSummary.className = 'dd-split-toggle';
+        unreadSummary.innerHTML = `
                 <span class="dd-split-label">Unread</span>
                 <span class="dd-split-count">${unreadItems.length}</span>
-            </div>
         `;
+        unreadSection.appendChild(unreadSummary);
         if (unreadItems.length) {
             const unreadList = document.createElement('ul');
             unreadList.className = 'dd-list';
