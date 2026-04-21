@@ -174,8 +174,8 @@
             height: 24px;
         }
         .dd-split-label {
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 500;
             color: inherit;
             letter-spacing: 0.01em;
             line-height: 1.25rem;
@@ -213,6 +213,16 @@
         }
         .dd-split-icon path:first-child {
             stroke: none;
+        }
+        .dd-split-section[data-dd-key="state:read"] > .dd-split-toggle {
+            color: #eab308;
+        }
+        .dd-split-section[data-dd-key="state:unread"] > .dd-split-toggle {
+            color: #0ec4a9;
+        }
+        .dd-split-section[data-dd-key="state:read"] > .dd-split-toggle .dd-split-count,
+        .dd-split-section[data-dd-key="state:unread"] > .dd-split-toggle .dd-split-count {
+            color: #8b949e;
         }
         details[open] > .dd-split-toggle .dd-split-icon {
             transform: rotate(90deg);
