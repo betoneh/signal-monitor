@@ -147,9 +147,9 @@
         .dd-flat-list { display: none; }
         .dd-split-root { display: block; }
         .dd-split-section + .dd-split-section {
-            margin-top: 1.25rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(10, 143, 123, 0.18);
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
         }
         .dd-split-toggle {
             display: flex;
@@ -207,6 +207,9 @@
             stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
+        }
+        .dd-split-icon path:first-child {
+            stroke: none;
         }
         details[open] > .dd-split-toggle .dd-split-icon {
             transform: rotate(90deg);
