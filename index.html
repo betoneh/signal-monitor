@@ -148,54 +148,95 @@
         .dd-flat-list { display: none; }
         .dd-split-root {
             display: block;
-            padding-bottom: 1.5rem;
+            padding-bottom: 1.75rem;
+        }
+        .dd-split-section {
+            overflow: hidden;
         }
         .dd-split-section + .dd-split-section {
-            margin-top: 1.25rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(10, 143, 123, 0.18);
+            margin-top: 1.5rem;
+            padding-top: 0;
+            border-top: none;
         }
-        .dd-split-header,
         .dd-split-toggle {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 1rem;
-            margin-bottom: 0.9rem;
+            height: 24px;
+            min-height: 24px;
+            padding: 0;
+            color: #eaedf3;
+            box-sizing: border-box;
         }
-        .dd-split-heading {
+        details[open] > .dd-split-toggle { margin-bottom: 0.8rem; }
+        .dd-split-title {
             display: inline-flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 0.5rem;
             min-width: 0;
+            height: 24px;
         }
         .dd-split-label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #eaedf3;
+            font-size: 1rem;
+            font-weight: 500;
+            color: inherit;
             letter-spacing: 0.01em;
+            line-height: 1.25rem;
         }
         .dd-split-count {
+            display: inline-flex;
+            align-items: center;
+            height: 24px;
             font-size: 0.75rem;
             color: #8b949e;
+            line-height: 1.25rem;
         }
         .dd-split-toggle {
             cursor: pointer;
             list-style: none;
         }
         .dd-split-toggle::-webkit-details-marker { display: none; }
-        .dd-split-arrow {
+        .dd-split-icon {
             width: 24px;
             height: 24px;
-            color: #8b949e;
             flex-shrink: 0;
+            margin-top: 0.125rem;
+            color: currentColor;
             transition: transform 0.15s ease, opacity 0.15s ease;
         }
-        details[open] > .dd-split-toggle .dd-split-arrow {
+        .dd-split-toggle:hover {
+            opacity: 0.75;
+        }
+        .dd-split-icon path {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .dd-split-icon path:first-child {
+            stroke: none;
+        }
+        .dd-split-section[data-dd-key="state:read"] > .dd-split-toggle {
+            color: #eab308;
+        }
+        .dd-split-section[data-dd-key="state:unread"] > .dd-split-toggle {
+            color: #0ec4a9;
+        }
+        .dd-split-section[data-dd-key="state:read"] > .dd-split-toggle .dd-split-count,
+        .dd-split-section[data-dd-key="state:unread"] > .dd-split-toggle .dd-split-count {
+            color: #8b949e;
+        }
+        details[open] > .dd-split-toggle .dd-split-icon {
             transform: rotate(90deg);
         }
         .dd-list {
             padding: 0;
+        }
+        details:not([open]) > .dd-list,
+        details:not([open]) > .dd-empty {
+            display: none;
         }
         .dd-empty {
             padding: 0.2rem 0;
@@ -2051,9 +2092,9 @@
         const readSummary = document.createElement('summary');
         readSummary.className = 'dd-split-toggle';
         readSummary.innerHTML = `
-            <span class="dd-split-heading">
-                <svg viewBox="0 0 24 24" aria-hidden="true" class="dd-split-arrow">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <span class="dd-split-title">
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="dd-split-icon">
+                    <path stroke="none" d="M0 0h24v24H0z"></path>
                     <path d="M9 6l6 6l-6 6"></path>
                 </svg>
                 <span class="dd-split-label">Read</span>
@@ -2081,14 +2122,14 @@
         const unreadSummary = document.createElement('summary');
         unreadSummary.className = 'dd-split-toggle';
         unreadSummary.innerHTML = `
-            <span class="dd-split-heading">
-                <svg viewBox="0 0 24 24" aria-hidden="true" class="dd-split-arrow">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <span class="dd-split-title">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" class="dd-split-icon">
+                        <path stroke="none" d="M0 0h24v24H0z"></path>
                     <path d="M9 6l6 6l-6 6"></path>
-                </svg>
-                <span class="dd-split-label">Unread</span>
-            </span>
-            <span class="dd-split-count">${unreadItems.length}</span>
+                    </svg>
+                    <span class="dd-split-label">Unread</span>
+                </span>
+                <span class="dd-split-count">${unreadItems.length}</span>
         `;
         unreadSection.appendChild(unreadSummary);
         if (unreadItems.length) {
