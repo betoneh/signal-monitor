@@ -151,37 +151,57 @@
             padding-top: 1rem;
             border-top: 1px solid rgba(10, 143, 123, 0.18);
         }
-        .dd-split-header,
         .dd-split-toggle {
             display: flex;
-            align-items: baseline;
+            align-items: center;
             justify-content: space-between;
             gap: 1rem;
-            margin-bottom: 0.8rem;
+            min-height: 24px;
+            padding: 0.1rem 0;
+        }
+        details[open] > .dd-split-toggle { margin-bottom: 0.8rem; }
+        .dd-split-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 0;
         }
         .dd-split-label {
             font-size: 0.9rem;
             font-weight: 600;
             color: #eaedf3;
             letter-spacing: 0.01em;
+            line-height: 1.25rem;
         }
         .dd-split-count {
             font-size: 0.75rem;
             color: #8b949e;
+            line-height: 1.25rem;
         }
         .dd-split-toggle {
             cursor: pointer;
             list-style: none;
         }
         .dd-split-toggle::-webkit-details-marker { display: none; }
-        .dd-split-toggle .dd-split-label::before {
-            content: '▸';
-            display: inline-block;
-            margin-right: 0.45rem;
+        .dd-split-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
             color: #8b949e;
-            transition: transform 0.15s ease;
+            transition: transform 0.15s ease, opacity 0.15s ease;
         }
-        details[open] > .dd-split-toggle .dd-split-label::before {
+        .dd-split-toggle:hover .dd-split-icon,
+        .dd-split-toggle:hover .dd-split-label {
+            opacity: 0.8;
+        }
+        .dd-split-icon path {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        details[open] > .dd-split-toggle .dd-split-icon {
             transform: rotate(90deg);
         }
         .dd-list {
@@ -2042,7 +2062,13 @@
         const readSummary = document.createElement('summary');
         readSummary.className = 'dd-split-toggle';
         readSummary.innerHTML = `
-            <span class="dd-split-label">Read</span>
+            <span class="dd-split-title">
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="dd-split-icon">
+                    <path stroke="none" d="M0 0h24v24H0z"></path>
+                    <path d="M9 6l6 6l-6 6"></path>
+                </svg>
+                <span class="dd-split-label">Read</span>
+            </span>
             <span class="dd-split-count">${readItems.length}</span>
         `;
         readSection.appendChild(readSummary);
@@ -2066,7 +2092,13 @@
         const unreadSummary = document.createElement('summary');
         unreadSummary.className = 'dd-split-toggle';
         unreadSummary.innerHTML = `
-                <span class="dd-split-label">Unread</span>
+                <span class="dd-split-title">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" class="dd-split-icon">
+                        <path stroke="none" d="M0 0h24v24H0z"></path>
+                        <path d="M9 6l6 6l-6 6"></path>
+                    </svg>
+                    <span class="dd-split-label">Unread</span>
+                </span>
                 <span class="dd-split-count">${unreadItems.length}</span>
         `;
         unreadSection.appendChild(unreadSummary);
