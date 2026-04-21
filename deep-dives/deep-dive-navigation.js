@@ -17,6 +17,7 @@
         flex-direction: column;
         gap: 1.5rem;
       }
+      .dd-sequence-index,
       .dd-sequence-primary,
       .dd-sequence-secondary {
         border: none;
@@ -27,15 +28,23 @@
         cursor: pointer;
         font: inherit;
       }
+      .dd-sequence-index,
       .dd-sequence-primary {
         display: flex;
         gap: 0.5rem;
         align-items: flex-start;
+        color: #eaedf3;
+        width: auto;
+        text-decoration: none;
+      }
+      .dd-sequence-index {
+        justify-content: flex-start;
+        text-align: left;
+      }
+      .dd-sequence-primary {
         justify-content: flex-end;
         text-align: right;
         margin-left: auto;
-        color: #eaedf3;
-        width: auto;
       }
       .dd-sequence-copy {
         min-width: 0;
@@ -56,9 +65,11 @@
         flex-shrink: 0;
         margin-top: 0.125rem;
       }
+      .dd-sequence-index:hover,
       .dd-sequence-primary:hover {
         opacity: 0.75;
       }
+      .dd-sequence-index svg,
       .dd-sequence-primary svg {
         width: 24px;
         height: 24px;
@@ -235,6 +246,9 @@
     root.querySelectorAll('button').forEach((button) => {
       button.disabled = busy;
     });
+    root.querySelectorAll('a.dd-sequence-primary').forEach((link) => {
+      link.style.pointerEvents = busy ? 'none' : '';
+    });
   }
 
   function buildPrimaryCopy(nextItem) {
@@ -256,8 +270,18 @@
 
     const primaryCopy = buildPrimaryCopy(primaryTarget);
     nav.innerHTML = `
+      <a href="../index.html" class="dd-sequence-index" id="deep-dive-index-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="dd-sequence-arrow">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M15 6l-6 6l6 6"></path>
+        </svg>
+        <div class="dd-sequence-copy">
+          <span class="dd-sequence-action">Deep Dive Index</span>
+          <div class="dd-sequence-target">Return to unread list and save</div>
+        </div>
+      </a>
       <div class="dd-sequence-meta">
-        <button type="button" class="dd-sequence-primary" id="next-post-link">
+        <a href="${primaryTarget ? getPageHref(primaryTarget) : '../index.html'}" class="dd-sequence-primary" id="next-post-link">
           <div class="dd-sequence-copy">
             <span class="dd-sequence-action">${primaryCopy.action}</span>
             <div class="dd-sequence-target">${primaryCopy.target}</div>
@@ -266,7 +290,7 @@
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <path d="M9 6l6 6l-6 6"></path>
           </svg>
-        </button>
+        </a>
         ${
           secondaryTarget
             ? `<button type="button" class="dd-sequence-secondary">Next unread without marking this one</button>`
@@ -277,6 +301,11 @@
     `;
 
     nav.querySelector('.dd-sequence-primary').addEventListener('click', onPrimary);
+    nav.querySelector('.dd-sequence-index').addEventListener('click', () => {
+      try {
+        localStorage.setItem('sm-tab', 'deepdives');
+      } catch (error) {}
+    });
     const secondaryButton = nav.querySelector('.dd-sequence-secondary');
     if (secondaryButton) {
       secondaryButton.addEventListener('click', onSecondary);
@@ -292,7 +321,7 @@
   async function init() {
     injectStyles();
 
-    const rootPoint = document.querySelector('.source') || document.querySelector('.content');
+    const rootPoint = document.querySelector('.content');
     if (!rootPoint) return;
 
     const [items, remoteState] = await Promise.all([fetchDeepDiveManifest(), fetchRemoteState()]);
@@ -316,7 +345,8 @@
       currentItem,
       primaryTarget,
       secondaryTarget,
-      async () => {
+      async (event) => {
+        event.preventDefault();
         try {
           setBusy(nav, true);
           setStatus(nav, 'Marked locally. Moving on…');
