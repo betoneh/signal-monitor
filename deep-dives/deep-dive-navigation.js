@@ -7,21 +7,18 @@
     const style = document.createElement('style');
     style.id = 'dd-sequence-nav-style';
     style.textContent = `
-      .dd-sequence-nav {
-        margin: 2.25rem 0 1.75rem;
-        padding-top: 1.25rem;
-        border-top: 1px solid rgba(10, 143, 123, 0.28);
+      .dd-sequence-divider {
+        margin: 1.5rem 0;
+        border: 0;
+        border-top: 1px dashed rgba(139, 148, 158, 0.45);
       }
-      .dd-sequence-label {
-        margin-bottom: 0.6rem;
-        color: #8b949e;
-        font-size: 0.72rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+      .dd-sequence-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
       }
       .dd-sequence-primary,
       .dd-sequence-secondary {
-        width: 100%;
         border: none;
         background: none;
         padding: 0;
@@ -31,44 +28,47 @@
         font: inherit;
       }
       .dd-sequence-primary {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 0.85rem;
-        align-items: center;
+        display: flex;
+        gap: 0.5rem;
+        align-items: flex-start;
+        justify-content: flex-end;
+        text-align: right;
+        margin-left: auto;
         color: #eaedf3;
-      }
-      .dd-sequence-primary:hover .dd-sequence-action,
-      .dd-sequence-primary:hover .dd-sequence-target {
-        color: #0ec4a9;
+        width: auto;
       }
       .dd-sequence-copy {
         min-width: 0;
       }
       .dd-sequence-action {
         display: block;
-        font-size: 0.98rem;
-        line-height: 1.45;
-        transition: color 0.15s ease;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: #8b949e;
       }
       .dd-sequence-target {
         display: block;
-        margin-top: 0.28rem;
-        color: #8b949e;
-        font-size: 0.82rem;
-        line-height: 1.55;
-        transition: color 0.15s ease;
+        color: rgba(14, 196, 169, 0.85);
+        margin-top: 0;
       }
       .dd-sequence-arrow {
-        color: #8b949e;
-        font-size: 1.15rem;
-        transition: color 0.15s ease, transform 0.15s ease;
+        color: currentColor;
+        flex-shrink: 0;
+        margin-top: 0.125rem;
       }
-      .dd-sequence-primary:hover .dd-sequence-arrow {
-        color: #0ec4a9;
-        transform: translateX(2px);
+      .dd-sequence-primary:hover {
+        opacity: 0.75;
+      }
+      .dd-sequence-primary svg {
+        width: 24px;
+        height: 24px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
       .dd-sequence-secondary {
-        margin-top: 0.85rem;
         color: #8b949e;
         font-size: 0.8rem;
         text-decoration: underline;
@@ -86,7 +86,7 @@
       }
       .dd-sequence-status {
         min-height: 1.2rem;
-        margin-top: 0.7rem;
+        text-align: right;
         color: #8b949e;
         font-size: 0.78rem;
       }
@@ -95,6 +95,18 @@
       }
       .dd-sequence-status.is-success {
         color: #0ec4a9;
+      }
+      @media (min-width: 640px) {
+        .dd-sequence-nav {
+          flex-direction: row;
+          justify-content: space-between;
+          gap: 1.5rem;
+          align-items: flex-start;
+        }
+        .dd-sequence-meta {
+          margin-left: auto;
+          text-align: right;
+        }
       }
     `;
     document.head.appendChild(style);
@@ -228,13 +240,13 @@
   function buildPrimaryCopy(nextItem) {
     if (!nextItem) {
       return {
-        action: 'Mark as read and return to Deep Dives',
-        target: 'No later unread deep dives from here.',
+        action: 'Deep Dives',
+        target: 'Return to index',
       };
     }
     return {
-      action: 'Mark as read and go to next deep dive',
-      target: `Next unread: #${nextItem.id} — ${nextItem.title}`,
+      action: 'Next Deep Dive',
+      target: `#${nextItem.id} — ${nextItem.title}`,
     };
   }
 
@@ -244,20 +256,24 @@
 
     const primaryCopy = buildPrimaryCopy(primaryTarget);
     nav.innerHTML = `
-      <div class="dd-sequence-label">Continue Reading</div>
-      <button type="button" class="dd-sequence-primary">
-        <span class="dd-sequence-copy">
-          <span class="dd-sequence-action">${primaryCopy.action}</span>
-          <span class="dd-sequence-target">${primaryCopy.target}</span>
-        </span>
-        <span class="dd-sequence-arrow" aria-hidden="true">→</span>
-      </button>
-      ${
-        secondaryTarget
-          ? `<button type="button" class="dd-sequence-secondary">Next unread without marking this one</button>`
-          : ''
-      }
-      <div class="dd-sequence-status" aria-live="polite"></div>
+      <div class="dd-sequence-meta">
+        <button type="button" class="dd-sequence-primary" id="next-post-link">
+          <div class="dd-sequence-copy">
+            <span class="dd-sequence-action">${primaryCopy.action}</span>
+            <div class="dd-sequence-target">${primaryCopy.target}</div>
+          </div>
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="dd-sequence-arrow">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M9 6l6 6l-6 6"></path>
+          </svg>
+        </button>
+        ${
+          secondaryTarget
+            ? `<button type="button" class="dd-sequence-secondary">Next unread without marking this one</button>`
+            : ''
+        }
+        <div class="dd-sequence-status" aria-live="polite"></div>
+      </div>
     `;
 
     nav.querySelector('.dd-sequence-primary').addEventListener('click', onPrimary);
@@ -266,7 +282,10 @@
       secondaryButton.addEventListener('click', onSecondary);
     }
 
-    rootPoint.insertAdjacentElement('afterend', nav);
+    const divider = document.createElement('hr');
+    divider.className = 'dd-sequence-divider';
+    rootPoint.insertAdjacentElement('afterend', divider);
+    divider.insertAdjacentElement('afterend', nav);
     return nav;
   }
 
