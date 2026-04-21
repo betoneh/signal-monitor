@@ -1,11 +1,6 @@
 (function () {
   const DD_READ_KEY = 'sm-dd-read';
   const DD_UNREAD_KEY = 'sm-dd-unread';
-  const PW_HASH = '74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163';
-  const ENC_TOKEN = 'E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==';
-  const REPO = 'betoneh/signal-monitor';
-
-  let ghToken = null;
 
   function injectStyles() {
     if (document.getElementById('dd-sequence-nav-style')) return;
@@ -145,49 +140,6 @@
     return merged;
   }
 
-  function decryptToken(password) {
-    const key = new Uint8Array(32);
-    for (let index = 0; index < 32; index += 1) {
-      key[index] = parseInt(PW_HASH.substr(index * 2, 2), 16);
-    }
-    const enc = Uint8Array.from(atob(ENC_TOKEN), (char) => char.charCodeAt(0));
-    const dec = new Uint8Array(enc.length);
-    for (let index = 0; index < enc.length; index += 1) {
-      dec[index] = enc[index] ^ key[index % key.length];
-    }
-    return new TextDecoder().decode(dec);
-  }
-
-  async function sha256(text) {
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-    return Array.from(new Uint8Array(buf))
-      .map((byte) => byte.toString(16).padStart(2, '0'))
-      .join('');
-  }
-
-  async function ensureGitHubToken() {
-    if (ghToken) return ghToken;
-
-    const savedPw = sessionStorage.getItem('sm-pw');
-    if (savedPw && (await sha256(savedPw)) === PW_HASH) {
-      ghToken = decryptToken(savedPw);
-      return ghToken;
-    }
-
-    const prompted = window.prompt('Enter your Signal Monitor password to save this read state');
-    if (!prompted) return null;
-    if ((await sha256(prompted)) !== PW_HASH) {
-      throw new Error('Wrong password.');
-    }
-
-    ghToken = decryptToken(prompted);
-    try {
-      sessionStorage.setItem('sm-pw', prompted);
-      localStorage.setItem('sm-auth', Date.now().toString());
-    } catch (error) {}
-    return ghToken;
-  }
-
   async function fetchRemoteState() {
     try {
       const response = await fetch(`../dd-state.json?_=${Date.now()}`, { cache: 'no-store' });
@@ -257,58 +209,6 @@
 
   function getPageHref(item) {
     return item.href.split('/').pop();
-  }
-
-  async function saveStateToGitHub(state) {
-    const token = await ensureGitHubToken();
-    if (!token) {
-      throw new Error('Save cancelled.');
-    }
-
-    const content = btoa(
-      JSON.stringify(
-        {
-          read: state.read,
-          unreport: state.unreport,
-        },
-        null,
-        2
-      )
-    );
-
-    let sha = null;
-    try {
-      const readResponse = await fetch(`https://api.github.com/repos/${REPO}/contents/dd-state.json`, {
-        headers: {
-          Authorization: `token ${token}`,
-          Accept: 'application/vnd.github.v3+json',
-        },
-      });
-      if (readResponse.ok) {
-        const data = await readResponse.json();
-        sha = data.sha;
-      }
-    } catch (error) {}
-
-    const body = {
-      message: 'Update dd-state.json',
-      content,
-    };
-    if (sha) body.sha = sha;
-
-    const writeResponse = await fetch(`https://api.github.com/repos/${REPO}/contents/dd-state.json`, {
-      method: 'PUT',
-      headers: {
-        Authorization: `token ${token}`,
-        'Content-Type': 'application/json',
-        Accept: 'application/vnd.github.v3+json',
-      },
-      body: JSON.stringify(body),
-    });
-
-    if (!writeResponse.ok) {
-      throw new Error(`GitHub save failed (${writeResponse.status}).`);
-    }
   }
 
   function setStatus(root, message, tone) {
@@ -400,7 +300,7 @@
       async () => {
         try {
           setBusy(nav, true);
-          setStatus(nav, 'Saving read state…');
+          setStatus(nav, 'Marked locally. Moving on…');
 
           state = {
             read: [...state.read],
@@ -408,8 +308,7 @@
           };
           markAsRead(currentItem, state);
           persistState(state);
-          await saveStateToGitHub(state);
-          setStatus(nav, 'Saved. Moving on…', 'success');
+          setStatus(nav, 'Marked locally. Save later from the index.', 'success');
 
           const destination = primaryTarget ? getPageHref(primaryTarget) : '../index.html';
           try {

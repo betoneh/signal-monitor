@@ -2025,10 +2025,13 @@
         const items = Array.from(tab.querySelectorAll('.dd-item'))
             .sort((a, b) => parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId));
 
-        const unreadItems = items
-            .filter(el => !el.querySelector('.dd-check')?.checked)
-            .sort((a, b) => parseInt(a.dataset.ddId) - parseInt(b.dataset.ddId));
-        const readItems = items.filter(el => !!el.querySelector('.dd-check')?.checked);
+        // Keep local read checks visually in place inside Unread.
+        // Items only move sections when the LaunchAgent republishes the index
+        // with updated server-side membership.
+        const unreadItems = items.filter(el => el.dataset.origReport !== 'true');
+        const readItems = items
+            .filter(el => el.dataset.origReport === 'true')
+            .sort((a, b) => parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId));
 
         root.replaceChildren();
 
@@ -2051,7 +2054,7 @@
         } else {
             const empty = document.createElement('div');
             empty.className = 'dd-empty';
-            empty.textContent = 'No deep dives marked read yet.';
+            empty.textContent = 'No published deep dives in Read right now.';
             readSection.appendChild(empty);
         }
         root.appendChild(readSection);
@@ -2070,7 +2073,9 @@
         if (unreadItems.length) {
             const unreadList = document.createElement('ul');
             unreadList.className = 'dd-list';
-            unreadItems.forEach(item => unreadList.appendChild(item));
+            unreadItems
+                .sort((a, b) => parseInt(a.dataset.ddId) - parseInt(b.dataset.ddId))
+                .forEach(item => unreadList.appendChild(item));
             unreadSection.appendChild(unreadList);
         } else {
             const empty = document.createElement('div');
