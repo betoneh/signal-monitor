@@ -18,8 +18,7 @@
         gap: 1.5rem;
       }
       .dd-sequence-index,
-      .dd-sequence-primary,
-      .dd-sequence-secondary {
+      .dd-sequence-primary {
         border: none;
         background: none;
         padding: 0;
@@ -79,19 +78,8 @@
         stroke-linecap: round;
         stroke-linejoin: round;
       }
-      .dd-sequence-secondary {
-        color: #8b949e;
-        font-size: 0.8rem;
-        text-decoration: underline;
-        text-decoration-style: dashed;
-        text-underline-offset: 4px;
-        width: fit-content;
-      }
-      .dd-sequence-secondary:hover {
-        color: #eaedf3;
-      }
       .dd-sequence-primary[disabled],
-      .dd-sequence-secondary[disabled] {
+      .dd-sequence-index[disabled] {
         opacity: 0.55;
         cursor: wait;
       }
@@ -264,7 +252,7 @@
     };
   }
 
-  function createNavigation(rootPoint, currentItem, primaryTarget, secondaryTarget, onPrimary, onSecondary) {
+  function createNavigation(rootPoint, currentItem, primaryTarget, onPrimary) {
     const nav = document.createElement('section');
     nav.className = 'dd-sequence-nav';
 
@@ -291,11 +279,6 @@
             <path d="M9 6l6 6l-6 6"></path>
           </svg>
         </a>
-        ${
-          secondaryTarget
-            ? `<button type="button" class="dd-sequence-secondary">Next unread without marking this one</button>`
-            : ''
-        }
         <div class="dd-sequence-status" aria-live="polite"></div>
       </div>
     `;
@@ -306,10 +289,6 @@
         localStorage.setItem('sm-tab', 'deepdives');
       } catch (error) {}
     });
-    const secondaryButton = nav.querySelector('.dd-sequence-secondary');
-    if (secondaryButton) {
-      secondaryButton.addEventListener('click', onSecondary);
-    }
 
     const divider = document.createElement('hr');
     divider.className = 'dd-sequence-divider';
@@ -338,13 +317,10 @@
     markAsRead(currentItem, primaryState);
 
     const primaryTarget = findNextUnread(items, currentItem, primaryState);
-    const secondaryTarget = findNextUnread(items, currentItem, state);
-
     const nav = createNavigation(
       rootPoint,
       currentItem,
       primaryTarget,
-      secondaryTarget,
       async (event) => {
         event.preventDefault();
         try {
@@ -368,13 +344,6 @@
           setBusy(nav, false);
           setStatus(nav, error.message || 'Could not save read state.', 'error');
         }
-      },
-      () => {
-        if (!secondaryTarget) return;
-        try {
-          localStorage.setItem('sm-tab', 'deepdives');
-        } catch (error) {}
-        window.location.href = getPageHref(secondaryTarget);
       }
     );
   }
