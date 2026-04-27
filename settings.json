@@ -96,8 +96,8 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "https://critiqueanddigest.substack.com/p/the-post-christian-condition-and",
-    "deep_dives_count": 4,
+    "url": "",
+    "deep_dives_count": 0,
     "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
