@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-21T05:29:09.426Z",
+  "updated_at": "2026-04-27T03:51:12.139Z",
   "model": "anthropic/claude-opus-4-6",
   "available_models": [
     {
@@ -96,8 +96,8 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "",
-    "deep_dives_count": 0,
+    "url": "https://critiqueanddigest.substack.com/p/the-post-christian-condition-and",
+    "deep_dives_count": 4,
     "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
