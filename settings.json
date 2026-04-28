@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-27T15:34:56.714Z",
+  "updated_at": "2026-04-28T04:44:26.673Z",
   "model": "anthropic/claude-opus-4-6",
   "available_models": [
     {
@@ -96,8 +96,8 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "",
-    "deep_dives_count": 0,
+    "url": "https://kevinkelly.substack.com/p/our-uncertain-uncertainties",
+    "deep_dives_count": 4,
     "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
