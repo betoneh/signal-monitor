@@ -7,8 +7,21 @@
     "url": "https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html"
   },
   "body_html": "<p>The public discourse on AI and technology in 2023 collapsed into two camps. The doomers — broadly aligned with the AI safety movement — argued that powerful AI is so dangerous that development should be slowed, paused, or stopped. The accelerationists, crystallized in the <a href=\"https://beff.substack.com/p/notes-on-eacc-principles-and-tenets\" target=\"_blank\">e/acc movement</a> championed by \"Beff Jezos\" and others, argued that technological progress is so overwhelmingly good that any attempt to slow it is effectively murder — the invisible deaths of people who didn't get cures, didn't get economic lift, didn't get the future sooner. Both camps had real arguments. Both were missing something critical. Enter <strong>d/acc</strong>.</p><p>Vitalik Buterin's d/acc manifesto, published in November 2023 as an explicit response to <a href=\"https://a16z.com/the-techno-optimist-manifesto/\" target=\"_blank\">Marc Andreessen's Techno-Optimist Manifesto</a>, argues that both doomerism and blind acceleration get the problem wrong. Doomerism treats technology as uniformly dangerous and treats slowdown as automatically safe. But slowdown is not safe — it has costs measured in preventable deaths, preventable poverty, preventable suffering. Every decade of delay on malaria vaccines, cancer treatments, or clean energy means real people dying from things we could have fixed. The doomers systematically undercount these costs because the dead from inaction don't appear in any newspaper.</p><p>Blind acceleration makes the opposite error: it treats all technology as uniformly good and treats \"maximize profit\" as a reliable selector for beneficial directions. But markets don't automatically optimize for the right things. They optimize for what's monetizable, which correlates with beneficial outcomes in some domains and diverges sharply in others. Surveillance infrastructure is highly monetizable and deeply offense-favoring. Open-source vaccines are defense-favoring and hard to monetize. The techno-capital machine, left alone, will build the former and underinvest in the latter — not out of malice, but out of pure economic logic.</p><p>d/acc is the synthesis: <em>accelerate, but differentially</em>. The \"d\" stands simultaneously for defensive, decentralized, democratic, and differential. The core commitment is to be enthusiastically pro-technology while being intentional about <em>which</em> technologies get accelerated. Defense-favoring technologies — those that make the world harder to exploit, more resilient, more privacy-preserving — deserve active acceleration. Offense-favoring technologies — those that concentrate power, enable surveillance, remove checks on aggression — deserve active skepticism even if they're profitable.</p><p>Buterin is explicit that this is uncomfortable territory for him. He says in the essay that statements departing from open enthusiasm for progress are ones he makes \"with a heavy heart,\" citing the historical disasters of anti-technology movements: eugenics, forced sterilizations, the Limits to Growth thesis inspiring China's one-child policy. The 20th century is littered with examples of people who were wrong about technology being bad, and their wrongness had catastrophic consequences. He takes that seriously. His conclusion is not that caution is safe — it's that indiscriminate acceleration is specifically dangerous in ways that previous technologies were not, because AI and biotech create genuine possibilities for permanent, irreversible lock-in.</p><p>The political attractiveness of d/acc is that it gives developers something to do. The AI safety movement's primary message to builders was \"stop.\" That's a non-starter economically and psychologically. d/acc says: build, but build <em>this</em>. Build biosecurity infrastructure. Build zero-knowledge privacy tools. Build prediction markets and decentralized identity. Build brain-computer interfaces that augment rather than replace human cognition. There's a huge, important, profitable technology agenda here that doesn't require anyone to sacrifice their building ambitions — it just requires pointing those ambitions in deliberately chosen directions. That's the third path: not less technology, but better-aimed technology.</p>",
-  "tags": ["tech", "ai", "crypto", "d-acc", "governance", "existential-risk", "effective-altruism"],
+  "tags": [
+    "tech",
+    "ai",
+    "crypto",
+    "d-acc",
+    "governance",
+    "existential-risk",
+    "effective-altruism"
+  ],
   "word_count": 620,
-  "used_dates": [],
-  "created_date": "2026-04-02"
+  "used_dates": [
+    "2026-04-27"
+  ],
+  "created_date": "2026-04-02",
+  "read_dates": [
+    "2026-04-27"
+  ]
 }
