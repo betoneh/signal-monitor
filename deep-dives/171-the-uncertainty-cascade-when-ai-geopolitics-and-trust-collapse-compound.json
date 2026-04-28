@@ -1,0 +1,22 @@
+{
+  "id": 171,
+  "title": "The Uncertainty Cascade: When AI, Geopolitics, and Trust Collapse Compound",
+  "source": {
+    "kb_entry": "our-uncertain-uncertainties-kevin-kelly",
+    "original": "Our Uncertain Uncertainties — Kevin Kelly",
+    "url": "https://kevinkelly.substack.com/p/our-uncertain-uncertainties"
+  },
+  "body_html": "<p>AI uncertainty doesn't exist in isolation. It sits atop — and amplifies — at least three other tectonic shifts happening simultaneously: the US-China power transition, the collapse of institutional trust and media reliability, and global political polarization driven by social media. Each of these would be destabilizing on its own. Together, they form what can be called an <strong>uncertainty cascade</strong> — a compounding, multi-domain crisis of not-knowing.</p><p>The US is sliding from its position as the sole global superpower while China rises without a clear destination of its own. Neither country — nor the rest of the world — has a reliable map for what a duopoly world order looks like. The psychological blow of being dethroned will permeate American economic confidence, defense posture, and cultural identity. Meanwhile, China is moving at extraordinary speed with no historical template for where it's headed. The bilateral relationship itself resists categorization: are they allies, adversaries, or something without a name yet?</p><p>Layer on the media environment: social platforms have replaced the managed curation of legacy institutions, making news more volatile, harder to verify, and impossible for any single actor to control. AI deepens this by forcing even moderate, careful people to question whether what they see, read, or hear is real or generated. The traditional mechanisms of trust — journalistic norms, institutional authority, shared evidentiary standards — have been damaged, and AI's improving imitation of reality ensures the damage keeps spreading.</p><p>The result is not merely uncertainty across multiple domains but a <em>meta-uncertainty</em>: we can't even agree on what we know versus what we don't. This is the Rumsfeldian \"uncertain uncertainties\" — a condition where the boundaries between known and unknown are themselves contested. It's a structural shift in the nature of knowing, not a temporary fog that lifts once a few key questions get answered.</p><p>For organizations and individuals monitoring these signals, the critical insight is that these domains are <strong>not independent variables</strong>. A surprise in US-China relations reshapes AI investment; a trust collapse in media changes how AI-generated content propagates; political polarization feeds back into all of the above. Tracking any one thread in isolation will miss the cascade dynamics that define this era.</p>",
+  "tags": [
+    "uncertainty-cascade",
+    "geopolitics",
+    "china-us-relations",
+    "trust-erosion",
+    "social-media",
+    "epistemology",
+    "compounding-risk"
+  ],
+  "word_count": 365,
+  "used_dates": [],
+  "created_date": "2026-04-28"
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!-- AUTO-GENERATED FILE. Edit scripts/build_hub.py for layout changes and deep-dives/deep-dive-navigation.js for deep dive navigation behavior. See DESIGN-SOURCES.md before editing generated HTML. -->
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Uncertain Uncertainties — Signal Monitor KB</title>
+<meta property="og:title" content="Our Uncertain Uncertainties">
+<meta property="og:description" content="Knowledge Base — Signal Monitor">
+<meta property="og:image" content="https://betoneh.github.io/signal-monitor/og/kb-our-uncertain-uncertainties-kevin-kelly.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; overflow-wrap: break-word; word-break: break-word; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 8px; }
+  .content a:hover { text-decoration-color: #eaedf3; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  .build-version { color: #8b949e; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+
+  
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+
+  
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .label {
+    font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem;
+  }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+</style>
+</head>
+<body id="top">
+<div class="progress-bar" id="progress"></div>
+<header>
+  <h1>Our Uncertain Uncertainties</h1>
+  <div class="meta">10 min read · article · 2026-04-28</div>
+  <div class="tags"><span class="tag">ai-uncertainty</span><span class="tag">geopolitics</span><span class="tag">future-scenarios</span><span class="tag">agi</span><span class="tag">adaptability</span><span class="tag">trust-erosion</span><span class="tag">china-us-relations</span><span class="tag">social-media</span><span class="tag">ambiguity</span><span class="tag">scenario-planning</span></div>
+  <div class="source" style="margin-top:0.5rem">Source: <a href="https://kevinkelly.substack.com/p/our-uncertain-uncertainties" target="_blank">https://kevinkelly.substack.com/p/our-uncertain-uncertainties</a></div>
+</header>
+<main>
+  <div class="content"><h2>Summary</h2>
+<p>Kevin Kelly proposes an alternative to the popular '3-year clarity' thesis on AI: rather than resolving open questions about AGI, scaling, employment, and economic impact, continued AI progress may actually expand our ignorance by introducing novelties that invalidate existing frameworks and measurements. He situates AI uncertainty within a broader 'uncertainty cascade' — the US-China power transition, the destabilization of media and institutional trust, global political polarization fueled by social media, and AI's corrosion of our ability to distinguish real from generated content. The compounding effect is what he calls 'uncertain uncertainties,' a Rumsfeldian layer where we cannot even agree on what we don't know.
+Kelly offers ten diagnostic signs that this scenario is unfolding — from high-profile AGI definitional disputes and ambiguous employment data to rising nihilism and delayed life commitments. He frames this not as stagnation but as a sustained decade-plus regime of radical ambiguity across every major domain: technology, geopolitics, economics, identity, and epistemology. The psychological burden is severe because humans find uncertainty more distressing than confirmed bad news.
+The prescribed response is 'radical adaptability and radical optionality': treat goals as disposable hypotheses, maximize future options rather than optimizing for predicted outcomes, hold contradictory possibilities simultaneously, and anchor agility in durable virtues like honesty and generosity. Kelly warns that certainty and overconfidence will be the biggest killers in this era, and that the fundamental shift is not a temporary fog but a structural change in the nature of knowing itself. He tentatively names it 'The Age of Ambiguity.'</p>
+<h2>Key Takeaways</h2>
+<ul><li>AI progress may not resolve our biggest questions within 3 years but instead expand ignorance by requiring entirely new conceptual and measurement frameworks.</li>
+<li>Uncertainty is compounding across multiple domains simultaneously — AI, US-China power shifts, media trust erosion, political polarization, and epistemological collapse — creating an 'uncertainty cascade.'</li>
+<li>We may face 'uncertain uncertainties': a Rumsfeldian condition where we cannot even establish consensus on what we know versus what we don't.</li>
+<li>Diagnostic signs include expert disagreement on AGI arrival, contradictory employment data, rising anxiety, delayed life commitments, and nihilism gaining cultural legitimacy.</li>
+<li>The worst strategic error in prolonged ambiguity is overconfidence and locking into a single prediction or plan.</li>
+<li>The recommended strategy is radical optionality: maximize future choices, treat goals as disposable hypotheses, and make decisions based on whether they expand or narrow future options.</li>
+<li>Radical adaptability must be anchored in stable, unchanging virtues to prevent drift into mere trend-chasing.</li>
+<li>Kelly frames this not as a prediction but as a plausible scenario worth naming and preparing for: 'The Age of Ambiguity.'</li>
+</ul>
+<h2>Full Text / Transcript</h2>
+<p>Our Uncertain Uncertainties</p>
+<p>Even the experts inventing AI don’t know what will happen next. Is artificial general intelligence even possible? Can scaling continue? Will we need massive compute centers to make AI, or can we do it with a mere 25 watts like we do in our brains? What will humans do as AI gets smarter? What does the future of the economy, of warfare, or civil society look like?</p>
+<p>Everyone has a different guess. The people creating the machines have as many different ideas as the onlookers, the pundits, the other scientists, and the wisest among us. No one knows. There is a vibe that we’ll know within the next three years. For some, the pace of change suggests that if things continue as they have been, by 2029 at the latest, the outlines of an AI-first world will have emerged. By then we’ll have answered the question of scaling, we’ll have seen the effects on employment, and we’ll have felt its acceleration in the economy – or not.</p>
+<p>That’s a reasonable, and not outlandish scenario. But I offer an alternative scenario which I think we should also keep in mind: AI continues to surprise us at its core. As AI continues to evolve rapidly there will be no resolution to these questions in 3 years. By 2029, we still won’t know if AGI is possible, we can’t tell if employment is disrupted, and we still can’t say if it is worth the huge investment. I don’t mean AI progress stalls. I mean, AI continues to advance, but the new stuff doesn’t answer the old questions, it only expands our ignorance because the new is new in a new way. We have to alter our ideas (and measurements) of employment, we have to amend our concepts (and measurements) of the economy, and we have to shift our ideas of what AI even is.</p>
+<p>In other words, we have a sustained, extended period of uncertainty. Not just a few years, but a decade or more. As AI continues to progress, rather than resolving our perplexity, it expands it. So for the next 10-15 years we have perpetual, continuous, severe uncertainty. This is a burdensome weight because people hate uncertainty more than bad news.</p>
+<p>It goes deeper. AI is only one leg of this grand uncertainty. In the next decade the US will continue its slide off its pinnacle of a sole global superpower, while China continues to rise in power and prestige. This shift toward a duopoly prompts a new world order, and no one – especially the Chinese and Americans – knows how this will play out. The uncertainty around this shift is nearly boundless, and yet its indeterminate consequences will affect everyone in the world, but especially the US. Being dethroned from the century-long position of sole #1 will be a huge physiological blow, and the uncertainty of what follows will weigh heavy on all aspects of life. The uncertainty of a new role spreads over China as well, because while they are zooming ahead at 1,000 miles per hour, they have no idea where they are headed. The uncertainty of global relationships and new national identity, plus the uncertainty of individual worth and identity from AI increases the overall uncertainty levels to new highs. All this is a very large puzzle and will not be resolved in 3 years. This will be a sustained uncertainty.</p>
+<p>It goes deeper still. After a long first wave of true globalization, there are now whirlpools of chaos and polarization as nations adjust to world-wide immigration and the borderless spread of modern culture, causing chaos in national politics, and sowing mistrust with the establishment. Anarchy, disruption, contrarian antics, blows to the states, seem to be the norm in countries all around the world. This wild chaos is being fueled in part by the new technologies of social media which have replaced the managed care of established media. News now is far more volatile, hard to control by anyone, and further elevates the already amplified uncertainty. There is a visceral sense that civics is headed into an unknown territory of near-permanent provisionalism.</p>
+<p>Additionally, AI also forces even the most moderate person to question the truth of what they read, see or hear. Is that real or AI generated? How much has been manipulated? Who do you trust to disclose what is real? How do we come to agree that something is true? The traditional mechanisms of trust have been damaged by AI, so that this new technological realm generates a huge uncertainty. As AI gets more skilled at imitating reality, this uncertainty is likely to keep increasing for a while, and not just 3 years. The uncertainty meter is now deep in the red zone.</p>
+<p>Finally, the ambiguity and indefinite nature of AI, or human identity, or whether what we see is real or generated, means that we are entering a period where we are even uncertain of our doubts. Our uncertainty is so deep and durable, yet elusive, that we will have extended uncertainty about whether we are uncertain. We can have major agreements on what we know versus what we don’t know. In the model of Rumsfeld’s Unknown Unknowns, we will be confronted by Uncertain Uncertainties. And they will prevail for at least a decade or more.</p>
+<p>What we end up with is a poly-X, a multi-factored unknown, an uncertainty cascade, a pervasive lack of confidence about the future, in an era of ambiguity.</p>
+<p>Given the inherent unknowability of this era, what would some of the signs be that we are in it? They might look like this: in 5 years,1) There are high-profile disagreements among leading AI researchers on whether AGI is here. 2) Reputable economists can’t determine if productivity has increased or decreased. 3) Lower public confidence in media platforms and established institutions. 4) The US and China cannot decide whether they are allies nor adversaries. 5) There are ambiguous spikes in employment rates in both directions. 6) Medical levels of anxiety increase. 7) Major court decisions leave as many questions as answers. 8) Commitments (marriage, work) are postponed even later in life. 9) Investing, capital allocation becomes more expensive. 10) Nihilism gets respect.</p>
+<p>A great question to ask when creating a scenario is what could prevent it from happening? Maybe there is not a single force that can undo this sustained uncertainty, but perhaps it is a mixture of several. If AGI arrived without a doubt in 3 years and China took over Taiwan despite the US’s actions, and if companies found a way to embed reliability and trust in media, then maybe this extended uncertainty could cease.</p>
+<p>A second question to ask, is if we find ourselves in this scenario, what should we do about it? The most effective response to this multi-layered persistent uncertainty is not to seek impossible stability, but to cultivate radical adaptability and radical optionality. Give up on having a reliable prediction of what happens next. Instead cultivate multiple scenarios of what could happen, and endeavor with each of them to maximize your options. Goals should be considered as disposable hypotheses, constantly ready to be discarded and replaced by better-fitting concepts later on. You will be dead wrong on 19 out of your 20 expectations, but at least one of them will allow you to proceed. Make your decisions not on whether they are “right” but on whether they tend to give you more options later.</p>
+<p>In our era of uncertain uncertainty, certainty will be the killer. In this era more downfalls will happen because of overconfidence than questioning. The key is to not get stuck on just one option. You have to become at ease holding multiple contradictory possibilities at once. (To prevent yourself from being swept away by the latest current and fashionable whim, this radical adaptability must be anchored on a steadfast set of unchangeable virtues, as corny as honesty, or as slick as generosity.) The strategy for prospering in prolonged uncertainty must be one of constant, agile recalibration.</p>
+<p>In short, in our age of uncertainty, you have to get good at changing your mind.</p>
+<p>The challenge we face in this scenario is not a temporary fog but a fundamental shift in the nature of knowing. Pervasive, measurable ambiguity across every major domain of human endeavor reduces the platform of truth and certainty that we normally rest on. When the unknowns dwarf the known, and all borders are constantly being redrawn, then we don’t trust any map. The incompleteness, and contradictory state around us seeps into our bones so that we also ourselves feel incomplete and contradictory. All-around skepticism is the natural response.</p>
+<p>I am not predicting this future, and I sure hope it does not come to pass. But it feels like it could be possible, and there is evidence we already experience parts of this scenario. If we are leaning in this direction, we should examine this direction carefully, and maybe give it a name: The Age of Ambiguity.</p></div>
+  
+<div class="share-row">
+  <div class="share-left">
+    <div class="label">Share this post on:</div>
+    <div class="share-icons">
+      <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/kb/our-uncertain-uncertainties-kevin-kelly.html" target="_blank" rel="noopener" title="Share on X">
+        <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+      </a>
+      <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/kb/our-uncertain-uncertainties-kevin-kelly.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+      </a>
+      <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/kb/our-uncertain-uncertainties-kevin-kelly.html" target="_blank" rel="noopener" title="Share on Telegram">
+        <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+      </a>
+      <a href="mailto:?subject=Our Uncertain Uncertainties&body=https://betoneh.github.io/signal-monitor/kb/our-uncertain-uncertainties-kevin-kelly.html" title="Share via email">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+      </a>
+      <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
+    </div>
+  </div>
+  <div style="width:100%;text-align:center;margin-top:0.5rem;">
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>Back to Top</span>
+    </button>
+  </div>
+</div>
+
+</main>
+<footer>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260428-0901</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+
+<script>
+  (function(){
+    var bar = document.getElementById('progress');
+    if (!bar) return;
+    function up() {
+      var s = window.pageYOffset || document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = (h > 0 ? s / h * 100 : 0) + '%';
+    }
+    window.onscroll = up;
+    up();
+  })();
+</script>
+
+</body>
+</html>
