@@ -78,6 +78,7 @@
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
   .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -152,7 +153,7 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1157</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
@@ -163,6 +164,7 @@
     var payloadEl = document.getElementById('blog-publish-payload');
     if (!button || !payloadEl || button.disabled) return;
     var defaultIcon = button.innerHTML;
+    var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     var payload = JSON.parse(payloadEl.textContent || '{}');
 
     function toBase64Utf8(text) {
@@ -200,6 +202,13 @@
       return token;
     }
 
+    function setPublishedState(isPublished) {
+      button.dataset.published = isPublished ? '1' : '0';
+      button.classList.toggle('is-published', !!isPublished);
+      button.innerHTML = isPublished ? publishedIcon : defaultIcon;
+      button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
+    }
+
     async function fetchExisting(token) {
       var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
         headers: {
@@ -212,18 +221,37 @@
       return await res.json();
     }
 
+    async function refreshPublishedState(token) {
+      if (!token) return null;
+      var existing = await fetchExisting(token);
+      setPublishedState(!!existing);
+      return existing;
+    }
+
+    var cachedToken = sessionStorage.getItem('sm-gh-token');
+    if (cachedToken) {
+      refreshPublishedState(cachedToken).catch(function(){});
+    }
+
     button.addEventListener('click', async function() {
       if (button.dataset.busy === '1') return;
       if (!payload.repo || !payload.path || !payload.content) {
         window.alert('Publish payload is missing.');
         return;
       }
-      if (!window.confirm('Publish this deep dive to the blog?')) return;
       button.dataset.busy = '1';
       button.style.opacity = '0.45';
       try {
         var token = await ensureToken();
-        var existing = await fetchExisting(token);
+        var existing = await refreshPublishedState(token);
+        var confirmMessage = existing
+          ? 'This deep dive is already on the blog. Update it?'
+          : 'Publish this deep dive to the blog?';
+        if (!window.confirm(confirmMessage)) {
+          button.dataset.busy = '0';
+          button.style.opacity = '';
+          return;
+        }
         var body = {
           message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
           content: toBase64Utf8(payload.content)
@@ -242,17 +270,13 @@
           var errorText = await res.text();
           throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
         }
-        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
-        button.title = 'Published to blog';
+        setPublishedState(true);
         window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
       } catch (err) {
         window.alert(err && err.message ? err.message : String(err));
       } finally {
-        window.setTimeout(function() {
-          button.innerHTML = defaultIcon;
-          button.style.opacity = '';
-          button.dataset.busy = '0';
-        }, 1600);
+        button.style.opacity = '';
+        button.dataset.busy = '0';
       }
     });
   })();
