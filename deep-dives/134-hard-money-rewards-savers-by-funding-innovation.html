@@ -139,11 +139,11 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1413</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1415</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "Hard Money Rewards Savers by Funding Innovation", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/hard-money-rewards-savers-by-funding-innovation.md", "slug": "hard-money-rewards-savers-by-funding-innovation", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/hard-money-rewards-savers-by-funding-innovation", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Hard Money Rewards Savers by Funding Innovation\"\ndescription: \"Critics often describe savers under hard money as free riders who simply sit on assets and get rewarded. The essay flips that. Saving in honest money is part...\"\npubDatetime: 2026-04-18T00:00:00\ntags: [\"hard-money\", \"saving\", \"innovation\", \"purchasing-power\", \"capital-formation\"]\nsource: \"Number Go Down\"\nsourceUrl: \"https://x.com/i/article/2045147796752175104\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Number Go Down →](https://x.com/i/article/2045147796752175104)\n\n\nCritics often describe savers under hard money as free riders who simply sit on assets and get rewarded. The essay flips that. Saving in honest money is participation in the monetary network that entrepreneurs depend on. By extending the holding period of money and deepening the network, savers increase the purchasing power of the unit and make long-run planning more coherent.\n\nThat does not mean every saved dollar directly finances an invention in a mechanistic sense. It means a monetary system with intact purchasing power changes the social incentives around capital. People can defer consumption without being punished. Entrepreneurs can compete for capital that has not been forced into risk assets by inflation. Investment becomes more discriminating, not less.\n\nIn that world the saver is not dead weight. He is part of the substrate that allows productive projects to be compared honestly. And when innovation lowers prices, the saver benefits through rising purchasing power rather than watching the gains get siphoned into nominal asset inflation.\n\nHard money therefore aligns morality and economics more tightly. Prudence stops being something the system mocks and starts becoming something the system reinforces.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "Hard Money Rewards Savers by Funding Innovation", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/hard-money-rewards-savers-by-funding-innovation.md", "slug": "hard-money-rewards-savers-by-funding-innovation", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/hard-money-rewards-savers-by-funding-innovation", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Hard Money Rewards Savers by Funding Innovation\"\ndescription: \"Critics often describe savers under hard money as free riders who simply sit on assets and get rewarded. The essay flips that. Saving in honest money is part...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"hard-money\", \"saving\", \"innovation\", \"purchasing-power\", \"capital-formation\"]\nsource: \"Number Go Down\"\nsourceUrl: \"https://x.com/i/article/2045147796752175104\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Number Go Down →](https://x.com/i/article/2045147796752175104)\n\n\nCritics often describe savers under hard money as free riders who simply sit on assets and get rewarded. The essay flips that. Saving in honest money is participation in the monetary network that entrepreneurs depend on. By extending the holding period of money and deepening the network, savers increase the purchasing power of the unit and make long-run planning more coherent.\n\nThat does not mean every saved dollar directly finances an invention in a mechanistic sense. It means a monetary system with intact purchasing power changes the social incentives around capital. People can defer consumption without being punished. Entrepreneurs can compete for capital that has not been forced into risk assets by inflation. Investment becomes more discriminating, not less.\n\nIn that world the saver is not dead weight. He is part of the substrate that allows productive projects to be compared honestly. And when innovation lowers prices, the saver benefits through rising purchasing power rather than watching the gains get siphoned into nominal asset inflation.\n\nHard money therefore aligns morality and economics more tightly. Prudence stops being something the system mocks and starts becoming something the system reinforces.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
@@ -158,6 +158,13 @@
       var binary = '';
       for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
       return btoa(binary);
+    }
+
+    function fromBase64Utf8(text) {
+      var binary = atob((text || '').replace(/\n/g, ''));
+      var bytes = new Uint8Array(binary.length);
+      for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new TextDecoder().decode(bytes);
     }
 
     async function sha256(text) {
@@ -186,6 +193,18 @@
       var token = decryptToken(password, payload.pwHash, payload.encToken);
       sessionStorage.setItem('sm-gh-token', token);
       return token;
+    }
+
+    function extractPubDatetime(markdown) {
+      var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
+      return match ? match[1].trim() : '';
+    }
+
+    function applyPubDatetime(markdown, pubDatetime) {
+      if (!pubDatetime) return markdown;
+      return /^pubDatetime:\s*.+$/m.test(markdown)
+        ? markdown.replace(/^pubDatetime:\s*.+$/m, 'pubDatetime: ' + pubDatetime)
+        : markdown;
     }
 
     function setPublishedState(isPublished) {
@@ -238,9 +257,17 @@
           button.style.opacity = '';
           return;
         }
+        var contentToPublish = payload.content;
+        if (existing && existing.content) {
+          var existingMarkdown = fromBase64Utf8(existing.content);
+          var existingPubDatetime = extractPubDatetime(existingMarkdown);
+          if (existingPubDatetime) {
+            contentToPublish = applyPubDatetime(contentToPublish, existingPubDatetime);
+          }
+        }
         var body = {
           message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
-          content: toBase64Utf8(payload.content)
+          content: toBase64Utf8(contentToPublish)
         };
         if (existing && existing.sha) body.sha = existing.sha;
         var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {

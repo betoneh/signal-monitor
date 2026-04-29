@@ -139,11 +139,11 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1413</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1415</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "Money as Stem Cell: The Crystallization Theory of Capital", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/money-as-stem-cell-the-crystallization-theory-of-capital.md", "slug": "money-as-stem-cell-the-crystallization-theory-of-capital", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/money-as-stem-cell-the-crystallization-theory-of-capital", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Money as Stem Cell: The Crystallization Theory of Capital\"\ndescription: \"One of the essay’s most memorable metaphors is that money is an economic stem cell. Before it is committed, money is undifferentiated potential. It can becom...\"\npubDatetime: 2026-04-18T00:00:00\ntags: [\"money\", \"capital\", \"investment\", \"liquidity\", \"entrepreneurship\"]\nsource: \"Number Go Down\"\nsourceUrl: \"https://x.com/i/article/2045147796752175104\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Number Go Down →](https://x.com/i/article/2045147796752175104)\n\n\nOne of the essay’s most memorable metaphors is that money is an economic stem cell. Before it is committed, money is undifferentiated potential. It can become a bridge, a data center, a drug trial, a factory, a media company, or a year of engineering salaries. It is perfectly fungible at the moment before decision.\n\nInvestment is the act of crystallization. The entrepreneur freezes liquid optionality into a concrete, risky, time-bound project. At that moment, capital stops being universal and becomes particular. The future becomes less flexible and more speculative. That is why returns matter so much: once crystallized, money is harder to recover and easier to destroy.\n\nThis metaphor also explains why honest price signals are so important. If the monetary network is corrupted by inflation, subsidies, or distorted credit, the stem-cell stage gets poisoned before differentiation even begins. Capital is then pushed into politically favored uses, financial theater, or low-discipline speculation rather than the projects that actually improve productivity.\n\nThe elegance of the metaphor is that it links monetary theory and entrepreneurial theory in one shot. Sound money is not merely a store of value. It is the clean substrate from which disciplined capital formation can emerge.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "Money as Stem Cell: The Crystallization Theory of Capital", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/money-as-stem-cell-the-crystallization-theory-of-capital.md", "slug": "money-as-stem-cell-the-crystallization-theory-of-capital", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/money-as-stem-cell-the-crystallization-theory-of-capital", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Money as Stem Cell: The Crystallization Theory of Capital\"\ndescription: \"One of the essay’s most memorable metaphors is that money is an economic stem cell. Before it is committed, money is undifferentiated potential. It can becom...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"money\", \"capital\", \"investment\", \"liquidity\", \"entrepreneurship\"]\nsource: \"Number Go Down\"\nsourceUrl: \"https://x.com/i/article/2045147796752175104\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Number Go Down →](https://x.com/i/article/2045147796752175104)\n\n\nOne of the essay’s most memorable metaphors is that money is an economic stem cell. Before it is committed, money is undifferentiated potential. It can become a bridge, a data center, a drug trial, a factory, a media company, or a year of engineering salaries. It is perfectly fungible at the moment before decision.\n\nInvestment is the act of crystallization. The entrepreneur freezes liquid optionality into a concrete, risky, time-bound project. At that moment, capital stops being universal and becomes particular. The future becomes less flexible and more speculative. That is why returns matter so much: once crystallized, money is harder to recover and easier to destroy.\n\nThis metaphor also explains why honest price signals are so important. If the monetary network is corrupted by inflation, subsidies, or distorted credit, the stem-cell stage gets poisoned before differentiation even begins. Capital is then pushed into politically favored uses, financial theater, or low-discipline speculation rather than the projects that actually improve productivity.\n\nThe elegance of the metaphor is that it links monetary theory and entrepreneurial theory in one shot. Sound money is not merely a store of value. It is the clean substrate from which disciplined capital formation can emerge.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
@@ -158,6 +158,13 @@
       var binary = '';
       for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
       return btoa(binary);
+    }
+
+    function fromBase64Utf8(text) {
+      var binary = atob((text || '').replace(/\n/g, ''));
+      var bytes = new Uint8Array(binary.length);
+      for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new TextDecoder().decode(bytes);
     }
 
     async function sha256(text) {
@@ -186,6 +193,18 @@
       var token = decryptToken(password, payload.pwHash, payload.encToken);
       sessionStorage.setItem('sm-gh-token', token);
       return token;
+    }
+
+    function extractPubDatetime(markdown) {
+      var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
+      return match ? match[1].trim() : '';
+    }
+
+    function applyPubDatetime(markdown, pubDatetime) {
+      if (!pubDatetime) return markdown;
+      return /^pubDatetime:\s*.+$/m.test(markdown)
+        ? markdown.replace(/^pubDatetime:\s*.+$/m, 'pubDatetime: ' + pubDatetime)
+        : markdown;
     }
 
     function setPublishedState(isPublished) {
@@ -238,9 +257,17 @@
           button.style.opacity = '';
           return;
         }
+        var contentToPublish = payload.content;
+        if (existing && existing.content) {
+          var existingMarkdown = fromBase64Utf8(existing.content);
+          var existingPubDatetime = extractPubDatetime(existingMarkdown);
+          if (existingPubDatetime) {
+            contentToPublish = applyPubDatetime(contentToPublish, existingPubDatetime);
+          }
+        }
         var body = {
           message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
-          content: toBase64Utf8(payload.content)
+          content: toBase64Utf8(contentToPublish)
         };
         if (existing && existing.sha) body.sha = existing.sha;
         var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {

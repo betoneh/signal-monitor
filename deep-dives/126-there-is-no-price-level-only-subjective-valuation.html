@@ -139,11 +139,11 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1413</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1415</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "There Is No Price Level, Only Subjective Valuation", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/there-is-no-price-level-only-subjective-valuation.md", "slug": "there-is-no-price-level-only-subjective-valuation", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/there-is-no-price-level-only-subjective-valuation", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"There Is No Price Level, Only Subjective Valuation\"\ndescription: \"The phrase ‘price level’ sounds scientific because it compresses a civilization’s worth of exchanges into something that feels measurable and manageable. The...\"\npubDatetime: 2026-04-18T00:00:00\ntags: [\"prices\", \"subjectivity\", \"markets\", \"calculation\", \"economics\"]\nsource: \"Number Go Down\"\nsourceUrl: \"https://x.com/i/article/2045147796752175104\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Number Go Down →](https://x.com/i/article/2045147796752175104)\n\n\nThe phrase ‘price level’ sounds scientific because it compresses a civilization’s worth of exchanges into something that feels measurable and manageable. The authors treat that phrase as a conceptual scam. A haircut, a shipping container, cloud compute, oranges, and semiconductors are not commensurable in any simple sense, so pretending they can be averaged into a single economic thermometer already smuggles in the fantasy of central oversight.\n\nReal markets are made of people facing trade-offs, opportunity costs, and local knowledge. Prices emerge from countless comparisons that are context-specific and temporary. The decision to buy steel instead of labor, or software instead of office space, cannot be reduced to a tidy aggregate without erasing the very texture that makes markets informative.\n\nThis is why the essay mocks the ‘price level’ as the product of physics envy. Economists who want the authority of hard science often speak as though society were a container of particles rather than a network of thinking actors. But once the particles can think, speak, learn, delay, imitate, speculate, and innovate, the fantasy of precise top-down calibration starts to fall apart.\n\nThe practical implication is blunt: if there is no singular price level in a meaningful governing sense, then managing it cannot be the master task of economic policy. The real task is to protect the conditions under which relative prices can communicate truth.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "There Is No Price Level, Only Subjective Valuation", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/there-is-no-price-level-only-subjective-valuation.md", "slug": "there-is-no-price-level-only-subjective-valuation", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/there-is-no-price-level-only-subjective-valuation", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"There Is No Price Level, Only Subjective Valuation\"\ndescription: \"The phrase ‘price level’ sounds scientific because it compresses a civilization’s worth of exchanges into something that feels measurable and manageable. The...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"prices\", \"subjectivity\", \"markets\", \"calculation\", \"economics\"]\nsource: \"Number Go Down\"\nsourceUrl: \"https://x.com/i/article/2045147796752175104\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Number Go Down →](https://x.com/i/article/2045147796752175104)\n\n\nThe phrase ‘price level’ sounds scientific because it compresses a civilization’s worth of exchanges into something that feels measurable and manageable. The authors treat that phrase as a conceptual scam. A haircut, a shipping container, cloud compute, oranges, and semiconductors are not commensurable in any simple sense, so pretending they can be averaged into a single economic thermometer already smuggles in the fantasy of central oversight.\n\nReal markets are made of people facing trade-offs, opportunity costs, and local knowledge. Prices emerge from countless comparisons that are context-specific and temporary. The decision to buy steel instead of labor, or software instead of office space, cannot be reduced to a tidy aggregate without erasing the very texture that makes markets informative.\n\nThis is why the essay mocks the ‘price level’ as the product of physics envy. Economists who want the authority of hard science often speak as though society were a container of particles rather than a network of thinking actors. But once the particles can think, speak, learn, delay, imitate, speculate, and innovate, the fantasy of precise top-down calibration starts to fall apart.\n\nThe practical implication is blunt: if there is no singular price level in a meaningful governing sense, then managing it cannot be the master task of economic policy. The real task is to protect the conditions under which relative prices can communicate truth.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
@@ -158,6 +158,13 @@
       var binary = '';
       for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
       return btoa(binary);
+    }
+
+    function fromBase64Utf8(text) {
+      var binary = atob((text || '').replace(/\n/g, ''));
+      var bytes = new Uint8Array(binary.length);
+      for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new TextDecoder().decode(bytes);
     }
 
     async function sha256(text) {
@@ -186,6 +193,18 @@
       var token = decryptToken(password, payload.pwHash, payload.encToken);
       sessionStorage.setItem('sm-gh-token', token);
       return token;
+    }
+
+    function extractPubDatetime(markdown) {
+      var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
+      return match ? match[1].trim() : '';
+    }
+
+    function applyPubDatetime(markdown, pubDatetime) {
+      if (!pubDatetime) return markdown;
+      return /^pubDatetime:\s*.+$/m.test(markdown)
+        ? markdown.replace(/^pubDatetime:\s*.+$/m, 'pubDatetime: ' + pubDatetime)
+        : markdown;
     }
 
     function setPublishedState(isPublished) {
@@ -238,9 +257,17 @@
           button.style.opacity = '';
           return;
         }
+        var contentToPublish = payload.content;
+        if (existing && existing.content) {
+          var existingMarkdown = fromBase64Utf8(existing.content);
+          var existingPubDatetime = extractPubDatetime(existingMarkdown);
+          if (existingPubDatetime) {
+            contentToPublish = applyPubDatetime(contentToPublish, existingPubDatetime);
+          }
+        }
         var body = {
           message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
-          content: toBase64Utf8(payload.content)
+          content: toBase64Utf8(contentToPublish)
         };
         if (existing && existing.sha) body.sha = existing.sha;
         var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {

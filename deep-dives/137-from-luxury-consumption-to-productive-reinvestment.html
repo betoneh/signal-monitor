@@ -139,11 +139,11 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1413</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1415</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "From Luxury Consumption to Productive Reinvestment", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/from-luxury-consumption-to-productive-reinvestment.md", "slug": "from-luxury-consumption-to-productive-reinvestment", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/from-luxury-consumption-to-productive-reinvestment", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"From Luxury Consumption to Productive Reinvestment\"\ndescription: \"Inflationary systems do more than distort prices; they distort taste and timing. If money predictably loses value, people are nudged away from saving and tow...\"\npubDatetime: 2026-04-18T00:00:00\ntags: [\"consumption\", \"luxury\", \"investment\", \"capital-allocation\", \"fiat\"]\nsource: \"Number Go Down\"\nsourceUrl: \"https://x.com/i/article/2045147796752175104\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Number Go Down →](https://x.com/i/article/2045147796752175104)\n\n\nInflationary systems do more than distort prices; they distort taste and timing. If money predictably loses value, people are nudged away from saving and toward consumption, speculation, or anything that feels like an escape hatch. That changes what gets financed.\n\nThe essay argues that under harder money, people would still consume, but they would do so more selectively. The pressure to buy frivolously just to outrun depreciation would ease. More resources could then flow into productive reinvestment, better tools, and the capital goods that actually improve long-term prosperity.\n\nThis is not puritanism. It is a claim about clarity. A system should not need to bribe citizens into economic activity by penalizing prudence. If luxuries lose demand when the printer stops, that reveals something about how artificial the prior demand may have been. Meanwhile, projects that genuinely improve output become easier to justify because capital is not being shunted into frantic present-mindedness.\n\nThe broader vision is a culture less organized around nominal escape velocity and more organized around compounding productive capacity.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "From Luxury Consumption to Productive Reinvestment", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/from-luxury-consumption-to-productive-reinvestment.md", "slug": "from-luxury-consumption-to-productive-reinvestment", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/from-luxury-consumption-to-productive-reinvestment", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"From Luxury Consumption to Productive Reinvestment\"\ndescription: \"Inflationary systems do more than distort prices; they distort taste and timing. If money predictably loses value, people are nudged away from saving and tow...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"consumption\", \"luxury\", \"investment\", \"capital-allocation\", \"fiat\"]\nsource: \"Number Go Down\"\nsourceUrl: \"https://x.com/i/article/2045147796752175104\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Number Go Down →](https://x.com/i/article/2045147796752175104)\n\n\nInflationary systems do more than distort prices; they distort taste and timing. If money predictably loses value, people are nudged away from saving and toward consumption, speculation, or anything that feels like an escape hatch. That changes what gets financed.\n\nThe essay argues that under harder money, people would still consume, but they would do so more selectively. The pressure to buy frivolously just to outrun depreciation would ease. More resources could then flow into productive reinvestment, better tools, and the capital goods that actually improve long-term prosperity.\n\nThis is not puritanism. It is a claim about clarity. A system should not need to bribe citizens into economic activity by penalizing prudence. If luxuries lose demand when the printer stops, that reveals something about how artificial the prior demand may have been. Meanwhile, projects that genuinely improve output become easier to justify because capital is not being shunted into frantic present-mindedness.\n\nThe broader vision is a culture less organized around nominal escape velocity and more organized around compounding productive capacity.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
@@ -158,6 +158,13 @@
       var binary = '';
       for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
       return btoa(binary);
+    }
+
+    function fromBase64Utf8(text) {
+      var binary = atob((text || '').replace(/\n/g, ''));
+      var bytes = new Uint8Array(binary.length);
+      for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new TextDecoder().decode(bytes);
     }
 
     async function sha256(text) {
@@ -186,6 +193,18 @@
       var token = decryptToken(password, payload.pwHash, payload.encToken);
       sessionStorage.setItem('sm-gh-token', token);
       return token;
+    }
+
+    function extractPubDatetime(markdown) {
+      var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
+      return match ? match[1].trim() : '';
+    }
+
+    function applyPubDatetime(markdown, pubDatetime) {
+      if (!pubDatetime) return markdown;
+      return /^pubDatetime:\s*.+$/m.test(markdown)
+        ? markdown.replace(/^pubDatetime:\s*.+$/m, 'pubDatetime: ' + pubDatetime)
+        : markdown;
     }
 
     function setPublishedState(isPublished) {
@@ -238,9 +257,17 @@
           button.style.opacity = '';
           return;
         }
+        var contentToPublish = payload.content;
+        if (existing && existing.content) {
+          var existingMarkdown = fromBase64Utf8(existing.content);
+          var existingPubDatetime = extractPubDatetime(existingMarkdown);
+          if (existingPubDatetime) {
+            contentToPublish = applyPubDatetime(contentToPublish, existingPubDatetime);
+          }
+        }
         var body = {
           message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
-          content: toBase64Utf8(payload.content)
+          content: toBase64Utf8(contentToPublish)
         };
         if (existing && existing.sha) body.sha = existing.sha;
         var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
