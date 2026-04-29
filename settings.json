@@ -96,8 +96,8 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "https://nav.al/code",
-    "deep_dives_count": 8,
+    "url": "",
+    "deep_dives_count": 0,
     "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
