@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -121,6 +122,7 @@
       <a href="mailto:?subject=The Solo Builder Renaissance: Why One-Person Software Companies Are About to Explode&body=https://betoneh.github.io/signal-monitor/deep-dives/183-the-solo-builder-renaissance-why-one-person-software-companies-are-about-to-explode.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -136,9 +138,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "The Solo Builder Renaissance: Why One-Person Software Companies Are About to Explode", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-solo-builder-renaissance-why-one-person-software-companies-are-about-to-explode.md", "slug": "the-solo-builder-renaissance-why-one-person-software-companies-are-about-to-explode", "blogUrl": "https://betoneh.vercel.app/deep-dives/the-solo-builder-renaissance-why-one-person-software-companies-are-about-to-explode", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Solo Builder Renaissance: Why One-Person Software Companies Are About to Explode\"\ndescription: \"The economics of software creation are undergoing a radical inversion. What once required teams of eight or nine engineers working for months can now be prot...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"one-person-companies\", \"solo-builders\", \"vibe-coding\", \"ai-coding-agents\", \"software-entrepreneurship\", \"creative-vision\", \"naval-ravikant\"]\nsource: \"A Return to Code – Naval Ravikant on Vibe Coding, Personal App Stores, and the End of Apple's Dominance\"\nsourceUrl: \"https://nav.al/code\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: A Return to Code – Naval Ravikant on Vibe Coding, Personal App Stores, and the End of Apple's Dominance →](https://nav.al/code)\n\n\nThe economics of software creation are undergoing a radical inversion. What once required teams of eight or nine engineers working for months can now be prototyped by a single person in hours. Naval Ravikant describes rebuilding an entire social messaging app—one that previously demanded a full engineering team working nine to twelve months—by himself, using AI coding agents. The key unlock isn't just speed; it's the elimination of social friction that dilutes creative vision.\n\nWhen you build with a team, every decision passes through a filter of compromise. You can't ask an engineer to move an icon left, then right, then back again without justification. You can't act on gut instinct or aesthetic intuition without explaining yourself. But with an AI coding agent, there's no self-consciousness—like riding in a self-driving car with no driver to judge you. The result is software that's *true to a single person's vision*, uncompromised by committee dynamics.\n\nThis has historical precedent. Minecraft emerged from Notch's singular vision—blocky graphics that looked like a step backward but resonated precisely because no one forced him to compromise. Satoshi Nakamoto built Bitcoin. The original Instagram and WhatsApp teams were famously tiny. But these were rare exceptions. Now, the pattern could become the norm as AI agents handle implementation at superhuman speed while human operators provide taste, direction, and architectural judgment.\n\nThe implications extend beyond prototyping. With AI agents functioning as autonomous bug fixers and customer service representatives—collecting bug reports, generating fixes in side branches, awaiting human approval—a single person can maintain software serving millions of users. The agent is indefatigable, egoless, available around the clock, and perfectly willing to have its work discarded without complaint. Software development becomes a continuous collaborative loop between users, agents, and a sole human tastemaker.\n\nThis doesn't mean everyone becomes a developer. The percentage of people who can build apps might rise from 0.1 percent to a few percent—still a small minority. You still need a clear vision, basic understanding of computer architecture, and the ability to articulate what you want. But the barrier has dropped from **years of specialized training** to **high-level conceptual literacy**, and that shift is enough to reshape the entire landscape of software entrepreneurship.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

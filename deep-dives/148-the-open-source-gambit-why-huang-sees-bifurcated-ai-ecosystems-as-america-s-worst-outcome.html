@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -121,6 +122,7 @@
       <a href="mailto:?subject=The Open-Source Gambit: Why Huang Sees Bifurcated AI Ecosystems as America's Worst Outcome&body=https://betoneh.github.io/signal-monitor/deep-dives/148-the-open-source-gambit-why-huang-sees-bifurcated-ai-ecosystems-as-america-s-worst-outcome.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -136,9 +138,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "The Open-Source Gambit: Why Huang Sees Bifurcated AI Ecosystems as America's Worst Outcome", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-open-source-gambit-why-huang-sees-bifurcated-ai-ecosystems-as-america-s-worst-outcome.md", "slug": "the-open-source-gambit-why-huang-sees-bifurcated-ai-ecosystems-as-america-s-worst-outcome", "blogUrl": "https://betoneh.vercel.app/deep-dives/the-open-source-gambit-why-huang-sees-bifurcated-ai-ecosystems-as-america-s-worst-outcome", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Open-Source Gambit: Why Huang Sees Bifurcated AI Ecosystems as America's Worst Outcome\"\ndescription: \"Jensen Huang's most provocative geopolitical argument isn't about whether China can build AI chips—he takes that as given. It's about what happens to the sof...\"\npubDatetime: 2026-04-20T00:00:00\ntags: [\"open-source\", \"china-ai\", \"export-controls\", \"ecosystem-bifurcation\", \"nvidia\", \"geopolitics\", \"american-tech-stack\"]\nsource: \"Jensen Huang – Will Nvidia's moat persist?\"\nsourceUrl: \"https://youtu.be/Hrbq66XqtCo\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Jensen Huang – Will Nvidia's moat persist? →](https://youtu.be/Hrbq66XqtCo)\n\n\nJensen Huang's most provocative geopolitical argument isn't about whether China can build AI chips—he takes that as given. It's about what happens to the **software ecosystem** if American policy drives a wedge between open-source AI development and American hardware. The nightmare scenario he describes: open-source models optimized for non-American hardware, while American-stack models remain closed. Two ecosystems, bifurcated, with the open one running on Huawei.\n\nThe argument has a specific mechanism. Today, the world's open-source AI models—including significant contributions from Chinese researchers and companies like DeepSeek—run well on Nvidia's CUDA ecosystem. This is, in Huang's framing, *good news for America*. It means the global open-source community is developing on and optimizing for the American tech stack. Every model that runs best on CUDA reinforces Nvidia's ecosystem position and, by extension, American technology leadership.\n\nBut if export controls push Chinese AI development entirely onto domestic hardware, the optimization target shifts. Models would be tuned for Huawei's architecture. Libraries would be built for their software stack. And because 50% of the world's AI researchers are Chinese, this wouldn't be a marginal shift—it would represent a massive reorientation of the open-source ecosystem away from American platforms. The global south, the Middle East, and other emerging AI markets would encounter models that work best on non-American hardware out of the box.\n\nHuang draws a sharp distinction from consumer products like cars or phones, where brand switching is trivial. Computing ecosystems are *sticky*—there's a reason x86 persisted for decades and ARM became entrenched in mobile. Once developers optimize for an architecture, the switching costs compound. If the open-source world locks into a foreign stack during these critical years, reversing that trajectory becomes extraordinarily difficult.\n\nThe policy prescription Huang advocates is maintaining research dialogue with China, keeping open-source vibrant, and ensuring American companies can compete globally rather than conceding markets. He frames this not as dovishness but as strategic realism: the United States wins by making its technology stack indispensable to the world's developers, not by creating vacuums that competitors fill.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

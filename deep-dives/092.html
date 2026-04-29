@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -121,6 +122,7 @@
       <a href="mailto:?subject=Crypto as Defensive Infrastructure: Beyond Financial Speculation&body=https://betoneh.github.io/signal-monitor/deep-dives/092.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -136,9 +138,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "Crypto as Defensive Infrastructure: Beyond Financial Speculation", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/crypto-as-defensive-infrastructure-beyond-financial-speculation.md", "slug": "crypto-as-defensive-infrastructure-beyond-financial-speculation", "blogUrl": "https://betoneh.vercel.app/deep-dives/crypto-as-defensive-infrastructure-beyond-financial-speculation", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Crypto as Defensive Infrastructure: Beyond Financial Speculation\"\ndescription: \"The dominant narrative around cryptocurrency — for critics and enthusiasts alike — is financial. Critics see speculative bubbles, Ponzi dynamics, and a waste...\"\npubDatetime: 2026-04-02T00:00:00\ntags: [\"crypto\", \"tech\", \"governance\", \"privacy\", \"decentralization\", \"d-acc\", \"surveillance\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nThe dominant narrative around cryptocurrency — for critics and enthusiasts alike — is financial. Critics see speculative bubbles, Ponzi dynamics, and a waste of energy. Enthusiasts see deflationary money, DeFi yields, and the financialization of everything. Both sides are largely arguing about the same thing: crypto as a financial instrument. Vitalik Buterin's d/acc manifesto makes a different case, one that has been somewhat lost in the noise: **crypto is defensive infrastructure**, and its most important function is not financial.\n\nThe core argument starts with the observation that modern technology increasingly routes through centralized chokepoints — and the operators of those chokepoints can use that position to gather information, manipulate outcomes, or exclude specific actors. Buterin calls this [\"weaponized interdependence\"](https://www.amazon.co.uk/Uses-Abuses-Weaponized-Interdependence/dp/0815738374): the tendency of global systems to create dependencies that can then be exploited as leverage. The Swift banking network is a chokepoint. App stores are chokepoints. DNS is a chokepoint. Email, despite being a distributed protocol in design, has effectively [become an oligopoly](https://cfenollosa.com/blog/after-self-hosting-my-email-for-twenty-three-years-i-have-thrown-in-the-towel-the-oligopoly-has-won.html) because spam filtering requirements pushed providers toward centralization. These chokepoints are already being used — against the [crypto industry itself via Operation Chokepoint 2.0](https://www.coindesk.com/consensus-magazine/2023/03/22/the-reality-behind-the-crypto-banking-crackdown-operation-choke-point-20-is-here/), against political dissidents via payment network pressure, against entire countries via Swift exclusion.\n\nBlockchains' fundamental contribution to this problem is a \"shared hard drive\" that doesn't depend on any single operator. You can't deplatform someone from Bitcoin by pressuring a company. You can't freeze someone's on-chain assets by calling their bank. You can't exclude a country from a permission-free network by pressuring intermediaries. This is not primarily about tax avoidance or financial privacy — it's about the structural impossibility of creating a single point of control that a government, corporation, or other powerful actor can leverage. In David Friedman's framing in [Future Imperfect](http://www.daviddfriedman.com/Future_Imperfect/Chapter5.html), the internet's surveillance regime in the physical world might be tolerable if the digital world retained meaningful privacy — blockchains are part of what makes that possible.\n\n[Social recovery wallets](https://vitalik.eth.limo/general/2021/01/11/recovery.html) and account abstraction let individuals secure financial assets without depending on financial institutions that can change their terms on a whim. [Zero-knowledge proofs](https://vitalik.eth.limo/general/2021/01/26/snarks.html) let users prove things about themselves — identity, credentials, financial thresholds — without exposing the underlying data. [Gitcoin Passport](https://passport.gitcoin.co/), [Zupass](https://zupass.org/), and similar systems let communities make collective decisions about membership and trust without centralized identity authorities that can be captured or pressured.\n\nThe most important reframe Buterin offers is temporal: these capabilities matter most not when things are going well, but as insurance against futures where things go badly. In a functional liberal democracy with a healthy financial system, the difference between holding crypto and holding bank deposits is minor. But in a scenario where authoritarian pressures escalate, where payment networks are weaponized against political minorities, where the \"sky is near and the emperor is everywhere\" — having an alternative financial and communication substrate that can't be easily controlled becomes the difference between meaningful resistance and helplessness.\n\nThe blockchain community's failure to communicate this case has been partly strategic and partly cultural. The financial speculation narrative is more immediately engaging and more easily monetizable. But it crowds out the more important long-term story: that decentralized infrastructure is the digital equivalent of the mountains that protected Switzerland, and building it is one of the most important defensive investments a technically sophisticated society can make.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

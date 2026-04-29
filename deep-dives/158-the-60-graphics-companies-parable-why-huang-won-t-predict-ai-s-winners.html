@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -121,6 +122,7 @@
       <a href="mailto:?subject=The 60 Graphics Companies Parable: Why Huang Won't Predict AI's Winners&body=https://betoneh.github.io/signal-monitor/deep-dives/158-the-60-graphics-companies-parable-why-huang-won-t-predict-ai-s-winners.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -136,9 +138,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "The 60 Graphics Companies Parable: Why Huang Won't Predict AI's Winners", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-60-graphics-companies-parable-why-huang-won-t-predict-ai-s-winners.md", "slug": "the-60-graphics-companies-parable-why-huang-won-t-predict-ai-s-winners", "blogUrl": "https://betoneh.vercel.app/deep-dives/the-60-graphics-companies-parable-why-huang-won-t-predict-ai-s-winners", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The 60 Graphics Companies Parable: Why Huang Won't Predict AI's Winners\"\ndescription: \"When asked why Nvidia goes out of its way not to pick winners among AI companies, Huang reaches back to the company's founding era with a story that doubles...\"\npubDatetime: 2026-04-20T00:00:00\ntags: [\"nvidia\", \"ecosystem-strategy\", \"ai-startups\", \"corporate-philosophy\", \"neutrality\", \"jensen-huang\", \"competitive-dynamics\"]\nsource: \"Jensen Huang – Will Nvidia's moat persist?\"\nsourceUrl: \"https://youtu.be/Hrbq66XqtCo\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Jensen Huang – Will Nvidia's moat persist? →](https://youtu.be/Hrbq66XqtCo)\n\n\nWhen asked why Nvidia goes out of its way not to pick winners among AI companies, Huang reaches back to the company's founding era with a story that doubles as a warning. In the early days of 3D graphics, there were 60 companies competing. Nvidia survived. But Huang's point isn't about triumph—it's about how unlikely that survival was. \"Nvidia would be at the top of that list not to make it,\" he says. The company's original architecture was \"precisely wrong,\" not just slightly off, but fundamentally unworkable for developers.\n\nThis formative experience shapes Nvidia's current stance toward the AI ecosystem. Huang invests in OpenAI, Anthropic, and a wide array of startups not because he's identified which will dominate, but because he's learned that prediction is futile. The company that looks most doomed might be the one that pivots into dominance. The one that looks inevitable might be building on a flawed premise. Humility about outcomes, forged in near-death experience, is now corporate policy.\n\nThe practical consequence is a kind of deliberate neutrality. Nvidia allocates engineering support, investment capital, and early hardware access across the AI landscape rather than concentrating resources on perceived frontrunners. When Huang invests in one lab, he invests in others. When he supports one neocloud, he supports its competitors too. The goal is to ensure that the entire ecosystem thrives on the Nvidia stack, regardless of which individual companies succeed.\n\nThis approach carries real costs. By not picking winners, Nvidia forgoes the potential upside of deep strategic alignment with whichever lab ultimately dominates. But Huang sees the alternative as far riskier. Concentrating bets would alienate the rest of the ecosystem and undermine the platform neutrality that makes Nvidia's CUDA stack the default choice for developers worldwide. The lesson from those 60 graphics companies isn't just that prediction is hard—it's that the company best positioned to survive is the one that serves everyone.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -135,6 +136,7 @@
       <a href="mailto:?subject=The American Dream Platform: Where Tech Operates, Prices Crash&body=https://betoneh.github.io/signal-monitor/deep-dives/122-the-american-dream-platform-where-tech-operates-prices-crash.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -150,9 +152,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "The American Dream Platform: Where Tech Operates, Prices Crash", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-american-dream-platform-where-tech-operates-prices-crash.md", "slug": "the-american-dream-platform-where-tech-operates-prices-crash", "blogUrl": "https://betoneh.vercel.app/deep-dives/the-american-dream-platform-where-tech-operates-prices-crash", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The American Dream Platform: Where Tech Operates, Prices Crash\"\ndescription: \"The last five minutes of the Andreessen-Horowitz tech politics video contains the sharpest political observation in the entire conversation, and it almost ha...\"\npubDatetime: 2026-04-11T00:00:00\ntags: [\"american-dream\", \"housing\", \"healthcare\", \"education\", \"prices\", \"andreessen\", \"policy\", \"politics\"]\nsource: \"On Tech Politics/Policy — Marc Andreessen & Ben Horowitz (a16z, April 2024)\"\nsourceUrl: \"https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: On Tech Politics/Policy — Marc Andreessen & Ben Horowitz (a16z, April 2024) →](https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video)\n\n\nThe last five minutes of the Andreessen-Horowitz tech politics video contains the sharpest political observation in the entire conversation, and it almost happens by accident. Asked whether he would ever run for office and what his platform would be, [Andreessen](https://x.com/pmarca) pulls up a mental chart he references often: **the change in prices across sectors of the American economy over the last 25 years**.\n\nThe pattern is stark and not in dispute. Two kinds of sectors exist. In one group — televisions, software, video games, consumer electronics, cell phone service, toys, apparel — prices have **crashed**. A 75-inch 4K TV now costs less than $500. A computer more powerful than a 2005 supercomputer fits in your pocket. Software that used to cost $10,000 a seat is now free. These are the sectors where technology is allowed to work its magic, where market competition functions, and where startup disruption is possible.\n\nIn the other group — **healthcare, education, housing** — prices have done the opposite. They've gone straight to the moon. A four-year college degree has more than doubled in real terms since 2000. Healthcare premiums have tripled. Housing costs in any major American city have outpaced median income by a factor that makes home ownership structurally impossible for most under-35-year-olds. These are the sectors where government involvement is most dense — subsidized demand, restricted supply, heavily regulated entry, protected incumbents, and the most active suppression of technological disruption.\n\nAndreessen's observation is that this isn't a coincidence. The sectors where prices crash are the sectors where technology is permitted to operate. The sectors where prices explode are the sectors where it isn't. And then the killer move: **those three sectors — healthcare, education, housing — are the three pillars of the American Dream**. They're exactly the things a young person needs to form a family, own a home, and live the life their parents lived.\n\nAn entire generation has now done the math and reached a perfectly rational conclusion: **the American Dream is no longer available to them**. Not because they're lazy, not because they failed, not because of any character flaw — but because the three things they need are structurally rising in price faster than wages can compensate, and the structural driver is the set of policy choices that prevent technology from touching those sectors.\n\nAndreessen's claim is that this is the **underlying theme** of American political dysfunction right now. The zero-sum politics, the intensifying anger, the apocalyptic tone, the resentment directed at immigrants or tech or billionaires or whoever is this week's scapegoat — all of it is downstream of a generation-wide psychological collapse about what's possible. When you can't form a family, you get angry. When you can't own a home, you get radical. When you can't afford to get sick, you get desperate. The political instability of the last decade isn't mysterious. It's the predictable output of an economy where the three most important things have been deliberately kept expensive.\n\nThe platform he'd run on is to confront this directly. Not by dumping more subsidy into demand — that makes prices worse, not better. Not by nationalizing supply — that replaces market failure with bureaucratic failure. But by **unleashing technology in the three sectors where it's currently blocked**. AI-powered education that makes personalized tutoring free. AI-powered healthcare that makes diagnostics and preventative care cheap. Housing regulation reform that lets new construction actually get built, combined with construction technology that drops the per-unit cost. The same productivity magic that made TVs and software collapse in price, applied to the things people actually need.\n\nThe catch — which Andreessen names — is that nobody in Washington is saying this out loud. The Republicans don't want to blame government policy for housing or healthcare because they're part of the system protecting incumbents. The Democrats don't want to credit markets for making anything cheaper because it undercuts their regulatory agenda. The result is that **the most important political message of the decade is sitting in plain sight, unclaimed, waiting for someone to run on it**. Whether or not Andreessen ever runs, the observation is precisely right: fix the American Dream, or watch what happens when a generation gives up on it.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

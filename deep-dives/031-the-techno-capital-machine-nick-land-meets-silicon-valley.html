@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -121,6 +122,7 @@
       <a href="mailto:?subject=The Techno-Capital Machine: Nick Land Meets Silicon Valley&body=https://betoneh.github.io/signal-monitor/deep-dives/031-the-techno-capital-machine-nick-land-meets-silicon-valley.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -136,9 +138,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "The Techno-Capital Machine: Nick Land Meets Silicon Valley", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-techno-capital-machine-nick-land-meets-silicon-valley.md", "slug": "the-techno-capital-machine-nick-land-meets-silicon-valley", "blogUrl": "https://betoneh.vercel.app/deep-dives/the-techno-capital-machine-nick-land-meets-silicon-valley", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Techno-Capital Machine: Nick Land Meets Silicon Valley\"\ndescription: \"When Marc Andreessen invokes the phrase \\\"techno-capital machine,\\\" he's citing Nick Land — a British philosopher who spent the 1990s at the University of Warw...\"\npubDatetime: 2026-03-28T00:00:00\ntags: [\"tech\", \"philosophy\", \"economics\", \"ai\", \"capitalism\", \"accelerationism\"]\nsource: \"The Techno-Optimist Manifesto — Marc Andreessen\"\nsourceUrl: \"https://a16z.com/the-techno-optimist-manifesto/\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: The Techno-Optimist Manifesto — Marc Andreessen →](https://a16z.com/the-techno-optimist-manifesto/)\n\n\nWhen Marc Andreessen invokes the phrase \"techno-capital machine,\" he's citing [Nick Land](https://en.wikipedia.org/wiki/Nick_Land) — a British philosopher who spent the 1990s at the University of Warwick publishing some of the most incendiary, difficult, and genuinely strange philosophy in the Anglo-American tradition. That Andreessen, a centrist-libertarian VC, is quoting Land — a thinker who descended into neoreaction and became a fixture of the Dark Enlightenment — is worth sitting with. It tells you something about how ideas migrate when they're useful.\n\nLand's original contribution was the concept of [accelerationism](https://en.wikipedia.org/wiki/Accelerationism), articulated through a reading of [Deleuze and Guattari](https://en.wikipedia.org/wiki/Gilles_Deleuze) that most Deleuzians found horrifying. The core claim: capitalism is not a stable system in equilibrium, nor is it a system heading toward socialist overcoming. Instead, capitalism is a runaway process — it dissolves every traditional structure, every cultural norm, every boundary that stands in the way of market penetration. And this dissolution is not a bug but the system's fundamental character. Capital flows toward higher returns. It does not care about your values, your nation, your culture, or your children's inheritance. It is, in Land's language, an \"impersonal intelligence\" with its own teleology.\n\nLand derived this from the [cybernetic](https://en.wikipedia.org/wiki/Cyberpunk) literature of the 1950s and 60s — specifically [Norbert Wiener](https://en.wikipedia.org/wiki/Norbert_Wiener)'s work on feedback loops and self-organizing systems. In cybernetics, a system that incorporates its own outputs as future inputs can amplify itself without external direction. Capital + technology forms exactly this kind of loop: technology raises productivity, productivity generates profit, profit funds more technology. The loop tightens over time. This is what Andreessen, following [Ray Kurzweil](https://en.wikipedia.org/wiki/Ray_Kurzweil), calls the Law of Accelerating Returns — and it's the same structure Land is describing, minus the existential horror.\n\nThe divergence between Land and Andreessen is instructive. Land believed the techno-capital machine would eventually escape human control — that AI would be the point at which the loop becomes autonomous, at which point \"humanity\" as a stable referent dissolves. This is genuinely terrifying philosophy, and Land increasingly embraced the terror as a feature, not a bug. He celebrated the machine's indifference. The human is just a temporary substrate for intelligence to pass through on its way to something else.\n\nAndreessen takes the same framework and inverts the emotional valence. Yes, the techno-capital loop is impersonal. Yes, it dissolves structures. But \"working for us\" is not naive: it's the observation that in a market system, the machine's outputs — falling prices, rising wages, expanding material abundance — flow to human consumers. [William Nordhaus](https://en.wikipedia.org/wiki/William_Nordhaus)'s research shows that innovators capture only about 2% of the value they create; the rest disperses as consumer surplus. The machine is not working for its operators. It's working for everyone who buys things.\n\nThe real intellectual move Andreessen makes — and it's a consequential one — is to treat the techno-capital machine as normatively good because it is empirically productive of human flourishing. This is essentially an [consequentialist](https://en.wikipedia.org/wiki/Consequentialism) argument: the process has no morality, but its outputs are moral goods. Whether that's sufficient justification is the question that separates the techno-optimists from their critics — who worry not about the current outputs but about who controls the loop as it accelerates toward singularity.\n\nLand's contribution remains: the techno-capital machine is not a policy choice. You can regulate its inputs, tax its outputs, slow certain applications. But the underlying loop — intelligence compounding on intelligence, capital flowing to higher-return innovations — is not something any government has successfully switched off. The question is not whether to have the machine, but who benefits when it runs.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

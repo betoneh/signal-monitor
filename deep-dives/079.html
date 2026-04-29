@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -121,6 +122,7 @@
       <a href="mailto:?subject=The Sky Is Near, The Emperor Is Everywhere: AI and the End of Distance as Freedom&body=https://betoneh.github.io/signal-monitor/deep-dives/079.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -136,9 +138,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "The Sky Is Near, The Emperor Is Everywhere: AI and the End of Distance as Freedom", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-sky-is-near-the-emperor-is-everywhere-ai-and-the-end-of-distance-as-freedom.md", "slug": "the-sky-is-near-the-emperor-is-everywhere-ai-and-the-end-of-distance-as-freedom", "blogUrl": "https://betoneh.vercel.app/deep-dives/the-sky-is-near-the-emperor-is-everywhere-ai-and-the-end-of-distance-as-freedom", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Sky Is Near, The Emperor Is Everywhere: AI and the End of Distance as Freedom\"\ndescription: \"The Chinese proverb 天高皇帝远 — \\\"the sky is high, the emperor is far away\\\" — describes something historically true and politically important: centralized power h...\"\npubDatetime: 2026-04-02T00:00:00\ntags: [\"tech\", \"ai\", \"crypto\", \"authoritarianism\", \"governance\", \"privacy\", \"surveillance\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nThe Chinese proverb *天高皇帝远* — \"the sky is high, the emperor is far away\" — describes something historically true and politically important: centralized power has always been physically constrained by distance and attention. Even the most ruthless empires could not project perfect control everywhere simultaneously. The emperor could issue edicts, but enforcement required delegation, and delegation introduced loyalty failures, local interpretation, and practical gaps where a certain degree of freedom persisted. Dissidents, minorities, innovators, and eccentrics survived by being somewhere the apparatus of power couldn't conveniently reach.\n\nVitalik Buterin's d/acc manifesto identifies this as one of the most important structural changes that AI enables — and one of the most underappreciated threats to human freedom. For the first time in history, distance and attention are ceasing to be meaningful constraints on centralized power. [Digital authoritarianism](https://freedomhouse.org/report/freedom-net/2018/rise-digital-authoritarianism) has been growing for over a decade, but AI is about to make it qualitatively different. Surveillance cameras plus facial recognition means that a protest in a major city can be fully documented even if no arrests happen on the day. The participants are identified later, quietly, with no warning, no visible repression, no martyrs to galvanize further resistance. The technique is already employed by authoritarian governments: [let the protests happen, then pick off the participants one by one](https://www.reuters.com/article/us-russia-politics-navalny-tech-idUSKBN2AB1U2).\n\nNow scale this up with AI-enabled automation. Buterin draws the comparison explicitly: OpenAI serves over 100 million users with around 500 employees. The same managerial and operational technology that allows a tiny team to run a global service could allow a 500-person political elite to maintain detailed control over an entire country's population. Not through constant active surveillance — that requires too much human attention — but through automated pattern detection, automated flagging, automated enforcement. The emperor doesn't need to be everywhere if the emperor's algorithms are everywhere.\n\nThe implication for warfare is even more alarming. Buterin cites a [provocative essay by 0xAlpha](https://im0xalpha.notion.site/AI-to-the-Left-Crypto-to-the-Right-914c101cfc314659a18dbbabc89d152b) on the philosophy of AI and crypto: when armies are made of robots, the human psychological cost of war disappears. A dictator who today must convince soldiers to fight, families to accept casualties, and populations to accept justifications for violence faces massive institutional friction. That friction is a constraint on aggression. Remove the human element from military force, and that constraint evaporates. The war becomes a chess game where the pieces don't feel pain, don't defect, and don't refuse orders. The human in the loop has historically [prevented nuclear launches](https://www.theguardian.com/science/2017/oct/27/vasili-arkhipov-soviet-submarine-captain-who-averted-nuclear-war-awarded-future-of-life-prize) and [opened the Berlin Wall](https://www.npr.org/sections/parallels/2014/11/06/361785478/the-man-who-disobeyed-his-boss-and-opened-the-berlin-wall). A robot army has no Vasili Arkhipov.\n\nWhat's genuinely new about this threat is its permanence. Every previous totalitarian regime had an expiration date — the emperor's attention ran out, the secret police defected, the provinces fell away, the population eventually found an ungoverned corner to organize in. Historical tyranny was bad but bounded. With 21st century AI, Buterin argues that a totalitarian regime could achieve genuine lock-in: enough surveillance and control to prevent any effective resistance from ever coalescing. No corner left where the sky is high enough and the emperor far enough away.\n\nThis is why d/acc prioritizes decentralized, privacy-preserving technologies not as an abstract libertarian preference, but as a direct countermeasure to this specific threat. If the infrastructure of communication, identity, and finance can be made surveillance-resistant by default, then the information asymmetry that authoritarian control requires is much harder to achieve. The fight isn't against any particular government — it's against the structural condition where distance as a protector of freedom disappears entirely.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

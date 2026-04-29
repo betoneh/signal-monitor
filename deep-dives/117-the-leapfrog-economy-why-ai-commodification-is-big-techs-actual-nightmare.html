@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -135,6 +136,7 @@
       <a href="mailto:?subject=The Leapfrog Economy: Why AI Commodification Is Big Tech's Actual Nightmare&body=https://betoneh.github.io/signal-monitor/deep-dives/117-the-leapfrog-economy-why-ai-commodification-is-big-techs-actual-nightmare.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -150,9 +152,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "The Leapfrog Economy: Why AI Commodification Is Big Tech's Actual Nightmare", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-leapfrog-economy-why-ai-commodification-is-big-techs-actual-nightmare.md", "slug": "the-leapfrog-economy-why-ai-commodification-is-big-techs-actual-nightmare", "blogUrl": "https://betoneh.vercel.app/deep-dives/the-leapfrog-economy-why-ai-commodification-is-big-techs-actual-nightmare", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Leapfrog Economy: Why AI Commodification Is Big Tech's Actual Nightmare\"\ndescription: \"The most underrated observation in the Andreessen-Horowitz tech politics video is a single throwaway line about what big tech CEOs would say if you put them...\"\npubDatetime: 2026-04-11T00:00:00\ntags: [\"ai\", \"competition\", \"commodification\", \"andreessen\", \"regulation\", \"schumpeter\", \"pricing\", \"moats\"]\nsource: \"On Tech Politics/Policy — Marc Andreessen & Ben Horowitz (a16z, April 2024)\"\nsourceUrl: \"https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: On Tech Politics/Policy — Marc Andreessen & Ben Horowitz (a16z, April 2024) →](https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video)\n\n\nThe most underrated observation in the Andreessen-Horowitz tech politics video is a single throwaway line about what big tech CEOs would say *if you put them under truth serum*. Andreessen's answer: their actual nightmare isn't an AI doomsday — it's that **AI becomes a commodity**.\n\nThis reframes everything about the current AI policy debate. The standard story says big tech is racing to build AGI and worries about safety. The honest story is that big tech is racing to lock in pricing power before the leapfrogging dynamic destroys their margins. And the leapfrogging is already happening, in public, every quarter.\n\nLook at the actual market structure. [GPT-4](https://en.wikipedia.org/wiki/GPT-4) was the dominant frontier model. Then [Anthropic's Claude](https://en.wikipedia.org/wiki/Claude_(language_model)) leapfrogged it on benchmarks and reasoning. Then Google's Gemini leapfrogged with a 1M-token context window. Then OpenAI came back with a new release. Then Anthropic again. Meanwhile, on the smaller-model side, [Mistral](https://x.com/MistralAI) shipped models that punch above their weight at a fraction of the cost. [Databricks](https://en.wikipedia.org/wiki/Databricks) released DBRX. Meta open-sourced Llama. The benchmarks shift on a monthly basis. The economic implication is that **no one can build a durable moat on raw model capability**.\n\nThe pricing data confirms it. API costs for frontier-level inference have collapsed 90%+ over 18 months. Customers can swap providers with a config file change — the API surfaces are nearly interchangeable, and routing libraries (LangChain, LiteLLM, OpenRouter) make multi-vendor deployments trivial. From the customer's perspective, this is paradise: continuous improvement, plummeting costs, vendor competition. From the vendor's perspective, it's the worst possible market structure. It's not a search engine market (winner take all). It's not even an operating system market (lock-in via switching costs). It's a commodity market, like long-distance phone service after deregulation.\n\nThis is the actual reason big tech is in Washington. The doomer rhetoric is the cover story. The real ask is: **please freeze the market now, before it commodifies us**. Licensing requirements that exclude small players. Compliance costs that benefit incumbents. Open source bans that cut off the cheap alternative. Pre-deployment review that creates regulatory friction proportional to the size of the legal team. Each of these is a moat — not against doomsday, but against price competition.\n\nThe kicker is that the leapfrogging dynamic is also **great for the rest of the economy**. Every business that uses AI as an input — which is rapidly becoming every business — benefits from cheaper, faster, smarter models on a continuous improvement curve. The downstream value creation from a hyper-competitive AI market is potentially trillions of dollars over the next decade, distributed across every industry that touches information. Schumpeterian economics tells us that 99% of the value of a new technology accrues to the users, not the producers. AI is shaping up to be the cleanest example of that pattern in living memory.\n\nWhich is exactly why big tech wants it stopped. The Schumpeterian dividend is what they're trying to reroute through regulation — converting what would be a generation-defining productivity boom for the broader economy into rent extraction by three or four firms. The regulatory capture push isn't a side effect of AI policy. It **is** AI policy, as currently being written.\n\nAnyone defending the current trajectory of AI regulation should be asked: are you defending consumers, or are you defending margins?\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

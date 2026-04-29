@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -121,6 +122,7 @@
       <a href="mailto:?subject=Rifkin, Keynes, and the Graveyard of Unemployment Predictions&body=https://betoneh.github.io/signal-monitor/deep-dives/046-rifkin-keynes-and-the-graveyard-of-unemployment-predictions.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -136,9 +138,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "Rifkin, Keynes, and the Graveyard of Unemployment Predictions", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/rifkin-keynes-and-the-graveyard-of-unemployment-predictions.md", "slug": "rifkin-keynes-and-the-graveyard-of-unemployment-predictions", "blogUrl": "https://betoneh.vercel.app/deep-dives/rifkin-keynes-and-the-graveyard-of-unemployment-predictions", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Rifkin, Keynes, and the Graveyard of Unemployment Predictions\"\ndescription: \"In 1930, at the depths of the Great Depression, John Maynard Keynes wrote an essay called \\\"Economic Possibilities for Our Grandchildren.\\\" It contained one of...\"\npubDatetime: 2026-03-28T00:00:00\ntags: [\"economics\", \"rifkin\", \"keynes\", \"unemployment\", \"predictions\", \"history\", \"automation\", \"agi\"]\nsource: \"The Lump of Labor Fallacy — Marc Andreessen (X thread)\"\nsourceUrl: \"https://x.com/pmarca/status/2037816674716729455\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: The Lump of Labor Fallacy — Marc Andreessen (X thread) →](https://x.com/pmarca/status/2037816674716729455)\n\n\nIn 1930, at the depths of the Great Depression, [John Maynard Keynes](https://en.wikipedia.org/wiki/John_Maynard_Keynes) wrote an essay called [\"Economic Possibilities for Our Grandchildren.\"](https://en.wikipedia.org/wiki/Economic_Possibilities_for_our_Grandchildren) It contained one of the most famous wrong predictions in the history of economics: by 2030, rising productivity would be so dramatic that the average person would need to work only 15 hours a week to maintain a comfortable standard of living. The real problem, Keynes predicted, would not be unemployment but too much leisure — humanity would struggle to fill its days meaningfully once technology had solved the material problem.\n\nKeynes was spectacularly wrong, but in an illuminating way. He correctly predicted the productivity gains — they happened, and then some. What he failed to anticipate was the infinite expansibility of human wants. As people got richer, they didn't decide to work less. They decided to want more things, including things that didn't exist in 1930. The 15-hour workweek never arrived because rising income created rising aspirations faster than productivity could satisfy them. The material problem was not solved; it was constantly redefined upward.\n\nThe more consequential tradition of unemployment catastrophism runs through [Jeremy Rifkin](https://en.wikipedia.org/wiki/Jeremy_Rifkin), whose 1995 book [The End of Work](https://en.wikipedia.org/wiki/The_End_of_Work) became the defining statement of the technology-destroys-jobs thesis for the internet era. Rifkin argued that the third industrial revolution — computers, automation, the internet — would hollow out employment across manufacturing, services, and white-collar work simultaneously, producing structural mass unemployment that no amount of retraining or policy adjustment could address. The book was serious, widely read, and influential. It was also completely wrong.\n\nWhat happened in the thirty years after Rifkin's prediction? The United States computerized its entire economy, saturated the workforce with internet-connected devices, automated enormous swaths of manufacturing and clerical work — and reached its lowest peacetime unemployment rate in recorded history, 3.5% in 2019. Total employment approximately doubled in absolute numbers between 1983 and 2019. The specific jobs Rifkin worried about did shrink or disappear. But the new jobs created by the internet economy — software engineers, UX designers, social media managers, data scientists, podcast producers, app developers, cloud architects — dwarfed them in number and exceeded them substantially in median wage.\n\nThe pattern extends much further back. The mechanization of agriculture was supposed to produce a permanent surplus of landless laborers. Instead, it produced the Industrial Revolution. The introduction of mass production assembly lines was supposed to deskill and ultimately displace the factory workforce. Instead, it created the industrial working class and the middle-income consumer society. The mainframe computer was supposed to eliminate accounting departments. Instead, it created the information economy. The personal computer was supposed to automate white-collar work out of existence. Instead, it created Silicon Valley and the knowledge economy.\n\nThe track record is not ambiguous: zero for approximately ten. Every major wave of technological unemployment catastrophism has been empirically falsified, and the falsification has not been marginal. In every case, aggregate employment grew. In most cases, median real wages grew. The composition of employment changed dramatically. The specific jobs displaced did disappear. But the economy's capacity to generate new categories of work — categories that couldn't be predicted in advance, that required the new technology to exist — consistently outpaced displacement.\n\nThis doesn't mean the next prediction is automatically wrong. Intellectual honesty requires acknowledging that ten failures doesn't guarantee an eleventh failure. AGI may genuinely be different in degree and kind from prior automation. But the burden of proof sits entirely with the catastrophists. They need to specify the precise mechanism by which the demand-creation feedback loop — which has held without exception across 250 years of industrial history — breaks down with AGI. \"It's really powerful this time\" is not a mechanism. It is the same claim the Luddites made about power looms, that Rifkin made about the internet, and that both got wrong by the same structure of error. The graveyard of wrong predictions is not a reason for complacency. It is evidence about where the prior probability should sit.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

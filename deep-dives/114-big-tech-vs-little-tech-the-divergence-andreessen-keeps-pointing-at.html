@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -133,6 +134,7 @@
       <a href="mailto:?subject=Big Tech vs Little Tech: The Divergence Andreessen Keeps Pointing At&body=https://betoneh.github.io/signal-monitor/deep-dives/114-big-tech-vs-little-tech-the-divergence-andreessen-keeps-pointing-at.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -148,9 +150,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "Big Tech vs Little Tech: The Divergence Andreessen Keeps Pointing At", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/big-tech-vs-little-tech-the-divergence-andreessen-keeps-pointing-at.md", "slug": "big-tech-vs-little-tech-the-divergence-andreessen-keeps-pointing-at", "blogUrl": "https://betoneh.vercel.app/deep-dives/big-tech-vs-little-tech-the-divergence-andreessen-keeps-pointing-at", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Big Tech vs Little Tech: The Divergence Andreessen Keeps Pointing At\"\ndescription: \"For most of the software era, \\\"tech\\\" was a useful shorthand. There was Silicon Valley, and Silicon Valley was startups, and startups grew into big companies,...\"\npubDatetime: 2026-04-11T00:00:00\ntags: [\"tech-policy\", \"lobbying\", \"andreessen\", \"horowitz\", \"a16z\", \"big-tech\", \"startups\", \"regulation\"]\nsource: \"On Tech Politics/Policy — Marc Andreessen & Ben Horowitz (a16z, April 2024)\"\nsourceUrl: \"https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: On Tech Politics/Policy — Marc Andreessen & Ben Horowitz (a16z, April 2024) →](https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video)\n\n\nFor most of the software era, \"tech\" was a useful shorthand. There was Silicon Valley, and Silicon Valley was startups, and startups grew into big companies, and the line from one to the other was continuous. [Marc Andreessen](https://x.com/pmarca) and [Ben Horowitz](https://x.com/bhorowitz)'s central thesis in their 2-hour tech-politics video is that this shorthand has stopped working — and that conflating the two is now actively dangerous.\n\nThe argument is structural. Big tech (Microsoft, Google, Amazon, Apple, Anthropic-via-Amazon, OpenAI-via-Microsoft) is now so dominant that its primary commercial interest isn't innovation — it's **preventing innovation by anyone else**. The cleanest tell is what these companies actually lobby for. They don't lobby for R&D credits, immigration reform for engineers, or expanded compute access. They lobby for [regulatory capture](https://en.wikipedia.org/wiki/Regulatory_capture) — for AI safety regimes that conveniently outlaw open source, for licensing schemes that conveniently exclude anyone who can't afford a 50-person compliance team, for \"voluntary commitments\" that conveniently lock in the current top three.\n\nLittle tech — startups, founders, open source projects, university researchers — wants the exact opposite. It wants freedom to build, freedom to compete, freedom to ship something the incumbent didn't approve of. These two interests are now **diametrically opposed**, and the policy implications follow directly: any rule that's good for big tech is almost certainly bad for little tech, and any rule that protects little tech is almost certainly going to be fought by big tech.\n\nThe historical fix-up is that this wasn't always true. In the 1980s and 1990s, big tech companies barely engaged with Washington. Microsoft famously underinvested in lobbying right up until the antitrust case, and even then, the issues that united the industry were narrow and esoteric — stock option accounting, carried interest tax treatment. [TechNet](https://en.wikipedia.org/wiki/TechNet), the original tech lobbying group, anchored on those topics because they were the only things founders could agree on. The infrastructure for representing little tech as a coherent political bloc never got built, and now it's badly needed.\n\nThe thing that makes the divergence acute is what Andreessen calls **\"the dog that caught the bus.\"** Tech wanted to be important in the world. Tech is now important in the world. And the things that are important in the world get pulled into politics — there's no opt-out. National security meetings are tech meetings. Civil rights meetings are tech meetings. Education and healthcare meetings are tech meetings. Whether the tech industry shows up to those conversations or not, the conversations are happening, and the people running them are getting their information from the only voices in the room: **big tech lobbyists with monopoly maintenance budgets**.\n\nThe practical implication is that little tech has to *actually show up*. Andreessen describes a16z's commitment as a 10-year, bipartisan, real-money lobbying effort, and the explicit motivation is that nobody else is going to represent the interests of someone trying to ship a 6-person AI startup or a permissionless DeFi protocol. The Sand Hill Road consensus that politics is beneath us has been a strategic disaster — and it's the disaster that's enabled the regulatory capture push of the last 18 months.\n\nThe framing that matters most: this isn't about partisan politics. It isn't about left vs right. It's about **incumbent vs entrant** — and the current alignment of forces in Washington is overwhelmingly tilted toward incumbents. Until little tech builds a permanent political infrastructure with the same patience and capital as the MPAA or the National Association of Broadcasters, that tilt won't change.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

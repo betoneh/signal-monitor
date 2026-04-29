@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -121,6 +122,7 @@
       <a href="mailto:?subject=The Limits to Growth Fallacy: When Anti-Technology Goes Genocidal&body=https://betoneh.github.io/signal-monitor/deep-dives/093.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -136,9 +138,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "The Limits to Growth Fallacy: When Anti-Technology Goes Genocidal", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-limits-to-growth-fallacy-when-anti-technology-goes-genocidal.md", "slug": "the-limits-to-growth-fallacy-when-anti-technology-goes-genocidal", "blogUrl": "https://betoneh.vercel.app/deep-dives/the-limits-to-growth-fallacy-when-anti-technology-goes-genocidal", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Limits to Growth Fallacy: When Anti-Technology Goes Genocidal\"\ndescription: \"In 1972, the Club of Rome published The Limits to Growth — a systems dynamics model predicting that industrial civilization would collapse under the weight o...\"\npubDatetime: 2026-04-02T00:00:00\ntags: [\"tech\", \"ai\", \"stocks_macro\", \"existential-risk\", \"governance\", \"history\", \"techno-optimism\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nIn 1972, the Club of Rome published [The Limits to Growth](https://en.wikipedia.org/wiki/The_Limits_to_Growth) — a systems dynamics model predicting that industrial civilization would collapse under the weight of resource depletion and population growth by the mid-21st century. The thesis was influential, widely cited, and wrong. The model failed to account for technological substitution, efficiency improvements, and the fundamental adaptability of economic systems. Resources that were supposed to run out in decades either didn't deplete or were replaced by alternatives. But the model's most catastrophic legacy wasn't its specific predictions — it was the policy responses it inspired before those predictions were falsified.\n\nVitalik Buterin uses this history in his d/acc manifesto as a cautionary argument about the costs of anti-technology thinking. The Limits to Growth thesis directly influenced [China's one-child policy](https://www.jstor.org/stable/20192474) — a policy that resulted in forced sterilizations, female infanticide, and the suppression of an estimated 400 million births, accompanied by profound human rights abuses. It similarly inspired [massive forced sterilization programs in India](https://www.cato.org/policy-analysis/neo-malthusianism-coercive-population-control-china-india-overpopulation-concerns#introduction) during the emergency period. In earlier iterations of the same Malthusian logic — arguments about overpopulation [dating back to 1798](https://en.wikipedia.org/wiki/An_Essay_on_the_Principle_of_Population) — the same intellectual tradition was used to [justify eugenics programs](https://www.econlib.org/archives/2012/05/eugenics_malthu.html) and mass murder.\n\nThis is not a gotcha about environmentalists having bad ideas sometimes. It's a serious structural argument: when you combine a genuine concern about a complex system with a prescription to limit human capability, population, or technology, you create conditions for catastrophic coercion. The prescription inherently requires someone with the power to enforce limits on everyone else — and the history of who exercises that power and how they exercise it is ugly. The people with the power to limit others almost never limit themselves. The limits fall hardest on the most vulnerable.\n\nButerin is not arguing that concerns about resource depletion, pollution, or population pressure are fake. He's arguing that the empirical track record of techno-pessimist predictions is poor — these arguments have been [made since 1798 and proven wrong repeatedly](https://quillette.com/2022/09/08/in-defence-of-progress/) — and that the institutional forms that anti-technology arguments enable have a documented pattern of horrifying outcomes. This makes him deeply uncomfortable with any argument that frames constraint on human capability as the solution to civilizational risk, even when — especially when — the risk being identified is real.\n\nThe specific application to AI safety is where this history bites hardest. The AI safety movement's most credible near-term governance proposals involve licensing regimes, compute restrictions, and international treaties to limit who can build powerful AI. These are not crazy ideas — there are genuine analogies to nuclear nonproliferation regimes that have worked reasonably well. But the Limits to Growth history should make us ask: who decides what's too powerful? Who enforces the limits? History suggests these mechanisms tend to entrench the already-powerful and restrict the newly-emerging. Buterin's preference for d/acc approaches — accelerating defensive capabilities rather than restricting offensive ones — partly reflects this historical lesson: the cure for dangerous capabilities is better defense, not top-down limitation whose enforcement creates its own catastrophes.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

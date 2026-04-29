@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -121,6 +122,7 @@
       <a href="mailto:?subject=The Lump of Labor Fallacy: 200 Years of Being Wrong About Jobs&body=https://betoneh.github.io/signal-monitor/deep-dives/041-the-lump-of-labor-fallacy-200-years-of-being-wrong-about-jobs.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -136,9 +138,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "The Lump of Labor Fallacy: 200 Years of Being Wrong About Jobs", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-lump-of-labor-fallacy-200-years-of-being-wrong-about-jobs.md", "slug": "the-lump-of-labor-fallacy-200-years-of-being-wrong-about-jobs", "blogUrl": "https://betoneh.vercel.app/deep-dives/the-lump-of-labor-fallacy-200-years-of-being-wrong-about-jobs", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Lump of Labor Fallacy: 200 Years of Being Wrong About Jobs\"\ndescription: \"There is a belief so intuitively appealing, so stubbornly persistent, and so thoroughly wrong that economists have given it a proper name: the lump of labor...\"\npubDatetime: 2026-03-28T00:00:00\ntags: [\"economics\", \"lump-of-labor-fallacy\", \"luddites\", \"automation\", \"labor-markets\", \"history-of-ideas\"]\nsource: \"The Lump of Labor Fallacy — Marc Andreessen (X thread)\"\nsourceUrl: \"https://x.com/pmarca/status/2037816674716729455\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: The Lump of Labor Fallacy — Marc Andreessen (X thread) →](https://x.com/pmarca/status/2037816674716729455)\n\n\nThere is a belief so intuitively appealing, so stubbornly persistent, and so thoroughly wrong that economists have given it a proper name: the [lump of labor fallacy](https://en.wikipedia.org/wiki/Lump_of_labour_fallacy). The idea is simple: there is a fixed amount of work in any economy, and if a machine does some of it, there is less left for humans. It is the economic equivalent of believing the sun revolves around the earth — it feels right, it matches surface appearances, and it is completely backwards.\n\nThe fallacy has been formally identified and demolished since at least the early 20th century, but its roots reach deeper. It animated the [Luddite riots of 1811–1816](https://en.wikipedia.org/wiki/Luddite), when English textile workers smashed power looms across the Midlands, convinced the machines would steal their livelihoods permanently. They were not ignorant men. They were skilled craftsmen watching their wages collapse in real time. What they lacked was not courage but a theory of how demand works — specifically, how machines lower the cost of goods, which raises real incomes, which creates demand for new goods and services, which creates new jobs. The engine they couldn't see was the one that would make their grandchildren richer than any king in history.\n\nThe fallacy didn't die with the Luddites. It was reborn every generation, wearing different clothes. It drove opposition to the [spinning jenny](https://en.wikipedia.org/wiki/Spinning_jenny), the [cotton gin](https://en.wikipedia.org/wiki/Cotton_gin), the [mechanical reaper](https://en.wikipedia.org/wiki/Mechanical_reaper), the steam engine, the railroad, the assembly line, and the personal computer. Each wave of catastrophists made the same structural error: they counted the jobs being destroyed and failed to account for the jobs that would be created — not the same jobs, but new ones, in industries that didn't yet exist and therefore couldn't be named.\n\nThe error's persistence is itself worth studying. [Daniel Kahneman](https://en.wikipedia.org/wiki/Daniel_Kahneman)'s framework of System 1 versus System 2 thinking is useful here. The fixed-pie assumption is a System 1 conclusion — fast, intuitive, emotionally resonant. You can see the loom being displaced. You cannot see the textile mill that will employ more workers at higher wages a generation later. Visible displacement wins the political argument even when invisible creation is the economic reality.\n\nThe mechanism that consistently falsifies the fallacy is this: work generates income, income generates demand, demand generates new categories of work. This is not a reservoir that can be drained — it is an engine that accelerates when you add fuel. Agricultural mechanization didn't produce mass unemployment. It freed up 33 percentage points of household income that American workers had been spending on food, and that freed income funded entire new industries: automobiles, television, healthcare, travel, smartphones, streaming services. None of those industries existed when the mechanical reaper was invented. The workers who left farms didn't vanish. They went to factories, then offices, then service industries, then information industries.\n\nThe empirical record is not ambiguous. It is zero for approximately ten. Every major technological revolution in 250 years has been accompanied by catastrophist predictions of permanent unemployment. Every single one of those predictions was wrong — not marginally, not partially, but structurally and categorically wrong. The United States economy absorbed the complete mechanization of agriculture, the industrialization of manufacturing, and the computerization of clerical work without producing permanent structural unemployment. What it produced was the highest material standard of living in human history.\n\nUnderstanding why the lump of labor fallacy is wrong is not merely an academic exercise. It is the prerequisite for having an intelligent conversation about any technology that automates labor — including AGI. Every argument that begins \"but this time the machines can do cognitive work\" is making the same logical error the Luddites made about looms. The question is not whether the technology displaces — it does. The question is whether displacement equals permanent unemployment, which it doesn't, for reasons that have been robust across two and a half centuries of industrial history.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

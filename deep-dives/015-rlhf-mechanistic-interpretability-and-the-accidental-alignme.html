@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -128,6 +129,7 @@
       <a href="mailto:?subject=RLHF, Mechanistic Interpretability, and the Accidental Alignment Progress&body=https://betoneh.github.io/signal-monitor/deep-dives/015-rlhf-mechanistic-interpretability-and-the-accidental-alignme.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -143,9 +145,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "RLHF, Mechanistic Interpretability, and the Accidental Alignment Progress", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/rlhf-mechanistic-interpretability-and-the-accidental-alignme.md", "slug": "rlhf-mechanistic-interpretability-and-the-accidental-alignme", "blogUrl": "https://betoneh.vercel.app/deep-dives/rlhf-mechanistic-interpretability-and-the-accidental-alignme", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"RLHF, Mechanistic Interpretability, and the Accidental Alignment Progress\"\ndescription: \"One of the sharpest exchanges in the debate centers on whether AI safety progress is a byproduct of capabilities progress. The moderator asks: \\\"Is it possibl...\"\npubDatetime: 2026-03-28T00:00:00\ntags: [\"ai\", \"alignment\", \"eacc\", \"information_theory\", \"neuroscience\", \"nuclear\"]\nsource: \"Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate\"\nsourceUrl: \"https://www.youtube.com/watch?v=NSm6GRiMkzU\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate →](https://www.youtube.com/watch?v=NSm6GRiMkzU)\n\n\nOne of the sharpest exchanges in the debate centers on whether AI safety progress is a byproduct of capabilities progress. The moderator asks: \"Is it possible that advances in [RLHF](https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback), persona controls, and [mechanistic interpretability](https://en.wikipedia.org/wiki/Mechanistic_interpretability) have emerged as a result of capabilities progress?\" [Vitalik](https://vitalik.eth.limo)'s answer — \"Yes, I think they have\" — has profound implications for the acceleration debate.\n\nRLHF (Reinforcement Learning from Human Feedback) was developed to make language models more useful, not more safe. [OpenAI](https://openai.com) needed ChatGPT to follow instructions, be helpful, and not say obviously offensive things — commercial requirements, not safety requirements. But the same technique that makes a model follow \"write a poem about dogs\" also makes it follow \"don't provide instructions for building weapons.\" Safety turned out to be a special case of controllability, and controllability was commercially necessary.\n\nMechanistic interpretability — the effort to understand what's happening inside neural networks at the circuit level — similarly emerged from practical needs. Engineers debugging model failures needed to understand why a model produced a specific output. The tools they built for debugging (attention visualization, feature analysis, circuit tracing) turned out to be the same tools needed for safety analysis. Understanding why a model hallucinates is technically similar to understanding whether a model is deceptive.\n\nThis creates an uncomfortable reality for the \"pause AI\" camp: the safety tools we have were produced by the capabilities race. If you'd frozen AI development in 2020, we wouldn't have RLHF, constitutional AI, interpretability tools, or any of the alignment techniques that make current models safer than their predecessors. The very progress that makes AI more dangerous also makes it more controllable.\n\nVitalik uses this to refine his timing argument. Four extra years starting in 2028 are worth \"100 times more\" than four extra years inserted in the 1960s, precisely because we now have the tools to make progress on alignment. The argument isn't \"delay forever\" — it's \"delay just long enough to deploy the safety tools that the capabilities race itself produced.\" It's an arbitrage on the gap between when safety tools become available and when they're actually deployed at scale.\n\n[Verdon](https://extropic.ai) would counter that this proves his point: acceleration produces its own safety solutions. If capabilities progress generates safety tools as a byproduct, then the fastest path to safety is the fastest path to capabilities. Slowing down capabilities to \"focus on safety\" is counterproductive because the safety insights come from the capabilities work.\n\nThe deeper question neither fully addresses: is this correlation or causation? Maybe safety progress has coincided with capabilities progress but isn't caused by it. Maybe targeted safety research (funded independently of commercial pressures) would have produced better tools faster. The empirical record is ambiguous — we only have one timeline to observe.\n\nWhat's clear is that the relationship between capabilities and safety is far more entangled than either \"build it and safety follows\" or \"stop building until it's safe\" suggests. The real challenge is maintaining the entanglement: ensuring that future capabilities advances continue to produce safety-relevant insights, rather than diverging into capabilities that are powerful but opaque and uncontrollable.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

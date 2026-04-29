@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -131,6 +132,7 @@
       <a href="mailto:?subject=The Trust Stack: How Humans and AI Will Actually Cooperate&body=https://betoneh.github.io/signal-monitor/deep-dives/030-the-trust-stack-how-humans-and-ai-will-actually-cooperate.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -146,9 +148,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "The Trust Stack: How Humans and AI Will Actually Cooperate", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-trust-stack-how-humans-and-ai-will-actually-cooperate.md", "slug": "the-trust-stack-how-humans-and-ai-will-actually-cooperate", "blogUrl": "https://betoneh.vercel.app/deep-dives/the-trust-stack-how-humans-and-ai-will-actually-cooperate", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Trust Stack: How Humans and AI Will Actually Cooperate\"\ndescription: \"The debate's final act converges on perhaps its most practically important theme: the specific technical infrastructure needed for humans and AI to cooperate...\"\npubDatetime: 2026-03-28T00:00:00\ntags: [\"agents\", \"ai\", \"cognitive_security\", \"computing\", \"crypto\", \"dacc\", \"eacc\", \"geopolitics\"]\nsource: \"Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate\"\nsourceUrl: \"https://www.youtube.com/watch?v=NSm6GRiMkzU\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate →](https://www.youtube.com/watch?v=NSm6GRiMkzU)\n\n\nThe debate's final act converges on perhaps its most practically important theme: the specific technical infrastructure needed for humans and AI to cooperate safely and productively. [Verdon](https://extropic.ai)'s closing statement — \"Crypto is going to be the coupling between AI and humans. How else are you going to build trust between species?\" — gestures at a problem that's larger than any single technology. What's needed is a complete trust stack.\n\nA trust stack is a layered architecture where each layer provides guarantees that the layers above can rely on. The internet has one: physical cables (layer 1), data packets (layer 2-3), TCP connections (layer 4), encrypted sessions (TLS), authenticated identities (certificates), application-level trust (OAuth, API keys). Each layer solves a specific trust problem, and together they enable strangers to transact safely across the globe.\n\nHuman-AI cooperation needs an equivalent stack, and the debate implicitly sketches its layers. Layer 1: Verifiable Hardware. The physical substrate must be trustworthy. Cameras, sensors, and compute devices must be able to prove what they're doing. Without this, all higher layers are compromised — you can't trust software running on hardware you can't verify. [Vitalik](https://vitalik.eth.limo)'s open hardware and hardware attestation proposals live here.\n\nLayer 2: Cryptographic Computation. The processing layer must preserve privacy and prevent manipulation. [FHE](https://en.wikipedia.org/wiki/Homomorphic_encryption#Fully_homomorphic_encryption), [differential privacy](https://en.wikipedia.org/wiki/Differential_privacy), [secure multi-party computation](https://en.wikipedia.org/wiki/Secure_multi-party_computation), and [zero-knowledge proofs](https://en.wikipedia.org/wiki/Zero-knowledge_proof) ensure that data can be used without being exposed. This layer is where the raw power of AI meets the constraint of human rights.\n\nLayer 3: Blockchain and Smart Contracts. The coordination layer must enable trustless agreements. When a human hires an AI agent to manage their portfolio, the terms must be enforceable without trusting either party. Smart contracts provide this: code that executes exactly as written, with outcomes recorded immutably. This is where crypto becomes essential — not as currency, but as infrastructure.\n\nLayer 4: Identity and Reputation. Both humans and AI agents need verifiable identities and track records. Decentralized identity systems (DIDs), verifiable credentials, and on-chain reputation scores allow participants to assess trustworthiness without centralized authorities. An AI agent's track record of successful tasks, honest reporting, and reliable performance is encoded on-chain and publicly auditable.\n\nLayer 5: Governance and Dispute Resolution. When things go wrong — and they will — there must be mechanisms for redress. Decentralized arbitration (like Kleros), governance tokens, and DAO-based decision-making provide structures for resolving conflicts between humans and AI agents without relying on traditional courts (which have no framework for AI disputes).\n\nLayer 6: Economic Integration. The financial plumbing that allows AI agents to earn, spend, save, and invest. Stablecoins for pricing, DeFi protocols for financial services, payment channels for micropayments. An AI agent that provides a service needs to be paid; one that consumes resources needs to pay. The economic layer is the incentive structure that aligns human and AI interests.\n\nWhat's striking about this stack is that most of it already exists in some form. Blockchain (layer 3) is mature. Cryptographic computation (layer 2) is rapidly advancing. Identity systems (layer 4) are being deployed. The weakest layers are 1 (verifiable hardware is still early) and 5 (governance frameworks are experimental).\n\nThe debate between Vitalik and Verdon is ultimately about priorities within this stack. Verdon wants to push layers 3, 6, and the raw capability that makes the stack necessary. Vitalik wants to shore up layers 1 and 2 — the defensive foundations — before the upper layers become load-bearing. Both agree the stack is needed. They disagree on the construction sequence.\n\nThe trust stack is how the abstract philosophy of e/acc and d/acc becomes engineering practice. It's the blueprint for a world where humans and AI coexist as economic actors, creative partners, and — eventually — co-inhabitants of a civilization that neither could build alone.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

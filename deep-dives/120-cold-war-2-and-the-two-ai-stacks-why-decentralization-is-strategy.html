@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -135,6 +136,7 @@
       <a href="mailto:?subject=Cold War 2.0 and the Two AI Stacks: Why Decentralization Is Strategy&body=https://betoneh.github.io/signal-monitor/deep-dives/120-cold-war-2-and-the-two-ai-stacks-why-decentralization-is-strategy.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -150,9 +152,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "Cold War 2.0 and the Two AI Stacks: Why Decentralization Is Strategy", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/cold-war-2-and-the-two-ai-stacks-why-decentralization-is-strategy.md", "slug": "cold-war-2-and-the-two-ai-stacks-why-decentralization-is-strategy", "blogUrl": "https://betoneh.vercel.app/deep-dives/cold-war-2-and-the-two-ai-stacks-why-decentralization-is-strategy", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Cold War 2.0 and the Two AI Stacks: Why Decentralization Is Strategy\"\ndescription: \"Niall Ferguson coined it. Andreessen uses it constantly. Cold War 2.0. The premise: whether or not we wanted it, the United States and China are now in a str...\"\npubDatetime: 2026-04-11T00:00:00\ntags: [\"china\", \"cold-war\", \"geopolitics\", \"ai\", \"open-source\", \"decentralization\", \"andreessen\", \"national-security\"]\nsource: \"On Tech Politics/Policy — Marc Andreessen & Ben Horowitz (a16z, April 2024)\"\nsourceUrl: \"https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: On Tech Politics/Policy — Marc Andreessen & Ben Horowitz (a16z, April 2024) →](https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video)\n\n\nNiall Ferguson coined it. [Andreessen](https://x.com/pmarca) uses it constantly. **Cold War 2.0.** The premise: whether or not we wanted it, the United States and China are now in a structural geopolitical confrontation that will define the next several decades — and AI is the central technology around which the contest is being fought.\n\nThe framing matters because it forces a question that techno-libertarians often avoid: what is America's actual **strategic advantage** in this contest? China has more population. More STEM graduates per year. More state coordination. More ability to move capital and labor at will. More willingness to sacrifice individual rights for national goals. More physical proximity to the rare-earth supply chain. On almost every centralizable metric, China wins.\n\nThe one structural advantage the United States has is the inverse of all of those things: **decentralization**. A market economy. A private sector. Distributed venture capital. Open-source development. Academic research that doesn't require party approval. Immigration that pulls talent from everywhere. A legal system that defaults to permitting rather than prohibiting. These are the things China can't replicate without ceasing to be China — and they're the things that produced ChatGPT, Claude, Gemini, Llama, Mistral, Stable Diffusion, and the entire AI infrastructure stack.\n\nAndreessen's strategic argument follows immediately from this: **any policy that centralizes American AI development is unilateral disarmament**. If the US adopts the Chinese model of AI governance — pick a few national champions, give them the compute, ban everyone else — we're trying to beat China at China's own game while throwing away the only game we can win. The whole point of having a decentralized system is that decentralization wins on the long timescales, exactly because it has more participants making more attempts and finding more local optima.\n\nThe historical analog is the Cold War itself. The Soviet Union had centralized planning, command economy, top-down R&D allocation, and a bigger military than the US for much of the era. They lost not because the centralized model was inherently weak in any single domain, but because it was **brittle across domains**. The Soviets could build great rockets and great ballet. They couldn't build a consumer economy, a software industry, a venture ecosystem, or a culture of permissionless experimentation. The decentralized American system, with all its mess and inefficiency, ground them down across decades because it could adapt faster than they could plan.\n\nThe parallel for AI is exact. China can mobilize the state, set five-year plans, and force national champions to coordinate. They will probably win the race to deploy AI inside their government and military. They will probably win on surveillance integration, social credit, and population-level optimization. The thing they cannot win on is the **permissionless innovation Cambrian explosion** that produces the long tail of unexpected applications — the small teams building medical AI, education AI, agricultural AI, scientific research AI, and a million other niches that no central planner would have predicted.\n\nThis is also why the open-source vs closed-source debate isn't just an economic argument. It's a national security argument. **An open-source AI ecosystem that produces ten thousand small teams competing in different niches is a strategic asset**. A closed-source AI ecosystem with three companies and a regulatory moat is a strategic vulnerability — because those three companies have to compete with the entire People's Republic of China, and the math doesn't work in their favor.\n\nAndreessen's strategic framing converges with his commercial argument by accident: the policy that's good for little tech is also the policy that's good for American national interest, and the policy that's good for big tech is also the policy that hands China the future. That convergence is what makes the open-source AI fight winnable in Washington. There's a unifying issue across both parties — they don't like China — and you can use that as the lever to defend exactly the open ecosystem big tech is trying to dismantle. If you're not framing it that way, you're missing the fight.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -121,6 +122,7 @@
       <a href="mailto:?subject=The Baumol Premium: Why Human Touch Gets More Valuable as Machines Improve&body=https://betoneh.github.io/signal-monitor/deep-dives/049-the-baumol-premium-why-human-touch-gets-more-valuable-as-machines-improve.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -136,9 +138,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "The Baumol Premium: Why Human Touch Gets More Valuable as Machines Improve", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-baumol-premium-why-human-touch-gets-more-valuable-as-machines-improve.md", "slug": "the-baumol-premium-why-human-touch-gets-more-valuable-as-machines-improve", "blogUrl": "https://betoneh.vercel.app/deep-dives/the-baumol-premium-why-human-touch-gets-more-valuable-as-machines-improve", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Baumol Premium: Why Human Touch Gets More Valuable as Machines Improve\"\ndescription: \"There is a class of economic goods that becomes more valuable, not less, precisely because machines get better at producing everything else. Call it the Baum...\"\npubDatetime: 2026-03-28T00:00:00\ntags: [\"economics\", \"baumol-effect\", \"premium\", \"human-labor\", \"agi\", \"services\", \"scarcity\", \"value\"]\nsource: \"The Lump of Labor Fallacy — Marc Andreessen (X thread)\"\nsourceUrl: \"https://x.com/pmarca/status/2037816674716729455\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: The Lump of Labor Fallacy — Marc Andreessen (X thread) →](https://x.com/pmarca/status/2037816674716729455)\n\n\nThere is a class of economic goods that becomes more valuable, not less, precisely because machines get better at producing everything else. Call it the Baumol premium — the rising relative price and rising relative demand for irreducibly human experiences as the machine-produced alternatives get dramatically cheaper. This is not a wishful story about human uniqueness. It is the straightforward arithmetic of how scarcity and price interact when productivity gains are uneven across sectors. And it has implications for how we should think about work, wages, and the long-run employment effects of AGI that cut against both the catastrophist and the naive-optimist positions.\n\nThe mechanism starts with [William Baumol](https://en.wikipedia.org/wiki/William_Baumol)'s foundational insight about uneven productivity growth across sectors. As mechanized sectors get dramatically cheaper, household budgets — holding total income constant — automatically increase in the share available for human-intensive services. But this understates the effect, because total income is not constant. Productivity-driven growth raises real incomes, and a disproportionate share of the additional income goes into the categories that can't be cheapened by machines.\n\nThe evidence for this is already visible in premium goods markets. As mass production made adequate wine globally available at low cost, demand for and prices of exceptional wine from specific human producers — with named winemakers, specific vineyards, artisanal methods — rose dramatically. The commodity got cheaper; the artisanal human version got more expensive. The same pattern holds for food: industrial food production has made adequate nutrition cheap globally, while simultaneously creating booming markets for farm-to-table restaurants, craft food producers, and branded chef experiences. The machine doing more makes the human doing it by hand more scarce and therefore more valuable.\n\nIn services, the Baumol premium is even more pronounced. As AI systems become capable of providing competent legal information, financial advice, therapeutic support, and educational content at near-zero marginal cost, the demand for human professionals in those fields does not collapse — it bifurcates. A large volume of routine need gets served by AI at low cost. A smaller but high-value tier of clients with complex, high-stakes, or deeply personal needs seeks human professionals specifically because the human relationship is part of the product they're buying. The human lawyer is not selling legal analysis. She's selling accountability, judgment under uncertainty, and the trust that comes from professional liability and genuine relationship. None of that is replicated by an AI that can write a better brief.\n\nThe philosopher [Albert Borgmann](https://en.wikipedia.org/wiki/Albert_Borgmann) described something adjacent to this in his concept of [focal practices](https://en.wikipedia.org/wiki/Albert_Borgmann#Device_paradigm) — activities whose value lies precisely in their resistance to technological commodification. Cooking a meal for someone you love is not an inefficient way to deliver calories. Its value is constituted by the human effort, care, and presence it embodies. No delivery app, however fast and cheap, substitutes for it on its own terms. As delivery apps get better and cheaper, they don't eliminate the demand for home cooking as a meaningful activity — they free up time for it by handling the functional food requirement.\n\nThe long-run implication of the Baumol premium for employment is counterintuitive and important. A world in which AGI handles most routine cognitive production is not a world of less human work. It is a world in which human work that cannot be AGI-produced commands a substantial and rising premium — and in which the total hours demanded of that human work may well increase, because a richer world with cheaper machine-produced goods has more time and money to spend on the human-intensive remainder. The masseuse, the therapist, the teacher, the artisan chef, the performance artist — these are not consolation prizes for people displaced by AGI. They are the premium products of a post-scarcity world in which human attention is the one thing that cannot be mass-produced.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

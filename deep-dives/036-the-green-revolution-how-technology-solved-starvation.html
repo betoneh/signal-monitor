@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -121,6 +122,7 @@
       <a href="mailto:?subject=The Green Revolution: How Technology Solved Starvation&body=https://betoneh.github.io/signal-monitor/deep-dives/036-the-green-revolution-how-technology-solved-starvation.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -136,9 +138,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "The Green Revolution: How Technology Solved Starvation", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-green-revolution-how-technology-solved-starvation.md", "slug": "the-green-revolution-how-technology-solved-starvation", "blogUrl": "https://betoneh.vercel.app/deep-dives/the-green-revolution-how-technology-solved-starvation", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Green Revolution: How Technology Solved Starvation\"\ndescription: \"In 1968, Stanford biologist Paul Ehrlich published The Population Bomb, opening with the sentence: \\\"The battle to feed all of humanity is over. In the 1970s...\"\npubDatetime: 2026-03-28T00:00:00\ntags: [\"tech\", \"energy\", \"economics\", \"philosophy\", \"biology\", \"climate\"]\nsource: \"The Techno-Optimist Manifesto — Marc Andreessen\"\nsourceUrl: \"https://a16z.com/the-techno-optimist-manifesto/\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: The Techno-Optimist Manifesto — Marc Andreessen →](https://a16z.com/the-techno-optimist-manifesto/)\n\n\nIn 1968, Stanford biologist [Paul Ehrlich](https://en.wikipedia.org/wiki/Paul_R._Ehrlich) published [The Population Bomb](https://en.wikipedia.org/wiki/The_Population_Bomb), opening with the sentence: \"The battle to feed all of humanity is over. In the 1970s hundreds of millions of people will starve to death.\" The book sold millions of copies and launched the modern population control movement. Ehrlich was wrong about almost everything — and the man most responsible for proving him wrong is one of the 20th century's most important human beings, a name most people don't recognize: [Norman Borlaug](https://en.wikipedia.org/wiki/Norman_Borlaug).\n\nBorlaug was an agronomist from Iowa who spent decades in Mexico breeding high-yield, disease-resistant wheat varieties. His breakthrough was developing semi-dwarf wheat that could support heavier grain heads without falling over — a trait that, combined with fertilizer and irrigation, could multiply crop yields several-fold. Starting in Mexico in the 1940s, his techniques spread to India and Pakistan in the 1960s, where predicted famines never materialized. India went from a food-importing nation on the edge of mass starvation to a net food exporter within a decade. Borlaug received the Nobel Peace Prize in 1970; the committee estimated he had saved over a billion lives.\n\nThe [Green Revolution](https://en.wikipedia.org/wiki/Green_Revolution) is a precise case study in the techno-optimist thesis. The problem — feeding a rapidly growing human population from a finite arable land base — was exactly the kind of problem that Malthusian reasoning said was insoluble by definition. [Thomas Malthus](https://en.wikipedia.org/wiki/Thomas_Robert_Malthus) had argued in 1798 that population grows exponentially while food production grows arithmetically, so starvation is always the ultimate check on human numbers. This logic seemed inescapable — until it wasn't, because it treated agricultural technology as a constant rather than a variable.\n\nThe yields unlocked by Borlaug and subsequent Green Revolution researchers were not marginal improvements. Between 1960 and 2000, global cereal yields roughly doubled, while the land area under cultivation increased only modestly. A rough calculation: without the yield increases of the Green Revolution, feeding the world's current population of 8 billion would require converting essentially all remaining wild land to farmland. The forests, the grasslands, the biodiversity — all of it would have been plowed under. The Green Revolution didn't just feed people; it saved the natural world from agricultural expansion.\n\nThe backlash against the Green Revolution is instructive. By the 1980s and 90s, a significant ecological critique had developed: high-yield agriculture depended on synthetic fertilizers, pesticides, and intensive irrigation. It reduced crop genetic diversity, concentrating production in a handful of varieties. It displaced traditional farming communities. All of these criticisms have merit. But the comparison class is not some ideal sustainable agriculture — it is mass starvation, land conversion, and the collapse of the ecosystems that would have been cleared to feed a growing population using pre-Green Revolution methods.\n\nThe successor debate is now around [GMO crops](https://en.wikipedia.org/wiki/Genetically_modified_organism) — genetic modification applied to agriculture with far greater precision than Borlaug's classical breeding. [Golden Rice](https://en.wikipedia.org/wiki/Golden_rice), engineered to produce beta-carotene and prevent Vitamin A deficiency-related blindness in children, has been blocked for two decades by regulatory and activist opposition in many countries where it's needed most. The Precautionary Principle in action: hypothetical GMO risks are weighted against invisible, statistical deaths from Vitamin A deficiency in South Asian children. The Green Revolution required political will to deploy at scale against institutional resistance. The next one will too.\n\nBorlaug, characteristically blunt, said in his Nobel lecture: \"The green revolution has won a temporary success in man's war against hunger and deprivation; it has given man a breathing space.\" Breathing space for technology to develop the next solution. That's the pattern — not a permanent fix, but each technological advance buying time for the next one. The starvation Ehrlich predicted didn't happen not because Malthus was wrong about population pressure, but because he was wrong about the fixed nature of human ingenuity.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){

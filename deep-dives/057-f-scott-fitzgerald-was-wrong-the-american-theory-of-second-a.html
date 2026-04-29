@@ -77,6 +77,7 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -121,6 +122,7 @@
       <a href="mailto:?subject=F. Scott Fitzgerald Was Wrong: The American Theory of Second Acts&body=https://betoneh.github.io/signal-monitor/deep-dives/057-f-scott-fitzgerald-was-wrong-the-american-theory-of-second-a.html" title="Share via email">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
       </a>
+      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -136,9 +138,111 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1152</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
+
+<script id="blog-publish-payload" type="application/json">{"title": "F. Scott Fitzgerald Was Wrong: The American Theory of Second Acts", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/f-scott-fitzgerald-was-wrong-the-american-theory-of-second-a.md", "slug": "f-scott-fitzgerald-was-wrong-the-american-theory-of-second-a", "blogUrl": "https://betoneh.vercel.app/deep-dives/f-scott-fitzgerald-was-wrong-the-american-theory-of-second-a", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"F. Scott Fitzgerald Was Wrong: The American Theory of Second Acts\"\ndescription: \"Andreessen quotes F. Scott Fitzgerald's famous line — \\\"there are no second acts in American lives\\\" — and then demolishes it. This isn't just literary critici...\"\npubDatetime: 2026-03-30T00:00:00\ntags: [\"resilience\", \"second-acts\", \"failure\", \"american-culture\", \"innovation\", \"risk\"]\nsource: \"Marc Andreessen: Will a16z Go Public & Why Labour Displacement with AI is Wrong (20VC)\"\nsourceUrl: \"https://www.youtube.com/watch?v=c4tvVKDhpiY\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Marc Andreessen: Will a16z Go Public & Why Labour Displacement with AI is Wrong (20VC) →](https://www.youtube.com/watch?v=c4tvVKDhpiY)\n\n\nAndreessen quotes F. Scott Fitzgerald's famous line — \"there are no second acts in American lives\" — and then demolishes it. This isn't just literary criticism; it's a core operating belief about what makes the American tech ecosystem uniquely productive.\n\nThe counterargument is empirical. Steve Jobs was fired from Apple, wandered in the wilderness for a decade, and returned to build the most valuable company in history. Marc Andreessen himself co-founded Netscape (glory), watched it get destroyed by Microsoft (shame), and then built a16z into one of the most powerful venture firms in history (glory again). The pattern \"oh the glory of it, oh the shame of it, oh the glory of it\" is more compelling than uninterrupted success precisely because the recovery demonstrates something that initial success doesn't: resilience, learning, and determination.\n\nThis connects to Andreessen's earlier point about the scalded stove. American culture — at least in its Silicon Valley variant — has a mechanism for letting go of failure that other cultures lack. \"As long as you're still alive and you haven't brought some fundamental legal issue on your head, I think second chances are actually available.\" This isn't universally true (he notes Europe is somewhat less forgiving), but in the tech world, it's deeply embedded.\n\nThe economic implication is significant. A culture that allows second acts gets more innovation per capita, because the cost of failure is lower. If failing once means you're permanently marked, rational people take fewer risks. If failing once means you get a chance to apply what you learned, rational people take more risks. More risk-taking means more experiments, which means more discoveries, which means more value creation. The tolerance for failure isn't soft-hearted generosity — it's an economic optimization that produces strictly better outcomes than the alternative.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('publish-blog-btn');
+    var payloadEl = document.getElementById('blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      if (!window.confirm('Publish this deep dive to the blog?')) return;
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await fetchExisting(token);
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        button.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        button.title = 'Published to blog';
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        window.setTimeout(function() {
+          button.innerHTML = defaultIcon;
+          button.style.opacity = '';
+          button.dataset.busy = '0';
+        }, 1600);
+      }
+    });
+  })();
+</script>
 
 <script>
   (function(){
