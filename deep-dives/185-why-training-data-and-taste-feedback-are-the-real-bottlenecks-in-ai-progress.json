@@ -1,0 +1,22 @@
+{
+  "id": 185,
+  "title": "Why Training Data and Taste Feedback Are the Real Bottlenecks in AI Progress",
+  "source": {
+    "kb_entry": "a-return-to-code-naval-ravikant-on-vibe-coding-personal-app-stores-and-the-end-of-apple-s-dominance",
+    "original": "A Return to Code – Naval Ravikant on Vibe Coding, Personal App Stores, and the End of Apple's Dominance",
+    "url": "https://nav.al/code"
+  },
+  "body_html": "<p>AI coding agents didn't get dramatically better just because of architectural breakthroughs—they improved because the training loop finally closed with high-quality human feedback. When top software engineers started using these models seriously in late 2025, their taste began feeding back into the system. The models got access not just to code, but to expert judgment about <em>what constitutes good code</em>. This distinction between raw data and quality-graded data turns out to be the critical bottleneck for AI progress across domains.</p><p>Coding and mathematics are tractable for AI precisely because verification is cheap and abundant. Code either compiles or it doesn't. Tests either pass or fail. Mathematical proofs can be checked algorithmically. Self-driving is similar—the car either navigated safely or it didn't. In these domains, you can run massive closed-loop training where models generate output and receive immediate, objective feedback without expensive human intervention.</p><p>Creative domains tell a completely different story. An AI can generate infinite essays, but who determines what's good? Even hiring human evaluators only works as well as their taste. If you staff a call center to rate AI-generated writing, you get feedback calibrated to call-center-level literary judgment. The quality ceiling of your model becomes the quality ceiling of your evaluators. This is why AI writing still feels like <em>slop</em> while AI code has become genuinely useful—the feedback signal in writing is noisy, subjective, and expensive to produce at scale.</p><p>This framework suggests where AI will advance fastest and where it will plateau. Any domain with abundant data and cheap verification—logistics, drug molecule screening, chip design—is ripe for rapid improvement. Domains requiring high-taste feedback loops—design, strategy, creative direction—will improve more slowly because the bottleneck isn't compute or architecture, it's the scarcity of expert human judgment to train against.</p><p>The strategic implication is significant: <strong>the companies that control high-quality feedback loops will control AI progress</strong>. Raw training data matters, but curated, taste-graded data matters far more. This may explain why models trained with input from elite practitioners leap ahead of those trained on undifferentiated internet content—and why the next frontier in AI isn't just bigger models, but better taste.</p>",
+  "tags": [
+    "training-data",
+    "feedback-loops",
+    "ai-progress",
+    "verification",
+    "creative-ai",
+    "taste",
+    "model-training"
+  ],
+  "word_count": 352,
+  "used_dates": [],
+  "created_date": "2026-04-29"
+}

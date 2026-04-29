@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<!-- AUTO-GENERATED FILE. Edit scripts/build_hub.py for layout changes and deep-dives/deep-dive-navigation.js for deep dive navigation behavior. See DESIGN-SOURCES.md before editing generated HTML. -->
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Return to Code – Naval Ravikant on Vibe Coding, Personal App Stores, and the End of Apple's Dominance — Signal Monitor KB</title>
+<meta property="og:title" content="A Return to Code – Naval Ravikant on Vibe Coding, Personal App Stores, and the End of Apple's Dominance">
+<meta property="og:description" content="Knowledge Base — Signal Monitor">
+<meta property="og:image" content="https://betoneh.github.io/signal-monitor/og/kb-a-return-to-code-naval-ravikant-on-vibe-coding-personal-app-stores-and-the-end-of-apple-s-dominance.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; overflow-wrap: break-word; word-break: break-word; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 8px; }
+  .content a:hover { text-decoration-color: #eaedf3; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  .build-version { color: #8b949e; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+
+  
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+
+  
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .label {
+    font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem;
+  }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+</style>
+</head>
+<body id="top">
+<div class="progress-bar" id="progress"></div>
+<header>
+  <h1>A Return to Code – Naval Ravikant on Vibe Coding, Personal App Stores, and the End of Apple's Dominance</h1>
+  <div class="meta">33 min read · podcast · 2026-04-29</div>
+  <div class="tags"><span class="tag">vibe-coding</span><span class="tag">ai-coding-agents</span><span class="tag">naval-ravikant</span><span class="tag">apple</span><span class="tag">software-development</span><span class="tag">claude</span><span class="tag">personal-apps</span><span class="tag">venture-capital</span><span class="tag">one-person-companies</span><span class="tag">ai-models</span></div>
+  <div class="source" style="margin-top:0.5rem">Source: <a href="https://nav.al/code" target="_blank">https://nav.al/code</a></div>
+</header>
+<main>
+  <div class="content"><h2>Summary</h2>
+<p>Naval Ravikant describes his deep dive into vibe coding after Claude Opus 4.5 hit an inflection point in late 2025, making AI coding agents genuinely capable of building full applications from natural language descriptions. He built a personal app store that lets him describe an app to Claude, have it compiled and delivered to his iPhone within minutes, and iteratively improve it without the compromises inherent in working with engineering teams. He draws a compelling analogy to video games—vibe coding offers the same addictive feedback loops of escalating challenge and reward, but with real-world output and unbounded creative scope, making it more engaging than gaming, doomscrolling, or even traditional programming.
+The conversation explores the practical limitations and operational realities of working with current AI coding agents. Naval notes that models lose coherence as codebases exceed their context windows, resort to hacks and patches when unsupervised, and are fundamentally eager to please rather than to challenge the operator's assumptions. He describes using multiple models (Claude, Codex, Gemini, Grok) in a council-like review process but finds limited value due to groupthink across similarly trained models. The key insight is that human architectural judgment, taste, and vision remain essential—the operator must guide the agent, not merely prompt it—while the agent handles the mechanical burden of implementation at superhuman speed.
+Naval makes two bold strategic claims: first, that pure software is now uninvestable because AI agents will soon produce scalable, well-architected code, collapsing the moat of technical execution; and second, that Apple's failure to build competitive AI represents the biggest strategic mistake of the decade. As user interactions shift from tapping through app interfaces to conversing with AI agents, the value of Apple's OS and app ecosystem erodes, reducing it to a hardware company competing on Samsung-like margins. He envisions a future of one-person software companies scaling to millions of users, with AI agents serving simultaneously as coders, bug fixers, and customer service representatives in a continuous collaborative loop with end users.</p>
+<h2>Key Takeaways</h2>
+<ul><li>AI coding agents (particularly Claude Code and Codex) have crossed an inflection point where non-professional programmers with basic computer science knowledge can build fully functional, custom apps through natural language prompts.</li>
+<li>Vibe coding is more addictive than video games because it offers the same escalating challenge-reward feedback loops but with unbounded scope, real-world utility, and no artificial ceiling.</li>
+<li>The elimination of team compromises is a major creative unlock—solo builders can now iterate on pure vision without social friction, potentially producing more Minecraft-like singular creative works.</li>
+<li>Current AI models still require significant human oversight for architecture decisions, debugging, and preventing hacks; they are eager to please and easily led, rarely contradicting the operator even when wrong.</li>
+<li>Pure software is becoming uninvestable for venture capital—the moat of technical execution is collapsing, and investors should look toward hardware, network effects, and AI model training for defensibility.</li>
+<li>Apple's dependence on third-party AI (Google's Gemini) and failure to build competitive AI internally threatens to reduce it from a platform monopoly to a commoditized hardware company with compressed margins.</li>
+<li>AI agents can already function as autonomous bug-fixing customer service reps—Naval's app automatically collects bug reports, has Claude fix them in side branches, and requires only human approval before shipping.</li>
+<li>Each frontier model has distinct strengths: Claude excels at visual presentation and meeting users at their level, Gemini leverages Google's search and YouTube data, Grok is least censored and strong on technical/scientific problems, and ChatGPT remains the best generalist.</li>
+</ul>
+<h2>Full Text / Transcript</h2>
+<p>Apr 28 2026</p>
+<p>A Return to Code</p>
+<p>Nivi: You’re listening to the Naval Podcast. This is Nivi, his regular co-host. Today we’re going to talk about vibe coding.</p>
+<p>A Return to Coding</p>
+<p>Nivi: Let me tee up the conversation with a tweet from Naval from March 23rd : “AI coding agents can now deliver one-shot custom apps straight to your phone. It’s the beginning of the end for the iPhone’s dominance.”</p>
+<p>Do you want to talk about what you’re building and how you’re distributing it?</p>
+<p>Naval: Well, yeah, let me talk about vibe coding and how I got into it.</p>
+<p>So around December of 2025, the coding agents in AI hit an inflection point with the release of Claude Opus 4.5 . And people started using it and were like, “Wow—this is an agent that stays on track, can build apps soup to nuts, can solve thorny problems, and really feels like having a junior programmer at your disposal who’s fast, essentially free, and ready to please.”</p>
+<p>That was an inflection point, and I was reading all the hype on Twitter, but this time it felt real. I’ve tried the coding agents in the past with some mixed results, but this time I really got into it. And I haven’t seriously coded in decades. I have a computer science degree; I understand computer architecture and networking, a little bit of chips, algorithms, et cetera.</p>
+<p>But I haven’t seriously coded in a long time.</p>
+<p>And the activation energy to writing code is really high. You have to hook up all these different services to each other. Everything from GitHub to maybe some backend—you’re doing Vercel or Firebase or Railway or whatever—and just lots of things to connect together.</p>
+<p>You have to know lots of jargon—lots of tools. And the AI now makes it really easy. So I started with Claude Code like everybody else. I’ve also used Codex for some of the thornier bug solving and deep problems, and I immediately got addicted. It was incredibly fun. And so: what’s changed? Well, the agents are really working.</p>
+<p>These are not just coding assists now—where you ask it to solve a specific problem, it gives you a pile of code, and then you cut and paste that into your IDE , your development environment. Rather, you open up a terminal— CLI , as they call it—the command line interface. It’s all text-based, which is what these things are really good at, because they’re trained on text tokens in the first place. It’s running Unix inside or underneath. And these agents really know Unix because if you look at all the code out there that they were trained on—sitting on GitHub or elsewhere or Stack Overflow —most of it was Unix.</p>
+<p>And most of the modern OSes are really Unix underneath anyway. macOS is famously BSD . So underneath these are all Unix, which is all text in, text out. So these agents are just long-lived coding AIs that are connected to Unix at a core level. They’re connected to the Unix shell so that they can execute commands. They’re connected to the file system through basic Unix commands.</p>
+<p>They can call all the Unix commands like grep and awk and sed and pipe and so on—all these operators that daisy chain into each other. They can run cron jobs so they can be long-lived; and they can spawn more shells and more tasks as needed.</p>
+<p>The Personal App Store</p>
+<p>Naval: It’s very addictive because—normally, with coding, coding can be really fun once you get into it.</p>
+<p>But getting into it, the activation energy is really high. But now all of a sudden you don’t have to know all the tools and all the commands. These things speak English. AIs are incredible translators. And one of their core use cases early on was machine translation. They were tested on translating. But now they’re translating from Python and C and Lisp and Rust, and all of these various programming dialects and all of these specialized commands—and they’re communicating in English, and they’re very forgiving in their communication.</p>
+<p>So, you can use different words; you can make spelling mistakes; you can explain things your own way. But if you have a basic understanding of computer architecture and networking and programming—and it doesn’t take a lot, it can be very basic, actually, very high-level, I should say; not basic in the sense that it’s simplistic, but basic in the sense that it’s high-level—then you can go very, very far.</p>
+<p>And so just for fun, I tried building a bunch of different apps and I started by one-shotting particular apps that I wanted. One-shotting meaning: I just give it a description and it gives me back an app. Then I started improving from there. So I actually built my own little app store, which is an app store just for me.</p>
+<p>I can ask it for an app; it can deliver that app to my app store, which is a webpage, and eventually I made it into an app itself that lives on my iPhone. And then I can download those apps with one click, and I can give upgrades like you do with the App Store.</p>
+<p>So, if I want a new app, for example, that tracks my workouts—and I have this; I built a custom tracking app for just my workouts exactly the way I like it—so I can say:</p>
+<p>“Hey, use the functionality of Tonal and Ladder ; follow Apple’s human interface guidelines to make it look like an Apple app; track my workouts the following way—here’s a text log of my last few workouts—and make it easy for me to re-enter new ones and to adjust them; build me pretty graphs and charts to track my progress; add in whatever other features you can think of—calculate strength scores; read scientific papers to figure out what the right way to do strength scores by body part is; do a human body diagram so it can just show which muscles are bigger, which are smaller; connect to Apple Health to do my heart rate stuff.”</p>
+<p>So I didn’t put all of this in one prompt, but I put a lot of it in one prompt, and I immediately got a working app delivered to my personal app store. By the way, the personal app store is a little bit of a joke. It’s real in the sense that it’s my personal app store: it looks like an app store and my apps get delivered into it.</p>
+<p>But obviously it’s not for wide distribution because Apple gates that. Apple will not let you build apps that can be downloaded on anyone’s iPhone. You have to key them against your specific devices. So with my friends and family, I can deliver them apps; I can’t yet deliver them to everybody. However, this whole experience is incredibly addictive.</p>
+<p>You can get extremely customized tuned apps for you. Now, does this mean that normal apps don’t have a place? No, of course they have a place. Those apps that cover the broad use cases—they’re going to be the best-of-breeds. Someone’s hand-tuned them and slaved over them. So you’re not going to beat that if your use case is covered by one of the broad use cases.</p>
+<p>But when you want something truly custom or private—these are great for niche apps that only you would want. Or when you want to tune them to your specific use case, this is going to be incredible.</p>
+<p>Vibe Coding Is a Video Game With Real-World Rewards</p>
+<p>Naval: And it’s very addictive—because like in a video game, the way a video game is designed is that it keeps you hooked by giving you feedback and rewards for doing work.</p>
+<p>And it’s always at the edge of your capability. So as you get better, the video game gets harder. It’s not so hard that it’s frustrating, but it’s not so easy that it’s boring. So you’re always operating at the edge of your capability with a video game and getting these rewards. But those rewards are fake, and the video game is bounded. It’s created by other humans. It’s sort of a fake little world, and deep down you kind of know that. So you’re just figuring out the rules of the game. And then once you’ve figured out the rules of the game, it’s boring.</p>
+<p>Except with vibe coding, it’s unbounded because now you’ve got a Turing machine running underneath. You can build anything. The objective is created by you and can keep expanding, so it kind of never fills up completely. And it has real-world relevance. It’s not just some fake world for fake people or fake games that you’re solving, so it’s way more interesting. So vibe coding has one-shotted a whole bunch of my friends who have disappeared into vibe coding the apps they’ve wanted.</p>
+<p>But it really, really helps to have a clear direction. You have to know what you want—that’s actually the hardest thing—and having a very clear vision of it. And I have that, because it’s a particular app that I was obsessed with for about a year called Airchat —which I built with a team—and it was a social messenger for people to talk through voice and video.</p>
+<p>It didn’t quite work, so we sold it off, got the investors their money back, and got the team some nice packages. But I remember that experience as being exhilarating because I was building a product that I wanted and I was working with a brilliant team.</p>
+<p>But I had to work through a team to do it. I had eight or nine engineers, depending on the day, and we worked pretty hard for nine to 12 months, and we shipped a couple of variations. But with vibe coding, I am basically rebuilding that app. I’m rebuilding from scratch. But the key now is: I’m rebuilding it exactly the way that I want it. There’s no compromises.</p>
+<p>And normally, in the act of building anything with a team, there’s always compromises—even if you are not aware of them. Even if you’re the dictator in charge, which you rarely are, you still have to just accommodate other people. You can’t say, “Move this icon left. Now move it right. No, move it back. No, move it back again.”</p>
+<p>You can’t do that. You’ll annoy the engineer. You can’t demand things where you don’t have a reasonable justification—where it’s just a gut feel or an intuition. But the beauty with an AI coding agent is there’s none of that.</p>
+<p>It’s like a self-driving car. You don’t feel self-conscious in a self-driving car because there isn’t a driver sitting there. The same way, with an autonomous coding agent, you don’t feel self-conscious about your own idiosyncrasies. So you can create exactly the thing that you want.</p>
+<p>I think one of the nice benefits of vibe coding is that—although we may not see like super high-quality code (at least not in this generation), and the architecture needs a lot of work, and these things may have security holes, and they may be hard to scale—the prototyping that you’re going to get, the individual apps you’re going to get, is going to be very fast and they’re going to be true to the vision of the creator. There’s going to be no compromises.</p>
+<p>So you may end up with more things like Minecraft —which Notch famously coded by himself—where there was one person’s vision. And it may have looked weird because like, “What is this blocky graphics? It’s like a huge step backwards.”</p>
+<p>But he didn’t have to compromise. He didn’t have to communicate with anybody or explain to anybody why he wanted it that way. So I think it expands the scope of discovery.</p>
+<p>It’s also incredibly fun. It takes the number of people who might have built apps from like 0.1 percent to one or two or three percent in the populace. Don’t get me wrong—the majority of people are not going to code their own apps. For the majority of people, computers are sort of this magic black box and who knows what was going on in there anyway. So the fact that it’s become 10x or 100x easier still doesn’t mean anything to them. It’s still a black box.</p>
+<p>But for the people who are creative, who are self-motivated, and who are articulate and have a good vision, you can code now. There’s nobody standing in between you and your prototype.</p>
+<p>And yes, if you go to market with a high-functioning app and you need to scale to a lot of users and all of that, then you want to recruit a great team and you want to get real engineers on board, and you’re probably going to have to rewrite the whole thing. But if you’re experimenting, you’re prototyping, you’re getting to market, there’s nothing better.</p>
+<p>Pure Software Is Uninvestable</p>
+<p>Naval: There’s never been a better time to be alive as a creator of software.</p>
+<p>Now, are the same market opportunities still there? That’s a big question. They’re shifting very, very fast. It may be the case that the big companies are vulnerable because now anyone can create software.</p>
+<p>It may be the case that they have more of an advantage because they have distribution. They can just fill all the gaps with all the software they can dream up. But I actually think this is a renaissance for individual software creators.</p>
+<p>Now, one other tweet that I put out was something like, “There’s no market for venture-backed software anymore,” or, “Pure software is not venture investable anymore.”</p>
+<p>Nivi: I think it was like, “ Pure software is rapidly becoming uninvestable ,” if I remember correctly.</p>
+<p>Naval: Yeah, that’s a watered-down version of what I really wanted to say, which is that pure software is uninvestable. I would just full stop right there. If your whole advantage is like, “Hey, I’m building cool software that other people don’t know how to build,” I think that’s uninvestable.</p>
+<p>And it’s uninvestable for two reasons.</p>
+<p>One is they can just hack it together today. And the second is the coding agents are getting better so quickly that within a year, or even less, they’ll probably be building scalable software with good architecture. So I think we’re going to see leaps and bounds improvements. That genie is out of the bottle.</p>
+<p>So if you’re a venture investor now, you’re looking for hardware, you’re looking for network effects, you’re looking for AI models. And I would argue that training AI models is the new building software for however long that lasts until autoresearch and autotraining starts working.</p>
+<p>But I think vibe coding, it’s more fun than playing video games. It’s more productive. It’s more constructive. It has better feedback loops. You build something you want. You’re at the bleeding edge of technology. You may even make some money or career out of it—although careers are kind of dead—but you may make an interesting opportunity out of it. And you learn a lot about computers just by doing.</p>
+<p>I’ve seen kids who are vibe coding. It’s hard to get kids to program. You can throw Swift Playgrounds and ScratchJr and all of that at them and hope that they pick up coding. But if you throw vibe coding at them, they’re going to get instant feedback and instant rewards. Maybe along the way they’ll pick up fundamentals because these things still require some skill to operate.</p>
+<p>And in the process of operating them, you’ll be forced to figure out the command line; and you’ll be forced to figure out how basic computer architecture works; and you’ll be forced to figure out concepts like caching, and backing off in a network, and sharing streams, and writing to disk; and latency versus bandwidth trade-offs, et cetera, and all of those things. So you’ll be forced to learn some basics of computer algorithms and architecture. And it’s just a fun way to go. I’ve been up late nights, probably spending a couple hours every night—the time that used to go into reading, or doomscrolling, or playing video games—is all now in vibe coding. In fact, that’s why I haven’t been active on X recently. I’ve been completely missing on X because I’m buried in Claude and Codex.</p>
+<p>A Place for Each Model</p>
+<p>Nivi: AI has gotten so surprisingly resourceful that whenever I get a response that isn’t surprisingly resourceful, I just assume they’re not feeding it enough tokens.</p>
+<p>The most interesting thing to me about agents is their ability to error correct and learn—how people have it watch YouTube videos at night or go out onto the internet and try and learn about the tasks they’ve been instructed to perform during the day.</p>
+<p>So these agents are going out and error correcting and improving their skills. Likewise, the innovation of thinking in AI models is also an application of error correcting, where you take the next token prediction process and turn it into a pseudo-thinking process that can error correct as it goes through each step in the thought process.</p>
+<p>Getting rid of hallucinations was also an error correction process.</p>
+<p>So I wonder what’s going to be the next application of error correction in AI? One random thought I had, and I’m sure people are working on it, is applying error correction to agents working together—agents working with other agents. Because one of the important ways that people learn and improve is by working with and talking to other people.</p>
+<p>Naval: I’m not sure the analogy applies that well, because AI is jagged intelligence , as they say, where it’s incredibly smart at some things and incredibly dumb at others. And it’s structured very differently than humans in that when you’re using Claude, you’re using the same AI model—even if you have 10 instances of it running. So 10 of them talking to each other doesn’t really improve its thinking in the same way that 10 humans talking to each other do, because those humans are trained on 10 different datasets.</p>
+<p>Humans are just inherently very creative and think out of bounds. Whereas the AI agents are trained on the same data distribution. They’re literally running the same model. It’s like 10 people with the same brain and the same dataset talking to each other. Sure, just through thermodynamics they might have some different ideas and come up with something slightly different, but they’re generally going to think the same. So all you’re doing when your 10 agents are talking to each other is you’re just throwing 10 times as many tokens at the problem. It’s like saying take 10 times as long if you need to.</p>
+<p>Now there are different models like Codex, and Gemini , and Grok Code , which are trained slightly differently. Not that different, but they’re slightly different. And so they might have some different insights.</p>
+<p>Claude has really good visual presentation through a system called Artifacts and Claude is very good at talking to me at the level that I’m at. So it’s very tuned to figure out from your question and your conversation what you’re capable of understanding and what level you’re asking the question at. It’s very good at meeting you at that level.</p>
+<p>ChatGPT is still the OG. It’s very good all around.</p>
+<p>Gemini is very good at search because it has the Google crawl underneath. It’s a frustrating product—it’s constantly timing out on the app and losing the connection and forgetting the plot. But it’s very fast and it’s got a great search index. So if the question I’m asking is really a search question underneath, then I use Gemini.</p>
+<p>Gemini also has access to YouTube. So if you think your answer is lying in a YouTube video—and there’s a lot of YouTube videos—then Gemini has the data advantage of YouTube. So Gemini is really getting by on data advantages. It doesn’t feel like the best model to me, but it has the best underlying data.</p>
+<p>And then Grok is the one I can count on to tell me the truth. It’s like the least neutered, least nerfed. It’s got access to X, so it’s very good at news. And it’s very good at technical problems. So if you’re asking a deep, difficult problem in the scientific/mathematical domain, then I think Grok is actually quite good—not that the others aren’t, but I just think Grok is standout there. And that reflects the biases of the companies that created them and trained them and are driving them.</p>
+<p>Currently all four of the leading frontier models have a place.</p>
+<p>AI Is Eager to Please</p>
+<p>Naval: I do use them against each other. So for example, I wire it up with my GitHub so that every time I’m submitting a new piece of code—say that’s written by Claude—then Codex and Gemini automatically fire in every pull request.</p>
+<p>It’s misnamed, but it’s when you actually push code into your main repository and you’re basically saying this is ready for review and this is ready to get merged into the main codebase. So you’ve been working locally in a piece of code, let’s say with Claude, and then you push it into the main repository, so you file a pull request. Well, you can set it up so that other agents like Gemini and Codex and Grok automatically fire and review the pull request.</p>
+<p>Then they say, “Oh, well you should change this thing about the architecture,” and so on. That’s a way of getting them to sort of communicate with each other, to have a council—a roundtable of AIs. But I haven’t found that to be as useful as you might think. There’s still a lot of groupthink with these AIs. If you’re coding with them and you push towards an answer—for example, if you think you know what the answer is—it is rare that they will contradict you. You’d have to be pretty wrong for them to contradict you.</p>
+<p>They’re trying to please you, and I don’t think they have any long-lived theory of mind of their own. So they’re always kind of morphing towards you, and they’re going to find the answer that you are looking for. So if you think the answer is in a certain area and you push the models even slightly, all of them will find roughly the same answer because you’re leading them to the answer. They’re very easily led around.</p>
+<p>One of the things I’ve noticed is that as the codebase has gotten more complex and larger, it becomes more difficult to manage because it doesn’t all fit into the model’s context window anymore. The models can only hold a certain amount of data in their heads. And right now the state of the art is about a million tokens, which will be considered laughable in the future.</p>
+<p>You can approximate that by thinking that is a million words, and that’s because of the transformer attention mechanism underneath which, for it to properly work, the problem is a square of the number of tokens in the context. So if it’s a million tokens, that means the context window is like in the order of complexity of a trillion tokens because it’s the square of a million.</p>
+<p>So the context window runs out as your codebase gets larger. The models can’t keep all of it in memory anymore. So they start making guesses, approximations, they start compacting the context window. They start losing the plot. They get lost. They start fixing the wrong thing. They fix the same bug five times. They go do a quick patch in the architecture when the problem lies somewhere else, and you have to guide them.</p>
+<p>So as you are dealing with a more and more complex codebase, it falls upon the operator to provide the guidance to say, “Actually here, I think we should just re-architect that whole thing.”</p>
+<p>And they will do some incredibly boneheaded things. Like if you are not paying attention and just text is scrolling by, occasionally they’ll patch a bug just by eliminating the use case or destroying the feature in the first place. Or they’ll do something that is clearly a hack and you kind of have to stop them and say, “Hey, that’s a hack.”</p>
+<p>And by the way, I do this all the time.</p>
+<p>I’ll stop the model. And I’ll say, “No, that’s a hack. That’s a patch. Go fix it at an architectural level.” And what’s funny is the model will always say, “Oh, I’m sorry. You’re right. That was a hack.”</p>
+<p>Even if that wasn’t a hack, the model will say, “You’re right. That was a hack.”</p>
+<p>So the model is always trying to please you, and it doesn’t know any better. In that sense, it’s a little bit like a dog. It’s better than you at catching that duck if you’re duck hunting with a dog, but it’s still a dog. So if you point it at a bird that’s not a duck, it might take that bird down instead. So you do have to guide it. It does require a lot of operational oversight.</p>
+<p>So, long-winded way of saying, you still have to guide these models. Them talking to each other isn’t going to fix the problem. And you do have to get involved in the architecture, the debugging, the features, and pay close attention. But this combo right now of human operator combined with state-of-the-art coding model can yield incredible results.</p>
+<p>You can already completely one-shot simple apps. So like a basic task list, a basic video game clone—you can one-shot them: one prompt and you get something that’s reasonably good coming out the other end.</p>
+<p>So you can see where this is headed. Eventually, once they have enough data, they will be able to one-shot very complex apps, and that’s a whole different world that we’re going to get into.</p>
+<p>Why Math and Coding?</p>
+<p>Naval: Now in terms of what is it about coding that makes them uniquely good at it?</p>
+<p>It’s just there’s tons and tons of data, and when you’re training the model, it’s very easy to verify, “Hey, did you do a good job or not?” Because the code has to compile. It has to execute. And you can have simple tests that are pre-written on the other side to say, “Did the code you wrote pass the test? Did it do the thing you’re supposed to do?”</p>
+<p>So coding turns out to be one of those things that it’s actually quite easy to train models on.</p>
+<p>Mathematics is actually similar in that you have a ton of data—you have a lot of solved problems—and you can verify the output very easily. So in domains where we have a lot of data and you have good verification—self-driving is another one of those. These models do extremely well.</p>
+<p>In areas where you don’t have a lot of data, which are brand new fields, the models are not going to do well, and that’s still an opportunity for humans and creativity. Then domains where it’s hard to verify, for example, in creative writing—like who determines what’s good creative writing versus what’s not, what’s slop versus what’s not—then these models don’t do as well because you can’t easily run a closed loop where they’re just outputting huge amounts of content and then that content is being immediately algorithmically graded without having to have humans in the loop saying, “This is good, this is bad.”</p>
+<p>For example, if you’re trying to do creative writing with these models, they’re going to output huge amounts of content. They can output infinite essays. Who’s to say it’s good on the other side? Even if you hire some low-wage people to sit around call center style and say, “this is good” or “this is bad,” it’s only as good as their taste.</p>
+<p>I think one of the reasons why these coding models got really good recently—there’s multiple; one is they’re doing sort of almost recursive training where like one model is helping improve the next one—but I think the bigger reason might just be that a lot of the best software engineers started using these models in the last few months and their taste is now feeding back in. So you’re getting access to their code plus their taste as to what’s good and what’s not.</p>
+<p>You need high-taste feedback loops to improve these models. And those are harder to develop than they look.</p>
+<p>In certain domains it’s tractable and in other domains it’s hard to see how it happens.</p>
+<p>The Beginning of the End of Apple’s Dominance</p>
+<p>Naval: So the obvious stuff is, yeah, you go and you build your app. Great. Less obvious stuff that’s like just one level more advanced, which will be laughably simple to a software engineer but it’s kind of fun for a non-engineer or someone who hasn’t coded in a long time to think about.</p>
+<p>One is I built my own app store. So if I want an app, I literally open up Claude on my phone. I can operate a remote terminal, which is running on my desktop, or I can just use Claude in the cloud.</p>
+<p>It can connect to Xcode .</p>
+<p>I give it a two-line description. It builds me an app. It ships it to my app store. I open my app store app. The app is sitting there. I click install. 30 seconds later, I have a working app on my phone.</p>
+<p>That’s magical. You can literally be at dinner with someone having a conversation, they describe some app they want, you can describe it to Claude, and five minutes later you’re showing them that app on your phone.</p>
+<p>That’s why I say it’s kind of the beginning of the end for Apple, because Apple relies on their OS and their apps being better than everybody else’s. The hardware, yes, it’s better, but it doesn’t support their margins and their monopoly, or pseudo-monopoly. So when all your communication starts going through Claude, or through Codex, or through some other agent, when all you’re doing all day long is instead of opening an Uber app, you’re saying, “Call me an Uber,” or instead of opening a workout app, you’re saying, “Where’s my workout app? Track my workout. Make no mistakes,” right?</p>
+<p>Then you are just communicating with the agent, and when that happens, then the need for a phone becomes much smaller and smaller.</p>
+<p>Maybe there’s a few banking apps and government apps that haven’t ported and don’t have the proper APIs. But these agents don’t even need APIs. They can figure out and create their own APIs on the fly.</p>
+<p>The use case stops being your interfacing with your iPhone or your Android phone. Instead, you’re just interfacing with the AI model. And now Apple is using Gemini, which is Google’s AI model. So what’s the difference? I might as well just use an Android phone, because all I need at that point is I need a screen, I need battery, and I need connectivity. And Android’s got that just fine.</p>
+<p>And then the apps and user interfaces are being created on the fly for what I need. And yes, for certain things, there will always be best-of-breed user interfaces and you’ll want some familiarity. But even the era of tap, tap, tap, upgrade your system software, drag this over here, hunt for that button, type into that field, all that is going away. It should all be conversational. It should all be agentic. And in that world, Apple loses a lot of its advantages, and then it’s competing purely on, “Oh yeah, we have the best chips and we have the best integrated hardware.”</p>
+<p>But that’s not the same margins as Apple of today. That’s more like the margins that Samsung or Lenovo makes, which is not the margins that Apple wants to have. As a consequence, I think its market cap will compress.</p>
+<p>I think Apple giving up on AI will go down as the biggest strategic mistake in the tech industry of this decade, and it’s the beginning of the end of Apple’s dominance. These companies can exist for a long time and make lots of money—like Microsoft is more valuable than it’s ever been. But Microsoft Windows has kind of lost the battle because they missed the mobile phone wave. They stuck to Windows OS and they didn’t upgrade to a touchscreen-based native OS designed for phones from the ground up, and they didn’t focus on the consumer. They were too focused at the enterprise level. So Apple surpassed them and is now one of the most valuable companies in the world. I think it used to be the most valuable. It might be Nvidia at this moment.</p>
+<p>The same way I think Apple will get surpassed. I think their future growth is capped because they’re now captive on AI and they’re behind. Unless they manage to turn the AI ship around, I think Apple has capped growth long term, and is in “trouble.” Not in the sense that it won’t be valuable, but it’ll be a lot less valuable than it could have been.</p>
+<p>Coding Agents As Customer Service Reps</p>
+<p>Naval: The other thing is within the app that I’m building, I have a bug reporting infrastructure, where if someone sees a bug, they tap on a button, the bug sends the logs up and the bug files into a server. And then I have Claude go every 24 hours through all the bug reports and it just fixes them all, by itself, without my having to intervene. And it puts all the fixes into side branches for me to review. And then all I have to do is just review the fixes and say, “Ah, that wasn’t really a bug. That wasn’t a good fix. Don’t ship that.”</p>
+<p>“Oh, that looks good. Makes sense. Ship it.”</p>
+<p>I’m just the final gate that decides on what goes out there. Eventually you can see apps being built that way by features, where the users will ask for features, they’ll vote on features, and then there’ll be some tastemaker or maintainer in the cloud who’ll look at that and say, “No, the users don’t know what they want.”</p>
+<p>Or, “Oh, that makes a lot of sense. We should fix that or change that.”</p>
+<p>So I think even software development will become a collaborative process with the users and the agents will be handling all of it. Because in a sense, the agents can do perfect customer service. If your customer service was perfect, your customer service person would also be an incredible coder and would be indefatigable. They would be up 24/7. They would be writing code, fixing bugs, responding to people, and they would have no ego if they wrote a lot of code to fix a bug, and then you just threw it all away. So I just find that kind of a feature very compelling. You truly can have one-person, two-person software companies now that can scale to millions upon millions of users and make billions upon billions of dollars.</p>
+<p>That has happened already in the past with people like Notch and Satoshi Nakamoto , and very small teams like the original Instagram team that just made a huge dent with very few people, or the original WhatsApp team. But I think you’re going to see it more and more now.</p></div>
+  
+<div class="share-row">
+  <div class="share-left">
+    <div class="label">Share this post on:</div>
+    <div class="share-icons">
+      <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/kb/a-return-to-code-naval-ravikant-on-vibe-coding-personal-app-stores-and-the-end-of-apple-s-dominance.html" target="_blank" rel="noopener" title="Share on X">
+        <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+      </a>
+      <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/kb/a-return-to-code-naval-ravikant-on-vibe-coding-personal-app-stores-and-the-end-of-apple-s-dominance.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+      </a>
+      <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/kb/a-return-to-code-naval-ravikant-on-vibe-coding-personal-app-stores-and-the-end-of-apple-s-dominance.html" target="_blank" rel="noopener" title="Share on Telegram">
+        <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+      </a>
+      <a href="mailto:?subject=A Return to Code – Naval Ravikant on Vibe Coding, Personal App Stores, and the End of Apple's Dominance&body=https://betoneh.github.io/signal-monitor/kb/a-return-to-code-naval-ravikant-on-vibe-coding-personal-app-stores-and-the-end-of-apple-s-dominance.html" title="Share via email">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+      </a>
+      <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
+    </div>
+  </div>
+  <div style="width:100%;text-align:center;margin-top:0.5rem;">
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>Back to Top</span>
+    </button>
+  </div>
+</div>
+
+</main>
+<footer>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-0902</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+
+<script>
+  (function(){
+    var bar = document.getElementById('progress');
+    if (!bar) return;
+    function up() {
+      var s = window.pageYOffset || document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = (h > 0 ? s / h * 100 : 0) + '%';
+    }
+    window.onscroll = up;
+    up();
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "id": 178,
+  "title": "Vibe Coding Is More Addictive Than Video Games—and That's the Point",
+  "source": {
+    "kb_entry": "a-return-to-code-naval-ravikant-on-vibe-coding-personal-app-stores-and-the-end-of-apple-s-dominance",
+    "original": "A Return to Code – Naval Ravikant on Vibe Coding, Personal App Stores, and the End of Apple's Dominance",
+    "url": "https://nav.al/code"
+  },
+  "body_html": "<p>Naval Ravikant makes a compelling case that vibe coding has cracked the same psychological formula that makes video games irresistible—escalating challenge matched to your skill level, immediate feedback, and a constant sense of reward—but with a crucial difference. Video games are bounded, artificial, and ultimately shallow. Once you've decoded the rules, the magic evaporates. Vibe coding, by contrast, runs on a Turing machine underneath, which means the creative space is literally unbounded.</p><p>The feedback loop is what makes it stick. You describe an app in natural language, and within minutes you have a working prototype on your phone. You refine it, push it further, encounter new technical challenges, solve them, and the cycle repeats. Each iteration teaches you something new about computer architecture, networking, or algorithms—not through a textbook, but through the immediate pressure of wanting your creation to work.</p><p>Ravikant reports that vibe coding has consumed the time he used to spend reading, doomscrolling, and playing games. He's been absent from social media because he's buried in Claude and Codex every night. And he's not alone—he describes friends who have <em>disappeared</em> into building the apps they've always wanted, one-shotting personal tools that no app store would ever serve.</p><p>What's particularly interesting is the skill threshold. You don't need to be a professional engineer, but you do need a high-level understanding of how computers work—networking, caching, latency versus bandwidth trade-offs. The AI handles the mechanical translation from English to code, but the human still provides direction, taste, and architectural vision. It's not coding for everyone, but it expands the builder population from 0.1 percent to perhaps two or three percent.</p><p>For kids especially, vibe coding may succeed where tools like Swift Playgrounds and ScratchJr have struggled. Instead of learning syntax in a vacuum, children get instant, tangible results—and they absorb fundamentals like command-line operations and file systems as a side effect of building things they actually care about.</p>",
+  "tags": [
+    "vibe-coding",
+    "feedback-loops",
+    "video-games",
+    "ai-coding-agents",
+    "software-prototyping",
+    "learning"
+  ],
+  "word_count": 318,
+  "used_dates": [],
+  "created_date": "2026-04-29"
+}

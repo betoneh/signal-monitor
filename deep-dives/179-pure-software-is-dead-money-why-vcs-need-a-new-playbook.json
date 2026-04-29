@@ -1,0 +1,21 @@
+{
+  "id": 179,
+  "title": "Pure Software Is Dead Money: Why VCs Need a New Playbook",
+  "source": {
+    "kb_entry": "a-return-to-code-naval-ravikant-on-vibe-coding-personal-app-stores-and-the-end-of-apple-s-dominance",
+    "original": "A Return to Code – Naval Ravikant on Vibe Coding, Personal App Stores, and the End of Apple's Dominance",
+    "url": "https://nav.al/code"
+  },
+  "body_html": "<p>Naval Ravikant's claim is stark: pure software is uninvestable. If your startup's competitive advantage is \"we built cool software that others can't,\" that moat is evaporating in real time. Today's AI coding agents can hack together functional applications from natural language prompts, and they're improving so rapidly that scalable, well-architected code is likely months—not years—away.</p><p>The logic is straightforward. Venture capital depends on defensibility—some durable advantage that prevents competitors from replicating your product. But when anyone with basic computer science knowledge and access to Claude or Codex can build a working app in minutes, the technical execution layer ceases to be a moat. The barrier that once required a team of eight engineers working for a year can now be crossed by a single person in an evening.</p><p>So where should investors look? Ravikant points to three categories that retain defensibility: <strong>hardware</strong>, where physical atoms are harder to replicate than bits; <strong>network effects</strong>, where the product's value scales with its user base in ways code alone can't capture; and <strong>AI model training</strong>, which he frames as \"the new building software\"—at least until autotraining and autoresearch close that gap too.</p><p>The implications ripple beyond venture capital. If one or two people can build and maintain software that serves millions of users—with AI agents handling coding, bug fixing, and customer service simultaneously—then the entire economics of software companies shift. The original Instagram and WhatsApp teams were famously small, but they were still teams. The next wave may be genuine solo operations scaling to billions in revenue.</p><p>This doesn't mean software stops mattering. Best-of-breed applications covering broad use cases will continue to be hand-tuned and refined by dedicated teams. But the long tail of software—niche tools, custom workflows, personal utilities—is being democratized at a pace that makes traditional software investment look increasingly precarious.</p>",
+  "tags": [
+    "venture-capital",
+    "pure-software",
+    "defensibility",
+    "network-effects",
+    "one-person-companies",
+    "ai-disruption"
+  ],
+  "word_count": 303,
+  "used_dates": [],
+  "created_date": "2026-04-29"
+}

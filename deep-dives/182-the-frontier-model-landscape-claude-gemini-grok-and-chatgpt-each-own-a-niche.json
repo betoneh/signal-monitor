@@ -1,0 +1,22 @@
+{
+  "id": 182,
+  "title": "The Frontier Model Landscape: Claude, Gemini, Grok, and ChatGPT Each Own a Niche",
+  "source": {
+    "kb_entry": "a-return-to-code-naval-ravikant-on-vibe-coding-personal-app-stores-and-the-end-of-apple-s-dominance",
+    "original": "A Return to Code – Naval Ravikant on Vibe Coding, Personal App Stores, and the End of Apple's Dominance",
+    "url": "https://nav.al/code"
+  },
+  "body_html": "<p>Rather than declaring a single winner among frontier AI models, Naval Ravikant describes a landscape where each model has carved out a distinct functional niche based on training data, corporate philosophy, and technical architecture. The right model depends on what you're trying to do—and heavy users routinely switch between all four.</p><p><strong>Claude</strong> excels at visual presentation through its Artifacts system and is remarkably good at calibrating its responses to the operator's skill level. It reads the conversation to determine what you're capable of understanding and meets you there—a subtle but powerful quality that makes it the default for building user-facing applications and for operators who aren't professional engineers.</p><p><strong>Gemini</strong> wins on data advantages rather than model quality. It has Google's search crawl underneath and access to YouTube's massive video library, making it the go-to choice when the answer likely lives in indexed web content or video transcripts. Ravikant finds the product frustrating—it times out, loses connections, and forgets context—but its speed and data moat keep it in rotation for search-adjacent queries.</p><p><strong>Grok</strong> stands out as the least censored and most technically honest of the four. With access to X's real-time data, it's strong on news and current events. But its real edge, according to Ravikant, is in deep scientific and mathematical problems—reflecting the technical biases of the team that built it. When you need an answer that other models might hedge or soften, Grok is the one to ask.</p><p><strong>ChatGPT</strong> remains the best generalist—the \"OG\" that handles broad tasks competently without dominating any single category. For operators who don't want to think about which model to use for each query, it's still the safest default. Together, these four represent a competitive ecosystem where corporate culture, training philosophy, and data access produce meaningfully different tools rather than interchangeable commodities.</p>",
+  "tags": [
+    "claude",
+    "gemini",
+    "grok",
+    "chatgpt",
+    "frontier-models",
+    "model-comparison",
+    "ai-coding-agents"
+  ],
+  "word_count": 298,
+  "used_dates": [],
+  "created_date": "2026-04-29"
+}
