@@ -121,6 +121,13 @@
         .dd-item.in-report .dd-title { color: #eab308; }
         /* Manually read — teal text */
         .dd-item.is-read .dd-title { color: #0ec4a9; }
+        .dd-item.is-downvoted .dd-title,
+        .dd-item.is-downvoted .date {
+            text-decoration: line-through;
+            text-decoration-thickness: 1.5px;
+            text-decoration-color: rgba(234, 179, 8, 0.8);
+            opacity: 0.62;
+        }
         /* Checkbox — custom styled */
         .dd-check {
             -webkit-appearance: none; appearance: none;
@@ -2158,7 +2165,7 @@
 <div class="hr"><hr></div>
 
 <footer>
-    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <span class="build-version" title="Generated build version">Build 20260429-1427</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <span class="build-version" title="Generated build version">Build 20260429-1438</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 
 </div><!-- /app -->
@@ -2234,6 +2241,7 @@
     // Deep dive read checkboxes
     const DD_READ_KEY = 'sm-dd-read';      // manually checked (non-report items)
     const DD_UNREAD_KEY = 'sm-dd-unread';  // manually unchecked from in-report items
+    const DD_DOWNVOTE_KEY = 'sm-dd-downvoted';
     function getDDRead() {
         try { return JSON.parse(localStorage.getItem(DD_READ_KEY) || '[]'); } catch(e) { return []; }
     }
@@ -2245,6 +2253,12 @@
     }
     function saveDDUnread(list) {
         try { localStorage.setItem(DD_UNREAD_KEY, JSON.stringify(list)); } catch(e) {}
+    }
+    function getDDDownvotes() {
+        try { return JSON.parse(localStorage.getItem(DD_DOWNVOTE_KEY) || '[]'); } catch(e) { return []; }
+    }
+    function saveDDDownvotes(list) {
+        try { localStorage.setItem(DD_DOWNVOTE_KEY, JSON.stringify(list)); } catch(e) {}
     }
     function ensureDeepDiveSplitRoot() {
         const tab = document.getElementById('tab-deepdives');
@@ -2363,6 +2377,7 @@
     function syncDDState() {
         const readList = getDDRead();
         let unreadList = getDDUnread();
+        const downvotedList = getDDDownvotes();
         // Collect server-side in-report IDs for display logic
         const serverReportIds = [];
         document.querySelectorAll('.dd-item[data-orig-report="true"]').forEach(el => {
@@ -2376,7 +2391,9 @@
             const cb = el.querySelector('.dd-check');
             const origReport = el.dataset.origReport === 'true';
             const effectivelyInReport = (origReport && !unreadList.includes(id)) || prunedRead.includes(id);
+            const isDownvoted = downvotedList.includes(id);
             el.classList.toggle('in-report', effectivelyInReport);
+            el.classList.toggle('is-downvoted', isDownvoted);
             el.classList.remove('is-read');
             if (cb) cb.checked = effectivelyInReport;
         });
@@ -2440,6 +2457,15 @@
                 (state.unreport || []).forEach(id => { if (!unreadList.includes(id)) unreadList.push(id); });
                 saveDDRead(readList);
                 saveDDUnread(unreadList);
+            }
+        } catch(e) {}
+        try {
+            const r = await fetch('dd-votes.json?_=' + Date.now(), {cache: 'no-store'});
+            if (r.ok) {
+                const state = await r.json();
+                const downvotedList = getDDDownvotes();
+                (state.downvoted || []).forEach(id => { if (!downvotedList.includes(id)) downvotedList.push(id); });
+                saveDDDownvotes(downvotedList);
             }
         } catch(e) {}
         syncDDState();

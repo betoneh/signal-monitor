@@ -79,6 +79,7 @@
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
   .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.is-downvoted { color: #ef4444; opacity: 1; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -120,9 +121,7 @@
       <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/deep-dives/099.html" target="_blank" rel="noopener" title="Share on Telegram">
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
-      <a href="mailto:?subject=How Bank Credit Inflates Housing and Why That Is a Feature, Not a Bug&body=https://betoneh.github.io/signal-monitor/deep-dives/099.html" title="Share via email">
-        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
-      </a>
+      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M7 10v10"/><path d="M15 5.88l-.94 4.7a2 2 0 0 0 .39 1.62l.55 .73a2 2 0 0 1 .39 1.2v3.87a2 2 0 0 1 -2 2h-7.34a2 2 0 0 1 -1.98 -1.75l-1 -8a2 2 0 0 1 1.98 -2.25h3.34a2 2 0 0 0 1.89 -1.37l1.62 -4.32a1 1 0 0 1 1.9 .57z"/></svg></button>
       <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -139,17 +138,19 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1427</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1438</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "How Bank Credit Inflates Housing and Why That Is a Feature, Not a Bug", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/how-bank-credit-inflates-housing-and-why-that-is-a-feature-not-a-bug.md", "slug": "how-bank-credit-inflates-housing-and-why-that-is-a-feature-not-a-bug", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/how-bank-credit-inflates-housing-and-why-that-is-a-feature-not-a-bug", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"How Bank Credit Inflates Housing and Why That Is a Feature, Not a Bug\"\ndescription: \"Housing is expensive not primarily because there aren't enough houses — though supply matters — but because of how credit works. Banks create money when they...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"economics\", \"stocks_macro\", \"crypto\", \"defi\", \"regulation\", \"governance\"]\nsource: \"Where Does Money Come From? — Josh Ryan-Collins, Tony Greenham, Richard Werner, Andrew Jackson\"\nsourceUrl: \"https://www.amazon.com/Where-Does-Money-Come-practical/dp/1908506547\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Where Does Money Come From? — Josh Ryan-Collins, Tony Greenham, Richard Werner, Andrew Jackson →](https://www.amazon.com/Where-Does-Money-Come-practical/dp/1908506547)\n\n\nHousing is expensive not primarily because there aren't enough houses — though supply matters — but because of how credit works. Banks create money when they lend. They prefer to lend against collateral. Real estate is the best collateral: it is tangible, immovable, legally well-defined, and — critically — its value tends to rise when more credit is extended against it. This creates a feedback loop that is not an accident of the system. It is the system's natural equilibrium given the incentive structure of private money creation.\n\nThe mechanics work like this. Banks assess collateral value before extending mortgage credit. If property prices are rising, collateral looks stronger, and banks extend more credit more freely. More credit bids up property prices further. Rising prices validate the collateral assessments that justified the original lending. This loop runs forward in time until it encounters a constraint — borrowers can no longer service debt at current prices, or some external shock forces a reassessment of collateral values — at which point the loop reverses with equal and opposite violence. Banks tighten lending standards, prices fall, collateral values collapse below outstanding loan balances, banks face losses, lending contracts further. [BIS research](https://www.bis.org/publ/work562.pdf) has documented this credit-property price cycle as one of the most reliable precursors of banking crises across countries and time periods.\n\nThe incentive alignment for banks is near-perfect. Mortgage lending is safe in rising markets (collateral covers losses), generates predictable fee income, and uses favorable risk weights under [Basel capital requirements](https://www.bis.org/bcbs/basel3.htm) — residential mortgages require less capital to be held against them than commercial lending. So banks rationally prefer mortgage lending to, say, lending to small manufacturing firms whose collateral is equipment and whose cash flows are harder to assess. The regulatory framework amplifies the inherent preference rather than correcting it.\n\nThe consequence is that bank credit creation systematically flows toward existing assets — real estate and financial securities — rather than new productive investment. **Richard Werner's Quantity Theory of Credit** formalizes this: GDP growth correlates with bank credit extended for real economic activity, not with credit extended for asset purchase. When credit inflates existing asset prices, it generates wealth for current owners, raises the cost of entry for everyone else, and does nothing to expand productive capacity. The economy gets more expensive but not more productive. This is the structural driver of wealth inequality in most developed economies over the past four decades.\n\nThe political economy of housing credit is also worth examining. Existing homeowners — who are disproportionately older, wealthier, and more likely to vote — benefit directly from rising property values. Politicians whose constituents are predominantly homeowners face perverse incentives: policies that cool the housing market protect affordability for renters and first-time buyers but destroy wealth for the homeowner base. This has made meaningful housing policy reform structurally difficult in the UK, US, and most other countries where homeownership rates are high and property is treated as a retirement asset.\n\nThe crypto parallel: DeFi lending protocols like [Aave](https://aave.com/) and [Compound](https://compound.finance/) are overcollateralized — borrowers must deposit more value than they receive. This eliminates the fractional-reserve feedback loop but creates a different problem: it restricts credit access to those who already have assets, making DeFi lending useful primarily for leveraged speculation rather than productive investment. The housing-credit problem is not solved by moving the system on-chain; it is reproduced. The underlying issue is that collateral-based lending systematically favors existing wealth over future productivity, whether the ledger runs on a bank's mainframe or a public blockchain.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "How Bank Credit Inflates Housing and Why That Is a Feature, Not a Bug", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/how-bank-credit-inflates-housing-and-why-that-is-a-feature-not-a-bug.md", "slug": "how-bank-credit-inflates-housing-and-why-that-is-a-feature-not-a-bug", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/how-bank-credit-inflates-housing-and-why-that-is-a-feature-not-a-bug", "ddId": 99, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"How Bank Credit Inflates Housing and Why That Is a Feature, Not a Bug\"\ndescription: \"Housing is expensive not primarily because there aren't enough houses — though supply matters — but because of how credit works. Banks create money when they...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"economics\", \"stocks_macro\", \"crypto\", \"defi\", \"regulation\", \"governance\"]\nsource: \"Where Does Money Come From? — Josh Ryan-Collins, Tony Greenham, Richard Werner, Andrew Jackson\"\nsourceUrl: \"https://www.amazon.com/Where-Does-Money-Come-practical/dp/1908506547\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Where Does Money Come From? — Josh Ryan-Collins, Tony Greenham, Richard Werner, Andrew Jackson →](https://www.amazon.com/Where-Does-Money-Come-practical/dp/1908506547)\n\n\nHousing is expensive not primarily because there aren't enough houses — though supply matters — but because of how credit works. Banks create money when they lend. They prefer to lend against collateral. Real estate is the best collateral: it is tangible, immovable, legally well-defined, and — critically — its value tends to rise when more credit is extended against it. This creates a feedback loop that is not an accident of the system. It is the system's natural equilibrium given the incentive structure of private money creation.\n\nThe mechanics work like this. Banks assess collateral value before extending mortgage credit. If property prices are rising, collateral looks stronger, and banks extend more credit more freely. More credit bids up property prices further. Rising prices validate the collateral assessments that justified the original lending. This loop runs forward in time until it encounters a constraint — borrowers can no longer service debt at current prices, or some external shock forces a reassessment of collateral values — at which point the loop reverses with equal and opposite violence. Banks tighten lending standards, prices fall, collateral values collapse below outstanding loan balances, banks face losses, lending contracts further. [BIS research](https://www.bis.org/publ/work562.pdf) has documented this credit-property price cycle as one of the most reliable precursors of banking crises across countries and time periods.\n\nThe incentive alignment for banks is near-perfect. Mortgage lending is safe in rising markets (collateral covers losses), generates predictable fee income, and uses favorable risk weights under [Basel capital requirements](https://www.bis.org/bcbs/basel3.htm) — residential mortgages require less capital to be held against them than commercial lending. So banks rationally prefer mortgage lending to, say, lending to small manufacturing firms whose collateral is equipment and whose cash flows are harder to assess. The regulatory framework amplifies the inherent preference rather than correcting it.\n\nThe consequence is that bank credit creation systematically flows toward existing assets — real estate and financial securities — rather than new productive investment. **Richard Werner's Quantity Theory of Credit** formalizes this: GDP growth correlates with bank credit extended for real economic activity, not with credit extended for asset purchase. When credit inflates existing asset prices, it generates wealth for current owners, raises the cost of entry for everyone else, and does nothing to expand productive capacity. The economy gets more expensive but not more productive. This is the structural driver of wealth inequality in most developed economies over the past four decades.\n\nThe political economy of housing credit is also worth examining. Existing homeowners — who are disproportionately older, wealthier, and more likely to vote — benefit directly from rising property values. Politicians whose constituents are predominantly homeowners face perverse incentives: policies that cool the housing market protect affordability for renters and first-time buyers but destroy wealth for the homeowner base. This has made meaningful housing policy reform structurally difficult in the UK, US, and most other countries where homeownership rates are high and property is treated as a retirement asset.\n\nThe crypto parallel: DeFi lending protocols like [Aave](https://aave.com/) and [Compound](https://compound.finance/) are overcollateralized — borrowers must deposit more value than they receive. This eliminates the fractional-reserve feedback loop but creates a different problem: it restricts credit access to those who already have assets, making DeFi lending useful primarily for leveraged speculation rather than productive investment. The housing-credit problem is not solved by moving the system on-chain; it is reproduced. The underlying issue is that collateral-based lending systematically favors existing wealth over future productivity, whether the ledger runs on a bank's mainframe or a public blockchain.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
+    var downvoteButton = document.getElementById('downvote-dd-btn');
     var payloadEl = document.getElementById('blog-publish-payload');
-    if (!button || !payloadEl || button.disabled) return;
-    var defaultIcon = button.innerHTML;
+    if (!payloadEl) return;
+    var defaultIcon = button ? button.innerHTML : '';
+    var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
     var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     var payload = JSON.parse(payloadEl.textContent || '{}');
 
@@ -195,6 +196,14 @@
       return token;
     }
 
+    function getLocalDownvotes() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-downvoted') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalDownvotes(list) {
+      try { localStorage.setItem('sm-dd-downvoted', JSON.stringify(list)); } catch (e) {}
+    }
+
     function extractPubDatetime(markdown) {
       var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
       return match ? match[1].trim() : '';
@@ -208,10 +217,19 @@
     }
 
     function setPublishedState(isPublished) {
+      if (!button) return;
       button.dataset.published = isPublished ? '1' : '0';
       button.classList.toggle('is-published', !!isPublished);
       button.innerHTML = isPublished ? publishedIcon : defaultIcon;
       button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
+    }
+
+    function setDownvoteState(isDownvoted) {
+      if (!downvoteButton) return;
+      downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
+      downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
+      downvoteButton.innerHTML = defaultDownvoteIcon;
+      downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
     }
 
     async function fetchExisting(token) {
@@ -233,12 +251,45 @@
       return existing;
     }
 
+    async function fetchVotes(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Votes lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshDownvoteState(token) {
+      var localDownvotes = getLocalDownvotes();
+      var localState = localDownvotes.includes(payload.ddId);
+      setDownvoteState(localState);
+      if (!token) return null;
+      var existing = await fetchVotes(token);
+      var downvoted = false;
+      if (existing && existing.content) {
+        var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        downvoted = (voteState.downvoted || []).includes(payload.ddId);
+        var nextLocal = localDownvotes.filter(function(id) { return id !== payload.ddId; });
+        if (downvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+      }
+      setDownvoteState(downvoted);
+      return existing;
+    }
+
     var cachedToken = sessionStorage.getItem('sm-gh-token');
     if (cachedToken) {
       refreshPublishedState(cachedToken).catch(function(){});
+      refreshDownvoteState(cachedToken).catch(function(){});
+    } else {
+      setDownvoteState(getLocalDownvotes().includes(payload.ddId));
     }
 
-    button.addEventListener('click', async function() {
+    if (button && !button.disabled) button.addEventListener('click', async function() {
       if (button.dataset.busy === '1') return;
       if (!payload.repo || !payload.path || !payload.content) {
         window.alert('Publish payload is missing.');
@@ -290,6 +341,65 @@
       } finally {
         button.style.opacity = '';
         button.dataset.busy = '0';
+      }
+    });
+
+    if (downvoteButton) downvoteButton.addEventListener('click', async function() {
+      if (downvoteButton.dataset.busy === '1') return;
+      if (!payload.votesRepo || !payload.votesPath || !payload.ddId) {
+        window.alert('Downvote payload is missing.');
+        return;
+      }
+      downvoteButton.dataset.busy = '1';
+      downvoteButton.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshDownvoteState(token);
+        var voteState = { downvoted: [] };
+        if (existing && existing.content) {
+          voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        }
+        var list = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+        var idx = list.indexOf(payload.ddId);
+        var isDownvoted = idx >= 0;
+        if (isDownvoted) {
+          list.splice(idx, 1);
+        } else {
+          list.push(payload.ddId);
+        }
+        list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+          .sort(function(a, b) { return a - b; });
+        voteState.downvoted = list;
+        var body = {
+          message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
+          content: toBase64Utf8(JSON.stringify(voteState, null, 2))
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Downvote failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        var nextLocal = getLocalDownvotes().filter(function(id) { return id !== payload.ddId; });
+        if (!isDownvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+        setDownvoteState(!isDownvoted);
+        window.alert(!isDownvoted
+          ? 'Deep dive downvoted. It will appear crossed in the index.'
+          : 'Downvote removed from this deep dive.');
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        downvoteButton.style.opacity = '';
+        downvoteButton.dataset.busy = '0';
       }
     });
   })();

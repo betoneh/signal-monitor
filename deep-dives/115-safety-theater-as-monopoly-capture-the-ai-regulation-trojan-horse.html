@@ -79,6 +79,7 @@
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
   .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.is-downvoted { color: #ef4444; opacity: 1; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -132,9 +133,7 @@
       <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/deep-dives/115-safety-theater-as-monopoly-capture-the-ai-regulation-trojan-horse.html" target="_blank" rel="noopener" title="Share on Telegram">
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
-      <a href="mailto:?subject=Safety Theater as Monopoly Capture: The AI Regulation Trojan Horse&body=https://betoneh.github.io/signal-monitor/deep-dives/115-safety-theater-as-monopoly-capture-the-ai-regulation-trojan-horse.html" title="Share via email">
-        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
-      </a>
+      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M7 10v10"/><path d="M15 5.88l-.94 4.7a2 2 0 0 0 .39 1.62l.55 .73a2 2 0 0 1 .39 1.2v3.87a2 2 0 0 1 -2 2h-7.34a2 2 0 0 1 -1.98 -1.75l-1 -8a2 2 0 0 1 1.98 -2.25h3.34a2 2 0 0 0 1.89 -1.37l1.62 -4.32a1 1 0 0 1 1.9 .57z"/></svg></button>
       <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -151,17 +150,19 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1427</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1438</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "Safety Theater as Monopoly Capture: The AI Regulation Trojan Horse", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/safety-theater-as-monopoly-capture-the-ai-regulation-trojan-horse.md", "slug": "safety-theater-as-monopoly-capture-the-ai-regulation-trojan-horse", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/safety-theater-as-monopoly-capture-the-ai-regulation-trojan-horse", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Safety Theater as Monopoly Capture: The AI Regulation Trojan Horse\"\ndescription: \"The most important sentence in the Andreessen-Horowitz tech policy video is the one most people will skip past: big tech got language banning open source AI...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"ai-regulation\", \"open-source\", \"safety-theater\", \"regulatory-capture\", \"andreessen\", \"biden-eo\", \"anthropic\", \"microsoft\"]\nsource: \"On Tech Politics/Policy — Marc Andreessen & Ben Horowitz (a16z, April 2024)\"\nsourceUrl: \"https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: On Tech Politics/Policy — Marc Andreessen & Ben Horowitz (a16z, April 2024) →](https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video)\n\n\nThe most important sentence in the Andreessen-Horowitz tech policy video is the one most people will skip past: **big tech got language banning open source AI into the Biden executive order — under the guise of safety — to protect themselves from competition**. That isn't a hypothesis. It's a documented fact, and Ben Horowitz says it on camera with the same matter-of-factness someone would use to describe the weather.\n\nThis is the playbook. It works in three steps. First, you arrive in Washington with a doomsday narrative about the technology you yourself are building. Second, you propose \"responsible\" guardrails that just so happen to require massive compliance teams, expensive licensing, and pre-deployment government review — all things you can afford and your competitors can't. Third, you walk out with a regulatory moat carved into federal policy, marketed to the public as consumer protection.\n\nThe thing that makes this so effective is that the surface-level argument is unfalsifiable. Who could possibly be against \"safe AI\"? Who could oppose \"responsible development\"? The framing is designed to make objection sound reckless. But Horowitz nails the actual question buried inside the safety frame: **safe for whom?** Safe for incumbents whose business model is at risk from cheaper, faster, open-source competitors? Sure. Safe for users, researchers, and the broader innovation ecosystem? Almost certainly not.\n\nThe historical analogy is the precautionary principle, which is what the Biden EO's open source provisions ultimately rest on. Andreessen points out that the term itself was coined by the German Greens in the 1970s to ban civilian nuclear power — and the result, fifty years later, is a Germany shutting down nuclear plants while funding Russian gas imports during a war in Ukraine. The precautionary principle is the cleanest available framework for converting any technology into a regulated monopoly, because the burden of proof — \"prove it can never be misused\" — is impossible to meet, which means the only entities who can field the technology are the ones already big enough to absorb the legal risk.\n\nThe deeper move is rhetorical. Big tech has discovered that **you can launder a monopoly play through the language of public interest**. The same companies that built their dominance on the open internet, open standards, and (in many cases) open source software are now lobbying to make the next generation of those things illegal — and they're doing it under banners like \"responsible AI,\" \"AI safety,\" and \"frontier model governance.\" The vocabulary changes. The play doesn't.\n\nWhat makes Andreessen's framing useful is that he's willing to name names. Microsoft via OpenAI. Amazon via [Anthropic](https://en.wikipedia.org/wiki/Anthropic). Google directly. Even Vinod Khosla, who Andreessen says he personally watched lobby Congress to ban open source AI on Manhattan Project grounds. The cartel isn't a theory. It's a coalition with names, lobbyists, and a shared business model — and the safety language is the wrapper, not the content.\n\nThe counter-move that little tech needs to make is the unglamorous one: show up, repeat the actual technical facts, and refuse to let \"responsible\" become a synonym for \"licensed by the incumbents.\" Every harmful use of AI is already illegal under existing law. Regulating *uses* works. Regulating *the math itself* is what the cartel wants — because banning the math is the only way to ban the competition.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "Safety Theater as Monopoly Capture: The AI Regulation Trojan Horse", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/safety-theater-as-monopoly-capture-the-ai-regulation-trojan-horse.md", "slug": "safety-theater-as-monopoly-capture-the-ai-regulation-trojan-horse", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/safety-theater-as-monopoly-capture-the-ai-regulation-trojan-horse", "ddId": 115, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Safety Theater as Monopoly Capture: The AI Regulation Trojan Horse\"\ndescription: \"The most important sentence in the Andreessen-Horowitz tech policy video is the one most people will skip past: big tech got language banning open source AI...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"ai-regulation\", \"open-source\", \"safety-theater\", \"regulatory-capture\", \"andreessen\", \"biden-eo\", \"anthropic\", \"microsoft\"]\nsource: \"On Tech Politics/Policy — Marc Andreessen & Ben Horowitz (a16z, April 2024)\"\nsourceUrl: \"https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: On Tech Politics/Policy — Marc Andreessen & Ben Horowitz (a16z, April 2024) →](https://pmarca.substack.com/p/on-tech-politicspolicy-2-hour-video)\n\n\nThe most important sentence in the Andreessen-Horowitz tech policy video is the one most people will skip past: **big tech got language banning open source AI into the Biden executive order — under the guise of safety — to protect themselves from competition**. That isn't a hypothesis. It's a documented fact, and Ben Horowitz says it on camera with the same matter-of-factness someone would use to describe the weather.\n\nThis is the playbook. It works in three steps. First, you arrive in Washington with a doomsday narrative about the technology you yourself are building. Second, you propose \"responsible\" guardrails that just so happen to require massive compliance teams, expensive licensing, and pre-deployment government review — all things you can afford and your competitors can't. Third, you walk out with a regulatory moat carved into federal policy, marketed to the public as consumer protection.\n\nThe thing that makes this so effective is that the surface-level argument is unfalsifiable. Who could possibly be against \"safe AI\"? Who could oppose \"responsible development\"? The framing is designed to make objection sound reckless. But Horowitz nails the actual question buried inside the safety frame: **safe for whom?** Safe for incumbents whose business model is at risk from cheaper, faster, open-source competitors? Sure. Safe for users, researchers, and the broader innovation ecosystem? Almost certainly not.\n\nThe historical analogy is the precautionary principle, which is what the Biden EO's open source provisions ultimately rest on. Andreessen points out that the term itself was coined by the German Greens in the 1970s to ban civilian nuclear power — and the result, fifty years later, is a Germany shutting down nuclear plants while funding Russian gas imports during a war in Ukraine. The precautionary principle is the cleanest available framework for converting any technology into a regulated monopoly, because the burden of proof — \"prove it can never be misused\" — is impossible to meet, which means the only entities who can field the technology are the ones already big enough to absorb the legal risk.\n\nThe deeper move is rhetorical. Big tech has discovered that **you can launder a monopoly play through the language of public interest**. The same companies that built their dominance on the open internet, open standards, and (in many cases) open source software are now lobbying to make the next generation of those things illegal — and they're doing it under banners like \"responsible AI,\" \"AI safety,\" and \"frontier model governance.\" The vocabulary changes. The play doesn't.\n\nWhat makes Andreessen's framing useful is that he's willing to name names. Microsoft via OpenAI. Amazon via [Anthropic](https://en.wikipedia.org/wiki/Anthropic). Google directly. Even Vinod Khosla, who Andreessen says he personally watched lobby Congress to ban open source AI on Manhattan Project grounds. The cartel isn't a theory. It's a coalition with names, lobbyists, and a shared business model — and the safety language is the wrapper, not the content.\n\nThe counter-move that little tech needs to make is the unglamorous one: show up, repeat the actual technical facts, and refuse to let \"responsible\" become a synonym for \"licensed by the incumbents.\" Every harmful use of AI is already illegal under existing law. Regulating *uses* works. Regulating *the math itself* is what the cartel wants — because banning the math is the only way to ban the competition.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
+    var downvoteButton = document.getElementById('downvote-dd-btn');
     var payloadEl = document.getElementById('blog-publish-payload');
-    if (!button || !payloadEl || button.disabled) return;
-    var defaultIcon = button.innerHTML;
+    if (!payloadEl) return;
+    var defaultIcon = button ? button.innerHTML : '';
+    var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
     var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     var payload = JSON.parse(payloadEl.textContent || '{}');
 
@@ -207,6 +208,14 @@
       return token;
     }
 
+    function getLocalDownvotes() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-downvoted') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalDownvotes(list) {
+      try { localStorage.setItem('sm-dd-downvoted', JSON.stringify(list)); } catch (e) {}
+    }
+
     function extractPubDatetime(markdown) {
       var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
       return match ? match[1].trim() : '';
@@ -220,10 +229,19 @@
     }
 
     function setPublishedState(isPublished) {
+      if (!button) return;
       button.dataset.published = isPublished ? '1' : '0';
       button.classList.toggle('is-published', !!isPublished);
       button.innerHTML = isPublished ? publishedIcon : defaultIcon;
       button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
+    }
+
+    function setDownvoteState(isDownvoted) {
+      if (!downvoteButton) return;
+      downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
+      downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
+      downvoteButton.innerHTML = defaultDownvoteIcon;
+      downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
     }
 
     async function fetchExisting(token) {
@@ -245,12 +263,45 @@
       return existing;
     }
 
+    async function fetchVotes(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Votes lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshDownvoteState(token) {
+      var localDownvotes = getLocalDownvotes();
+      var localState = localDownvotes.includes(payload.ddId);
+      setDownvoteState(localState);
+      if (!token) return null;
+      var existing = await fetchVotes(token);
+      var downvoted = false;
+      if (existing && existing.content) {
+        var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        downvoted = (voteState.downvoted || []).includes(payload.ddId);
+        var nextLocal = localDownvotes.filter(function(id) { return id !== payload.ddId; });
+        if (downvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+      }
+      setDownvoteState(downvoted);
+      return existing;
+    }
+
     var cachedToken = sessionStorage.getItem('sm-gh-token');
     if (cachedToken) {
       refreshPublishedState(cachedToken).catch(function(){});
+      refreshDownvoteState(cachedToken).catch(function(){});
+    } else {
+      setDownvoteState(getLocalDownvotes().includes(payload.ddId));
     }
 
-    button.addEventListener('click', async function() {
+    if (button && !button.disabled) button.addEventListener('click', async function() {
       if (button.dataset.busy === '1') return;
       if (!payload.repo || !payload.path || !payload.content) {
         window.alert('Publish payload is missing.');
@@ -302,6 +353,65 @@
       } finally {
         button.style.opacity = '';
         button.dataset.busy = '0';
+      }
+    });
+
+    if (downvoteButton) downvoteButton.addEventListener('click', async function() {
+      if (downvoteButton.dataset.busy === '1') return;
+      if (!payload.votesRepo || !payload.votesPath || !payload.ddId) {
+        window.alert('Downvote payload is missing.');
+        return;
+      }
+      downvoteButton.dataset.busy = '1';
+      downvoteButton.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshDownvoteState(token);
+        var voteState = { downvoted: [] };
+        if (existing && existing.content) {
+          voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        }
+        var list = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+        var idx = list.indexOf(payload.ddId);
+        var isDownvoted = idx >= 0;
+        if (isDownvoted) {
+          list.splice(idx, 1);
+        } else {
+          list.push(payload.ddId);
+        }
+        list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+          .sort(function(a, b) { return a - b; });
+        voteState.downvoted = list;
+        var body = {
+          message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
+          content: toBase64Utf8(JSON.stringify(voteState, null, 2))
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Downvote failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        var nextLocal = getLocalDownvotes().filter(function(id) { return id !== payload.ddId; });
+        if (!isDownvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+        setDownvoteState(!isDownvoted);
+        window.alert(!isDownvoted
+          ? 'Deep dive downvoted. It will appear crossed in the index.'
+          : 'Downvote removed from this deep dive.');
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        downvoteButton.style.opacity = '';
+        downvoteButton.dataset.busy = '0';
       }
     });
   })();

@@ -79,6 +79,7 @@
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
   .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.is-downvoted { color: #ef4444; opacity: 1; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -120,9 +121,7 @@
       <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/deep-dives/031-the-techno-capital-machine-nick-land-meets-silicon-valley.html" target="_blank" rel="noopener" title="Share on Telegram">
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
-      <a href="mailto:?subject=The Techno-Capital Machine: Nick Land Meets Silicon Valley&body=https://betoneh.github.io/signal-monitor/deep-dives/031-the-techno-capital-machine-nick-land-meets-silicon-valley.html" title="Share via email">
-        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
-      </a>
+      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M7 10v10"/><path d="M15 5.88l-.94 4.7a2 2 0 0 0 .39 1.62l.55 .73a2 2 0 0 1 .39 1.2v3.87a2 2 0 0 1 -2 2h-7.34a2 2 0 0 1 -1.98 -1.75l-1 -8a2 2 0 0 1 1.98 -2.25h3.34a2 2 0 0 0 1.89 -1.37l1.62 -4.32a1 1 0 0 1 1.9 .57z"/></svg></button>
       <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -139,17 +138,19 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1427</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1438</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "The Techno-Capital Machine: Nick Land Meets Silicon Valley", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-techno-capital-machine-nick-land-meets-silicon-valley.md", "slug": "the-techno-capital-machine-nick-land-meets-silicon-valley", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/the-techno-capital-machine-nick-land-meets-silicon-valley", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Techno-Capital Machine: Nick Land Meets Silicon Valley\"\ndescription: \"When Marc Andreessen invokes the phrase \\\"techno-capital machine,\\\" he's citing Nick Land — a British philosopher who spent the 1990s at the University of Warw...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"tech\", \"philosophy\", \"economics\", \"ai\", \"capitalism\", \"accelerationism\"]\nsource: \"The Techno-Optimist Manifesto — Marc Andreessen\"\nsourceUrl: \"https://a16z.com/the-techno-optimist-manifesto/\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: The Techno-Optimist Manifesto — Marc Andreessen →](https://a16z.com/the-techno-optimist-manifesto/)\n\n\nWhen Marc Andreessen invokes the phrase \"techno-capital machine,\" he's citing [Nick Land](https://en.wikipedia.org/wiki/Nick_Land) — a British philosopher who spent the 1990s at the University of Warwick publishing some of the most incendiary, difficult, and genuinely strange philosophy in the Anglo-American tradition. That Andreessen, a centrist-libertarian VC, is quoting Land — a thinker who descended into neoreaction and became a fixture of the Dark Enlightenment — is worth sitting with. It tells you something about how ideas migrate when they're useful.\n\nLand's original contribution was the concept of [accelerationism](https://en.wikipedia.org/wiki/Accelerationism), articulated through a reading of [Deleuze and Guattari](https://en.wikipedia.org/wiki/Gilles_Deleuze) that most Deleuzians found horrifying. The core claim: capitalism is not a stable system in equilibrium, nor is it a system heading toward socialist overcoming. Instead, capitalism is a runaway process — it dissolves every traditional structure, every cultural norm, every boundary that stands in the way of market penetration. And this dissolution is not a bug but the system's fundamental character. Capital flows toward higher returns. It does not care about your values, your nation, your culture, or your children's inheritance. It is, in Land's language, an \"impersonal intelligence\" with its own teleology.\n\nLand derived this from the [cybernetic](https://en.wikipedia.org/wiki/Cyberpunk) literature of the 1950s and 60s — specifically [Norbert Wiener](https://en.wikipedia.org/wiki/Norbert_Wiener)'s work on feedback loops and self-organizing systems. In cybernetics, a system that incorporates its own outputs as future inputs can amplify itself without external direction. Capital + technology forms exactly this kind of loop: technology raises productivity, productivity generates profit, profit funds more technology. The loop tightens over time. This is what Andreessen, following [Ray Kurzweil](https://en.wikipedia.org/wiki/Ray_Kurzweil), calls the Law of Accelerating Returns — and it's the same structure Land is describing, minus the existential horror.\n\nThe divergence between Land and Andreessen is instructive. Land believed the techno-capital machine would eventually escape human control — that AI would be the point at which the loop becomes autonomous, at which point \"humanity\" as a stable referent dissolves. This is genuinely terrifying philosophy, and Land increasingly embraced the terror as a feature, not a bug. He celebrated the machine's indifference. The human is just a temporary substrate for intelligence to pass through on its way to something else.\n\nAndreessen takes the same framework and inverts the emotional valence. Yes, the techno-capital loop is impersonal. Yes, it dissolves structures. But \"working for us\" is not naive: it's the observation that in a market system, the machine's outputs — falling prices, rising wages, expanding material abundance — flow to human consumers. [William Nordhaus](https://en.wikipedia.org/wiki/William_Nordhaus)'s research shows that innovators capture only about 2% of the value they create; the rest disperses as consumer surplus. The machine is not working for its operators. It's working for everyone who buys things.\n\nThe real intellectual move Andreessen makes — and it's a consequential one — is to treat the techno-capital machine as normatively good because it is empirically productive of human flourishing. This is essentially an [consequentialist](https://en.wikipedia.org/wiki/Consequentialism) argument: the process has no morality, but its outputs are moral goods. Whether that's sufficient justification is the question that separates the techno-optimists from their critics — who worry not about the current outputs but about who controls the loop as it accelerates toward singularity.\n\nLand's contribution remains: the techno-capital machine is not a policy choice. You can regulate its inputs, tax its outputs, slow certain applications. But the underlying loop — intelligence compounding on intelligence, capital flowing to higher-return innovations — is not something any government has successfully switched off. The question is not whether to have the machine, but who benefits when it runs.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "The Techno-Capital Machine: Nick Land Meets Silicon Valley", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-techno-capital-machine-nick-land-meets-silicon-valley.md", "slug": "the-techno-capital-machine-nick-land-meets-silicon-valley", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/the-techno-capital-machine-nick-land-meets-silicon-valley", "ddId": 31, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Techno-Capital Machine: Nick Land Meets Silicon Valley\"\ndescription: \"When Marc Andreessen invokes the phrase \\\"techno-capital machine,\\\" he's citing Nick Land — a British philosopher who spent the 1990s at the University of Warw...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"tech\", \"philosophy\", \"economics\", \"ai\", \"capitalism\", \"accelerationism\"]\nsource: \"The Techno-Optimist Manifesto — Marc Andreessen\"\nsourceUrl: \"https://a16z.com/the-techno-optimist-manifesto/\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: The Techno-Optimist Manifesto — Marc Andreessen →](https://a16z.com/the-techno-optimist-manifesto/)\n\n\nWhen Marc Andreessen invokes the phrase \"techno-capital machine,\" he's citing [Nick Land](https://en.wikipedia.org/wiki/Nick_Land) — a British philosopher who spent the 1990s at the University of Warwick publishing some of the most incendiary, difficult, and genuinely strange philosophy in the Anglo-American tradition. That Andreessen, a centrist-libertarian VC, is quoting Land — a thinker who descended into neoreaction and became a fixture of the Dark Enlightenment — is worth sitting with. It tells you something about how ideas migrate when they're useful.\n\nLand's original contribution was the concept of [accelerationism](https://en.wikipedia.org/wiki/Accelerationism), articulated through a reading of [Deleuze and Guattari](https://en.wikipedia.org/wiki/Gilles_Deleuze) that most Deleuzians found horrifying. The core claim: capitalism is not a stable system in equilibrium, nor is it a system heading toward socialist overcoming. Instead, capitalism is a runaway process — it dissolves every traditional structure, every cultural norm, every boundary that stands in the way of market penetration. And this dissolution is not a bug but the system's fundamental character. Capital flows toward higher returns. It does not care about your values, your nation, your culture, or your children's inheritance. It is, in Land's language, an \"impersonal intelligence\" with its own teleology.\n\nLand derived this from the [cybernetic](https://en.wikipedia.org/wiki/Cyberpunk) literature of the 1950s and 60s — specifically [Norbert Wiener](https://en.wikipedia.org/wiki/Norbert_Wiener)'s work on feedback loops and self-organizing systems. In cybernetics, a system that incorporates its own outputs as future inputs can amplify itself without external direction. Capital + technology forms exactly this kind of loop: technology raises productivity, productivity generates profit, profit funds more technology. The loop tightens over time. This is what Andreessen, following [Ray Kurzweil](https://en.wikipedia.org/wiki/Ray_Kurzweil), calls the Law of Accelerating Returns — and it's the same structure Land is describing, minus the existential horror.\n\nThe divergence between Land and Andreessen is instructive. Land believed the techno-capital machine would eventually escape human control — that AI would be the point at which the loop becomes autonomous, at which point \"humanity\" as a stable referent dissolves. This is genuinely terrifying philosophy, and Land increasingly embraced the terror as a feature, not a bug. He celebrated the machine's indifference. The human is just a temporary substrate for intelligence to pass through on its way to something else.\n\nAndreessen takes the same framework and inverts the emotional valence. Yes, the techno-capital loop is impersonal. Yes, it dissolves structures. But \"working for us\" is not naive: it's the observation that in a market system, the machine's outputs — falling prices, rising wages, expanding material abundance — flow to human consumers. [William Nordhaus](https://en.wikipedia.org/wiki/William_Nordhaus)'s research shows that innovators capture only about 2% of the value they create; the rest disperses as consumer surplus. The machine is not working for its operators. It's working for everyone who buys things.\n\nThe real intellectual move Andreessen makes — and it's a consequential one — is to treat the techno-capital machine as normatively good because it is empirically productive of human flourishing. This is essentially an [consequentialist](https://en.wikipedia.org/wiki/Consequentialism) argument: the process has no morality, but its outputs are moral goods. Whether that's sufficient justification is the question that separates the techno-optimists from their critics — who worry not about the current outputs but about who controls the loop as it accelerates toward singularity.\n\nLand's contribution remains: the techno-capital machine is not a policy choice. You can regulate its inputs, tax its outputs, slow certain applications. But the underlying loop — intelligence compounding on intelligence, capital flowing to higher-return innovations — is not something any government has successfully switched off. The question is not whether to have the machine, but who benefits when it runs.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
+    var downvoteButton = document.getElementById('downvote-dd-btn');
     var payloadEl = document.getElementById('blog-publish-payload');
-    if (!button || !payloadEl || button.disabled) return;
-    var defaultIcon = button.innerHTML;
+    if (!payloadEl) return;
+    var defaultIcon = button ? button.innerHTML : '';
+    var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
     var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     var payload = JSON.parse(payloadEl.textContent || '{}');
 
@@ -195,6 +196,14 @@
       return token;
     }
 
+    function getLocalDownvotes() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-downvoted') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalDownvotes(list) {
+      try { localStorage.setItem('sm-dd-downvoted', JSON.stringify(list)); } catch (e) {}
+    }
+
     function extractPubDatetime(markdown) {
       var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
       return match ? match[1].trim() : '';
@@ -208,10 +217,19 @@
     }
 
     function setPublishedState(isPublished) {
+      if (!button) return;
       button.dataset.published = isPublished ? '1' : '0';
       button.classList.toggle('is-published', !!isPublished);
       button.innerHTML = isPublished ? publishedIcon : defaultIcon;
       button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
+    }
+
+    function setDownvoteState(isDownvoted) {
+      if (!downvoteButton) return;
+      downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
+      downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
+      downvoteButton.innerHTML = defaultDownvoteIcon;
+      downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
     }
 
     async function fetchExisting(token) {
@@ -233,12 +251,45 @@
       return existing;
     }
 
+    async function fetchVotes(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Votes lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshDownvoteState(token) {
+      var localDownvotes = getLocalDownvotes();
+      var localState = localDownvotes.includes(payload.ddId);
+      setDownvoteState(localState);
+      if (!token) return null;
+      var existing = await fetchVotes(token);
+      var downvoted = false;
+      if (existing && existing.content) {
+        var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        downvoted = (voteState.downvoted || []).includes(payload.ddId);
+        var nextLocal = localDownvotes.filter(function(id) { return id !== payload.ddId; });
+        if (downvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+      }
+      setDownvoteState(downvoted);
+      return existing;
+    }
+
     var cachedToken = sessionStorage.getItem('sm-gh-token');
     if (cachedToken) {
       refreshPublishedState(cachedToken).catch(function(){});
+      refreshDownvoteState(cachedToken).catch(function(){});
+    } else {
+      setDownvoteState(getLocalDownvotes().includes(payload.ddId));
     }
 
-    button.addEventListener('click', async function() {
+    if (button && !button.disabled) button.addEventListener('click', async function() {
       if (button.dataset.busy === '1') return;
       if (!payload.repo || !payload.path || !payload.content) {
         window.alert('Publish payload is missing.');
@@ -290,6 +341,65 @@
       } finally {
         button.style.opacity = '';
         button.dataset.busy = '0';
+      }
+    });
+
+    if (downvoteButton) downvoteButton.addEventListener('click', async function() {
+      if (downvoteButton.dataset.busy === '1') return;
+      if (!payload.votesRepo || !payload.votesPath || !payload.ddId) {
+        window.alert('Downvote payload is missing.');
+        return;
+      }
+      downvoteButton.dataset.busy = '1';
+      downvoteButton.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshDownvoteState(token);
+        var voteState = { downvoted: [] };
+        if (existing && existing.content) {
+          voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        }
+        var list = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+        var idx = list.indexOf(payload.ddId);
+        var isDownvoted = idx >= 0;
+        if (isDownvoted) {
+          list.splice(idx, 1);
+        } else {
+          list.push(payload.ddId);
+        }
+        list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+          .sort(function(a, b) { return a - b; });
+        voteState.downvoted = list;
+        var body = {
+          message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
+          content: toBase64Utf8(JSON.stringify(voteState, null, 2))
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Downvote failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        var nextLocal = getLocalDownvotes().filter(function(id) { return id !== payload.ddId; });
+        if (!isDownvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+        setDownvoteState(!isDownvoted);
+        window.alert(!isDownvoted
+          ? 'Deep dive downvoted. It will appear crossed in the index.'
+          : 'Downvote removed from this deep dive.');
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        downvoteButton.style.opacity = '';
+        downvoteButton.dataset.busy = '0';
       }
     });
   })();

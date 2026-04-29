@@ -79,6 +79,7 @@
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
   .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.is-downvoted { color: #ef4444; opacity: 1; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -120,9 +121,7 @@
       <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/deep-dives/037-ephemeralization-buckminster-fullers-vision-of-doing-more-with-less.html" target="_blank" rel="noopener" title="Share on Telegram">
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
-      <a href="mailto:?subject=Ephemeralization: Buckminster Fuller's Vision of Doing More With Less&body=https://betoneh.github.io/signal-monitor/deep-dives/037-ephemeralization-buckminster-fullers-vision-of-doing-more-with-less.html" title="Share via email">
-        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
-      </a>
+      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M7 10v10"/><path d="M15 5.88l-.94 4.7a2 2 0 0 0 .39 1.62l.55 .73a2 2 0 0 1 .39 1.2v3.87a2 2 0 0 1 -2 2h-7.34a2 2 0 0 1 -1.98 -1.75l-1 -8a2 2 0 0 1 1.98 -2.25h3.34a2 2 0 0 0 1.89 -1.37l1.62 -4.32a1 1 0 0 1 1.9 .57z"/></svg></button>
       <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -139,17 +138,19 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1427</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1438</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "Ephemeralization: Buckminster Fuller's Vision of Doing More With Less", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/ephemeralization-buckminster-fullers-vision-of-doing-more-with-less.md", "slug": "ephemeralization-buckminster-fullers-vision-of-doing-more-with-less", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/ephemeralization-buckminster-fullers-vision-of-doing-more-with-less", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Ephemeralization: Buckminster Fuller's Vision of Doing More With Less\"\ndescription: \"Buckminster Fuller coined the word \\\"ephemeralization\\\" in 1938 to describe a trend he observed across the history of technology: doing more and more with less...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"tech\", \"energy\", \"economics\", \"climate\", \"philosophy\"]\nsource: \"The Techno-Optimist Manifesto — Marc Andreessen\"\nsourceUrl: \"https://a16z.com/the-techno-optimist-manifesto/\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: The Techno-Optimist Manifesto — Marc Andreessen →](https://a16z.com/the-techno-optimist-manifesto/)\n\n\n[Buckminster Fuller](https://en.wikipedia.org/wiki/Buckminster_Fuller) coined the word \"ephemeralization\" in 1938 to describe a trend he observed across the history of technology: doing more and more with less and less material, until eventually you can do everything with essentially nothing. It's an ungainly word for a profound idea — one that economists now call [dematerialization](https://en.wikipedia.org/wiki/Dematerialization_(economics)) — and it has become one of the most empirically well-supported claims in the techno-optimist canon.\n\nFuller was an architect, engineer, futurist, and professional eccentric who spent his life designing systems at the intersection of physics and human flourishing. His most famous invention, the [geodesic dome](https://en.wikipedia.org/wiki/Geodesic_dome), is itself an embodiment of ephemeralization: a structure that achieves extraordinary strength-to-weight ratios by distributing stress across its entire surface rather than concentrating it in pillars. The same enclosed volume, vastly less material. The same structural function, achieved through geometry rather than brute mass.\n\nThe historical pattern Fuller identified is striking. The first transatlantic telegraph cables required enormous amounts of copper and were fragile and expensive. Each subsequent generation of communication technology carried more information using fewer physical resources. Today a fiber-optic cable the width of a human hair carries millions of times more information than those early copper cables, using photons rather than electrons, at a tiny fraction of the energy cost. The trend across 150 years is unmistakable: more signal, less stuff.\n\nThe same pattern holds across industries. A Boeing 787 uses 20% less fuel than the aircraft it replaced, with a higher percentage of its structure made from carbon fiber composites rather than aluminum. A modern smartphone contains more computing power than a room-sized mainframe of the 1970s, at a millionth of the energy cost. Global steel consumption per unit of GDP has been falling for decades as structures are engineered more efficiently. LED lighting delivers the same lumens as incandescent bulbs using 80% less electricity. The physical economy is quietly becoming lighter, even as it becomes richer.\n\nThe economist [Jesse Ausubel](https://en.wikipedia.org/wiki/Jesse_Ausubel) and his colleagues at Rockefeller University have documented this dematerialization across dozens of industries and materials — a body of research that directly challenges the resource-depletion narrative. The US economy uses less steel, aluminum, copper, and timber per unit of economic output than it did in 1970, and in absolute terms many of these have peaked as well. The idea that economic growth necessarily means proportionally more resource consumption is empirically false, and has been for decades.\n\nFuller's broader framework connected ephemeralization to a long-run vision of universal abundance. If you can do the same work with less material each generation, then the long-run trajectory of technology is toward a world where the physical constraints on human flourishing — scarcity of raw materials, energy inputs, physical labor — become progressively less binding. Andreessen's version of this is that physical goods should eventually become \"as cheap as pencils\" — not because pencils are worthless, but because they are produced so efficiently that their material scarcity is irrelevant to your decision to use them.\n\nThe interesting tension in Fuller's vision is between ephemeralization and energy. Doing more with less material typically requires more sophisticated information processing — better design, smarter algorithms, more complex manufacturing. Information processing requires energy. The dematerialization of physical goods is partly offset by the increased energy intensity of the knowledge economy that produces them. Fuller anticipated this: his answer was the same technology curve applied to energy — solar, nuclear, eventually fusion — that would make energy itself effectively free. At that point, the material limits on human ambition dissolve into pure physics. Fuller called this \"livingry\" — the technology of life support — and he thought it was the actual project of civilization, if we were serious about it.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "Ephemeralization: Buckminster Fuller's Vision of Doing More With Less", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/ephemeralization-buckminster-fullers-vision-of-doing-more-with-less.md", "slug": "ephemeralization-buckminster-fullers-vision-of-doing-more-with-less", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/ephemeralization-buckminster-fullers-vision-of-doing-more-with-less", "ddId": 37, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Ephemeralization: Buckminster Fuller's Vision of Doing More With Less\"\ndescription: \"Buckminster Fuller coined the word \\\"ephemeralization\\\" in 1938 to describe a trend he observed across the history of technology: doing more and more with less...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"tech\", \"energy\", \"economics\", \"climate\", \"philosophy\"]\nsource: \"The Techno-Optimist Manifesto — Marc Andreessen\"\nsourceUrl: \"https://a16z.com/the-techno-optimist-manifesto/\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: The Techno-Optimist Manifesto — Marc Andreessen →](https://a16z.com/the-techno-optimist-manifesto/)\n\n\n[Buckminster Fuller](https://en.wikipedia.org/wiki/Buckminster_Fuller) coined the word \"ephemeralization\" in 1938 to describe a trend he observed across the history of technology: doing more and more with less and less material, until eventually you can do everything with essentially nothing. It's an ungainly word for a profound idea — one that economists now call [dematerialization](https://en.wikipedia.org/wiki/Dematerialization_(economics)) — and it has become one of the most empirically well-supported claims in the techno-optimist canon.\n\nFuller was an architect, engineer, futurist, and professional eccentric who spent his life designing systems at the intersection of physics and human flourishing. His most famous invention, the [geodesic dome](https://en.wikipedia.org/wiki/Geodesic_dome), is itself an embodiment of ephemeralization: a structure that achieves extraordinary strength-to-weight ratios by distributing stress across its entire surface rather than concentrating it in pillars. The same enclosed volume, vastly less material. The same structural function, achieved through geometry rather than brute mass.\n\nThe historical pattern Fuller identified is striking. The first transatlantic telegraph cables required enormous amounts of copper and were fragile and expensive. Each subsequent generation of communication technology carried more information using fewer physical resources. Today a fiber-optic cable the width of a human hair carries millions of times more information than those early copper cables, using photons rather than electrons, at a tiny fraction of the energy cost. The trend across 150 years is unmistakable: more signal, less stuff.\n\nThe same pattern holds across industries. A Boeing 787 uses 20% less fuel than the aircraft it replaced, with a higher percentage of its structure made from carbon fiber composites rather than aluminum. A modern smartphone contains more computing power than a room-sized mainframe of the 1970s, at a millionth of the energy cost. Global steel consumption per unit of GDP has been falling for decades as structures are engineered more efficiently. LED lighting delivers the same lumens as incandescent bulbs using 80% less electricity. The physical economy is quietly becoming lighter, even as it becomes richer.\n\nThe economist [Jesse Ausubel](https://en.wikipedia.org/wiki/Jesse_Ausubel) and his colleagues at Rockefeller University have documented this dematerialization across dozens of industries and materials — a body of research that directly challenges the resource-depletion narrative. The US economy uses less steel, aluminum, copper, and timber per unit of economic output than it did in 1970, and in absolute terms many of these have peaked as well. The idea that economic growth necessarily means proportionally more resource consumption is empirically false, and has been for decades.\n\nFuller's broader framework connected ephemeralization to a long-run vision of universal abundance. If you can do the same work with less material each generation, then the long-run trajectory of technology is toward a world where the physical constraints on human flourishing — scarcity of raw materials, energy inputs, physical labor — become progressively less binding. Andreessen's version of this is that physical goods should eventually become \"as cheap as pencils\" — not because pencils are worthless, but because they are produced so efficiently that their material scarcity is irrelevant to your decision to use them.\n\nThe interesting tension in Fuller's vision is between ephemeralization and energy. Doing more with less material typically requires more sophisticated information processing — better design, smarter algorithms, more complex manufacturing. Information processing requires energy. The dematerialization of physical goods is partly offset by the increased energy intensity of the knowledge economy that produces them. Fuller anticipated this: his answer was the same technology curve applied to energy — solar, nuclear, eventually fusion — that would make energy itself effectively free. At that point, the material limits on human ambition dissolve into pure physics. Fuller called this \"livingry\" — the technology of life support — and he thought it was the actual project of civilization, if we were serious about it.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
+    var downvoteButton = document.getElementById('downvote-dd-btn');
     var payloadEl = document.getElementById('blog-publish-payload');
-    if (!button || !payloadEl || button.disabled) return;
-    var defaultIcon = button.innerHTML;
+    if (!payloadEl) return;
+    var defaultIcon = button ? button.innerHTML : '';
+    var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
     var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     var payload = JSON.parse(payloadEl.textContent || '{}');
 
@@ -195,6 +196,14 @@
       return token;
     }
 
+    function getLocalDownvotes() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-downvoted') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalDownvotes(list) {
+      try { localStorage.setItem('sm-dd-downvoted', JSON.stringify(list)); } catch (e) {}
+    }
+
     function extractPubDatetime(markdown) {
       var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
       return match ? match[1].trim() : '';
@@ -208,10 +217,19 @@
     }
 
     function setPublishedState(isPublished) {
+      if (!button) return;
       button.dataset.published = isPublished ? '1' : '0';
       button.classList.toggle('is-published', !!isPublished);
       button.innerHTML = isPublished ? publishedIcon : defaultIcon;
       button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
+    }
+
+    function setDownvoteState(isDownvoted) {
+      if (!downvoteButton) return;
+      downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
+      downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
+      downvoteButton.innerHTML = defaultDownvoteIcon;
+      downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
     }
 
     async function fetchExisting(token) {
@@ -233,12 +251,45 @@
       return existing;
     }
 
+    async function fetchVotes(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Votes lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshDownvoteState(token) {
+      var localDownvotes = getLocalDownvotes();
+      var localState = localDownvotes.includes(payload.ddId);
+      setDownvoteState(localState);
+      if (!token) return null;
+      var existing = await fetchVotes(token);
+      var downvoted = false;
+      if (existing && existing.content) {
+        var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        downvoted = (voteState.downvoted || []).includes(payload.ddId);
+        var nextLocal = localDownvotes.filter(function(id) { return id !== payload.ddId; });
+        if (downvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+      }
+      setDownvoteState(downvoted);
+      return existing;
+    }
+
     var cachedToken = sessionStorage.getItem('sm-gh-token');
     if (cachedToken) {
       refreshPublishedState(cachedToken).catch(function(){});
+      refreshDownvoteState(cachedToken).catch(function(){});
+    } else {
+      setDownvoteState(getLocalDownvotes().includes(payload.ddId));
     }
 
-    button.addEventListener('click', async function() {
+    if (button && !button.disabled) button.addEventListener('click', async function() {
       if (button.dataset.busy === '1') return;
       if (!payload.repo || !payload.path || !payload.content) {
         window.alert('Publish payload is missing.');
@@ -290,6 +341,65 @@
       } finally {
         button.style.opacity = '';
         button.dataset.busy = '0';
+      }
+    });
+
+    if (downvoteButton) downvoteButton.addEventListener('click', async function() {
+      if (downvoteButton.dataset.busy === '1') return;
+      if (!payload.votesRepo || !payload.votesPath || !payload.ddId) {
+        window.alert('Downvote payload is missing.');
+        return;
+      }
+      downvoteButton.dataset.busy = '1';
+      downvoteButton.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshDownvoteState(token);
+        var voteState = { downvoted: [] };
+        if (existing && existing.content) {
+          voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        }
+        var list = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+        var idx = list.indexOf(payload.ddId);
+        var isDownvoted = idx >= 0;
+        if (isDownvoted) {
+          list.splice(idx, 1);
+        } else {
+          list.push(payload.ddId);
+        }
+        list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+          .sort(function(a, b) { return a - b; });
+        voteState.downvoted = list;
+        var body = {
+          message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
+          content: toBase64Utf8(JSON.stringify(voteState, null, 2))
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Downvote failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        var nextLocal = getLocalDownvotes().filter(function(id) { return id !== payload.ddId; });
+        if (!isDownvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+        setDownvoteState(!isDownvoted);
+        window.alert(!isDownvoted
+          ? 'Deep dive downvoted. It will appear crossed in the index.'
+          : 'Downvote removed from this deep dive.');
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        downvoteButton.style.opacity = '';
+        downvoteButton.dataset.busy = '0';
       }
     });
   })();

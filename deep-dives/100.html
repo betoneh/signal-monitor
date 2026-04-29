@@ -79,6 +79,7 @@
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
   .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.is-downvoted { color: #ef4444; opacity: 1; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -120,9 +121,7 @@
       <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/deep-dives/100.html" target="_blank" rel="noopener" title="Share on Telegram">
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
-      <a href="mailto:?subject=Who Should Create Money? Full Reserve, CBDC, and the Crypto Bet&body=https://betoneh.github.io/signal-monitor/deep-dives/100.html" title="Share via email">
-        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
-      </a>
+      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M7 10v10"/><path d="M15 5.88l-.94 4.7a2 2 0 0 0 .39 1.62l.55 .73a2 2 0 0 1 .39 1.2v3.87a2 2 0 0 1 -2 2h-7.34a2 2 0 0 1 -1.98 -1.75l-1 -8a2 2 0 0 1 1.98 -2.25h3.34a2 2 0 0 0 1.89 -1.37l1.62 -4.32a1 1 0 0 1 1.9 .57z"/></svg></button>
       <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -139,17 +138,19 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1427</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1438</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "Who Should Create Money? Full Reserve, CBDC, and the Crypto Bet", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/who-should-create-money-full-reserve-cbdc-and-the-crypto-bet.md", "slug": "who-should-create-money-full-reserve-cbdc-and-the-crypto-bet", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/who-should-create-money-full-reserve-cbdc-and-the-crypto-bet", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Who Should Create Money? Full Reserve, CBDC, and the Crypto Bet\"\ndescription: \"Once you understand that private banks create the majority of the money supply, the question of whether this is the right arrangement becomes unavoidable. Th...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"economics\", \"crypto\", \"defi\", \"regulation\", \"governance\", \"stocks_macro\", \"tech\"]\nsource: \"Where Does Money Come From? — Josh Ryan-Collins, Tony Greenham, Richard Werner, Andrew Jackson\"\nsourceUrl: \"https://www.amazon.com/Where-Does-Money-Come-practical/dp/1908506547\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Where Does Money Come From? — Josh Ryan-Collins, Tony Greenham, Richard Werner, Andrew Jackson →](https://www.amazon.com/Where-Does-Money-Come-practical/dp/1908506547)\n\n\nOnce you understand that private banks create the majority of the money supply, the question of whether this is the right arrangement becomes unavoidable. The current system is not a law of nature — it is a set of institutional choices with a history, and it can be redesigned. *Where Does Money Come From?* surveys the reform landscape seriously. In the decade since the book's publication, that landscape has expanded dramatically: central bank digital currencies are now live in several jurisdictions, and Bitcoin has become a multi-trillion-dollar experiment in sovereign-free money creation. The debate the authors raised in 2012 is now being conducted at scale.\n\n**Full reserve banking** — the most radical mainstream proposal — would require banks to hold 100% reserves against deposits, eliminating their ability to create money through lending. Credit would be funded entirely by equity or long-term bonds, not demand deposits. The money supply would be controlled entirely by the state. Proponents argue this would eliminate bank runs, prevent boom-bust credit cycles, and give democratic institutions direct control over money creation. The [Positive Money](https://positivemoney.org/) campaign in the UK has advocated a version of this. The objections are serious: eliminating fractional reserve banking would likely reduce the availability of credit significantly, with uncertain effects on investment and growth. And it would require a political consensus that does not exist.\n\n**Overt Monetary Financing** — sometimes called helicopter money — is a more moderate proposal: have the central bank create money directly to fund government spending, bypassing the bond market. This sidesteps the commercial bank intermediary entirely for fiscal purposes. [During COVID-19](https://www.tandfonline.com/doi/full/10.1080/09538259.2020.1836432), several central banks came close to this in practice, with the Bank of England temporarily extending its Ways and Means facility to the government. The taboo against direct monetary financing is political as much as economic — it is associated with historical hyperinflations that had causes far more complex than the financing mechanism alone.\n\n**Central Bank Digital Currencies** represent the state's answer to the fintech and crypto challenge: a digital form of central bank money accessible directly to individuals and businesses, bypassing commercial banks as intermediaries for basic transactions. [Over 130 countries](https://www.atlanticcouncil.org/cbdctracker/) are now exploring CBDCs at various stages. The design choices are politically charged: a retail CBDC that replaces bank deposits would disintermediate commercial banks, threatening their funding base and their money-creation role. Most central bank proposals have been deliberately limited to avoid this outcome, adding complexity that undermines the simplicity argument for CBDCs in the first place.\n\n**Bitcoin and crypto** represent the most radical departure: money created by protocol, with a fixed issuance schedule, no central bank, and no commercial bank intermediary. The monetary policy is encoded in software and enforced by a decentralized network. This eliminates the democratic legitimacy question — no one controls Bitcoin's money supply — but replaces it with a governance question about who controls protocol changes. Bitcoin's fixed supply is a deliberate rejection of the endogenous money model: instead of money expanding to meet economic demand, the economy must adapt to a fixed monetary stock. Whether this is sound monetary design or [deflationary pathology](https://www.nber.org/papers/w29019) is a live debate among serious economists.\n\nThe convergence is that all serious monetary reform proposals now grapple with the same underlying question the book poses: **who should have the power to create money, and under what constraints?** Central banks, commercial banks, protocols, and DAOs are competing answers to the same question. The technical implementations differ radically, but the political and philosophical stakes are identical. Understanding the mechanics of the current system is the minimum requirement for evaluating any of the alternatives honestly. The reform debate has finally escaped academic obscurity. It is happening now, in real time, with real money.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "Who Should Create Money? Full Reserve, CBDC, and the Crypto Bet", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/who-should-create-money-full-reserve-cbdc-and-the-crypto-bet.md", "slug": "who-should-create-money-full-reserve-cbdc-and-the-crypto-bet", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/who-should-create-money-full-reserve-cbdc-and-the-crypto-bet", "ddId": 100, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Who Should Create Money? Full Reserve, CBDC, and the Crypto Bet\"\ndescription: \"Once you understand that private banks create the majority of the money supply, the question of whether this is the right arrangement becomes unavoidable. Th...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"economics\", \"crypto\", \"defi\", \"regulation\", \"governance\", \"stocks_macro\", \"tech\"]\nsource: \"Where Does Money Come From? — Josh Ryan-Collins, Tony Greenham, Richard Werner, Andrew Jackson\"\nsourceUrl: \"https://www.amazon.com/Where-Does-Money-Come-practical/dp/1908506547\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Where Does Money Come From? — Josh Ryan-Collins, Tony Greenham, Richard Werner, Andrew Jackson →](https://www.amazon.com/Where-Does-Money-Come-practical/dp/1908506547)\n\n\nOnce you understand that private banks create the majority of the money supply, the question of whether this is the right arrangement becomes unavoidable. The current system is not a law of nature — it is a set of institutional choices with a history, and it can be redesigned. *Where Does Money Come From?* surveys the reform landscape seriously. In the decade since the book's publication, that landscape has expanded dramatically: central bank digital currencies are now live in several jurisdictions, and Bitcoin has become a multi-trillion-dollar experiment in sovereign-free money creation. The debate the authors raised in 2012 is now being conducted at scale.\n\n**Full reserve banking** — the most radical mainstream proposal — would require banks to hold 100% reserves against deposits, eliminating their ability to create money through lending. Credit would be funded entirely by equity or long-term bonds, not demand deposits. The money supply would be controlled entirely by the state. Proponents argue this would eliminate bank runs, prevent boom-bust credit cycles, and give democratic institutions direct control over money creation. The [Positive Money](https://positivemoney.org/) campaign in the UK has advocated a version of this. The objections are serious: eliminating fractional reserve banking would likely reduce the availability of credit significantly, with uncertain effects on investment and growth. And it would require a political consensus that does not exist.\n\n**Overt Monetary Financing** — sometimes called helicopter money — is a more moderate proposal: have the central bank create money directly to fund government spending, bypassing the bond market. This sidesteps the commercial bank intermediary entirely for fiscal purposes. [During COVID-19](https://www.tandfonline.com/doi/full/10.1080/09538259.2020.1836432), several central banks came close to this in practice, with the Bank of England temporarily extending its Ways and Means facility to the government. The taboo against direct monetary financing is political as much as economic — it is associated with historical hyperinflations that had causes far more complex than the financing mechanism alone.\n\n**Central Bank Digital Currencies** represent the state's answer to the fintech and crypto challenge: a digital form of central bank money accessible directly to individuals and businesses, bypassing commercial banks as intermediaries for basic transactions. [Over 130 countries](https://www.atlanticcouncil.org/cbdctracker/) are now exploring CBDCs at various stages. The design choices are politically charged: a retail CBDC that replaces bank deposits would disintermediate commercial banks, threatening their funding base and their money-creation role. Most central bank proposals have been deliberately limited to avoid this outcome, adding complexity that undermines the simplicity argument for CBDCs in the first place.\n\n**Bitcoin and crypto** represent the most radical departure: money created by protocol, with a fixed issuance schedule, no central bank, and no commercial bank intermediary. The monetary policy is encoded in software and enforced by a decentralized network. This eliminates the democratic legitimacy question — no one controls Bitcoin's money supply — but replaces it with a governance question about who controls protocol changes. Bitcoin's fixed supply is a deliberate rejection of the endogenous money model: instead of money expanding to meet economic demand, the economy must adapt to a fixed monetary stock. Whether this is sound monetary design or [deflationary pathology](https://www.nber.org/papers/w29019) is a live debate among serious economists.\n\nThe convergence is that all serious monetary reform proposals now grapple with the same underlying question the book poses: **who should have the power to create money, and under what constraints?** Central banks, commercial banks, protocols, and DAOs are competing answers to the same question. The technical implementations differ radically, but the political and philosophical stakes are identical. Understanding the mechanics of the current system is the minimum requirement for evaluating any of the alternatives honestly. The reform debate has finally escaped academic obscurity. It is happening now, in real time, with real money.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
+    var downvoteButton = document.getElementById('downvote-dd-btn');
     var payloadEl = document.getElementById('blog-publish-payload');
-    if (!button || !payloadEl || button.disabled) return;
-    var defaultIcon = button.innerHTML;
+    if (!payloadEl) return;
+    var defaultIcon = button ? button.innerHTML : '';
+    var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
     var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     var payload = JSON.parse(payloadEl.textContent || '{}');
 
@@ -195,6 +196,14 @@
       return token;
     }
 
+    function getLocalDownvotes() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-downvoted') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalDownvotes(list) {
+      try { localStorage.setItem('sm-dd-downvoted', JSON.stringify(list)); } catch (e) {}
+    }
+
     function extractPubDatetime(markdown) {
       var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
       return match ? match[1].trim() : '';
@@ -208,10 +217,19 @@
     }
 
     function setPublishedState(isPublished) {
+      if (!button) return;
       button.dataset.published = isPublished ? '1' : '0';
       button.classList.toggle('is-published', !!isPublished);
       button.innerHTML = isPublished ? publishedIcon : defaultIcon;
       button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
+    }
+
+    function setDownvoteState(isDownvoted) {
+      if (!downvoteButton) return;
+      downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
+      downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
+      downvoteButton.innerHTML = defaultDownvoteIcon;
+      downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
     }
 
     async function fetchExisting(token) {
@@ -233,12 +251,45 @@
       return existing;
     }
 
+    async function fetchVotes(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Votes lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshDownvoteState(token) {
+      var localDownvotes = getLocalDownvotes();
+      var localState = localDownvotes.includes(payload.ddId);
+      setDownvoteState(localState);
+      if (!token) return null;
+      var existing = await fetchVotes(token);
+      var downvoted = false;
+      if (existing && existing.content) {
+        var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        downvoted = (voteState.downvoted || []).includes(payload.ddId);
+        var nextLocal = localDownvotes.filter(function(id) { return id !== payload.ddId; });
+        if (downvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+      }
+      setDownvoteState(downvoted);
+      return existing;
+    }
+
     var cachedToken = sessionStorage.getItem('sm-gh-token');
     if (cachedToken) {
       refreshPublishedState(cachedToken).catch(function(){});
+      refreshDownvoteState(cachedToken).catch(function(){});
+    } else {
+      setDownvoteState(getLocalDownvotes().includes(payload.ddId));
     }
 
-    button.addEventListener('click', async function() {
+    if (button && !button.disabled) button.addEventListener('click', async function() {
       if (button.dataset.busy === '1') return;
       if (!payload.repo || !payload.path || !payload.content) {
         window.alert('Publish payload is missing.');
@@ -290,6 +341,65 @@
       } finally {
         button.style.opacity = '';
         button.dataset.busy = '0';
+      }
+    });
+
+    if (downvoteButton) downvoteButton.addEventListener('click', async function() {
+      if (downvoteButton.dataset.busy === '1') return;
+      if (!payload.votesRepo || !payload.votesPath || !payload.ddId) {
+        window.alert('Downvote payload is missing.');
+        return;
+      }
+      downvoteButton.dataset.busy = '1';
+      downvoteButton.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshDownvoteState(token);
+        var voteState = { downvoted: [] };
+        if (existing && existing.content) {
+          voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        }
+        var list = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+        var idx = list.indexOf(payload.ddId);
+        var isDownvoted = idx >= 0;
+        if (isDownvoted) {
+          list.splice(idx, 1);
+        } else {
+          list.push(payload.ddId);
+        }
+        list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+          .sort(function(a, b) { return a - b; });
+        voteState.downvoted = list;
+        var body = {
+          message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
+          content: toBase64Utf8(JSON.stringify(voteState, null, 2))
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Downvote failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        var nextLocal = getLocalDownvotes().filter(function(id) { return id !== payload.ddId; });
+        if (!isDownvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+        setDownvoteState(!isDownvoted);
+        window.alert(!isDownvoted
+          ? 'Deep dive downvoted. It will appear crossed in the index.'
+          : 'Downvote removed from this deep dive.');
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        downvoteButton.style.opacity = '';
+        downvoteButton.dataset.busy = '0';
       }
     });
   })();

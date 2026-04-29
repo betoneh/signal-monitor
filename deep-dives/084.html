@@ -79,6 +79,7 @@
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
   .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.is-downvoted { color: #ef4444; opacity: 1; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -120,9 +121,7 @@
       <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/deep-dives/084.html" target="_blank" rel="noopener" title="Share on Telegram">
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
-      <a href="mailto:?subject=ZK Proofs as Democratic Infrastructure: Privacy Without Anarchy&body=https://betoneh.github.io/signal-monitor/deep-dives/084.html" title="Share via email">
-        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
-      </a>
+      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M7 10v10"/><path d="M15 5.88l-.94 4.7a2 2 0 0 0 .39 1.62l.55 .73a2 2 0 0 1 .39 1.2v3.87a2 2 0 0 1 -2 2h-7.34a2 2 0 0 1 -1.98 -1.75l-1 -8a2 2 0 0 1 1.98 -2.25h3.34a2 2 0 0 0 1.89 -1.37l1.62 -4.32a1 1 0 0 1 1.9 .57z"/></svg></button>
       <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -139,17 +138,19 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1427</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1438</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "ZK Proofs as Democratic Infrastructure: Privacy Without Anarchy", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/zk-proofs-as-democratic-infrastructure-privacy-without-anarchy.md", "slug": "zk-proofs-as-democratic-infrastructure-privacy-without-anarchy", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/zk-proofs-as-democratic-infrastructure-privacy-without-anarchy", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"ZK Proofs as Democratic Infrastructure: Privacy Without Anarchy\"\ndescription: \"The classic tradeoff between privacy and security goes like this: to prevent fraud, spam, and abuse, systems need to know who you are. But knowing who you ar...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"crypto\", \"tech\", \"privacy\", \"governance\", \"zero-knowledge\", \"democracy\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nThe classic tradeoff between privacy and security goes like this: to prevent fraud, spam, and abuse, systems need to know who you are. But knowing who you are enables surveillance. The more a system can verify your identity, the more it can track your behavior. Privacy and security pull in opposite directions — or so the conventional wisdom goes. [Zero-knowledge proofs](https://en.wikipedia.org/wiki/Zero-knowledge_proof) are a mathematical technique that systematically breaks this tradeoff, and Vitalik Buterin argues in his d/acc manifesto that they represent some of the most important infrastructure we can build for the 21st century.\n\nA zero-knowledge proof allows you to prove that a statement is true without revealing anything about *why* it's true. The canonical example: you can prove you know a password without revealing the password. More practically for political applications: you can prove you are a unique citizen of a given country without revealing which citizen you are. You can prove you are over 18 without revealing your birthdate. You can prove you hold a valid credential without exposing the credential itself. You can prove membership in a group without exposing which group member you are. These are not theoretical capabilities — [Zupass](https://zupass.org/), deployed at real events with thousands of users, already does this.\n\nButerin's specific design proposal illustrates the power: wrap a [digital passport signature](https://crypto.stackexchange.com/questions/75058/using-epassport-with-active-chip-authentication-to-sign-documents) in a ZK-SNARK to prove you are a unique citizen without revealing which citizen. Apply this to voting: you get anonymous voting — a property already considered [essential to democracy for centuries](https://en.wikipedia.org/wiki/Secret_ballot) — combined with cryptographically verifiable eligibility. No election authority needs to know how any individual voted, and no one can vote twice. The security properties exceed anything current paper-based systems provide, and the privacy properties are mathematically guaranteed rather than procedurally hoped for.\n\nThe applications extend far beyond voting. ZK proofs can enable anti-spam mechanisms that don't require identity exposure: prove you've paid a small fee (making mass spam expensive) without revealing who you are. They can enable [proof-of-work equivalents that scale](https://ethresear.ch/t/conditional-proof-of-stake-hashcash/1301) without mining. They can enable selective disclosure in financial systems: prove your net worth exceeds a threshold for a loan application without revealing your bank balance. They can enable decentralized moderation systems where users can be penalized for rule violations — without moderators ever knowing users' real identities.\n\nWhat makes ZK proofs specifically d/acc rather than merely interesting cryptography is their structural position: they enable verification without surveillance. Every system that currently requires identity to achieve security is a potential surveillance infrastructure. ZK proofs allow those systems to achieve the security goals without building the surveillance infrastructure. That's not a marginal improvement — it's a phase transition in what kinds of institutions are possible. A world where you can participate in financial systems, governance systems, and social systems without leaving a trail of identity data is a world that is structurally more resistant to authoritarian control than one where identity verification requires identity exposure.\n\nThe gap between the theoretical capability and widespread deployment is a pure funding and coordination problem. The cryptography is mature. The open-source implementations exist. What's missing is investment in making these tools default in browsers, wallets, and government systems — and the political will to insist on privacy-preserving verification rather than identity-exposure verification when both are technically available. That's a choice, and it's one the next decade will make.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "ZK Proofs as Democratic Infrastructure: Privacy Without Anarchy", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/zk-proofs-as-democratic-infrastructure-privacy-without-anarchy.md", "slug": "zk-proofs-as-democratic-infrastructure-privacy-without-anarchy", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/zk-proofs-as-democratic-infrastructure-privacy-without-anarchy", "ddId": 84, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"ZK Proofs as Democratic Infrastructure: Privacy Without Anarchy\"\ndescription: \"The classic tradeoff between privacy and security goes like this: to prevent fraud, spam, and abuse, systems need to know who you are. But knowing who you ar...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"crypto\", \"tech\", \"privacy\", \"governance\", \"zero-knowledge\", \"democracy\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nThe classic tradeoff between privacy and security goes like this: to prevent fraud, spam, and abuse, systems need to know who you are. But knowing who you are enables surveillance. The more a system can verify your identity, the more it can track your behavior. Privacy and security pull in opposite directions — or so the conventional wisdom goes. [Zero-knowledge proofs](https://en.wikipedia.org/wiki/Zero-knowledge_proof) are a mathematical technique that systematically breaks this tradeoff, and Vitalik Buterin argues in his d/acc manifesto that they represent some of the most important infrastructure we can build for the 21st century.\n\nA zero-knowledge proof allows you to prove that a statement is true without revealing anything about *why* it's true. The canonical example: you can prove you know a password without revealing the password. More practically for political applications: you can prove you are a unique citizen of a given country without revealing which citizen you are. You can prove you are over 18 without revealing your birthdate. You can prove you hold a valid credential without exposing the credential itself. You can prove membership in a group without exposing which group member you are. These are not theoretical capabilities — [Zupass](https://zupass.org/), deployed at real events with thousands of users, already does this.\n\nButerin's specific design proposal illustrates the power: wrap a [digital passport signature](https://crypto.stackexchange.com/questions/75058/using-epassport-with-active-chip-authentication-to-sign-documents) in a ZK-SNARK to prove you are a unique citizen without revealing which citizen. Apply this to voting: you get anonymous voting — a property already considered [essential to democracy for centuries](https://en.wikipedia.org/wiki/Secret_ballot) — combined with cryptographically verifiable eligibility. No election authority needs to know how any individual voted, and no one can vote twice. The security properties exceed anything current paper-based systems provide, and the privacy properties are mathematically guaranteed rather than procedurally hoped for.\n\nThe applications extend far beyond voting. ZK proofs can enable anti-spam mechanisms that don't require identity exposure: prove you've paid a small fee (making mass spam expensive) without revealing who you are. They can enable [proof-of-work equivalents that scale](https://ethresear.ch/t/conditional-proof-of-stake-hashcash/1301) without mining. They can enable selective disclosure in financial systems: prove your net worth exceeds a threshold for a loan application without revealing your bank balance. They can enable decentralized moderation systems where users can be penalized for rule violations — without moderators ever knowing users' real identities.\n\nWhat makes ZK proofs specifically d/acc rather than merely interesting cryptography is their structural position: they enable verification without surveillance. Every system that currently requires identity to achieve security is a potential surveillance infrastructure. ZK proofs allow those systems to achieve the security goals without building the surveillance infrastructure. That's not a marginal improvement — it's a phase transition in what kinds of institutions are possible. A world where you can participate in financial systems, governance systems, and social systems without leaving a trail of identity data is a world that is structurally more resistant to authoritarian control than one where identity verification requires identity exposure.\n\nThe gap between the theoretical capability and widespread deployment is a pure funding and coordination problem. The cryptography is mature. The open-source implementations exist. What's missing is investment in making these tools default in browsers, wallets, and government systems — and the political will to insist on privacy-preserving verification rather than identity-exposure verification when both are technically available. That's a choice, and it's one the next decade will make.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
+    var downvoteButton = document.getElementById('downvote-dd-btn');
     var payloadEl = document.getElementById('blog-publish-payload');
-    if (!button || !payloadEl || button.disabled) return;
-    var defaultIcon = button.innerHTML;
+    if (!payloadEl) return;
+    var defaultIcon = button ? button.innerHTML : '';
+    var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
     var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     var payload = JSON.parse(payloadEl.textContent || '{}');
 
@@ -195,6 +196,14 @@
       return token;
     }
 
+    function getLocalDownvotes() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-downvoted') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalDownvotes(list) {
+      try { localStorage.setItem('sm-dd-downvoted', JSON.stringify(list)); } catch (e) {}
+    }
+
     function extractPubDatetime(markdown) {
       var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
       return match ? match[1].trim() : '';
@@ -208,10 +217,19 @@
     }
 
     function setPublishedState(isPublished) {
+      if (!button) return;
       button.dataset.published = isPublished ? '1' : '0';
       button.classList.toggle('is-published', !!isPublished);
       button.innerHTML = isPublished ? publishedIcon : defaultIcon;
       button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
+    }
+
+    function setDownvoteState(isDownvoted) {
+      if (!downvoteButton) return;
+      downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
+      downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
+      downvoteButton.innerHTML = defaultDownvoteIcon;
+      downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
     }
 
     async function fetchExisting(token) {
@@ -233,12 +251,45 @@
       return existing;
     }
 
+    async function fetchVotes(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Votes lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshDownvoteState(token) {
+      var localDownvotes = getLocalDownvotes();
+      var localState = localDownvotes.includes(payload.ddId);
+      setDownvoteState(localState);
+      if (!token) return null;
+      var existing = await fetchVotes(token);
+      var downvoted = false;
+      if (existing && existing.content) {
+        var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        downvoted = (voteState.downvoted || []).includes(payload.ddId);
+        var nextLocal = localDownvotes.filter(function(id) { return id !== payload.ddId; });
+        if (downvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+      }
+      setDownvoteState(downvoted);
+      return existing;
+    }
+
     var cachedToken = sessionStorage.getItem('sm-gh-token');
     if (cachedToken) {
       refreshPublishedState(cachedToken).catch(function(){});
+      refreshDownvoteState(cachedToken).catch(function(){});
+    } else {
+      setDownvoteState(getLocalDownvotes().includes(payload.ddId));
     }
 
-    button.addEventListener('click', async function() {
+    if (button && !button.disabled) button.addEventListener('click', async function() {
       if (button.dataset.busy === '1') return;
       if (!payload.repo || !payload.path || !payload.content) {
         window.alert('Publish payload is missing.');
@@ -290,6 +341,65 @@
       } finally {
         button.style.opacity = '';
         button.dataset.busy = '0';
+      }
+    });
+
+    if (downvoteButton) downvoteButton.addEventListener('click', async function() {
+      if (downvoteButton.dataset.busy === '1') return;
+      if (!payload.votesRepo || !payload.votesPath || !payload.ddId) {
+        window.alert('Downvote payload is missing.');
+        return;
+      }
+      downvoteButton.dataset.busy = '1';
+      downvoteButton.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshDownvoteState(token);
+        var voteState = { downvoted: [] };
+        if (existing && existing.content) {
+          voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        }
+        var list = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+        var idx = list.indexOf(payload.ddId);
+        var isDownvoted = idx >= 0;
+        if (isDownvoted) {
+          list.splice(idx, 1);
+        } else {
+          list.push(payload.ddId);
+        }
+        list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+          .sort(function(a, b) { return a - b; });
+        voteState.downvoted = list;
+        var body = {
+          message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
+          content: toBase64Utf8(JSON.stringify(voteState, null, 2))
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Downvote failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        var nextLocal = getLocalDownvotes().filter(function(id) { return id !== payload.ddId; });
+        if (!isDownvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+        setDownvoteState(!isDownvoted);
+        window.alert(!isDownvoted
+          ? 'Deep dive downvoted. It will appear crossed in the index.'
+          : 'Downvote removed from this deep dive.');
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        downvoteButton.style.opacity = '';
+        downvoteButton.dataset.busy = '0';
       }
     });
   })();
