@@ -241,17 +241,13 @@
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
   .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.deepdive-publish-btn { color: #eab308; opacity: 1; }
+  .share-icons button.deepdive-publish-btn:hover { color: #facc15; }
+  .share-icons button.deepdive-publish-btn.is-published { color: #eab308; opacity: 1; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
     .share-icons a, .share-icons button { padding: 0.5rem; }
-  }
-  .deepdive-publish-row {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.5rem; margin: 1.25rem 0 0; text-align: center;
-  }
-  .deepdive-publish-label {
-    font-style: italic; color: #eaedf3; font-size: 0.875rem;
   }
   .back-top-btn {
     background: none; border: none; cursor: pointer; color: #eaedf3;
@@ -345,7 +341,6 @@
     </div>
     <div class="deepdive-source">Source: <a href="https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html" target="_blank">My Techno-Optimism — Vitalik Buterin</a> · KB #14</div>
     <div class="editorial"><p>How seriously should you take a threat if experts give it a 5-10% probability of killing everyone? The intuitive answer is: not that seriously — 90-95% is a good chance it doesn't happen, and we live with small risks constantly. But this intuition breaks down when the outcome is irreversible extinction. The math of expected value applied to existential risk produces conclusions that feel disproportionate to everyday intuition, and understanding why is essential to evaluating whether AI safety concerns deserve the attention they're getting.</p><p>A <a href="https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/#Extinction_from_AI" target="_blank">2022 survey of machine learning researchers</a> — not doomer activists, but working AI scientists — found a median estimate of 5-10% probability that AI will cause human extinction or comparably catastrophic outcomes. Vitalik Buterin notes in his d/acc manifesto that this is roughly the same probability that the average person will die from an accidental non-biological cause during their lifetime. We treat accident risk seriously: we wear seatbelts, build safety regulations, litigate liability. We should probably apply similar seriousness to a risk of similar magnitude that ends humanity rather than one person.</p><p>The standard counterargument is that these probability estimates are wildly speculative — we're talking about events decades in the future, involving technologies that don't exist yet, based on philosophical arguments about the nature of optimization. That's fair. But Buterin's response is equally fair: these arguments have been around for over a decade and have survived sustained scrutiny from smart critics without being clearly refuted. "I don't think this is true" and "this is definitely not true" are very different epistemic states, and we are firmly in the former. Epistemic uncertainty at 5-10% is not the same as dismissal.</p><p>The asymmetry argument is the decisive one. Consider two scenarios: in the first, we take existential risk seriously, invest heavily in safety research and defensive technologies, and it turns out the risk was overstated — we wasted some resources but humanity thrives. In the second, we dismiss the risk, invest in capabilities without adequate safety work, and the 5-10% scenario materializes — humanity is gone, permanently. The cost of false alarm is bounded: some resources misdirected, some development slowed. The cost of false dismissal is unbounded: not just bad, but permanently bad, with no future generations to eventually fix the problem. Under this asymmetry, even relatively low probability of extinction justifies relatively high precaution.</p><p>This expected-value framing also explains why even people who place much lower probability estimates on AI doom — say, 1% or even 0.1% — might rationally support significant investment in safety. The expected number of lives at stake when you multiply even small probabilities by the 8 billion humans alive today, plus all potential future generations, produces numbers that dwarf any other intervention available. <a href="https://www.effectivealtruism.org/" target="_blank">Effective altruist</a> frameworks have driven this calculation explicitly, which is why many EA-aligned actors have prioritized AI safety over more tractable near-term interventions.</p><p>Buterin's practical conclusion is not "stop AI" but "take safety seriously in proportion to the stakes." The current governance structures — a few nonprofit boards, voluntary commitments from labs, emerging regulatory frameworks that may not survive contact with commercial pressure — are clearly inadequate for a technology with this risk profile. We don't rely on voluntary commitments from aircraft manufacturers to ensure planes don't fall out of the sky. The question is what adequate governance for existential risk actually looks like, and that's a harder problem than the math — but the math at least makes clear that solving the governance problem is worth significant investment.</p></div>
-    <div class="deepdive-publish-row"><div class="deepdive-publish-label">Publish this deep dive to blog:</div><div class="share-icons"><button id="report-publish-blog-btn" title="Publish this deep dive to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button></div></div>
   </div>
 
   <div class="noise">📡 noise (7d): <a href="https://x.com/cabelaschmitt" target="_blank">@cabelaschmitt</a> 6/6 (100%) · <a href="https://x.com/rogueducknet" target="_blank">@rogueducknet</a> 5/5 (100%) · <a href="https://x.com/paragonfgc" target="_blank">@paragonfgc</a> 5/5 (100%) · <a href="https://x.com/philipjohnston" target="_blank">@philipjohnston</a> 6/7 (86%) · <a href="https://x.com/zoink" target="_blank">@zoink</a> 4/5 (80%)</div>
@@ -369,6 +364,7 @@
         <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'},1500)})" title="Copy link">
           <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
         </button>
+        <button id="report-publish-blog-btn" class="deepdive-publish-btn" title="Publish this deep dive to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       </div>
     </div>
     <div style="width:100%;text-align:center;margin-top:0.5rem;">
