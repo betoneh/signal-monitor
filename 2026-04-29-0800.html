@@ -239,6 +239,8 @@
     transition: color 0.15s, transform 0.15s; opacity: 0.9;
   }
   .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
   .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   @media (min-width: 640px) {
     .share-icons svg { width: 1.5rem; height: 1.5rem; }
@@ -356,6 +358,7 @@
         <a href="mailto:?subject=Signal%20Monitor%202026-04-29-0800&body=https://betoneh.github.io/signal-monitor/2026-04-29-0800.html" title="Share via email">
           <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
         </a>
+        <button id="report-publish-blog-btn" title="Publish this deep dive to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
         <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'},1500)})" title="Copy link">
           <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
         </button>
@@ -448,6 +451,131 @@
       if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
     });
   }
+</script>
+
+<script id="report-blog-publish-payload" type="application/json">{"title": "Existential Risk Math: When 5-10% Probability of Doom Demands Action", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/existential-risk-math-when-5-10-probability-of-doom-demands-action.md", "slug": "existential-risk-math-when-5-10-probability-of-doom-demands-action", "blogUrl": "https://betoneh.vercel.app/deep-dives/existential-risk-math-when-5-10-probability-of-doom-demands-action", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Existential Risk Math: When 5-10% Probability of Doom Demands Action\"\ndescription: \"How seriously should you take a threat if experts give it a 5-10% probability of killing everyone? The intuitive answer is: not that seriously — 90-95% is a...\"\npubDatetime: 2026-04-02T00:00:00\ntags: [\"ai\", \"tech\", \"existential-risk\", \"ai-alignment\", \"governance\", \"effective-altruism\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nHow seriously should you take a threat if experts give it a 5-10% probability of killing everyone? The intuitive answer is: not that seriously — 90-95% is a good chance it doesn't happen, and we live with small risks constantly. But this intuition breaks down when the outcome is irreversible extinction. The math of expected value applied to existential risk produces conclusions that feel disproportionate to everyday intuition, and understanding why is essential to evaluating whether AI safety concerns deserve the attention they're getting.\n\nA [2022 survey of machine learning researchers](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/#Extinction_from_AI) — not doomer activists, but working AI scientists — found a median estimate of 5-10% probability that AI will cause human extinction or comparably catastrophic outcomes. Vitalik Buterin notes in his d/acc manifesto that this is roughly the same probability that the average person will die from an accidental non-biological cause during their lifetime. We treat accident risk seriously: we wear seatbelts, build safety regulations, litigate liability. We should probably apply similar seriousness to a risk of similar magnitude that ends humanity rather than one person.\n\nThe standard counterargument is that these probability estimates are wildly speculative — we're talking about events decades in the future, involving technologies that don't exist yet, based on philosophical arguments about the nature of optimization. That's fair. But Buterin's response is equally fair: these arguments have been around for over a decade and have survived sustained scrutiny from smart critics without being clearly refuted. \"I don't think this is true\" and \"this is definitely not true\" are very different epistemic states, and we are firmly in the former. Epistemic uncertainty at 5-10% is not the same as dismissal.\n\nThe asymmetry argument is the decisive one. Consider two scenarios: in the first, we take existential risk seriously, invest heavily in safety research and defensive technologies, and it turns out the risk was overstated — we wasted some resources but humanity thrives. In the second, we dismiss the risk, invest in capabilities without adequate safety work, and the 5-10% scenario materializes — humanity is gone, permanently. The cost of false alarm is bounded: some resources misdirected, some development slowed. The cost of false dismissal is unbounded: not just bad, but permanently bad, with no future generations to eventually fix the problem. Under this asymmetry, even relatively low probability of extinction justifies relatively high precaution.\n\nThis expected-value framing also explains why even people who place much lower probability estimates on AI doom — say, 1% or even 0.1% — might rationally support significant investment in safety. The expected number of lives at stake when you multiply even small probabilities by the 8 billion humans alive today, plus all potential future generations, produces numbers that dwarf any other intervention available. [Effective altruist](https://www.effectivealtruism.org/) frameworks have driven this calculation explicitly, which is why many EA-aligned actors have prioritized AI safety over more tractable near-term interventions.\n\nButerin's practical conclusion is not \"stop AI\" but \"take safety seriously in proportion to the stakes.\" The current governance structures — a few nonprofit boards, voluntary commitments from labs, emerging regulatory frameworks that may not survive contact with commercial pressure — are clearly inadequate for a technology with this risk profile. We don't rely on voluntary commitments from aircraft manufacturers to ensure planes don't fall out of the sky. The question is what adequate governance for existential risk actually looks like, and that's a harder problem than the math — but the math at least makes clear that solving the governance problem is worth significant investment.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('report-publish-blog-btn');
+    var payloadEl = document.getElementById('report-blog-publish-payload');
+    if (!button || !payloadEl || button.disabled) return;
+    var defaultIcon = button.innerHTML;
+    var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    function setPublishedState(isPublished) {
+      button.dataset.published = isPublished ? '1' : '0';
+      button.classList.toggle('is-published', !!isPublished);
+      button.innerHTML = isPublished ? publishedIcon : defaultIcon;
+      button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish this deep dive to blog deep dives';
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshPublishedState(token) {
+      if (!token) return null;
+      var existing = await fetchExisting(token);
+      setPublishedState(!!existing);
+      return existing;
+    }
+
+    var cachedToken = sessionStorage.getItem('sm-gh-token');
+    if (cachedToken) {
+      refreshPublishedState(cachedToken).catch(function(){});
+    }
+
+    button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshPublishedState(token);
+        var confirmMessage = existing
+          ? 'This deep dive is already on the blog. Update it?'
+          : 'Publish this deep dive to the blog?';
+        if (!window.confirm(confirmMessage)) {
+          button.dataset.busy = '0';
+          button.style.opacity = '';
+          return;
+        }
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(payload.content)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        setPublishedState(true);
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        button.style.opacity = '';
+        button.dataset.busy = '0';
+      }
+    });
+  })();
 </script>
 </body>
 </html>
