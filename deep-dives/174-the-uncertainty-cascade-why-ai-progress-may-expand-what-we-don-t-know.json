@@ -1,0 +1,21 @@
+{
+  "id": 174,
+  "title": "The Uncertainty Cascade: Why AI Progress May Expand What We Don't Know",
+  "source": {
+    "kb_entry": "our-uncertain-uncertainties-kevin-kelly",
+    "original": "Our Uncertain Uncertainties — Kevin Kelly",
+    "url": "https://kevinkelly.substack.com/p/our-uncertain-uncertainties"
+  },
+  "body_html": "<p>The prevailing assumption in tech and policy circles is that the next three years will bring clarity on AI's biggest questions—whether AGI is achievable, how employment will shift, and whether the massive capital investments will pay off. But there's a compelling counter-scenario: AI continues to advance rapidly, yet each advance generates entirely new categories of confusion rather than resolving existing ones. The new is new <em>in a new way</em>, forcing us to redefine the very concepts—employment, productivity, intelligence—we're trying to measure.</p><p>This isn't a stagnation thesis. It's something more disorienting. Imagine AI keeps surprising us at its core, but the surprises don't converge toward answers. Instead, they fracture into novel questions that existing frameworks can't absorb. Our metrics for economic output were built for an industrial and information economy; they may simply fail to capture what an AI-saturated economy is doing. Employment statistics might spike in both directions simultaneously as entire job categories dissolve while strange new ones emerge faster than the Bureau of Labor Statistics can classify them.</p><p>Kevin Kelly calls this an <strong>uncertainty cascade</strong>—a state where progress itself is the engine of confusion. The analogy isn't a fog that lifts with time, but a fog that thickens the faster you drive. By 2029, we may still be unable to say definitively whether AGI has arrived, because the definition of AGI will have shifted underfoot. High-profile AI researchers could remain in irreconcilable disagreement, not out of ignorance but because the phenomenon they're studying keeps shapeshifting.</p><p>For strategists and decision-makers, this reframes the planning horizon dramatically. If clarity isn't coming in three years—or even ten—then bets premised on resolution carry enormous hidden risk. The organizations and individuals best positioned may not be those with the strongest convictions, but those with the most robust capacity to operate amid persistent, compounding ambiguity. The uncertainty isn't a bug in the forecast; it <em>is</em> the forecast.</p>",
+  "tags": [
+    "ai-uncertainty",
+    "agi-debate",
+    "scenario-planning",
+    "uncertainty-cascade",
+    "forecasting",
+    "technology-strategy"
+  ],
+  "word_count": 314,
+  "used_dates": [],
+  "created_date": "2026-04-28"
+}
