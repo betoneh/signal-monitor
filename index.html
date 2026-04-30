@@ -199,6 +199,12 @@
             color: #8b949e;
             line-height: 1.25rem;
         }
+        .dd-split-counts {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            height: 24px;
+        }
         .dd-split-toggle {
             cursor: pointer;
             list-style: none;
@@ -234,6 +240,12 @@
         .dd-split-section[data-dd-key="state:read"] > .dd-split-toggle .dd-split-count,
         .dd-split-section[data-dd-key="state:unread"] > .dd-split-toggle .dd-split-count {
             color: #8b949e;
+        }
+        .dd-split-section[data-dd-key="state:read"] > .dd-split-toggle .dd-split-count-normal {
+            color: #eab308;
+        }
+        .dd-split-section[data-dd-key="state:read"] > .dd-split-toggle .dd-split-count-downvoted {
+            color: #ef4444;
         }
         details[open] > .dd-split-toggle .dd-split-icon {
             transform: rotate(90deg);
@@ -2165,7 +2177,7 @@
 <div class="hr"><hr></div>
 
 <footer>
-    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <span class="build-version" title="Generated build version">Build 20260429-1822</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <span class="build-version" title="Generated build version">Build 20260429-1824</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 
 </div><!-- /app -->
@@ -2297,6 +2309,8 @@
         const readItems = items
             .filter(el => el.dataset.origReport === 'true')
             .sort((a, b) => parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId));
+        const readDownvotedCount = readItems.filter(el => el.classList.contains('is-downvoted')).length;
+        const readNormalCount = readItems.length - readDownvotedCount;
 
         root.replaceChildren();
 
@@ -2314,7 +2328,10 @@
                 </svg>
                 <span class="dd-split-label">Read</span>
             </span>
-            <span class="dd-split-count">${readItems.length}</span>
+            <span class="dd-split-counts">
+                <span class="dd-split-count dd-split-count-normal" title="Read">${readNormalCount}</span>
+                <span class="dd-split-count dd-split-count-downvoted" title="Read downvoted">${readDownvotedCount}</span>
+            </span>
         `;
         readSection.appendChild(readSummary);
         if (readItems.length) {
