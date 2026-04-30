@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#212737">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Signal Monitor — 2026-04-30-0800</title>
+<style>
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; display: flex; flex-direction: column;
+    overflow-y: scroll; scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  a { outline-offset: 1px; outline-color: rgba(14, 196, 169, 0.75); }
+  a:focus-visible { outline: 2px dashed rgba(14, 196, 169, 0.75); text-decoration: none; }
+
+  header, main, footer {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem;
+  }
+  header { padding: 2rem 1rem 1.5rem; }
+  .title-row {
+    display: flex; align-items: baseline; gap: 0.75rem;
+  }
+  .site-title {
+    display: inline-block;
+    font-size: 1.875rem; font-weight: 700; color: #0ec4a9; text-decoration: none;
+  }
+  @media (min-width: 640px) { .site-title { font-size: 2.25rem; } }
+  .site-title:hover { color: #0ec4a9; }
+  .feed-badge {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.4);
+    font-weight: 400;
+  }
+  .header-meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 0.5rem; margin-bottom: 1.5rem;
+  }
+  .header-meta .date-wrap {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.875rem; color: #eaedf3; opacity: 0.8; font-style: italic;
+  }
+  @media (min-width: 640px) { .header-meta .date-wrap { font-size: 1rem; } }
+  .header-meta .date-wrap svg {
+    display: inline-block; width: 1.25rem; height: 1.25rem; min-width: 1.25rem; flex-shrink: 0;
+  }
+  .header-meta .sep { color: rgba(234, 237, 243, 0.3); }
+  .header-meta .reading-time {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.6);
+  }
+
+  .model-meta { font-size: 0.75rem; color: rgba(234, 237, 243, 0.4); margin-top: 0.25rem; letter-spacing: 0.01em; }
+
+  .stats { font-size: 0.75rem; color: #8b949e; margin-top: 0.5rem; line-height: 1.6; }
+
+  .hr { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  .hr hr { border: none; border-top: 1px solid #0a8f7b; }
+
+  main { flex: 1; }
+
+  .category { margin-bottom: 2rem; }
+  .category-header {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.75rem; padding-bottom: 0.5rem;
+    border-bottom: 1px solid #0a8f7b;
+  }
+  .category-header h2 { font-size: 1.25rem; font-weight: 600; color: #eaedf3; }
+  .category-count {
+    font-size: 0.75rem; color: #8b949e;
+    background: rgba(52, 63, 96, 0.75); padding: 1px 8px; border-radius: 3px;
+  }
+
+  .cat-crypto .category-header { border-color: #f7931a; }
+  .cat-crypto .category-header h2 { color: #f7931a; }
+  .cat-ai .category-header { border-color: #0ec4a9; }
+  .cat-ai .category-header h2 { color: #0ec4a9; }
+  .cat-tech .category-header { border-color: #8b5cf6; }
+  .cat-tech .category-header h2 { color: #8b5cf6; }
+  .cat-stocks_macro .category-header { border-color: #ef4444; }
+  .cat-stocks_macro .category-header h2 { color: #ef4444; }
+  .cat-israel .category-header { border-color: #3b82f6; }
+  .cat-israel .category-header h2 { color: #3b82f6; }
+  .cat-openclaw .category-header { border-color: #FF4500; }
+  .cat-openclaw .category-header h2 { color: #FF4500; }
+
+  .editorial {
+    line-height: 1.75; font-size: 1rem; margin-bottom: 1rem;
+    overflow-wrap: break-word; word-break: break-word;
+    color: #eaedf3;
+  }
+  .editorial p {
+    margin-bottom: 0.75rem; line-height: 1.75;
+  }
+  .editorial p:last-child { margin-bottom: 0; }
+
+  a {
+    color: #0ec4a9; text-decoration: none;
+  }
+  a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .editorial a {
+    color: #0ec4a9; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 8px;
+  }
+  .editorial a:hover { text-decoration-color: #eaedf3; }
+
+  .tweets { display: flex; flex-direction: column; gap: 0.75rem; }
+  .tweet {
+    background: rgba(52, 63, 96, 0.35);
+    border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.875rem 1rem;
+    overflow: hidden; max-width: 100%;
+  }
+  @media (hover:hover) { .tweet:hover { border-color: #0ec4a9; } }
+  .tweet.priority { border-left: 3px solid #0ec4a9; }
+
+  .tweet-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+  .tweet-author { font-weight: 600; font-size: 0.85rem; color: #eaedf3; }
+  .tweet-handle { color: #8b949e; font-size: 0.8rem; font-weight: 400; }
+  .tweet-handle a { color: #8b949e; text-decoration: none; }
+  .tweet-handle a:hover { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; }
+  .tweet-time { font-size: 0.75rem; color: #8b949e; }
+
+  .tweet-text {
+    font-size: 0.85rem; line-height: 1.65; margin-bottom: 0.5rem;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .tweet-text a { text-decoration: none; }
+  .tweet-text a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .tweet-media {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px; margin-bottom: 0.5rem; overflow: hidden;
+  }
+  .tweet-media img {
+    width: 100%; max-width: 100%; border-radius: 4px;
+    border: 1px solid rgba(10, 143, 123, 0.3);
+  }
+
+  .tweet-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: #8b949e;
+  }
+  .tweet-metrics { display: flex; gap: 1rem; }
+  .tweet-link a { font-size: 0.75rem; }
+
+  .retweet-badge {
+    background: rgba(52, 63, 96, 0.75); color: #8b949e;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem;
+    margin-bottom: 0.5rem; display: inline-block;
+  }
+  .priority-badge {
+    background: #0ec4a9; color: #212737;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; margin-left: 0.5rem;
+  }
+
+  .noise {
+    font-size: 0.75rem; color: #8b949e; margin: 2rem 0 1rem;
+    padding: 0.75rem 1rem; background: rgba(52, 63, 96, 0.35); border-radius: 4px;
+  }
+  .noise a { color: #0ec4a9; text-decoration: none; font-size: 0.75rem; }
+  .noise a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .audio-row {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem 1.5rem;
+  }
+  .audio-player {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: rgba(52, 63, 96, 0.35); border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.625rem 1rem;
+  }
+  .audio-player:hover { border-color: #0ec4a9; }
+  .audio-btn {
+    background: none; border: none; cursor: pointer;
+    color: #0ec4a9; font-size: 1.25rem; padding: 0; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; flex-shrink: 0;
+  }
+  .audio-btn:hover { color: #eaedf3; }
+  .audio-progress {
+    flex: 1; height: 3px; background: rgba(52, 63, 96, 0.75);
+    border-radius: 2px; cursor: pointer; position: relative;
+  }
+  .audio-progress-fill {
+    height: 100%; background: #0ec4a9; border-radius: 2px;
+    width: 0%; transition: width 100ms linear;
+  }
+  .audio-time {
+    font-size: 0.75rem; color: #8b949e; min-width: 3.5rem; text-align: right;
+  }
+  .audio-speed {
+    font-size: 0.7rem; color: #8b949e; background: rgba(52, 63, 96, 0.75);
+    border: none; border-radius: 3px; padding: 2px 6px; cursor: pointer;
+  }
+  .audio-speed:hover { color: #0ec4a9; }
+
+  footer { padding: 1.5rem 1rem; }
+  .footer-text {
+    text-align: center; font-size: 0.75rem; color: #8b949e; line-height: 1.6;
+  }
+  .footer-text a {
+    color: #eaedf3; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 4px;
+  }
+  .footer-text a:hover { color: #0ec4a9; }
+  .stats-line {
+    text-align: center; font-size: 0.75rem; color: #8b949e;
+    margin-bottom: 0.5rem; line-height: 1.6;
+  }
+
+  /* Share bar */
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .share-label { font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem; }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.is-downvoted { color: #ef4444; opacity: 1; }
+  .share-icons button.deepdive-publish-btn { color: #eab308; opacity: 1; }
+  .share-icons button.deepdive-publish-btn:hover { color: #facc15; }
+  .share-icons button.deepdive-publish-btn.is-published { color: #eab308; opacity: 1; }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+  /* Deep Dive section — matches category style */
+  .cat-deepdive .category-header { border-color: #eab308; }
+  .cat-deepdive .category-header h2 { color: #eab308; }
+  .deepdive-source {
+    font-size: 0.75rem; color: #8b949e; margin-top: 0.75rem;
+  }
+  .deepdive-source a { color: #8b949e; text-decoration: none; }
+  .deepdive-source a:hover { color: #eab308; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+
+  @media (max-width: 640px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .site-title { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<header>
+  <div class="title-row">
+    <span class="site-title">Signal Monitor</span>
+    <span class="feed-badge">Following</span>
+  </div>
+  <div class="header-meta">
+    <span class="date-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/><path d="M7 14h.013"/><path d="M10.01 14h.005"/><path d="M13.01 14h.005"/><path d="M16.015 14h.005"/><path d="M13.015 17h.005"/><path d="M7.01 17h.005"/><path d="M10.01 17h.005"/></svg>
+      <time>30 Apr, 2026 — 8:00am</time>
+    </span>
+    <span class="sep">&bull;</span>
+    <span class="reading-time" id="reading-time"></span>
+  </div>
+  <div class="model-meta">claude-opus-4-6 &middot; $0.1714</div>
+</header>
+
+<main>
+
+  <div class="category cat-crypto">
+    <div class="category-header">
+      <h2>Crypto</h2>
+      <span class="category-count">140w</span>
+    </div>
+    <p class="editorial">Telegram's decision to <a href="https://x.com/BSCNews/status/2049847525520069103" target="_blank">stake 2.2 million TON as a primary validator</a> is the most consequential crypto-infrastructure move this cycle — a 950-million-user messaging app now has skin in its own chain's consensus, collapsing the distance between distribution and validation to zero. Meanwhile the stablecoin plumbing war documented in prior weeks gains another node: <a href="https://x.com/Optimism/status/2049848848898502794" target="_blank">Circle nanopayments are now live on OP Mainnet</a>, extending the x402 agentic payment protocol to yet another L2 and reinforcing Circle's multi-chain settlement moat against Stripe's card-based approach. On the privacy front, Starknet's push to bring <a href="https://x.com/Starknet/status/2049848382378684487" target="_blank">shielded Bitcoin balances with full native redemption</a> is a quiet but structurally important play — Bitcoin privacy has been the missing primitive for institutional custody narratives. Uniswap's <a href="https://x.com/Uniswap/status/2021220137534104019" target="_blank">deployment of v2 through v4 on MegaETH</a> continues the pattern of major protocols treating new L2s as zero-cost option expansions rather than strategic bets.</p>
+  </div>
+
+  <div class="category cat-ai">
+    <div class="category-header">
+      <h2>AI</h2>
+      <span class="category-count">111w</span>
+    </div>
+    <p class="editorial">Stripe is now playing defense and offense simultaneously in the agentic economy: <a href="https://x.com/jeff_weinstein/status/2049850434752508050" target="_blank">helping AI companies thwart three new types of token fraud</a> addresses the inevitable abuse vector as autonomous agents gain spending authority — a problem the wiki's dual-settlement-stack thesis predicted but hadn't yet manifested in product. This is the first explicit anti-fraud tooling designed for agentic commerce, and it signals Stripe sees enough real agent transaction volume to justify engineering investment. Circle's OP Mainnet nanopayments launch (noted above) means both competing agentic stacks shipped incremental infrastructure the same week — again. The race isn't for features anymore; it's for which settlement layer AI developers default to before switching costs harden.</p>
+  </div>
+
+  <div class="category cat-tech">
+    <div class="category-header">
+      <h2>Tech & Quantum</h2>
+      <span class="category-count">130w</span>
+    </div>
+    <p class="editorial">The most telling signal today isn't a product launch — it's that <a href="https://x.com/CoinMarketCap/status/2049841249138434244" target="_blank">crypto has become the most snoozed topic on X</a> since the platform introduced its mute feature, followed by politics and the Iran conflict. This is an attention-fatigue metric with real commercial implications: the very topics dominating macro risk and institutional flows are the ones retail users are actively suppressing from their feeds, widening the gap between market-moving information and public engagement. Separately, <a href="https://x.com/levelsio/status/2049828839631548424" target="_blank">Revolut is visibly displacing incumbent banks in Portugal</a>, confirming the fintech-eats-banking thesis is now street-level observable in Southern Europe. Meta's <a href="https://x.com/zerohedge/status/2049817562263761149" target="_blank">six-part high-grade debt sale to fund capex</a> after reporting negative free cash flow is the clearest admission yet that AI infrastructure spending has outrun organic cash generation — the capex-to-debt pipeline every hyperscaler will eventually traverse.</p>
+  </div>
+
+  <div class="category cat-stocks_macro">
+    <div class="category-header">
+      <h2>Stocks & Macro</h2>
+      <span class="category-count">146w</span>
+    </div>
+    <p class="editorial">Japan's <a href="https://x.com/zerohedge/status/2049842724027699226" target="_blank">confirmed FX market intervention</a> lands in a week where the yen's 18-month cycle low remains unconfirmed and oil keeps grinding higher — a combination that historically precedes further yen weakness despite intervention, not less. U.S. GDP <a href="https://x.com/coinbureau/status/2049839390655127813" target="_blank">rebounded to 2.0 percent in Q1</a>, beating the prior 0.5% but missing the 2.3% consensus, which is exactly the tepid-resilience zone that keeps the Fed frozen and the TACO disconnect intact. Bilello's point about <a href="https://x.com/charliebilello/status/2049845442842603574" target="_blank">zero press conference questions on the 40 percent money supply spike or 18 trillion in new debt</a> during Powell's entire tenure is less media critique than monetary-policy autopsy — the inflation narrative was allowed to be framed as supply-shock from the start, and markets priced accordingly. The QQQ <a href="https://x.com/dampedspring/status/2049846637573390364" target="_blank">touching 666</a> while yields are ignored in favor of <a href="https://x.com/zerohedge/status/2049848213838930307" target="_blank">rate volatility as the equity driver</a> confirms Brandt's chop thesis: markets aren't pricing fundamentals, they're pricing vol regimes.</p>
+  </div>
+
+  <div class="category cat-israel">
+    <div class="category-header">
+      <h2>Israel</h2>
+      <span class="category-count">121w</span>
+    </div>
+    <p class="editorial">Khamenei's claim that <a href="https://x.com/MKhamenei_ir/status/2049835645858685349" target="_blank">Iran's new Hormuz management framework will benefit all regional nations</a> is the diplomatic scaffolding for permanent straits control — framed as legal order, operationalized as leverage. The White House <a href="https://x.com/WhiteHouse/status/2049842355130212863" target="_blank">declared Iran will never obtain a nuclear weapon under Trump</a>, while Trump simultaneously <a href="https://x.com/disclosetv/status/2049847669271470134" target="_blank">told Germany's chancellor to stop interfering with those eliminating the Iran nuclear threat</a>. Read together, these are pre-strike communications: establish the red line publicly, warn allies to stand aside, let CENTCOM's ready option do the rest. The IDF's <a href="https://x.com/manniefabian/status/2049828826004259250" target="_blank">strikes on Hezbollah buildings in southern Lebanon</a> continue the pattern of keeping the northern front warm enough to justify five-division presence without triggering full escalation — managed tension as strategic posture while the Iran decision matures in Washington.</p>
+  </div>
+
+  <div class="category cat-deepdive">
+    <div class="category-header">
+      <h2>Today's Deep Dive: The Merge Path: Brain-Computer Interfaces as AI Alignment Strategy</h2>
+      <span class="category-count">620w</span>
+    </div>
+    <div class="deepdive-source">Source: <a href="https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html" target="_blank">My Techno-Optimism — Vitalik Buterin</a> · KB #14</div>
+    <div class="editorial"><p>Every proposed solution to the superintelligent AI alignment problem eventually runs into the same wall: if the AI is vastly smarter than humans, the humans trying to align it are the weakest link in the chain. You can design clever oversight systems, constitutional AI, interpretability tools — but if the AI is thinking a thousand times faster and reasoning a thousand times more accurately, it will eventually find failure modes in your oversight that you didn't anticipate, exploit edge cases you didn't consider, or simply talk human evaluators into approving actions that they wouldn't endorse on reflection. The humans are the constraint. What if instead of trying to constrain the AI, we upgraded the humans?</p><p>This is the logic of the "merge path" that Vitalik Buterin outlines in his d/acc manifesto. The proposal starts with <a href="https://en.wikipedia.org/wiki/Brain%E2%80%93computer_interface" target="_blank">brain-computer interfaces</a> — direct neural connections to computational systems that allow much faster, higher-bandwidth communication between human cognition and machine intelligence. Today, the interface between human and computer is a keyboard, mouse, and screen: low-bandwidth, high-latency, requiring enormous translation work on both sides. A brain-computer interface could reduce that loop from seconds to milliseconds, allowing human intent to more directly direct machine action and machine information to more directly inform human reasoning.</p><p>At higher levels of integration, this path leads to <a href="https://en.wikipedia.org/wiki/Mind_uploading" target="_blank">mind uploading</a> — running human cognitive patterns on substrate other than biological neurons. This is speculative and probably very far off. But even the near-term steps on this path have significant alignment implications. If humans can reason faster, process more information, hold more considerations simultaneously — if the gap between human and AI cognition narrows from orders of magnitude to a smaller factor — then human oversight becomes more meaningful and less vulnerable to being outpaced.</p><p>Buterin also frames the merge path as the only realistic alternative to one of two bad outcomes: the AI takes over completely (humans become pets or extinct), or humans maintain political control by permanently handicapping AI capability (which requires a global enforcement mechanism nobody trusts to build). The merge path threads this needle: humans remain authors of the process, but as genuinely enhanced humans whose cognitive capabilities can grow alongside AI capabilities, not as unaugmented stone-age minds trying to supervise entities vastly more capable than themselves.</p><p>The safety objections to brain-computer interfaces are real and Buterin acknowledges them directly. Reading and writing to human minds is serious. Proprietary neural interfaces could create enormous power asymmetries — the enhanced versus the unenhanced. The <a href="https://www.digitaltrends.com/computing/these-countries-chatgpt-banned/" target="_blank">divide between those with and without access to AI augmentation</a> already exists today; neural augmentation could make this gap qualitatively larger. These concerns are reasons to insist that the leading role in this space be held by <em>open-source, security-focused organizations</em> rather than closed proprietary systems — but they're not reasons to avoid the path altogether, because the alternatives are worse.</p><p>The deeper argument is about what makes human agency worth preserving. If the goal is a future where human values shape the universe rather than being replaced by alien optimization targets, then the mechanism that achieves this probably can't be "keep the humans biologically unchanged while building entities a million times smarter." That's an unstable equilibrium on a long enough timescale. The merge path is uncomfortable and strange, but it may be the only path to a future that is simultaneously superintelligent <em>and</em> genuinely human.</p></div>
+  </div>
+
+  <div class="noise">📡 noise (7d): <a href="https://x.com/cabelaschmitt" target="_blank">@cabelaschmitt</a> 6/6 (100%) · <a href="https://x.com/philipjohnston" target="_blank">@philipjohnston</a> 6/7 (86%) · <a href="https://x.com/pmarca" target="_blank">@pmarca</a> 13/20 (65%) · <a href="https://x.com/mrjasonchoi" target="_blank">@mrjasonchoi</a> 3/5 (60%) · <a href="https://x.com/petermccormack" target="_blank">@petermccormack</a> 3/5 (60%)</div>
+
+  <div class="share-row">
+    <div class="share-left">
+      <div class="share-label">Share this post on:</div>
+      <div class="share-icons">
+        <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/2026-04-30-0800.html" target="_blank" rel="noopener" title="Share on X">
+          <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+        </a>
+        <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/2026-04-30-0800.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+        </a>
+        <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/2026-04-30-0800.html" target="_blank" rel="noopener" title="Share on Telegram">
+          <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+        </a>
+        <button id="report-downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-2a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v2"/></svg></button>
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'},1500)})" title="Copy link">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button id="report-publish-blog-btn" class="deepdive-publish-btn" title="Publish this deep dive to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
+      </div>
+    </div>
+    <div style="width:100%;text-align:center;margin-top:0.5rem;">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>Back to Top</span>
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<div class="hr"><hr></div>
+
+<footer>
+  <p class="stats-line">172 tweets · Crypto 23% · AI 16% · Tech & Quantum 5% · Stocks & Macro 28% · Noise 46 · Israel Monitor · 50 tweets from curated list · source: Following</p>
+  <p class="footer-text">
+    Generated by Signal Monitor ·
+    <a href="https://x.com/beto_neh">@beto_neh</a>
+  </p>
+</footer>
+
+<script>
+  // Reading time
+  const text = document.querySelector('main').innerText;
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+  document.getElementById('reading-time').textContent = minutes + ' min read';
+
+  // Progress bar
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Audio player
+  const ael=document.getElementById('audio-el');
+  if(ael){
+    const abtn=document.getElementById('audio-btn');
+    const afill=document.getElementById('audio-fill');
+    const atime=document.getElementById('audio-time');
+    const aspeed=document.getElementById('audio-speed');
+    const playIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>';
+    const pauseIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>';
+    function fmt(s){const m=Math.floor(s/60);return m+':'+(''+(Math.floor(s)%60)).padStart(2,'0');}
+    window.toggleAudio=function(){if(ael.paused){ael.play();abtn.innerHTML=pauseIcon;}else{ael.pause();abtn.innerHTML=playIcon;}};
+    ael.addEventListener('timeupdate',function(){
+      if(ael.duration){afill.style.width=(ael.currentTime/ael.duration*100)+'%';}
+      atime.textContent=fmt(ael.currentTime)+(ael.duration?' / '+fmt(ael.duration):'');
+    });
+    ael.addEventListener('ended',function(){abtn.innerHTML=playIcon;afill.style.width='0%';});
+    window.seekAudio=function(e){
+      const bar=document.getElementById('audio-bar');
+      const pct=e.offsetX/bar.offsetWidth;
+      if(ael.duration)ael.currentTime=pct*ael.duration;
+    };
+    const speeds=[1,1.25,1.5,1.75,2];let si=0;
+    window.cycleSpeed=function(){si=(si+1)%speeds.length;ael.playbackRate=speeds[si];aspeed.textContent=speeds[si]+'x';};
+  }
+
+  // Pull to refresh (PWA)
+  if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+    let sy=0,p=false,d=document,b=d.body;
+    const el=d.createElement('div');
+    el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#8b949e;font-size:14px;z-index:9999;transition:top 0.2s;background:#212737;';
+    el.textContent='\u2193 Pull to refresh';
+    b.prepend(el);
+    d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+    d.addEventListener('touchmove',e=>{
+      if(!p)return;
+      const dy=e.touches[0].clientY-sy;
+      if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+      if(dy>5)e.preventDefault();
+      const t=Math.min(dy*0.4,50);
+      el.style.top=(t-50)+'px';
+      el.textContent=dy>80?'\u2191 Release':'\u2193 Pull to refresh';
+    },{passive:false});
+    d.addEventListener('touchend',e=>{
+      if(!p){return;}p=false;
+      const dy=e.changedTouches[0].clientY-sy;
+      el.style.top='-50px';
+      if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+    });
+  }
+</script>
+
+<script id="report-blog-publish-payload" type="application/json">{"title": "The Merge Path: Brain-Computer Interfaces as AI Alignment Strategy", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-merge-path-brain-computer-interfaces-as-ai-alignment-strategy.md", "slug": "the-merge-path-brain-computer-interfaces-as-ai-alignment-strategy", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/the-merge-path-brain-computer-interfaces-as-ai-alignment-strategy", "ddId": 89, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "publishedRepo": "betoneh/signal-monitor", "publishedPath": "blog-published.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Merge Path: Brain-Computer Interfaces as AI Alignment Strategy\"\ndescription: \"Every proposed solution to the superintelligent AI alignment problem eventually runs into the same wall: if the AI is vastly smarter than humans, the humans...\"\npubDatetime: 2026-04-30T00:00:00\ntags: [\"ai\", \"tech\", \"ai-alignment\", \"bci\", \"transhumanism\", \"superintelligence\", \"d-acc\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nEvery proposed solution to the superintelligent AI alignment problem eventually runs into the same wall: if the AI is vastly smarter than humans, the humans trying to align it are the weakest link in the chain. You can design clever oversight systems, constitutional AI, interpretability tools — but if the AI is thinking a thousand times faster and reasoning a thousand times more accurately, it will eventually find failure modes in your oversight that you didn't anticipate, exploit edge cases you didn't consider, or simply talk human evaluators into approving actions that they wouldn't endorse on reflection. The humans are the constraint. What if instead of trying to constrain the AI, we upgraded the humans?\n\nThis is the logic of the \"merge path\" that Vitalik Buterin outlines in his d/acc manifesto. The proposal starts with [brain-computer interfaces](https://en.wikipedia.org/wiki/Brain%E2%80%93computer_interface) — direct neural connections to computational systems that allow much faster, higher-bandwidth communication between human cognition and machine intelligence. Today, the interface between human and computer is a keyboard, mouse, and screen: low-bandwidth, high-latency, requiring enormous translation work on both sides. A brain-computer interface could reduce that loop from seconds to milliseconds, allowing human intent to more directly direct machine action and machine information to more directly inform human reasoning.\n\nAt higher levels of integration, this path leads to [mind uploading](https://en.wikipedia.org/wiki/Mind_uploading) — running human cognitive patterns on substrate other than biological neurons. This is speculative and probably very far off. But even the near-term steps on this path have significant alignment implications. If humans can reason faster, process more information, hold more considerations simultaneously — if the gap between human and AI cognition narrows from orders of magnitude to a smaller factor — then human oversight becomes more meaningful and less vulnerable to being outpaced.\n\nButerin also frames the merge path as the only realistic alternative to one of two bad outcomes: the AI takes over completely (humans become pets or extinct), or humans maintain political control by permanently handicapping AI capability (which requires a global enforcement mechanism nobody trusts to build). The merge path threads this needle: humans remain authors of the process, but as genuinely enhanced humans whose cognitive capabilities can grow alongside AI capabilities, not as unaugmented stone-age minds trying to supervise entities vastly more capable than themselves.\n\nThe safety objections to brain-computer interfaces are real and Buterin acknowledges them directly. Reading and writing to human minds is serious. Proprietary neural interfaces could create enormous power asymmetries — the enhanced versus the unenhanced. The [divide between those with and without access to AI augmentation](https://www.digitaltrends.com/computing/these-countries-chatgpt-banned/) already exists today; neural augmentation could make this gap qualitatively larger. These concerns are reasons to insist that the leading role in this space be held by *open-source, security-focused organizations* rather than closed proprietary systems — but they're not reasons to avoid the path altogether, because the alternatives are worse.\n\nThe deeper argument is about what makes human agency worth preserving. If the goal is a future where human values shape the universe rather than being replaced by alien optimization targets, then the mechanism that achieves this probably can't be \"keep the humans biologically unchanged while building entities a million times smarter.\" That's an unstable equilibrium on a long enough timescale. The merge path is uncomfortable and strange, but it may be the only path to a future that is simultaneously superintelligent *and* genuinely human.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('report-publish-blog-btn');
+    var downvoteButton = document.getElementById('report-downvote-dd-btn');
+    var payloadEl = document.getElementById('report-blog-publish-payload');
+    if (!payloadEl) return;
+    var defaultIcon = button ? button.innerHTML : '';
+    var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
+    var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    function fromBase64Utf8(text) {
+      var binary = atob((text || '').replace(/\n/g, ''));
+      var bytes = new Uint8Array(binary.length);
+      for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new TextDecoder().decode(bytes);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    function getLocalDownvotes() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-downvoted') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalDownvotes(list) {
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-downvoted', JSON.stringify(normalized));
+      } catch (e) {}
+    }
+
+    function getLocalPublished() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-blog-published') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalPublished(list) {
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-blog-published', JSON.stringify(normalized));
+      } catch (e) {}
+    }
+
+    function extractPubDatetime(markdown) {
+      var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
+      return match ? match[1].trim() : '';
+    }
+
+    function applyPubDatetime(markdown, pubDatetime) {
+      if (!pubDatetime) return markdown;
+      return /^pubDatetime:\s*.+$/m.test(markdown)
+        ? markdown.replace(/^pubDatetime:\s*.+$/m, 'pubDatetime: ' + pubDatetime)
+        : markdown;
+    }
+
+    function setPublishedState(isPublished) {
+      if (!button) return;
+      button.dataset.published = isPublished ? '1' : '0';
+      button.classList.toggle('is-published', !!isPublished);
+      button.innerHTML = isPublished ? publishedIcon : defaultIcon;
+      button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish this deep dive to blog deep dives';
+      if (payload.ddId) {
+        var localPublished = getLocalPublished().filter(function(id) { return id !== payload.ddId; });
+        if (isPublished) localPublished.push(payload.ddId);
+        saveLocalPublished(localPublished);
+      }
+    }
+
+    function setDownvoteState(isDownvoted) {
+      if (!downvoteButton) return;
+      downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
+      downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
+      downvoteButton.innerHTML = defaultDownvoteIcon;
+      downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshPublishedState(token) {
+      if (!token) return null;
+      var existing = await fetchExisting(token);
+      setPublishedState(!!existing);
+      return existing;
+    }
+
+    async function refreshPublishedStatePublic() {
+      if (!payload.ddId) return null;
+      setPublishedState(getLocalPublished().includes(payload.ddId));
+      try {
+        var res = await fetch('blog-published.json?_=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) return null;
+        var state = await res.json();
+        var published = Array.isArray(state.published) ? state.published : [];
+        saveLocalPublished(published);
+        setPublishedState(published.includes(payload.ddId));
+        return published;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    async function fetchPublished(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Published lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function markPublished(token) {
+      var existing = await fetchPublished(token);
+      var publishedState = { published: [] };
+      if (existing && existing.content) {
+        publishedState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+      }
+      var list = Array.isArray(publishedState.published) ? publishedState.published.slice() : [];
+      if (!list.includes(payload.ddId)) list.push(payload.ddId);
+      list = list
+        .filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+        .sort(function(a, b) { return a - b; });
+      publishedState.published = list;
+      var body = {
+        message: 'Mark deep dive #' + payload.ddId + ' as published on blog',
+        content: toBase64Utf8(JSON.stringify(publishedState, null, 2))
+      };
+      if (existing && existing.sha) body.sha = existing.sha;
+      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + token,
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) {
+        var errorText = await res.text();
+        throw new Error('Published-state update failed (' + res.status + '): ' + errorText.slice(0, 220));
+      }
+      saveLocalPublished(list);
+    }
+
+    async function fetchVotes(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Votes lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshDownvoteState(token) {
+      var localDownvotes = getLocalDownvotes();
+      setDownvoteState(localDownvotes.includes(payload.ddId));
+      if (!token) return null;
+      var existing = await fetchVotes(token);
+      var remoteDownvotes = [];
+      if (existing && existing.content) {
+        var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        remoteDownvotes = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+      }
+      saveLocalDownvotes(remoteDownvotes);
+      setDownvoteState(remoteDownvotes.includes(payload.ddId));
+      return existing;
+    }
+
+    var cachedToken = sessionStorage.getItem('sm-gh-token');
+    if (cachedToken) {
+      refreshPublishedState(cachedToken).catch(function(){});
+      refreshDownvoteState(cachedToken).catch(function(){});
+    } else {
+      setPublishedState(getLocalPublished().includes(payload.ddId));
+      setDownvoteState(getLocalDownvotes().includes(payload.ddId));
+    }
+    refreshPublishedStatePublic().catch(function(){});
+
+    if (button && !button.disabled) button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshPublishedState(token);
+        var confirmMessage = existing
+          ? 'This deep dive is already on the blog. Update it?'
+          : 'Publish this deep dive to the blog?';
+        if (!window.confirm(confirmMessage)) {
+          button.dataset.busy = '0';
+          button.style.opacity = '';
+          return;
+        }
+        var contentToPublish = payload.content;
+        if (existing && existing.content) {
+          var existingMarkdown = fromBase64Utf8(existing.content);
+          var existingPubDatetime = extractPubDatetime(existingMarkdown);
+          if (existingPubDatetime) {
+            contentToPublish = applyPubDatetime(contentToPublish, existingPubDatetime);
+          }
+        }
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(contentToPublish)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        await markPublished(token);
+        setPublishedState(true);
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        button.style.opacity = '';
+        button.dataset.busy = '0';
+      }
+    });
+
+    if (downvoteButton) downvoteButton.addEventListener('click', async function() {
+      if (downvoteButton.dataset.busy === '1') return;
+      if (!payload.votesRepo || !payload.votesPath || !payload.ddId) {
+        window.alert('Downvote payload is missing.');
+        return;
+      }
+      downvoteButton.dataset.busy = '1';
+      downvoteButton.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshDownvoteState(token);
+        var list = getLocalDownvotes();
+        var idx = list.indexOf(payload.ddId);
+        var isDownvoted = idx >= 0;
+        if (isDownvoted) {
+          list.splice(idx, 1);
+        } else {
+          list.push(payload.ddId);
+        }
+        list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+          .sort(function(a, b) { return a - b; });
+        var voteState = { downvoted: list };
+        var body = {
+          message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
+          content: toBase64Utf8(JSON.stringify(voteState, null, 2))
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Downvote failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        var nextLocal = getLocalDownvotes().filter(function(id) { return id !== payload.ddId; });
+        if (!isDownvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+        setDownvoteState(!isDownvoted);
+        window.alert(!isDownvoted
+          ? 'Deep dive downvoted. It will appear crossed in the index.'
+          : 'Downvote removed from this deep dive.');
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        downvoteButton.style.opacity = '';
+        downvoteButton.dataset.busy = '0';
+      }
+    });
+  })();
+</script>
+</body>
+</html>
