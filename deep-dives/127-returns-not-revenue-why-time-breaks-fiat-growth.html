@@ -138,11 +138,11 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1829</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1844</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "Returns, Not Revenue: Why Time Breaks Fiat Growth", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/returns-not-revenue-why-time-breaks-fiat-growth.md", "slug": "returns-not-revenue-why-time-breaks-fiat-growth", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/returns-not-revenue-why-time-breaks-fiat-growth", "ddId": 127, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Returns, Not Revenue: Why Time Breaks Fiat Growth\"\ndescription: \"A huge amount of bad economic reasoning comes from collapsing time out of the picture. The essay pushes back hard against that by insisting that what matters...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"returns\", \"time\", \"capital\", \"growth\", \"pricing\"]\nsource: \"Number Go Down\"\nsourceUrl: \"https://x.com/i/article/2045147796752175104\"\nsignalOrder: 127\ndraft: false\n---\n\n> **Deep Dive** · [Source: Number Go Down →](https://x.com/i/article/2045147796752175104)\n\n\nA huge amount of bad economic reasoning comes from collapsing time out of the picture. The essay pushes back hard against that by insisting that what matters in business is not just whether dollars come in, but whether capital earns an attractive return over time. Revenue is a number. Returns are a relationship between money and duration.\n\nThat sounds elementary, but it rewires the whole conversation. A company can show growing revenue while destroying capital. A government can celebrate rising GDP while society becomes less productive in any meaningful reinvestment sense. And a producer can lower prices dramatically yet improve his long-run economic position if lower prices increase turnover, scale, and return on invested capital.\n\nTime is what exposes the gap between static models and real entrepreneurship. In equilibrium fantasies, nobody has to commit scarce resources today under uncertainty in hopes of recouping them years later. In the actual economy, every serious investment is a temporal wager. Factories, software platforms, R&D pipelines, and retail networks all require patient capital before any payoff appears.\n\nThat is why the essay treats return on capital as the real compass. Once time returns to the frame, the fear of falling prices looks much weaker. What matters is whether capital is being used more intelligently, not whether toplines can be cosmetically inflated.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "Returns, Not Revenue: Why Time Breaks Fiat Growth", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/returns-not-revenue-why-time-breaks-fiat-growth.md", "slug": "returns-not-revenue-why-time-breaks-fiat-growth", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/returns-not-revenue-why-time-breaks-fiat-growth", "ddId": 127, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "publishedRepo": "betoneh/signal-monitor", "publishedPath": "blog-published.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Returns, Not Revenue: Why Time Breaks Fiat Growth\"\ndescription: \"A huge amount of bad economic reasoning comes from collapsing time out of the picture. The essay pushes back hard against that by insisting that what matters...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"returns\", \"time\", \"capital\", \"growth\", \"pricing\"]\nsource: \"Number Go Down\"\nsourceUrl: \"https://x.com/i/article/2045147796752175104\"\nsignalOrder: 127\ndraft: false\n---\n\n> **Deep Dive** · [Source: Number Go Down →](https://x.com/i/article/2045147796752175104)\n\n\nA huge amount of bad economic reasoning comes from collapsing time out of the picture. The essay pushes back hard against that by insisting that what matters in business is not just whether dollars come in, but whether capital earns an attractive return over time. Revenue is a number. Returns are a relationship between money and duration.\n\nThat sounds elementary, but it rewires the whole conversation. A company can show growing revenue while destroying capital. A government can celebrate rising GDP while society becomes less productive in any meaningful reinvestment sense. And a producer can lower prices dramatically yet improve his long-run economic position if lower prices increase turnover, scale, and return on invested capital.\n\nTime is what exposes the gap between static models and real entrepreneurship. In equilibrium fantasies, nobody has to commit scarce resources today under uncertainty in hopes of recouping them years later. In the actual economy, every serious investment is a temporal wager. Factories, software platforms, R&D pipelines, and retail networks all require patient capital before any payoff appears.\n\nThat is why the essay treats return on capital as the real compass. Once time returns to the frame, the fear of falling prices looks much weaker. What matters is whether capital is being used more intelligently, not whether toplines can be cosmetically inflated.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
@@ -210,6 +210,20 @@
       } catch (e) {}
     }
 
+    function getLocalPublished() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-blog-published') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalPublished(list) {
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-blog-published', JSON.stringify(normalized));
+      } catch (e) {}
+    }
+
     function extractPubDatetime(markdown) {
       var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
       return match ? match[1].trim() : '';
@@ -228,6 +242,11 @@
       button.classList.toggle('is-published', !!isPublished);
       button.innerHTML = isPublished ? publishedIcon : defaultIcon;
       button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
+      if (payload.ddId) {
+        var localPublished = getLocalPublished().filter(function(id) { return id !== payload.ddId; });
+        if (isPublished) localPublished.push(payload.ddId);
+        saveLocalPublished(localPublished);
+      }
     }
 
     function setDownvoteState(isDownvoted) {
@@ -255,6 +274,51 @@
       var existing = await fetchExisting(token);
       setPublishedState(!!existing);
       return existing;
+    }
+
+    async function fetchPublished(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Published lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function markPublished(token) {
+      var existing = await fetchPublished(token);
+      var publishedState = { published: [] };
+      if (existing && existing.content) {
+        publishedState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+      }
+      var list = Array.isArray(publishedState.published) ? publishedState.published.slice() : [];
+      if (!list.includes(payload.ddId)) list.push(payload.ddId);
+      list = list
+        .filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+        .sort(function(a, b) { return a - b; });
+      publishedState.published = list;
+      var body = {
+        message: 'Mark deep dive #' + payload.ddId + ' as published on blog',
+        content: toBase64Utf8(JSON.stringify(publishedState, null, 2))
+      };
+      if (existing && existing.sha) body.sha = existing.sha;
+      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + token,
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) {
+        var errorText = await res.text();
+        throw new Error('Published-state update failed (' + res.status + '): ' + errorText.slice(0, 220));
+      }
+      saveLocalPublished(list);
     }
 
     async function fetchVotes(token) {
@@ -337,6 +401,7 @@
           var errorText = await res.text();
           throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
         }
+        await markPublished(token);
         setPublishedState(true);
         window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
       } catch (err) {

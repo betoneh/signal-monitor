@@ -138,11 +138,11 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1829</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1844</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "CUDA vs. Custom Silicon: The Programmability Argument Nvidia Is Betting Everything On", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/cuda-vs-custom-silicon-the-programmability-argument-nvidia-is-betting-everything-on.md", "slug": "cuda-vs-custom-silicon-the-programmability-argument-nvidia-is-betting-everything-on", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/cuda-vs-custom-silicon-the-programmability-argument-nvidia-is-betting-everything-on", "ddId": 143, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"CUDA vs. Custom Silicon: The Programmability Argument Nvidia Is Betting Everything On\"\ndescription: \"The conventional critique of Nvidia's GPU architecture is straightforward: AI workloads are dominated by predictable matrix multiplies, and a purpose-built t...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"cuda-ecosystem\", \"gpu-moat\", \"tpu-competition\", \"programmability\", \"asic-debate\", \"ai-infrastructure\"]\nsource: \"Jensen Huang – Will Nvidia's moat persist?\"\nsourceUrl: \"https://youtu.be/Hrbq66XqtCo\"\nsignalOrder: 143\ndraft: false\n---\n\n> **Deep Dive** · [Source: Jensen Huang – Will Nvidia's moat persist? →](https://youtu.be/Hrbq66XqtCo)\n\n\nThe conventional critique of Nvidia's GPU architecture is straightforward: AI workloads are dominated by predictable matrix multiplies, and a purpose-built tensor processing unit or ASIC can dedicate more die area to that task by eliminating the overhead of warp schedulers, thread switching, and other general-purpose machinery. Huang's counter-argument is that this view fundamentally misunderstands what drives AI progress. Matrix multiplies matter, but **the ability to invent entirely new algorithms**—hybrid SSMs, novel attention mechanisms, fused diffusion-autoregressive models—requires the general programmability that only CUDA provides.\n\nHuang frames this as the difference between Moore's Law improvements (roughly 25% per year) and the 10x to 100x leaps that come from algorithmic breakthroughs. The jump from Hopper to Blackwell—initially announced as 35x more energy-efficient, later revised upward to 50x—could not have been achieved through transistor shrinks alone. It required new model architectures like mixture-of-experts that are parallelized, disaggregated, and distributed across computing systems in ways that demand CUDA's flexibility. Without the ability to write custom kernels and co-design across processors, fabric, libraries, and algorithms simultaneously, these gains would be impossible.\n\nThe CUDA ecosystem's advantages extend well beyond kernel programmability. Huang emphasizes three pillars: the richness of the software ecosystem (every framework, from Triton to vLLM to emerging RL frameworks like verl and NeMo RL), the massive install base (several hundred million GPUs across every cloud and every form factor), and the universal availability (every major cloud provider, on-premises options, and embedded systems for robotics). For any developer or AI startup choosing an architecture, these factors create an overwhelming gravitational pull toward CUDA—not because alternatives don't exist, but because the cost of betting on a smaller ecosystem is enormous.\n\nHuang also challenges the notion that hyperscalers' ability to write custom kernels undermines CUDA's value. He acknowledges that companies like OpenAI develop their own kernel stacks (Triton, for instance, has significant Nvidia technology in its backend), but argues that Nvidia's deep architectural expertise means its engineers routinely deliver 2x–3x speedups when optimizing partner workloads. These GPUs are \"like F1 racers\"—anyone can drive them at 100 mph, but extracting maximum performance requires the kind of expertise Nvidia has spent decades building.\n\nThe economic argument reinforces the technical one. Huang claims no competitor has publicly demonstrated better performance per total cost of ownership than Nvidia, and repeatedly invites TPU and Trainium teams to prove their claims on open benchmarks. With ASIC margins at roughly 65% versus Nvidia's 70%, the actual savings from switching are minimal—while the risks of abandoning a battle-tested, universally supported stack are substantial. For Nvidia, programmability isn't just a technical feature; it's the foundation of a flywheel that connects algorithmic innovation to commercial dominance.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "CUDA vs. Custom Silicon: The Programmability Argument Nvidia Is Betting Everything On", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/cuda-vs-custom-silicon-the-programmability-argument-nvidia-is-betting-everything-on.md", "slug": "cuda-vs-custom-silicon-the-programmability-argument-nvidia-is-betting-everything-on", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/cuda-vs-custom-silicon-the-programmability-argument-nvidia-is-betting-everything-on", "ddId": 143, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "publishedRepo": "betoneh/signal-monitor", "publishedPath": "blog-published.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"CUDA vs. Custom Silicon: The Programmability Argument Nvidia Is Betting Everything On\"\ndescription: \"The conventional critique of Nvidia's GPU architecture is straightforward: AI workloads are dominated by predictable matrix multiplies, and a purpose-built t...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"cuda-ecosystem\", \"gpu-moat\", \"tpu-competition\", \"programmability\", \"asic-debate\", \"ai-infrastructure\"]\nsource: \"Jensen Huang – Will Nvidia's moat persist?\"\nsourceUrl: \"https://youtu.be/Hrbq66XqtCo\"\nsignalOrder: 143\ndraft: false\n---\n\n> **Deep Dive** · [Source: Jensen Huang – Will Nvidia's moat persist? →](https://youtu.be/Hrbq66XqtCo)\n\n\nThe conventional critique of Nvidia's GPU architecture is straightforward: AI workloads are dominated by predictable matrix multiplies, and a purpose-built tensor processing unit or ASIC can dedicate more die area to that task by eliminating the overhead of warp schedulers, thread switching, and other general-purpose machinery. Huang's counter-argument is that this view fundamentally misunderstands what drives AI progress. Matrix multiplies matter, but **the ability to invent entirely new algorithms**—hybrid SSMs, novel attention mechanisms, fused diffusion-autoregressive models—requires the general programmability that only CUDA provides.\n\nHuang frames this as the difference between Moore's Law improvements (roughly 25% per year) and the 10x to 100x leaps that come from algorithmic breakthroughs. The jump from Hopper to Blackwell—initially announced as 35x more energy-efficient, later revised upward to 50x—could not have been achieved through transistor shrinks alone. It required new model architectures like mixture-of-experts that are parallelized, disaggregated, and distributed across computing systems in ways that demand CUDA's flexibility. Without the ability to write custom kernels and co-design across processors, fabric, libraries, and algorithms simultaneously, these gains would be impossible.\n\nThe CUDA ecosystem's advantages extend well beyond kernel programmability. Huang emphasizes three pillars: the richness of the software ecosystem (every framework, from Triton to vLLM to emerging RL frameworks like verl and NeMo RL), the massive install base (several hundred million GPUs across every cloud and every form factor), and the universal availability (every major cloud provider, on-premises options, and embedded systems for robotics). For any developer or AI startup choosing an architecture, these factors create an overwhelming gravitational pull toward CUDA—not because alternatives don't exist, but because the cost of betting on a smaller ecosystem is enormous.\n\nHuang also challenges the notion that hyperscalers' ability to write custom kernels undermines CUDA's value. He acknowledges that companies like OpenAI develop their own kernel stacks (Triton, for instance, has significant Nvidia technology in its backend), but argues that Nvidia's deep architectural expertise means its engineers routinely deliver 2x–3x speedups when optimizing partner workloads. These GPUs are \"like F1 racers\"—anyone can drive them at 100 mph, but extracting maximum performance requires the kind of expertise Nvidia has spent decades building.\n\nThe economic argument reinforces the technical one. Huang claims no competitor has publicly demonstrated better performance per total cost of ownership than Nvidia, and repeatedly invites TPU and Trainium teams to prove their claims on open benchmarks. With ASIC margins at roughly 65% versus Nvidia's 70%, the actual savings from switching are minimal—while the risks of abandoning a battle-tested, universally supported stack are substantial. For Nvidia, programmability isn't just a technical feature; it's the foundation of a flywheel that connects algorithmic innovation to commercial dominance.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
@@ -210,6 +210,20 @@
       } catch (e) {}
     }
 
+    function getLocalPublished() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-blog-published') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalPublished(list) {
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-blog-published', JSON.stringify(normalized));
+      } catch (e) {}
+    }
+
     function extractPubDatetime(markdown) {
       var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
       return match ? match[1].trim() : '';
@@ -228,6 +242,11 @@
       button.classList.toggle('is-published', !!isPublished);
       button.innerHTML = isPublished ? publishedIcon : defaultIcon;
       button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
+      if (payload.ddId) {
+        var localPublished = getLocalPublished().filter(function(id) { return id !== payload.ddId; });
+        if (isPublished) localPublished.push(payload.ddId);
+        saveLocalPublished(localPublished);
+      }
     }
 
     function setDownvoteState(isDownvoted) {
@@ -255,6 +274,51 @@
       var existing = await fetchExisting(token);
       setPublishedState(!!existing);
       return existing;
+    }
+
+    async function fetchPublished(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Published lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function markPublished(token) {
+      var existing = await fetchPublished(token);
+      var publishedState = { published: [] };
+      if (existing && existing.content) {
+        publishedState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+      }
+      var list = Array.isArray(publishedState.published) ? publishedState.published.slice() : [];
+      if (!list.includes(payload.ddId)) list.push(payload.ddId);
+      list = list
+        .filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+        .sort(function(a, b) { return a - b; });
+      publishedState.published = list;
+      var body = {
+        message: 'Mark deep dive #' + payload.ddId + ' as published on blog',
+        content: toBase64Utf8(JSON.stringify(publishedState, null, 2))
+      };
+      if (existing && existing.sha) body.sha = existing.sha;
+      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + token,
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) {
+        var errorText = await res.text();
+        throw new Error('Published-state update failed (' + res.status + '): ' + errorText.slice(0, 220));
+      }
+      saveLocalPublished(list);
     }
 
     async function fetchVotes(token) {
@@ -337,6 +401,7 @@
           var errorText = await res.text();
           throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
         }
+        await markPublished(token);
         setPublishedState(true);
         window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
       } catch (err) {

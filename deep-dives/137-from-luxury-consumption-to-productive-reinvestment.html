@@ -138,11 +138,11 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1829</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1844</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "From Luxury Consumption to Productive Reinvestment", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/from-luxury-consumption-to-productive-reinvestment.md", "slug": "from-luxury-consumption-to-productive-reinvestment", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/from-luxury-consumption-to-productive-reinvestment", "ddId": 137, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"From Luxury Consumption to Productive Reinvestment\"\ndescription: \"Inflationary systems do more than distort prices; they distort taste and timing. If money predictably loses value, people are nudged away from saving and tow...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"consumption\", \"luxury\", \"investment\", \"capital-allocation\", \"fiat\"]\nsource: \"Number Go Down\"\nsourceUrl: \"https://x.com/i/article/2045147796752175104\"\nsignalOrder: 137\ndraft: false\n---\n\n> **Deep Dive** · [Source: Number Go Down →](https://x.com/i/article/2045147796752175104)\n\n\nInflationary systems do more than distort prices; they distort taste and timing. If money predictably loses value, people are nudged away from saving and toward consumption, speculation, or anything that feels like an escape hatch. That changes what gets financed.\n\nThe essay argues that under harder money, people would still consume, but they would do so more selectively. The pressure to buy frivolously just to outrun depreciation would ease. More resources could then flow into productive reinvestment, better tools, and the capital goods that actually improve long-term prosperity.\n\nThis is not puritanism. It is a claim about clarity. A system should not need to bribe citizens into economic activity by penalizing prudence. If luxuries lose demand when the printer stops, that reveals something about how artificial the prior demand may have been. Meanwhile, projects that genuinely improve output become easier to justify because capital is not being shunted into frantic present-mindedness.\n\nThe broader vision is a culture less organized around nominal escape velocity and more organized around compounding productive capacity.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "From Luxury Consumption to Productive Reinvestment", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/from-luxury-consumption-to-productive-reinvestment.md", "slug": "from-luxury-consumption-to-productive-reinvestment", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/from-luxury-consumption-to-productive-reinvestment", "ddId": 137, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "publishedRepo": "betoneh/signal-monitor", "publishedPath": "blog-published.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"From Luxury Consumption to Productive Reinvestment\"\ndescription: \"Inflationary systems do more than distort prices; they distort taste and timing. If money predictably loses value, people are nudged away from saving and tow...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"consumption\", \"luxury\", \"investment\", \"capital-allocation\", \"fiat\"]\nsource: \"Number Go Down\"\nsourceUrl: \"https://x.com/i/article/2045147796752175104\"\nsignalOrder: 137\ndraft: false\n---\n\n> **Deep Dive** · [Source: Number Go Down →](https://x.com/i/article/2045147796752175104)\n\n\nInflationary systems do more than distort prices; they distort taste and timing. If money predictably loses value, people are nudged away from saving and toward consumption, speculation, or anything that feels like an escape hatch. That changes what gets financed.\n\nThe essay argues that under harder money, people would still consume, but they would do so more selectively. The pressure to buy frivolously just to outrun depreciation would ease. More resources could then flow into productive reinvestment, better tools, and the capital goods that actually improve long-term prosperity.\n\nThis is not puritanism. It is a claim about clarity. A system should not need to bribe citizens into economic activity by penalizing prudence. If luxuries lose demand when the printer stops, that reveals something about how artificial the prior demand may have been. Meanwhile, projects that genuinely improve output become easier to justify because capital is not being shunted into frantic present-mindedness.\n\nThe broader vision is a culture less organized around nominal escape velocity and more organized around compounding productive capacity.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
@@ -210,6 +210,20 @@
       } catch (e) {}
     }
 
+    function getLocalPublished() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-blog-published') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalPublished(list) {
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-blog-published', JSON.stringify(normalized));
+      } catch (e) {}
+    }
+
     function extractPubDatetime(markdown) {
       var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
       return match ? match[1].trim() : '';
@@ -228,6 +242,11 @@
       button.classList.toggle('is-published', !!isPublished);
       button.innerHTML = isPublished ? publishedIcon : defaultIcon;
       button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
+      if (payload.ddId) {
+        var localPublished = getLocalPublished().filter(function(id) { return id !== payload.ddId; });
+        if (isPublished) localPublished.push(payload.ddId);
+        saveLocalPublished(localPublished);
+      }
     }
 
     function setDownvoteState(isDownvoted) {
@@ -255,6 +274,51 @@
       var existing = await fetchExisting(token);
       setPublishedState(!!existing);
       return existing;
+    }
+
+    async function fetchPublished(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Published lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function markPublished(token) {
+      var existing = await fetchPublished(token);
+      var publishedState = { published: [] };
+      if (existing && existing.content) {
+        publishedState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+      }
+      var list = Array.isArray(publishedState.published) ? publishedState.published.slice() : [];
+      if (!list.includes(payload.ddId)) list.push(payload.ddId);
+      list = list
+        .filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+        .sort(function(a, b) { return a - b; });
+      publishedState.published = list;
+      var body = {
+        message: 'Mark deep dive #' + payload.ddId + ' as published on blog',
+        content: toBase64Utf8(JSON.stringify(publishedState, null, 2))
+      };
+      if (existing && existing.sha) body.sha = existing.sha;
+      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + token,
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) {
+        var errorText = await res.text();
+        throw new Error('Published-state update failed (' + res.status + '): ' + errorText.slice(0, 220));
+      }
+      saveLocalPublished(list);
     }
 
     async function fetchVotes(token) {
@@ -337,6 +401,7 @@
           var errorText = await res.text();
           throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
         }
+        await markPublished(token);
         setPublishedState(true);
         window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
       } catch (err) {
