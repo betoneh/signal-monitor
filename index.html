@@ -573,7 +573,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report is-downvoted" data-dd-id="169" data-orig-report="true" data-downvoted="true">
+<li class="dd-item in-report" data-dd-id="169" data-orig-report="true">
           <div class="dd-check-row">
             <button type="button" class="dd-check" data-id="169" data-title="Modernism and Kitsch Are Structural Twins, Not Opposites" data-state="unread" role="checkbox" aria-checked="false" aria-label="Unread" onclick="cycleDDState(event, 169)"></button>
             <a href="deep-dives/169-modernism-and-kitsch-are-structural-twins-not-opposites.html">
@@ -583,7 +583,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report is-downvoted" data-dd-id="168" data-orig-report="true" data-downvoted="true">
+<li class="dd-item in-report" data-dd-id="168" data-orig-report="true">
           <div class="dd-check-row">
             <button type="button" class="dd-check" data-id="168" data-title="'Never Again' as Negative Theology — How Post-1945 Morality Ran Out of Fuel" data-state="unread" role="checkbox" aria-checked="false" aria-label="Unread" onclick="cycleDDState(event, 168)"></button>
             <a href="deep-dives/168-never-again-as-negative-theology-how-post-1945-morality-ran-out-of-fuel.html">
@@ -593,7 +593,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report is-downvoted" data-dd-id="167" data-orig-report="true" data-downvoted="true">
+<li class="dd-item in-report" data-dd-id="167" data-orig-report="true">
           <div class="dd-check-row">
             <button type="button" class="dd-check" data-id="167" data-title="Kitsch Isn't Bad Taste — It's the Aesthetic Regime of a World Without Transcendence" data-state="unread" role="checkbox" aria-checked="false" aria-label="Unread" onclick="cycleDDState(event, 167)"></button>
             <a href="deep-dives/167-kitsch-isn-t-bad-taste-it-s-the-aesthetic-regime-of-a-world-without-transcendence.html">
@@ -2385,7 +2385,7 @@
 <div class="hr"><hr></div>
 
 <footer>
-    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <span class="build-version" title="Generated build version">Build 20260429-1850</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <span class="build-version" title="Generated build version">Build 20260429-1857</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 
 </div><!-- /app -->
@@ -2747,10 +2747,11 @@
         const state = { read: readList, unreport: unreadList };
         const votesState = { downvoted: downvotedList };
         try {
-            const [stateResp, votesResp] = await Promise.all([
-                putRepoJson('dd-state.json', 'Update dd-state.json', state),
-                putRepoJson('dd-votes.json', 'Update dd-votes.json', votesState),
-            ]);
+            const stateResp = await putRepoJson('dd-state.json', 'Update dd-state.json', state);
+            let votesResp = stateResp;
+            if (stateResp.ok) {
+                votesResp = await putRepoJson('dd-votes.json', 'Update dd-votes.json', votesState);
+            }
             if (stateResp.ok && votesResp.ok) {
                 try {
                     localStorage.removeItem(DD_READ_KEY);
@@ -2761,6 +2762,10 @@
                 btn.disabled = false;
                 setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save'; }, 3000);
             } else {
+                try {
+                    const errorText = stateResp.ok ? await votesResp.text() : await stateResp.text();
+                    console.error('saveDDState failed:', errorText);
+                } catch (e) {}
                 btn.innerHTML = '❌ Error';
                 btn.disabled = false;
                 setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save'; }, 3000);
