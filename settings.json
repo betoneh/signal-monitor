@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-29T04:52:27.225Z",
+  "updated_at": "2026-04-30T01:48:14.343Z",
   "model": "anthropic/claude-opus-4-6",
   "available_models": [
     {
@@ -96,8 +96,8 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "",
-    "deep_dives_count": 0,
+    "url": "https://x.com/revishvilig/status/2049561109028339941?s=46&t=OHfXTbjdV4tiD3nnG1lsTw",
+    "deep_dives_count": 4,
     "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
