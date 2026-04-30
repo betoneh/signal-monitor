@@ -301,6 +301,45 @@
         .fab-save, .fab-generate { background: rgba(52,63,96,0.85); color: #eaedf3; border: 1px solid rgba(10,143,123,0.3); backdrop-filter: blur(8px); }
         .fab-save:hover, .fab-generate:hover { background: rgba(10,143,123,0.4); }
         .fab-save svg, .fab-generate svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -2px; margin-right: 6px; }
+        .fab-status {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            background: rgba(52,63,96,0.85);
+            color: #8b949e;
+            border: 1px solid rgba(10,143,123,0.2);
+            backdrop-filter: blur(8px);
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(4px);
+            pointer-events: none;
+            transition: opacity 0.18s ease, transform 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+        }
+        .fab-status.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab-status[data-state="saving"] {
+            color: #eaedf3;
+            border-color: rgba(14,196,169,0.35);
+        }
+        .fab-status[data-state="saved"] {
+            color: #0ec4a9;
+            border-color: rgba(14,196,169,0.35);
+        }
+        .fab-status[data-state="error"] {
+            color: #ef4444;
+            border-color: rgba(239,68,68,0.35);
+        }
+        .fab-status[data-state="idle"] {
+            color: #8b949e;
+        }
 
         footer {
             max-width: 48rem; margin: 0 auto; width: 100%;
@@ -573,7 +612,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="169" data-orig-report="true">
+<li class="dd-item in-report is-downvoted" data-dd-id="169" data-orig-report="true" data-downvoted="true">
           <div class="dd-check-row">
             <button type="button" class="dd-check" data-id="169" data-title="Modernism and Kitsch Are Structural Twins, Not Opposites" data-state="unread" role="checkbox" aria-checked="false" aria-label="Unread" onclick="cycleDDState(event, 169)"></button>
             <a href="deep-dives/169-modernism-and-kitsch-are-structural-twins-not-opposites.html">
@@ -583,7 +622,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="168" data-orig-report="true">
+<li class="dd-item in-report is-downvoted" data-dd-id="168" data-orig-report="true" data-downvoted="true">
           <div class="dd-check-row">
             <button type="button" class="dd-check" data-id="168" data-title="'Never Again' as Negative Theology — How Post-1945 Morality Ran Out of Fuel" data-state="unread" role="checkbox" aria-checked="false" aria-label="Unread" onclick="cycleDDState(event, 168)"></button>
             <a href="deep-dives/168-never-again-as-negative-theology-how-post-1945-morality-ran-out-of-fuel.html">
@@ -593,7 +632,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="167" data-orig-report="true">
+<li class="dd-item in-report is-downvoted" data-dd-id="167" data-orig-report="true" data-downvoted="true">
           <div class="dd-check-row">
             <button type="button" class="dd-check" data-id="167" data-title="Kitsch Isn't Bad Taste — It's the Aesthetic Regime of a World Without Transcendence" data-state="unread" role="checkbox" aria-checked="false" aria-label="Unread" onclick="cycleDDState(event, 167)"></button>
             <a href="deep-dives/167-kitsch-isn-t-bad-taste-it-s-the-aesthetic-regime-of-a-world-without-transcendence.html">
@@ -2375,7 +2414,7 @@
 </main>
 
 <div class="fab-container" id="dd-fab">
-  <button class="fab-btn fab-save" id="dd-save-btn" onclick="saveDDState()"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save</button>
+  <div class="fab-status" id="dd-save-status" data-state="idle" aria-live="polite"></div>
 </div>
 
 <div class="fab-container" id="gen-fab">
@@ -2385,7 +2424,7 @@
 <div class="hr"><hr></div>
 
 <footer>
-    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <span class="build-version" title="Generated build version">Build 20260429-1857</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <span class="build-version" title="Generated build version">Build 20260429-1913</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 
 </div><!-- /app -->
@@ -2417,6 +2456,7 @@
             document.getElementById('gate').style.display = 'none';
             document.getElementById('app').style.display = 'block';
             try { localStorage.setItem('sm-auth', Date.now().toString()); } catch(e) {}
+            if (ddAutosaveDirty) scheduleDDSave(true);
         } else {
             document.getElementById('gate-err').style.display = 'block';
             document.getElementById('pw').value = '';
@@ -2463,6 +2503,12 @@
     const DD_UNREAD_KEY = 'sm-dd-unread';  // manually unchecked from in-report items
     const DD_DOWNVOTE_KEY = 'sm-dd-downvoted';
     const DD_BLOG_PUBLISHED_KEY = 'sm-dd-blog-published';
+    let ddAutosaveTimer = null;
+    let ddAutosaveResetTimer = null;
+    let ddAutosaveInFlight = false;
+    let ddAutosaveQueued = false;
+    let ddAutosaveDirty = false;
+    let ddAutosaveLastSaved = '';
     function getDDRead() {
         try { return JSON.parse(localStorage.getItem(DD_READ_KEY) || '[]'); } catch(e) { return []; }
     }
@@ -2498,6 +2544,54 @@
                 .sort((a, b) => a - b);
             localStorage.setItem(DD_BLOG_PUBLISHED_KEY, JSON.stringify(normalized));
         } catch(e) {}
+    }
+    function getDDStateSnapshot() {
+        return JSON.stringify({
+            read: getDDRead(),
+            unreport: getDDUnread(),
+            downvoted: getDDDownvotes(),
+        });
+    }
+    function setDDSaveStatus(state, message, persist=false) {
+        const el = document.getElementById('dd-save-status');
+        if (!el) return;
+        if (ddAutosaveResetTimer) {
+            clearTimeout(ddAutosaveResetTimer);
+            ddAutosaveResetTimer = null;
+        }
+        el.dataset.state = state;
+        el.textContent = message || '';
+        const visible = !!message;
+        el.classList.toggle('is-visible', visible);
+        if (visible && !persist && (state === 'saved' || state === 'idle')) {
+            ddAutosaveResetTimer = setTimeout(() => {
+                el.classList.remove('is-visible');
+                el.textContent = '';
+                el.dataset.state = 'idle';
+            }, state === 'saved' ? 1800 : 2600);
+        }
+    }
+    function requireDDSaveLogin() {
+        setDDSaveStatus('error', 'Sign in to save', true);
+        document.getElementById('gate').style.display = 'flex';
+        document.getElementById('app').style.display = 'none';
+        localStorage.removeItem('sm-auth');
+    }
+    function scheduleDDSave(immediate=false) {
+        ddAutosaveDirty = true;
+        if (ddAutosaveTimer) {
+            clearTimeout(ddAutosaveTimer);
+            ddAutosaveTimer = null;
+        }
+        if (!ghToken) {
+            requireDDSaveLogin();
+            return;
+        }
+        setDDSaveStatus('saving', immediate ? 'Saving…' : 'Saving soon…', true);
+        ddAutosaveTimer = setTimeout(() => {
+            ddAutosaveTimer = null;
+            saveDDState();
+        }, immediate ? 0 : 450);
     }
     function ensureDeepDiveSplitRoot() {
         const tab = document.getElementById('tab-deepdives');
@@ -2659,6 +2753,7 @@
                 : 'unread';
         setDDVisualState(id, nextState);
         syncDDState();
+        scheduleDDSave();
     }
     function syncDDState() {
         const readList = getDDRead();
@@ -2731,16 +2826,21 @@
         });
     }
     async function saveDDState() {
-        const btn = document.getElementById('dd-save-btn');
         if (!ghToken) {
-            // Token not available (auto-login without session) — force re-login
-            document.getElementById('gate').style.display = 'flex';
-            document.getElementById('app').style.display = 'none';
-            localStorage.removeItem('sm-auth');
+            requireDDSaveLogin();
             return;
         }
-        btn.disabled = true;
-        btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Saving...';
+        const snapshot = getDDStateSnapshot();
+        if (!ddAutosaveDirty && snapshot === ddAutosaveLastSaved) {
+            setDDSaveStatus('saved', 'Saved');
+            return;
+        }
+        if (ddAutosaveInFlight) {
+            ddAutosaveQueued = true;
+            return;
+        }
+        ddAutosaveInFlight = true;
+        setDDSaveStatus('saving', 'Saving…', true);
         const readList = getDDRead();
         const unreadList = getDDUnread();
         const downvotedList = getDDDownvotes();
@@ -2753,27 +2853,27 @@
                 votesResp = await putRepoJson('dd-votes.json', 'Update dd-votes.json', votesState);
             }
             if (stateResp.ok && votesResp.ok) {
-                try {
-                    localStorage.removeItem(DD_READ_KEY);
-                    localStorage.removeItem(DD_UNREAD_KEY);
-                    localStorage.removeItem(DD_DOWNVOTE_KEY);
-                } catch(e) {}
-                btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Saved';
-                btn.disabled = false;
-                setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save'; }, 3000);
+                ddAutosaveLastSaved = snapshot;
+                ddAutosaveDirty = false;
+                setDDSaveStatus('saved', 'Saved');
             } else {
                 try {
                     const errorText = stateResp.ok ? await votesResp.text() : await stateResp.text();
                     console.error('saveDDState failed:', errorText);
                 } catch (e) {}
-                btn.innerHTML = '❌ Error';
-                btn.disabled = false;
-                setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save'; }, 3000);
+                ddAutosaveDirty = true;
+                setDDSaveStatus('error', 'Save failed', true);
             }
         } catch(e) {
-            btn.innerHTML = '❌ Error';
-            btn.disabled = false;
-            setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save'; }, 3000);
+            console.error('saveDDState failed:', e);
+            ddAutosaveDirty = true;
+            setDDSaveStatus('error', 'Save failed', true);
+        } finally {
+            ddAutosaveInFlight = false;
+            if (ddAutosaveQueued || (ddAutosaveDirty && getDDStateSnapshot() !== ddAutosaveLastSaved)) {
+                ddAutosaveQueued = false;
+                scheduleDDSave(true);
+            }
         }
     }
     // On load: fetch dd-state.json from repo, merge into localStorage, then sync UI
@@ -2809,6 +2909,8 @@
             }
         } catch(e) {}
         syncDDState();
+        ddAutosaveLastSaved = getDDStateSnapshot();
+        ddAutosaveDirty = false;
     })();
 
     // Generate report trigger
