@@ -2424,7 +2424,7 @@
 <div class="hr"><hr></div>
 
 <footer>
-    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <span class="build-version" title="Generated build version">Build 20260429-1913</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <span class="build-version" title="Generated build version">Build 20260429-1929</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 
 </div><!-- /app -->
@@ -2503,6 +2503,7 @@
     const DD_UNREAD_KEY = 'sm-dd-unread';  // manually unchecked from in-report items
     const DD_DOWNVOTE_KEY = 'sm-dd-downvoted';
     const DD_BLOG_PUBLISHED_KEY = 'sm-dd-blog-published';
+    const DD_READ_META_KEY = 'sm-dd-read-meta';
     let ddAutosaveTimer = null;
     let ddAutosaveResetTimer = null;
     let ddAutosaveInFlight = false;
@@ -2545,11 +2546,31 @@
             localStorage.setItem(DD_BLOG_PUBLISHED_KEY, JSON.stringify(normalized));
         } catch(e) {}
     }
+    function getDDReadMeta() {
+        try {
+            const raw = JSON.parse(localStorage.getItem(DD_READ_META_KEY) || '{}');
+            return raw && typeof raw === 'object' ? raw : {};
+        } catch(e) {
+            return {};
+        }
+    }
+    function saveDDReadMeta(meta) {
+        try {
+            const normalized = {};
+            Object.entries(meta || {}).forEach(([id, timestamp]) => {
+                const numericId = parseInt(id, 10);
+                if (!Number.isFinite(numericId) || typeof timestamp !== 'string' || !timestamp) return;
+                normalized[String(numericId)] = timestamp;
+            });
+            localStorage.setItem(DD_READ_META_KEY, JSON.stringify(normalized));
+        } catch(e) {}
+    }
     function getDDStateSnapshot() {
         return JSON.stringify({
             read: getDDRead(),
             unreport: getDDUnread(),
             downvoted: getDDDownvotes(),
+            read_meta: getDDReadMeta(),
         });
     }
     function setDDSaveStatus(state, message, persist=false) {
@@ -2623,7 +2644,13 @@
         const unreadItems = items.filter(el => el.dataset.origReport !== 'true');
         const readItems = items
             .filter(el => el.dataset.origReport === 'true')
-            .sort((a, b) => parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId));
+            .sort((a, b) => {
+                const aReadAt = a.dataset.readAt || '';
+                const bReadAt = b.dataset.readAt || '';
+                if (aReadAt && bReadAt && aReadAt !== bReadAt) return bReadAt.localeCompare(aReadAt);
+                if (aReadAt !== bReadAt) return bReadAt ? 1 : -1;
+                return parseInt(b.dataset.ddId) - parseInt(a.dataset.ddId);
+            });
         const readDownvotedCount = readItems.filter(el => el.classList.contains('is-downvoted')).length;
         const readNormalCount = readItems.length - readDownvotedCount;
 
@@ -2705,17 +2732,19 @@
         if (!effectivelyRead) return 'unread';
         return downvotedList.includes(id) ? 'crossed' : 'read';
     }
-    function setDDVisualState(id, nextState) {
+    function setDDVisualState(id, nextState, currentState) {
         const el = document.querySelector(`.dd-item[data-dd-id="${id}"]`);
         if (!el) return;
         const origReport = el.dataset.origReport === 'true';
         let readList = getDDRead();
         let unreadList = getDDUnread();
         let downvotedList = getDDDownvotes();
+        let readMeta = getDDReadMeta();
 
         readList = readList.filter(value => value !== id);
         unreadList = unreadList.filter(value => value !== id);
         downvotedList = downvotedList.filter(value => value !== id);
+        delete readMeta[String(id)];
 
         if (nextState === 'read') {
             if (origReport) {
@@ -2723,6 +2752,9 @@
             } else {
                 readList.push(id);
             }
+            readMeta[String(id)] = (currentState === 'read' || currentState === 'crossed')
+                ? (el.dataset.readAt || new Date().toISOString())
+                : new Date().toISOString();
         } else if (nextState === 'crossed') {
             if (origReport) {
                 unreadList = unreadList.filter(value => value !== id);
@@ -2730,6 +2762,9 @@
                 readList.push(id);
             }
             downvotedList.push(id);
+            readMeta[String(id)] = (currentState === 'read' || currentState === 'crossed')
+                ? (el.dataset.readAt || new Date().toISOString())
+                : new Date().toISOString();
         } else if (nextState === 'unread') {
             if (origReport) {
                 unreadList.push(id);
@@ -2739,6 +2774,7 @@
         saveDDRead(readList);
         saveDDUnread(unreadList);
         saveDDDownvotes(downvotedList);
+        saveDDReadMeta(readMeta);
     }
     function cycleDDState(event, id) {
         if (event) {
@@ -2751,7 +2787,7 @@
             : currentState === 'read'
                 ? 'crossed'
                 : 'unread';
-        setDDVisualState(id, nextState);
+        setDDVisualState(id, nextState, currentState);
         syncDDState();
         scheduleDDSave();
     }
@@ -2760,6 +2796,7 @@
         let unreadList = getDDUnread();
         const downvotedList = getDDDownvotes();
         const publishedList = getDDBlogPublished();
+        const readMeta = getDDReadMeta();
         // Collect server-side in-report IDs for display logic
         const serverReportIds = [];
         document.querySelectorAll('.dd-item[data-orig-report="true"]').forEach(el => {
@@ -2780,6 +2817,13 @@
         if (normalizedRead.length !== prunedRead.length || normalizedRead.some((id, index) => id !== prunedRead[index])) {
             saveDDRead(normalizedRead);
         }
+        const normalizedReadMeta = {};
+        Object.entries(readMeta).forEach(([id, timestamp]) => {
+            const numericId = parseInt(id, 10);
+            if (!Number.isFinite(numericId)) return;
+            if (normalizedRead.includes(numericId)) normalizedReadMeta[String(numericId)] = timestamp;
+        });
+        saveDDReadMeta(normalizedReadMeta);
         document.querySelectorAll('.dd-item').forEach(el => {
             const id = parseInt(el.dataset.ddId);
             const cb = el.querySelector('.dd-check');
@@ -2792,6 +2836,9 @@
             el.classList.toggle('is-downvoted', isDownvoted);
             el.classList.toggle('is-blog-published', isPublished);
             el.classList.remove('is-read');
+            if (normalizedReadMeta[String(id)]) {
+                el.dataset.readAt = normalizedReadMeta[String(id)];
+            }
             if (cb) {
                 cb.dataset.state = visualState;
                 cb.title = visualState === 'crossed'
@@ -2844,7 +2891,8 @@
         const readList = getDDRead();
         const unreadList = getDDUnread();
         const downvotedList = getDDDownvotes();
-        const state = { read: readList, unreport: unreadList };
+        const readMeta = getDDReadMeta();
+        const state = { read: readList, unreport: unreadList, read_meta: readMeta };
         const votesState = { downvoted: downvotedList };
         try {
             const stateResp = await putRepoJson('dd-state.json', 'Update dd-state.json', state);
@@ -2888,6 +2936,7 @@
                 (state.unreport || []).forEach(id => { if (!unreadList.includes(id)) unreadList.push(id); });
                 saveDDRead(readList);
                 saveDDUnread(unreadList);
+                saveDDReadMeta({ ...getDDReadMeta(), ...(state.read_meta || {}) });
             }
         } catch(e) {}
         try {
