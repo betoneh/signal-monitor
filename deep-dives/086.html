@@ -121,7 +121,7 @@
       <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/deep-dives/086.html" target="_blank" rel="noopener" title="Share on Telegram">
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
-      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M7 10v10"/><path d="M15 5.88l-.94 4.7a2 2 0 0 0 .39 1.62l.55 .73a2 2 0 0 1 .39 1.2v3.87a2 2 0 0 1 -2 2h-7.34a2 2 0 0 1 -1.98 -1.75l-1 -8a2 2 0 0 1 1.98 -2.25h3.34a2 2 0 0 0 1.89 -1.37l1.62 -4.32a1 1 0 0 1 1.9 .57z"/></svg></button>
+      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-2a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v2"/></svg></button>
       <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -138,11 +138,11 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1438</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1822</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "Existential Risk Math: When 5-10% Probability of Doom Demands Action", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/existential-risk-math-when-5-10-probability-of-doom-demands-action.md", "slug": "existential-risk-math-when-5-10-probability-of-doom-demands-action", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/existential-risk-math-when-5-10-probability-of-doom-demands-action", "ddId": 86, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Existential Risk Math: When 5-10% Probability of Doom Demands Action\"\ndescription: \"How seriously should you take a threat if experts give it a 5-10% probability of killing everyone? The intuitive answer is: not that seriously — 90-95% is a...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"ai\", \"tech\", \"existential-risk\", \"ai-alignment\", \"governance\", \"effective-altruism\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nHow seriously should you take a threat if experts give it a 5-10% probability of killing everyone? The intuitive answer is: not that seriously — 90-95% is a good chance it doesn't happen, and we live with small risks constantly. But this intuition breaks down when the outcome is irreversible extinction. The math of expected value applied to existential risk produces conclusions that feel disproportionate to everyday intuition, and understanding why is essential to evaluating whether AI safety concerns deserve the attention they're getting.\n\nA [2022 survey of machine learning researchers](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/#Extinction_from_AI) — not doomer activists, but working AI scientists — found a median estimate of 5-10% probability that AI will cause human extinction or comparably catastrophic outcomes. Vitalik Buterin notes in his d/acc manifesto that this is roughly the same probability that the average person will die from an accidental non-biological cause during their lifetime. We treat accident risk seriously: we wear seatbelts, build safety regulations, litigate liability. We should probably apply similar seriousness to a risk of similar magnitude that ends humanity rather than one person.\n\nThe standard counterargument is that these probability estimates are wildly speculative — we're talking about events decades in the future, involving technologies that don't exist yet, based on philosophical arguments about the nature of optimization. That's fair. But Buterin's response is equally fair: these arguments have been around for over a decade and have survived sustained scrutiny from smart critics without being clearly refuted. \"I don't think this is true\" and \"this is definitely not true\" are very different epistemic states, and we are firmly in the former. Epistemic uncertainty at 5-10% is not the same as dismissal.\n\nThe asymmetry argument is the decisive one. Consider two scenarios: in the first, we take existential risk seriously, invest heavily in safety research and defensive technologies, and it turns out the risk was overstated — we wasted some resources but humanity thrives. In the second, we dismiss the risk, invest in capabilities without adequate safety work, and the 5-10% scenario materializes — humanity is gone, permanently. The cost of false alarm is bounded: some resources misdirected, some development slowed. The cost of false dismissal is unbounded: not just bad, but permanently bad, with no future generations to eventually fix the problem. Under this asymmetry, even relatively low probability of extinction justifies relatively high precaution.\n\nThis expected-value framing also explains why even people who place much lower probability estimates on AI doom — say, 1% or even 0.1% — might rationally support significant investment in safety. The expected number of lives at stake when you multiply even small probabilities by the 8 billion humans alive today, plus all potential future generations, produces numbers that dwarf any other intervention available. [Effective altruist](https://www.effectivealtruism.org/) frameworks have driven this calculation explicitly, which is why many EA-aligned actors have prioritized AI safety over more tractable near-term interventions.\n\nButerin's practical conclusion is not \"stop AI\" but \"take safety seriously in proportion to the stakes.\" The current governance structures — a few nonprofit boards, voluntary commitments from labs, emerging regulatory frameworks that may not survive contact with commercial pressure — are clearly inadequate for a technology with this risk profile. We don't rely on voluntary commitments from aircraft manufacturers to ensure planes don't fall out of the sky. The question is what adequate governance for existential risk actually looks like, and that's a harder problem than the math — but the math at least makes clear that solving the governance problem is worth significant investment.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "Existential Risk Math: When 5-10% Probability of Doom Demands Action", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/existential-risk-math-when-5-10-probability-of-doom-demands-action.md", "slug": "existential-risk-math-when-5-10-probability-of-doom-demands-action", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/existential-risk-math-when-5-10-probability-of-doom-demands-action", "ddId": 86, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Existential Risk Math: When 5-10% Probability of Doom Demands Action\"\ndescription: \"How seriously should you take a threat if experts give it a 5-10% probability of killing everyone? The intuitive answer is: not that seriously — 90-95% is a...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"ai\", \"tech\", \"existential-risk\", \"ai-alignment\", \"governance\", \"effective-altruism\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\nsignalOrder: 86\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nHow seriously should you take a threat if experts give it a 5-10% probability of killing everyone? The intuitive answer is: not that seriously — 90-95% is a good chance it doesn't happen, and we live with small risks constantly. But this intuition breaks down when the outcome is irreversible extinction. The math of expected value applied to existential risk produces conclusions that feel disproportionate to everyday intuition, and understanding why is essential to evaluating whether AI safety concerns deserve the attention they're getting.\n\nA [2022 survey of machine learning researchers](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/#Extinction_from_AI) — not doomer activists, but working AI scientists — found a median estimate of 5-10% probability that AI will cause human extinction or comparably catastrophic outcomes. Vitalik Buterin notes in his d/acc manifesto that this is roughly the same probability that the average person will die from an accidental non-biological cause during their lifetime. We treat accident risk seriously: we wear seatbelts, build safety regulations, litigate liability. We should probably apply similar seriousness to a risk of similar magnitude that ends humanity rather than one person.\n\nThe standard counterargument is that these probability estimates are wildly speculative — we're talking about events decades in the future, involving technologies that don't exist yet, based on philosophical arguments about the nature of optimization. That's fair. But Buterin's response is equally fair: these arguments have been around for over a decade and have survived sustained scrutiny from smart critics without being clearly refuted. \"I don't think this is true\" and \"this is definitely not true\" are very different epistemic states, and we are firmly in the former. Epistemic uncertainty at 5-10% is not the same as dismissal.\n\nThe asymmetry argument is the decisive one. Consider two scenarios: in the first, we take existential risk seriously, invest heavily in safety research and defensive technologies, and it turns out the risk was overstated — we wasted some resources but humanity thrives. In the second, we dismiss the risk, invest in capabilities without adequate safety work, and the 5-10% scenario materializes — humanity is gone, permanently. The cost of false alarm is bounded: some resources misdirected, some development slowed. The cost of false dismissal is unbounded: not just bad, but permanently bad, with no future generations to eventually fix the problem. Under this asymmetry, even relatively low probability of extinction justifies relatively high precaution.\n\nThis expected-value framing also explains why even people who place much lower probability estimates on AI doom — say, 1% or even 0.1% — might rationally support significant investment in safety. The expected number of lives at stake when you multiply even small probabilities by the 8 billion humans alive today, plus all potential future generations, produces numbers that dwarf any other intervention available. [Effective altruist](https://www.effectivealtruism.org/) frameworks have driven this calculation explicitly, which is why many EA-aligned actors have prioritized AI safety over more tractable near-term interventions.\n\nButerin's practical conclusion is not \"stop AI\" but \"take safety seriously in proportion to the stakes.\" The current governance structures — a few nonprofit boards, voluntary commitments from labs, emerging regulatory frameworks that may not survive contact with commercial pressure — are clearly inadequate for a technology with this risk profile. We don't rely on voluntary commitments from aircraft manufacturers to ensure planes don't fall out of the sky. The question is what adequate governance for existential risk actually looks like, and that's a harder problem than the math — but the math at least makes clear that solving the governance problem is worth significant investment.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
@@ -201,7 +201,13 @@
     }
 
     function saveLocalDownvotes(list) {
-      try { localStorage.setItem('sm-dd-downvoted', JSON.stringify(list)); } catch (e) {}
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-downvoted', JSON.stringify(normalized));
+      } catch (e) {}
     }
 
     function extractPubDatetime(markdown) {
@@ -265,19 +271,16 @@
 
     async function refreshDownvoteState(token) {
       var localDownvotes = getLocalDownvotes();
-      var localState = localDownvotes.includes(payload.ddId);
-      setDownvoteState(localState);
+      setDownvoteState(localDownvotes.includes(payload.ddId));
       if (!token) return null;
       var existing = await fetchVotes(token);
-      var downvoted = false;
+      var remoteDownvotes = [];
       if (existing && existing.content) {
         var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
-        downvoted = (voteState.downvoted || []).includes(payload.ddId);
-        var nextLocal = localDownvotes.filter(function(id) { return id !== payload.ddId; });
-        if (downvoted) nextLocal.push(payload.ddId);
-        saveLocalDownvotes(nextLocal);
+        remoteDownvotes = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
       }
-      setDownvoteState(downvoted);
+      saveLocalDownvotes(remoteDownvotes);
+      setDownvoteState(remoteDownvotes.includes(payload.ddId));
       return existing;
     }
 
@@ -355,11 +358,7 @@
       try {
         var token = await ensureToken();
         var existing = await refreshDownvoteState(token);
-        var voteState = { downvoted: [] };
-        if (existing && existing.content) {
-          voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
-        }
-        var list = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+        var list = getLocalDownvotes();
         var idx = list.indexOf(payload.ddId);
         var isDownvoted = idx >= 0;
         if (isDownvoted) {
@@ -369,7 +368,7 @@
         }
         list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
           .sort(function(a, b) { return a - b; });
-        voteState.downvoted = list;
+        var voteState = { downvoted: list };
         var body = {
           message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
           content: toBase64Utf8(JSON.stringify(voteState, null, 2))

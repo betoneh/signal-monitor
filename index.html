@@ -522,7 +522,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="169" data-orig-report="true">
+<li class="dd-item in-report is-downvoted" data-dd-id="169" data-orig-report="true" data-downvoted="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="169" data-title="Modernism and Kitsch Are Structural Twins, Not Opposites" onchange="toggleDDRead(169)">
             <a href="deep-dives/169-modernism-and-kitsch-are-structural-twins-not-opposites.html">
@@ -531,7 +531,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="168" data-orig-report="true">
+<li class="dd-item in-report is-downvoted" data-dd-id="168" data-orig-report="true" data-downvoted="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="168" data-title="'Never Again' as Negative Theology — How Post-1945 Morality Ran Out of Fuel" onchange="toggleDDRead(168)">
             <a href="deep-dives/168-never-again-as-negative-theology-how-post-1945-morality-ran-out-of-fuel.html">
@@ -540,7 +540,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="167" data-orig-report="true">
+<li class="dd-item in-report is-downvoted" data-dd-id="167" data-orig-report="true" data-downvoted="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="167" data-title="Kitsch Isn't Bad Taste — It's the Aesthetic Regime of a World Without Transcendence" onchange="toggleDDRead(167)">
             <a href="deep-dives/167-kitsch-isn-t-bad-taste-it-s-the-aesthetic-regime-of-a-world-without-transcendence.html">
@@ -549,7 +549,7 @@
             </a>
           </div>
         </li>
-<li class="dd-item in-report" data-dd-id="166" data-orig-report="true">
+<li class="dd-item in-report is-downvoted" data-dd-id="166" data-orig-report="true" data-downvoted="true">
           <div class="dd-check-row">
             <input type="checkbox" class="dd-check" data-id="166" data-title="Modernity Isn't Secular — It's Decomposing Christianity" onchange="toggleDDRead(166)">
             <a href="deep-dives/166-modernity-isn-t-secular-it-s-decomposing-christianity.html">
@@ -2165,7 +2165,7 @@
 <div class="hr"><hr></div>
 
 <footer>
-    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <span class="build-version" title="Generated build version">Build 20260429-1438</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+    <a href="https://github.com/betoneh/signal-monitor">Signal Monitor</a> · <span class="build-version" title="Generated build version">Build 20260429-1822</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 
 </div><!-- /app -->
@@ -2258,7 +2258,13 @@
         try { return JSON.parse(localStorage.getItem(DD_DOWNVOTE_KEY) || '[]'); } catch(e) { return []; }
     }
     function saveDDDownvotes(list) {
-        try { localStorage.setItem(DD_DOWNVOTE_KEY, JSON.stringify(list)); } catch(e) {}
+        try {
+            const normalized = (Array.isArray(list) ? list : [])
+                .map(id => parseInt(id, 10))
+                .filter((id, index, arr) => Number.isFinite(id) && arr.indexOf(id) === index)
+                .sort((a, b) => a - b);
+            localStorage.setItem(DD_DOWNVOTE_KEY, JSON.stringify(normalized));
+        } catch(e) {}
     }
     function ensureDeepDiveSplitRoot() {
         const tab = document.getElementById('tab-deepdives');
@@ -2463,9 +2469,9 @@
             const r = await fetch('dd-votes.json?_=' + Date.now(), {cache: 'no-store'});
             if (r.ok) {
                 const state = await r.json();
-                const downvotedList = getDDDownvotes();
-                (state.downvoted || []).forEach(id => { if (!downvotedList.includes(id)) downvotedList.push(id); });
-                saveDDDownvotes(downvotedList);
+                saveDDDownvotes(state.downvoted || []);
+            } else if (r.status === 404) {
+                saveDDDownvotes([]);
             }
         } catch(e) {}
         syncDDState();

@@ -121,7 +121,7 @@
       <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/deep-dives/090.html" target="_blank" rel="noopener" title="Share on Telegram">
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
-      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M7 10v10"/><path d="M15 5.88l-.94 4.7a2 2 0 0 0 .39 1.62l.55 .73a2 2 0 0 1 .39 1.2v3.87a2 2 0 0 1 -2 2h-7.34a2 2 0 0 1 -1.98 -1.75l-1 -8a2 2 0 0 1 1.98 -2.25h3.34a2 2 0 0 0 1.89 -1.37l1.62 -4.32a1 1 0 0 1 1.9 .57z"/></svg></button>
+      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-2a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v2"/></svg></button>
       <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -138,11 +138,11 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1438</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1822</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "Biosecurity as d/acc: Open-Source Vaccines and Pandemic Preparedness", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/biosecurity-as-d-acc-open-source-vaccines-and-pandemic-preparedness.md", "slug": "biosecurity-as-d-acc-open-source-vaccines-and-pandemic-preparedness", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/biosecurity-as-d-acc-open-source-vaccines-and-pandemic-preparedness", "ddId": 90, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Biosecurity as d/acc: Open-Source Vaccines and Pandemic Preparedness\"\ndescription: \"The next pandemic is not a hypothetical. It's a probability distribution with a disturbingly short tail. The structural drivers that made COVID-19 possible —...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"tech\", \"biosecurity\", \"pandemic\", \"public-health\", \"crypto\", \"d-acc\", \"open-source\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nThe next pandemic is not a hypothetical. It's a probability distribution with a disturbingly short tail. The structural drivers that made COVID-19 possible — urban density, global air travel, factory farming, and increasingly accessible bioengineering tools — are all either stable or accelerating. [Rapid urbanization](https://ourworldindata.org/grapher/urban-population-share-2050?tab=chart) continues globally. Air passenger volumes are projected to roughly double over the next two decades. And the ability to design genetic sequences and order their synthesis — [shipped to your door within five days](https://www.twistbioscience.com/products/genes) — is already commercially available. The pandemic threat is not receding; it's growing.\n\nWhat makes bioweapons particularly alarming is a property Buterin highlights specifically: unlike nuclear weapons, engineered pathogens are *unattributable*. You can [detect a nuclear strike's origin](https://www.science.org/content/article/surprise-nuclear-strike-heres-how-well-figure-out-who-did-it) with high confidence, creating deterrence. A released pathogen has no signature. A state or non-state actor that creates a highly transmissible virus and releases it in a transit hub might cause millions of deaths with no forensic trail pointing back to them. This eliminates the deterrence dynamic that has historically constrained nuclear use and makes biodefense categorically harder than nuclear defense.\n\nVitalik's Balvi fund, spun up with crypto proceeds from an accidental windfall of Shiba Inu coin donations during the Indian COVID crisis, has put these ideas into practice. The fund's explicit requirement that all projects be **open source** is not incidental — it reflects the d/acc principle that biosecurity infrastructure should be a public good rather than a competitive advantage for any single actor. An open-source vaccine platform like [RaDVaC](https://radvac.org) or [PopVax](https://popvax.com) means any competent lab in any country can manufacture a response to a novel pathogen, rather than waiting for a handful of global pharmaceutical manufacturers to ramp up production.\n\nThe 19th century water engineering analogy that Buterin uses is illuminating. Cholera and other waterborne pathogens were defeated not by better medical treatment but by changing the infrastructure of the built environment: sewers, clean water supply, sanitation standards woven into the fabric of cities. Nobody has to \"choose\" to not drink cholera-contaminated water today — the infrastructure makes it the default. Buterin envisions an equivalent transformation for airborne pathogens: far-UVC irradiation in public buildings, [wastewater surveillance](https://www.nature.com/articles/s41591-022-01940-x) detecting outbreak signatures before clinical cases appear, rapid decentralized vaccine synthesis capabilities, and standardized ventilation making indoor air quality a public health guarantee rather than a private choice.\n\nThe cost-benefit case is overwhelming. The COVID-19 pandemic cost the global economy an estimated $12-16 trillion. The total cost of fully implementing the kind of pandemic-hardened infrastructure Buterin describes — far-UVC deployment in major public buildings, wastewater surveillance networks, open-source vaccine manufacturing capacity — is probably two orders of magnitude less. We are making an implicit choice every year we don't invest in this infrastructure, trading a large certain future cost against a small immediate expenditure.\n\nThe d/acc frame clarifies why this is a priority and not just a nice-to-have: pandemic defense is almost purely defense-favoring. It reduces suffering without creating new offensive capabilities. Open-source vaccine platforms don't give any actor a meaningful bioweapons advantage. Wastewater surveillance is as useful for detecting natural outbreaks as engineered ones. This is the kind of technology that differential development frameworks should put at the top of the agenda — high benefit, low dual-use risk, systematically underfunded by markets alone.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "Biosecurity as d/acc: Open-Source Vaccines and Pandemic Preparedness", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/biosecurity-as-d-acc-open-source-vaccines-and-pandemic-preparedness.md", "slug": "biosecurity-as-d-acc-open-source-vaccines-and-pandemic-preparedness", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/biosecurity-as-d-acc-open-source-vaccines-and-pandemic-preparedness", "ddId": 90, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Biosecurity as d/acc: Open-Source Vaccines and Pandemic Preparedness\"\ndescription: \"The next pandemic is not a hypothetical. It's a probability distribution with a disturbingly short tail. The structural drivers that made COVID-19 possible —...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"tech\", \"biosecurity\", \"pandemic\", \"public-health\", \"crypto\", \"d-acc\", \"open-source\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\nsignalOrder: 90\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nThe next pandemic is not a hypothetical. It's a probability distribution with a disturbingly short tail. The structural drivers that made COVID-19 possible — urban density, global air travel, factory farming, and increasingly accessible bioengineering tools — are all either stable or accelerating. [Rapid urbanization](https://ourworldindata.org/grapher/urban-population-share-2050?tab=chart) continues globally. Air passenger volumes are projected to roughly double over the next two decades. And the ability to design genetic sequences and order their synthesis — [shipped to your door within five days](https://www.twistbioscience.com/products/genes) — is already commercially available. The pandemic threat is not receding; it's growing.\n\nWhat makes bioweapons particularly alarming is a property Buterin highlights specifically: unlike nuclear weapons, engineered pathogens are *unattributable*. You can [detect a nuclear strike's origin](https://www.science.org/content/article/surprise-nuclear-strike-heres-how-well-figure-out-who-did-it) with high confidence, creating deterrence. A released pathogen has no signature. A state or non-state actor that creates a highly transmissible virus and releases it in a transit hub might cause millions of deaths with no forensic trail pointing back to them. This eliminates the deterrence dynamic that has historically constrained nuclear use and makes biodefense categorically harder than nuclear defense.\n\nVitalik's Balvi fund, spun up with crypto proceeds from an accidental windfall of Shiba Inu coin donations during the Indian COVID crisis, has put these ideas into practice. The fund's explicit requirement that all projects be **open source** is not incidental — it reflects the d/acc principle that biosecurity infrastructure should be a public good rather than a competitive advantage for any single actor. An open-source vaccine platform like [RaDVaC](https://radvac.org) or [PopVax](https://popvax.com) means any competent lab in any country can manufacture a response to a novel pathogen, rather than waiting for a handful of global pharmaceutical manufacturers to ramp up production.\n\nThe 19th century water engineering analogy that Buterin uses is illuminating. Cholera and other waterborne pathogens were defeated not by better medical treatment but by changing the infrastructure of the built environment: sewers, clean water supply, sanitation standards woven into the fabric of cities. Nobody has to \"choose\" to not drink cholera-contaminated water today — the infrastructure makes it the default. Buterin envisions an equivalent transformation for airborne pathogens: far-UVC irradiation in public buildings, [wastewater surveillance](https://www.nature.com/articles/s41591-022-01940-x) detecting outbreak signatures before clinical cases appear, rapid decentralized vaccine synthesis capabilities, and standardized ventilation making indoor air quality a public health guarantee rather than a private choice.\n\nThe cost-benefit case is overwhelming. The COVID-19 pandemic cost the global economy an estimated $12-16 trillion. The total cost of fully implementing the kind of pandemic-hardened infrastructure Buterin describes — far-UVC deployment in major public buildings, wastewater surveillance networks, open-source vaccine manufacturing capacity — is probably two orders of magnitude less. We are making an implicit choice every year we don't invest in this infrastructure, trading a large certain future cost against a small immediate expenditure.\n\nThe d/acc frame clarifies why this is a priority and not just a nice-to-have: pandemic defense is almost purely defense-favoring. It reduces suffering without creating new offensive capabilities. Open-source vaccine platforms don't give any actor a meaningful bioweapons advantage. Wastewater surveillance is as useful for detecting natural outbreaks as engineered ones. This is the kind of technology that differential development frameworks should put at the top of the agenda — high benefit, low dual-use risk, systematically underfunded by markets alone.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
@@ -201,7 +201,13 @@
     }
 
     function saveLocalDownvotes(list) {
-      try { localStorage.setItem('sm-dd-downvoted', JSON.stringify(list)); } catch (e) {}
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-downvoted', JSON.stringify(normalized));
+      } catch (e) {}
     }
 
     function extractPubDatetime(markdown) {
@@ -265,19 +271,16 @@
 
     async function refreshDownvoteState(token) {
       var localDownvotes = getLocalDownvotes();
-      var localState = localDownvotes.includes(payload.ddId);
-      setDownvoteState(localState);
+      setDownvoteState(localDownvotes.includes(payload.ddId));
       if (!token) return null;
       var existing = await fetchVotes(token);
-      var downvoted = false;
+      var remoteDownvotes = [];
       if (existing && existing.content) {
         var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
-        downvoted = (voteState.downvoted || []).includes(payload.ddId);
-        var nextLocal = localDownvotes.filter(function(id) { return id !== payload.ddId; });
-        if (downvoted) nextLocal.push(payload.ddId);
-        saveLocalDownvotes(nextLocal);
+        remoteDownvotes = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
       }
-      setDownvoteState(downvoted);
+      saveLocalDownvotes(remoteDownvotes);
+      setDownvoteState(remoteDownvotes.includes(payload.ddId));
       return existing;
     }
 
@@ -355,11 +358,7 @@
       try {
         var token = await ensureToken();
         var existing = await refreshDownvoteState(token);
-        var voteState = { downvoted: [] };
-        if (existing && existing.content) {
-          voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
-        }
-        var list = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+        var list = getLocalDownvotes();
         var idx = list.indexOf(payload.ddId);
         var isDownvoted = idx >= 0;
         if (isDownvoted) {
@@ -369,7 +368,7 @@
         }
         list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
           .sort(function(a, b) { return a - b; });
-        voteState.downvoted = list;
+        var voteState = { downvoted: list };
         var body = {
           message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
           content: toBase64Utf8(JSON.stringify(voteState, null, 2))

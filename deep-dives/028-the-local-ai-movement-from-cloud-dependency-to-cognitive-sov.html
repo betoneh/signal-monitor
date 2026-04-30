@@ -129,7 +129,7 @@
       <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/deep-dives/028-the-local-ai-movement-from-cloud-dependency-to-cognitive-sov.html" target="_blank" rel="noopener" title="Share on Telegram">
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
-      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M7 10v10"/><path d="M15 5.88l-.94 4.7a2 2 0 0 0 .39 1.62l.55 .73a2 2 0 0 1 .39 1.2v3.87a2 2 0 0 1 -2 2h-7.34a2 2 0 0 1 -1.98 -1.75l-1 -8a2 2 0 0 1 1.98 -2.25h3.34a2 2 0 0 0 1.89 -1.37l1.62 -4.32a1 1 0 0 1 1.9 .57z"/></svg></button>
+      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-2a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v2"/></svg></button>
       <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -146,11 +146,11 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1438</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1822</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "The Local AI Movement: From Cloud Dependency to Cognitive Sovereignty", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-local-ai-movement-from-cloud-dependency-to-cognitive-sov.md", "slug": "the-local-ai-movement-from-cloud-dependency-to-cognitive-sov", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/the-local-ai-movement-from-cloud-dependency-to-cognitive-sov", "ddId": 28, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Local AI Movement: From Cloud Dependency to Cognitive Sovereignty\"\ndescription: \"Verdon references \\\"the open source Mac mini craziness of the past few weeks\\\" as evidence that people are clamoring for local, personal AI. This throwaway lin...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"ai\", \"cognitive_security\", \"computing\", \"eacc\", \"economics\", \"energy\", \"geopolitics\", \"neuroscience\"]\nsource: \"Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate\"\nsourceUrl: \"https://www.youtube.com/watch?v=NSm6GRiMkzU\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate →](https://www.youtube.com/watch?v=NSm6GRiMkzU)\n\n\n[Verdon](https://extropic.ai) references \"the [open source](https://en.wikipedia.org/wiki/Open-source_software) Mac mini craziness of the past few weeks\" as evidence that people are clamoring for local, personal AI. This throwaway line points to one of the most significant grassroots technology movements happening right now — and it's driven by exactly the concerns both debaters share.\n\nThe local AI movement is the rapidly growing community of people running large language models on their own hardware — laptops, desktops, Mac Minis, even Raspberry Pis. Enabled by projects like llama.cpp (which runs Meta's Llama models on consumer hardware), Ollama (which makes local model deployment one-click simple), and a proliferation of quantized models that compress 70-billion-parameter models to run in 32GB of RAM, personal AI has gone from impossible to practical in under two years.\n\nThe motivations are diverse but cluster around a few themes. Privacy: conversations with a local model never leave your machine. No company reads them, trains on them, or stores them. Reliability: local models work offline, can't be rate-limited, and won't suddenly change behavior because a company updated their content policy. Ownership: the model weights are yours. No subscription, no API key, no terms of service that can change unilaterally. Customization: you can fine-tune local models on your own data, creating genuinely personalized AI without sharing anything with anyone.\n\nThis movement is the consumer expression of the power distribution principle both debaters advocate. Every person running a local model is one more node in the distributed AI network. If [OpenAI](https://openai.com) or [Anthropic](https://anthropic.com) were to be captured by government interests (as the Anthropic situation hints), local AI provides a fallback. You can't shut down millions of Mac Minis running open source models the way you can shut down an API endpoint.\n\nThe current limitations are real. Local models are smaller and less capable than frontier cloud models. A 70B parameter model running on a Mac Studio is impressive but doesn't match GPT-4 or Claude on complex reasoning tasks. The gap is closing — Llama 3.1 405B approaches frontier performance, and quantization techniques are improving rapidly — but today, choosing local AI means accepting a capability trade-off.\n\nVerdon connects this to his hardware thesis: the reason local AI requires compromises is that current hardware (GPUs, CPUs) is fundamentally inefficient for neural network inference. If [Extropic](https://extropic.ai) delivers 10,000x better energy efficiency, a device the size of a smartphone could run models that today require a data center. The hardware bottleneck, not the algorithmic one, is what prevents true cognitive sovereignty.\n\nThe political dimension is underappreciated. In an era where governments are increasingly interested in controlling AI (China's content restrictions, the EU's AI Act, US export controls), the ability to run uncensored, unmonitored AI locally is a form of cognitive freedom analogous to freedom of thought. You can regulate what companies deploy in their products. You can't regulate what someone runs on their own hardware in their own home — at least not without the kind of invasive enforcement that democracies have historically rejected.\n\nThe economic model is also shifting. Cloud AI is a rental economy — you pay per token, per query, per month. Local AI is an ownership economy — you buy hardware once and run inference forever at the cost of electricity. For heavy users, the break-even point has already arrived. A $3,000 Mac Studio running Ollama pays for itself in under a year compared to commercial API pricing for equivalent usage.\n\nBoth [Vitalik](https://vitalik.eth.limo) and Verdon see local AI as essential infrastructure, not a hobbyist curiosity. It's the foundation of cognitive security (defending against prompt attacks), personal sovereignty (owning your cognitive model), and power distribution (preventing AI monopolies). The Mac mini craziness isn't a trend — it's the beginning of the most important infrastructure deployment since personal computers.\n"}</script>
+<script id="blog-publish-payload" type="application/json">{"title": "The Local AI Movement: From Cloud Dependency to Cognitive Sovereignty", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-local-ai-movement-from-cloud-dependency-to-cognitive-sov.md", "slug": "the-local-ai-movement-from-cloud-dependency-to-cognitive-sov", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/the-local-ai-movement-from-cloud-dependency-to-cognitive-sov", "ddId": 28, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Local AI Movement: From Cloud Dependency to Cognitive Sovereignty\"\ndescription: \"Verdon references \\\"the open source Mac mini craziness of the past few weeks\\\" as evidence that people are clamoring for local, personal AI. This throwaway lin...\"\npubDatetime: 2026-04-29T00:00:00\ntags: [\"ai\", \"cognitive_security\", \"computing\", \"eacc\", \"economics\", \"energy\", \"geopolitics\", \"neuroscience\"]\nsource: \"Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate\"\nsourceUrl: \"https://www.youtube.com/watch?v=NSm6GRiMkzU\"\nsignalOrder: 28\ndraft: false\n---\n\n> **Deep Dive** · [Source: Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate →](https://www.youtube.com/watch?v=NSm6GRiMkzU)\n\n\n[Verdon](https://extropic.ai) references \"the [open source](https://en.wikipedia.org/wiki/Open-source_software) Mac mini craziness of the past few weeks\" as evidence that people are clamoring for local, personal AI. This throwaway line points to one of the most significant grassroots technology movements happening right now — and it's driven by exactly the concerns both debaters share.\n\nThe local AI movement is the rapidly growing community of people running large language models on their own hardware — laptops, desktops, Mac Minis, even Raspberry Pis. Enabled by projects like llama.cpp (which runs Meta's Llama models on consumer hardware), Ollama (which makes local model deployment one-click simple), and a proliferation of quantized models that compress 70-billion-parameter models to run in 32GB of RAM, personal AI has gone from impossible to practical in under two years.\n\nThe motivations are diverse but cluster around a few themes. Privacy: conversations with a local model never leave your machine. No company reads them, trains on them, or stores them. Reliability: local models work offline, can't be rate-limited, and won't suddenly change behavior because a company updated their content policy. Ownership: the model weights are yours. No subscription, no API key, no terms of service that can change unilaterally. Customization: you can fine-tune local models on your own data, creating genuinely personalized AI without sharing anything with anyone.\n\nThis movement is the consumer expression of the power distribution principle both debaters advocate. Every person running a local model is one more node in the distributed AI network. If [OpenAI](https://openai.com) or [Anthropic](https://anthropic.com) were to be captured by government interests (as the Anthropic situation hints), local AI provides a fallback. You can't shut down millions of Mac Minis running open source models the way you can shut down an API endpoint.\n\nThe current limitations are real. Local models are smaller and less capable than frontier cloud models. A 70B parameter model running on a Mac Studio is impressive but doesn't match GPT-4 or Claude on complex reasoning tasks. The gap is closing — Llama 3.1 405B approaches frontier performance, and quantization techniques are improving rapidly — but today, choosing local AI means accepting a capability trade-off.\n\nVerdon connects this to his hardware thesis: the reason local AI requires compromises is that current hardware (GPUs, CPUs) is fundamentally inefficient for neural network inference. If [Extropic](https://extropic.ai) delivers 10,000x better energy efficiency, a device the size of a smartphone could run models that today require a data center. The hardware bottleneck, not the algorithmic one, is what prevents true cognitive sovereignty.\n\nThe political dimension is underappreciated. In an era where governments are increasingly interested in controlling AI (China's content restrictions, the EU's AI Act, US export controls), the ability to run uncensored, unmonitored AI locally is a form of cognitive freedom analogous to freedom of thought. You can regulate what companies deploy in their products. You can't regulate what someone runs on their own hardware in their own home — at least not without the kind of invasive enforcement that democracies have historically rejected.\n\nThe economic model is also shifting. Cloud AI is a rental economy — you pay per token, per query, per month. Local AI is an ownership economy — you buy hardware once and run inference forever at the cost of electricity. For heavy users, the break-even point has already arrived. A $3,000 Mac Studio running Ollama pays for itself in under a year compared to commercial API pricing for equivalent usage.\n\nBoth [Vitalik](https://vitalik.eth.limo) and Verdon see local AI as essential infrastructure, not a hobbyist curiosity. It's the foundation of cognitive security (defending against prompt attacks), personal sovereignty (owning your cognitive model), and power distribution (preventing AI monopolies). The Mac mini craziness isn't a trend — it's the beginning of the most important infrastructure deployment since personal computers.\n"}</script>
 <script>
   (function(){
     var button = document.getElementById('publish-blog-btn');
@@ -209,7 +209,13 @@
     }
 
     function saveLocalDownvotes(list) {
-      try { localStorage.setItem('sm-dd-downvoted', JSON.stringify(list)); } catch (e) {}
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-downvoted', JSON.stringify(normalized));
+      } catch (e) {}
     }
 
     function extractPubDatetime(markdown) {
@@ -273,19 +279,16 @@
 
     async function refreshDownvoteState(token) {
       var localDownvotes = getLocalDownvotes();
-      var localState = localDownvotes.includes(payload.ddId);
-      setDownvoteState(localState);
+      setDownvoteState(localDownvotes.includes(payload.ddId));
       if (!token) return null;
       var existing = await fetchVotes(token);
-      var downvoted = false;
+      var remoteDownvotes = [];
       if (existing && existing.content) {
         var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
-        downvoted = (voteState.downvoted || []).includes(payload.ddId);
-        var nextLocal = localDownvotes.filter(function(id) { return id !== payload.ddId; });
-        if (downvoted) nextLocal.push(payload.ddId);
-        saveLocalDownvotes(nextLocal);
+        remoteDownvotes = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
       }
-      setDownvoteState(downvoted);
+      saveLocalDownvotes(remoteDownvotes);
+      setDownvoteState(remoteDownvotes.includes(payload.ddId));
       return existing;
     }
 
@@ -363,11 +366,7 @@
       try {
         var token = await ensureToken();
         var existing = await refreshDownvoteState(token);
-        var voteState = { downvoted: [] };
-        if (existing && existing.content) {
-          voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
-        }
-        var list = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+        var list = getLocalDownvotes();
         var idx = list.indexOf(payload.ddId);
         var isDownvoted = idx >= 0;
         if (isDownvoted) {
@@ -377,7 +376,7 @@
         }
         list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
           .sort(function(a, b) { return a - b; });
-        voteState.downvoted = list;
+        var voteState = { downvoted: list };
         var body = {
           message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
           content: toBase64Utf8(JSON.stringify(voteState, null, 2))
