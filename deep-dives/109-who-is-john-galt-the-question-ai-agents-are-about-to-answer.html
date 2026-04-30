@@ -154,7 +154,7 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1844</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260429-1848</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
@@ -292,6 +292,22 @@
       return existing;
     }
 
+    async function refreshPublishedStatePublic() {
+      if (!payload.ddId) return null;
+      setPublishedState(getLocalPublished().includes(payload.ddId));
+      try {
+        var res = await fetch('../blog-published.json?_=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) return null;
+        var state = await res.json();
+        var published = Array.isArray(state.published) ? state.published : [];
+        saveLocalPublished(published);
+        setPublishedState(published.includes(payload.ddId));
+        return published;
+      } catch (e) {
+        return null;
+      }
+    }
+
     async function fetchPublished(token) {
       var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
         headers: {
@@ -369,8 +385,10 @@
       refreshPublishedState(cachedToken).catch(function(){});
       refreshDownvoteState(cachedToken).catch(function(){});
     } else {
+      setPublishedState(getLocalPublished().includes(payload.ddId));
       setDownvoteState(getLocalDownvotes().includes(payload.ddId));
     }
+    refreshPublishedStatePublic().catch(function(){});
 
     if (button && !button.disabled) button.addEventListener('click', async function() {
       if (button.dataset.busy === '1') return;
