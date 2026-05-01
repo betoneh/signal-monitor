@@ -96,8 +96,8 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "https://youtu.be/cDr8Ssi6gM0?si=xpn78XfFmQ5296Pt",
-    "deep_dives_count": 15,
+    "url": "",
+    "deep_dives_count": 0,
     "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
