@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#212737">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Signal Monitor — 2026-04-30-2038</title>
+<style>
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; display: flex; flex-direction: column;
+    overflow-y: scroll; scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  a { outline-offset: 1px; outline-color: rgba(14, 196, 169, 0.75); }
+  a:focus-visible { outline: 2px dashed rgba(14, 196, 169, 0.75); text-decoration: none; }
+
+  header, main, footer {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem;
+  }
+  header { padding: 2rem 1rem 1.5rem; }
+  .title-row {
+    display: flex; align-items: baseline; gap: 0.75rem;
+  }
+  .site-title {
+    display: inline-block;
+    font-size: 1.875rem; font-weight: 700; color: #0ec4a9; text-decoration: none;
+  }
+  @media (min-width: 640px) { .site-title { font-size: 2.25rem; } }
+  .site-title:hover { color: #0ec4a9; }
+  .feed-badge {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.4);
+    font-weight: 400;
+  }
+  .header-meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 0.5rem; margin-bottom: 1.5rem;
+  }
+  .header-meta .date-wrap {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.875rem; color: #eaedf3; opacity: 0.8; font-style: italic;
+  }
+  @media (min-width: 640px) { .header-meta .date-wrap { font-size: 1rem; } }
+  .header-meta .date-wrap svg {
+    display: inline-block; width: 1.25rem; height: 1.25rem; min-width: 1.25rem; flex-shrink: 0;
+  }
+  .header-meta .sep { color: rgba(234, 237, 243, 0.3); }
+  .header-meta .reading-time {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.6);
+  }
+
+  .model-meta { font-size: 0.75rem; color: rgba(234, 237, 243, 0.4); margin-top: 0.25rem; letter-spacing: 0.01em; }
+
+  .stats { font-size: 0.75rem; color: #8b949e; margin-top: 0.5rem; line-height: 1.6; }
+
+  .hr { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  .hr hr { border: none; border-top: 1px solid #0a8f7b; }
+
+  main { flex: 1; }
+
+  .category { margin-bottom: 2rem; }
+  .category-header {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.75rem; padding-bottom: 0.5rem;
+    border-bottom: 1px solid #0a8f7b;
+  }
+  .category-header h2 { font-size: 1.25rem; font-weight: 600; color: #eaedf3; }
+  .category-count {
+    font-size: 0.75rem; color: #8b949e;
+    background: rgba(52, 63, 96, 0.75); padding: 1px 8px; border-radius: 3px;
+  }
+
+  .cat-crypto .category-header { border-color: #f7931a; }
+  .cat-crypto .category-header h2 { color: #f7931a; }
+  .cat-ai .category-header { border-color: #0ec4a9; }
+  .cat-ai .category-header h2 { color: #0ec4a9; }
+  .cat-tech .category-header { border-color: #8b5cf6; }
+  .cat-tech .category-header h2 { color: #8b5cf6; }
+  .cat-stocks_macro .category-header { border-color: #ef4444; }
+  .cat-stocks_macro .category-header h2 { color: #ef4444; }
+  .cat-israel .category-header { border-color: #3b82f6; }
+  .cat-israel .category-header h2 { color: #3b82f6; }
+  .cat-openclaw .category-header { border-color: #FF4500; }
+  .cat-openclaw .category-header h2 { color: #FF4500; }
+
+  .editorial {
+    line-height: 1.75; font-size: 1rem; margin-bottom: 1rem;
+    overflow-wrap: break-word; word-break: break-word;
+    color: #eaedf3;
+  }
+  .editorial p {
+    margin-bottom: 0.75rem; line-height: 1.75;
+  }
+  .editorial p:last-child { margin-bottom: 0; }
+
+  a {
+    color: #0ec4a9; text-decoration: none;
+  }
+  a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .editorial a {
+    color: #0ec4a9; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 8px;
+  }
+  .editorial a:hover { text-decoration-color: #eaedf3; }
+
+  .tweets { display: flex; flex-direction: column; gap: 0.75rem; }
+  .tweet {
+    background: rgba(52, 63, 96, 0.35);
+    border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.875rem 1rem;
+    overflow: hidden; max-width: 100%;
+  }
+  @media (hover:hover) { .tweet:hover { border-color: #0ec4a9; } }
+  .tweet.priority { border-left: 3px solid #0ec4a9; }
+
+  .tweet-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+  .tweet-author { font-weight: 600; font-size: 0.85rem; color: #eaedf3; }
+  .tweet-handle { color: #8b949e; font-size: 0.8rem; font-weight: 400; }
+  .tweet-handle a { color: #8b949e; text-decoration: none; }
+  .tweet-handle a:hover { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; }
+  .tweet-time { font-size: 0.75rem; color: #8b949e; }
+
+  .tweet-text {
+    font-size: 0.85rem; line-height: 1.65; margin-bottom: 0.5rem;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .tweet-text a { text-decoration: none; }
+  .tweet-text a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .tweet-media {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px; margin-bottom: 0.5rem; overflow: hidden;
+  }
+  .tweet-media img {
+    width: 100%; max-width: 100%; border-radius: 4px;
+    border: 1px solid rgba(10, 143, 123, 0.3);
+  }
+
+  .tweet-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: #8b949e;
+  }
+  .tweet-metrics { display: flex; gap: 1rem; }
+  .tweet-link a { font-size: 0.75rem; }
+
+  .retweet-badge {
+    background: rgba(52, 63, 96, 0.75); color: #8b949e;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem;
+    margin-bottom: 0.5rem; display: inline-block;
+  }
+  .priority-badge {
+    background: #0ec4a9; color: #212737;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; margin-left: 0.5rem;
+  }
+
+  .noise {
+    font-size: 0.75rem; color: #8b949e; margin: 2rem 0 1rem;
+    padding: 0.75rem 1rem; background: rgba(52, 63, 96, 0.35); border-radius: 4px;
+  }
+  .noise a { color: #0ec4a9; text-decoration: none; font-size: 0.75rem; }
+  .noise a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .audio-row {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem 1.5rem;
+  }
+  .audio-player {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: rgba(52, 63, 96, 0.35); border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.625rem 1rem;
+  }
+  .audio-player:hover { border-color: #0ec4a9; }
+  .audio-btn {
+    background: none; border: none; cursor: pointer;
+    color: #0ec4a9; font-size: 1.25rem; padding: 0; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; flex-shrink: 0;
+  }
+  .audio-btn:hover { color: #eaedf3; }
+  .audio-progress {
+    flex: 1; height: 3px; background: rgba(52, 63, 96, 0.75);
+    border-radius: 2px; cursor: pointer; position: relative;
+  }
+  .audio-progress-fill {
+    height: 100%; background: #0ec4a9; border-radius: 2px;
+    width: 0%; transition: width 100ms linear;
+  }
+  .audio-time {
+    font-size: 0.75rem; color: #8b949e; min-width: 3.5rem; text-align: right;
+  }
+  .audio-speed {
+    font-size: 0.7rem; color: #8b949e; background: rgba(52, 63, 96, 0.75);
+    border: none; border-radius: 3px; padding: 2px 6px; cursor: pointer;
+  }
+  .audio-speed:hover { color: #0ec4a9; }
+
+  footer { padding: 1.5rem 1rem; }
+  .footer-text {
+    text-align: center; font-size: 0.75rem; color: #8b949e; line-height: 1.6;
+  }
+  .footer-text a {
+    color: #eaedf3; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 4px;
+  }
+  .footer-text a:hover { color: #0ec4a9; }
+  .stats-line {
+    text-align: center; font-size: 0.75rem; color: #8b949e;
+    margin-bottom: 0.5rem; line-height: 1.6;
+  }
+
+  /* Share bar */
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .share-label { font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem; }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.is-downvoted { color: #ef4444; opacity: 1; }
+  .share-icons button.deepdive-publish-btn { color: #eab308; opacity: 1; }
+  .share-icons button.deepdive-publish-btn:hover { color: #facc15; }
+  .share-icons button.deepdive-publish-btn.is-published { color: #eab308; opacity: 1; }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+  /* Deep Dive section — matches category style */
+  .cat-deepdive .category-header { border-color: #eab308; }
+  .cat-deepdive .category-header h2 { color: #eab308; }
+  .deepdive-source {
+    font-size: 0.75rem; color: #8b949e; margin-top: 0.75rem;
+  }
+  .deepdive-source a { color: #8b949e; text-decoration: none; }
+  .deepdive-source a:hover { color: #eab308; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+
+  @media (max-width: 640px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .site-title { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<header>
+  <div class="title-row">
+    <span class="site-title">Signal Monitor</span>
+    <span class="feed-badge">For You</span>
+  </div>
+  <div class="header-meta">
+    <span class="date-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/><path d="M7 14h.013"/><path d="M10.01 14h.005"/><path d="M13.01 14h.005"/><path d="M16.015 14h.005"/><path d="M13.015 17h.005"/><path d="M7.01 17h.005"/><path d="M10.01 17h.005"/></svg>
+      <time>30 Apr, 2026 — 8:38pm</time>
+    </span>
+    <span class="sep">&bull;</span>
+    <span class="reading-time" id="reading-time"></span>
+  </div>
+  <div class="model-meta">claude-opus-4-6 &middot; $0.1759</div>
+</header>
+
+<main>
+
+  <div class="category cat-crypto">
+    <div class="category-header">
+      <h2>Crypto</h2>
+      <span class="category-count">124w</span>
+    </div>
+    <p class="editorial">The stablecoin infrastructure layer is consolidating at speed. <a href="https://x.com/tbpn/status/2049963646470758553" target="_blank">Stripe is developing streaming payments for token providers</a>, allowing users to pay per-token with stablecoins — the clearest signal yet that Stripe sees agentic micropayments as its next primitives-level business, not a feature add-on. Simultaneously, <a href="https://x.com/coinbureau/status/2049911130546708884" target="_blank">Circle launched gas-free USDC nanopayments across 11 blockchains</a>, confirming the dual-stack race documented in the wiki is now a weekly cadence of matching feature drops. <a href="https://x.com/KobeissiLetter/status/2049875889765158979" target="_blank">Crypto card spending has surged 500% since September 2024</a> to $600M/month, while <a href="https://x.com/SuperstateInc/status/2049859241566253517" target="_blank">Coinbase Asset Management selected Superstate FundOS to launch an onchain share class</a> of a stablecoin yield fund — the tokenized-fund plumbing and the spend rails are converging into a single consumer pipeline. The wiki's Agentic Settlement Layer thesis is no longer predictive; it's descriptive.</p>
+  </div>
+
+  <div class="category cat-ai">
+    <div class="category-header">
+      <h2>AI</h2>
+      <span class="category-count">122w</span>
+    </div>
+    <p class="editorial">Sacks publicly <a href="https://x.com/DavidSacks/status/2049907993588769006" target="_blank">demystified Mythos as not magic but the first of many models automating cyber tasks</a>, noting GPT-5.5-cyber already matches it — which means offensive-security AI is now a commodity frontier, not a moat. Andreessen <a href="https://x.com/a16z/status/2049953301589065914" target="_blank">called AI clearly bigger than the internet</a>, comparing it to the steam engine and electricity, while Karpathy at Sequoia <a href="https://x.com/karpathy/status/2049903821095354523" target="_blank">pushed the thesis that LLMs open new horizons beyond speeding up existing workflows</a>. The more interesting ground-level signal: OpenClaw's apparent decline as <a href="https://x.com/levelsio/status/2049868839605637516" target="_blank">Anthropic successfully killed OpenClaw</a> according to levelsio, yet Mac Mini demand <a href="https://x.com/RaoulGMI/status/2050016757427916934" target="_blank">surged specifically because of AI agent use cases</a>, meaning the hardware layer is absorbing demand the software layer hasn't stabilized. Agent infrastructure is shipping faster than agent UX is maturing — the classic platform-before-killer-app gap.</p>
+  </div>
+
+  <div class="category cat-tech">
+    <div class="category-header">
+      <h2>Tech & Quantum</h2>
+      <span class="category-count">112w</span>
+    </div>
+    <p class="editorial">Meta's <a href="https://x.com/patrickc/status/2049853787645636951" target="_blank">creator stablecoin payouts built on Tempo and Link are live in Colombia and the Philippines</a> with 160+ countries coming — this is the wiki's Stripe-Meta stablecoin axis now operationalized at distribution scale across 3.5B daily users. <a href="https://x.com/itsolelehmann/status/2049911241003430055" target="_blank">The last time Stripe shipped a primitive this big it birthed modern SaaS</a>: Shopify, Substack, Gumroad all trace lineage to Stripe's payments API, and the streaming-payments primitive could do the same for agentic commerce. X's <a href="https://x.com/nikitabier/status/2049935477617377296" target="_blank">new Cashtags feature brings real-time charts and posts for every asset</a> to the web — Musk continuing to compress social and trading surfaces into one interface, though the audience-attention data from the wiki suggests retail may already be tuning out.</p>
+  </div>
+
+  <div class="category cat-stocks_macro">
+    <div class="category-header">
+      <h2>Stocks & Macro</h2>
+      <span class="category-count">132w</span>
+    </div>
+    <p class="editorial">The macro beat is quiet, which itself is the signal. No new GDP prints, no Fed movement, no oil shock escalation in price — the TACO chop thesis holds. <a href="https://x.com/Osinttechnical/status/2050011317428220380" target="_blank">Catastrophic damage to Russia's Tuapse oil refinery from Ukrainian drone raids</a> over the past week reinforces the wiki's fifth Hormuz variable: Russian energy vulnerability is not hypothetical, it's accumulating physical damage. The <a href="https://x.com/Faytuks/status/2049945696132878820" target="_blank">UAE called on its citizens in Iran, Lebanon, and Iraq to depart immediately</a> — when a Gulf state with the region's best intelligence tells its people to leave three countries simultaneously, the pre-strike communications phase documented in the wiki has moved from diplomatic signaling to evacuation-level urgency. Combined with <a href="https://x.com/sentdefender/status/2049998733077557303" target="_blank">Trump seriously mulling renewed combat operations against Iran while CENTCOM briefs military options</a>, the kinetic window is narrowing. Markets haven't priced this.</p>
+  </div>
+
+  <div class="category cat-israel">
+    <div class="category-header">
+      <h2>Israel</h2>
+      <span class="category-count">119w</span>
+    </div>
+    <p class="editorial">The UAE evacuation notice is the single most important overnight development. <a href="https://x.com/Faytuks/status/2049945696132878820" target="_blank">UAE urged citizens in Iran, Lebanon, and Iraq to depart immediately due to regional developments</a> — this is a state with deep back-channel visibility into both Washington and Tehran issuing a triple-country evacuation simultaneously. <a href="https://x.com/sentdefender/status/2049998733077557303" target="_blank">Trump is seriously mulling renewed combat operations as CENTCOM Commander Admiral Cooper briefs military options</a> moves the wiki's pre-strike communications phase into what looks like a decision window. The Tuapse refinery footage <a href="https://x.com/Osinttechnical/status/2050011317428220380" target="_blank">showing catastrophic damage from multiple Ukrainian drone raids</a> further constrains Russia's ability to play energy-market intermediary if Hormuz tightens. Every structural variable the wiki tracks — CENTCOM readiness, ally warnings, proxy-front management, Russian energy degradation, UAE repositioning — is now flashing concurrently.</p>
+  </div>
+
+  <div class="category cat-deepdive">
+    <div class="category-header">
+      <h2>Today's Deep Dive: Biosecurity as d/acc: Open-Source Vaccines and Pandemic Preparedness</h2>
+      <span class="category-count">630w</span>
+    </div>
+    <div class="deepdive-source">Source: <a href="https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html" target="_blank">My Techno-Optimism — Vitalik Buterin</a> · KB #14</div>
+    <div class="editorial"><p>The next pandemic is not a hypothetical. It's a probability distribution with a disturbingly short tail. The structural drivers that made COVID-19 possible — urban density, global air travel, factory farming, and increasingly accessible bioengineering tools — are all either stable or accelerating. <a href="https://ourworldindata.org/grapher/urban-population-share-2050?tab=chart" target="_blank">Rapid urbanization</a> continues globally. Air passenger volumes are projected to roughly double over the next two decades. And the ability to design genetic sequences and order their synthesis — <a href="https://www.twistbioscience.com/products/genes" target="_blank">shipped to your door within five days</a> — is already commercially available. The pandemic threat is not receding; it's growing.</p><p>What makes bioweapons particularly alarming is a property Buterin highlights specifically: unlike nuclear weapons, engineered pathogens are <em>unattributable</em>. You can <a href="https://www.science.org/content/article/surprise-nuclear-strike-heres-how-well-figure-out-who-did-it" target="_blank">detect a nuclear strike's origin</a> with high confidence, creating deterrence. A released pathogen has no signature. A state or non-state actor that creates a highly transmissible virus and releases it in a transit hub might cause millions of deaths with no forensic trail pointing back to them. This eliminates the deterrence dynamic that has historically constrained nuclear use and makes biodefense categorically harder than nuclear defense.</p><p>Vitalik's Balvi fund, spun up with crypto proceeds from an accidental windfall of Shiba Inu coin donations during the Indian COVID crisis, has put these ideas into practice. The fund's explicit requirement that all projects be <strong>open source</strong> is not incidental — it reflects the d/acc principle that biosecurity infrastructure should be a public good rather than a competitive advantage for any single actor. An open-source vaccine platform like <a href="https://radvac.org" target="_blank">RaDVaC</a> or <a href="https://popvax.com" target="_blank">PopVax</a> means any competent lab in any country can manufacture a response to a novel pathogen, rather than waiting for a handful of global pharmaceutical manufacturers to ramp up production.</p><p>The 19th century water engineering analogy that Buterin uses is illuminating. Cholera and other waterborne pathogens were defeated not by better medical treatment but by changing the infrastructure of the built environment: sewers, clean water supply, sanitation standards woven into the fabric of cities. Nobody has to "choose" to not drink cholera-contaminated water today — the infrastructure makes it the default. Buterin envisions an equivalent transformation for airborne pathogens: far-UVC irradiation in public buildings, <a href="https://www.nature.com/articles/s41591-022-01940-x" target="_blank">wastewater surveillance</a> detecting outbreak signatures before clinical cases appear, rapid decentralized vaccine synthesis capabilities, and standardized ventilation making indoor air quality a public health guarantee rather than a private choice.</p><p>The cost-benefit case is overwhelming. The COVID-19 pandemic cost the global economy an estimated $12-16 trillion. The total cost of fully implementing the kind of pandemic-hardened infrastructure Buterin describes — far-UVC deployment in major public buildings, wastewater surveillance networks, open-source vaccine manufacturing capacity — is probably two orders of magnitude less. We are making an implicit choice every year we don't invest in this infrastructure, trading a large certain future cost against a small immediate expenditure.</p><p>The d/acc frame clarifies why this is a priority and not just a nice-to-have: pandemic defense is almost purely defense-favoring. It reduces suffering without creating new offensive capabilities. Open-source vaccine platforms don't give any actor a meaningful bioweapons advantage. Wastewater surveillance is as useful for detecting natural outbreaks as engineered ones. This is the kind of technology that differential development frameworks should put at the top of the agenda — high benefit, low dual-use risk, systematically underfunded by markets alone.</p></div>
+  </div>
+
+  <div class="noise">📡 noise (7d): <a href="https://x.com/cabelaschmitt" target="_blank">@cabelaschmitt</a> 6/6 (100%) · <a href="https://x.com/philipjohnston" target="_blank">@philipjohnston</a> 6/7 (86%) · <a href="https://x.com/pmarca" target="_blank">@pmarca</a> 15/24 (62%) · <a href="https://x.com/skyecosystem" target="_blank">@skyecosystem</a> 8/13 (62%) · <a href="https://x.com/base" target="_blank">@base</a> 9/15 (60%)</div>
+
+  <div class="share-row">
+    <div class="share-left">
+      <div class="share-label">Share this post on:</div>
+      <div class="share-icons">
+        <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/2026-04-30-2038.html" target="_blank" rel="noopener" title="Share on X">
+          <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+        </a>
+        <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/2026-04-30-2038.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+        </a>
+        <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/2026-04-30-2038.html" target="_blank" rel="noopener" title="Share on Telegram">
+          <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+        </a>
+        <button id="report-downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-2a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v2"/></svg></button>
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'},1500)})" title="Copy link">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button id="report-publish-blog-btn" class="deepdive-publish-btn" title="Publish this deep dive to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
+      </div>
+    </div>
+    <div style="width:100%;text-align:center;margin-top:0.5rem;">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>Back to Top</span>
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<div class="hr"><hr></div>
+
+<footer>
+  <p class="stats-line">158 tweets · Crypto 25% · AI 25% · Tech & Quantum 6% · Stocks & Macro 15% · Noise 44 · Israel Monitor · 49 tweets from curated list · source: For You</p>
+  <p class="footer-text">
+    Generated by Signal Monitor ·
+    <a href="https://x.com/beto_neh">@beto_neh</a>
+  </p>
+</footer>
+
+<script>
+  // Reading time
+  const text = document.querySelector('main').innerText;
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+  document.getElementById('reading-time').textContent = minutes + ' min read';
+
+  // Progress bar
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Audio player
+  const ael=document.getElementById('audio-el');
+  if(ael){
+    const abtn=document.getElementById('audio-btn');
+    const afill=document.getElementById('audio-fill');
+    const atime=document.getElementById('audio-time');
+    const aspeed=document.getElementById('audio-speed');
+    const playIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>';
+    const pauseIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>';
+    function fmt(s){const m=Math.floor(s/60);return m+':'+(''+(Math.floor(s)%60)).padStart(2,'0');}
+    window.toggleAudio=function(){if(ael.paused){ael.play();abtn.innerHTML=pauseIcon;}else{ael.pause();abtn.innerHTML=playIcon;}};
+    ael.addEventListener('timeupdate',function(){
+      if(ael.duration){afill.style.width=(ael.currentTime/ael.duration*100)+'%';}
+      atime.textContent=fmt(ael.currentTime)+(ael.duration?' / '+fmt(ael.duration):'');
+    });
+    ael.addEventListener('ended',function(){abtn.innerHTML=playIcon;afill.style.width='0%';});
+    window.seekAudio=function(e){
+      const bar=document.getElementById('audio-bar');
+      const pct=e.offsetX/bar.offsetWidth;
+      if(ael.duration)ael.currentTime=pct*ael.duration;
+    };
+    const speeds=[1,1.25,1.5,1.75,2];let si=0;
+    window.cycleSpeed=function(){si=(si+1)%speeds.length;ael.playbackRate=speeds[si];aspeed.textContent=speeds[si]+'x';};
+  }
+
+  // Pull to refresh (PWA)
+  if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+    let sy=0,p=false,d=document,b=d.body;
+    const el=d.createElement('div');
+    el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#8b949e;font-size:14px;z-index:9999;transition:top 0.2s;background:#212737;';
+    el.textContent='\u2193 Pull to refresh';
+    b.prepend(el);
+    d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+    d.addEventListener('touchmove',e=>{
+      if(!p)return;
+      const dy=e.touches[0].clientY-sy;
+      if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+      if(dy>5)e.preventDefault();
+      const t=Math.min(dy*0.4,50);
+      el.style.top=(t-50)+'px';
+      el.textContent=dy>80?'\u2191 Release':'\u2193 Pull to refresh';
+    },{passive:false});
+    d.addEventListener('touchend',e=>{
+      if(!p){return;}p=false;
+      const dy=e.changedTouches[0].clientY-sy;
+      el.style.top='-50px';
+      if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+    });
+  }
+</script>
+
+<script id="report-blog-publish-payload" type="application/json">{"title": "Biosecurity as d/acc: Open-Source Vaccines and Pandemic Preparedness", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/biosecurity-as-d-acc-open-source-vaccines-and-pandemic-preparedness.md", "slug": "biosecurity-as-d-acc-open-source-vaccines-and-pandemic-preparedness", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/biosecurity-as-d-acc-open-source-vaccines-and-pandemic-preparedness", "ddId": 90, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "publishedRepo": "betoneh/signal-monitor", "publishedPath": "blog-published.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Biosecurity as d/acc: Open-Source Vaccines and Pandemic Preparedness\"\ndescription: \"The next pandemic is not a hypothetical. It's a probability distribution with a disturbingly short tail. The structural drivers that made COVID-19 possible —...\"\npubDatetime: 2026-04-30T00:00:00\ntags: [\"tech\", \"biosecurity\", \"pandemic\", \"public-health\", \"crypto\", \"d-acc\", \"open-source\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nThe next pandemic is not a hypothetical. It's a probability distribution with a disturbingly short tail. The structural drivers that made COVID-19 possible — urban density, global air travel, factory farming, and increasingly accessible bioengineering tools — are all either stable or accelerating. [Rapid urbanization](https://ourworldindata.org/grapher/urban-population-share-2050?tab=chart) continues globally. Air passenger volumes are projected to roughly double over the next two decades. And the ability to design genetic sequences and order their synthesis — [shipped to your door within five days](https://www.twistbioscience.com/products/genes) — is already commercially available. The pandemic threat is not receding; it's growing.\n\nWhat makes bioweapons particularly alarming is a property Buterin highlights specifically: unlike nuclear weapons, engineered pathogens are *unattributable*. You can [detect a nuclear strike's origin](https://www.science.org/content/article/surprise-nuclear-strike-heres-how-well-figure-out-who-did-it) with high confidence, creating deterrence. A released pathogen has no signature. A state or non-state actor that creates a highly transmissible virus and releases it in a transit hub might cause millions of deaths with no forensic trail pointing back to them. This eliminates the deterrence dynamic that has historically constrained nuclear use and makes biodefense categorically harder than nuclear defense.\n\nVitalik's Balvi fund, spun up with crypto proceeds from an accidental windfall of Shiba Inu coin donations during the Indian COVID crisis, has put these ideas into practice. The fund's explicit requirement that all projects be **open source** is not incidental — it reflects the d/acc principle that biosecurity infrastructure should be a public good rather than a competitive advantage for any single actor. An open-source vaccine platform like [RaDVaC](https://radvac.org) or [PopVax](https://popvax.com) means any competent lab in any country can manufacture a response to a novel pathogen, rather than waiting for a handful of global pharmaceutical manufacturers to ramp up production.\n\nThe 19th century water engineering analogy that Buterin uses is illuminating. Cholera and other waterborne pathogens were defeated not by better medical treatment but by changing the infrastructure of the built environment: sewers, clean water supply, sanitation standards woven into the fabric of cities. Nobody has to \"choose\" to not drink cholera-contaminated water today — the infrastructure makes it the default. Buterin envisions an equivalent transformation for airborne pathogens: far-UVC irradiation in public buildings, [wastewater surveillance](https://www.nature.com/articles/s41591-022-01940-x) detecting outbreak signatures before clinical cases appear, rapid decentralized vaccine synthesis capabilities, and standardized ventilation making indoor air quality a public health guarantee rather than a private choice.\n\nThe cost-benefit case is overwhelming. The COVID-19 pandemic cost the global economy an estimated $12-16 trillion. The total cost of fully implementing the kind of pandemic-hardened infrastructure Buterin describes — far-UVC deployment in major public buildings, wastewater surveillance networks, open-source vaccine manufacturing capacity — is probably two orders of magnitude less. We are making an implicit choice every year we don't invest in this infrastructure, trading a large certain future cost against a small immediate expenditure.\n\nThe d/acc frame clarifies why this is a priority and not just a nice-to-have: pandemic defense is almost purely defense-favoring. It reduces suffering without creating new offensive capabilities. Open-source vaccine platforms don't give any actor a meaningful bioweapons advantage. Wastewater surveillance is as useful for detecting natural outbreaks as engineered ones. This is the kind of technology that differential development frameworks should put at the top of the agenda — high benefit, low dual-use risk, systematically underfunded by markets alone.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('report-publish-blog-btn');
+    var downvoteButton = document.getElementById('report-downvote-dd-btn');
+    var payloadEl = document.getElementById('report-blog-publish-payload');
+    if (!payloadEl) return;
+    var defaultIcon = button ? button.innerHTML : '';
+    var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
+    var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    function fromBase64Utf8(text) {
+      var binary = atob((text || '').replace(/\n/g, ''));
+      var bytes = new Uint8Array(binary.length);
+      for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new TextDecoder().decode(bytes);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    function getLocalDownvotes() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-downvoted') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalDownvotes(list) {
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-downvoted', JSON.stringify(normalized));
+      } catch (e) {}
+    }
+
+    function getLocalPublished() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-blog-published') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalPublished(list) {
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-blog-published', JSON.stringify(normalized));
+      } catch (e) {}
+    }
+
+    function extractPubDatetime(markdown) {
+      var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
+      return match ? match[1].trim() : '';
+    }
+
+    function applyPubDatetime(markdown, pubDatetime) {
+      if (!pubDatetime) return markdown;
+      return /^pubDatetime:\s*.+$/m.test(markdown)
+        ? markdown.replace(/^pubDatetime:\s*.+$/m, 'pubDatetime: ' + pubDatetime)
+        : markdown;
+    }
+
+    function setPublishedState(isPublished) {
+      if (!button) return;
+      button.dataset.published = isPublished ? '1' : '0';
+      button.classList.toggle('is-published', !!isPublished);
+      button.innerHTML = isPublished ? publishedIcon : defaultIcon;
+      button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish this deep dive to blog deep dives';
+      if (payload.ddId) {
+        var localPublished = getLocalPublished().filter(function(id) { return id !== payload.ddId; });
+        if (isPublished) localPublished.push(payload.ddId);
+        saveLocalPublished(localPublished);
+      }
+    }
+
+    function setDownvoteState(isDownvoted) {
+      if (!downvoteButton) return;
+      downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
+      downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
+      downvoteButton.innerHTML = defaultDownvoteIcon;
+      downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshPublishedState(token) {
+      if (!token) return null;
+      var existing = await fetchExisting(token);
+      setPublishedState(!!existing);
+      return existing;
+    }
+
+    async function refreshPublishedStatePublic() {
+      if (!payload.ddId) return null;
+      setPublishedState(getLocalPublished().includes(payload.ddId));
+      try {
+        var res = await fetch('blog-published.json?_=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) return null;
+        var state = await res.json();
+        var published = Array.isArray(state.published) ? state.published : [];
+        saveLocalPublished(published);
+        setPublishedState(published.includes(payload.ddId));
+        return published;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    async function fetchPublished(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Published lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function markPublished(token) {
+      var existing = await fetchPublished(token);
+      var publishedState = { published: [] };
+      if (existing && existing.content) {
+        publishedState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+      }
+      var list = Array.isArray(publishedState.published) ? publishedState.published.slice() : [];
+      if (!list.includes(payload.ddId)) list.push(payload.ddId);
+      list = list
+        .filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+        .sort(function(a, b) { return a - b; });
+      publishedState.published = list;
+      var body = {
+        message: 'Mark deep dive #' + payload.ddId + ' as published on blog',
+        content: toBase64Utf8(JSON.stringify(publishedState, null, 2))
+      };
+      if (existing && existing.sha) body.sha = existing.sha;
+      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + token,
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) {
+        var errorText = await res.text();
+        throw new Error('Published-state update failed (' + res.status + '): ' + errorText.slice(0, 220));
+      }
+      saveLocalPublished(list);
+    }
+
+    async function fetchVotes(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Votes lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshDownvoteState(token) {
+      var localDownvotes = getLocalDownvotes();
+      setDownvoteState(localDownvotes.includes(payload.ddId));
+      if (!token) return null;
+      var existing = await fetchVotes(token);
+      var remoteDownvotes = [];
+      if (existing && existing.content) {
+        var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        remoteDownvotes = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+      }
+      saveLocalDownvotes(remoteDownvotes);
+      setDownvoteState(remoteDownvotes.includes(payload.ddId));
+      return existing;
+    }
+
+    var cachedToken = sessionStorage.getItem('sm-gh-token');
+    if (cachedToken) {
+      refreshPublishedState(cachedToken).catch(function(){});
+      refreshDownvoteState(cachedToken).catch(function(){});
+    } else {
+      setPublishedState(getLocalPublished().includes(payload.ddId));
+      setDownvoteState(getLocalDownvotes().includes(payload.ddId));
+    }
+    refreshPublishedStatePublic().catch(function(){});
+
+    if (button && !button.disabled) button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshPublishedState(token);
+        var confirmMessage = existing
+          ? 'This deep dive is already on the blog. Update it?'
+          : 'Publish this deep dive to the blog?';
+        if (!window.confirm(confirmMessage)) {
+          button.dataset.busy = '0';
+          button.style.opacity = '';
+          return;
+        }
+        var contentToPublish = payload.content;
+        if (existing && existing.content) {
+          var existingMarkdown = fromBase64Utf8(existing.content);
+          var existingPubDatetime = extractPubDatetime(existingMarkdown);
+          if (existingPubDatetime) {
+            contentToPublish = applyPubDatetime(contentToPublish, existingPubDatetime);
+          }
+        }
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(contentToPublish)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        await markPublished(token);
+        setPublishedState(true);
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        button.style.opacity = '';
+        button.dataset.busy = '0';
+      }
+    });
+
+    if (downvoteButton) downvoteButton.addEventListener('click', async function() {
+      if (downvoteButton.dataset.busy === '1') return;
+      if (!payload.votesRepo || !payload.votesPath || !payload.ddId) {
+        window.alert('Downvote payload is missing.');
+        return;
+      }
+      downvoteButton.dataset.busy = '1';
+      downvoteButton.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshDownvoteState(token);
+        var list = getLocalDownvotes();
+        var idx = list.indexOf(payload.ddId);
+        var isDownvoted = idx >= 0;
+        if (isDownvoted) {
+          list.splice(idx, 1);
+        } else {
+          list.push(payload.ddId);
+        }
+        list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+          .sort(function(a, b) { return a - b; });
+        var voteState = { downvoted: list };
+        var body = {
+          message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
+          content: toBase64Utf8(JSON.stringify(voteState, null, 2))
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Downvote failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        var nextLocal = getLocalDownvotes().filter(function(id) { return id !== payload.ddId; });
+        if (!isDownvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+        setDownvoteState(!isDownvoted);
+        window.alert(!isDownvoted
+          ? 'Deep dive downvoted. It will appear crossed in the index.'
+          : 'Downvote removed from this deep dive.');
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        downvoteButton.style.opacity = '';
+        downvoteButton.dataset.busy = '0';
+      }
+    });
+  })();
+</script>
+</body>
+</html>
