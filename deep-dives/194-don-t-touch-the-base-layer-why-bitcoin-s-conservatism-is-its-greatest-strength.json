@@ -1,0 +1,14 @@
+{
+  "id": 194,
+  "title": "Don't Touch the Base Layer: Why Bitcoin's Conservatism Is Its Greatest Strength",
+  "source": {
+    "kb_entry": "you-have-10-years-to-join-the-ai-economy-michael-saylor",
+    "original": "You Have 10 Years to Join the AI Economy | Michael Saylor",
+    "url": "https://youtu.be/cDr8Ssi6gM0?si=xpn78XfFmQ5296Pt"
+  },
+  "body_html": "<p>The most dangerous threat to Bitcoin is not external attack but internal corruption — well-intentioned proposals to add features, increase bandwidth, or load the protocol with bells and whistles. The analogy is simple: Manhattan sits on granite that has been there for 200 million years. Nobody should try to transmute the granite into steel or cotton candy. You innovate by putting buildings on the granite, companies in the buildings, and technology in the companies — not by altering the foundation itself.</p><p>The block size wars of the mid-2010s provided definitive vindication of this conservative philosophy. Critics argued that Bitcoin would fail without increased bandwidth, that transaction fees would become prohibitive, and that the network couldn't scale. A decade later, the average Bitcoin transaction costs 32 cents, and the minimum fee sits at one satoshi per vbyte — the lowest measurable unit — for same-day settlement. The network didn't need more bandwidth. It needed discipline.</p><p>Innovation belongs on layers two, three, and four. The explosion of Bitcoin ETFs has brought the promise of Bitcoin to between 50 and 100 million beneficiaries in just two years, channeling $150 billion in capital. Bitcoin-backed equity instruments have reached 55 million beneficiaries. New digital credit products are emerging that strip away volatility and deliver steady yields to those who cannot tolerate Bitcoin's price swings. All of this innovation happens above the base layer, without touching the protocol itself.</p><p>The lesson extends beyond technology into a broader principle: the reason Bitcoin succeeded was the humility of its ambition. It does one thing — provide an incorruptible ledger of value — and it does it with extraordinary integrity. Every grandiose attempt to expand that mission, to make Bitcoin do more, risks the same fate as Napoleon marching into the Russian winter or empires that overextend until they collapse under their own weight. Preserve the protocol. Defend the network. Don't break it.</p>",
+  "tags": [],
+  "word_count": 314,
+  "used_dates": [],
+  "created_date": "2026-04-30"
+}

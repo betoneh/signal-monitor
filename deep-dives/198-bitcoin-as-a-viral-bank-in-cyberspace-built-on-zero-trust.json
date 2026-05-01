@@ -1,0 +1,21 @@
+{
+  "id": 198,
+  "title": "Bitcoin as a Viral Bank in Cyberspace Built on Zero Trust",
+  "source": {
+    "kb_entry": "you-have-10-years-to-join-the-ai-economy-michael-saylor",
+    "original": "You Have 10 Years to Join the AI Economy | Michael Saylor",
+    "url": "https://youtu.be/cDr8Ssi6gM0?si=xpn78XfFmQ5296Pt"
+  },
+  "body_html": "<p>The foundational design philosophy of Bitcoin is radical distrust. Not temporary suspicion, not cautious skepticism, but the absolute assumption that no person, no institution, no government, and no jurisdiction can be trusted over a long enough timeline. From this uncompromising starting point, a global network emerged that doesn't require trust — it routes around the need for it entirely.</p><p>Consider the problem Bitcoin solves through a historical lens. Gold stored in banks has been seized by governments in the US, Japan, Germany, and virtually everywhere else over the past century. Real estate cannot run or hide — it faces triple taxation on sale, inheritance, and holding, plus the ever-present risk of regulatory impairment like rent control or zoning changes. Art and diamonds require physical custody and authenticated provenance. Every traditional store of value has a vulnerability rooted in its physical nature or dependence on institutional gatekeepers.</p><p>Bitcoin's answer is a bank in cyberspace with no single operator. Nodes validate transactions independently; fraudulent broadcasts get rejected automatically. If one nation turns hostile, the network migrates. If a company fails, the network persists. The analogy to an armed society being a polite society applies directly: when a government knows it's effectively impossible to seize Bitcoin held by a knowledgeable owner, the incentive to attempt seizure diminishes. You don't pick a fight with the person holding the gun.</p><p>The property rights embedded in Bitcoin ownership are qualitatively different from those in securitized or intermediated assets. Buying $87 of Bitcoin on an iPhone grants the same class of property rights as a whale holding thousands of coins — you are the direct owner, not a limited partner in someone else's structure. There is no bank approval needed, no six intermediaries in the chain, no restriction on trading hours, and no jurisdictional lock-in. This is what makes it the hardest asset to tax, steal, or impair ever created.</p><p>The practical upshot is jurisdictional optionality at the speed of the internet. If regulations shift in one country, Bitcoin can be relocated in minutes rather than the months or years required for gold, real estate, or business operations. This portability doesn't eliminate all risk, but it fundamentally changes the power dynamic between property owners and the states they inhabit.</p>",
+  "tags": [
+    "bitcoin",
+    "self-custody",
+    "property-rights",
+    "jurisdictional-risk",
+    "decentralization",
+    "censorship-resistance"
+  ],
+  "word_count": 372,
+  "used_dates": [],
+  "created_date": "2026-04-30"
+}
