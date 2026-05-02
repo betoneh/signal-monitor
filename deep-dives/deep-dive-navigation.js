@@ -268,7 +268,7 @@
         </svg>
         <div class="dd-sequence-copy">
           <span class="dd-sequence-action">Deep Dive Index</span>
-          <div class="dd-sequence-target">Return to unread list and save</div>
+          <div class="dd-sequence-target">Mark as read and return to index</div>
         </div>
       </a>
       <div class="dd-sequence-meta">
