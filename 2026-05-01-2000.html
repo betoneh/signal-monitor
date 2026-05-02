@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#212737">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Signal Monitor — 2026-05-01-2000</title>
+<style>
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; display: flex; flex-direction: column;
+    overflow-y: scroll; scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  a { outline-offset: 1px; outline-color: rgba(14, 196, 169, 0.75); }
+  a:focus-visible { outline: 2px dashed rgba(14, 196, 169, 0.75); text-decoration: none; }
+
+  header, main, footer {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem;
+  }
+  header { padding: 2rem 1rem 1.5rem; }
+  .title-row {
+    display: flex; align-items: baseline; gap: 0.75rem;
+  }
+  .site-title {
+    display: inline-block;
+    font-size: 1.875rem; font-weight: 700; color: #0ec4a9; text-decoration: none;
+  }
+  @media (min-width: 640px) { .site-title { font-size: 2.25rem; } }
+  .site-title:hover { color: #0ec4a9; }
+  .feed-badge {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.4);
+    font-weight: 400;
+  }
+  .header-meta {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 0.5rem; margin-bottom: 1.5rem;
+  }
+  .header-meta .date-wrap {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.875rem; color: #eaedf3; opacity: 0.8; font-style: italic;
+  }
+  @media (min-width: 640px) { .header-meta .date-wrap { font-size: 1rem; } }
+  .header-meta .date-wrap svg {
+    display: inline-block; width: 1.25rem; height: 1.25rem; min-width: 1.25rem; flex-shrink: 0;
+  }
+  .header-meta .sep { color: rgba(234, 237, 243, 0.3); }
+  .header-meta .reading-time {
+    font-size: 0.875rem; color: rgba(234, 237, 243, 0.6);
+  }
+
+  .model-meta { font-size: 0.75rem; color: rgba(234, 237, 243, 0.4); margin-top: 0.25rem; letter-spacing: 0.01em; }
+
+  .stats { font-size: 0.75rem; color: #8b949e; margin-top: 0.5rem; line-height: 1.6; }
+
+  .hr { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  .hr hr { border: none; border-top: 1px solid #0a8f7b; }
+
+  main { flex: 1; }
+
+  .category { margin-bottom: 2rem; }
+  .category-header {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.75rem; padding-bottom: 0.5rem;
+    border-bottom: 1px solid #0a8f7b;
+  }
+  .category-header h2 { font-size: 1.25rem; font-weight: 600; color: #eaedf3; }
+  .category-count {
+    font-size: 0.75rem; color: #8b949e;
+    background: rgba(52, 63, 96, 0.75); padding: 1px 8px; border-radius: 3px;
+  }
+
+  .cat-crypto .category-header { border-color: #f7931a; }
+  .cat-crypto .category-header h2 { color: #f7931a; }
+  .cat-ai .category-header { border-color: #0ec4a9; }
+  .cat-ai .category-header h2 { color: #0ec4a9; }
+  .cat-tech .category-header { border-color: #8b5cf6; }
+  .cat-tech .category-header h2 { color: #8b5cf6; }
+  .cat-stocks_macro .category-header { border-color: #ef4444; }
+  .cat-stocks_macro .category-header h2 { color: #ef4444; }
+  .cat-israel .category-header { border-color: #3b82f6; }
+  .cat-israel .category-header h2 { color: #3b82f6; }
+  .cat-openclaw .category-header { border-color: #FF4500; }
+  .cat-openclaw .category-header h2 { color: #FF4500; }
+
+  .editorial {
+    line-height: 1.75; font-size: 1rem; margin-bottom: 1rem;
+    overflow-wrap: break-word; word-break: break-word;
+    color: #eaedf3;
+  }
+  .editorial p {
+    margin-bottom: 0.75rem; line-height: 1.75;
+  }
+  .editorial p:last-child { margin-bottom: 0; }
+
+  a {
+    color: #0ec4a9; text-decoration: none;
+  }
+  a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .editorial a {
+    color: #0ec4a9; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 8px;
+  }
+  .editorial a:hover { text-decoration-color: #eaedf3; }
+
+  .tweets { display: flex; flex-direction: column; gap: 0.75rem; }
+  .tweet {
+    background: rgba(52, 63, 96, 0.35);
+    border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.875rem 1rem;
+    overflow: hidden; max-width: 100%;
+  }
+  @media (hover:hover) { .tweet:hover { border-color: #0ec4a9; } }
+  .tweet.priority { border-left: 3px solid #0ec4a9; }
+
+  .tweet-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+  .tweet-author { font-weight: 600; font-size: 0.85rem; color: #eaedf3; }
+  .tweet-handle { color: #8b949e; font-size: 0.8rem; font-weight: 400; }
+  .tweet-handle a { color: #8b949e; text-decoration: none; }
+  .tweet-handle a:hover { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; }
+  .tweet-time { font-size: 0.75rem; color: #8b949e; }
+
+  .tweet-text {
+    font-size: 0.85rem; line-height: 1.65; margin-bottom: 0.5rem;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .tweet-text a { text-decoration: none; }
+  .tweet-text a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .tweet-media {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px; margin-bottom: 0.5rem; overflow: hidden;
+  }
+  .tweet-media img {
+    width: 100%; max-width: 100%; border-radius: 4px;
+    border: 1px solid rgba(10, 143, 123, 0.3);
+  }
+
+  .tweet-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: #8b949e;
+  }
+  .tweet-metrics { display: flex; gap: 1rem; }
+  .tweet-link a { font-size: 0.75rem; }
+
+  .retweet-badge {
+    background: rgba(52, 63, 96, 0.75); color: #8b949e;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem;
+    margin-bottom: 0.5rem; display: inline-block;
+  }
+  .priority-badge {
+    background: #0ec4a9; color: #212737;
+    padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; margin-left: 0.5rem;
+  }
+
+  .noise {
+    font-size: 0.75rem; color: #8b949e; margin: 2rem 0 1rem;
+    padding: 0.75rem 1rem; background: rgba(52, 63, 96, 0.35); border-radius: 4px;
+  }
+  .noise a { color: #0ec4a9; text-decoration: none; font-size: 0.75rem; }
+  .noise a:hover { text-decoration: underline; text-decoration-style: dashed; }
+
+  .audio-row {
+    max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem 1.5rem;
+  }
+  .audio-player {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: rgba(52, 63, 96, 0.35); border: 1px solid rgba(10, 143, 123, 0.3);
+    border-radius: 4px; padding: 0.625rem 1rem;
+  }
+  .audio-player:hover { border-color: #0ec4a9; }
+  .audio-btn {
+    background: none; border: none; cursor: pointer;
+    color: #0ec4a9; font-size: 1.25rem; padding: 0; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; flex-shrink: 0;
+  }
+  .audio-btn:hover { color: #eaedf3; }
+  .audio-progress {
+    flex: 1; height: 3px; background: rgba(52, 63, 96, 0.75);
+    border-radius: 2px; cursor: pointer; position: relative;
+  }
+  .audio-progress-fill {
+    height: 100%; background: #0ec4a9; border-radius: 2px;
+    width: 0%; transition: width 100ms linear;
+  }
+  .audio-time {
+    font-size: 0.75rem; color: #8b949e; min-width: 3.5rem; text-align: right;
+  }
+  .audio-speed {
+    font-size: 0.7rem; color: #8b949e; background: rgba(52, 63, 96, 0.75);
+    border: none; border-radius: 3px; padding: 2px 6px; cursor: pointer;
+  }
+  .audio-speed:hover { color: #0ec4a9; }
+
+  footer { padding: 1.5rem 1rem; }
+  .footer-text {
+    text-align: center; font-size: 0.75rem; color: #8b949e; line-height: 1.6;
+  }
+  .footer-text a {
+    color: #eaedf3; text-decoration: underline;
+    text-decoration-style: dashed; text-underline-offset: 4px;
+  }
+  .footer-text a:hover { color: #0ec4a9; }
+  .stats-line {
+    text-align: center; font-size: 0.75rem; color: #8b949e;
+    margin-bottom: 0.5rem; line-height: 1.6;
+  }
+
+  /* Share bar */
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .share-label { font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem; }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.is-downvoted { color: #ef4444; opacity: 1; }
+  .share-icons button.deepdive-publish-btn { color: #eab308; opacity: 1; }
+  .share-icons button.deepdive-publish-btn:hover { color: #facc15; }
+  .share-icons button.deepdive-publish-btn.is-published { color: #eab308; opacity: 1; }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+  /* Deep Dive section — matches category style */
+  .cat-deepdive .category-header { border-color: #eab308; }
+  .cat-deepdive .category-header h2 { color: #eab308; }
+  .deepdive-source {
+    font-size: 0.75rem; color: #8b949e; margin-top: 0.75rem;
+  }
+  .deepdive-source a { color: #8b949e; text-decoration: none; }
+  .deepdive-source a:hover { color: #eab308; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+
+  @media (max-width: 640px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    .site-title { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<header>
+  <div class="title-row">
+    <span class="site-title">Signal Monitor</span>
+    <span class="feed-badge">For You</span>
+  </div>
+  <div class="header-meta">
+    <span class="date-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/><path d="M7 14h.013"/><path d="M10.01 14h.005"/><path d="M13.01 14h.005"/><path d="M16.015 14h.005"/><path d="M13.015 17h.005"/><path d="M7.01 17h.005"/><path d="M10.01 17h.005"/></svg>
+      <time>1 May, 2026 — 8:00pm</time>
+    </span>
+    <span class="sep">&bull;</span>
+    <span class="reading-time" id="reading-time"></span>
+  </div>
+  <div class="model-meta">claude-opus-4-6 &middot; $0.1837</div>
+</header>
+
+<main>
+
+  <div class="category cat-crypto">
+    <div class="category-header">
+      <h2>Crypto</h2>
+      <span class="category-count">128w</span>
+    </div>
+    <p class="editorial">a16z's weekly roundup frames stablecoins as <a href="https://x.com/a16zcrypto/status/2050285186802463036" target="_blank">core financial plumbing with agents transacting on top</a> — a thesis the wiki's triple-stack agentic settlement layer already confirms in production. The more structurally interesting signal is Tether CEO Ardoino revealing that <a href="https://x.com/paoloardoino/status/2050229393641853029" target="_blank">Tether is a top-10 buyer of US Treasuries over the past two years</a>, absorbing 45% of the $133B China sold. That's not a stablecoin company — that's a parallel sovereign balance sheet now actively backstopping US debt issuance, exactly the trajectory the wiki's Tether thesis predicted. Meanwhile Circle's enterprise stablecoin settlement product <a href="https://x.com/circle/status/2050317667433914727" target="_blank">solved the biggest enterprise objection to stablecoin payments</a>, and Stripe's Bridge integration <a href="https://x.com/Stablecoin/status/2050288948849811600" target="_blank">launched stablecoin-backed card issuing across more markets</a> — the agentic settlement stack is no longer three competitors, it's becoming a unified plumbing layer with multiple on-ramps.</p>
+  </div>
+
+  <div class="category cat-ai">
+    <div class="category-header">
+      <h2>AI</h2>
+      <span class="category-count">124w</span>
+    </div>
+    <p class="editorial">OpenClaw is alive after all — Altman announced <a href="https://x.com/sama/status/2050357911915028689" target="_blank">users can sign in with their ChatGPT account</a> and the product shipped <a href="https://x.com/openclaw/status/2049986075221692678" target="_blank">group chats that finally feel agent-native</a>, contradicting the wiki's note that OpenClaw was reportedly killed. Anthropic's position remains fascinating: <a href="https://x.com/openclaw/status/2049990855398748563" target="_blank">Anthropic is actively blocking OpenClaw again</a>, which rhymes perfectly with the Pentagon blacklist dynamic — Anthropic wants to be the strategic exception, not commodity infrastructure that plugs into anyone's agent orchestration layer. Alibaba's <a href="https://x.com/alibaba_cloud/status/2047243656667537496" target="_blank">Qwen3.6-Max-Preview with improved agentic coding capability</a> signals the commodity floor rising from the East. Haseeb's framing that <a href="https://x.com/hosseeb/status/2050217929636286959" target="_blank">everyone will soon manage agents smarter than themselves</a> is the management theory version of what the Pentagon bifurcation already operationalized: the question isn't whether AI is smart, it's who controls the orchestration layer above it.</p>
+  </div>
+
+  <div class="category cat-tech">
+    <div class="category-header">
+      <h2>Tech & Quantum</h2>
+      <span class="category-count">125w</span>
+    </div>
+    <p class="editorial">Stripe's primitive-shipping cadence gets its clearest articulation yet — <a href="https://x.com/itsolelehmann/status/2049911241003430055" target="_blank">the last time Stripe shipped a primitive this big it birthed modern SaaS</a>, referring to Bridge's stablecoin infrastructure launch that pairs card issuing, onramping, and orchestrated payments into a single developer surface. This is the agentic settlement layer thesis graduating from fintech plumbing into platform economics: when Stripe makes stablecoin settlement as easy as its original payments API, the downstream application explosion follows the same Shopify/Substack/Gumroad pattern. Privy's <a href="https://x.com/privy_io/status/2050254213834285084" target="_blank">Earn feature turning idle balances into productive assets within any app</a> is the quiet middleware play — embedding yield directly into wallet UX rather than requiring users to navigate DeFi. Levelsio, meanwhile, has moved from <a href="https://x.com/levelsio/status/2050350719744561359" target="_blank">vibe-coding 945 games to debugging bedroom CO2 levels</a> — the vibes-to-atoms pipeline continues.</p>
+  </div>
+
+  <div class="category cat-stocks_macro">
+    <div class="category-header">
+      <h2>Stocks & Macro</h2>
+      <span class="category-count">136w</span>
+    </div>
+    <p class="editorial">The a16z chart desk dropped the most telling frame of the week: <a href="https://x.com/a16z/status/2050239206866514131" target="_blank">the S&P 500 recovered its Iran-conflict selloff in just 11 trading sessions</a>, the fastest V-shaped recovery on record. That stat crystallizes the TACO thesis — markets have learned to price geopolitical shocks as transient noise while treating mega-cap earnings as permanent signal. But the recovery happened *before* Trump declared he's <a href="https://x.com/TheStudyofWar/status/2050334133667144016" target="_blank">not satisfied with Iran's latest proposal</a>, meaning the bounce priced in diplomatic progress that hasn't materialized. Spirit Airlines <a href="https://x.com/lookner/status/2050330764227588413" target="_blank">preparing to cease operations Saturday</a> is a micro-signal of the bifurcation economy: mega-caps at ATHs while marginal operators simply vanish. The macro feast Econimica teased on <a href="https://x.com/Econimica/status/2050376217099219051" target="_blank">federal marketable debt growth per decade</a> is the structural backdrop Bilello's money-supply critique already framed — debt issuance acceleration that no one at the Fed presser bothers to ask about.</p>
+  </div>
+
+  <div class="category cat-israel">
+    <div class="category-header">
+      <h2>Israel</h2>
+      <span class="category-count">159w</span>
+    </div>
+    <p class="editorial">Five signals in twelve hours, all escalatory. Trump declared he's <a href="https://x.com/TheStudyofWar/status/2050334133667144016" target="_blank">not satisfied with Iran's latest proposal</a>, confirming the wiki's read that Tehran's diplomatic overture was theater. The US is <a href="https://x.com/JenniferJJacobs/status/2050323917420519872" target="_blank">withdrawing 5,000 troops from Germany as a signal of discontent with Merz</a>, punishing European allies mid-conflict rather than consolidating force posture — strategic spite over strategic logic. Trump then <a href="https://x.com/Osinttechnical/status/2050372275816292802" target="_blank">said Cuba is next after Iran</a>, casually expanding the threat aperture while CENTCOM is already stretched. A <a href="https://x.com/FirstSquawk/status/2050380739028598956" target="_blank">drone was spotted moving from Qazvin toward Tehran</a>, suggesting either internal Iranian military activity or an operational probe that bears watching. Meanwhile the UK elevated its terror threat to severe, with the US embassy <a href="https://x.com/disclosetv/status/2050323918771081623" target="_blank">urging Americans in the UK to exercise increased caution</a>, and Iran's embassy in Mexico is reportedly <a href="https://x.com/ArturoMcfields/status/2050325297195856347" target="_blank">operating as a propaganda hub with record Iranian entries into the country</a>. The Quint-Variable Hormuz framework remains fully lit — and the Germany withdrawal adds a sixth variable: allied force degradation during active operations.</p>
+  </div>
+
+  <div class="category cat-deepdive">
+    <div class="category-header">
+      <h2>Today's Deep Dive: Crypto as Defensive Infrastructure: Beyond Financial Speculation</h2>
+      <span class="category-count">640w</span>
+    </div>
+    <div class="deepdive-source">Source: <a href="https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html" target="_blank">My Techno-Optimism — Vitalik Buterin</a> · KB #14</div>
+    <div class="editorial"><p>The dominant narrative around cryptocurrency — for critics and enthusiasts alike — is financial. Critics see speculative bubbles, Ponzi dynamics, and a waste of energy. Enthusiasts see deflationary money, DeFi yields, and the financialization of everything. Both sides are largely arguing about the same thing: crypto as a financial instrument. Vitalik Buterin's d/acc manifesto makes a different case, one that has been somewhat lost in the noise: <strong>crypto is defensive infrastructure</strong>, and its most important function is not financial.</p><p>The core argument starts with the observation that modern technology increasingly routes through centralized chokepoints — and the operators of those chokepoints can use that position to gather information, manipulate outcomes, or exclude specific actors. Buterin calls this <a href="https://www.amazon.co.uk/Uses-Abuses-Weaponized-Interdependence/dp/0815738374" target="_blank">"weaponized interdependence"</a>: the tendency of global systems to create dependencies that can then be exploited as leverage. The Swift banking network is a chokepoint. App stores are chokepoints. DNS is a chokepoint. Email, despite being a distributed protocol in design, has effectively <a href="https://cfenollosa.com/blog/after-self-hosting-my-email-for-twenty-three-years-i-have-thrown-in-the-towel-the-oligopoly-has-won.html" target="_blank">become an oligopoly</a> because spam filtering requirements pushed providers toward centralization. These chokepoints are already being used — against the <a href="https://www.coindesk.com/consensus-magazine/2023/03/22/the-reality-behind-the-crypto-banking-crackdown-operation-choke-point-20-is-here/" target="_blank">crypto industry itself via Operation Chokepoint 2.0</a>, against political dissidents via payment network pressure, against entire countries via Swift exclusion.</p><p>Blockchains' fundamental contribution to this problem is a "shared hard drive" that doesn't depend on any single operator. You can't deplatform someone from Bitcoin by pressuring a company. You can't freeze someone's on-chain assets by calling their bank. You can't exclude a country from a permission-free network by pressuring intermediaries. This is not primarily about tax avoidance or financial privacy — it's about the structural impossibility of creating a single point of control that a government, corporation, or other powerful actor can leverage. In David Friedman's framing in <a href="http://www.daviddfriedman.com/Future_Imperfect/Chapter5.html" target="_blank">Future Imperfect</a>, the internet's surveillance regime in the physical world might be tolerable if the digital world retained meaningful privacy — blockchains are part of what makes that possible.</p><p><a href="https://vitalik.eth.limo/general/2021/01/11/recovery.html" target="_blank">Social recovery wallets</a> and account abstraction let individuals secure financial assets without depending on financial institutions that can change their terms on a whim. <a href="https://vitalik.eth.limo/general/2021/01/26/snarks.html" target="_blank">Zero-knowledge proofs</a> let users prove things about themselves — identity, credentials, financial thresholds — without exposing the underlying data. <a href="https://passport.gitcoin.co/" target="_blank">Gitcoin Passport</a>, <a href="https://zupass.org/" target="_blank">Zupass</a>, and similar systems let communities make collective decisions about membership and trust without centralized identity authorities that can be captured or pressured.</p><p>The most important reframe Buterin offers is temporal: these capabilities matter most not when things are going well, but as insurance against futures where things go badly. In a functional liberal democracy with a healthy financial system, the difference between holding crypto and holding bank deposits is minor. But in a scenario where authoritarian pressures escalate, where payment networks are weaponized against political minorities, where the "sky is near and the emperor is everywhere" — having an alternative financial and communication substrate that can't be easily controlled becomes the difference between meaningful resistance and helplessness.</p><p>The blockchain community's failure to communicate this case has been partly strategic and partly cultural. The financial speculation narrative is more immediately engaging and more easily monetizable. But it crowds out the more important long-term story: that decentralized infrastructure is the digital equivalent of the mountains that protected Switzerland, and building it is one of the most important defensive investments a technically sophisticated society can make.</p></div>
+  </div>
+
+  <div class="noise">📡 noise (7d): <a href="https://x.com/cabelaschmitt" target="_blank">@cabelaschmitt</a> 7/7 (100%) · <a href="https://x.com/philipjohnston" target="_blank">@philipjohnston</a> 6/7 (86%) · <a href="https://x.com/billackman" target="_blank">@billackman</a> 4/5 (80%) · <a href="https://x.com/skyecosystem" target="_blank">@skyecosystem</a> 9/13 (69%) · <a href="https://x.com/pmarca" target="_blank">@pmarca</a> 12/21 (57%)</div>
+
+  <div class="share-row">
+    <div class="share-left">
+      <div class="share-label">Share this post on:</div>
+      <div class="share-icons">
+        <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/2026-05-01-2000.html" target="_blank" rel="noopener" title="Share on X">
+          <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+        </a>
+        <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/2026-05-01-2000.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+        </a>
+        <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/2026-05-01-2000.html" target="_blank" rel="noopener" title="Share on Telegram">
+          <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+        </a>
+        <button id="report-downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-2a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v2"/></svg></button>
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'},1500)})" title="Copy link">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button id="report-publish-blog-btn" class="deepdive-publish-btn" title="Publish this deep dive to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
+      </div>
+    </div>
+    <div style="width:100%;text-align:center;margin-top:0.5rem;">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>Back to Top</span>
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<div class="hr"><hr></div>
+
+<footer>
+  <p class="stats-line">118 tweets · Crypto 30% · AI 18% · Tech & Quantum 9% · Stocks & Macro 17% · Noise 31 · Israel Monitor · 50 tweets from curated list · source: For You</p>
+  <p class="footer-text">
+    Generated by Signal Monitor ·
+    <a href="https://x.com/beto_neh">@beto_neh</a>
+  </p>
+</footer>
+
+<script>
+  // Reading time
+  const text = document.querySelector('main').innerText;
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+  document.getElementById('reading-time').textContent = minutes + ' min read';
+
+  // Progress bar
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Audio player
+  const ael=document.getElementById('audio-el');
+  if(ael){
+    const abtn=document.getElementById('audio-btn');
+    const afill=document.getElementById('audio-fill');
+    const atime=document.getElementById('audio-time');
+    const aspeed=document.getElementById('audio-speed');
+    const playIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>';
+    const pauseIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>';
+    function fmt(s){const m=Math.floor(s/60);return m+':'+(''+(Math.floor(s)%60)).padStart(2,'0');}
+    window.toggleAudio=function(){if(ael.paused){ael.play();abtn.innerHTML=pauseIcon;}else{ael.pause();abtn.innerHTML=playIcon;}};
+    ael.addEventListener('timeupdate',function(){
+      if(ael.duration){afill.style.width=(ael.currentTime/ael.duration*100)+'%';}
+      atime.textContent=fmt(ael.currentTime)+(ael.duration?' / '+fmt(ael.duration):'');
+    });
+    ael.addEventListener('ended',function(){abtn.innerHTML=playIcon;afill.style.width='0%';});
+    window.seekAudio=function(e){
+      const bar=document.getElementById('audio-bar');
+      const pct=e.offsetX/bar.offsetWidth;
+      if(ael.duration)ael.currentTime=pct*ael.duration;
+    };
+    const speeds=[1,1.25,1.5,1.75,2];let si=0;
+    window.cycleSpeed=function(){si=(si+1)%speeds.length;ael.playbackRate=speeds[si];aspeed.textContent=speeds[si]+'x';};
+  }
+
+  // Pull to refresh (PWA)
+  if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+    let sy=0,p=false,d=document,b=d.body;
+    const el=d.createElement('div');
+    el.style.cssText='position:fixed;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;color:#8b949e;font-size:14px;z-index:9999;transition:top 0.2s;background:#212737;';
+    el.textContent='\u2193 Pull to refresh';
+    b.prepend(el);
+    d.addEventListener('touchstart',e=>{if(window.scrollY<1){sy=e.touches[0].clientY;p=true;}},{passive:true});
+    d.addEventListener('touchmove',e=>{
+      if(!p)return;
+      const dy=e.touches[0].clientY-sy;
+      if(dy<0||window.scrollY>0){p=false;el.style.top='-50px';return;}
+      if(dy>5)e.preventDefault();
+      const t=Math.min(dy*0.4,50);
+      el.style.top=(t-50)+'px';
+      el.textContent=dy>80?'\u2191 Release':'\u2193 Pull to refresh';
+    },{passive:false});
+    d.addEventListener('touchend',e=>{
+      if(!p){return;}p=false;
+      const dy=e.changedTouches[0].clientY-sy;
+      el.style.top='-50px';
+      if(dy>80){el.style.top='0';el.textContent='Refreshing...';setTimeout(()=>location.reload(),200);}
+    });
+  }
+</script>
+
+<script id="report-blog-publish-payload" type="application/json">{"title": "Crypto as Defensive Infrastructure: Beyond Financial Speculation", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/crypto-as-defensive-infrastructure-beyond-financial-speculation.md", "slug": "crypto-as-defensive-infrastructure-beyond-financial-speculation", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/crypto-as-defensive-infrastructure-beyond-financial-speculation", "ddId": 92, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "publishedRepo": "betoneh/signal-monitor", "publishedPath": "blog-published.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Crypto as Defensive Infrastructure: Beyond Financial Speculation\"\ndescription: \"The dominant narrative around cryptocurrency — for critics and enthusiasts alike — is financial. Critics see speculative bubbles, Ponzi dynamics, and a waste...\"\npubDatetime: 2026-05-01T00:00:00\ntags: [\"crypto\", \"tech\", \"governance\", \"privacy\", \"decentralization\", \"d-acc\", \"surveillance\"]\nsource: \"My Techno-Optimism — Vitalik Buterin\"\nsourceUrl: \"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\"\ndraft: false\n---\n\n> **Deep Dive** · [Source: My Techno-Optimism — Vitalik Buterin →](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html)\n\n\nThe dominant narrative around cryptocurrency — for critics and enthusiasts alike — is financial. Critics see speculative bubbles, Ponzi dynamics, and a waste of energy. Enthusiasts see deflationary money, DeFi yields, and the financialization of everything. Both sides are largely arguing about the same thing: crypto as a financial instrument. Vitalik Buterin's d/acc manifesto makes a different case, one that has been somewhat lost in the noise: **crypto is defensive infrastructure**, and its most important function is not financial.\n\nThe core argument starts with the observation that modern technology increasingly routes through centralized chokepoints — and the operators of those chokepoints can use that position to gather information, manipulate outcomes, or exclude specific actors. Buterin calls this [\"weaponized interdependence\"](https://www.amazon.co.uk/Uses-Abuses-Weaponized-Interdependence/dp/0815738374): the tendency of global systems to create dependencies that can then be exploited as leverage. The Swift banking network is a chokepoint. App stores are chokepoints. DNS is a chokepoint. Email, despite being a distributed protocol in design, has effectively [become an oligopoly](https://cfenollosa.com/blog/after-self-hosting-my-email-for-twenty-three-years-i-have-thrown-in-the-towel-the-oligopoly-has-won.html) because spam filtering requirements pushed providers toward centralization. These chokepoints are already being used — against the [crypto industry itself via Operation Chokepoint 2.0](https://www.coindesk.com/consensus-magazine/2023/03/22/the-reality-behind-the-crypto-banking-crackdown-operation-choke-point-20-is-here/), against political dissidents via payment network pressure, against entire countries via Swift exclusion.\n\nBlockchains' fundamental contribution to this problem is a \"shared hard drive\" that doesn't depend on any single operator. You can't deplatform someone from Bitcoin by pressuring a company. You can't freeze someone's on-chain assets by calling their bank. You can't exclude a country from a permission-free network by pressuring intermediaries. This is not primarily about tax avoidance or financial privacy — it's about the structural impossibility of creating a single point of control that a government, corporation, or other powerful actor can leverage. In David Friedman's framing in [Future Imperfect](http://www.daviddfriedman.com/Future_Imperfect/Chapter5.html), the internet's surveillance regime in the physical world might be tolerable if the digital world retained meaningful privacy — blockchains are part of what makes that possible.\n\n[Social recovery wallets](https://vitalik.eth.limo/general/2021/01/11/recovery.html) and account abstraction let individuals secure financial assets without depending on financial institutions that can change their terms on a whim. [Zero-knowledge proofs](https://vitalik.eth.limo/general/2021/01/26/snarks.html) let users prove things about themselves — identity, credentials, financial thresholds — without exposing the underlying data. [Gitcoin Passport](https://passport.gitcoin.co/), [Zupass](https://zupass.org/), and similar systems let communities make collective decisions about membership and trust without centralized identity authorities that can be captured or pressured.\n\nThe most important reframe Buterin offers is temporal: these capabilities matter most not when things are going well, but as insurance against futures where things go badly. In a functional liberal democracy with a healthy financial system, the difference between holding crypto and holding bank deposits is minor. But in a scenario where authoritarian pressures escalate, where payment networks are weaponized against political minorities, where the \"sky is near and the emperor is everywhere\" — having an alternative financial and communication substrate that can't be easily controlled becomes the difference between meaningful resistance and helplessness.\n\nThe blockchain community's failure to communicate this case has been partly strategic and partly cultural. The financial speculation narrative is more immediately engaging and more easily monetizable. But it crowds out the more important long-term story: that decentralized infrastructure is the digital equivalent of the mountains that protected Switzerland, and building it is one of the most important defensive investments a technically sophisticated society can make.\n"}</script>
+<script>
+  (function(){
+    var button = document.getElementById('report-publish-blog-btn');
+    var downvoteButton = document.getElementById('report-downvote-dd-btn');
+    var payloadEl = document.getElementById('report-blog-publish-payload');
+    if (!payloadEl) return;
+    var defaultIcon = button ? button.innerHTML : '';
+    var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
+    var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    function fromBase64Utf8(text) {
+      var binary = atob((text || '').replace(/\n/g, ''));
+      var bytes = new Uint8Array(binary.length);
+      for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new TextDecoder().decode(bytes);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    function getLocalDownvotes() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-downvoted') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalDownvotes(list) {
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-downvoted', JSON.stringify(normalized));
+      } catch (e) {}
+    }
+
+    function getLocalPublished() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-blog-published') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalPublished(list) {
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-blog-published', JSON.stringify(normalized));
+      } catch (e) {}
+    }
+
+    function extractPubDatetime(markdown) {
+      var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
+      return match ? match[1].trim() : '';
+    }
+
+    function applyPubDatetime(markdown, pubDatetime) {
+      if (!pubDatetime) return markdown;
+      return /^pubDatetime:\s*.+$/m.test(markdown)
+        ? markdown.replace(/^pubDatetime:\s*.+$/m, 'pubDatetime: ' + pubDatetime)
+        : markdown;
+    }
+
+    function setPublishedState(isPublished) {
+      if (!button) return;
+      button.dataset.published = isPublished ? '1' : '0';
+      button.classList.toggle('is-published', !!isPublished);
+      button.innerHTML = isPublished ? publishedIcon : defaultIcon;
+      button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish this deep dive to blog deep dives';
+      if (payload.ddId) {
+        var localPublished = getLocalPublished().filter(function(id) { return id !== payload.ddId; });
+        if (isPublished) localPublished.push(payload.ddId);
+        saveLocalPublished(localPublished);
+      }
+    }
+
+    function setDownvoteState(isDownvoted) {
+      if (!downvoteButton) return;
+      downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
+      downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
+      downvoteButton.innerHTML = defaultDownvoteIcon;
+      downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
+    }
+
+    async function fetchExisting(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshPublishedState(token) {
+      if (!token) return null;
+      var existing = await fetchExisting(token);
+      setPublishedState(!!existing);
+      return existing;
+    }
+
+    async function refreshPublishedStatePublic() {
+      if (!payload.ddId) return null;
+      setPublishedState(getLocalPublished().includes(payload.ddId));
+      try {
+        var res = await fetch('blog-published.json?_=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) return null;
+        var state = await res.json();
+        var published = Array.isArray(state.published) ? state.published : [];
+        saveLocalPublished(published);
+        setPublishedState(published.includes(payload.ddId));
+        return published;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    async function fetchPublished(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Published lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function markPublished(token) {
+      var existing = await fetchPublished(token);
+      var publishedState = { published: [] };
+      if (existing && existing.content) {
+        publishedState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+      }
+      var list = Array.isArray(publishedState.published) ? publishedState.published.slice() : [];
+      if (!list.includes(payload.ddId)) list.push(payload.ddId);
+      list = list
+        .filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+        .sort(function(a, b) { return a - b; });
+      publishedState.published = list;
+      var body = {
+        message: 'Mark deep dive #' + payload.ddId + ' as published on blog',
+        content: toBase64Utf8(JSON.stringify(publishedState, null, 2))
+      };
+      if (existing && existing.sha) body.sha = existing.sha;
+      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + token,
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) {
+        var errorText = await res.text();
+        throw new Error('Published-state update failed (' + res.status + '): ' + errorText.slice(0, 220));
+      }
+      saveLocalPublished(list);
+    }
+
+    async function fetchVotes(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Votes lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshDownvoteState(token) {
+      var localDownvotes = getLocalDownvotes();
+      setDownvoteState(localDownvotes.includes(payload.ddId));
+      if (!token) return null;
+      var existing = await fetchVotes(token);
+      var remoteDownvotes = [];
+      if (existing && existing.content) {
+        var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        remoteDownvotes = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+      }
+      saveLocalDownvotes(remoteDownvotes);
+      setDownvoteState(remoteDownvotes.includes(payload.ddId));
+      return existing;
+    }
+
+    var cachedToken = sessionStorage.getItem('sm-gh-token');
+    if (cachedToken) {
+      refreshPublishedState(cachedToken).catch(function(){});
+      refreshDownvoteState(cachedToken).catch(function(){});
+    } else {
+      setPublishedState(getLocalPublished().includes(payload.ddId));
+      setDownvoteState(getLocalDownvotes().includes(payload.ddId));
+    }
+    refreshPublishedStatePublic().catch(function(){});
+
+    if (button && !button.disabled) button.addEventListener('click', async function() {
+      if (button.dataset.busy === '1') return;
+      if (!payload.repo || !payload.path || !payload.content) {
+        window.alert('Publish payload is missing.');
+        return;
+      }
+      button.dataset.busy = '1';
+      button.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshPublishedState(token);
+        var confirmMessage = existing
+          ? 'This deep dive is already on the blog. Update it?'
+          : 'Publish this deep dive to the blog?';
+        if (!window.confirm(confirmMessage)) {
+          button.dataset.busy = '0';
+          button.style.opacity = '';
+          return;
+        }
+        var contentToPublish = payload.content;
+        if (existing && existing.content) {
+          var existingMarkdown = fromBase64Utf8(existing.content);
+          var existingPubDatetime = extractPubDatetime(existingMarkdown);
+          if (existingPubDatetime) {
+            contentToPublish = applyPubDatetime(contentToPublish, existingPubDatetime);
+          }
+        }
+        var body = {
+          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
+          content: toBase64Utf8(contentToPublish)
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        await markPublished(token);
+        setPublishedState(true);
+        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        button.style.opacity = '';
+        button.dataset.busy = '0';
+      }
+    });
+
+    if (downvoteButton) downvoteButton.addEventListener('click', async function() {
+      if (downvoteButton.dataset.busy === '1') return;
+      if (!payload.votesRepo || !payload.votesPath || !payload.ddId) {
+        window.alert('Downvote payload is missing.');
+        return;
+      }
+      downvoteButton.dataset.busy = '1';
+      downvoteButton.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshDownvoteState(token);
+        var list = getLocalDownvotes();
+        var idx = list.indexOf(payload.ddId);
+        var isDownvoted = idx >= 0;
+        if (isDownvoted) {
+          list.splice(idx, 1);
+        } else {
+          list.push(payload.ddId);
+        }
+        list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+          .sort(function(a, b) { return a - b; });
+        var voteState = { downvoted: list };
+        var body = {
+          message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
+          content: toBase64Utf8(JSON.stringify(voteState, null, 2))
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Downvote failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        var nextLocal = getLocalDownvotes().filter(function(id) { return id !== payload.ddId; });
+        if (!isDownvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+        setDownvoteState(!isDownvoted);
+        window.alert(!isDownvoted
+          ? 'Deep dive downvoted. It will appear crossed in the index.'
+          : 'Downvote removed from this deep dive.');
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        downvoteButton.style.opacity = '';
+        downvoteButton.dataset.busy = '0';
+      }
+    });
+  })();
+</script>
+</body>
+</html>
