@@ -255,7 +255,7 @@
     };
   }
 
-  function createNavigation(rootPoint, currentItem, primaryTarget, onPrimary) {
+  function createNavigation(rootPoint, currentItem, primaryTarget, onPrimary, onIndex) {
     const nav = document.createElement('section');
     nav.className = 'dd-sequence-nav';
 
@@ -287,11 +287,7 @@
     `;
 
     nav.querySelector('.dd-sequence-primary').addEventListener('click', onPrimary);
-    nav.querySelector('.dd-sequence-index').addEventListener('click', () => {
-      try {
-        localStorage.setItem('sm-tab', 'deepdives');
-      } catch (error) {}
-    });
+    nav.querySelector('.dd-sequence-index').addEventListener('click', onIndex);
 
     const divider = document.createElement('hr');
     divider.className = 'dd-sequence-divider';
@@ -343,6 +339,28 @@
             localStorage.setItem('sm-tab', 'deepdives');
           } catch (error) {}
           window.location.href = destination;
+        } catch (error) {
+          setBusy(nav, false);
+          setStatus(nav, error.message || 'Could not save read state.', 'error');
+        }
+      },
+      async (event) => {
+        event.preventDefault();
+        try {
+          setBusy(nav, true);
+          setStatus(nav, 'Marked locally. Returning to index…');
+
+          state = {
+            read: [...state.read],
+            unreport: [...state.unreport],
+          };
+          markAsRead(currentItem, state);
+          persistState(state);
+
+          try {
+            localStorage.setItem('sm-tab', 'deepdives');
+          } catch (error) {}
+          window.location.href = '../index.html';
         } catch (error) {
           setBusy(nav, false);
           setStatus(nav, error.message || 'Could not save read state.', 'error');
