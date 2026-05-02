@@ -131,7 +131,7 @@
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
       <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-2a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v2"/></svg></button>
-      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
+      
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -147,20 +147,17 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260502-1255</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260502-1300</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "The Geopolitics of Chip Fabs: Taiwan, ASML, and the AI Chokepoint", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-geopolitics-of-chip-fabs-taiwan-asml-and-the-ai-chokepoi.md", "slug": "the-geopolitics-of-chip-fabs-taiwan-asml-and-the-ai-chokepoi", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/the-geopolitics-of-chip-fabs-taiwan-asml-and-the-ai-chokepoi", "ddId": 20, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "publishedRepo": "betoneh/signal-monitor", "publishedPath": "blog-published.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Geopolitics of Chip Fabs: Taiwan, ASML, and the AI Chokepoint\"\ndescription: \"When Vitalik suggests that hardware controls could buy time before AGI, Verdon counters with geopolitical reality. Their exchange highlights the most concent...\"\npubDatetime: 2026-05-02T12:00:00\ntags: [\"ai\", \"computing\", \"crypto\", \"eacc\", \"economics\", \"energy\", \"geopolitics\", \"information_theory\"]\nsource: \"Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate\"\nsourceUrl: \"https://www.youtube.com/watch?v=NSm6GRiMkzU\"\nsignalOrder: 20\ndraft: false\n---\n\n> **Deep Dive** · [Source: Vitalik Buterin vs Beff Jezos/Guillaume Verdon debate →](https://www.youtube.com/watch?v=NSm6GRiMkzU)\n\n\nWhen [Vitalik](https://vitalik.eth.limo) suggests that hardware controls could buy time before AGI, [Verdon](https://extropic.ai) counters with geopolitical reality. Their exchange highlights the most concentrated supply chain in modern history — and its extraordinary implications for AI governance.\n\nThe production of advanced semiconductors depends on an absurdly narrow pipeline. [ASML](https://en.wikipedia.org/wiki/ASML_Holding), a Dutch company, is the sole manufacturer of extreme ultraviolet (EUV) lithography machines — the equipment needed to produce chips at 7nm and below. Each machine costs $200 million, weighs 180 tons, and requires multiple 747 cargo planes to ship. ASML has a complete monopoly; there is no second source.\n\nThese machines are used primarily by [TSMC](https://en.wikipedia.org/wiki/TSMC) in Taiwan, which produces over 70% of the world's advanced semiconductors. Samsung (South Korea) and Intel (US) produce most of the rest. The entire advanced chip supply for every AI model on Earth flows through roughly three factories on one small island in the western Pacific.\n\nThis concentration is historically unprecedented. No other technology critical to the global economy has ever been this dependent on so few points of production. It's as if all the world's oil flowed through a single refinery in a disputed territory.\n\nThe geopolitical implications are explosive. China's inability to produce cutting-edge chips is arguably the single biggest constraint on its AI ambitions. The US has leveraged this through export controls, restricting ASML and TSMC from selling advanced equipment and chips to Chinese entities. Huawei has responded by developing its own chipmaking capabilities — achieving 7nm production through older DUV lithography techniques — but still lags significantly in efficiency and yield.\n\nVitalik's argument is that this existing concentration provides a governance lever. You don't need a \"world government\" to control AI hardware — you need cooperation between four countries (US, Netherlands, Japan, Taiwan) that already control the pipeline. The nuclear non-proliferation analogy fails for AI in general, but for hardware specifically, the supply chain is even more concentrated than uranium enrichment ever was.\n\nVerdon's counterargument operates on two levels. Short-term: restricting GPU supply raises prices and creates rationing, but doesn't stop determined actors. China will invest whatever it takes because the strategic upside is too enormous. Long-term: hardware restrictions incentivize alternative computing architectures. If GPUs become scarce or export-controlled, investment floods into alternatives — neuromorphic chips, photonic computing, and yes, [Extropic](https://extropic.ai)'s superconducting hardware. These alternatives might end up being more powerful than the thing you tried to restrict.\n\nThere's also the Taiwan risk. The world's most concentrated chokepoint sits within missile range of a nuclear power that considers the island a renegade province. A conflict in the Taiwan Strait wouldn't just disrupt AI development — it would crash the global economy. This fragility is itself an argument for diversification: relying on Taiwanese fabs for AI governance is betting civilization on the continued peace across 100 miles of ocean.\n\nThe chip fab question ultimately reveals the tension between AI governance approaches. Top-down control is feasible because the supply chain is concentrated, but fragile because that concentration is also a vulnerability. Bottom-up diffusion ([open source](https://en.wikipedia.org/wiki/Open-source_software), alternative hardware, local compute) is more resilient but harder to govern. The debate between Vitalik and Verdon mirrors the debate between these two approaches — and neither has a clear advantage.\n\nWhat's clear is that whoever controls the chip supply chain controls the pace of AI development. Today that's an informal alliance of democratic nations. Whether that remains true — and whether it should — is one of the defining geopolitical questions of the decade.\n"}</script>
+<script id="dd-controls-payload" type="application/json">{"ddId": 20, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q=="}</script>
 <script>
   (function(){
-    var button = document.getElementById('publish-blog-btn');
     var downvoteButton = document.getElementById('downvote-dd-btn');
-    var payloadEl = document.getElementById('blog-publish-payload');
+    var payloadEl = document.getElementById('dd-controls-payload');
     if (!payloadEl) return;
-    var defaultIcon = button ? button.innerHTML : '';
     var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
-    var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     var payload = JSON.parse(payloadEl.textContent || '{}');
 
     function toBase64Utf8(text) {
@@ -219,131 +216,12 @@
       } catch (e) {}
     }
 
-    function getLocalPublished() {
-      try { return JSON.parse(localStorage.getItem('sm-dd-blog-published') || '[]'); } catch (e) { return []; }
-    }
-
-    function saveLocalPublished(list) {
-      try {
-        var normalized = (Array.isArray(list) ? list : [])
-          .map(function(id) { return parseInt(id, 10); })
-          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
-          .sort(function(a, b) { return a - b; });
-        localStorage.setItem('sm-dd-blog-published', JSON.stringify(normalized));
-      } catch (e) {}
-    }
-
-    function extractPubDatetime(markdown) {
-      var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
-      return match ? match[1].trim() : '';
-    }
-
-    function applyPubDatetime(markdown, pubDatetime) {
-      if (!pubDatetime) return markdown;
-      return /^pubDatetime:\s*.+$/m.test(markdown)
-        ? markdown.replace(/^pubDatetime:\s*.+$/m, 'pubDatetime: ' + pubDatetime)
-        : markdown;
-    }
-
-    function setPublishedState(isPublished) {
-      if (!button) return;
-      button.dataset.published = isPublished ? '1' : '0';
-      button.classList.toggle('is-published', !!isPublished);
-      button.innerHTML = isPublished ? publishedIcon : defaultIcon;
-      button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
-      if (payload.ddId) {
-        var localPublished = getLocalPublished().filter(function(id) { return id !== payload.ddId; });
-        if (isPublished) localPublished.push(payload.ddId);
-        saveLocalPublished(localPublished);
-      }
-    }
-
     function setDownvoteState(isDownvoted) {
       if (!downvoteButton) return;
       downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
       downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
       downvoteButton.innerHTML = defaultDownvoteIcon;
       downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
-    }
-
-    async function fetchExisting(token) {
-      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
-        headers: {
-          'Authorization': 'token ' + token,
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      });
-      if (res.status === 404) return null;
-      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
-      return await res.json();
-    }
-
-    async function refreshPublishedState(token) {
-      if (!token) return null;
-      var existing = await fetchExisting(token);
-      setPublishedState(!!existing);
-      return existing;
-    }
-
-    async function refreshPublishedStatePublic() {
-      if (!payload.ddId) return null;
-      setPublishedState(getLocalPublished().includes(payload.ddId));
-      try {
-        var res = await fetch('../blog-published.json?_=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) return null;
-        var state = await res.json();
-        var published = Array.isArray(state.published) ? state.published : [];
-        saveLocalPublished(published);
-        setPublishedState(published.includes(payload.ddId));
-        return published;
-      } catch (e) {
-        return null;
-      }
-    }
-
-    async function fetchPublished(token) {
-      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
-        headers: {
-          'Authorization': 'token ' + token,
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      });
-      if (res.status === 404) return null;
-      if (!res.ok) throw new Error('Published lookup failed (' + res.status + ').');
-      return await res.json();
-    }
-
-    async function markPublished(token) {
-      var existing = await fetchPublished(token);
-      var publishedState = { published: [] };
-      if (existing && existing.content) {
-        publishedState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
-      }
-      var list = Array.isArray(publishedState.published) ? publishedState.published.slice() : [];
-      if (!list.includes(payload.ddId)) list.push(payload.ddId);
-      list = list
-        .filter(function(value, index, arr) { return arr.indexOf(value) === index; })
-        .sort(function(a, b) { return a - b; });
-      publishedState.published = list;
-      var body = {
-        message: 'Mark deep dive #' + payload.ddId + ' as published on blog',
-        content: toBase64Utf8(JSON.stringify(publishedState, null, 2))
-      };
-      if (existing && existing.sha) body.sha = existing.sha;
-      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
-        method: 'PUT',
-        headers: {
-          'Authorization': 'token ' + token,
-          'Content-Type': 'application/json',
-          'Accept': 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify(body)
-      });
-      if (!res.ok) {
-        var errorText = await res.text();
-        throw new Error('Published-state update failed (' + res.status + '): ' + errorText.slice(0, 220));
-      }
-      saveLocalPublished(list);
     }
 
     async function fetchVotes(token) {
@@ -375,69 +253,10 @@
 
     var cachedToken = sessionStorage.getItem('sm-gh-token');
     if (cachedToken) {
-      refreshPublishedState(cachedToken).catch(function(){});
       refreshDownvoteState(cachedToken).catch(function(){});
     } else {
-      setPublishedState(getLocalPublished().includes(payload.ddId));
       setDownvoteState(getLocalDownvotes().includes(payload.ddId));
     }
-    refreshPublishedStatePublic().catch(function(){});
-
-    if (button && !button.disabled) button.addEventListener('click', async function() {
-      if (button.dataset.busy === '1') return;
-      if (!payload.repo || !payload.path || !payload.content) {
-        window.alert('Publish payload is missing.');
-        return;
-      }
-      button.dataset.busy = '1';
-      button.style.opacity = '0.45';
-      try {
-        var token = await ensureToken();
-        var existing = await refreshPublishedState(token);
-        var confirmMessage = existing
-          ? 'This deep dive is already on the blog. Update it?'
-          : 'Publish this deep dive to the blog?';
-        if (!window.confirm(confirmMessage)) {
-          button.dataset.busy = '0';
-          button.style.opacity = '';
-          return;
-        }
-        var contentToPublish = payload.content;
-        if (existing && existing.content) {
-          var existingMarkdown = fromBase64Utf8(existing.content);
-          var existingPubDatetime = extractPubDatetime(existingMarkdown);
-          if (existingPubDatetime) {
-            contentToPublish = applyPubDatetime(contentToPublish, existingPubDatetime);
-          }
-        }
-        var body = {
-          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
-          content: toBase64Utf8(contentToPublish)
-        };
-        if (existing && existing.sha) body.sha = existing.sha;
-        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
-          method: 'PUT',
-          headers: {
-            'Authorization': 'token ' + token,
-            'Content-Type': 'application/json',
-            'Accept': 'application/vnd.github.v3+json'
-          },
-          body: JSON.stringify(body)
-        });
-        if (!res.ok) {
-          var errorText = await res.text();
-          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
-        }
-        await markPublished(token);
-        setPublishedState(true);
-        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
-      } catch (err) {
-        window.alert(err && err.message ? err.message : String(err));
-      } finally {
-        button.style.opacity = '';
-        button.dataset.busy = '0';
-      }
-    });
 
     if (downvoteButton) downvoteButton.addEventListener('click', async function() {
       if (downvoteButton.dataset.busy === '1') return;

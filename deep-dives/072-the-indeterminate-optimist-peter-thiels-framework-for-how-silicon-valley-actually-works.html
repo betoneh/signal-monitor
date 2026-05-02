@@ -122,7 +122,7 @@
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
       <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-2a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v2"/></svg></button>
-      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
+      
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -138,20 +138,17 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260502-1255</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260502-1300</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "The Indeterminate Optimist: Peter Thiel's Framework for How Silicon Valley Actually Works", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-indeterminate-optimist-peter-thiels-framework-for-how-silicon-valley-actually-works.md", "slug": "the-indeterminate-optimist-peter-thiels-framework-for-how-silicon-valley-actually-works", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/the-indeterminate-optimist-peter-thiels-framework-for-how-silicon-valley-actually-works", "ddId": 72, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "publishedRepo": "betoneh/signal-monitor", "publishedPath": "blog-published.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The Indeterminate Optimist: Peter Thiel's Framework for How Silicon Valley Actually Works\"\ndescription: \"In Zero to One, Peter Thiel offers a 2x2 that cuts through most political and economic confusion in a single move. Cross two axes — optimism versus pessimism...\"\npubDatetime: 2026-05-02T12:00:00\ntags: [\"peter-thiel\", \"venture-capital\", \"silicon-valley\", \"philosophy-of-technology\", \"andreessen\", \"optimism\", \"epistemology\", \"frameworks\"]\nsource: \"Marc Andreessen: The Real AI Boom Hasn't Even Started Yet — Lenny's Podcast\"\nsourceUrl: \"https://youtu.be/87Pm0SGTtN8\"\nsignalOrder: 72\ndraft: false\n---\n\n> **Deep Dive** · [Source: Marc Andreessen: The Real AI Boom Hasn't Even Started Yet — Lenny's Podcast →](https://youtu.be/87Pm0SGTtN8)\n\n\nIn [Zero to One](https://en.wikipedia.org/wiki/Zero_to_One), [Peter Thiel](https://en.wikipedia.org/wiki/Peter_Thiel) offers a 2x2 that cuts through most political and economic confusion in a single move. Cross two axes — optimism versus pessimism about the future, and determinacy versus indeterminacy about what that future looks like — and you get four distinct worldviews. The determinate optimist knows exactly what the good future looks like and builds toward it directly. The determinate pessimist knows exactly what disaster is coming and plans accordingly. The indeterminate pessimist assumes things will go badly but has no specific model of how. And then there is the fourth quadrant, which Thiel identifies as the dominant ideology of postwar American finance and Silicon Valley in particular: the indeterminate optimist. They believe the future will be better. They have no idea which specific future will arrive. And they act anyway.\n\nMarc Andreessen, in conversation with [Lenny Rachitsky](https://www.lennysnewsletter.com/), returns to this framework repeatedly — not as abstract philosophy but as a practical description of how the venture capital ecosystem actually functions. Nobody in 1995 built a detailed roadmap from the browser to the iPhone to large language models. The sequence was not predicted, not planned, and not obvious even in retrospect until you were already inside the next wave. What Silicon Valley optimized for was not prediction accuracy but option density: keep funding smart people attacking hard problems, and let the landscape self-organize.\n\nThis looks irresponsible from the outside. It looks like a culture that cannot articulate what it is building. Thiel's framework explains why that appearance is misleading. Indeterminate optimism is not the same as naive optimism or wishful thinking. It is a specific epistemic posture — the acknowledgment that complex systems produce emergent outcomes that outrun any individual model, combined with the conviction that those emergent outcomes will, on net, be positive. The venture portfolio is the institutional expression of this posture: you do not bet on one future, you bet on variance itself.\n\nThe weakness of indeterminate optimism is that it provides no natural stopping condition. You cannot falsify it in the short run. A determinate pessimist, like a central planner who believes in decline, has a clear model that generates testable predictions. An indeterminate optimist just keeps funding the next wave. The strength is that it is calibrated to how complex technological systems actually behave. [Gordon Moore](https://en.wikipedia.org/wiki/Gordon_Moore) observed a regularity in transistor density, but no one in 1965 predicted that this regularity would eventually generate social networks, gene-sequencing platforms, and real-time language models. The specific applications were not derivable from the trend. You had to be in the room when each one appeared.\n\nAndreessen's observation that the last three years of AI development have defied every prediction — including his own — is not a confession of failure. It is the framework validating itself. The people who built the most accurate models of what GPT-4 would look like in 2018 were also, often, the people who missed what GPT-4 would actually do to the labor market, the software stack, and the economics of content production. Prediction and navigation are different skills. Silicon Valley, whatever its pathologies, has been historically better at navigation than at prediction.\n\nThe deeper implication of Thiel's framework is about risk tolerance. Determinate thinking demands a business plan, a five-year model, a specific hypothesis about which niche will be disrupted and when. Indeterminate thinking demands something harder: comfort with not knowing, paired with the discipline to keep the portfolio alive long enough for the emergent outcome to arrive. In a period of genuine technological discontinuity — which is the period Andreessen argues we are entering, not leaving — the indeterminate optimist has a structural advantage. They are not surprised when their model breaks. Breaking the model is the point.\n"}</script>
+<script id="dd-controls-payload" type="application/json">{"ddId": 72, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q=="}</script>
 <script>
   (function(){
-    var button = document.getElementById('publish-blog-btn');
     var downvoteButton = document.getElementById('downvote-dd-btn');
-    var payloadEl = document.getElementById('blog-publish-payload');
+    var payloadEl = document.getElementById('dd-controls-payload');
     if (!payloadEl) return;
-    var defaultIcon = button ? button.innerHTML : '';
     var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
-    var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     var payload = JSON.parse(payloadEl.textContent || '{}');
 
     function toBase64Utf8(text) {
@@ -210,131 +207,12 @@
       } catch (e) {}
     }
 
-    function getLocalPublished() {
-      try { return JSON.parse(localStorage.getItem('sm-dd-blog-published') || '[]'); } catch (e) { return []; }
-    }
-
-    function saveLocalPublished(list) {
-      try {
-        var normalized = (Array.isArray(list) ? list : [])
-          .map(function(id) { return parseInt(id, 10); })
-          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
-          .sort(function(a, b) { return a - b; });
-        localStorage.setItem('sm-dd-blog-published', JSON.stringify(normalized));
-      } catch (e) {}
-    }
-
-    function extractPubDatetime(markdown) {
-      var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
-      return match ? match[1].trim() : '';
-    }
-
-    function applyPubDatetime(markdown, pubDatetime) {
-      if (!pubDatetime) return markdown;
-      return /^pubDatetime:\s*.+$/m.test(markdown)
-        ? markdown.replace(/^pubDatetime:\s*.+$/m, 'pubDatetime: ' + pubDatetime)
-        : markdown;
-    }
-
-    function setPublishedState(isPublished) {
-      if (!button) return;
-      button.dataset.published = isPublished ? '1' : '0';
-      button.classList.toggle('is-published', !!isPublished);
-      button.innerHTML = isPublished ? publishedIcon : defaultIcon;
-      button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
-      if (payload.ddId) {
-        var localPublished = getLocalPublished().filter(function(id) { return id !== payload.ddId; });
-        if (isPublished) localPublished.push(payload.ddId);
-        saveLocalPublished(localPublished);
-      }
-    }
-
     function setDownvoteState(isDownvoted) {
       if (!downvoteButton) return;
       downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
       downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
       downvoteButton.innerHTML = defaultDownvoteIcon;
       downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
-    }
-
-    async function fetchExisting(token) {
-      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
-        headers: {
-          'Authorization': 'token ' + token,
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      });
-      if (res.status === 404) return null;
-      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
-      return await res.json();
-    }
-
-    async function refreshPublishedState(token) {
-      if (!token) return null;
-      var existing = await fetchExisting(token);
-      setPublishedState(!!existing);
-      return existing;
-    }
-
-    async function refreshPublishedStatePublic() {
-      if (!payload.ddId) return null;
-      setPublishedState(getLocalPublished().includes(payload.ddId));
-      try {
-        var res = await fetch('../blog-published.json?_=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) return null;
-        var state = await res.json();
-        var published = Array.isArray(state.published) ? state.published : [];
-        saveLocalPublished(published);
-        setPublishedState(published.includes(payload.ddId));
-        return published;
-      } catch (e) {
-        return null;
-      }
-    }
-
-    async function fetchPublished(token) {
-      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
-        headers: {
-          'Authorization': 'token ' + token,
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      });
-      if (res.status === 404) return null;
-      if (!res.ok) throw new Error('Published lookup failed (' + res.status + ').');
-      return await res.json();
-    }
-
-    async function markPublished(token) {
-      var existing = await fetchPublished(token);
-      var publishedState = { published: [] };
-      if (existing && existing.content) {
-        publishedState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
-      }
-      var list = Array.isArray(publishedState.published) ? publishedState.published.slice() : [];
-      if (!list.includes(payload.ddId)) list.push(payload.ddId);
-      list = list
-        .filter(function(value, index, arr) { return arr.indexOf(value) === index; })
-        .sort(function(a, b) { return a - b; });
-      publishedState.published = list;
-      var body = {
-        message: 'Mark deep dive #' + payload.ddId + ' as published on blog',
-        content: toBase64Utf8(JSON.stringify(publishedState, null, 2))
-      };
-      if (existing && existing.sha) body.sha = existing.sha;
-      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
-        method: 'PUT',
-        headers: {
-          'Authorization': 'token ' + token,
-          'Content-Type': 'application/json',
-          'Accept': 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify(body)
-      });
-      if (!res.ok) {
-        var errorText = await res.text();
-        throw new Error('Published-state update failed (' + res.status + '): ' + errorText.slice(0, 220));
-      }
-      saveLocalPublished(list);
     }
 
     async function fetchVotes(token) {
@@ -366,69 +244,10 @@
 
     var cachedToken = sessionStorage.getItem('sm-gh-token');
     if (cachedToken) {
-      refreshPublishedState(cachedToken).catch(function(){});
       refreshDownvoteState(cachedToken).catch(function(){});
     } else {
-      setPublishedState(getLocalPublished().includes(payload.ddId));
       setDownvoteState(getLocalDownvotes().includes(payload.ddId));
     }
-    refreshPublishedStatePublic().catch(function(){});
-
-    if (button && !button.disabled) button.addEventListener('click', async function() {
-      if (button.dataset.busy === '1') return;
-      if (!payload.repo || !payload.path || !payload.content) {
-        window.alert('Publish payload is missing.');
-        return;
-      }
-      button.dataset.busy = '1';
-      button.style.opacity = '0.45';
-      try {
-        var token = await ensureToken();
-        var existing = await refreshPublishedState(token);
-        var confirmMessage = existing
-          ? 'This deep dive is already on the blog. Update it?'
-          : 'Publish this deep dive to the blog?';
-        if (!window.confirm(confirmMessage)) {
-          button.dataset.busy = '0';
-          button.style.opacity = '';
-          return;
-        }
-        var contentToPublish = payload.content;
-        if (existing && existing.content) {
-          var existingMarkdown = fromBase64Utf8(existing.content);
-          var existingPubDatetime = extractPubDatetime(existingMarkdown);
-          if (existingPubDatetime) {
-            contentToPublish = applyPubDatetime(contentToPublish, existingPubDatetime);
-          }
-        }
-        var body = {
-          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
-          content: toBase64Utf8(contentToPublish)
-        };
-        if (existing && existing.sha) body.sha = existing.sha;
-        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
-          method: 'PUT',
-          headers: {
-            'Authorization': 'token ' + token,
-            'Content-Type': 'application/json',
-            'Accept': 'application/vnd.github.v3+json'
-          },
-          body: JSON.stringify(body)
-        });
-        if (!res.ok) {
-          var errorText = await res.text();
-          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
-        }
-        await markPublished(token);
-        setPublishedState(true);
-        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
-      } catch (err) {
-        window.alert(err && err.message ? err.message : String(err));
-      } finally {
-        button.style.opacity = '';
-        button.dataset.busy = '0';
-      }
-    });
 
     if (downvoteButton) downvoteButton.addEventListener('click', async function() {
       if (downvoteButton.dataset.busy === '1') return;

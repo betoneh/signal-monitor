@@ -122,7 +122,7 @@
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
       <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-2a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v2"/></svg></button>
-      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
+      
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -138,20 +138,17 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260502-1255</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260502-1300</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "Say's Law and the Productivity-Demand Feedback Loop", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/says-law-and-the-productivity-demand-feedback-loop.md", "slug": "says-law-and-the-productivity-demand-feedback-loop", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/says-law-and-the-productivity-demand-feedback-loop", "ddId": 42, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "publishedRepo": "betoneh/signal-monitor", "publishedPath": "blog-published.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"Say's Law and the Productivity-Demand Feedback Loop\"\ndescription: \"In 1803, a French economist named Jean-Baptiste Say articulated something that seemed obvious to him but has been contested ever since: supply creates its ow...\"\npubDatetime: 2026-05-02T12:00:00\ntags: [\"economics\", \"says-law\", \"demand\", \"productivity\", \"labor-markets\", \"history-of-ideas\", \"keynes\"]\nsource: \"The Lump of Labor Fallacy — Marc Andreessen (X thread)\"\nsourceUrl: \"https://x.com/pmarca/status/2037816674716729455\"\nsignalOrder: 42\ndraft: false\n---\n\n> **Deep Dive** · [Source: The Lump of Labor Fallacy — Marc Andreessen (X thread) →](https://x.com/pmarca/status/2037816674716729455)\n\n\nIn 1803, a French economist named [Jean-Baptiste Say](https://en.wikipedia.org/wiki/Jean-Baptiste_Say) articulated something that seemed obvious to him but has been contested ever since: supply creates its own demand. When you produce something, you generate income — for workers, suppliers, owners — and that income goes back into the economy as spending. The economy is not a fixed pool of purchasing power. It expands when production expands. This became known as [Say's Law](https://en.wikipedia.org/wiki/Say%27s_law), and while its precise formulation has been debated, disputed by Keynes, and refined over two centuries, its core insight is the key to understanding why automation does not destroy aggregate demand for labor.\n\nThe mechanism works like this. When a technology increases the productivity of labor — or replaces labor entirely in a given task — it lowers the cost of producing whatever that task was part of. Lower production costs translate into one of three outcomes: lower prices for consumers (raising real purchasing power), higher profits for producers (which get reinvested, paid as dividends, or spent as wages elsewhere), or both. In all three cases, real aggregate income in the economy rises. That additional real income does not evaporate. It gets spent on something — including goods and services that didn't previously exist or were too expensive to consume at scale.\n\nThe historical evidence for this mechanism is overwhelming. In 1900, the average American household spent roughly 43% of its income on food. Today, that figure is around 10%. The mechanization of agriculture — the combine harvester, the tractor, the chemical fertilizer regime — didn't produce a nation of starving unemployed farm laborers. It freed up 33 percentage points of household income to be spent on categories that barely existed in 1900: automobiles, air conditioning, healthcare, education, travel, consumer electronics, entertainment, streaming services. The workers who left farms didn't fall into permanent unemployment. They went to the factories, the offices, the service industries, the information industries that the freed purchasing power called into being.\n\nThis is the productivity-demand feedback loop: technology raises productivity, productivity lowers costs, lower costs raise real incomes, higher real incomes generate demand for new goods and services, demand for new goods and services generates employment. It is an engine, not a reservoir. The engine metaphor matters because it captures the self-reinforcing character of the process — it does not simply maintain equilibrium, it expands.\n\n[John Maynard Keynes](https://en.wikipedia.org/wiki/John_Maynard_Keynes) famously challenged Say's Law in the 1930s, arguing that in a demand-constrained depression, supply does not automatically create its own demand — savings can leak out of the spending circuit, and economies can get trapped below full employment. Keynes was right about this as a short-run phenomenon under specific conditions. But the Keynesian critique of Say's Law does not vindicate the lump of labor fallacy. Keynes himself, in his 1930 essay [\"Economic Possibilities for Our Grandchildren,\"](https://en.wikipedia.org/wiki/Economic_Possibilities_for_our_Grandchildren) predicted that rising productivity would generate so much leisure that the 15-hour workweek would become standard by 2030. He was wrong in the opposite direction — not because productivity didn't rise, but because human wants expanded to absorb the additional income.\n\nThe modified version of Say's Law relevant to AGI is not the naive claim that supply always creates exactly its own demand with no friction. It is the more robust claim that productivity gains generate real income, and real income in the hands of humans with infinite wants does not sit idle — it flows into new demands, new markets, new employment. The bottleneck to this process is not the existence of wants (which are effectively unlimited) but the speed at which labor markets can reallocate. That's a transition problem. It is not a structural permanent unemployment problem. Say's Law, suitably modified, remains the engine under the economy — and it does not have an off switch.\n"}</script>
+<script id="dd-controls-payload" type="application/json">{"ddId": 42, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q=="}</script>
 <script>
   (function(){
-    var button = document.getElementById('publish-blog-btn');
     var downvoteButton = document.getElementById('downvote-dd-btn');
-    var payloadEl = document.getElementById('blog-publish-payload');
+    var payloadEl = document.getElementById('dd-controls-payload');
     if (!payloadEl) return;
-    var defaultIcon = button ? button.innerHTML : '';
     var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
-    var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     var payload = JSON.parse(payloadEl.textContent || '{}');
 
     function toBase64Utf8(text) {
@@ -210,131 +207,12 @@
       } catch (e) {}
     }
 
-    function getLocalPublished() {
-      try { return JSON.parse(localStorage.getItem('sm-dd-blog-published') || '[]'); } catch (e) { return []; }
-    }
-
-    function saveLocalPublished(list) {
-      try {
-        var normalized = (Array.isArray(list) ? list : [])
-          .map(function(id) { return parseInt(id, 10); })
-          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
-          .sort(function(a, b) { return a - b; });
-        localStorage.setItem('sm-dd-blog-published', JSON.stringify(normalized));
-      } catch (e) {}
-    }
-
-    function extractPubDatetime(markdown) {
-      var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
-      return match ? match[1].trim() : '';
-    }
-
-    function applyPubDatetime(markdown, pubDatetime) {
-      if (!pubDatetime) return markdown;
-      return /^pubDatetime:\s*.+$/m.test(markdown)
-        ? markdown.replace(/^pubDatetime:\s*.+$/m, 'pubDatetime: ' + pubDatetime)
-        : markdown;
-    }
-
-    function setPublishedState(isPublished) {
-      if (!button) return;
-      button.dataset.published = isPublished ? '1' : '0';
-      button.classList.toggle('is-published', !!isPublished);
-      button.innerHTML = isPublished ? publishedIcon : defaultIcon;
-      button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
-      if (payload.ddId) {
-        var localPublished = getLocalPublished().filter(function(id) { return id !== payload.ddId; });
-        if (isPublished) localPublished.push(payload.ddId);
-        saveLocalPublished(localPublished);
-      }
-    }
-
     function setDownvoteState(isDownvoted) {
       if (!downvoteButton) return;
       downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
       downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
       downvoteButton.innerHTML = defaultDownvoteIcon;
       downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
-    }
-
-    async function fetchExisting(token) {
-      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
-        headers: {
-          'Authorization': 'token ' + token,
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      });
-      if (res.status === 404) return null;
-      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
-      return await res.json();
-    }
-
-    async function refreshPublishedState(token) {
-      if (!token) return null;
-      var existing = await fetchExisting(token);
-      setPublishedState(!!existing);
-      return existing;
-    }
-
-    async function refreshPublishedStatePublic() {
-      if (!payload.ddId) return null;
-      setPublishedState(getLocalPublished().includes(payload.ddId));
-      try {
-        var res = await fetch('../blog-published.json?_=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) return null;
-        var state = await res.json();
-        var published = Array.isArray(state.published) ? state.published : [];
-        saveLocalPublished(published);
-        setPublishedState(published.includes(payload.ddId));
-        return published;
-      } catch (e) {
-        return null;
-      }
-    }
-
-    async function fetchPublished(token) {
-      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
-        headers: {
-          'Authorization': 'token ' + token,
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      });
-      if (res.status === 404) return null;
-      if (!res.ok) throw new Error('Published lookup failed (' + res.status + ').');
-      return await res.json();
-    }
-
-    async function markPublished(token) {
-      var existing = await fetchPublished(token);
-      var publishedState = { published: [] };
-      if (existing && existing.content) {
-        publishedState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
-      }
-      var list = Array.isArray(publishedState.published) ? publishedState.published.slice() : [];
-      if (!list.includes(payload.ddId)) list.push(payload.ddId);
-      list = list
-        .filter(function(value, index, arr) { return arr.indexOf(value) === index; })
-        .sort(function(a, b) { return a - b; });
-      publishedState.published = list;
-      var body = {
-        message: 'Mark deep dive #' + payload.ddId + ' as published on blog',
-        content: toBase64Utf8(JSON.stringify(publishedState, null, 2))
-      };
-      if (existing && existing.sha) body.sha = existing.sha;
-      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
-        method: 'PUT',
-        headers: {
-          'Authorization': 'token ' + token,
-          'Content-Type': 'application/json',
-          'Accept': 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify(body)
-      });
-      if (!res.ok) {
-        var errorText = await res.text();
-        throw new Error('Published-state update failed (' + res.status + '): ' + errorText.slice(0, 220));
-      }
-      saveLocalPublished(list);
     }
 
     async function fetchVotes(token) {
@@ -366,69 +244,10 @@
 
     var cachedToken = sessionStorage.getItem('sm-gh-token');
     if (cachedToken) {
-      refreshPublishedState(cachedToken).catch(function(){});
       refreshDownvoteState(cachedToken).catch(function(){});
     } else {
-      setPublishedState(getLocalPublished().includes(payload.ddId));
       setDownvoteState(getLocalDownvotes().includes(payload.ddId));
     }
-    refreshPublishedStatePublic().catch(function(){});
-
-    if (button && !button.disabled) button.addEventListener('click', async function() {
-      if (button.dataset.busy === '1') return;
-      if (!payload.repo || !payload.path || !payload.content) {
-        window.alert('Publish payload is missing.');
-        return;
-      }
-      button.dataset.busy = '1';
-      button.style.opacity = '0.45';
-      try {
-        var token = await ensureToken();
-        var existing = await refreshPublishedState(token);
-        var confirmMessage = existing
-          ? 'This deep dive is already on the blog. Update it?'
-          : 'Publish this deep dive to the blog?';
-        if (!window.confirm(confirmMessage)) {
-          button.dataset.busy = '0';
-          button.style.opacity = '';
-          return;
-        }
-        var contentToPublish = payload.content;
-        if (existing && existing.content) {
-          var existingMarkdown = fromBase64Utf8(existing.content);
-          var existingPubDatetime = extractPubDatetime(existingMarkdown);
-          if (existingPubDatetime) {
-            contentToPublish = applyPubDatetime(contentToPublish, existingPubDatetime);
-          }
-        }
-        var body = {
-          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
-          content: toBase64Utf8(contentToPublish)
-        };
-        if (existing && existing.sha) body.sha = existing.sha;
-        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
-          method: 'PUT',
-          headers: {
-            'Authorization': 'token ' + token,
-            'Content-Type': 'application/json',
-            'Accept': 'application/vnd.github.v3+json'
-          },
-          body: JSON.stringify(body)
-        });
-        if (!res.ok) {
-          var errorText = await res.text();
-          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
-        }
-        await markPublished(token);
-        setPublishedState(true);
-        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
-      } catch (err) {
-        window.alert(err && err.message ? err.message : String(err));
-      } finally {
-        button.style.opacity = '';
-        button.dataset.busy = '0';
-      }
-    });
 
     if (downvoteButton) downvoteButton.addEventListener('click', async function() {
       if (downvoteButton.dataset.busy === '1') return;

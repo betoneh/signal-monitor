@@ -122,7 +122,7 @@
         <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
       </a>
       <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-2a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v2"/></svg></button>
-      <button id="publish-blog-btn" title="Publish to blog deep dives"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 11l6 -6l6 6"/><path d="M5 19h14"/></svg></button>
+      
       <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
         <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       </button>
@@ -138,20 +138,17 @@
 
 </main>
 <footer>
-  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260502-1255</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260502-1300</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
 </footer>
 <script src="deep-dive-navigation.js?v=20260421-2"></script>
 
-<script id="blog-publish-payload" type="application/json">{"title": "The 2% Problem: Nordhaus and the Philanthropic Nature of Innovation", "repo": "betoneh/blog", "path": "src/content/deepdives/2026/the-2-percent-problem-nordhaus-and-the-philanthropic-nature-of-innovation.md", "slug": "the-2-percent-problem-nordhaus-and-the-philanthropic-nature-of-innovation", "blogUrl": "https://betoneh.vercel.app/deep-dives/2026/the-2-percent-problem-nordhaus-and-the-philanthropic-nature-of-innovation", "ddId": 40, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "publishedRepo": "betoneh/signal-monitor", "publishedPath": "blog-published.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q==", "content": "---\ntitle: \"The 2% Problem: Nordhaus and the Philanthropic Nature of Innovation\"\ndescription: \"In 2004, Yale economist William Nordhaus — who would win the Nobel Prize in Economics in 2018 — published a paper titled \\\"Schumpeterian Profits in the Americ...\"\npubDatetime: 2026-05-02T12:00:00\ntags: [\"economics\", \"tech\", \"ai\", \"stocks_macro\", \"markets\", \"capitalism\"]\nsource: \"The Techno-Optimist Manifesto — Marc Andreessen\"\nsourceUrl: \"https://a16z.com/the-techno-optimist-manifesto/\"\nsignalOrder: 40\ndraft: false\n---\n\n> **Deep Dive** · [Source: The Techno-Optimist Manifesto — Marc Andreessen →](https://a16z.com/the-techno-optimist-manifesto/)\n\n\nIn 2004, Yale economist [William Nordhaus](https://en.wikipedia.org/wiki/William_Nordhaus) — who would win the Nobel Prize in Economics in 2018 — published a paper titled \"Schumpeterian Profits in the American Economy: Theory and Measurement.\" The central finding is one of the most consequential and underappreciated results in modern economics: innovators capture only about 2.2% of the total social value created by their innovations. The other 97.8% flows to consumers and the broader economy as what economists call consumer surplus.\n\nThe mechanism is straightforward. When a new technology reduces the cost of producing something, the competitive market pressure eventually forces producers to pass those savings on to buyers in the form of lower prices. A firm that invents a better process can charge higher prices temporarily — earning what Schumpeter called \"entrepreneurial profits\" — but only until competitors copy the innovation, at which point prices fall to the new lower production cost. The inventor captures a brief window of above-normal profits; the consumer benefits permanently from lower prices. The 2% figure represents Nordhaus's estimate of how much of the total value created actually stays with the inventor across that window.\n\nThe implications are jarring. The firms we typically think of as the primary beneficiaries of technological progress — Google, Apple, Microsoft — are actually retaining only a tiny fraction of the value they create. The rest has already dispersed into falling prices, rising consumer welfare, and productivity gains that accrue to everyone who uses the technology. Andreessen frames this as the strongest possible argument for capitalism as a system: it is structurally philanthropic, not by intention but by competition. The innovator doesn't choose to give away 98% of the value — market competition forces it.\n\nThis reframes the entire debate about corporate profits and inequality. The critique that tech companies are extracting enormous value from society is true in a narrow sense — the absolute profits of large tech firms are substantial. But it misses the scale of the value being created and dispersed before those profits are counted. A rough calculation: if Apple's cumulative profits represent its 2% capture, then the social value it has created for consumers, developers, and downstream industries is roughly 50 times larger than what it has retained. The visible wealth at Apple is the tip of an iceberg whose body consists of millions of users getting services that would have cost them far more from the alternatives available before the iPhone.\n\nThe [consumer surplus](https://en.wikipedia.org/wiki/Consumer_surplus) framework also recontextualizes how we should measure economic welfare. GDP counts the value of transactions at market prices — what was paid. It does not count the gap between what was paid and what the consumer would have been willing to pay. [Erik Brynjolfsson](https://en.wikipedia.org/wiki/Erik_Brynjolfsson) and colleagues at MIT have attempted to measure this gap for digital goods and found it enormous: free services like search, social media, maps, and messaging generate consumer surplus that GDP essentially misses. The economy is creating far more welfare than conventional measures suggest, and it's being distributed far more broadly than wealth statistics indicate.\n\nThere's a deeper point about the incentive structure. If innovators capture only 2% of the social value they create, innovation is extraordinarily underincentivized from a purely financial standpoint. The rest of the value is a free gift to society. This means the barriers to innovation — regulatory, legal, social — are extraordinarily costly. Every year of regulatory delay on a genuinely beneficial technology doesn't just cost the inventor's delayed profits; it costs society the 98% that would have flowed to consumers and downstream users. The precautionary principle imposes its costs primarily on the 98%, not on the 2% that gets the scrutiny.\n\nNordhaus's finding has a recursive quality in the age of AI. If AI is a meta-technology — a tool that accelerates the development of other technologies — then its social surplus is not just the 98% of its own value; it's the amplified 98% of every technology it helps create. The philanthropic multiplier may be the largest in history.\n"}</script>
+<script id="dd-controls-payload" type="application/json">{"ddId": 40, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q=="}</script>
 <script>
   (function(){
-    var button = document.getElementById('publish-blog-btn');
     var downvoteButton = document.getElementById('downvote-dd-btn');
-    var payloadEl = document.getElementById('blog-publish-payload');
+    var payloadEl = document.getElementById('dd-controls-payload');
     if (!payloadEl) return;
-    var defaultIcon = button ? button.innerHTML : '';
     var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
-    var publishedIcon = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     var payload = JSON.parse(payloadEl.textContent || '{}');
 
     function toBase64Utf8(text) {
@@ -210,131 +207,12 @@
       } catch (e) {}
     }
 
-    function getLocalPublished() {
-      try { return JSON.parse(localStorage.getItem('sm-dd-blog-published') || '[]'); } catch (e) { return []; }
-    }
-
-    function saveLocalPublished(list) {
-      try {
-        var normalized = (Array.isArray(list) ? list : [])
-          .map(function(id) { return parseInt(id, 10); })
-          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
-          .sort(function(a, b) { return a - b; });
-        localStorage.setItem('sm-dd-blog-published', JSON.stringify(normalized));
-      } catch (e) {}
-    }
-
-    function extractPubDatetime(markdown) {
-      var match = markdown.match(/^pubDatetime:\s*(.+)$/m);
-      return match ? match[1].trim() : '';
-    }
-
-    function applyPubDatetime(markdown, pubDatetime) {
-      if (!pubDatetime) return markdown;
-      return /^pubDatetime:\s*.+$/m.test(markdown)
-        ? markdown.replace(/^pubDatetime:\s*.+$/m, 'pubDatetime: ' + pubDatetime)
-        : markdown;
-    }
-
-    function setPublishedState(isPublished) {
-      if (!button) return;
-      button.dataset.published = isPublished ? '1' : '0';
-      button.classList.toggle('is-published', !!isPublished);
-      button.innerHTML = isPublished ? publishedIcon : defaultIcon;
-      button.title = isPublished ? 'Published to blog. Click to update.' : 'Publish to blog deep dives';
-      if (payload.ddId) {
-        var localPublished = getLocalPublished().filter(function(id) { return id !== payload.ddId; });
-        if (isPublished) localPublished.push(payload.ddId);
-        saveLocalPublished(localPublished);
-      }
-    }
-
     function setDownvoteState(isDownvoted) {
       if (!downvoteButton) return;
       downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
       downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
       downvoteButton.innerHTML = defaultDownvoteIcon;
       downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
-    }
-
-    async function fetchExisting(token) {
-      var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
-        headers: {
-          'Authorization': 'token ' + token,
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      });
-      if (res.status === 404) return null;
-      if (!res.ok) throw new Error('GitHub lookup failed (' + res.status + ').');
-      return await res.json();
-    }
-
-    async function refreshPublishedState(token) {
-      if (!token) return null;
-      var existing = await fetchExisting(token);
-      setPublishedState(!!existing);
-      return existing;
-    }
-
-    async function refreshPublishedStatePublic() {
-      if (!payload.ddId) return null;
-      setPublishedState(getLocalPublished().includes(payload.ddId));
-      try {
-        var res = await fetch('../blog-published.json?_=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) return null;
-        var state = await res.json();
-        var published = Array.isArray(state.published) ? state.published : [];
-        saveLocalPublished(published);
-        setPublishedState(published.includes(payload.ddId));
-        return published;
-      } catch (e) {
-        return null;
-      }
-    }
-
-    async function fetchPublished(token) {
-      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
-        headers: {
-          'Authorization': 'token ' + token,
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      });
-      if (res.status === 404) return null;
-      if (!res.ok) throw new Error('Published lookup failed (' + res.status + ').');
-      return await res.json();
-    }
-
-    async function markPublished(token) {
-      var existing = await fetchPublished(token);
-      var publishedState = { published: [] };
-      if (existing && existing.content) {
-        publishedState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
-      }
-      var list = Array.isArray(publishedState.published) ? publishedState.published.slice() : [];
-      if (!list.includes(payload.ddId)) list.push(payload.ddId);
-      list = list
-        .filter(function(value, index, arr) { return arr.indexOf(value) === index; })
-        .sort(function(a, b) { return a - b; });
-      publishedState.published = list;
-      var body = {
-        message: 'Mark deep dive #' + payload.ddId + ' as published on blog',
-        content: toBase64Utf8(JSON.stringify(publishedState, null, 2))
-      };
-      if (existing && existing.sha) body.sha = existing.sha;
-      var res = await fetch('https://api.github.com/repos/' + payload.publishedRepo + '/contents/' + payload.publishedPath, {
-        method: 'PUT',
-        headers: {
-          'Authorization': 'token ' + token,
-          'Content-Type': 'application/json',
-          'Accept': 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify(body)
-      });
-      if (!res.ok) {
-        var errorText = await res.text();
-        throw new Error('Published-state update failed (' + res.status + '): ' + errorText.slice(0, 220));
-      }
-      saveLocalPublished(list);
     }
 
     async function fetchVotes(token) {
@@ -366,69 +244,10 @@
 
     var cachedToken = sessionStorage.getItem('sm-gh-token');
     if (cachedToken) {
-      refreshPublishedState(cachedToken).catch(function(){});
       refreshDownvoteState(cachedToken).catch(function(){});
     } else {
-      setPublishedState(getLocalPublished().includes(payload.ddId));
       setDownvoteState(getLocalDownvotes().includes(payload.ddId));
     }
-    refreshPublishedStatePublic().catch(function(){});
-
-    if (button && !button.disabled) button.addEventListener('click', async function() {
-      if (button.dataset.busy === '1') return;
-      if (!payload.repo || !payload.path || !payload.content) {
-        window.alert('Publish payload is missing.');
-        return;
-      }
-      button.dataset.busy = '1';
-      button.style.opacity = '0.45';
-      try {
-        var token = await ensureToken();
-        var existing = await refreshPublishedState(token);
-        var confirmMessage = existing
-          ? 'This deep dive is already on the blog. Update it?'
-          : 'Publish this deep dive to the blog?';
-        if (!window.confirm(confirmMessage)) {
-          button.dataset.busy = '0';
-          button.style.opacity = '';
-          return;
-        }
-        var contentToPublish = payload.content;
-        if (existing && existing.content) {
-          var existingMarkdown = fromBase64Utf8(existing.content);
-          var existingPubDatetime = extractPubDatetime(existingMarkdown);
-          if (existingPubDatetime) {
-            contentToPublish = applyPubDatetime(contentToPublish, existingPubDatetime);
-          }
-        }
-        var body = {
-          message: (existing ? 'Update' : 'Publish') + ' deep dive: ' + payload.title,
-          content: toBase64Utf8(contentToPublish)
-        };
-        if (existing && existing.sha) body.sha = existing.sha;
-        var res = await fetch('https://api.github.com/repos/' + payload.repo + '/contents/' + payload.path, {
-          method: 'PUT',
-          headers: {
-            'Authorization': 'token ' + token,
-            'Content-Type': 'application/json',
-            'Accept': 'application/vnd.github.v3+json'
-          },
-          body: JSON.stringify(body)
-        });
-        if (!res.ok) {
-          var errorText = await res.text();
-          throw new Error('Publish failed (' + res.status + '): ' + errorText.slice(0, 220));
-        }
-        await markPublished(token);
-        setPublishedState(true);
-        window.alert('Published to blog. Vercel may take a minute: ' + payload.blogUrl);
-      } catch (err) {
-        window.alert(err && err.message ? err.message : String(err));
-      } finally {
-        button.style.opacity = '';
-        button.dataset.busy = '0';
-      }
-    });
 
     if (downvoteButton) downvoteButton.addEventListener('click', async function() {
       if (downvoteButton.dataset.busy === '1') return;
