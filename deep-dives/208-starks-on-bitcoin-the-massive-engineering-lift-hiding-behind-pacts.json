@@ -1,0 +1,22 @@
+{
+  "id": 208,
+  "title": "STARKs on Bitcoin: The Massive Engineering Lift Hiding Behind PACTs",
+  "source": {
+    "kb_entry": "pacts-protecting-your-bitcoin-from-a-quantum-sunset-dan-robinson-paradigm",
+    "original": "PACTs: Protecting Your Bitcoin From a Quantum Sunset – Dan Robinson (Paradigm)",
+    "url": "https://www.paradigm.xyz/2026/05/pacts-protecting-your-bitcoin-from-a-quantum-sunset"
+  },
+  "body_html": "<p>While the PACT commitment protocol is elegantly simple—hash, salt, timestamp via OpenTimestamps—the <em>verification</em> side of the equation is anything but. Robinson is candid that actually redeeming a PACT in a post-sunset Bitcoin would require verifying <strong>STARK proofs</strong> (Scalable Transparent Arguments of Knowledge) within Bitcoin's consensus rules. This represents one of the most ambitious protocol engineering challenges Bitcoin has ever faced.</p><p>The consensus proof for a PACT redemption must verify a complete anchor chain: the hidden salt and BIP-322 control proof hash to the public PACT commitment; the OpenTimestamps attestation carries that commitment through Merkle operations into a calendar root; that root appears in an <code>OP_RETURN</code> output of a confirmed Bitcoin transaction; the transaction is included in a block via a Merkle proof; and the block is recognized as part of the active chain before the PACT cutoff. All of this must be validated inside a STARK circuit and then verified by every Bitcoin full node.</p><p>Bitcoin's scripting system was deliberately designed to be minimal and deterministic. Introducing STARK verification would require <em>substantial new plumbing</em>—new opcodes or a verification framework, careful gas-metering to prevent denial-of-service attacks, and rigorous testing against adversarial inputs. The cryptographic assumptions underlying STARKs (hash-based, no trusted setup) align well with Bitcoin's ethos, but the implementation complexity is orders of magnitude beyond anything in Bitcoin's current consensus code.</p><p>Robinson's proposal wisely decouples the timeline: holders create PACTs <em>now</em> using existing tools, while the hard engineering of STARK verification is deferred to a future soft fork—potentially years away. This mirrors Bitcoin's historical pattern of conservative, staged upgrades. But it also means that PACT holders are making a bet that the community will eventually muster the political will and technical capability to ship this verification layer.</p><p>The STARK verification challenge also intersects with broader debates about Bitcoin's programmability. If Bitcoin ever adds native zero-knowledge proof verification, PACTs would be just one of many applications. The quantum sunset scenario may ultimately be the forcing function that brings ZK verification to Bitcoin—turning a defensive measure against quantum attackers into a catalyst for the protocol's most significant capability upgrade in years.</p>",
+  "tags": [
+    "starks",
+    "bitcoin",
+    "zero-knowledge-proofs",
+    "protocol-engineering",
+    "consensus",
+    "cryptography",
+    "soft-fork"
+  ],
+  "word_count": 349,
+  "used_dates": [],
+  "created_date": "2026-05-01"
+}

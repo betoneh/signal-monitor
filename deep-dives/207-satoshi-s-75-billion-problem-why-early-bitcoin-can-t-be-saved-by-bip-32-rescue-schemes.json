@@ -1,0 +1,22 @@
+{
+  "id": 207,
+  "title": "Satoshi's $75 Billion Problem: Why Early Bitcoin Can't Be Saved by BIP-32 Rescue Schemes",
+  "source": {
+    "kb_entry": "pacts-protecting-your-bitcoin-from-a-quantum-sunset-dan-robinson-paradigm",
+    "original": "PACTs: Protecting Your Bitcoin From a Quantum Sunset – Dan Robinson (Paradigm)",
+    "url": "https://www.paradigm.xyz/2026/05/pacts-protecting-your-bitcoin-from-a-quantum-sunset"
+  },
+  "body_html": "<p>The most politically explosive dimension of Bitcoin's quantum preparedness debate centers on a specific class of coins: the millions of BTC in addresses that predate <strong>BIP-32 hierarchical deterministic key derivation</strong>. These early addresses—most notoriously the estimated 1.1 million BTC believed to belong to Satoshi Nakamoto, worth over $75 billion—have exposed public keys and were generated without any deterministic parent key structure. This makes them immune to the most promising rescue schemes currently under discussion.</p><p>For BIP-32-era addresses, a rescue protocol is conceptually straightforward. A holder can provide a zero-knowledge proof that they knew the parent key from which their private key was derived—information a quantum attacker who merely cracked the child key would not possess. Draft proposals in <a href=\"https://www.paradigm.xyz/2026/05/pacts-protecting-your-bitcoin-from-a-quantum-sunset\">BIP-361</a> have explored this path, and prototype provers have already been implemented. But this escape hatch simply does not exist for pre-BIP-32 coins, because those keys carry no hidden hierarchical structure that could serve as asymmetric private information.</p><p>Without a solution for these early addresses, a quantum sunset faces a stark binary: either freeze these coins permanently—effectively confiscating the largest known Bitcoin holdings—or leave them vulnerable to theft by quantum-capable adversaries. The geopolitical stakes are enormous. If a hostile nation-state or criminal organization were to crack Satoshi's keys and seize over a million BTC, the market impact and regulatory blowback could be catastrophic for the entire Bitcoin ecosystem.</p><p>This is precisely the gap that <strong>PACTs</strong> are designed to fill. By allowing holders of any address type—including the oldest, simplest pay-to-pubkey outputs—to timestamp a proof of key knowledge <em>before</em> quantum computers could derive those keys, PACTs provide a rescue path that doesn't depend on key derivation structure. It transforms the problem from \"prove you have secret structure in your key\" to \"prove you knew the key at a time when only you could have known it.\"</p><p>The implications for Bitcoin governance are profound. Without a mechanism like PACTs, any sunset proposal must grapple with the question of whether to permanently freeze Satoshi's coins—a decision that would reverberate through Bitcoin's culture, economics, and legal standing. PACTs don't resolve that debate, but they give the community breathing room by decoupling the urgent action of preserving evidence from the contentious decision of whether and how to act on it.</p>",
+  "tags": [
+    "satoshi-nakamoto",
+    "bitcoin",
+    "bip-32",
+    "quantum-sunset",
+    "early-addresses",
+    "pacts",
+    "geopolitical-risk"
+  ],
+  "word_count": 374,
+  "used_dates": [],
+  "created_date": "2026-05-01"
+}

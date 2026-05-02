@@ -1,0 +1,22 @@
+{
+  "id": 206,
+  "title": "PACTs: The Zero-Cost Insurance Policy Against Bitcoin's Quantum Doomsday",
+  "source": {
+    "kb_entry": "pacts-protecting-your-bitcoin-from-a-quantum-sunset-dan-robinson-paradigm",
+    "original": "PACTs: Protecting Your Bitcoin From a Quantum Sunset – Dan Robinson (Paradigm)",
+    "url": "https://www.paradigm.xyz/2026/05/pacts-protecting-your-bitcoin-from-a-quantum-sunset"
+  },
+  "body_html": "<p>Dan Robinson of Paradigm has introduced a novel concept called <strong>Provable Address-Control Timestamps (PACTs)</strong>—a mechanism that allows Bitcoin holders to silently and costlessly prove they controlled their private keys before quantum computers could derive them. The idea is deceptively simple: use Bitcoin's own timestamping infrastructure, specifically <a href=\"https://opentimestamps.org/\">OpenTimestamps</a>, to commit a salted, hashed BIP-322 message-signing proof to the blockchain without any visible on-chain transaction by the holder.</p><p>The threat model is straightforward. When cryptographically relevant quantum computers (CRQCs) arrive, any Bitcoin address with an exposed public key becomes vulnerable to theft. The community may respond with an emergency soft fork that <em>sunsets</em> spending from those addresses—effectively freezing them. But this creates a brutal dilemma for dormant holders: move your coins publicly (destroying privacy and revealing liveness) or accept permanent loss. PACTs offer a third path where holders preserve their right to spend without any public action whatsoever.</p><p>The commitment itself is fully private. A holder generates a 256-bit secret salt, produces a BIP-322 control proof, and timestamps only an opaque hash of the combined data via OpenTimestamps. The salt, signing proof, and target address are never revealed to anyone. If a future soft fork defines a rescue protocol, the holder would submit a post-quantum <strong>STARK proof</strong> demonstrating they possessed a valid PACT before the cutoff date—without revealing the underlying secrets.</p><p>What makes this proposal especially compelling is its <em>asymmetric risk profile</em>. Creating a PACT costs essentially nothing—no transaction fees, no protocol changes, no on-chain footprint. Yet if CRQCs arrive and Bitcoin enacts a sunset, that zero-cost commitment could protect enormous value. Robinson frames it as a seed planted today against a tail risk that could otherwise destroy hundreds of billions in value and invite geopolitical fallout.</p><p>There are important caveats: there is no guarantee Bitcoin will ever adopt this rescue path, STARK verification in consensus requires substantial new protocol engineering, and the approach assumes BIP-322 signing authority is equivalent to spending authority. But the cost-benefit calculus is overwhelmingly favorable for any long-term holder, making PACTs a pragmatic hedge in an uncertain cryptographic future.</p>",
+  "tags": [
+    "bitcoin",
+    "quantum-computing",
+    "pacts",
+    "zero-knowledge-proofs",
+    "opentimestamps",
+    "post-quantum",
+    "protocol-upgrade"
+  ],
+  "word_count": 345,
+  "used_dates": [],
+  "created_date": "2026-05-01"
+}

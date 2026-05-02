@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!-- AUTO-GENERATED FILE. Edit scripts/build_hub.py for layout changes and deep-dives/deep-dive-navigation.js for deep dive navigation behavior. See DESIGN-SOURCES.md before editing generated HTML. -->
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PACTs: Protecting Your Bitcoin From a Quantum Sunset – Dan Robinson (Paradigm) — Signal Monitor KB</title>
+<meta property="og:title" content="PACTs: Protecting Your Bitcoin From a Quantum Sunset – Dan Robinson (Paradigm)">
+<meta property="og:description" content="Knowledge Base — Signal Monitor">
+<meta property="og:image" content="https://betoneh.github.io/signal-monitor/og/kb-pacts-protecting-your-bitcoin-from-a-quantum-sunset-dan-robinson-paradigm.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; overflow-wrap: break-word; word-break: break-word; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 8px; }
+  .content a:hover { text-decoration-color: #eaedf3; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  .build-version { color: #8b949e; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+
+  
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+
+  
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .label {
+    font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem;
+  }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.is-downvoted { color: #ef4444; opacity: 1; }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+</style>
+</head>
+<body id="top">
+<div class="progress-bar" id="progress"></div>
+<header>
+  <h1>PACTs: Protecting Your Bitcoin From a Quantum Sunset – Dan Robinson (Paradigm)</h1>
+  <div class="meta">15 min read · article · 2026-05-01</div>
+  <div class="tags"><span class="tag">bitcoin</span><span class="tag">quantum-computing</span><span class="tag">pacts</span><span class="tag">cryptography</span><span class="tag">zero-knowledge-proofs</span><span class="tag">opentimestamps</span><span class="tag">protocol-upgrade</span><span class="tag">satoshi-nakamoto</span><span class="tag">starks</span><span class="tag">post-quantum</span></div>
+  <div class="source" style="margin-top:0.5rem">Source: <a href="https://www.paradigm.xyz/2026/05/pacts-protecting-your-bitcoin-from-a-quantum-sunset" target="_blank">https://www.paradigm.xyz/2026/05/pacts-protecting-your-bitcoin-from-a-quantum-su...</a></div>
+</header>
+<main>
+  <div class="content"><h2>Summary</h2>
+<p>Dan Robinson proposes Provable Address-Control Timestamps (PACTs), a mechanism that lets Bitcoin holders silently and costlessly prove they controlled their private keys before cryptographically relevant quantum computers (CRQCs) could derive them. The core idea leverages Bitcoin's own timestamping capability—via OpenTimestamps—to commit a salted, hashed BIP-322 message-signing proof to the blockchain without any visible on-chain transaction by the holder. If Bitcoin later undergoes an emergency soft fork sunsetting spending from addresses with exposed public keys, a rescue protocol could accept a post-quantum STARK proof of a valid PACT as an alternative spending path.
+The proposal directly addresses the most contentious aspect of quantum-sunset debates: the fate of early, pre-BIP-32 addresses—including Satoshi's estimated 1.1 million BTC—that cannot benefit from deterministic-derivation-based rescue schemes. Without PACTs, a sunset forces dormant holders to either publicly move coins (sacrificing privacy, paying fees, and revealing liveness) or accept permanent freezing. PACTs offer a third path where holders preserve their right to spend without any public action, deferring the hard political and technical decisions about whether a sunset is even necessary.
+Robinson is careful to note significant caveats: there is no guarantee Bitcoin will ever adopt this rescue path; verifying STARKs in consensus requires substantial new protocol plumbing; multisig and complex-script wallets need additional standardization; and the security model assumes BIP-322 signing authority is equivalent to spending authority. Nonetheless, the cost of creating a PACT is essentially zero, making it an asymmetric hedge—a seed planted today against a tail risk that could otherwise destroy hundreds of billions in value and invite geopolitical fallout.</p>
+<h2>Key Takeaways</h2>
+<ul><li>A PACT is a salted, hashed BIP-322 control proof timestamped on Bitcoin via OpenTimestamps, proving key knowledge before quantum computers could derive the key.</li>
+<li>No Bitcoin protocol change or on-chain transaction is needed today—holders can create PACTs immediately once a standard format is agreed upon.</li>
+<li>The commitment is fully private: the salt, signing proof, and target address are never revealed; only an opaque hash is timestamped.</li>
+<li>A future soft fork could define a rescue protocol accepting post-quantum STARK proofs of valid PACTs as an alternative spend path for sunsetted UTXOs.</li>
+<li>PACTs specifically address early pre-BIP-32 addresses (including Satoshi's ~1.1M BTC) that cannot use deterministic-derivation rescue schemes proposed in BIP-361.</li>
+<li>Verifying STARKs in Bitcoin consensus is non-trivial and would require significant new protocol engineering in a subsequent fork.</li>
+<li>The approach decouples the urgent action (timestamping proofs now) from the contentious decision (whether and how to sunset), buying the community time.</li>
+<li>PACTs are an asymmetric hedge: near-zero cost to create, potentially enormous value if CRQCs arrive and a sunset is enacted.</li>
+</ul>
+<h2>Full Text / Transcript</h2>
+<p>About</p>
+<p>Team</p>
+<p>Portfolio</p>
+<p>Writing</p>
+<p>Open Source</p>
+<p>Careers</p>
+<p>PACTs: Protecting Your Bitcoin From a Quantum Sunset</p>
+<p>05.01.2026 | Dan Robinson</p>
+<p>An attacker with a powerful enough quantum computer could steal hundreds of billions of dollars of Bitcoin.</p>
+<p>To prevent that, the Bitcoin community may someday choose to upgrade the protocol to sunset the ability to spend from addresses with exposed public keys.</p>
+<p>Such an upgrade would be controversial, in part because Bitcoin values the rights of dormant holders—including Satoshi Nakamoto himself, who is estimated to hold around $75 billion of Bitcoin in vulnerable addresses—to remain inactive onchain.</p>
+<p>If an upgrade sunsets support for those addresses, these dormant holders will be forced to publicly move their coins or let them be frozen. But if quantum computers are coming and we don’t sunset those addresses, those holders will be forced to move those coins or let them be stolen . Either path seems to force long-time holders to give up some of their privacy by publicly moving their funds.</p>
+<p>This post proposes a way out of that dilemma, by letting Bitcoin holders protect themselves from any eventual sunset costlessly and silently, without having to publicly move their coins.</p>
+<p>The key is that holders can use Bitcoin itself to secretly timestamp their knowledge of their private keys. A future protocol upgrade could then accept zero-knowledge proofs of these Provable Address-Control Timestamps (PACTs) as an alternative path for spending from a sunsetted address.</p>
+<p>This protocol could protect the privacy and security of existing Bitcoin holders better than the alternatives. And adopting a standard for these proofs now would help give holders as much time as possible to secure their coins against an emergency sunset, while allowing us to leave the more difficult decisions—including whether a sunset is necessary or desirable—until later.</p>
+<p>Background</p>
+<p>Recent advances raise the question of whether cryptographically relevant quantum computers (CRQCs) could come sooner than most people had hoped.</p>
+<p>There are many difficult questions about quantum preparedness going forward, but the elephant in the room is what to do about the hundreds of billions of dollars of Bitcoin stored in addresses with exposed public keys, and thus vulnerable to theft by CRQCs.</p>
+<p>The Bitcoin community has been divided on what to do about this risk. Neha Narula recently wrote a helpful summary of the debate.</p>
+<p>The default path is to do nothing. This will prove to be the right one if cryptographically relevant quantum computers never arrive, which is a legitimate reason to hold off on the most extreme measures. The rest of this post addresses the other possible worlds—in which we someday hit a point where CRQCs are clearly inevitable, and need to decide whether to undergo an emergency fork.</p>
+<p>If CRQCs do arrive before the protocol upgrades, then up to hundreds of billions of dollars of Bitcoin might end up in the hands of attackers. Even if the Bitcoin community were willing to stomach the theft and its effect on the market, the quantities involved would be geopolitically significant, and—particularly if the attacker was a criminal or a hostile nation-state—it could lead to a cataclysmic regulatory blowback on Bitcoin.</p>
+<p>Another option is a soft fork that eventually sunsets the ability to spend from addresses with exposed public keys, as proposed in the draft of BIP-361 .</p>
+<p>This path is controversial because it violates an important principle—that people should be able to leave their Bitcoin in cold storage for decades without fear of losing access. But in the scenario where CRQCs are imminent, there is no path where holders who are entirely offline can be assured of keeping their Bitcoin , because their funds are at risk of theft.</p>
+<p>However, a sunset poses some significant inconvenience on holders:</p>
+<p>First, it would force offline holders to move their coins, which is an expensive and public onchain action. They would have to pay fees, reveal that they are still active, and potentially leak other information about themselves, such as timing patterns, links between their wallets, and even their IP address. For an early holder like Satoshi, this would be a massive revelation—they would have to tell the world that they are alive and still in possession of their keys.</p>
+<p>Second, there may only be a limited amount of time for an upgrade. Bitcoin does not yet support post-quantum addresses, and may not adopt them until the quantum threat is clearer. If progress on quantum computers is fast enough, we may end up in a situation where the gap between post-quantum addresses being supported and being mandated is uncomfortably brief.</p>
+<p>For the above reasons, it is likely that many holders will fail to upgrade before the sunset date. Will there be a way for them to prove to the protocol that they are the rightful owners of their addresses?</p>
+<p>For some addresses, the answer is already yes. For example, if a private key was derived from a parent key (as in the BIP-32 standard), the holder may be able to provide a zero-knowledge proof that they knew that parent key, which is something a quantum attacker could not have. This kind of “rescue protocol” is discussed in BIP-361 , and a prototype prover has even been implemented . There may even be ways to delay the implementation of the specific rescue rules until a subsequent fork.</p>
+<p>Those are promising escape hatches, but they can’t save the earliest Bitcoin addresses.</p>
+<p>There are millions of bitcoins that have exposed public keys and predate BIP-32 (and which therefore could not be rescued using the above path). Most notoriously, wallets believed to belong to Satoshi Nakamoto hold around 1.1 million BTC, worth over $75 billion today.</p>
+<p>This post describes an escape hatch for sunsetting that can potentially provide the best achievable protection for those offline holders—a self-protective measure they could take today, with no changes to Bitcoin and no onchain action, in a way that could maintain their ability to spend after a sunset while still achieving the safety sunsetting would provide from a quantum attacker.</p>
+<p>PACTs</p>
+<p>Suppose we’re in the year 2040, and Satoshi has decided to fund his retirement by finally selling some of his Bitcoin. Cryptographically relevant quantum computers arrived in 2030, and deriving Satoshi’s private keys is now a standard homework assignment for MIT freshmen. Luckily for Satoshi, the protocol sunsetted the ability to spend from ECDSA keys in an emergency soft fork in 2029 .</p>
+<p>Satoshi wants to prove, in a post-quantum and algorithmically verifiable way, that he knew his private key before CRQCs could derive it. What can he do?</p>
+<p>If he has to generate that proof from scratch today, he is out of luck. Since everyone now knows his private keys, and since he didn’t derive them using BIP-32 or any other deterministic scheme, the keys don’t give him any asymmetric private information he can use for a cryptographic proof.</p>
+<p>However, if he can cryptographically prove that he knew those keys before CRQCs could have derived them, then the protocol could let him take the coins. If he had the foresight back in 2026, he could have used a cryptographic timestamping service to timestamp a signature, establishing that he knew the private key before CRQCs existed.</p>
+<p>Conveniently, he had already invented a trustless way to timestamp proofs of knowledge back in 2008. The Bitcoin whitepaper described the Bitcoin network as a “distributed timestamp server.” Developers have long recognized that while it was primarily designed for timestamping transactions, it could easily be used to timestamp any hash—and that since hashes can be aggregated efficiently, it is cheap to run a service that provides such timestamps for free. OpenTimestamps is an open-source protocol that allows anyone to timestamp arbitrary hashes on the Bitcoin blockchain, by including them in a Merkle tree within an OP_RETURN output.</p>
+<p>If Satoshi had timestamped a salted commitment to a standardized address-control proof before CRQCs using OpenTimestamps, then he could provide a post-quantum-secure STARK proof of that timestamp to the Bitcoin protocol.</p>
+<p>A Provable Address-Control Timestamp, or PACT, is just such a timestamped commitment.</p>
+<p>The below description is an illustrative example of how the PACT protocol could be designed, rather than a formal proposal. It will require significant input from experts and the community, and feedback is encouraged.</p>
+<p>To create a PACT, the holder generates a 256-bit secret salt and uses BIP-322 full message signing to prove control of the scriptPubKey for the vulnerable unspent transaction output (UTXO).</p>
+<p>The BIP-322 message should commit to the PACT purpose, Bitcoin network, vulnerable scriptPubKey, and salt:</p>
+<p>1</p>
+<p>As discussed in earlier drafts of BIP-361 , consensus deployment of these phases is subtle. If Phase B permanently declared all legacy-key spends invalid forever, a later rescue path that made some of them valid again would be a hard fork, which has never been done in modern Bitcoin history and is generally considered unacceptable by the Bitcoin community. For this reason, BIP-361 currently proposes including the rescue path as part of Phase B. One possible alternative would be to design Phase B as a temporary freeze with an explicit expiry (after which UTXOs would be spendable again), so a later Phase C soft fork could either extend the freeze permanently or introduce new rescue rules</p>
+<p>Let:</p>
+<p>The holder then timestamps commitment using OpenTimestamps. They store the salt, the BIP-322 control proof, and the OTS proof file in a secure location.</p>
+<p>This requires no Bitcoin transaction by the holder and is off-chain. The timestamp reveals nothing about the control proof, salt, public key, address, or which coins the holder owns, though privacy-conscious holders should still protect network metadata when interacting with timestamping services.</p>
+<p>If Bitcoin later sunsets spending from UTXOs with exposed public keys, that fork could also define a rescue protocol for PACTs.</p>
+<p>To spend a sunsetted UTXO, the claimant would provide a post-quantum-secure proof (such as a STARK ) that:</p>
+<p>they know a secret salt and a BIP-322 full message proof (control_proof) ;</p>
+<p>SHA256("PACT/v1 commitment" || salt || SHA256(control_proof)) equals a commitment timestamped before the PACT cutoff, where that cutoff is set before CRQCs are believed to be able to derive private keys from exposed public keys;</p>
+<p>control_proof is a valid BIP-322 full message proof for the scriptPubKey controlling the frozen UTXO over the PACT message containing that salt;</p>
+<p>the rescue proof is bound to the specific rescue transaction, so it cannot be copied and reused to redirect the coins.</p>
+<p>The salt and BIP-322 control proof themselves would not be revealed. The timestamp proves that the holder had the ability to produce that control proof before the cutoff. The transaction binding proves that the holder is authorizing this particular rescue spend.</p>
+<p>At a high level, the eventual consensus proof would need to show a complete anchor chain: the hidden salt and BIP-322 control proof hash to the public PACT commitment; the OpenTimestamps attestation carries that commitment through its hash operations into a calendar Merkle root; that root appears in an OP_RETURN output of a Bitcoin transaction; the transaction is included in a block by a transaction Merkle proof; and that block is recognized by the rescue rules as part of the active Bitcoin chain before the PACT cutoff. A practical design would have to specify how the proof, which is verified in the context of a transaction, is anchored to the history of the chain (likely via a recent block hash).</p>
+<p>This does not require Bitcoin to decide today whether a sunset is necessary. It only gives holders a silent, no-onchain-cost way to preserve evidence that may become useful if such a sunset is ever adopted.</p>
+<p>No fork required today. Holders don’t have to wait for Bitcoin to adopt quantum-secure addresses or to decide what to do about insecure UTXOs. As soon as we agree on a standardized format for PACTs, holders can begin timestamping them.</p>
+<p>Note that while the commitment protocol for PACTs is relatively simple and makes use of well-established primitives like OpenTimestamps, the protocol for eventually verifying them will not be. Verifying a STARK to allow spending from sunsetted UTXOs will require substantial new plumbing in the Bitcoin protocol.</p>
+<p>Silent. Nobody other than the holder knows that the holder made the commitment. Even when the holder spends the coin, they may not have to reveal when they timestamped it—the protocol could require only a zero-knowledge proof that it was early enough.</p>
+<p>No onchain cost to commit. OpenTimestamps is free to use and can batch many commitments into a single Bitcoin transaction.</p>
+<p>Low risk. While the protocol requires the holder to produce a BIP-322 control proof with their key—which poses some risk—neither the proof nor the salt is broadcast or shared with OpenTimestamps; only an opaque commitment is revealed. The holder does, however, need to protect the salt, proof, and OTS file as a recovery artifact.</p>
+<p>The holder has no guarantee that this rescue hatch will ever be implemented. It is possible that Bitcoin will never sunset quantum-unsafe keys (either because CRQCs never arrive, or because Bitcoin decides to bite the bullet on them). Even if it does, it may not implement this specific rescue path. A holder should not solely rely on PACTs for protection until the rescue protocol is adopted into the protocol. But given the low cost of making the commitment, it might still be worth it for a long-term holder to create a PACT as soon as a standard is agreed-upon.</p>
+<p>Not universal. While this protocol should work for many single-key wallets and can be generalized using a BIP-322-style proof format, multisig, complex scripts, custodial wallets, and hardware-wallet support would need careful standardization. Additionally, PACTs assume that the ability to produce a valid BIP-322 proof on a very specific message corresponds to the ability to control the coin. That is the same practical assumption behind message-signing proofs, but as discussed in BIP-322, the power to sign messages from an address is not necessarily identical to the power to sign transactions from that address.</p>
+<p>Jeremy Rubin has proposed a similar design on the Delving Bitcoin forum.</p>
+<p>Conclusion</p>
+<p>Cryptographically relevant quantum computing may not threaten Bitcoin for a long time, or it might never happen. Users might never need to do anything.</p>
+<p>But Bitcoin is about preparing for the long term, hedging for tail risks, and self-reliance. If there is a way to plant a seed now that will give us an advantage over cryptographic attackers in a possible future, then long-term holders should take it. And protocol developers should think about the privacy interests of large, long-term, dormant holders—including, possibly, the very largest, longest-term, and most dormant holder—when deciding how to implement a possible quantum sunset.</p>
+<p>Acknowledgments: Eli Ben-Sasson, Avihu Levy, Abdelhamid Bakhta, Jameson Lopp, Neha Narula, Nic Carter, Arjun Balaji.</p>
+<p>About</p>
+<p>Team</p>
+<p>Portfolio</p>
+<p>Writing</p>
+<p>Open Source</p>
+<p>Careers</p>
+<p>LP Login</p>
+<p>Terms</p>
+<p>Disclosures</p>
+<p>Privacy</p>
+<p>CA Privacy</p>
+<p>Copyright © 2026 Paradigm Operations LP All rights reserved. “Paradigm” is a trademark, and the triangular mobius symbol is a registered trademark of Paradigm Operations LP</p></div>
+  
+<div class="share-row">
+  <div class="share-left">
+    <div class="label">Share this post on:</div>
+    <div class="share-icons">
+      <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/kb/pacts-protecting-your-bitcoin-from-a-quantum-sunset-dan-robinson-paradigm.html" target="_blank" rel="noopener" title="Share on X">
+        <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+      </a>
+      <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/kb/pacts-protecting-your-bitcoin-from-a-quantum-sunset-dan-robinson-paradigm.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+      </a>
+      <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/kb/pacts-protecting-your-bitcoin-from-a-quantum-sunset-dan-robinson-paradigm.html" target="_blank" rel="noopener" title="Share on Telegram">
+        <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+      </a>
+      <a href="mailto:?subject=PACTs: Protecting Your Bitcoin From a Quantum Sunset – Dan Robinson (Paradigm)&body=https://betoneh.github.io/signal-monitor/kb/pacts-protecting-your-bitcoin-from-a-quantum-sunset-dan-robinson-paradigm.html" title="Share via email"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></a>
+      
+      <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
+    </div>
+  </div>
+  <div style="width:100%;text-align:center;margin-top:0.5rem;">
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>Back to Top</span>
+    </button>
+  </div>
+</div>
+
+</main>
+<footer>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260501-2101</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+
+<script>
+  (function(){
+    var bar = document.getElementById('progress');
+    if (!bar) return;
+    function up() {
+      var s = window.pageYOffset || document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = (h > 0 ? s / h * 100 : 0) + '%';
+    }
+    window.onscroll = up;
+    up();
+  })();
+</script>
+
+</body>
+</html>

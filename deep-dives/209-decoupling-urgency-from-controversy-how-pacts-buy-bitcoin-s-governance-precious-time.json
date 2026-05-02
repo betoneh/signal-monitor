@@ -1,0 +1,22 @@
+{
+  "id": 209,
+  "title": "Decoupling Urgency From Controversy: How PACTs Buy Bitcoin's Governance Precious Time",
+  "source": {
+    "kb_entry": "pacts-protecting-your-bitcoin-from-a-quantum-sunset-dan-robinson-paradigm",
+    "original": "PACTs: Protecting Your Bitcoin From a Quantum Sunset – Dan Robinson (Paradigm)",
+    "url": "https://www.paradigm.xyz/2026/05/pacts-protecting-your-bitcoin-from-a-quantum-sunset"
+  },
+  "body_html": "<p>Bitcoin governance moves slowly by design, and that's usually a feature. But the quantum computing threat introduces a dangerous mismatch: the <em>optimal time to act</em> for individual holders is now, while the <em>optimal time for collective decision-making</em> about protocol changes may be years away. PACTs resolve this tension by separating the urgent individual action—timestamping a proof of key knowledge—from the contentious collective decision of whether and how to sunset vulnerable addresses.</p><p>The quantum sunset debate is among the most divisive issues in Bitcoin's future. On one side, failing to sunset leaves hundreds of billions of dollars exposed to theft by quantum-capable adversaries, with potentially catastrophic market and geopolitical consequences. On the other, sunsetting violates a core Bitcoin principle: that holders should be able to leave coins in cold storage indefinitely without fear of confiscation. The draft <a href=\"https://www.paradigm.xyz/2026/05/pacts-protecting-your-bitcoin-from-a-quantum-sunset\">BIP-361</a> proposal attempts to navigate this, but even its phased approach remains deeply controversial.</p><p>PACTs defuse some of this political pressure by ensuring that dormant holders—including those who may be deceased, incapacitated, or simply offline for years—have a mechanism to preserve their claims without participating in any governance process or making any on-chain move. A holder who creates a PACT today doesn't need to take a position on whether a sunset should happen. They're simply hedging against the possibility that it <em>might</em>.</p><p>This decoupling also benefits protocol developers. Rather than rushing to define complete rescue rules under time pressure when CRQCs appear imminent, developers can focus first on standardizing the PACT commitment format—a relatively simple task—and defer the harder questions about verification, sunset triggers, and rescue eligibility to a calmer future deliberation. The most time-sensitive action becomes the least technically complex one.</p><p>Robinson draws an analogy to Bitcoin's own ethos: preparing for the long term, hedging tail risks, and emphasizing self-reliance. PACTs embody all three principles. They cost nothing, require no permission, reveal nothing publicly, and preserve optionality for an uncertain future. In a community that often struggles to reach consensus on protocol changes, a mechanism that lets individuals protect themselves <em>before</em> consensus is reached may be the most Bitcoinian solution possible.</p>",
+  "tags": [
+    "bitcoin",
+    "governance",
+    "quantum-sunset",
+    "pacts",
+    "protocol-upgrade",
+    "self-sovereignty",
+    "tail-risk"
+  ],
+  "word_count": 349,
+  "used_dates": [],
+  "created_date": "2026-05-01"
+}
