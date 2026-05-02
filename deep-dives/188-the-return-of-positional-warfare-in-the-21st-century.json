@@ -16,6 +16,12 @@
     "military-history"
   ],
   "word_count": 287,
-  "used_dates": [],
-  "created_date": "2026-04-29"
+  "used_dates": [
+    "2026-05-02"
+  ],
+  "created_date": "2026-04-29",
+  "read_dates": [
+    "2026-05-02"
+  ],
+  "last_read_at": "2026-05-02T08:02:27.316207"
 }

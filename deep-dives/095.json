@@ -7,8 +7,22 @@
     "url": "https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html"
   },
   "body_html": "<p>Globalization promised mutual prosperity through interdependence: countries that trade together fight less, supply chains spread wealth globally, international standards create cooperation. This was largely true in the optimistic post-Cold War era. But interdependence has a shadow side that is now becoming visible: when everyone depends on the same nodes, whoever controls those nodes has enormous leverage. <a href=\"https://www.amazon.co.uk/Uses-Abuses-Weaponized-Interdependence/dp/0815738374\" target=\"_blank\">Weaponized interdependence</a> — the term used by political scientists Henry Farrell and Abraham Newman — describes the deliberate exploitation of network centrality as geopolitical power. Vitalik Buterin imports this concept into the technology domain and argues it's one of the core threats that d/acc must address.</p><p>The examples are not subtle. The Swift banking network has been used to exclude countries from the global financial system as a sanction mechanism — most recently Russia after the Ukraine invasion, but also Iran, North Korea, and Venezuela. Countries on the wrong side of US foreign policy can find themselves unable to conduct basic international trade. This is a feature from one perspective (sanctions pressure authoritarian governments) and a catastrophic vulnerability from another (the US and its allies control the switch that turns off your access to global finance). The same infrastructure that enables efficient global commerce is a weapon when its operators decide to use it that way.</p><p>The technology industry has built an even denser web of similar chokepoints. <a href=\"https://twitter.com/\" target=\"_blank\">Twitter/X</a> has required users to sign in to see content and blocked VPN IP ranges, making anonymous browsing much harder. Cloud providers can deplatform customers under political pressure — as happened to Parler after January 6. <a href=\"https://cfenollosa.com/blog/after-self-hosting-my-email-for-twenty-three-years-i-have-thrown-in-the-towel-the-oligopoly-has-won.html\" target=\"_blank\">Email has become effectively oligopolistic</a>: running your own mail server means your messages land in spam, because the filtering requirements of large providers create de-facto gatekeeping. The need to fight spam has inadvertently built a surveillance and control infrastructure into the basic communication layer of the internet.</p><p>Most pointed for Buterin's argument: this weaponization of interdependence has been <a href=\"https://www.coindesk.com/consensus-magazine/2023/03/22/the-reality-behind-the-crypto-banking-crackdown-operation-choke-point-20-is-here/\" target=\"_blank\">applied directly against the crypto industry</a> via what critics call Operation Chokepoint 2.0 — a coordinated effort by US banking regulators to cut off banking access for crypto companies. The strategy doesn't require legislation or due process: you simply pressure banks to deny services, and the industry finds itself unable to operate normally. This is a preview of how financial chokepoints can be used against any industry or community that powerful actors want to marginalize.</p><p>The structural solution Buterin advocates is exactly what blockchains were designed to provide: a financial and communication substrate where there is no single node that can be pressured to exclude specific actors. A decentralized network with no privileged operators is structurally resistant to weaponized interdependence because there's no chokepoint to weaponize. This is why he argues that crypto's importance is fundamentally political and structural rather than just financial: it's the construction of an alternative infrastructure that doesn't have the architectural weakness that centralized systems have by design.</p><p>The broader lesson for technology infrastructure is that resilience should be a design criterion alongside efficiency. Centralized systems are more efficient — one point of control means faster decisions, better coordination, lower overhead. But centralized systems are also more brittle and more vulnerable to political capture. As interdependence deepens across the global economy and the potential for weaponization grows, the case for investing in decentralized alternatives — even at some efficiency cost — becomes stronger. The question is whether we build that alternative infrastructure before the chokepoints are weaponized against something we care about, or after.</p>",
-  "tags": ["crypto", "tech", "geopolitics", "governance", "decentralization", "stocks_macro", "surveillance"],
+  "tags": [
+    "crypto",
+    "tech",
+    "geopolitics",
+    "governance",
+    "decentralization",
+    "stocks_macro",
+    "surveillance"
+  ],
   "word_count": 630,
-  "used_dates": [],
-  "created_date": "2026-04-02"
+  "used_dates": [
+    "2026-05-02"
+  ],
+  "created_date": "2026-04-02",
+  "read_dates": [
+    "2026-05-02"
+  ],
+  "last_read_at": "2026-05-02T06:42:12.257Z"
 }
