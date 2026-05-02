@@ -96,8 +96,8 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "https://www.paradigm.xyz/2026/05/pacts-protecting-your-bitcoin-from-a-quantum-sunset",
-    "deep_dives_count": 4,
+    "url": "",
+    "deep_dives_count": 0,
     "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
