@@ -7,8 +7,23 @@
     "url": "https://en.wikipedia.org/wiki/Effective_accelerationism"
   },
   "body_html": "<p>Three moments. Three manifestos. One argument that keeps coming back because we keep forgetting it.</p>\n\n<p>In <strong>1883</strong>, <a href=\"https://en.wikipedia.org/wiki/Friedrich_Nietzsche\" target=\"_blank\">Nietzsche</a> drew the line. Humanity has two trajectories: the Übermensch — the self-overcoming individual who creates new values and accepts the vertigo of greatness — or the Last Man, who blinks, invents comfort, and calls it happiness. Zarathustra didn't present this as a debate. He presented it as a <strong>choice with a deadline</strong>. Choose the Übermensch or the species stagnates. There is no stable middle ground.</p>\n\n<p>In <strong>1957</strong>, <a href=\"https://en.wikipedia.org/wiki/Ayn_Rand\" target=\"_blank\">Rand</a> took Nietzsche's abstraction and built a 1,168-page simulation of what happens when the Last Men win. <a href=\"https://en.wikipedia.org/wiki/Atlas_Shrugged\" target=\"_blank\">Atlas Shrugged</a> isn't just philosophy — it's a <strong>systems model</strong>. When you punish producers for producing, regulate innovators into submission, and redistribute not wealth but <em>ambition</em>, the motor stops. Not with a bang. With a shrug. The creators don't fight. They leave. And the world discovers, too late, what was holding it up.</p>\n\n<p>In <strong>2022</strong>, <a href=\"https://en.wikipedia.org/wiki/Effective_accelerationism\" target=\"_blank\">e/acc</a> emerged as the tech world's version of the same argument. <a href=\"https://x.com/BasedBeffJezos\" target=\"_blank\">Beff Jezos</a> and the accelerationist movement said what Nietzsche and Rand said, but in the language of thermodynamics and information theory: civilization is a <strong>entropy-reducing machine</strong>, and anything that slows it down — overregulation, safety theater, institutional risk-aversion — is a civilizational threat. The d/acc counter (Vitalik's <a href=\"https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html\" target=\"_blank\">defensive accelerationism</a>) argues for acceleration with guardrails.</p>\n\n<p>The remarkable thing is how little the core tension has moved in 150 years. The vocabulary changes — will to power, rational self-interest, thermodynamic optimization — but the fault line stays the same: <strong>do we accept the risks of excellence, or do we protect ourselves into irrelevance?</strong></p>\n\n<p>Nietzsche warned that the Last Man's happiness is a trap. Rand showed the trap closing. e/acc is arguing about whether to spring it open. Each generation rediscovers that <strong>safety and greatness are not compatible goals</strong> — and that choosing safety feels like wisdom right up until the moment it becomes stagnation.</p>\n\n<p>The 150-year arc isn't a coincidence. It's the same argument because it's the same species, facing the same fork, and — most of the time — making the same comfortable choice. The crowd still wants the Last Man. The question is whether the builders keep building anyway.</p>",
-  "tags": ["philosophy", "technology", "e/acc", "nietzsche", "ayn-rand", "accelerationism", "civilization", "history"],
+  "tags": [
+    "philosophy",
+    "technology",
+    "e/acc",
+    "nietzsche",
+    "ayn-rand",
+    "accelerationism",
+    "civilization",
+    "history"
+  ],
   "word_count": 430,
-  "used_dates": [],
-  "created_date": "2026-04-09"
+  "used_dates": [
+    "2026-05-03"
+  ],
+  "created_date": "2026-04-09",
+  "read_dates": [
+    "2026-05-03"
+  ],
+  "last_read_at": "2026-05-03T01:26:02.251Z"
 }
