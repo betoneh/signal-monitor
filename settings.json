@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-01T15:53:19.757Z",
+  "updated_at": "2026-05-03T00:32:11.727Z",
   "model": "anthropic/claude-opus-4-6",
   "available_models": [
     {
@@ -96,8 +96,8 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "",
-    "deep_dives_count": 0,
+    "url": "https://x.com/davidsenra/status/2033181422081429882?s=46&t=OHfXTbjdV4tiD3nnG1lsTw",
+    "deep_dives_count": 20,
     "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
