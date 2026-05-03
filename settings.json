@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-03T15:15:58Z",
+  "updated_at": "2026-05-03T17:56:34.351Z",
   "model": "anthropic/claude-opus-4-6",
   "available_models": [
     {
@@ -93,11 +93,10 @@
     }
   ],
   "model_onboarding": {
-    "request": "",
-    "updated_at": "2026-05-03T15:15:58Z"
+    "request": ""
   },
   "kb_ingest": {
-    "url": "https://youtu.be/Af5LICjFIBc?si=1MqZxgwfL9x88jhz",
+    "url": "https://x.com/daviddeutschoxf/status/2050502208857272569?s=46&t=OHfXTbjdV4tiD3nnG1lsTw",
     "deep_dives_count": 20,
     "model": "anthropic/claude-opus-4-6"
   },
