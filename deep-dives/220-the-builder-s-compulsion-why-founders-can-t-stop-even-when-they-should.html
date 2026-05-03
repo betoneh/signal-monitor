@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<!-- AUTO-GENERATED FILE. Edit scripts/build_hub.py for layout changes and deep-dives/deep-dive-navigation.js for deep dive navigation behavior. See DESIGN-SOURCES.md before editing generated HTML. -->
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Builder's Compulsion: Why Founders Can't Stop Even When They Should — Signal Monitor</title>
+<meta property="og:title" content="The Builder's Compulsion: Why Founders Can't Stop Even When They Should">
+<meta property="og:description" content="Deep Dive #220 — Signal Monitor">
+<meta property="og:image" content="https://betoneh.github.io/signal-monitor/og/220-the-builder-s-compulsion-why-founders-can-t-stop-even-when-they-should.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; overflow-wrap: break-word; word-break: break-word; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 8px; }
+  .content a:hover { text-decoration-color: #eaedf3; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  .build-version { color: #8b949e; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+
+  
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+
+  
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .label {
+    font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem;
+  }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.is-downvoted { color: #ef4444; opacity: 1; }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+  .source-line { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .source-line a { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .source-line a:hover { color: #eaedf3; }
+</style>
+</head>
+<body id="top">
+<div class="progress-bar" id="progress"></div>
+<header>
+  <h1>The Builder's Compulsion: Why Founders Can't Stop Even When They Should</h1>
+  <div class="meta">2 min read · 303 words · Deep Dive #220 · 2026-05-02</div>
+  <div class="source-line">Source: <a href="https://x.com/davidsenra/status/2033181422081429882?s=46&t=OHfXTbjdV4tiD3nnG1lsTw" target="_blank">David Senra's Conversation with Marc Andreessen (@pmarca) – Founders, Tech as Progress, and the Zero Introspection Mindset</a> · <a href="../kb/david-senra-s-conversation-with-marc-andreessen-pmarca-founders-tech-as-progress-and-the-zero-introspection-mindset.html">KB #25</a></div>
+</header>
+<main>
+  <div class="content"><p>Marc Andreessen's worldview draws a hard line between people who are compelled to build and people who are content to maintain. In his conversation with David Senra, this distinction emerges not as a personality quiz result but as something closer to a diagnosis: founders don't choose relentless forward motion—they're wired for it. The "zero introspection" framing isn't about lacking emotional intelligence. It's about a cognitive orientation so locked onto creation that looking backward feels physically unnatural.</p><p>This compulsion is what separates founder energy from ambition in the conventional sense. Ambitious people want outcomes—titles, wealth, recognition. Founders, as Andreessen describes them, want <em>agency</em>. They want to bend the arc of what's possible. The outcome is secondary to the act of building itself. That's a crucial nuance that gets lost when people reduce founder psychology to hustle culture platitudes.</p><p>The implication is uncomfortable: if the drive to build is compulsive rather than chosen, then the founder archetype isn't aspirational in the way most business culture frames it. It's closer to an obsession that happens to align with value creation. The best founders aren't optimizing for work-life balance or even for success—they're satisfying something deeper and less negotiable.</p><p>What makes this framing powerful is that it explains both founder greatness and founder destruction. The same compulsion that drives someone to build Netscape or create an entirely new venture category is the one that makes them terrible at stepping back, delegating, or knowing when the thing they've built has outgrown their skillset. The compulsion doesn't come with an off switch.</p><p>For anyone studying what makes certain entrepreneurs fundamentally different from the broader population of business operators, Andreessen's lens is clarifying. It reframes founder drive not as a learnable trait but as a <strong>constitutional reality</strong>—one that produces extraordinary outcomes precisely because it refuses to moderate itself.</p></div>
+  
+<div class="share-row">
+  <div class="share-left">
+    <div class="label">Share this post on:</div>
+    <div class="share-icons">
+      <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/deep-dives/220-the-builder-s-compulsion-why-founders-can-t-stop-even-when-they-should.html" target="_blank" rel="noopener" title="Share on X">
+        <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+      </a>
+      <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/deep-dives/220-the-builder-s-compulsion-why-founders-can-t-stop-even-when-they-should.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+      </a>
+      <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/deep-dives/220-the-builder-s-compulsion-why-founders-can-t-stop-even-when-they-should.html" target="_blank" rel="noopener" title="Share on Telegram">
+        <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+      </a>
+      <button id="downvote-dd-btn" title="Downvote this deep dive"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-2a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v2"/></svg></button>
+      
+      <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
+    </div>
+  </div>
+  <div style="width:100%;text-align:center;margin-top:0.5rem;">
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>Back to Top</span>
+    </button>
+  </div>
+</div>
+
+</main>
+<footer>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260502-2104</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+<script src="deep-dive-navigation.js?v=20260502-2"></script>
+
+<script id="dd-controls-payload" type="application/json">{"ddId": 220, "votesRepo": "betoneh/signal-monitor", "votesPath": "dd-votes.json", "pwHash": "74a11fdc7152e49249187fd744495582f9fa7b0ad7dcd1ecbc3e2ed8dd222163", "encToken": "E8lwgycRnKEHbT6lPh5s2JSNCl7ujKmC0GxA769vVyIn6y2lPRGR8Q=="}</script>
+<script>
+  (function(){
+    var downvoteButton = document.getElementById('downvote-dd-btn');
+    var payloadEl = document.getElementById('dd-controls-payload');
+    if (!payloadEl) return;
+    var defaultDownvoteIcon = downvoteButton ? downvoteButton.innerHTML : '';
+    var payload = JSON.parse(payloadEl.textContent || '{}');
+
+    function toBase64Utf8(text) {
+      var bytes = new TextEncoder().encode(text);
+      var binary = '';
+      for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    function fromBase64Utf8(text) {
+      var binary = atob((text || '').replace(/\n/g, ''));
+      var bytes = new Uint8Array(binary.length);
+      for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new TextDecoder().decode(bytes);
+    }
+
+    async function sha256(text) {
+      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function decryptToken(password, pwHash, encToken) {
+      var key = new Uint8Array(32);
+      for (var i = 0; i < 32; i++) key[i] = parseInt(pwHash.substr(i * 2, 2), 16);
+      var enc = Uint8Array.from(atob(encToken), function(c) { return c.charCodeAt(0); });
+      var dec = new Uint8Array(enc.length);
+      for (var j = 0; j < enc.length; j++) dec[j] = enc[j] ^ key[j % key.length];
+      return new TextDecoder().decode(dec);
+    }
+
+    async function ensureToken() {
+      var cached = sessionStorage.getItem('sm-gh-token');
+      if (cached) return cached;
+      var password = window.prompt('Signal Monitor password');
+      if (!password) throw new Error('Password required.');
+      var hash = await sha256(password);
+      if (hash !== payload.pwHash) throw new Error('Wrong password.');
+      var token = decryptToken(password, payload.pwHash, payload.encToken);
+      sessionStorage.setItem('sm-gh-token', token);
+      return token;
+    }
+
+    function getLocalDownvotes() {
+      try { return JSON.parse(localStorage.getItem('sm-dd-downvoted') || '[]'); } catch (e) { return []; }
+    }
+
+    function saveLocalDownvotes(list) {
+      try {
+        var normalized = (Array.isArray(list) ? list : [])
+          .map(function(id) { return parseInt(id, 10); })
+          .filter(function(id, index, arr) { return Number.isFinite(id) && arr.indexOf(id) === index; })
+          .sort(function(a, b) { return a - b; });
+        localStorage.setItem('sm-dd-downvoted', JSON.stringify(normalized));
+      } catch (e) {}
+    }
+
+    function setDownvoteState(isDownvoted) {
+      if (!downvoteButton) return;
+      downvoteButton.dataset.downvoted = isDownvoted ? '1' : '0';
+      downvoteButton.classList.toggle('is-downvoted', !!isDownvoted);
+      downvoteButton.innerHTML = defaultDownvoteIcon;
+      downvoteButton.title = isDownvoted ? 'Downvoted. Click to remove.' : 'Downvote this deep dive';
+    }
+
+    async function fetchVotes(token) {
+      var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('Votes lookup failed (' + res.status + ').');
+      return await res.json();
+    }
+
+    async function refreshDownvoteState(token) {
+      var localDownvotes = getLocalDownvotes();
+      setDownvoteState(localDownvotes.includes(payload.ddId));
+      if (!token) return null;
+      var existing = await fetchVotes(token);
+      var remoteDownvotes = [];
+      if (existing && existing.content) {
+        var voteState = JSON.parse(fromBase64Utf8(existing.content) || '{}');
+        remoteDownvotes = Array.isArray(voteState.downvoted) ? voteState.downvoted.slice() : [];
+      }
+      saveLocalDownvotes(remoteDownvotes);
+      setDownvoteState(remoteDownvotes.includes(payload.ddId));
+      return existing;
+    }
+
+    var cachedToken = sessionStorage.getItem('sm-gh-token');
+    if (cachedToken) {
+      refreshDownvoteState(cachedToken).catch(function(){});
+    } else {
+      setDownvoteState(getLocalDownvotes().includes(payload.ddId));
+    }
+
+    if (downvoteButton) downvoteButton.addEventListener('click', async function() {
+      if (downvoteButton.dataset.busy === '1') return;
+      if (!payload.votesRepo || !payload.votesPath || !payload.ddId) {
+        window.alert('Downvote payload is missing.');
+        return;
+      }
+      downvoteButton.dataset.busy = '1';
+      downvoteButton.style.opacity = '0.45';
+      try {
+        var token = await ensureToken();
+        var existing = await refreshDownvoteState(token);
+        var list = getLocalDownvotes();
+        var idx = list.indexOf(payload.ddId);
+        var isDownvoted = idx >= 0;
+        if (isDownvoted) {
+          list.splice(idx, 1);
+        } else {
+          list.push(payload.ddId);
+        }
+        list = list.filter(function(value, index, arr) { return arr.indexOf(value) === index; })
+          .sort(function(a, b) { return a - b; });
+        var voteState = { downvoted: list };
+        var body = {
+          message: (isDownvoted ? 'Remove downvote' : 'Downvote') + ' deep dive #' + payload.ddId,
+          content: toBase64Utf8(JSON.stringify(voteState, null, 2))
+        };
+        if (existing && existing.sha) body.sha = existing.sha;
+        var res = await fetch('https://api.github.com/repos/' + payload.votesRepo + '/contents/' + payload.votesPath, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          var errorText = await res.text();
+          throw new Error('Downvote failed (' + res.status + '): ' + errorText.slice(0, 220));
+        }
+        var nextLocal = getLocalDownvotes().filter(function(id) { return id !== payload.ddId; });
+        if (!isDownvoted) nextLocal.push(payload.ddId);
+        saveLocalDownvotes(nextLocal);
+        setDownvoteState(!isDownvoted);
+        window.alert(!isDownvoted
+          ? 'Deep dive downvoted. It will appear crossed in the index.'
+          : 'Downvote removed from this deep dive.');
+      } catch (err) {
+        window.alert(err && err.message ? err.message : String(err));
+      } finally {
+        downvoteButton.style.opacity = '';
+        downvoteButton.dataset.busy = '0';
+      }
+    });
+  })();
+</script>
+
+<script>
+  (function(){
+    var bar = document.getElementById('progress');
+    if (!bar) return;
+    function up() {
+      var s = window.pageYOffset || document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = (h > 0 ? s / h * 100 : 0) + '%';
+    }
+    window.onscroll = up;
+    up();
+  })();
+</script>
+
+</body>
+</html>
