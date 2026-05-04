@@ -1,0 +1,21 @@
+{
+  "id": 237,
+  "title": "From Integers to Q-Numbers: Why Quantum Weirdness Is Just the Latest Step",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>People often treat quantum mechanics as a violent rupture with everything physics previously held dear — a forced march into irreducible randomness and observer-dependent reality. David Deutsch offers a far more soothing historical frame. The step from classical real-number-valued observables to quantum <em>q-numbers</em>, he argues, is conceptually <strong>smaller</strong> than the step the ancient Greeks struggled with for millennia: accepting that the physical world requires irrational numbers at all.</p><p>The Pythagoreans believed the cosmos was built from ratios of integers. The discovery that the diagonal of a unit square is irrational — that √2 cannot be expressed as a fraction — was so disturbing it was reportedly suppressed. It took roughly two thousand years before mathematicians produced a rigorous theory of the real number continuum. And a single real number, Deutsch notes, contains as much information as the entire multiverse. So the claim that \"real-valued physics\" is the natural, comfortable baseline is itself historically naive.</p><p>What Heisenberg did in 1925 was extend the number system one more time. Physical observables are not ordinary real numbers; they are q-numbers — objects with a richer algebraic structure that includes non-commutativity. Heisenberg didn't even know he had reinvented matrix algebra; other physicists had to tell him. But the conceptual move is continuous with the arc from integers to rationals to reals to complex numbers. Each extension initially felt alien and eventually became the obvious way to describe the world.</p><p>This reframing carries a quiet but powerful message for those who long for a return to classical determinism à la Einstein or Gerard 't Hooft. The desire to go back to \"familiar\" physics mistakes a historical accident for a permanent truth. Real numbers were once as exotic as q-numbers are now. Conforming our intuitions to our best theories is not a regrettable concession — it is the entire history of mathematical physics.</p>",
+  "tags": [
+    "q-numbers",
+    "heisenberg",
+    "real-numbers",
+    "history-of-physics",
+    "quantum-mechanics",
+    "mathematical-foundations"
+  ],
+  "word_count": 308,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

@@ -1,0 +1,21 @@
+{
+  "id": 246,
+  "title": "The Quantum Lottery Fallacy: Why You Can't Game the Multiverse",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>One of the more provocative thought experiments people raise against the Everettian multiverse is what might be called the quantum lottery strategy: play the lottery, and if you lose, end yourself — ensuring that every surviving version of you is a billionaire. It sounds like a logical consequence of many-worlds thinking, but Deutsch argues it is a straightforward fallacy rooted in mixing incompatible conceptions of probability.</p><p>The error lies in the assumption that \"the real you\" is the surviving you. In a classical, frequency-based interpretation of probability, this might seem to make sense. But in the Everettian framework, where probability emerges from decision theory rather than from stochastic processes, there is no basis for privileging surviving branches over dead ones. The claim that you should only care about branches where you persist is circular — it presupposes the very conclusion it tries to establish.</p><p>A related fallacy arises among students who reason: \"If every outcome happens somewhere in the multiverse, why should I bother doing anything? Some version of me will do the hard work.\" Deutsch points out this involves an inconsistent weighting — caring about hardworking copies when calculating expected good outcomes, but caring only about the lazy copy when deciding what to do. This violates the axioms of rational decision theory, and no coherent alternative decision framework supports it.</p><p>The deeper lesson is that the Everettian multiverse, combined with decision theory stripped of its probability axiom, yields a unique prescription for rational behavior — one that tells you to weight outcomes exactly as if classical stochastic processes were at work. The multiverse does not give you a loophole for irrationality; it gives you the Born rule as the uniquely rational betting strategy.</p>",
+  "tags": [
+    "many-worlds",
+    "decision-theory",
+    "born-rule",
+    "rationality",
+    "probability",
+    "quantum-ethics"
+  ],
+  "word_count": 284,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

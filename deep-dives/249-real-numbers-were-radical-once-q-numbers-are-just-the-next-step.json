@@ -1,0 +1,22 @@
+{
+  "id": 249,
+  "title": "Real Numbers Were Radical Once — Q-Numbers Are Just the Next Step",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>When people balk at the strangeness of quantum mechanics, Deutsch offers a striking historical reframe. The ancient Pythagoreans believed the world was fundamentally built from integers and their ratios. The discovery that the square root of two is irrational was so disturbing it reportedly led to existential crisis. It then took roughly two thousand years before mathematicians developed a satisfactory theory of real numbers encompassing rationals, algebraics, irrationals, and transcendentals. Today, we treat real numbers as the obvious, natural language for physics — forgetting how radical they once were.</p><p>And radical they are. A single real number contains as much information as the entire multiverse. The idea that physical quantities are described by the real number continuum — with its infinite precision and uncountable complexity — is itself a profound metaphysical commitment, one that required enormous intellectual adjustment. The move from integers to reals was arguably a greater conceptual leap than anything quantum mechanics demands.</p><p>Deutsch's point is that the step from real numbers to q-numbers — the matrix-valued observables of quantum mechanics — is comparatively modest. Heisenberg's matrices are essentially pairs of real numbers (complex numbers), arranged with a richer algebraic structure. The key new feature is non-commutativity: the order in which you multiply q-numbers matters. But this does not require any new violence to the relationship between everyday experience and underlying reality; that violence was already done by the adoption of real numbers centuries ago.</p><p>This perspective reframes the \"weirdness\" of quantum mechanics as parochialism. We happen to have grown comfortable with real numbers, so we treat them as the natural baseline. But from the vantage point of intellectual history, q-numbers are just the latest — and perhaps not the last — expansion of the mathematical vocabulary we use to describe what is really out there. Einstein's dream of returning to a more classical physics, shared by physicists like Gerard 't Hooft, may simply reflect an attachment to one particular rung on a much longer conceptual ladder.</p>",
+  "tags": [
+    "q-numbers",
+    "real-numbers",
+    "mathematical-history",
+    "quantum-mechanics",
+    "heisenberg",
+    "conceptual-revolution",
+    "pythagoras"
+  ],
+  "word_count": 329,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

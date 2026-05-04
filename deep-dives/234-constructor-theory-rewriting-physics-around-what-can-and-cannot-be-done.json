@@ -1,0 +1,21 @@
+{
+  "id": 234,
+  "title": "Constructor Theory: Rewriting Physics Around What Can and Cannot Be Done",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>At the deepest level, nearly all of physics follows a common template: specify initial conditions, write down dynamical laws, and evolve the system forward in time. David Deutsch proposes abandoning this entire framework in favor of something he calls <strong>constructor theory</strong> — a reformulation of physics expressed entirely in terms of which transformations can be brought about and which cannot. The shift is from \"what will happen\" to \"what is possible and what is impossible.\"</p><p>The motivation is partly philosophical and partly practical. On the philosophical side, our current framework treats initial conditions as brute facts — the state of the Big Bang, for instance, is simply given, not explained. We have extraordinarily deep theories of dynamical laws but only hand-waving about why the initial conditions are what they are. In constructor theory, both laws of motion and initial conditions would become emergent properties of deeper statements about possible and impossible transformations. The initial state of the universe would be constrained by — rather than independent of — fundamental principles.</p><p>Deutsch offers a striking example: computational universality. We observe that the physical world can instantiate computers of arbitrary memory and speed — there is no fundamental barrier to scaling computation. In the conventional framework, this is merely an emergent consequence of particular laws of physics. In constructor theory, you could instead <em>postulate</em> computational universality as a fundamental law. Doing so immediately rules out vast classes of initial conditions for the Big Bang, including the perfectly homogeneous state that cosmologists often assume as a starting point, because a homogeneous universe would remain homogeneous and could never give rise to the structured complexity required for universal computation.</p><p>This reframing also connects to Deutsch's views on free will and the creation of knowledge. If physics is fundamentally about what transformations are possible, then the capacity to create genuinely new explanations — which Deutsch identifies with free will — could be expressible as a constructor-theoretic principle rather than an emergent accident. The framework is still in its early stages, and Deutsch is candid that the full program has not yet been carried out. But the ambition is extraordinary: to find a formulation of physics where the deepest truths are not equations of motion but statements about the structure of possibility itself.</p>",
+  "tags": [
+    "constructor-theory",
+    "computational-universality",
+    "initial-conditions",
+    "foundations-of-physics",
+    "david-deutsch",
+    "possibility"
+  ],
+  "word_count": 377,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

@@ -1,0 +1,21 @@
+{
+  "id": 238,
+  "title": "Quantum Suicide and Lottery Fallacies: Why Multiverse Ethics Isn't What You Think",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>If every outcome of every quantum event actually occurs somewhere in the multiverse, a dark temptation arises: engineer your life so that only the best versions of you survive. The most notorious thought experiment involves playing the lottery, then ending your life if you lose — guaranteeing that every persisting copy of you is fabulously wealthy. Variations include deferring all effort to hardworking branches while the lazy you free-rides. These scenarios are disturbing, but Deutsch argues they rest on a <strong>fundamental logical error</strong>.</p><p>The fallacy comes from smuggling in the old, single-world conception of probability. In a classical stochastic picture, the \"real you\" is the surviving you, and dead branches simply vanish from the story. But in the Everettian framework, there is no privileged surviving copy. The decision-theoretic derivation of the Born rule — which recovers quantum probabilities as the uniquely rational betting weights — requires you to weight <em>all</em> branches, including those where you perish. Declaring that you should care only about the survivors is a circular assumption, not a conclusion.</p><p>The same logic defuses the laziness gambit. If you decide to do nothing and \"let the hardworking versions of you handle it,\" you are selectively applying the multiverse picture when it suits you and ignoring it when it doesn't. You invoke many worlds to claim that good outcomes are guaranteed somewhere, but you invoke single-world thinking to justify inaction in your branch. Deutsch points out that any consistent application of decision theory plus quantum mechanics forbids exactly this kind of cherry-picking: <strong>rational weights must be applied uniformly</strong>, or the axioms of decision theory are violated.</p><p>Far from licensing recklessness, the Everettian framework with decision-theoretic probability actually constrains behavior in much the same way classical expected-utility theory does. You should act as if there were genuine stochastic probabilities attached to outcomes, because that is what rationality demands once you strip both quantum mechanics and decision theory of their probability axioms and fuse what remains. The multiverse doesn't give you a free lunch — it gives you the same lunch, justified on deeper foundations.</p>",
+  "tags": [
+    "quantum-suicide",
+    "decision-theory",
+    "born-rule",
+    "everett-interpretation",
+    "ethics",
+    "probability"
+  ],
+  "word_count": 346,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

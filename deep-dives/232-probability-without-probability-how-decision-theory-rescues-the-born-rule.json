@@ -1,0 +1,21 @@
+{
+  "id": 232,
+  "title": "Probability Without Probability: How Decision Theory Rescues the Born Rule",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>If the Everettian multiverse is fully deterministic — every outcome of every quantum measurement actually occurs — then what on earth does probability mean? This is perhaps the oldest and sharpest objection to the many-worlds interpretation, and David Deutsch's proposed resolution is as radical as the theory itself: probability does not exist at a fundamental level. The world is completely deterministic. We were simply wrong to demand probability as a primitive ingredient of physics.</p><p>Deutsch's strategy is to fuse two theories, each stripped of its probability axiom. Quantum mechanics without the Born rule is a deterministic theory of how observables evolve. Decision theory without its probability axiom is a framework for rational choice given preferences — if you prefer X to Y and Y to Z, you prefer X to Z, and so on. Neither theory alone contains probability. But when combined, the framework uniquely recovers the Born rule as the only rational betting strategy. The square of the quantum amplitude emerges not as a mysterious postulate but as the weight any rational agent must assign when making decisions in a branching multiverse.</p><p>This means probability is not a feature of the world but a feature of how agents should act within the world. If something is predicted to be astronomically unlikely by the Born rule, a rational agent should be surprised if it occurs — not because the universe is stochastic, but because decision-theoretic rationality demands treating the amplitudes as if they were probabilities. The distinction is subtle but profound: the ontology is deterministic, yet the epistemology and practical reasoning recover everything we need from probability theory.</p><p>Not everyone is convinced. David Albert has argued that Deutsch's axioms don't cover all conceivable ways probability could enter the picture — for instance, agents with nonlinear preferences about probabilities themselves might reach different conclusions. David Wallace agrees with the broad approach but believes more mathematical structure is needed. Deutsch remains unfazed: the core insight, that a deterministic multiverse plus stripped-down decision theory yields the Born rule, stands as what he considers a complete solution to the measurement problem's probabilistic dimension.</p>",
+  "tags": [
+    "probability",
+    "born-rule",
+    "decision-theory",
+    "everett-interpretation",
+    "measurement-problem",
+    "determinism"
+  ],
+  "word_count": 349,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

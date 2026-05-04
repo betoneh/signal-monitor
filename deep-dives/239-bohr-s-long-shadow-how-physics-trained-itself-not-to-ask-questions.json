@@ -1,0 +1,21 @@
+{
+  "id": 239,
+  "title": "Bohr's Long Shadow: How Physics Trained Itself Not to Ask Questions",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>Niels Bohr never spoke of wave function collapse. He never used the word \"interpretation\" in the way it later calcified. What he did do, according to Deutsch, was something more subtle and arguably more damaging: he established a <strong>culture of intellectual deference</strong> in which asking what quantum mechanics says about reality became socially and professionally impermissible. Bohr was charismatic, and while he saw himself as groping toward understanding, his colleagues took his provisional agnosticism as the final word.</p><p>The result was an \"induced cringe\" that persisted for generations. Students entering quantum mechanics courses were trained not to ask foundational questions. Those who did were met with dismissal — or worse, with the implication that such questions revealed a lack of sophistication. The irony is that nearly every student who entered physics to understand the world harbored exactly these questions, but each believed they were alone in their unease. A conspiracy of silence masquerading as consensus.</p><p>Deutsch traces part of Bohr's influence to the intellectual zeitgeist of the early twentieth century. Einstein had rewritten space and time; Wittgenstein was reducing philosophy to language games; modernism was demolishing representational art. In that climate, the idea that physics itself demanded a revolutionary epistemological surrender — that we must abandon the very notion of an objective microscopic reality — had enormous cultural appeal. It positioned quantum mechanics as the deepest revolution of all, and Bohr as its prophet.</p><p>The practical cost has been enormous. If your foundational stance is that certain questions cannot be asked, you will never make progress on the problems those questions point to. Deutsch argues that breakthroughs like the Page-Wootters construction for understanding time in quantum mechanics, or his own decision-theoretic derivation of the Born rule, were possible <em>only</em> because a minority of physicists refused to accept Bohr's prohibition. Lifting that prohibition isn't just philosophically satisfying — it is a prerequisite for finding the successor to quantum theory itself.</p>",
+  "tags": [
+    "niels-bohr",
+    "copenhagen",
+    "physics-culture",
+    "philosophy-of-physics",
+    "quantum-foundations",
+    "history-of-physics"
+  ],
+  "word_count": 319,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

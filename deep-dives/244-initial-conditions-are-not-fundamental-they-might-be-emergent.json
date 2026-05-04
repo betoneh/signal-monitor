@@ -1,0 +1,21 @@
+{
+  "id": 244,
+  "title": "Initial Conditions Are Not Fundamental — They Might Be Emergent",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>Conventional physics tells a two-part story about the universe: there are laws of motion, and there are initial conditions. The laws say how things evolve; the initial conditions say where everything started. Together, they determine everything. David Deutsch thinks this framing is deeply misleading — and that constructor theory offers a way to make initial conditions <em>emergent</em> rather than brute facts bolted onto the theory from outside.</p><p>The standard picture runs into trouble almost immediately. We'd like to say the Big Bang was homogeneous — a smooth, symmetric starting point — but it obviously wasn't exactly homogeneous, because the universe today is lumpy with galaxies and voids. So we say it was homogeneous \"modulo quantum fluctuations.\" But those fluctuations aren't really fluctuations in any temporal sense — they're differences between branches of the multiverse. The initial condition in the multiverse is an object we simply don't have a good theory of. Our deepest framework has a gaping hole right where it claims to be most fundamental.</p><p>Constructor theory reframes physics entirely: instead of specifying what <em>will</em> happen given some starting state, it specifies which transformations <em>can</em> and <em>cannot</em> be brought about, regardless of initial conditions. A transformation that can be performed is called a possible task; one that cannot is an impossible task. The laws of physics, in this view, are statements about the boundary between possible and impossible. Deutsch argues that if you get these statements right, the initial conditions may follow as consequences — constrained by the requirement that the universe must be capable of instantiating certain transformations.</p><p>His favorite example is <strong>computational universality</strong>: the empirical fact that physical systems can, in principle, instantiate computers of arbitrary memory and speed. If you elevate this to a fundamental law — the universe must support unbounded computation — then it immediately rules out a perfectly homogeneous Big Bang, since a homogeneous universe stays homogeneous and cannot support complex computation. It also rules out almost all other conceivable initial states. The overwhelming majority of starting configurations are incompatible with a universe that can build computers, create knowledge, and sustain life.</p><p>This inversion of the usual hierarchy is striking. Rather than laws of motion plus initial conditions yielding emergent complexity, constructor theory envisions fundamental principles about what is achievable yielding both dynamics and boundary conditions as emergent consequences. If successful, this would dissolve one of the oldest puzzles in cosmology — why the initial conditions were \"just right\" — by showing they couldn't have been otherwise, given the deeper truths about possible and impossible transformations.</p>",
+  "tags": [
+    "constructor-theory",
+    "initial-conditions",
+    "computational-universality",
+    "cosmology",
+    "laws-of-physics",
+    "emergence"
+  ],
+  "word_count": 424,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

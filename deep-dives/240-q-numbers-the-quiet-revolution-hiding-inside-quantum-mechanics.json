@@ -1,0 +1,21 @@
+{
+  "id": 240,
+  "title": "Q-Numbers: The Quiet Revolution Hiding Inside Quantum Mechanics",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>When Heisenberg first wrote down his equations for quantum mechanics, he didn't even know he was using matrices — other physicists had to tell him. David Deutsch argues we should stop calling them matrices altogether and instead call them <strong>q-numbers</strong>, because what matters isn't the mathematical representation but the physical claim: the variables we observe in the real world aren't simple real numbers. They carry far richer internal structure, and that structure is the engine behind everything we find strange about quantum theory.</p><p>In the Heisenberg picture, observables — positions, momenta, spins — are the fundamental actors. They are q-numbers that evolve in time, while the quantum state sits fixed in the background. This is the mirror image of the Schrödinger picture, where the wave function evolves and the observables stay put. Both give identical predictions, but Deutsch contends the Heisenberg picture makes the origin of measurement outcomes <em>transparent</em>: a measurement yields a q-number with many simultaneous values, and the theory tells you that you will see one, that all of them occur, and that reconciling those facts leads naturally to an Everettian view of reality.</p><p>What makes q-numbers so radical is what they do to entanglement. In the Schrödinger picture, tweaking a magnet near one entangled particle seemingly changes the wave function at the distant partner — inviting confusion about nonlocality. In the Heisenberg picture, the distant observable doesn't change at all. Correlation only becomes meaningful when you bring the two systems together and let them interact. Entanglement is still strange, but the <em>explanation</em> of it finally behaves sensibly.</p><p>Deutsch draws an illuminating historical parallel: the ancient Greeks were disturbed when they discovered irrational numbers, and it took roughly two millennia to build a satisfactory theory of the real number continuum. A single real number, he notes, contains as much information as the entire multiverse. The conceptual leap from integers to real numbers was arguably <em>greater</em> than the leap from real numbers to q-numbers. If we've already made peace with the infinite complexity hidden inside every real-valued measurement, accepting that physical quantities have a slightly richer algebraic structure should not be so wrenching.</p><p>The practical payoff of thinking in q-numbers goes beyond interpretation. Deutsch argues it is only by taking the Heisenberg picture seriously — asking how outcomes come about, not just what the probabilities are — that physicists will spot the problems whose solutions lead to the <em>next</em> theory beyond quantum mechanics. One such problem is already visible: time enters the theory as a classical number whose commutator with the Hamiltonian is zero, meaning time \"can't change\" within the formalism. Progress on this puzzle, such as the Page-Wootters construction, has come precisely from physicists willing to interrogate what the theory's own mathematical objects are telling them.</p>",
+  "tags": [
+    "q-numbers",
+    "heisenberg-picture",
+    "observables",
+    "entanglement",
+    "real-numbers",
+    "quantum-mechanics"
+  ],
+  "word_count": 460,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

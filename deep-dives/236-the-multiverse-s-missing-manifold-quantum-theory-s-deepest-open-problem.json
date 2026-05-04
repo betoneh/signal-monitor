@@ -1,0 +1,21 @@
+{
+  "id": 236,
+  "title": "The Multiverse's Missing Manifold: Quantum Theory's Deepest Open Problem",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>General relativity has a beautiful mathematical backbone: a four-dimensional pseudo-Riemannian manifold equipped with a metric tensor. Einstein's field equations tell you how curvature relates to energy and momentum, but crucially, there is a <strong>mathematical object</strong> — spacetime itself — that those equations describe. You can point to the manifold and say: <em>this</em> is what the theory is about. Quantum mechanics, according to David Deutsch, has no equivalent.</p><p>In the Everettian picture, physicists talk freely about the multiverse — a vast structure of quasi-autonomous branches that decohere from one another, interfere in controlled experiments, and collectively constitute the full reality described by quantum theory. But there is no rigorous mathematical entity called \"the multiverse\" sitting inside the formalism. The theory gives us observables, equations of motion, and Hilbert spaces, but <strong>not the higher-level object from which the approximate decomposition into parallel universes can be derived</strong>.</p><p>This is not a minor bookkeeping issue. Deutsch draws a sharp analogy: you cannot have an approximation without knowing what it is an approximation <em>to</em>. Decoherence explains why branches become approximately autonomous, but the full structure — what branches are, how they relate, and what mathematical entity they partition — remains undefined. Hilbert space alone won't do: it is linear, it doesn't encode spatial locality, and space itself is supposed to be emergent rather than fundamental.</p><p>Some progress has come from unexpected quarters, including ideas within string theory and quantum information about how spacetime geometry can emerge from entanglement structure. But Deutsch considers this the genuinely hard unsolved problem for Everettians — harder than the probability question, harder than making peace with the sheer extravagance of many worlds. Until this mathematical object is found, the multiverse remains a compelling physical picture without a precise mathematical home.</p>",
+  "tags": [
+    "multiverse",
+    "everett-interpretation",
+    "quantum-mechanics",
+    "mathematical-structure",
+    "spacetime",
+    "open-problems"
+  ],
+  "word_count": 292,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

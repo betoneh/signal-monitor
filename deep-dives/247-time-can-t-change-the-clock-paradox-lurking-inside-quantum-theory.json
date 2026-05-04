@@ -1,0 +1,21 @@
+{
+  "id": 247,
+  "title": "Time Can't Change: The Clock Paradox Lurking Inside Quantum Theory",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>Here is a puzzle that hides in plain sight within quantum mechanics: time, the parameter against which everything else changes, is itself a classical number — a c-number whose commutator with the Hamiltonian is zero. By the theory's own rules, that means time cannot change. And yet time manifestly flows; every physical process unfolds with respect to it. How can the thing that measures change itself be incapable of changing?</p><p>Deutsch argues that this paradox becomes visible and tractable in the Heisenberg picture, where observables are the primary dynamical objects and all of them depend on time. In the Schrödinger picture, the problem is buried under what he calls \"general gunk\" — the formalism is convenient for calculation but obscures the conceptual tensions that point toward deeper physics. The Heisenberg picture, by contrast, forces you to confront the status of time head-on.</p><p>Some progress has been made. The Page-Wootters construction, subsequently extended by Sam Kuypers and others, offers a framework in which time emerges from correlations within a static universal state. The idea is that \"the flow of time\" is not fundamental but is recovered as a relational property — clocks inside the universe define time for each other without requiring an external parameter that somehow moves.</p><p>For Deutsch, this is exactly the kind of problem that can only be pursued within a fully realist interpretation of quantum mechanics. If you treat the theory as merely a recipe for predictions, you will never notice the tension, let alone resolve it. A realist framework like Everett's makes the question meaningful and, crucially, makes it possible that an answer could lead to the next revolution in physics.</p>",
+  "tags": [
+    "time",
+    "heisenberg-picture",
+    "page-wootters",
+    "quantum-foundations",
+    "c-numbers",
+    "emergent-time"
+  ],
+  "word_count": 275,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

@@ -1,0 +1,21 @@
+{
+  "id": 231,
+  "title": "Why GRW Collapse and Bohm's Pilot Wave Both Fall Short",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>Among the alternatives to the Everettian interpretation of quantum mechanics, two stand out as genuinely serious proposals rather than mere philosophical glosses: the GRW spontaneous collapse theory and the de Broglie-Bohm pilot wave theory. David Deutsch has sharp criticisms of both, arguing that each fails on its own terms — and that their failures point directly toward the many-worlds framework as the only consistent option.</p><p>The GRW approach modifies the Schrödinger equation so that wave functions spontaneously \"collapse\" or spike at one outcome, with a rate parameter governing how quickly this happens. Deutsch argues that quantum computing delivers a fatal blow to this proposal. As quantum computers scale up, the collapse parameter must be set within an ever-narrowing window: too fast and the quantum computation is destroyed before it completes, too slow and the collapse mechanism extends into human observers without triggering. Every engineering advance in quantum computing shifts this dividing line, turning the parameter into an ad hoc moving target rather than a fundamental constant of nature.</p><p>The de Broglie-Bohm theory fares differently but no better. Unlike GRW, it is a genuinely realist theory — particles have definite positions guided by a \"pilot wave.\" But Deutsch identifies what he calls an original sin: the theory equivocates about whether the pilot wave is physically real. If it is real, then measurements do not find particles where they actually are during interference experiments. If it is not real, then empty grooves in the wave — regions where no particle resides — are somehow pushing real particles around. Either way, the motivation for the theory collapses.</p><p>Deutsch's most striking claim is that de Broglie-Bohm theory is effectively \"Everett with unnecessary complications.\" The empty grooves in the pilot wave already carry all the causal weight of the theory — they do all the physical work. Strip away the redundant particle ontology and you are left with the many-worlds picture. This makes Bohm's theory unique among quantum interpretations: it is not so much wrong as it is Everett in disguise, burdened with an extra element that adds nothing explanatory.</p>",
+  "tags": [
+    "grw-collapse",
+    "de-broglie-bohm",
+    "pilot-wave",
+    "quantum-computing",
+    "many-worlds",
+    "quantum-foundations"
+  ],
+  "word_count": 345,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

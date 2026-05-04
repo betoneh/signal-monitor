@@ -1,0 +1,21 @@
+{
+  "id": 241,
+  "title": "Empty Grooves and Redundant Particles: The Hidden Everett Inside Bohm's Theory",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>The de Broglie-Bohm pilot wave theory is often presented as the realist's safe harbor — a version of quantum mechanics where particles have definite positions, definite velocities, and a guiding wave that steers them through space. It feels classical. It feels comfortable. And David Deutsch argues it is, at bottom, the Everett interpretation wearing an unnecessary costume.</p><p>The crux of the argument turns on a question Deutsch once posed directly to David Bohm at a talk: <em>Is the pilot wave physically real?</em> If you say yes, then the particle is not always measured where it actually is — in an interference experiment, the particle can appear at a location different from its real position. If you say no, then you must accept that <strong>empty grooves</strong> in the wave — regions where the particle is absent — have physical effects, pushing real particles around. Either horn of the dilemma strips the theory of the very motivation that makes it attractive.</p><p>Deutsch presses the point further: if empty grooves are allowed to do physical work, then the particle itself is redundant. Remove it, keep only the wave and its full structure of grooves — occupied and unoccupied — and you recover Everettian quantum mechanics. The pilot wave already contains all the causal machinery. The particle ontology is a fifth wheel bolted onto a vehicle that runs perfectly well without it. In Deutsch's memorable formulation, Bohm's theory is \"Everett with unnecessary complications.\"</p><p>This critique also separates Bohm's theory sharply from the other major alternative to Everett. Collapse theories like GRW genuinely alter the equations and make different empirical predictions in certain regimes. Bohm's theory, by contrast, is not really a rival to Everett at all — it is a reformulation that smuggles the multiverse back in through the pilot wave while pretending it has excised it. For Deutsch, intellectual honesty demands acknowledging the furniture that is already doing the heavy lifting inside your own formalism.</p>",
+  "tags": [
+    "de-broglie-bohm",
+    "pilot-wave",
+    "everett-interpretation",
+    "empty-grooves",
+    "quantum-realism",
+    "many-worlds"
+  ],
+  "word_count": 322,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

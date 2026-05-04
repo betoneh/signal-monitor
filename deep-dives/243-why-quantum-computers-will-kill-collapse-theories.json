@@ -1,0 +1,21 @@
+{
+  "id": 243,
+  "title": "Why Quantum Computers Will Kill Collapse Theories",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>The GRW collapse theory — named after Ghirardi, Rimini, and Weber — is the most disciplined attempt to modify quantum mechanics so that measurement outcomes emerge from the physics itself, without invoking observers or parallel worlds. It adds a new dynamical mechanism: at random intervals, the wave function spontaneously localizes, or \"collapses,\" and this process is governed by a tunable parameter that sets how frequently and how sharply localization occurs. David Deutsch argues that quantum computing will expose a fatal dilemma at the heart of this parameter choice.</p><p>The problem is simple to state. A quantum computer works by maintaining coherent superpositions across a large number of qubits for extended periods. If the GRW collapse parameter is set to trigger localization quickly — fast enough to ensure that human-scale observers always see definite outcomes — then it will also destroy the delicate superpositions that a large quantum computer needs to function. The computation will fail. But if you set the parameter slowly enough to let quantum computers operate, then you've pushed the collapse threshold out past the boundary of macroscopic systems, and your theory no longer explains why <em>observers</em> see definite outcomes.</p><p>What makes this lethal, rather than merely uncomfortable, is that the dividing line shifts with every advance in quantum engineering. Each time someone builds a larger, more coherent quantum computer, the GRW advocate must re-tune the parameter. Deutsch compares this to Lewis Carroll's man who planned to dye his whiskers green and carry a fan large enough to hide them — at some point, you must commit to how green and how large, and every technological improvement makes the previous choice untenable.</p><p>Deutsch concedes a narrow escape route: if large-scale quantum computers turn out to be impossible for some unforeseen reason, a GRW-style theory could survive. But he views this as deeply unlikely, and even then, the theory would still owe an explanation for <em>why</em> the collapse parameter takes the value it does. Without that, GRW remains a patch rather than a theory — a mathematical device that postpones the hard questions rather than answering them.</p>",
+  "tags": [
+    "grw-collapse",
+    "quantum-computing",
+    "wave-function-collapse",
+    "parameter-tuning",
+    "quantum-coherence",
+    "measurement-problem"
+  ],
+  "word_count": 348,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

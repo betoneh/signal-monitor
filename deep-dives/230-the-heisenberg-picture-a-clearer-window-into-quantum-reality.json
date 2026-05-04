@@ -1,0 +1,21 @@
+{
+  "id": 230,
+  "title": "The Heisenberg Picture: A Clearer Window Into Quantum Reality",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>Most physicists learn quantum mechanics through the Schrödinger picture, where a wave function evolves over time and encodes probabilities for measurement outcomes. But David Deutsch argues this framing is actively misleading when it comes to understanding what the theory actually says about reality. The alternative — the Heisenberg picture — takes observables as fundamental and treats the quantum state as a constant. In this view, what changes, what causes outcomes, is the motion of the observables themselves, exactly as in classical physics.</p><p>The key conceptual move is recognizing that physical quantities in the real world are not ordinary real numbers but <em>q-numbers</em> — mathematical objects with richer structure, including non-commutativity. Heisenberg originally expressed these as matrices, though he had never heard of matrices at the time and had to be told by colleagues what he had invented. Deutsch prefers the term q-numbers precisely because matrices are just one representation, and the physics should not be confused with any particular mathematical clothing.</p><p>This reframing dissolves several puzzles that plague the Schrödinger picture. Entanglement, for instance, no longer requires the uncomfortable idea that changing something here instantly alters a wave function over there. In the Heisenberg picture, the q-number on the distant side doesn't change at all — correlation only becomes meaningful when the two systems are brought together and made to interact. The weirdness of entanglement persists, but the <em>explanation</em> for it becomes coherent.</p><p>Deutsch also argues that only by working in this picture can physicists hope to make progress toward whatever theory succeeds quantum mechanics. If your existing framework is mystical — if it tells you not to ask certain questions — then you will never stumble upon the problems whose solutions lead to deeper physics. The Heisenberg picture exposes genuine open questions, like the nature of time as a classical number whose commutator with the Hamiltonian is zero, meaning it formally cannot change even though everything else changes with respect to it.</p>",
+  "tags": [
+    "heisenberg-picture",
+    "q-numbers",
+    "quantum-mechanics",
+    "entanglement",
+    "observables",
+    "david-deutsch"
+  ],
+  "word_count": 323,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}

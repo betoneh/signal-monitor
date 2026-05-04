@@ -1,0 +1,21 @@
+{
+  "id": 235,
+  "title": "Interpretations Are Not Interpretations — They're Rival Theories",
+  "source": {
+    "kb_entry": "what-is-quantum-mechanics-really-telling-us-david-deutsch-brian-greene-world-science-festival",
+    "original": "What Is Quantum Mechanics Really Telling Us? — David Deutsch & Brian Greene | World Science Festival",
+    "url": "https://youtu.be/Af5LICjFIBc"
+  },
+  "body_html": "<p>One of the most persistent misnomers in physics is the phrase <em>interpretations of quantum mechanics</em>. The word suggests these are just different glosses on the same underlying formalism — stylistic preferences that don't affect the science. But as David Deutsch argues, borrowing the conviction of his former supervisor Bryce DeWitt, these so-called interpretations are actually <strong>distinct theories with different ontologies</strong>. They disagree on what exists, what happens during measurement, and what the mathematics refers to in the physical world.</p><p>The reason the terminology persists is cultural. Generations of physicists have been trained under the shadow of Niels Bohr's Copenhagen framework, which effectively declared certain questions off-limits. Students learn to calculate expectation values and transition amplitudes without ever asking what physical reality those quantities describe. The result is what Deutsch's other mentor, Dennis Sciama, lamented: when it comes to quantum foundations, <em>the standard of argument drops to zero</em>.</p><p>This isn't merely a philosophical quibble. If you treat the different approaches — Copenhagen, GRW collapse, de Broglie–Bohm, Everett — as mere window dressing, you lose the ability to ask which one is <strong>correct</strong>. And correctness matters: these theories make different claims about the structure of reality, and in some cases (like GRW versus Everett in the presence of large-scale quantum computers) they will eventually make different empirical predictions. Calling them all \"interpretations\" papers over exactly the distinctions that physics should be resolving.</p><p>The deeper issue is about the purpose of physics itself. Deutsch is blunt: the point of physics is not to track down the sixth decimal place of a prediction. It is to explain the seen in terms of the unseen — to articulate what is actually happening in the world that produces the phenomena we observe. A framework that refuses to answer that question isn't an interpretation. It's an abdication.</p>",
+  "tags": [
+    "quantum-mechanics",
+    "interpretations",
+    "copenhagen",
+    "everett-interpretation",
+    "philosophy-of-physics",
+    "realism"
+  ],
+  "word_count": 304,
+  "used_dates": [],
+  "created_date": "2026-05-03"
+}
