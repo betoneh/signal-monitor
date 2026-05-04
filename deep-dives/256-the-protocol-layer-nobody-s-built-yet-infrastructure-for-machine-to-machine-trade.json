@@ -1,0 +1,22 @@
+{
+  "id": 256,
+  "title": "The Protocol Layer Nobody's Built Yet: Infrastructure for Machine-to-Machine Trade",
+  "source": {
+    "kb_entry": "the-open-agentic-commerce-stack-a16z-crypto-eddy-lazzarin-sam-ragsdale-noah-levine-robert-hackett",
+    "original": "The Open Agentic Commerce Stack – a16z crypto (Eddy Lazzarin, Sam Ragsdale, Noah Levine, Robert Hackett)",
+    "url": "https://x.com/a16zcrypto/status/2048811687864901801?s=46&t=OHfXTbjdV4tiD3nnG1lsTw"
+  },
+  "body_html": "<p>Today's internet commerce stack was engineered for a specific user: a human with eyeballs, a browser, and a credit card. Every layer — from ad targeting to checkout UX to fraud detection — assumes a person is on the other end. When the primary economic actor becomes an AI agent, that entire stack doesn't just need updates. It needs replacement at the protocol level.</p><p>The concept of an open agentic commerce stack addresses this gap head-on. The idea is a set of permissionless, interoperable protocols purpose-built for machine-to-machine transactions. Think of it as the TCP/IP of agent commerce: a shared foundation that any agent, regardless of its creator, can use to discover services, negotiate terms, authorize payments, and verify fulfillment — all programmatically.</p><p>Programmability is the critical design requirement. Agents need payment rails that can be embedded directly into code, triggered by conditions, and settled instantly. Traditional payment networks — with their batch processing, human-oriented authentication, and intermediary fees — are architecturally hostile to this use case. <strong>Blockchain-native rails, by contrast, offer exactly the properties agents need:</strong> 24/7 availability, atomic settlement, and composable smart contracts that can encode arbitrarily complex deal logic.</p><p>The \"open\" qualifier is just as important as the \"agentic\" one. Without open standards, every major AI platform will build its own closed commerce silo, and agents from different ecosystems won't be able to transact with each other. Interoperability at the protocol layer is what prevents fragmentation and unlocks network effects across the entire agent economy.</p><p>This infrastructure doesn't exist yet in mature form, which is precisely why the design decisions made now will have outsized long-term consequences. The protocols that get adopted early will become the default plumbing — and the teams building them are effectively laying the commercial foundation of the next internet.</p>",
+  "tags": [
+    "open-protocols",
+    "infrastructure",
+    "machine-to-machine",
+    "blockchain-rails",
+    "interoperability",
+    "protocol-design",
+    "agentic-commerce"
+  ],
+  "word_count": 297,
+  "used_dates": [],
+  "created_date": "2026-05-04"
+}

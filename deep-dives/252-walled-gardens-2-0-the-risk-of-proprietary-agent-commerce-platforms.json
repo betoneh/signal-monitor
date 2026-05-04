@@ -1,0 +1,22 @@
+{
+  "id": 252,
+  "title": "Walled Gardens 2.0: The Risk of Proprietary Agent Commerce Platforms",
+  "source": {
+    "kb_entry": "the-open-agentic-commerce-stack-a16z-crypto-eddy-lazzarin-sam-ragsdale-noah-levine-robert-hackett",
+    "original": "The Open Agentic Commerce Stack – a16z crypto (Eddy Lazzarin, Sam Ragsdale, Noah Levine, Robert Hackett)",
+    "url": "https://x.com/a16zcrypto/status/2048811687864901801?s=46&t=OHfXTbjdV4tiD3nnG1lsTw"
+  },
+  "body_html": "<p>One of the most pointed warnings embedded in the open agentic commerce framework is about history repeating itself. The current internet consolidated around a handful of dominant platforms — Google, Amazon, Apple, Meta — that control access, data, and monetization within their ecosystems. If agent commerce follows the same trajectory, a few companies could end up gatekeeping how AI agents discover, negotiate, and pay for services.</p><p>The dynamics that created today's walled gardens would be amplified in an agent-driven world. A proprietary agent-commerce platform could lock in developers by controlling the discovery layer (how agents find services), the trust layer (how agents verify counterparties), and the payment layer (how agents settle transactions). Control any one of these chokepoints and you own the economics of the machine economy.</p><p>This is why the emphasis on <em>open</em> in the proposed stack is not decorative — it's the core architectural argument. Interoperable protocols that any agent can plug into, regardless of who built it or which platform it runs on, are positioned as the only way to avoid re-centralizing the internet under a new set of gatekeepers.</p><p>The stakes are arguably higher than in the human internet era. Agents will transact at volumes and speeds that dwarf human activity, meaning the rent-extraction opportunities for platform owners would be enormous. An open protocol layer that commoditizes the commerce infrastructure is the proposed countermeasure — ensuring that value accrues to the agents and their human principals, not to the intermediaries.</p>",
+  "tags": [
+    "walled-gardens",
+    "open-protocols",
+    "platform-risk",
+    "agentic-commerce",
+    "decentralization",
+    "web3",
+    "interoperability"
+  ],
+  "word_count": 244,
+  "used_dates": [],
+  "created_date": "2026-05-04"
+}

@@ -1,0 +1,21 @@
+{
+  "id": 255,
+  "title": "Agents That Shop: Why Autonomous Spending Power Changes Everything",
+  "source": {
+    "kb_entry": "the-open-agentic-commerce-stack-a16z-crypto-eddy-lazzarin-sam-ragsdale-noah-levine-robert-hackett",
+    "original": "The Open Agentic Commerce Stack – a16z crypto (Eddy Lazzarin, Sam Ragsdale, Noah Levine, Robert Hackett)",
+    "url": "https://x.com/a16zcrypto/status/2048811687864901801?s=46&t=OHfXTbjdV4tiD3nnG1lsTw"
+  },
+  "body_html": "<p>AI agents have quietly reached a tipping point: they can now perform nearly any computer-based task a human can. Browsing, comparing prices, filling out forms, negotiating terms — all of it is within reach. The logical next frontier isn't just task completion, it's <em>transaction completion</em>. When agents begin spending money on behalf of users, the entire commercial layer of the internet faces a structural reckoning.</p><p>This isn't a matter of bolting a payment button onto a chatbot. Autonomous commerce means agents independently deciding when, where, and how to allocate budget across services and goods. They'll negotiate SaaS subscriptions, purchase API access, procure cloud compute, and settle micro-transactions — all without a human clicking \"confirm.\" The implications ripple outward: pricing models, checkout flows, and merchant interfaces designed for human cognition become irrelevant friction.</p><p>The speed at which this shift is materializing matters. Agent capabilities aren't advancing on a decade-long timeline; they're improving quarter over quarter. Frameworks for agent-to-agent negotiation and programmable wallets are already being prototyped. The gap between \"agents that assist\" and \"agents that transact\" is closing faster than most commerce infrastructure is prepared for.</p><p><strong>What makes this moment different from prior automation waves is scope.</strong> Previous bots handled narrow tasks — scraping data, scheduling posts. Today's agents operate with general-purpose reasoning, which means their commercial footprint won't be confined to a single vertical. Every category of online spending is potentially in play, from digital goods to physical logistics coordination.</p><p>For builders and investors, the signal is clear: the companies and protocols that make it easy for agents to spend programmatically — without gatekeepers, without human-centric UX assumptions — will capture an outsized share of a rapidly emerging machine economy.</p>",
+  "tags": [
+    "ai-agents",
+    "autonomous-commerce",
+    "machine-economy",
+    "agent-spending",
+    "programmable-wallets",
+    "digital-transactions"
+  ],
+  "word_count": 281,
+  "used_dates": [],
+  "created_date": "2026-05-04"
+}

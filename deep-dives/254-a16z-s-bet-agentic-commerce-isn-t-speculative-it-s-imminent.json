@@ -1,0 +1,22 @@
+{
+  "id": 254,
+  "title": "a16z's Bet: Agentic Commerce Isn't Speculative — It's Imminent",
+  "source": {
+    "kb_entry": "the-open-agentic-commerce-stack-a16z-crypto-eddy-lazzarin-sam-ragsdale-noah-levine-robert-hackett",
+    "original": "The Open Agentic Commerce Stack – a16z crypto (Eddy Lazzarin, Sam Ragsdale, Noah Levine, Robert Hackett)",
+    "url": "https://x.com/a16zcrypto/status/2048811687864901801?s=46&t=OHfXTbjdV4tiD3nnG1lsTw"
+  },
+  "body_html": "<p>The framing of the open agentic commerce stack by a16z crypto is notably urgent. This isn't positioned as a ten-year forecast or a thought experiment about what AI <em>might</em> someday do. The argument is that AI agents have already reached near-parity with humans for computer-based tasks, and the commercial implications are a design problem to solve now, not later.</p><p>By assembling a cross-functional team — Eddy Lazzarin (CTO), Sam Ragsdale, Noah Levine, and Robert Hackett spanning research, engineering, and editorial — a16z is signaling institutional conviction. This isn't a single partner's blog post; it's a coordinated thesis statement that reflects the firm's investment posture. They're looking for and funding the protocols and companies that will form this commerce layer.</p><p>The timing argument hinges on a simple observation: capability is outpacing infrastructure. Agents can already browse, compare, summarize, and make decisions. What they can't easily do is spend money, enter contracts, or settle disputes — because the infrastructure for autonomous machine commerce doesn't exist yet. That gap between agent capability and commercial infrastructure is the opportunity a16z is flagging.</p><p>For builders, the message is actionable: the protocol-level design decisions being made today — around payment standards, agent identity, service discovery, and trust frameworks — will determine the architecture of the machine economy for decades. Waiting for the agent revolution to fully arrive before building the commerce layer means arriving too late. The stack needs to be open, interoperable, and ready before the agents are.</p>",
+  "tags": [
+    "a16z",
+    "agentic-commerce",
+    "autonomous-agents",
+    "crypto",
+    "open-protocols",
+    "infrastructure",
+    "venture-capital"
+  ],
+  "word_count": 243,
+  "used_dates": [],
+  "created_date": "2026-05-04"
+}

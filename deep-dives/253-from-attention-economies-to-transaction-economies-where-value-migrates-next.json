@@ -1,0 +1,21 @@
+{
+  "id": 253,
+  "title": "From Attention Economies to Transaction Economies: Where Value Migrates Next",
+  "source": {
+    "kb_entry": "the-open-agentic-commerce-stack-a16z-crypto-eddy-lazzarin-sam-ragsdale-noah-levine-robert-hackett",
+    "original": "The Open Agentic Commerce Stack – a16z crypto (Eddy Lazzarin, Sam Ragsdale, Noah Levine, Robert Hackett)",
+    "url": "https://x.com/a16zcrypto/status/2048811687864901801?s=46&t=OHfXTbjdV4tiD3nnG1lsTw"
+  },
+  "body_html": "<p>The shift from human-driven to agent-driven internet activity doesn't just change how commerce happens — it fundamentally redistributes where value accumulates across the technology stack. Today, the most valuable layer is attention aggregation: platforms that capture eyeballs command the highest margins because they sit between advertisers and consumers. In an agent-transaction economy, the valuable layers shift dramatically.</p><p>When agents handle commerce, the premium moves to execution quality — who can find the best price, negotiate the best terms, and settle transactions most efficiently. Discovery becomes algorithmic rather than visual, negotiation becomes programmatic rather than persuasive, and settlement becomes instantaneous rather than batched. Each of these shifts creates new value pools and renders old ones obsolete.</p><p>Infrastructure providers — those building the payment rails, identity protocols, and service registries that agents rely on — are positioned to capture significant value in this new landscape. Similarly, data providers who can offer agents real-time, machine-readable information gain leverage that today's SEO-optimized content farms never could. The entire supply chain of internet value gets re-sorted.</p><p>This redistribution has profound implications for incumbents. Companies whose moats are built on human behavioral patterns — habitual app-opening, brand loyalty, UI stickiness — may find those advantages evaporating as agents make decisions based purely on price, quality, and programmatic trust signals. The winners in the agent economy will be those who optimize for machine legibility, not human persuasion.</p><p>The transition won't be instantaneous, but the directional bet is clear: as agents consume an increasing share of internet commerce, the economic center of gravity will migrate from attention capture to transaction execution, and the infrastructure stack needs to be ready.</p>",
+  "tags": [
+    "attention-economy",
+    "value-redistribution",
+    "machine-economy",
+    "agentic-commerce",
+    "internet-business-models",
+    "infrastructure"
+  ],
+  "word_count": 271,
+  "used_dates": [],
+  "created_date": "2026-05-04"
+}

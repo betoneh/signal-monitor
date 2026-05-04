@@ -1,0 +1,21 @@
+{
+  "id": 250,
+  "title": "The Internet's Business Model Was Built for Eyeballs — Agents Don't Have Any",
+  "source": {
+    "kb_entry": "the-open-agentic-commerce-stack-a16z-crypto-eddy-lazzarin-sam-ragsdale-noah-levine-robert-hackett",
+    "original": "The Open Agentic Commerce Stack – a16z crypto (Eddy Lazzarin, Sam Ragsdale, Noah Levine, Robert Hackett)",
+    "url": "https://x.com/a16zcrypto/status/2048811687864901801?s=46&t=OHfXTbjdV4tiD3nnG1lsTw"
+  },
+  "body_html": "<p>The entire monetization architecture of the modern internet — display ads, clickthrough rates, subscription paywalls, engagement-optimized feeds — was designed around one assumption: a human is on the other side of the screen. Every pixel of UX, every A/B test, every conversion funnel presupposes a person with attention to capture and a wallet to open. That assumption is about to break.</p><p>As AI agents approach full capability parity with humans for computer-based tasks, the browsing, comparing, and purchasing that drives internet commerce will increasingly be performed by machines. Agents don't see banner ads. They don't impulse-buy. They don't get pulled into engagement loops. The entire attention economy — the foundation on which Google, Meta, and the modern web were built — becomes structurally irrelevant when the primary \"user\" is software.</p><p>This isn't a marginal shift; it's a category-level disruption of how value flows online. Subscriptions designed to gate human access lose their logic when an agent can negotiate terms programmatically. Ad-supported free tiers make no sense when there's no human to advertise to. The business models that currently generate trillions of dollars in annual revenue are facing an architectural mismatch with the next wave of internet activity.</p><p>The implication is that new monetization primitives need to emerge — ones native to machine-to-machine interaction. Micropayments per API call, programmatic negotiation of service terms, and usage-based billing settled in real time are all candidates. The companies and protocols that figure out this new commerce layer will define the next era of the internet economy.</p>",
+  "tags": [
+    "ai-agents",
+    "internet-business-models",
+    "attention-economy",
+    "agentic-commerce",
+    "advertising-disruption",
+    "machine-economy"
+  ],
+  "word_count": 252,
+  "used_dates": [],
+  "created_date": "2026-05-04"
+}

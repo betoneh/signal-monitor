@@ -1,0 +1,22 @@
+{
+  "id": 251,
+  "title": "Why Crypto Rails Are the Default Plumbing for Agent-to-Agent Payments",
+  "source": {
+    "kb_entry": "the-open-agentic-commerce-stack-a16z-crypto-eddy-lazzarin-sam-ragsdale-noah-levine-robert-hackett",
+    "original": "The Open Agentic Commerce Stack – a16z crypto (Eddy Lazzarin, Sam Ragsdale, Noah Levine, Robert Hackett)",
+    "url": "https://x.com/a16zcrypto/status/2048811687864901801?s=46&t=OHfXTbjdV4tiD3nnG1lsTw"
+  },
+  "body_html": "<p>When AI agents need to transact autonomously — paying for services, purchasing data, settling micro-negotiations — they need payment infrastructure that matches their operational characteristics: programmable, permissionless, and capable of real-time settlement without human intervention. Traditional financial rails, built around identity verification, batch processing, and institutional gatekeeping, are a poor fit.</p><p>Blockchain-based payment systems offer a compelling alternative precisely because they were designed for exactly this kind of interaction. Smart contracts can encode complex payment logic — escrow, conditional release, split payments — that agents can invoke without needing a bank account, a credit card, or a human co-signer. The programmability is native, not bolted on.</p><p>Permissionlessness is the other critical property. An AI agent spun up by a small developer should be able to transact with an agent deployed by a Fortune 500 company without either party needing to pre-negotiate access to a shared payment platform. Open crypto rails provide this by default — any entity with a wallet address can send and receive value, regardless of identity or institutional affiliation.</p><p>This positions crypto infrastructure not as a speculative asset class but as essential plumbing for the machine economy. The same properties that made blockchain awkward for consumer payments — no chargebacks, irreversibility, pseudonymity — become features rather than bugs when the transacting parties are software agents operating at machine speed.</p><p>The a16z crypto team's framing is deliberate: if agent commerce scales on closed, proprietary payment platforms, it risks recreating the very walled-garden dynamics that have plagued the current internet. Open, interoperable crypto protocols are presented as the structural antidote.</p>",
+  "tags": [
+    "crypto",
+    "payments",
+    "blockchain-infrastructure",
+    "ai-agents",
+    "permissionless",
+    "smart-contracts",
+    "machine-economy"
+  ],
+  "word_count": 261,
+  "used_dates": [],
+  "created_date": "2026-05-04"
+}

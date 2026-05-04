@@ -1,0 +1,22 @@
+{
+  "id": 257,
+  "title": "Value Redistribution at Scale: Who Wins and Loses When Agents Replace Clicks",
+  "source": {
+    "kb_entry": "the-open-agentic-commerce-stack-a16z-crypto-eddy-lazzarin-sam-ragsdale-noah-levine-robert-hackett",
+    "original": "The Open Agentic Commerce Stack – a16z crypto (Eddy Lazzarin, Sam Ragsdale, Noah Levine, Robert Hackett)",
+    "url": "https://x.com/a16zcrypto/status/2048811687864901801?s=46&t=OHfXTbjdV4tiD3nnG1lsTw"
+  },
+  "body_html": "<p>The internet's dominant monetization engine — advertising — is predicated on one thing: human attention. Every impression, click, and scroll is a unit of value extracted from a person's finite cognitive bandwidth. When AI agents become the primary interface between users and the internet, that entire value chain breaks. Agents don't see banner ads. They don't impulse-buy. They don't get retargeted.</p><p>This isn't a marginal disruption to digital advertising; it's a <em>category-level</em> threat. If agents handle product discovery, price comparison, and purchasing, then the multi-hundred-billion-dollar attention economy starts hemorrhaging value. The companies that currently sit at the chokepoints of human attention — search engines, social platforms, ad networks — face a world where their core asset, eyeball traffic, is increasingly intermediated by machines that are immune to persuasion.</p><p><strong>Where does that value migrate?</strong> The emerging thesis is that it flows toward transaction infrastructure. In an agent-driven economy, value accrues not to whoever captures attention but to whoever facilitates the transaction. Protocol fees, settlement layers, identity verification for agents, reputation systems, escrow mechanisms — these become the new monetization surfaces.</p><p>This redistribution creates a new competitive landscape. Incumbents with massive ad revenue have every incentive to resist or co-opt the shift, likely by building proprietary agent platforms that keep commerce within their ecosystems. But if open, permissionless protocols gain traction first, the value could distribute far more broadly — rewarding infrastructure builders, open-source contributors, and decentralized network operators rather than a handful of platform monopolies.</p><p>The stakes are enormous and the window for architectural influence is narrow. The choices made now about whether agent commerce runs on open or closed rails will determine whether the next era of the internet repeats the concentration patterns of the last one — or breaks them.</p>",
+  "tags": [
+    "value-migration",
+    "attention-economy",
+    "advertising-disruption",
+    "transaction-infrastructure",
+    "platform-monopolies",
+    "open-networks",
+    "agent-economy"
+  ],
+  "word_count": 291,
+  "used_dates": [],
+  "created_date": "2026-05-04"
+}
