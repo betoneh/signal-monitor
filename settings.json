@@ -98,7 +98,9 @@
   "kb_ingest": {
     "url": "https://x.com/a16zcrypto/status/2048811687864901801?s=46&t=OHfXTbjdV4tiD3nnG1lsTw",
     "deep_dives_count": 8,
-    "model": "anthropic/claude-opus-4-6"
+    "model": "anthropic/claude-opus-4-6",
+    "status": "processing",
+    "claimed_at": "2026-05-04T15:00:02.362765+00:00"
   },
   "kb_existing_dd": {
     "entry": "",
