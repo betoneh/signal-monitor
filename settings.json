@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-03T17:56:34.351Z",
+  "updated_at": "2026-05-04T06:23:52.766Z",
   "model": "anthropic/claude-opus-4-6",
   "available_models": [
     {
@@ -96,8 +96,8 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "",
-    "deep_dives_count": 0,
+    "url": "https://x.com/a16zcrypto/status/2048811687864901801?s=46&t=OHfXTbjdV4tiD3nnG1lsTw",
+    "deep_dives_count": 8,
     "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
