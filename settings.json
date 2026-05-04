@@ -96,11 +96,9 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "https://x.com/daviddeutschoxf/status/2050502208857272569?s=46&t=OHfXTbjdV4tiD3nnG1lsTw",
-    "deep_dives_count": 20,
-    "model": "anthropic/claude-opus-4-6",
-    "status": "processing",
-    "claimed_at": "2026-05-04T05:10:42.325386+00:00"
+    "url": "",
+    "deep_dives_count": 0,
+    "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
     "entry": "",
