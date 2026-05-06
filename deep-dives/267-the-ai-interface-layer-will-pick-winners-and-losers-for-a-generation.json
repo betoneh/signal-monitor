@@ -1,0 +1,21 @@
+{
+  "id": 267,
+  "title": "The AI Interface Layer Will Pick Winners and Losers for a Generation",
+  "source": {
+    "kb_entry": "nothing-ever-happens-is-over-the-fully-interconnected-startup-naval-podcast",
+    "original": "'Nothing Ever Happens' Is Over: The Fully Interconnected Startup — Naval Podcast",
+    "url": "https://x.com/navalpodcast/status/2051455619358712167?s=46&t=OHfXTbjdV4tiD3nnG1lsTw"
+  },
+  "body_html": "<p>Naval identifies AI interfaces as the next critical inflection point — not the models themselves, but <em>how humans interact with them</em>. This distinction matters enormously. The raw capability of foundation models is increasingly commoditized; what isn't commoditized is the design of the interaction layer that determines whether a user gets 10x leverage or gets overwhelmed by noise.</p><p>Think of it as the browser moment for AI. In the early web, the underlying protocols were open and available to everyone. But the companies that built the best interfaces — the browsers, the search engines, the social platforms — captured the lion's share of value. AI is following the same pattern. The model is the protocol; the interface is the product.</p><p>This has profound implications for startups. Competing on model quality against well-funded labs is a losing proposition for most teams. But competing on <strong>interface design, workflow integration, and domain-specific UX</strong> is wide open. The teams that understand how knowledge workers, scientists, or operators actually think and work — and build AI interactions around those patterns — will define the next generation of software.</p><p>There's a darker dimension here too. AI interfaces also determine who gets left behind. If the primary way to harness AI requires technical fluency or specific cultural context, the gap between AI-literate and AI-illiterate populations will widen dramatically. The interface layer isn't just a business opportunity — it's a power structure.</p><p>The race to define how humanity relates to AI systems is happening now, largely in the open, and largely without regulatory guidance. Whoever sets the patterns — whether through consumer products, enterprise tools, or operating system integrations — will shape work, education, and power distribution for at least a decade. This is not a sideshow. It's the main event.</p>",
+  "tags": [
+    "ai-interfaces",
+    "human-ai-interaction",
+    "startups",
+    "power-structures",
+    "ux-design",
+    "technology-trends"
+  ],
+  "word_count": 293,
+  "used_dates": [],
+  "created_date": "2026-05-05"
+}
