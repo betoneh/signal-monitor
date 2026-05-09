@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-08T20:26:56.768Z",
+  "updated_at": "2026-05-09T03:35:46.574Z",
   "model": "anthropic/claude-opus-4-6",
   "available_models": [
     {
@@ -96,11 +96,9 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "https://www.darioamodei.com/essay/machines-of-loving-grace",
+    "url": "https://x.com/jayagup10/status/2052870394093408558?s=46&t=OHfXTbjdV4tiD3nnG1lsTw",
     "deep_dives_count": 10,
-    "model": "anthropic/claude-opus-4-6",
-    "status": "processing",
-    "claimed_at": "2026-05-09T03:00:01.738156+00:00"
+    "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
     "entry": "",
