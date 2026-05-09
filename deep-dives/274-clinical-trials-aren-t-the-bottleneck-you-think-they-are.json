@@ -1,0 +1,21 @@
+{
+  "id": 274,
+  "title": "Clinical Trials Aren't the Bottleneck You Think They Are",
+  "source": {
+    "kb_entry": "machines-of-loving-grace-dario-amodei",
+    "original": "Machines of Loving Grace — Dario Amodei",
+    "url": "https://www.darioamodei.com/essay/machines-of-loving-grace"
+  },
+  "body_html": "<p>A common objection to the idea of AI radically accelerating medicine is that clinical trials impose an irreducible speed limit. No matter how smart the AI, the argument goes, you still need years of human testing before any treatment reaches patients. But this framing conflates two very different situations: trials for drugs that barely work, and trials for drugs that work spectacularly well.</p><p>The vast majority of today's clinical trial slowness stems from evaluating treatments with marginal effect sizes. The average cancer drug extends survival by a few months while producing significant side effects that require enormous, statistically powered studies to measure. When treatments have large, unambiguous effects, the system moves much faster. mRNA vaccines for COVID-19 were approved in roughly nine months—and there's a strong argument they should have been approved in two.</p><p>If AI-driven drug discovery produces treatments with dramatically larger effect sizes—which is plausible given the quality of biological insights that better-than-human intelligence might generate—then the clinical trial bottleneck largely dissolves. Accelerated approval tracks already exist for breakthrough therapies, and regulators have historically responded to genuinely transformative treatments with appropriate urgency.</p><p>Beyond faster approval of better drugs, AI may also reduce the <em>need</em> for traditional trials altogether. Better preclinical models—more accurate cell cultures, animal models, or even sophisticated biological simulations—could provide higher-confidence predictions about human outcomes before any patient is enrolled. This is especially critical for diseases like aging, where outcomes play out over decades and waiting for natural endpoints is impractical.</p><p>None of this means clinical trials will disappear or that regulatory reform isn't needed. But the narrative that human biology imposes a hard decade-long wall on medical progress misses a crucial nuance: most of that wall is an artifact of mediocre drugs, not an intrinsic feature of the approval process.</p>",
+  "tags": [
+    "clinical-trials",
+    "drug-development",
+    "regulatory-reform",
+    "ai-medicine",
+    "effect-sizes",
+    "accelerated-approval"
+  ],
+  "word_count": 295,
+  "used_dates": [],
+  "created_date": "2026-05-08"
+}

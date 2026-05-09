@@ -1,0 +1,21 @@
+{
+  "id": 275,
+  "title": "The Scaling Hypothesis Should Have Already Revolutionized Neuroscience",
+  "source": {
+    "kb_entry": "machines-of-loving-grace-dario-amodei",
+    "original": "Machines of Loving Grace — Dario Amodei",
+    "url": "https://www.darioamodei.com/essay/machines-of-loving-grace"
+  },
+  "body_html": "<p>One of the most underappreciated implications of modern AI research is what it reveals about biological brains. The scaling hypothesis—the observation that simple learning objectives combined with large amounts of data and compute can produce extraordinarily complex intelligent behavior—is not just an engineering insight. It's arguably a high-level explanation of how intelligence works, period, including the intelligence that evolved in biological neural networks.</p><p>Yet the neuroscience community has been slow to absorb this lesson. Before the scaling era, many researchers focused on what now appear to be the wrong questions about learning: trying to reverse-engineer specific computational mechanisms rather than understanding the objective functions and architectural biases that give rise to emergent intelligence. The idea that you don't need to understand every circuit to understand the system—that the right training signal plus the right architecture does most of the work—should have reshaped the field's research agenda.</p><p>AI interpretability research offers an even more direct bridge. Although biological neurons communicate through spikes and neurotransmitters in ways that differ superficially from artificial neurons, the core question is identical: how do distributed networks of simple units performing combined linear and nonlinear operations work together to produce complex computation? A computational mechanism recently discovered by interpretability researchers studying artificial networks was subsequently found in the brains of mice, suggesting the transfer of insights between the two domains is not just possible but already happening.</p><p>Powerful AI systems could dramatically accelerate this cross-pollination. They could apply interpretability techniques to both artificial and biological neural networks simultaneously, drawing connections that human researchers might take years to notice. They could also design novel experiments—combining optogenetics, neural probes, and advanced imaging—guided by hypotheses derived from their understanding of how their own artificial cognition works.</p><p>The upshot is that AI may not just be a tool <em>for</em> neuroscience but a source of foundational insight <em>about</em> neuroscience. Understanding how trained artificial networks compute should illuminate how biological brains compute, blurring the boundary between AI research and brain science in ways that could unlock rapid progress on mental illness, cognitive enhancement, and our basic understanding of the mind.</p>",
+  "tags": [
+    "neuroscience",
+    "scaling-hypothesis",
+    "interpretability",
+    "ai-research",
+    "computational-neuroscience",
+    "mental-health"
+  ],
+  "word_count": 347,
+  "used_dates": [],
+  "created_date": "2026-05-08"
+}

@@ -1,0 +1,21 @@
+{
+  "id": 269,
+  "title": "Marginal Returns to Intelligence: The Framework That Predicts Where AI Will Transform Fastest",
+  "source": {
+    "kb_entry": "machines-of-loving-grace-dario-amodei",
+    "original": "Machines of Loving Grace — Dario Amodei",
+    "url": "https://www.darioamodei.com/essay/machines-of-loving-grace"
+  },
+  "body_html": "<p>Economists have long analyzed production through the lens of limiting factors—labor, capital, land. A powerful new analytical frame applies the same logic to intelligence itself: in any given domain, how much does <em>being smarter</em> actually help, and what are the binding constraints that even superhuman intelligence cannot bypass? This concept of <strong>marginal returns to intelligence</strong> turns out to be the single most useful tool for predicting where AI will have outsized impact and where it will disappoint.</p><p>Five key bottlenecks compete with intelligence as the limiting factor. The <em>speed of the physical world</em> means that cell cultures still take days and animal experiments take months, regardless of how brilliant the researcher. <em>Data scarcity</em> means that in fields like particle physics, no amount of cleverness substitutes for measurements that don't yet exist. <em>Intrinsic complexity</em>—chaotic systems, for instance—resists prediction even from superintelligent agents. <em>Human and regulatory constraints</em> impose friction through laws, institutional inertia, and social resistance. And <em>physical laws</em> set absolute ceilings that no intelligence can breach.</p><p>The crucial insight, however, is that these bottlenecks are not static. Over time, intelligence can <em>route around</em> many of them: developing better in-vitro models that replace slow animal experiments, building new instruments to collect missing data, or reforming regulatory processes. What starts as a heavily constrained system gradually loosens as intelligence finds creative workarounds. The bottlenecks don't fully dissolve—physical laws remain absolute—but the trajectory is one of accelerating returns.</p><p>This framework predicts that biology and drug discovery, where progress is driven by rare conceptual breakthroughs made by small teams, will see enormous acceleration. Fields constrained primarily by data collection or political consensus will move more slowly. And domains governed by irreducible physical processes will see the least dramatic speedups. For anyone trying to anticipate AI's real-world impact, asking \"what's the marginal return to intelligence here?\" is far more productive than asking \"how smart is the AI?\"</p>",
+  "tags": [
+    "marginal-returns",
+    "intelligence-bottleneck",
+    "economics",
+    "ai-impact",
+    "factors-of-production",
+    "acceleration"
+  ],
+  "word_count": 312,
+  "used_dates": [],
+  "created_date": "2026-05-08"
+}
