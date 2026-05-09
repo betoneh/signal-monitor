@@ -16,6 +16,12 @@
     "electrons-to-tokens"
   ],
   "word_count": 379,
-  "used_dates": [],
-  "created_date": "2026-04-20"
+  "used_dates": [
+    "2026-05-09"
+  ],
+  "created_date": "2026-04-20",
+  "read_dates": [
+    "2026-05-09"
+  ],
+  "last_read_at": "2026-05-09T04:27:53.379Z"
 }

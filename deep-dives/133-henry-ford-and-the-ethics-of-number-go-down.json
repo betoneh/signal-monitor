@@ -15,6 +15,12 @@
     "service"
   ],
   "word_count": 189,
-  "used_dates": [],
-  "created_date": "2026-04-18"
+  "used_dates": [
+    "2026-05-09"
+  ],
+  "created_date": "2026-04-18",
+  "read_dates": [
+    "2026-05-09"
+  ],
+  "last_read_at": "2026-05-09T04:18:26.156Z"
 }
