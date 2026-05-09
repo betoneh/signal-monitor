@@ -98,7 +98,9 @@
   "kb_ingest": {
     "url": "https://www.darioamodei.com/essay/machines-of-loving-grace",
     "deep_dives_count": 10,
-    "model": "anthropic/claude-opus-4-6"
+    "model": "anthropic/claude-opus-4-6",
+    "status": "processing",
+    "claimed_at": "2026-05-09T03:00:01.738156+00:00"
   },
   "kb_existing_dd": {
     "entry": "",
