@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-09T03:35:46.574Z",
+  "updated_at": "2026-05-09T14:00:03Z",
   "model": "anthropic/claude-opus-4-6",
   "available_models": [
     {
@@ -93,7 +93,8 @@
     }
   ],
   "model_onboarding": {
-    "request": ""
+    "request": "",
+    "updated_at": "2026-05-09T14:00:03Z"
   },
   "kb_ingest": {
     "url": "https://x.com/jayagup10/status/2052870394093408558?s=46&t=OHfXTbjdV4tiD3nnG1lsTw",
