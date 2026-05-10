@@ -16,6 +16,12 @@
     "data-center-economics"
   ],
   "word_count": 307,
-  "used_dates": [],
-  "created_date": "2026-04-20"
+  "used_dates": [
+    "2026-05-10"
+  ],
+  "created_date": "2026-04-20",
+  "read_dates": [
+    "2026-05-10"
+  ],
+  "last_read_at": "2026-05-10T13:48:11.146Z"
 }
