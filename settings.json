@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-09T14:00:03Z",
+  "updated_at": "2026-05-11T02:38:01.963Z",
   "model": "anthropic/claude-opus-4-6",
   "available_models": [
     {
@@ -93,12 +93,11 @@
     }
   ],
   "model_onboarding": {
-    "request": "",
-    "updated_at": "2026-05-09T14:00:03Z"
+    "request": ""
   },
   "kb_ingest": {
     "url": "https://x.com/jayagup10/status/2052870394093408558?s=46&t=OHfXTbjdV4tiD3nnG1lsTw",
-    "deep_dives_count": 10,
+    "deep_dives_count": 23,
     "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
