@@ -17,6 +17,12 @@
     "model-training"
   ],
   "word_count": 352,
-  "used_dates": [],
-  "created_date": "2026-04-29"
+  "used_dates": [
+    "2026-05-10"
+  ],
+  "created_date": "2026-04-29",
+  "read_dates": [
+    "2026-05-10"
+  ],
+  "last_read_at": "2026-05-10T14:27:13.767Z"
 }
