@@ -98,7 +98,9 @@
   "kb_ingest": {
     "url": "https://x.com/brivael/status/2055414755435889086?s=46&t=OHfXTbjdV4tiD3nnG1lsTw",
     "deep_dives_count": 4,
-    "model": "anthropic/claude-opus-4-6"
+    "model": "anthropic/claude-opus-4-6",
+    "status": "processing",
+    "claimed_at": "2026-05-18T15:00:01.219884+00:00"
   },
   "kb_existing_dd": {
     "entry": "",
