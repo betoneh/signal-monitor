@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-18T02:48:07.638Z",
+  "updated_at": "2026-05-19T15:04:11.258Z",
   "model": "anthropic/claude-opus-4-6",
   "available_models": [
     {
@@ -96,8 +96,8 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "",
-    "deep_dives_count": 0,
+    "url": "https://youtu.be/v2q3yPwEo5w?si=j0kuGktV6OJzTw7W",
+    "deep_dives_count": 15,
     "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
