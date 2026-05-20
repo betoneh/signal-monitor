@@ -1,0 +1,21 @@
+{
+  "id": 308,
+  "title": "The Palantir Playbook: Why Suing Your Own Customer Was the Only Way Forward",
+  "source": {
+    "kb_entry": "tariffs-doge-fixing-america-peter-thiel-s-skeptic-solutions",
+    "original": "Tariffs, DOGE & Fixing America: Peter Thiel's Skeptic Solutions",
+    "url": "https://youtu.be/v2q3yPwEo5w?si=j0kuGktV6OJzTw7W"
+  },
+  "body_html": "<p>When Palantir was founded in 2003-2004, the idea of building a military-focused software startup was considered insane. No venture capitalists wanted to fund it. The company's thesis was straightforward: the intelligence community and military were using low-tech, privacy-violating solutions for terrorism that amounted to security theater — like forcing people to remove their shoes at airports — while lacking the data integration tools that could actually catch threats.</p><p>Early visits to CIA headquarters at Langley reinforced Thiel's suspicions that the agencies had fallen far behind Silicon Valley. The eye-scanning security systems on every door were broken and turned off. The gift shop sold merchandise half-made in China. Whether this was a decoy or genuine dysfunction, the signals were unmistakable. A massive technology gap existed, and Palantir believed it could close it in months.</p><p>The reality was brutally different. Palantir targeted a billion-dollar military data integration program called DCGS-A, which was a consultant-driven boondoggle that didn't work. What the company expected to replace in six months took <strong>ten years</strong>. In 2016, Palantir sued the U.S. Army under a 1994 open procurement law, triggering discovery that revealed internal reports showing Palantir's software performed better — along with orders to suppress those reports and emails directing staff to hide the findings.</p><p>Every consultant quit when the lawsuit was filed, warning that suing your customer — especially the Army — would result in permanent blacklisting across Washington. Instead, Palantir won at the trial court level, won at the DC Circuit level, forced a reopened procurement process, and finally secured the contract in 2019. The lesson is stark: when the barrier is political rather than technical, only extraordinary persistence and willingness to use legal mechanisms against entrenched interests can break through.</p>",
+  "tags": [
+    "palantir",
+    "defense-tech",
+    "government-procurement",
+    "military-reform",
+    "legal-strategy",
+    "entrenched-interests"
+  ],
+  "word_count": 287,
+  "used_dates": [],
+  "created_date": "2026-05-19"
+}
