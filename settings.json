@@ -96,11 +96,9 @@
     "request": ""
   },
   "kb_ingest": {
-    "url": "https://youtu.be/v2q3yPwEo5w?si=j0kuGktV6OJzTw7W",
-    "deep_dives_count": 15,
-    "model": "anthropic/claude-opus-4-6",
-    "status": "processing",
-    "claimed_at": "2026-05-20T03:00:01.200100+00:00"
+    "url": "",
+    "deep_dives_count": 0,
+    "model": "anthropic/claude-opus-4-6"
   },
   "kb_existing_dd": {
     "entry": "",
