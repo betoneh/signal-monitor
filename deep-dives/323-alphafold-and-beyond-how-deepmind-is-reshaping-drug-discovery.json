@@ -1,0 +1,21 @@
+{
+  "id": 323,
+  "title": "AlphaFold and Beyond: How DeepMind Is Reshaping Drug Discovery",
+  "source": {
+    "kb_entry": "the-demis-hassabis-huge-conversation-in-full-cleo-abram",
+    "original": "The Demis Hassabis HUGE Conversation (in full) — Cleo Abram",
+    "url": "https://x.com/cleoabram/status/2057135587547578494?s=46&t=OHfXTbjdV4tiD3nnG1lsTw"
+  },
+  "body_html": "<p>DeepMind's AlphaFold stands as one of the most concrete demonstrations of AI's transformative potential, having effectively solved the protein structure prediction problem that had stumped biologists for decades. In his conversation with Cleo Abram, Demis Hassabis discussed where AI-driven drug discovery goes next — and the picture is one of rapid, compounding breakthroughs.</p><p>The cutting edge of computational biology is no longer just about predicting how proteins fold. It now extends to simulating molecular interactions, identifying drug candidates, and dramatically compressing the timeline from target identification to viable therapeutic. These are areas where DeepMind is actively pushing the frontier, leveraging the foundational work of AlphaFold to tackle problems that matter to human health at a global scale.</p><p>What makes this domain especially compelling is that the benefits are tangible and near-term. Unlike many AI applications that promise future returns, AI-driven drug discovery is already producing results that researchers can validate experimentally. The gap between algorithmic prediction and real-world biological impact is shrinking fast.</p><p>For Hassabis, drug discovery also serves as a powerful counter-narrative to fears about AI. It demonstrates that the same technology raising difficult governance questions is also capable of extraordinary scientific good — a tension that runs throughout his public thinking on the trajectory of artificial intelligence.</p>",
+  "tags": [
+    "alphafold",
+    "drug-discovery",
+    "computational-biology",
+    "deepmind",
+    "ai-in-science",
+    "protein-folding"
+  ],
+  "word_count": 209,
+  "used_dates": [],
+  "created_date": "2026-05-21"
+}

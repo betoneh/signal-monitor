@@ -1,0 +1,21 @@
+{
+  "id": 325,
+  "title": "The Hardest Problem AI Has Already Solved — And What It Tells Us",
+  "source": {
+    "kb_entry": "the-demis-hassabis-huge-conversation-in-full-cleo-abram",
+    "original": "The Demis Hassabis HUGE Conversation (in full) — Cleo Abram",
+    "url": "https://x.com/cleoabram/status/2057135587547578494?s=46&t=OHfXTbjdV4tiD3nnG1lsTw"
+  },
+  "body_html": "<p>When asked to identify the hardest problem AI has already solved, Demis Hassabis pointed toward achievements that represent genuine scientific milestones — not just incremental improvements in consumer technology. The most prominent example is protein structure prediction, where DeepMind's AlphaFold cracked a challenge that the biology community had worked on for over fifty years.</p><p>What makes this claim noteworthy is the specificity of the accomplishment. Unlike generative AI systems that produce impressive but sometimes unreliable outputs, AlphaFold delivered results that could be experimentally verified. It didn't just generate plausible answers — it solved a problem with measurable accuracy, earning recognition from the broader scientific establishment including a Nobel Prize.</p><p>This framing matters because it anchors the AI conversation in demonstrated capability rather than speculative potential. In a landscape crowded with hype about artificial general intelligence and existential risk, pointing to concrete solved problems provides a more grounded foundation for evaluating what AI can actually do today.</p><p>It also reveals Hassabis's priorities as a researcher and leader. By emphasizing scientific problem-solving over commercial applications, he positions DeepMind — and by extension, his vision for AI — as fundamentally oriented toward expanding human knowledge rather than simply optimizing engagement metrics or automating workflows.</p>",
+  "tags": [
+    "alphafold",
+    "scientific-breakthroughs",
+    "protein-prediction",
+    "deepmind",
+    "ai-capabilities",
+    "demis-hassabis"
+  ],
+  "word_count": 201,
+  "used_dates": [],
+  "created_date": "2026-05-21"
+}

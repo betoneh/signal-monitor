@@ -1,0 +1,21 @@
+{
+  "id": 328,
+  "title": "What Computational Biology Looks Like at the Frontier Right Now",
+  "source": {
+    "kb_entry": "the-demis-hassabis-huge-conversation-in-full-cleo-abram",
+    "original": "The Demis Hassabis HUGE Conversation (in full) — Cleo Abram",
+    "url": "https://x.com/cleoabram/status/2057135587547578494?s=46&t=OHfXTbjdV4tiD3nnG1lsTw"
+  },
+  "body_html": "<p>Drug discovery has always been brutally slow, staggeringly expensive, and plagued by high failure rates. A single new drug can take over a decade and cost billions of dollars to bring to market, with most candidates failing somewhere along the pipeline. AI is now being positioned as the tool that could fundamentally compress that timeline — and DeepMind is at the center of the effort.</p><p>In his conversation with Cleo Abram, Hassabis describes the cutting edge of AI-driven drug discovery as an inflection point. The success of AlphaFold in predicting protein structures was a proof of concept; what comes next involves using AI to model molecular interactions, predict drug efficacy, and identify therapeutic targets that human researchers might never have found on their own. The ambition is not incremental improvement but a paradigm shift in how medicines are designed.</p><p>What makes this moment distinct is that the tools are no longer speculative. Pharmaceutical companies are already integrating AI predictions into their pipelines, and early results suggest meaningful acceleration in identifying viable drug candidates. The gap between academic breakthrough and industrial application, which often spans years or decades, is closing faster than expected in computational biology.</p><p>The stakes are enormous. If AI-driven drug discovery delivers on even a fraction of its promise, it could reshape healthcare economics and save millions of lives. But it also raises hard questions about access, intellectual property, and who benefits when a publicly funded breakthrough — like AlphaFold's open-source protein database — gets funneled into proprietary pharmaceutical development. These are the questions that will define the next chapter of AI in biology.</p>",
+  "tags": [
+    "drug-discovery",
+    "computational-biology",
+    "alphafold",
+    "deepmind",
+    "pharmaceutical-ai",
+    "healthcare"
+  ],
+  "word_count": 266,
+  "used_dates": [],
+  "created_date": "2026-05-21"
+}
