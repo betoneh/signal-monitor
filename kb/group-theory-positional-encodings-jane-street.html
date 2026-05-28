@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<!-- AUTO-GENERATED FILE. Edit scripts/build_hub.py for layout changes and deep-dives/deep-dive-navigation.js for deep dive navigation behavior. See DESIGN-SOURCES.md before editing generated HTML. -->
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Using group theory to explore the space of positional encodings for attention — Signal Monitor KB</title>
+<meta property="og:title" content="Using group theory to explore the space of positional encodings for attention">
+<meta property="og:description" content="Knowledge Base — Signal Monitor">
+<meta property="og:image" content="https://betoneh.github.io/signal-monitor/og/kb-group-theory-positional-encodings-jane-street.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #212737; color: #eaedf3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                 "Liberation Mono", "Courier New", monospace;
+    min-height: 100svh; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(14, 196, 169, 0.75); color: #212737; }
+  header, main, footer { max-width: 48rem; margin: 0 auto; width: 100%; padding: 0 1rem; }
+  header { padding: 2rem 1rem 1rem; }
+  .back { font-size: 0.85rem; color: #8b949e; text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .back:hover { color: #0ec4a9; }
+  h1 { font-size: 1.5rem; font-weight: 700; color: #eaedf3; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meta { font-size: 0.8rem; color: #8b949e; margin-bottom: 1.5rem; }
+  .meta a { color: #8b949e; }
+  .meta a:hover { color: #0ec4a9; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.7rem; background: rgba(52, 63, 96, 0.75); color: #8b949e; 
+         padding: 2px 8px; border-radius: 3px; }
+  main { flex: 1; padding-bottom: 2rem; }
+  .content { line-height: 1.75; font-size: 1rem; color: #eaedf3; overflow-wrap: break-word; word-break: break-word; }
+  .content p { margin-bottom: 0.75rem; }
+  .content p:last-child { margin-bottom: 0; }
+  .content a { color: #0ec4a9; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 8px; }
+  .content a:hover { text-decoration-color: #eaedf3; }
+  .content h2 { font-size: 1.2rem; margin: 1.5rem 0 0.75rem; color: #eaedf3; }
+  .content h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: #eaedf3; }
+  .content ul, .content ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+  .content li { margin-bottom: 0.3rem; }
+  .content blockquote { border-left: 3px solid #0ec4a9; padding-left: 1rem; margin: 0.75rem 0; color: #8b949e; }
+  .content code { background: rgba(52, 63, 96, 0.75); padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+  .content pre { background: rgba(52, 63, 96, 0.5); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0.75rem 0; }
+  .content pre code { background: none; padding: 0; }
+  .source { font-size: 0.8rem; color: #8b949e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(10, 143, 123, 0.3); }
+  .source a { color: #8b949e; text-decoration: none; }
+  .source a:hover { color: #0ec4a9; }
+  footer { padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #8b949e; }
+  footer a { color: #eaedf3; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: #0ec4a9; }
+  .build-version { color: #8b949e; }
+  @media (max-width: 640px) { h1 { font-size: 1.25rem; } }
+
+  
+  .progress-bar {
+    position: fixed; top: 0; left: 0; width: 0%;
+    height: 4px; background: #0ec4a9; z-index: 100;
+    transition: width 50ms linear;
+  }
+
+  
+  .share-row {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; margin: 2.5rem 0 1rem; text-align: center;
+  }
+  .share-left { display: flex; flex-direction: column; align-items: center; }
+  .share-left .label {
+    font-style: italic; color: #eaedf3; font-size: 0.875rem; margin-bottom: 0.75rem;
+  }
+  .share-icons { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+  .share-icons a, .share-icons button {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem; color: #eaedf3; text-decoration: none;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    transition: color 0.15s, transform 0.15s; opacity: 0.9;
+  }
+  .share-icons a:hover, .share-icons button:hover { color: #0ec4a9; transform: rotate(6deg); }
+  .share-icons button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .share-icons button.is-published { color: #0ec4a9; opacity: 1; }
+  .share-icons button.is-downvoted { color: #ef4444; opacity: 1; }
+  .share-icons svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (min-width: 640px) {
+    .share-icons svg { width: 1.5rem; height: 1.5rem; }
+    .share-icons a, .share-icons button { padding: 0.5rem; }
+  }
+  .back-top-btn {
+    background: none; border: none; cursor: pointer; color: #eaedf3;
+    font-family: inherit; font-size: 0.875rem; display: inline-flex;
+    align-items: center; gap: 0.25rem; padding: 0.25rem 0;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .back-top-btn:hover { opacity: 0.75; }
+
+</style>
+</head>
+<body id="top">
+<div class="progress-bar" id="progress"></div>
+<header>
+  <h1>Using group theory to explore the space of positional encodings for attention</h1>
+  <div class="meta">10 min read · article · 2026-05-27</div>
+  <div class="tags"><span class="tag">machine-learning</span><span class="tag">transformers</span><span class="tag">attention</span><span class="tag">positional-encoding</span><span class="tag">rope</span><span class="tag">group-theory</span><span class="tag">mathematics</span><span class="tag">deep-learning</span><span class="tag">llm-architecture</span><span class="tag">jane-street</span></div>
+  <div class="source" style="margin-top:0.5rem">Source: <a href="https://blog.janestreet.com/using-group-theory-to-explore-positional-encodings-attention/" target="_blank">https://blog.janestreet.com/using-group-theory-to-explore-positional-encodings-a...</a></div>
+</header>
+<main>
+  <div class="content"><h2>Summary</h2>
+<p>Alok Puranik (ML researcher en Jane Street) ataca una pregunta sorprendentemente fundamental: ¿cuántas formas hay de hacer "positional encoding" en attention? El positional encoding es cómo los LLMs codifican el orden de los tokens — sin él, el dot product entre query y key no tiene noción de posición. RoPE, el método dominante hoy, rota componentes de los vectores como las manecillas de un reloj, pero la pregunta es si existen mejores alternativas.</p>
+<p>El resultado central es elegante y un poco decepcionante para los que esperaban descubrir algo nuevo: si imponés cuatro propiedades razonables (linealidad, invariancia traslacional, identidad en t=0, continuidad), el conjunto de positional encodings válidos forma matemáticamente un <strong>one-parameter group</strong>, y estos grupos están perfectamente clasificados. Cuando diagonalizás el generador, solo aparecen tres comportamientos: explosión exponencial (descartable), decay exponencial (linear attention), y rotaciones de frecuencia constante (RoPE). En otras palabras: la industria ya está usando, por intuición, las únicas opciones sensatas.</p>
+<p>Lo más interesante del paper es la sección de "defective generators" — matrices no diagonalizables que producen encodings con términos polinomiales en el tiempo, en lugar de exponenciales/trigonométricos. Estos casos están casi inexplorados en la literatura de deep learning. Puranik muestra que ALiBi (otro encoding popular) puede reinterpretarse como un caso especial de generador defectivo, y menciona un paper reciente (GRAPE, Zhang et al. 2025) que explora utilidad práctica de esta familia. Para quien construye modelos secuenciales, esto es tranquilizante (no estás dejando dinero en la mesa) y a la vez señala un rincón matemático aún por explorar.</p>
+<h2>Key Takeaways</h2>
+<ul><li>Positional encoding = cómo el modelo sabe la posición de cada token. Sin él, attention es invariante a permutación.</li>
+<li>RoPE (rotary position embeddings) es el estándar actual y funciona como manecillas de reloj.</li>
+<li>Imponiendo 4 propiedades (linealidad, translation invariance, A(0)=I, continuidad), todos los encodings válidos forman un <strong>one-parameter group</strong> del estilo A(t) = exp(tM).</li>
+<li>Diagonalizando el generador M, solo hay 3 casos: exponencial creciente (impráctico), decay exponencial (linear attention), rotaciones (RoPE). Decay + rotación combinados = RetNet, Mamba-3.</li>
+<li>Casi todo lo "razonable" ya se usa en la práctica — no hay un encoding mágico esperándose.</li>
+<li><strong>Defective generators</strong> (matrices no diagonalizables) generan encodings con términos polinomiales — territorio casi inexplorado.</li>
+<li>ALiBi resulta ser interpretable como un encoding lineal con generador defectivo.</li>
+<li>GRAPE (Zhang et al., arXiv:2512.07805) explora utilidad práctica de estas familias.</li>
+<li>La belleza del análisis: un Friday afternoon de teoría pura produce un resultado de clasificación completo para una decisión de diseño de modelos.</li>
+</ul>
+<h2>Full Text / Transcript</h2>
+<p>Attention is a computational primitive at the core of modern language models, allowing internal representations to reference and influence each other. It's how these models handle sequential data in the first place.</p>
+<p>Yet, naively implemented, attention doesn't have any notion of position. In the core attention computation, you calculate the dot product between a given "query" and a "key," which tells you how much to attend to the value at that key—and this dot product says nothing about where in the sequence the queries and keys are. Since in most settings that information matters a great deal, you generally want to somehow perturb your dot-product calculation so that it depends on the positions (usually just the relative positions) of the query and key.</p>
+<p>The so-called "positional encoding" that you use represents an important modeling decision, because it governs how the model views the passage of time. The most popular positional encoding, called RoPE, rotates components of key and query vectors by an angle that depends on the position in the sequence, like the hands of a clock. This works well in practice, but it's far from the only option.</p>
+<p>On a recent Friday afternoon I wondered, well, what are all the options? I'm an ML researcher at Jane Street, and when we're working with sequential models we've often debated whether we're using the best positional encoding. This raises the question: what positional encodings are even possible? As I started investigating, I discovered to my surprise that the space is quite constrained.</p>
+<p>The reason is that there are a few key properties that any desirable positional encoding should have, and once you formalize those, you're left with a very particular mathematical structure. (Spoiler: a one-parameter group.) In exploring that structure, I was able to show that there are only a few families of valid positional encoding—the demonstration of that fact forms the bulk of this blog post—and actually all of the sensible ones are already being used in real systems.</p>
+<p>It was a reassuring finding, because it means that we don't need to rack our brains to come up with some perfect positional encoding, as we are probably already using it. Even so, in doing this analysis I did discover a strange, unlikely-to-work-out-in-practice, but technically legal class of positional encodings that seems to be totally unexplored.</p>
+<h2>Formalizing a positional encoding</h2>
+<p>Let's suppose we have a time series of queries, and a time series of keys. We write Q and K as functions of time so that we can accommodate continuous or irregularly sampled inputs, but we could just as well restrict ourselves to only integer times if we prefer. "Time" here is a stand-in for any increasing quantity that we might care to use to measure progression through a sequence; it could be a sequence index, or literal elapsed time in a time series modeling problem, or even some kind of learned notion of time, as used in the Mamba family of models. We're only concerned with the time-dependent aspects of the positional encoding, so we'll allow ourselves to apply certain time-independent operations, most notably changes of basis, to Q and K without really considering the positional encoding to have changed.</p>
+<p>In the absence of positional encodings, attention would require us to compute inner products like q^T k. We want to modify these inner products to encode the progression of time. For the sake of computational efficiency, we won't modify every pairwise inner product independently; instead we'll transform the queries and keys themselves, using some explicitly time-dependent functions F(t) and G(t). We'll set q'(t) = F(t)q(t), k'(t) = G(t)k(t), so that the attention score of the pair becomes q'(t)^T k'(s) = q(t)^T F(t)^T G(s) k(s).</p>
+<h2>Properties of good positional encodings</h2>
+<p><strong>Linearity:</strong> F(t) is linear in q, and G(t) is linear in k. This one isn't rigorously justifiable, but we're working with a vector space, so it's only right that our encoding should be linear. We'll leave the study of nonlinear encodings to others.</p>
+<p>Linearity ensures that we can write F(t) and G(t) as square matrices. Now our attention dot product is q^T F(t)^T G(s) k.</p>
+<p>We can see at this point that any positional encoding scheme will be fully characterized by the square matrix F(t)^T G(s), which determines how we modify the inner product between times t and s.</p>
+<p><strong>Translation invariance:</strong> For any times t and s and offset r, we have F(t+r)^T G(s+r) = F(t)^T G(s). This property ensures that only relative positions are observable, which will help with generalization to longer sequences. (If the absolute index is observable in your positional encoding, what do you do when you train on sequences only up to length N, and now need to deal with a longer one?)</p>
+<p>Translation invariance is basically just saying that all you need to care about are the diagonals in the table of F(t)^T G(s) values, since by assumption along the diagonals the values will be equal.</p>
+<p>We make one more assumption, namely that F(0) = G(0) = I. Effectively this is saying that for equal times, our positional encoding modification simply drops out.</p>
+<p>Let's define a new matrix-valued function A(t-s) = F(t)^T G(s). A(τ) says how much you should perturb the inner product when shifted by τ. In other words, A(τ) is a translation across time that brings the key from the past to the present, where it can be compared to q.</p>
+<p>This key piece of intuition simultaneously suggests that:
+<ul><li>Shifting by 0 should be a no-op: A(0) = I</li>
+<li>Shifting by τ1 and then by τ2 should be the same as shifting by τ1+τ2: A(τ1)A(τ2) = A(τ1+τ2)</li>
+</ul>
+The property A(τ1)A(τ2) = A(τ1+τ2) is a very powerful constraint. If you're familiar with group theory, the family of matrices A(τ) form a <strong>one-parameter group</strong> as long as we require that A is continuous in τ. This fact makes our enumeration possible, because such groups are well understood.</p>
+<p><strong>Continuity:</strong> A(τ) is a continuous function of τ. There are discontinuous functions that satisfy our constraints, but they require the axiom of choice to describe and are far too deranged to implement on a physical computer.</p>
+<h2>Enumerating all the representations</h2>
+<p>We know that every one-parameter matrix group has the form A(τ) = exp(τM) for some fixed generator matrix M. So now our task comes down to determining how the choice of generator affects our encoding.</p>
+<h3>Diagonalizable generators</h3>
+<p>When M is diagonalizable, through a time-independent change of basis we can convert M to diagonal form. Diagonalizing M is convenient because it lets us chop up our positional encoding into non-interacting components.</p>
+<p>When we do this decomposition, we encounter a problem: the new basis will in general be complex. However, if the original M was real, then non-real eigenvalues come in conjugate pairs. We pick a slightly coarser decomposition: real diagonal elements get their own 1D subspaces, and pairs of conjugate elements get 2D subspaces.</p>
+<p>The action of M on a 1D subspace corresponds to exponential decay or blowup. With diagonal value c (a real scalar), A(τ) restricted to this subspace = exp(cτ).</p>
+<ul><li>If c > 0: influence of past keys blows up exponentially. Impractical — discard.</li>
+<li>If c = 0: A(τ) = 1 everywhere — this is <strong>NoPE</strong> (no positional encoding).</li>
+<li>If c < 0: exponentially suppresses influence of past keys — this is the exponential decay common in linear attention variants.</li>
+</ul>
+The action on 2D subspaces can be rewritten in polar form. The role of the real part is the same as in the 1D case (require ≤ 0), and the imaginary part produces a constant-frequency rotation. This is <strong>RoPE</strong>, with an optional exponential damping factor. Exponentially damped RoPE is used in RetNet and Mamba-3.
+<h3>Defective generators</h3>
+<p>Finally, the possibility that our generator M is a defective matrix (not diagonalizable). In Jordan normal form, Jordan blocks appear around repeated eigenvalues.</p>
+<p>For intuition, analyze N = [[0,1],[0,0]]. This satisfies N^2 = 0, so exp(τN) = I + τN. Applied to (x,y), we get (x+τy, y). This is not just mathematical pathology — it's the time evolution of a frictionless hockey puck: position x advances by τy where y is velocity.</p>
+<p>In general, defective matrices give rise to positional encodings involving polynomial terms — unlike diagonalizable matrices which produce only exponential and trigonometric factors. It's entirely unclear how to interpret these polynomials in the context of attention. The author failed to find any existing literature directly addressing the possibility of defective generators for positional encodings in deep learning, and most likely they have no practical application. Nevertheless, the curious possibility remains.</p>
+<h2>Addendum: ALiBi</h2>
+<p>@StefanGliga pointed out on X that the restriction to only linear functions of q and k narrows the space of positional encodings so much that it excludes ALiBi, which applies a -m|t-s| penalty to the attention dot product. And it's true that the assumptions made in this post don't cover the class of positional encodings which map the dot product q^T k → f(q,k,t-s) for some arbitrary function f. But ALiBi is implementable with linear positional encodings as long as we augment our queries and keys appropriately.</p>
+<p>ALiBi takes the dot product q^T k and replaces it with q^T k - m(t-s). The first term is trivial. We need a generator matrix that can grow a component linearly in time — exactly the defective N = [[0,1],[0,0]] case. With augmented q = (q, -m) and k = (k, 0) plus an additional dimension, the construction yields exactly q^T k - m(t-s).</p>
+<p>So, intentionally or otherwise, Stefan found a useful example of a positional encoding generated by a defective matrix.</p>
+<h2>Addendum: Group Representational Positional Encoding (GRAPE)</h2>
+<p>While writing this post, I somehow missed a recent paper by Zhang et al. (arXiv:2512.07805) which attacks a closely related problem and points out the connection between defective generators and ALiBi. Roughly speaking, while this post tries to enumerate a universe of positional encodings, the GRAPE paper demonstrates the utility of certain classes of positional encodings using essentially the same framework of one-parameter groups.</p>
+<p>---</p>
+<p>Alok has been a researcher at Jane Street since 2020. When not training neural networks, he enjoys running and pretending to understand theoretical physics.</p></div>
+  
+<div class="share-row">
+  <div class="share-left">
+    <div class="label">Share this post on:</div>
+    <div class="share-icons">
+      <a href="https://x.com/intent/post?url=https://betoneh.github.io/signal-monitor/kb/group-theory-positional-encodings-jane-street.html" target="_blank" rel="noopener" title="Share on X">
+        <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+      </a>
+      <a href="https://wa.me/?text=https://betoneh.github.io/signal-monitor/kb/group-theory-positional-encodings-jane-street.html" target="_blank" rel="noopener" title="Share on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"/><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"/></svg>
+      </a>
+      <a href="https://t.me/share/url?url=https://betoneh.github.io/signal-monitor/kb/group-theory-positional-encodings-jane-street.html" target="_blank" rel="noopener" title="Share on Telegram">
+        <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"/></svg>
+      </a>
+      <a href="mailto:?subject=Using group theory to explore the space of positional encodings for attention&body=https://betoneh.github.io/signal-monitor/kb/group-theory-positional-encodings-jane-street.html" title="Share via email"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></a>
+      
+      <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'}},1500)}})" title="Copy link">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
+    </div>
+  </div>
+  <div style="width:100%;text-align:center;margin-top:0.5rem;">
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-top-btn" style="margin:0 auto;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(90deg)"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>Back to Top</span>
+    </button>
+  </div>
+</div>
+
+</main>
+<footer>
+  Signal Monitor · <span class="build-version" title="Generated build version">Build 20260527-1936</span> · <a href="https://x.com/beto_neh">@beto_neh</a>
+</footer>
+
+<script>
+  (function(){
+    var bar = document.getElementById('progress');
+    if (!bar) return;
+    function up() {
+      var s = window.pageYOffset || document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = (h > 0 ? s / h * 100 : 0) + '%';
+    }
+    window.onscroll = up;
+    up();
+  })();
+</script>
+
+</body>
+</html>
